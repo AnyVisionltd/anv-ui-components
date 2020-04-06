@@ -1,0 +1,13 @@
+# dependencies
+/node_modules
+
+# testing
+/coverage
+/.idea
+/.cache
+
+npm-debug.log*
+
+/build
+.vscode/
+/dist

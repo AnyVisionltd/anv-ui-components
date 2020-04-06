@@ -1,0 +1,8 @@
+{
+  "*.+(js|jsx)": [
+    "npm run test:staged",
+    "prettier --write",
+    "eslint -c .eslintrc.js ./src --fix"
+  ],
+  "*.+(json|css|md|scss)": ["prettier --write"]
+}
