@@ -1,5 +1,5 @@
 {
   "hooks": {
-    "pre-push": "lint-staged npm test"
+    "pre-push": "lint-staged"
   }
 }
