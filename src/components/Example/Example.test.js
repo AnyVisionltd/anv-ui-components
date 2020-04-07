@@ -9,6 +9,6 @@ describe('Example', () => {
       <Example />,
     )
 
-    expect(true).toBeTruthy();
+    expect(tru).toBeTruthy();
   })
 })
