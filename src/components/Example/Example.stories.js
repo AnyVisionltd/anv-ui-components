@@ -7,7 +7,7 @@
 * */
 
 import React from 'react'
-import { text } from '@storybook/addon-knobs'
+import { text, boolean } from '@storybook/addon-knobs'
 
 import Example from './Example'
 
@@ -18,7 +18,8 @@ export default {
 
 export const exampleTitle = () => (
   <Example
-    extraText={ text('extraText', '') }
+    show={ boolean('show', true) }
+    text={ text('text', 'Hello Word') }
     className={ text('className', '') }
   />
 )
