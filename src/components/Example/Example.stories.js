@@ -1,9 +1,16 @@
 import React from 'react'
-import Example from './index'
+import { text } from '@storybook/addon-knobs'
+
+import Example from './Example'
 
 export default {
-  title: 'Example',
+  title: 'Components',
   component: Example
 }
 
-export const Test = () => <Example />
+export const exampleTitle = () => (
+  <Example
+    extraText={text('extraText', '')}
+    className={text('className', '')}
+  />
+)

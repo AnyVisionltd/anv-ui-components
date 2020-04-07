@@ -6,6 +6,7 @@ module.exports = {
     "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": "off",
     "import/no-extraneous-dependencies": "off",
+    "react/require-default-props": "off",
     semi: 0,
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
     "prettier/prettier": [

@@ -2,20 +2,19 @@ import React from 'react'
 import propTypes from 'prop-types'
 import styles from './Example.module.scss'
 
-const Example = ({ extraText }) => {
+const Example = ({ extraText, className }) => {
   return (
-    <div className={styles.justSomeClass}>
+    <h1 className={`${className} ${styles.justSomeClass}`}>
       Hello World
-      {extraText}
-    </div>
+      <p>{extraText}</p>
+    </h1>
   )
 }
 
-Example.defaultProps = {
-  extraText: ''
-}
-
 Example.propTypes = {
+  /** Custom class */
+  className: propTypes.string,
+  /** Add text to the component */
   extraText: propTypes.string
 }
 

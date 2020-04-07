@@ -1,5 +1,10 @@
 @import "~@anyvision/style-guide";
 
 .justSomeClass {
+  margin: 0 auto;
+  text-align: center;
   background-color: color(primary);
+  color: color(purewhite);
+  border: 1px color(secondary) solid;
+  width: size(sz-240);
 }
