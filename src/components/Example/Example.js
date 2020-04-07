@@ -11,6 +11,7 @@ const Example = ({ extraText, className }) => {
   )
 }
 
+// The comments use for storybook props table
 Example.propTypes = {
   /** Custom class */
   className: propTypes.string,
