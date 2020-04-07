@@ -1,6 +1,6 @@
 import React from 'react'
 import propTypes from 'prop-types'
-import styles from './Example.module.scss';
+import styles from './Example.module.scss'
 
 const Example = ({ extraText, className }) => {
   return (
