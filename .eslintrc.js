@@ -1,22 +1,14 @@
 module.exports = {
-  extends: ["react-app", "airbnb", "prettier", "prettier/react"],
-  plugins: ["prettier"],
+  extends: ["react-app", "airbnb"],
   rules: {
     "import/prefer-default-export": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": "off",
     "import/no-extraneous-dependencies": "off",
     "react/require-default-props": "off",
-    semi: 0,
+    'semi': ['error', 'never'],
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
-    "prettier/prettier": [
-      "error",
-      {
-        singleQuote: true,
-        semi: false,
-        trailingComma: "none",
-        jsxBracketSameLine: true,
-      },
-    ],
+    'react/jsx-curly-spacing': ['error', { "when": "always", "children": true }],
+    'object-curly-spacing': ['error', 'always'],
   },
 };

@@ -13,12 +13,12 @@ import Example from './Example'
 
 export default {
   title: 'Components',
-  component: Example
+  component: Example,
 }
 
 export const exampleTitle = () => (
   <Example
-    extraText={text('extraText', '')}
-    className={text('className', '')}
+    extraText={ text('extraText', '') }
+    className={ text('className', '') }
   />
 )

@@ -4,7 +4,7 @@ import Example from './Example'
 
 describe('Example', () => {
   it('CheckboxWithLabel changes the text after click', () => {
-    const { queryByLabelText, getByLabelText } = render(<Example />)
+    render(<Example />)
 
     expect(true).toBeTruthy()
   })
