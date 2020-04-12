@@ -2,10 +2,8 @@
 
 .story-wrapper {
   .info-table {
-    table {
-      border-collapse: collapse;
-      width: 100%;
-    }
+    border-collapse: collapse;
+    width: 100%;
 
     td,
     th {
@@ -25,8 +23,8 @@
       padding-top: 12px;
       padding-bottom: 12px;
       text-align: left;
-      background-color: color(primary);
-      color: color(purewhite);
+      background-color: av-color(primary);
+      color: av-color(purewhite);
     }
   }
 }

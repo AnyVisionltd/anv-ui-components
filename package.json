@@ -12,7 +12,7 @@
     "url": "https://github.com/AnyVisionltd/anv-ui-components"
   },
   "dependencies": {
-    "@anyvision/style-guide": "^1.0.1-beta.1",
+    "@anyvision/style-guide": "^1.0.1-beta.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/react-hooks": "^3.2.1",
@@ -45,6 +45,10 @@
       "last 1 safari version"
     ]
   },
+  "peerDependencies":{
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/preset-env": "^7.9.0",
@@ -61,8 +65,6 @@
     "eslint-config-airbnb": "^18.1.0",
     "husky": "^4.2.3",
     "lint-staged": "^10.1.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "react-test-renderer": "^16.13.1"
   }

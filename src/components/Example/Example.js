@@ -7,26 +7,26 @@ const Example = ({ show, text, className }) => (
   <div>
     { show
       ? (
-        <h1 className={ classNames(className, styles.justSomeClass) }>
+        <h4 className={ classNames(className, styles.justSomeClass) }>
           <p>{ text }</p>
-        </h1>
+        </h4>
       )
       : null }
   </div>
 )
 
 Example.defaultProps = {
-  text: 'Hello Word',
+  show: true,
 }
 
 // The comments use for storybook props table
 Example.propTypes = {
   /** Show or hide the component */
-  show: propTypes.bool.isRequired,
+  show: propTypes.bool,
   /** Custom class */
   className: propTypes.string,
   /** Add text to the component */
-  text: propTypes.string,
+  text: propTypes.string.isRequired,
 }
 
 export default Example
