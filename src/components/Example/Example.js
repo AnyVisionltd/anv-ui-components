@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 import propTypes from 'prop-types'
 import styles from './Example.module.scss'
 
@@ -6,7 +7,7 @@ const Example = ({ show, text, className }) => (
   <div>
     { show
       ? (
-        <h1 className={ `${className} ${styles.justSomeClass}` }>
+        <h1 className={ classNames(className, styles.justSomeClass) }>
           <p>{ text }</p>
         </h1>
       )
