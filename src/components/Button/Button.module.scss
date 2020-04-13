@@ -36,11 +36,11 @@ button:disabled {
     transition: background $ripple-transition-duration;
 
     &:hover:enabled {
-      background: lighten($value, 5%) radial-gradient(circle, transparent 1%, $value 1%) center/15000%;
+      background: scale-color($value, $lightness: 20%) radial-gradient(circle, transparent 1%, $value 1%) center/15000%;
     }
 
     &:active:enabled {
-      background-color: lighten($value, 5%);
+      background-color: $value;
       background-size: 100%;
       transition: background 0s;
     }
@@ -54,10 +54,10 @@ button:disabled {
     transition: background $ripple-transition-duration;
 
     &:hover:enabled {
-      background: lighten($value, 35%) radial-gradient(circle, transparent 1%, lighten($value, 35%) 1%) center/15000%;
+      background: scale-color($value, $lightness: 90%) radial-gradient(circle, transparent 1%, scale-color($value, $lightness: 90%) 1%) center/15000%;
     }
     &:active:enabled {
-      background-color: lighten($value, 25%);
+      background-color: scale-color($value, $lightness: 75%);
       background-size: 100%;
       transition: background 0s;
     }
@@ -71,10 +71,10 @@ button:disabled {
     transition: background $ripple-transition-duration;
 
     &:hover:enabled {
-      background: lighten($value, 35%) radial-gradient(circle, transparent 1%, lighten($value, 35%) 1%) center/15000%;
+      background: scale-color($value, $lightness: 90%) radial-gradient(circle, transparent 1%, scale-color($value, $lightness: 90%) 1%) center/15000%;
     }
     &:active:enabled {
-      background-color: lighten($value, 25%);
+      background-color: scale-color($value, $lightness: 75%);
       background-size: 100%;
       transition: background 0s;
     }
