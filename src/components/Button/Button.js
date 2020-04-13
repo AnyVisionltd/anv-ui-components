@@ -4,7 +4,7 @@ import propTypes from 'prop-types'
 import styles from './Button.module.scss'
 
 const Button = ({
-  color, size, variant, disabled, onClick, className, children,
+  color, size, variant, disabled, onClick, className, children, type,
 }) => {
   const classes = classNames(
     styles[color],
@@ -15,7 +15,7 @@ const Button = ({
 
   return (
     <button
-      type="button"
+      type={ type }
       className={ classes }
       onClick={ onClick }
       disabled={ disabled }
@@ -31,6 +31,7 @@ Button.defaultProps = {
   variant: 'fill',
   disabled: false,
   onClick: () => {},
+  type: 'button',
 }
 
 Button.propTypes = {
@@ -44,9 +45,11 @@ Button.propTypes = {
   disabled: propTypes.bool,
   /** Callback when click. */
   onClick: propTypes.func,
+  /** Defines HTML button type attribute. */
+  type: propTypes.oneOf(['button', 'reset', 'submit']),
   /** For css customizition. */
   className: propTypes.string,
-  /** Show or hide the component. */
+  /** The component content. */
   children: propTypes.node,
 }
 

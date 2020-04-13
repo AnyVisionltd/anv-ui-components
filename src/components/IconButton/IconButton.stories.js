@@ -15,7 +15,5 @@ export const iconButton = () => (
     variant={ select('variant', ['fill', 'outline', 'ghost'], 'fill') }
     disabled={ boolean('disabled', false) }
     icon={ Icon }
-  >
-    Text
-  </IconButton>
+  />
 )

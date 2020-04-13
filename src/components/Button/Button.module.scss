@@ -6,11 +6,13 @@ button {
   border: none;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   border-radius: av-radius(tidy);
   padding: 0 av-space();
   font-weight: av-font-weight(bold);
   font-size: av-font-size(small);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .small {
@@ -29,6 +31,7 @@ button:disabled {
   .#{$key}-fill {
     background-color: $value;
     color: av-color(purewhite);
+    fill: av-color(purewhite);
     background-position: center;
     transition: background $ripple-transition-duration;
 
@@ -47,6 +50,7 @@ button:disabled {
     background: center;
     border: 2px solid $value;
     color: $value;
+    fill: $value;
     transition: background $ripple-transition-duration;
 
     &:hover:enabled {
@@ -63,6 +67,7 @@ button:disabled {
     background: center;
     border: none;
     color: $value;
+    fill: $value;
     transition: background $ripple-transition-duration;
 
     &:hover:enabled {

@@ -18,10 +18,11 @@ const IconButton = ({ icon: SvgIcon, ...buttonProps }) => {
 
 IconButton.defaultProps = {
   color: 'primary',
-  size: 'small',
+  size: 'large',
   variant: 'fill',
   disabled: false,
   onClick: () => {},
+  type: 'button',
 }
 
 IconButton.propTypes = {
@@ -37,7 +38,8 @@ IconButton.propTypes = {
   disabled: propTypes.bool,
   /** Callback when click. */
   onClick: propTypes.func,
-  /** Show or hide the component. */
+  /** Defines HTML button type attribute. */
+  type: propTypes.oneOf(['button', 'reset', 'submit']),
 }
 
 export default IconButton
