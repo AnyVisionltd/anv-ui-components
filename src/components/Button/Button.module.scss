@@ -1,0 +1,77 @@
+@import "~@anyvision/style-guide";
+
+$ripple-transition-duration: 0.5s;
+
+button {
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: av-radius(tidy);
+  padding: 0 av-space();
+  font-weight: av-font-weight(bold);
+  font-size: av-font-size(small);
+}
+
+.small {
+  height: av-size(sz-32);
+}
+
+.large {
+  height: av-size(sz-48);
+}
+
+button:disabled {
+  opacity: av-opacity(disabled);
+}
+
+@each $key, $value in $color-palate {
+  .#{$key}-fill {
+    background-color: $value;
+    color: av-color(purewhite);
+    background-position: center;
+    transition: background $ripple-transition-duration;
+
+    &:hover:enabled {
+      background: lighten($value, 5%) radial-gradient(circle, transparent 1%, $value 1%) center/15000%;
+    }
+
+    &:active:enabled {
+      background-color: lighten($value, 5%);
+      background-size: 100%;
+      transition: background 0s;
+    }
+  }
+
+  .#{$key}-outline {
+    background: center;
+    border: 2px solid $value;
+    color: $value;
+    transition: background $ripple-transition-duration;
+
+    &:hover:enabled {
+      background: lighten($value, 35%) radial-gradient(circle, transparent 1%, lighten($value, 35%) 1%) center/15000%;
+    }
+    &:active:enabled {
+      background-color: lighten($value, 25%);
+      background-size: 100%;
+      transition: background 0s;
+    }
+  }
+
+  .#{$key}-ghost {
+    background: center;
+    border: none;
+    color: $value;
+    transition: background $ripple-transition-duration;
+
+    &:hover:enabled {
+      background: lighten($value, 35%) radial-gradient(circle, transparent 1%, lighten($value, 35%) 1%) center/15000%;
+    }
+    &:active:enabled {
+      background-color: lighten($value, 25%);
+      background-size: 100%;
+      transition: background 0s;
+    }
+  }
+}

@@ -1,0 +1,43 @@
+import React from 'react'
+import classNames from 'classnames'
+import propTypes from 'prop-types'
+import { Button } from '../Button'
+import styles from './IconButton.module.scss'
+
+const IconButton = ({ icon: SvgIcon, ...buttonProps }) => {
+  const classes = classNames(
+    styles.iconButton,
+  )
+
+  return (
+    <Button className={ classes } { ...buttonProps }>
+      <SvgIcon className={ styles.svgIcon } />
+    </Button>
+  )
+}
+
+IconButton.defaultProps = {
+  color: 'primary',
+  size: 'small',
+  variant: 'fill',
+  disabled: false,
+  onClick: () => {},
+}
+
+IconButton.propTypes = {
+  /** Svg icon */
+  icon: propTypes.elementType.isRequired,
+  /** The size of the button. */
+  color: propTypes.oneOf(['primary', 'secondary', 'accent', 'decorative']),
+  /** The size of the button. */
+  size: propTypes.oneOf(['small', 'large']),
+  /** The size of the button. */
+  variant: propTypes.oneOf(['fill', 'outline', 'ghost']),
+  /** If true, the button will be disabled. */
+  disabled: propTypes.bool,
+  /** Callback when click. */
+  onClick: propTypes.func,
+  /** Show or hide the component. */
+}
+
+export default IconButton

@@ -13,7 +13,7 @@ addDecorator(
     inline: true,
     header: false,
     source: true,
-    maxPropsIntoLine: 1,
+    maxPropsIntoLine: 1
   })
 );
 

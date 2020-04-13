@@ -1,6 +1,12 @@
 @import "~@anyvision/style-guide";
+@import url('https://fonts.googleapis.com/css?family=Poppins');
 
 .story-wrapper {
+
+  * {
+    font-family: "Poppins";
+  }
+
   .info-table {
     border-collapse: collapse;
     width: 100%;
@@ -26,5 +32,11 @@
       background-color: av-color(primary);
       color: av-color(purewhite);
     }
+  }
+
+  #story-root {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
   }
 }
