@@ -12,7 +12,7 @@ export default {
 export const iconButton = () => (
   <IconButton
     color={ select('color', Object.keys(colors), 'primary') }
-    size={ select('size', ['small', 'large'], 'large') }
+    size={ select('size', ['small', 'large'], 'small') }
     variant={ select('variant', ['fill', 'outline', 'ghost'], 'fill') }
     disabled={ boolean('disabled', false) }
     icon={ Icon }

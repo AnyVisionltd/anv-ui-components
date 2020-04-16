@@ -7,9 +7,10 @@ import styles from './IconButton.module.scss'
 
 const styleGuideColors = Object.keys(colors)
 
-const IconButton = ({ icon: SvgIcon, ...buttonProps }) => {
+const IconButton = ({ icon: SvgIcon, size, ...buttonProps }) => {
   const classes = classNames(
     styles.iconButton,
+    styles[size],
   )
 
   return (
@@ -21,7 +22,7 @@ const IconButton = ({ icon: SvgIcon, ...buttonProps }) => {
 
 IconButton.defaultProps = {
   color: 'primary',
-  size: 'large',
+  size: 'small',
   variant: 'fill',
   disabled: false,
   onClick: () => {},

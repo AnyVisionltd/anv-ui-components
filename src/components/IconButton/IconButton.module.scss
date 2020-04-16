@@ -1,12 +1,30 @@
 @import "~@anyvision/style-guide";
 
 .iconButton {
-  height: av-size(sz-32);
-  width: av-size(sz-32);
   padding: 0;
 }
 
 .svgIcon {
   fill: av-color(purewhite);
+}
+
+.small {
+  height: av-size(sz-32);
+  width: av-size(sz-32);
+
+  .svgIcon {
+    height: av-size(sz-24);
+    width: av-size(sz-24);
+  }
+}
+
+.large {
+  height: av-size(sz-48);
+  width: av-size(sz-48);
+
+  .svgIcon {
+    height: av-size(sz-32);
+    width: av-size(sz-32);
+  }
 }
 
