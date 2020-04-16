@@ -56,6 +56,7 @@ button:disabled {
     &:hover:enabled {
       background: scale-color($value, $lightness: 90%) radial-gradient(circle, transparent 1%, scale-color($value, $lightness: 90%) 1%) center/15000%;
     }
+
     &:active:enabled {
       background-color: scale-color($value, $lightness: 75%);
       background-size: 100%;
@@ -73,6 +74,7 @@ button:disabled {
     &:hover:enabled {
       background: scale-color($value, $lightness: 90%) radial-gradient(circle, transparent 1%, scale-color($value, $lightness: 90%) 1%) center/15000%;
     }
+
     &:active:enabled {
       background-color: scale-color($value, $lightness: 75%);
       background-size: 100%;

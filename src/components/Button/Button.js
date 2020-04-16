@@ -1,7 +1,10 @@
 import React from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
+import colors from '@anyvision/style-guide/abstracts/_colors.scss'
 import styles from './Button.module.scss'
+
+const styleGuideColors = Object.keys(colors)
 
 const Button = ({
   color, size, variant, disabled, onClick, className, children, type,
@@ -35,11 +38,11 @@ Button.defaultProps = {
 }
 
 Button.propTypes = {
-  /** The size of the button. */
-  color: propTypes.oneOf(['primary', 'secondary', 'accent', 'decorative']),
+  /** The color of the button. */
+  color: propTypes.oneOf(styleGuideColors),
   /** The size of the button. */
   size: propTypes.oneOf(['small', 'large']),
-  /** The size of the button. */
+  /** The variant of the button. */
   variant: propTypes.oneOf(['fill', 'outline', 'ghost']),
   /** If true, the button will be disabled. */
   disabled: propTypes.bool,

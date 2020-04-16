@@ -1,8 +1,11 @@
 import React from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
+import colors from '@anyvision/style-guide/abstracts/_colors.scss'
 import { Button } from '../Button'
 import styles from './IconButton.module.scss'
+
+const styleGuideColors = Object.keys(colors)
 
 const IconButton = ({ icon: SvgIcon, ...buttonProps }) => {
   const classes = classNames(
@@ -28,11 +31,11 @@ IconButton.defaultProps = {
 IconButton.propTypes = {
   /** Svg icon */
   icon: propTypes.elementType.isRequired,
-  /** The size of the button. */
-  color: propTypes.oneOf(['primary', 'secondary', 'accent', 'decorative']),
+  /** The color of the button. */
+  color: propTypes.oneOf(styleGuideColors),
   /** The size of the button. */
   size: propTypes.oneOf(['small', 'large']),
-  /** The size of the button. */
+  /** The variant of the button. */
   variant: propTypes.oneOf(['fill', 'outline', 'ghost']),
   /** If true, the button will be disabled. */
   disabled: propTypes.bool,
