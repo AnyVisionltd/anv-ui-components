@@ -5,7 +5,7 @@ import { ReactComponent as Icon } from '../../assets/svg/Sun.svg'
 import IconButton from './IconButton'
 
 export default {
-  title: 'Components/Button',
+  title: 'IconButton',
   component: IconButton,
 }
 

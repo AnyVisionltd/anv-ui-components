@@ -2,6 +2,10 @@
 
 $ripple-transition-duration: 0.5s;
 
+@mixin ripple($hover, $active, $ripple) {
+
+}
+
 button {
   border: none;
   text-align: center;
@@ -36,7 +40,7 @@ button:disabled {
     transition: background $ripple-transition-duration;
 
     &:hover:enabled {
-      background: scale-color($value, $lightness: 20%) radial-gradient(circle, transparent 1%, $value 1%) center/15000%;
+      background: scale-color($value, $lightness: -20%) radial-gradient(circle, transparent 1%, $value 1%) center/15000%;
     }
 
     &:active:enabled {
