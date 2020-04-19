@@ -1,0 +1,29 @@
+@mixin backgroundRipple($value) {
+  background-position: center;
+  transition: background $ripple-transition-duration;
+
+&:hover:enabled {
+    background: scale-color($value, $lightness: 10%) radial-gradient(circle, transparent 1%, scale-color($value, $lightness: 10%) 1%) center/15000%;
+  }
+
+&:active:enabled {
+    background-color: scale-color($value, $lightness: -10%);
+    background-size: 100%;
+    transition: background 0s;
+  }
+}
+
+@mixin textRipple($value) {
+  background: center;
+  transition: background $ripple-transition-duration;
+
+&:hover:enabled {
+    background: scale-color($value, $lightness: 90%) radial-gradient(circle, transparent 1%, scale-color($value, $lightness: 90%) 1%) center/15000%;
+  }
+
+&:active:enabled {
+    background-color: scale-color($value, $lightness: 75%);
+    background-size: 100%;
+    transition: background 0s;
+  }
+}

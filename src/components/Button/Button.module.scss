@@ -1,4 +1,5 @@
 @import "~@anyvision/style-guide";
+@import "../../styles/mixin/ripple";
 
 $ripple-transition-duration: 0.5s;
 
@@ -8,16 +9,12 @@ $ripple-transition-duration: 0.5s;
   text-decoration: none;
   border-radius: av-radius(tidy);
   padding: 0 av-space();
-  font-weight: av-font-weight(bold);
-  font-size: av-font-size(small);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: nowrap;
   white-space: nowrap;
-  text-transform: uppercase;
-  line-height: 1.36;
-  letter-spacing: 1.34px;
+  @extend %av-button
 }
 
 .small {
@@ -34,56 +31,22 @@ button:disabled {
 
 @each $key, $value in $color-palate {
   .#{$key}-fill {
-    background-color: $value;
     color: av-color(purewhite);
-    fill: av-color(purewhite);
-    background-position: center;
-    transition: background $ripple-transition-duration;
-
-    &:hover:enabled {
-      background: scale-color($value, $lightness: 10%) radial-gradient(circle, transparent 1%, scale-color($value, $lightness: 10%) 1%) center/15000%;
-    }
-
-    &:active:enabled {
-      background-color: scale-color($value, $lightness: -10%);
-      background-size: 100%;
-      transition: background 0s;
-    }
+    fill: currentColor;
+    background-color: $value;
+    @include backgroundRipple($value)
   }
 
   .#{$key}-outline {
-    background: center;
-    border: 2px solid $value;
     color: $value;
-    fill: $value;
-    transition: background $ripple-transition-duration;
-
-    &:hover:enabled {
-      background: scale-color($value, $lightness: 90%) radial-gradient(circle, transparent 1%, scale-color($value, $lightness: 90%) 1%) center/15000%;
-    }
-
-    &:active:enabled {
-      background-color: scale-color($value, $lightness: 75%);
-      background-size: 100%;
-      transition: background 0s;
-    }
+    fill: currentColor;
+    border: 2px solid currentColor;
+    @include textRipple($value)
   }
 
   .#{$key}-ghost {
-    background: center;
-    border: none;
     color: $value;
-    fill: $value;
-    transition: background $ripple-transition-duration;
-
-    &:hover:enabled {
-      background: scale-color($value, $lightness: 90%) radial-gradient(circle, transparent 1%, scale-color($value, $lightness: 90%) 1%) center/15000%;
-    }
-
-    &:active:enabled {
-      background-color: scale-color($value, $lightness: 75%);
-      background-size: 100%;
-      transition: background 0s;
-    }
+    fill: currentColor;
+    @include textRipple($value)
   }
 }
