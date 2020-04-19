@@ -10,6 +10,7 @@ const Button = ({
   color, size, variant, disabled, onClick, className, children, type,
 }) => {
   const classes = classNames(
+    styles.button,
     styles[color],
     styles[size],
     styles[`${color}-${variant}`],
@@ -50,7 +51,7 @@ Button.propTypes = {
   onClick: propTypes.func,
   /** Defines HTML button type attribute. */
   type: propTypes.oneOf(['button', 'reset', 'submit']),
-  /** For css customizition. */
+  /** For css customization. */
   className: propTypes.string,
   /** The component content. */
   children: propTypes.node,

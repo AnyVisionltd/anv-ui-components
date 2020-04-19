@@ -7,15 +7,19 @@ import styles from './IconButton.module.scss'
 
 const styleGuideColors = Object.keys(colors)
 
-const IconButton = ({ icon: SvgIcon, size, ...buttonProps }) => {
+const IconButton = ({
+  children, size, variant, className, ...buttonProps
+}) => {
   const classes = classNames(
     styles.iconButton,
     styles[size],
+    styles[variant],
+    className,
   )
 
   return (
-    <Button className={ classes } { ...buttonProps }>
-      <SvgIcon className={ styles.svgIcon } />
+    <Button className={ classes } variant={ variant } { ...buttonProps }>
+      { children }
     </Button>
   )
 }
@@ -44,6 +48,10 @@ IconButton.propTypes = {
   onClick: propTypes.func,
   /** Defines HTML button type attribute. */
   type: propTypes.oneOf(['button', 'reset', 'submit']),
+  /** For css customization. */
+  className: propTypes.string,
+  /** The component icon. */
+  children: propTypes.node,
 }
 
 export default IconButton

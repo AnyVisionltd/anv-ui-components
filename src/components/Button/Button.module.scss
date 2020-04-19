@@ -2,13 +2,9 @@
 
 $ripple-transition-duration: 0.5s;
 
-@mixin ripple($hover, $active, $ripple) {
-
-}
-
-button {
+.button {
   border: none;
-  text-align: center;
+  text-align: left;
   text-decoration: none;
   border-radius: av-radius(tidy);
   padding: 0 av-space();
@@ -17,6 +13,11 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  text-transform: uppercase;
+  line-height: 1.36;
+  letter-spacing: 1.34px;
 }
 
 .small {

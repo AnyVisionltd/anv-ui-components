@@ -4,15 +4,11 @@
   padding: 0;
 }
 
-.svgIcon {
-  fill: av-color(purewhite);
-}
-
 .small {
   height: av-size(sz-32);
   width: av-size(sz-32);
 
-  .svgIcon {
+  svg {
     height: av-size(sz-24);
     width: av-size(sz-24);
   }
@@ -22,9 +18,13 @@
   height: av-size(sz-48);
   width: av-size(sz-48);
 
-  .svgIcon {
+  svg {
     height: av-size(sz-32);
     width: av-size(sz-32);
   }
+}
+
+.ghost {
+  border-radius: av-radius(circle);
 }
 
