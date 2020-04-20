@@ -12,6 +12,10 @@
   justify-content: center;
   flex-wrap: nowrap;
   white-space: nowrap;
+
+  &:disabled {
+    opacity: av-opacity(disabled);
+  }
 }
 
 .startIcon {
@@ -24,10 +28,6 @@
 
 .large {
   height: av-size(sz-48);
-}
-
-button:disabled {
-  opacity: av-opacity(disabled);
 }
 
 // Consider other ripple approach fix white and black
