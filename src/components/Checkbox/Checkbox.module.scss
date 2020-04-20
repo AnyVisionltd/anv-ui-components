@@ -1,9 +1,76 @@
-.checkboxContainer {
-  .checkbox {
+@import "~@anyvision/style-guide";
 
+.checkbox {
+  position: relative;
+  height: av-size(sz-32);
+  width: av-size(sz-32);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: av-radius();
+
+  .parent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    height: 100%;
+    width: 100%;
   }
 
-  .label {
+  .iconContainer {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 50%;
+    border-radius: 4px;
+    border: solid 2px av-color(surface);
+    opacity: av-opacity(disabled);
+  }
 
+  &:not(&.isDisabled) {
+    &:focus,
+    &:active {
+      .iconContainer {
+        opacity: 1;
+        border-color: av-color(surface);
+      }
+    }
+  }
+
+  &.checked,
+  &.indeterminate {
+    .iconContainer {
+      opacity: 1;
+    }
+  }
+
+  &.isDisabled {
+    cursor: not-allowed;
   }
 }
+@each $key, $value in $color-palate {
+  .checkbox-#{$key} {
+    &:hover {
+      background-color: av-color($key, av-opacity(ghost));
+    }
+
+    &:focus,
+    &:active {
+      background-color: av-color($key, av-opacity(divider));
+    }
+
+    &.checked,
+    &.indeterminate {
+      .iconContainer {
+        border-color: $value;
+        background-color: $value;
+      }
+    }
+  }
+}
+

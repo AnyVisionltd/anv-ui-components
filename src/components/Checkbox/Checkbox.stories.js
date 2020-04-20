@@ -1,10 +1,9 @@
 import React from 'react'
-import { select, boolean, text } from '@storybook/addon-knobs'
-import styleGuideColors from '@anyvision/style-guide/abstracts/_colors.scss'
-import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
+import { select, boolean } from '@storybook/addon-knobs'
 import Checkbox from './Checkbox'
-import styles from '../../styles/storybook/index.module.scss'
 import { centerDecorator } from '../../utils/storybook/decorators'
+import styleGuideColors from '@anyvision/style-guide/abstracts/_colors.scss'
+import styles from '../../styles/storybook/index.module.scss'
 
 export default {
   title: 'Checkbox',
@@ -13,40 +12,27 @@ export default {
 }
 
 export const Default = () => (
-  <Checkbox>
-    Check me!
-  </Checkbox>
+  <Checkbox/>
 )
 
 export const colors = () => (Object.keys(styleGuideColors).map((color) => (
-  <Checkbox className={ styles.microMargin } key={ color } color={ color }>
-    { color }
-  </Checkbox>
-))
-)
-
-export const disable = () => (
-  <>
-    <Checkbox className={ styles.microMargin }>Enable</Checkbox>
-    <Checkbox className={ styles.microMargin } disabled>Disabled</Checkbox>
-  </>
-)
+  <Checkbox className={styles.microMargin} key={color} color={color} checked/>
+)))
 
 export const states = () => (
   <>
-    <Checkbox className={ styles.microMargin } checked>Checked</Checkbox>
-    <Checkbox className={ styles.microMargin }>Not checked</Checkbox>
-    <Checkbox className={ styles.microMargin } indeterminate>Indeterminate</Checkbox>
+    <Checkbox className={styles.microMargin} checked/>
+    <Checkbox className={styles.microMargin}/>
+    <Checkbox className={styles.microMargin} indeterminate/>
+    <Checkbox className={styles.microMargin} disabled/>
   </>
 )
 
 export const playGround = () => (
   <Checkbox
-    color={ select('color', Object.keys(styleGuideColors), 'primary') }
-    checked={ boolean('checked', false) }
-    indeterminate={ boolean('indeterminate', false) }
-    disabled={ boolean('disabled', false) }
-  >
-    { text('text', 'Checkbox Text') }
-  </Checkbox>
+    color={select('color', Object.keys(styleGuideColors), 'primary')}
+    indeterminate={boolean('indeterminate', false)}
+    checked={boolean('checked', false)}
+    disabled={boolean('disabled', false)}
+  />
 )
