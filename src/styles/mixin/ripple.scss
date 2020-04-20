@@ -1,0 +1,32 @@
+// Consider other ripple approach fix white and black
+$ripple-transition-duration: 0.5s;
+
+@mixin backgroundRipple($color) {
+  background-position: center;
+  transition: background $ripple-transition-duration;
+
+&:hover:enabled {
+    background: scale-color($color, $lightness: 10%) radial-gradient(circle, transparent 1%, scale-color($color, $lightness: 10%) 1%) center/15000%;
+  }
+
+&:active:enabled {
+    background-color: scale-color($color, $lightness: -10%);
+    background-size: 100%;
+    transition: background 0s;
+  }
+}
+
+@mixin textRipple($color) {
+  background: center;
+  transition: background $ripple-transition-duration;
+
+&:hover:enabled {
+    background: scale-color($color, $lightness: 90%) radial-gradient(circle, transparent 1%, scale-color($color, $lightness: 90%) 1%) center/15000%;
+  }
+
+&:active:enabled {
+    background-color: scale-color($color, $lightness: 75%);
+    background-size: 100%;
+    transition: background 0s;
+  }
+}

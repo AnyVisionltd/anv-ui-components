@@ -1,0 +1,54 @@
+@import "~@anyvision/style-guide";
+@import "../../styles/mixin/ripple";
+
+.button {
+  @extend %av-button;
+  border: none;
+  text-decoration: none;
+  border-radius: av-radius(tidy);
+  padding: 0 av-space();
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+
+  &:disabled {
+    opacity: av-opacity(disabled);
+  }
+}
+
+.startIcon {
+  margin-left: calc(#{av-space(micro)} * -1);
+}
+
+.small {
+  height: av-size(sz-32);
+}
+
+.large {
+  height: av-size(sz-48);
+}
+
+// Consider other ripple approach fix white and black
+@each $key, $value in $color-palate {
+  .#{$key}-fill {
+    color: av-color(purewhite);
+    fill: currentColor;
+    background-color: $value;
+    @include backgroundRipple($value)
+  }
+
+  .#{$key}-outline {
+    color: $value;
+    fill: currentColor;
+    border: 2px solid currentColor;
+    @include textRipple($value)
+  }
+
+  .#{$key}-ghost {
+    color: $value;
+    fill: currentColor;
+    @include textRipple($value)
+  }
+}
