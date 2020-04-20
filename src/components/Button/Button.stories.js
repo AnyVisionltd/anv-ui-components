@@ -48,15 +48,10 @@ export const disable = () => (
 )
 
 export const withIcon = () => (
-  <>
-    <Button className={ styles.microMargin }>
-      <SunIcon />
-      { ' ' }
-      Start
-    </Button>
-  </>
+  <Button className={ styles.microMargin } startIcon={ SunIcon }>
+    Start
+  </Button>
 )
-
 
 export const playGround = () => (
   <Button

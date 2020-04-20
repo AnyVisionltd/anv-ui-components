@@ -4,8 +4,8 @@
 $ripple-transition-duration: 0.5s;
 
 .button {
+  @extend %av-button;
   border: none;
-  text-align: left;
   text-decoration: none;
   border-radius: av-radius(tidy);
   padding: 0 av-space();
@@ -14,7 +14,10 @@ $ripple-transition-duration: 0.5s;
   justify-content: center;
   flex-wrap: nowrap;
   white-space: nowrap;
-  @extend %av-button
+}
+
+.startIcon {
+  margin-left: calc(#{av-space(micro)} * -1);
 }
 
 .small {
