@@ -13,8 +13,6 @@ const Checkbox = ({ color, checked, indeterminate, disabled, onChange, className
     className,
   )
 
-  console.log(classes)
-
   return (
     <div className={ classes }>
       <input
