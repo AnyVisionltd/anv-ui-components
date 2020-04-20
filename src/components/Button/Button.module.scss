@@ -32,6 +32,7 @@ button:disabled {
   opacity: av-opacity(disabled);
 }
 
+// Consider other ripple approach fix white and black
 @each $key, $value in $color-palate {
   .#{$key}-fill {
     color: av-color(purewhite);
