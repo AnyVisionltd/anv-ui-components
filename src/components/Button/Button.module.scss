@@ -1,8 +1,6 @@
 @import "~@anyvision/style-guide";
 @import "../../styles/mixin/ripple";
 
-$ripple-transition-duration: 0.5s;
-
 .button {
   @extend %av-button;
   border: none;
