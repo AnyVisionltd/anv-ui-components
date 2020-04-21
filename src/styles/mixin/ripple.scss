@@ -1,32 +1,34 @@
 // Consider other ripple approach fix white and black
 $ripple-transition-duration: 0.5s;
 
-@mixin backgroundRipple($color) {
-  background-position: center;
-  transition: background $ripple-transition-duration;
-
-&:hover:enabled {
-    background: scale-color($color, $lightness: 10%) radial-gradient(circle, transparent 1%, scale-color($color, $lightness: 10%) 1%) center/15000%;
+@mixin av-ripple($color) {
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
   }
 
-&:active:enabled {
-    background-color: scale-color($color, $lightness: -10%);
-    background-size: 100%;
-    transition: background 0s;
+  &::before {
+    background-color: currentColor;
+    transition: opacity 0.2s;
   }
-}
-
-@mixin textRipple($color) {
-  background: center;
-  transition: background $ripple-transition-duration;
-
-&:hover:enabled {
-    background: scale-color($color, $lightness: 90%) radial-gradient(circle, transparent 1%, scale-color($color, $lightness: 90%) 1%) center/15000%;
+  &::after {
+    background: radial-gradient(circle at center, currentColor 1%, transparent 1%) center/10000% 10000% no-repeat;
+    transition: opacity 1s, background-size $ripple-transition-duration;
   }
 
-&:active:enabled {
-    background-color: scale-color($color, $lightness: 75%);
-    background-size: 100%;
-    transition: background 0s;
+  &:hover::before {
+    opacity: av-opacity(divider);
+  }
+
+  &:active::after {
+    opacity: av-opacity(disabled);
+    background-size: 100% 100%;
+    transition: background-size 0s;
   }
 }
