@@ -13,10 +13,6 @@
   },
   "dependencies": {
     "@anyvision/style-guide": "1.0.1-beta.7",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/react-hooks": "^3.2.1",
-    "@testing-library/user-event": "^7.1.2",
     "classnames": "^2.2.6",
     "jest-environment-jsdom-sixteen": "^1.0.3",
     "node-sass": "^4.13.1",
@@ -60,6 +56,10 @@
     "@storybook/react": "^5.3.18",
     "@svgr/webpack": "^5.3.1",
     "@testing-library/dom": "^7.2.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/react-hooks": "^3.2.1",
+    "@testing-library/user-event": "^7.1.2",
     "cross-env": "^7.0.2",
     "eslint-config-airbnb": "^18.1.0",
     "husky": "^4.2.3",
@@ -67,5 +67,12 @@
     "react-scripts": "3.4.1",
     "react-test-renderer": "^16.13.1",
     "url-loader": "^4.1.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less|sass|scss)$": "<rootDir>/jest/__mocks__/style.js",
+      "\\.(gif|ttf|eot)$": "<rootDir>/jest/__mocks__/file.js",
+      "\\.(svg)$": "<rootDir>/jest/__mocks__/svg.js"
+    }
   }
 }
