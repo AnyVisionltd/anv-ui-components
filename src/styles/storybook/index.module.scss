@@ -3,3 +3,9 @@
 .microMargin {
   margin: av-space(micro);
 }
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  font-size: av-font-size(small);
+}
