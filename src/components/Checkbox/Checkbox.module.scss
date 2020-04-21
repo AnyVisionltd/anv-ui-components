@@ -15,12 +15,7 @@
   &:before,
   &:after {
     border-radius: inherit;
-  }
-  &:before {
     z-index: -1;
-  }
-  &:after {
-    z-index: -2;
   }
 
   .parent {
@@ -45,9 +40,9 @@
     }
   }
 
-  &:not(&.isDisabled) {
-    &:focus,
-    &:active {
+  &:focus,
+  &:active {
+    .iconContainer {
       border-color: av-color(surface);
     }
   }
@@ -62,6 +57,7 @@
   &.isDisabled {
     cursor: not-allowed;
     .iconContainer {
+      border: solid 2px av-color(surface, av-opacity(disabled));
       opacity: av-opacity(disabled);
     }
   }
