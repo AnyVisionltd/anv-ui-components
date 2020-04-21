@@ -1,8 +1,6 @@
 @import "~@anyvision/style-guide";
 @import "../../styles/mixin/ripple";
 
-$ripple-transition-duration: 0.5s;
-
 .button {
   @extend %av-button;
   border: none;
@@ -14,6 +12,10 @@ $ripple-transition-duration: 0.5s;
   justify-content: center;
   flex-wrap: nowrap;
   white-space: nowrap;
+
+  &:disabled {
+    opacity: av-opacity(disabled);
+  }
 }
 
 .startIcon {
@@ -28,10 +30,7 @@ $ripple-transition-duration: 0.5s;
   height: av-size(sz-48);
 }
 
-button:disabled {
-  opacity: av-opacity(disabled);
-}
-
+// Consider other ripple approach fix white and black
 @each $key, $value in $color-palate {
   .#{$key}-fill {
     color: av-color(purewhite);

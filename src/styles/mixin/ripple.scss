@@ -1,3 +1,6 @@
+// Consider other ripple approach fix white and black
+$ripple-transition-duration: 0.5s;
+
 @mixin backgroundRipple($color) {
   background-position: center;
   transition: background $ripple-transition-duration;
