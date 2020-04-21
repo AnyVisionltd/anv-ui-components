@@ -1,55 +1,49 @@
 import React from 'react'
-import '@testing-library/jest-dom'
-import {render, cleanup, fireEvent} from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { default as Checkbox } from './Checkbox'
+import { getByRole } from '@testing-library/dom'
+import { Checkbox } from './index'
 
-describe('Actual checkbox input behaviour', () => {
+describe('<Checkbox />', () => {
   describe('input state behaviour', () => {
     describe('checked state', () => {
-      afterEach(cleanup)
-
       it('should be checked when set to be', () => {
-        const { container } = render(<Checkbox checked/>)
-        const checkbox = container.querySelector('input')
+        const { container } = render(<Checkbox checked />)
+        const checkbox = getByRole(container, 'checkbox')
         expect(checkbox.checked).toBe(true)
       })
 
       it('shouldn\'t be checked when not set to be', () => {
-        const { container } = render(<Checkbox/>)
-        const checkbox = container.querySelector('input')
+        const { container } = render(<Checkbox />)
+        const checkbox = getByRole(container, 'checkbox')
         expect(checkbox.checked).toBe(false)
       })
     })
 
     describe('indeterminate view state', () => {
-      afterEach(cleanup)
-
       it('should be indeterminate when set to be', () => {
-        const { container } = render(<Checkbox indeterminate/>)
-        const checkbox = container.querySelector('input')
+        const { container } = render(<Checkbox indeterminate />)
+        const checkbox = getByRole(container, 'checkbox')
         expect(checkbox.indeterminate).toBe(true)
       })
 
       it('shouldn\'t be indeterminate when not set to be', () => {
-        const { container } = render(<Checkbox/>)
-        const checkbox = container.querySelector('input')
+        const { container } = render(<Checkbox />)
+        const checkbox = getByRole(container, 'checkbox')
         expect(checkbox.indeterminate).toBe(false)
       })
     })
 
     describe('disabled state', () => {
-      afterEach(cleanup)
-
       it('should be disabled when set to be', () => {
-        const { container } = render(<Checkbox disabled/>)
-        const checkbox = container.querySelector('input')
+        const { container } = render(<Checkbox disabled />)
+        const checkbox = getByRole(container, 'checkbox')
         expect(checkbox.disabled).toBe(true)
       })
 
       it('shouldn\'t be disabled when not set to be', () => {
-        const { container } = render(<Checkbox/>)
-        const checkbox = container.querySelector('input')
+        const { container } = render(<Checkbox />)
+        const checkbox = getByRole(container, 'checkbox')
         expect(checkbox.disabled).toBe(false)
       })
     })
@@ -58,10 +52,8 @@ describe('Actual checkbox input behaviour', () => {
   describe('check click on checkbox functionality', () => {
     describe('normal checkbox', () => {
       describe('check input state change', () => {
-        const {container} = render(<Checkbox/>)
-        const checkbox = container.querySelector('input')
-
-        afterEach(cleanup)
+        const { container } = render(<Checkbox />)
+        const checkbox = getByRole(container, 'checkbox')
 
         it('should be changed from false to true after clicking on the checkbox', () => {
           expect(checkbox.checked).toBe(false)
@@ -78,8 +70,8 @@ describe('Actual checkbox input behaviour', () => {
 
       it('should trigger a change handler', async () => {
         const onChange = jest.fn()
-        const {container} = render(<Checkbox onChange={onChange}/>)
-        const checkbox = container.querySelector('input')
+        const { container } = render(<Checkbox onChange={ onChange } />)
+        const checkbox = getByRole(container, 'checkbox')
 
         await userEvent.click(checkbox)
         expect(onChange).toBeCalled()
@@ -88,10 +80,8 @@ describe('Actual checkbox input behaviour', () => {
 
     describe('indeterminate checkbox', () => {
       describe('check input state change', () => {
-        const {container} = render(<Checkbox indeterminate/>)
-        const checkbox = container.querySelector('input')
-
-        afterEach(cleanup)
+        const { container } = render(<Checkbox indeterminate />)
+        const checkbox = getByRole(container, 'checkbox')
 
         it('should be changed to checked after clicking on the checkbox', () => {
           expect(checkbox.indeterminate).toBe(true)
@@ -109,8 +99,8 @@ describe('Actual checkbox input behaviour', () => {
 
       it('should trigger a change handler', async () => {
         const onChange = jest.fn()
-        const {container} = render(<Checkbox onChange={onChange}/>)
-        const checkbox = container.querySelector('input')
+        const { container } = render(<Checkbox onChange={ onChange } />)
+        const checkbox = getByRole(container, 'checkbox')
 
         await userEvent.click(checkbox)
         expect(onChange).toBeCalled()
@@ -118,12 +108,10 @@ describe('Actual checkbox input behaviour', () => {
     })
 
     describe('disabled checkbox', () => {
-      afterEach(cleanup)
-
       it('unchecked input should stay unchecked, change event should not be triggered', async () => {
         const onChange = jest.fn()
-        const { container } = render(<Checkbox disabled onChange={ onChange }/>)
-        const checkbox = container.querySelector('input')
+        const { container } = render(<Checkbox disabled onChange={ onChange } />)
+        const checkbox = getByRole(container, 'checkbox')
 
         expect(checkbox.checked).toBe(false)
         await userEvent.click(checkbox)
@@ -133,8 +121,8 @@ describe('Actual checkbox input behaviour', () => {
 
       it('checked input should stay unchecked, change event should not be triggered', async () => {
         const onChange = jest.fn()
-        const { container } = render(<Checkbox checked disabled onChange={ onChange }/>)
-        const checkbox = container.querySelector('input')
+        const { container } = render(<Checkbox checked disabled onChange={ onChange } />)
+        const checkbox = getByRole(container, 'checkbox')
 
         expect(checkbox.checked).toBe(true)
         await userEvent.click(checkbox)

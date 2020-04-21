@@ -20,15 +20,17 @@ export const Default = () => {
   }
 
   return (
-    <label htmlFor="check-me" className={ styles.checkboxLabel }>
+    <>
       <Checkbox
-        id="check-me"
-        checked={ isChecked }
         indeterminate={ isIndeterminate }
+        checked={ isChecked }
         onChange={ onChange }
+        id="checkbox-playground"
       />
-      Check me out!
-    </label>
+      <label htmlFor="checkbox-playground" className={ styles.checkboxLabel }>
+        Check me out!
+      </label>
+    </>
   )
 }
 
