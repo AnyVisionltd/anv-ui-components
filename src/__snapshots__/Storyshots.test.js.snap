@@ -168,6 +168,110 @@ exports[`Storyshots Button With Icon 1`] = `
 </div>
 `;
 
+exports[`Storyshots Checkbox Playground 1`] = `
+<div
+  className="story-wrapper"
+>
+  <div
+    className="center"
+  >
+    <label
+      className="checkbox primary checkbox-primary"
+      htmlFor="checkbox-playground"
+    >
+      <input
+        checked={false}
+        className="parent"
+        disabled={false}
+        id="checkbox-playground"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <span
+        className="iconContainer"
+      />
+    </label>
+    <label
+      className="checkboxLabel"
+      htmlFor="checkbox-playground"
+    >
+      Hit me!
+    </label>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Checkbox States 1`] = `
+<div
+  className="story-wrapper"
+>
+  <div
+    className="center"
+  >
+    <label
+      className="checkbox primary checkbox-primary checked microMargin"
+    >
+      <input
+        checked={true}
+        className="parent"
+        disabled={false}
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <span
+        className="iconContainer"
+      >
+        <svg />
+      </span>
+    </label>
+    <label
+      className="checkbox primary checkbox-primary microMargin"
+    >
+      <input
+        checked={false}
+        className="parent"
+        disabled={false}
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <span
+        className="iconContainer"
+      />
+    </label>
+    <label
+      className="checkbox primary checkbox-primary indeterminate microMargin"
+    >
+      <input
+        checked={false}
+        className="parent"
+        disabled={false}
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <span
+        className="iconContainer"
+      >
+        <svg />
+      </span>
+    </label>
+    <label
+      className="checkbox primary checkbox-primary isDisabled microMargin"
+    >
+      <input
+        checked={false}
+        className="parent"
+        disabled={true}
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <span
+        className="iconContainer"
+      />
+    </label>
+  </div>
+</div>
+`;
+
 exports[`Storyshots IconButton Colors 1`] = `
 <div
   className="story-wrapper"

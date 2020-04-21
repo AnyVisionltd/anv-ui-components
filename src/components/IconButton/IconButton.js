@@ -49,7 +49,7 @@ IconButton.propTypes = {
   /** For css customization. */
   className: propTypes.string,
   /** The component icon. */
-  children: propTypes.node,
+  children: propTypes.node.isRequired,
 }
 
 export default IconButton
