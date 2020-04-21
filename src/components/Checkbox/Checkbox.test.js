@@ -2,7 +2,10 @@ import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { getByRole } from '@testing-library/dom'
+import initStoryshots from '@storybook/addon-storyshots'
 import { Checkbox } from './index'
+
+initStoryshots()
 
 describe('<Checkbox />', () => {
   describe('input state behaviour', () => {
