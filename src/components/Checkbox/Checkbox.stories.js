@@ -5,13 +5,15 @@ import Checkbox from './Checkbox'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import styles from '../../styles/storybook/index.module.scss'
 
+/* eslint react-hooks/rules-of-hooks: 0 */
+
 export default {
   title: 'Checkbox',
   component: Checkbox,
   decorators: [centerDecorator],
 }
 
-export const Default = () => {
+const OverviewWithHooks = () => {
   const [isChecked, setChecked] = useState(false)
   const [isIndeterminate, setIndeterminate] = useState(false)
   const onChange = ({ target }) => {
@@ -33,8 +35,9 @@ export const Default = () => {
     </>
   )
 }
+export const Overview = () => <OverviewWithHooks />
 
-export const colors = () => Object
+const ColorsWithHooks = () => Object
   .keys(styleGuideColors)
   .map((color) => {
     const [isChecked, setChecked] = useState(true)
@@ -51,6 +54,7 @@ export const colors = () => Object
       />
     )
   })
+export const Colors = () => <ColorsWithHooks />
 
 export const states = () => (
   <>
