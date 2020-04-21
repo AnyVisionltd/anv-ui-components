@@ -1,5 +1,6 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
+// import { ReactComponent as SvgIcon } from '../../../jest/assets/svgIcon.svg'
 import Button from './Button'
 
 describe('<Button />', () => {
@@ -9,9 +10,11 @@ describe('<Button />', () => {
     expect(node.innerHTML).toBe('Button Text')
   })
 
-  it('should render startIcon', () => {
-
-  })
+  // it('should render startIcon', () => {
+  //   const { getByRole } = render(<Button startIcon={ SvgIcon }>Button Text</Button>)
+  //   const node = getByRole('img')
+  //   expect(node).toBeTruthy()
+  // })
 
   describe('disabled', () => {
     it('should not be disabled by default', () => {
