@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
-// import { ReactComponent as SvgIcon } from '../../../jest/assets/svgIcon.svg'
+import { ReactComponent as SvgIcon } from '../../../jest/assets/svgIcon.svg'
 import Button from './Button'
 
 describe('<Button />', () => {
@@ -10,14 +10,14 @@ describe('<Button />', () => {
     expect(node.innerHTML).toBe('Button Text')
   })
 
-  // it('should render startIcon', () => {
-  //   const { getByRole } = render(<Button startIcon={ SvgIcon }>Button Text</Button>)
-  //   const node = getByRole('img')
-  //   expect(node).toBeTruthy()
-  // })
+  it('should render startIcon', () => {
+    const { container } = render(<Button startIcon={ SvgIcon }>Button Text</Button>)
+    const node = container.querySelector('svg')
+    expect(node).toBeTruthy()
+  })
 
   describe('disabled', () => {
-    it('should not be disabled by default', () => {
+    it('should NOT be disabled by default', () => {
       const { getByRole } = render(<Button>Button Text</Button>)
       const node = getByRole('button')
       expect(node.disabled).toBe(false)
@@ -38,12 +38,5 @@ describe('<Button />', () => {
     const node = getByText('Click Me')
     fireEvent.click(node)
     expect(handleClick).toBeCalled()
-  })
-
-  it('should render button with correct default classNames', () => {
-    const { getByRole } = render(<Button>Button Text</Button>)
-    const node = getByRole('button')
-    expect(node).toHaveClass('large')
-    expect(node).toHaveClass('primary-fill')
   })
 })
