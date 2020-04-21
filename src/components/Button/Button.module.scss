@@ -36,7 +36,7 @@
     color: av-color(purewhite);
     fill: currentColor;
     background-color: av-color($key);
-    @include av-ripple(av-color($key))
+    @include av-ripple(av-color(purewhite))
   }
 
   .#{$key}-outline {
