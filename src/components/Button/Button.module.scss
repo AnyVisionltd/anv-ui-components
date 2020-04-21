@@ -3,6 +3,7 @@
 
 .button {
   @extend %av-button;
+  position: relative;
   border: none;
   text-decoration: none;
   border-radius: av-radius(tidy);
@@ -30,25 +31,26 @@
   height: av-size(sz-48);
 }
 
-// Consider other ripple approach fix white and black
 @each $key, $value in $color-palate {
   .#{$key}-fill {
     color: av-color(purewhite);
     fill: currentColor;
-    background-color: $value;
-    @include backgroundRipple($value)
+    background-color: av-color($key);
+    @include av-ripple(av-color($key))
   }
 
   .#{$key}-outline {
-    color: $value;
+    background: center;
+    color: av-color($key);
     fill: currentColor;
     border: 2px solid currentColor;
-    @include textRipple($value)
+    @include av-ripple(av-color($key))
   }
 
   .#{$key}-ghost {
-    color: $value;
+    background: center;
+    color: av-color($key);
     fill: currentColor;
-    @include textRipple($value)
+    @include av-ripple(av-color($key))
   }
 }
