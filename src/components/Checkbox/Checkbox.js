@@ -1,14 +1,14 @@
 import React from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
-import checkedIcon from '../../assets/svg/CheckboxChecked.svg'
-import indeterminateIcon from '../../assets/svg/CheckboxIndeterminate.svg'
+import { ReactComponent as CheckboxChecked } from '../../assets/svg/CheckboxChecked.svg'
+import { ReactComponent as CheckboxIndeterminate } from '../../assets/svg/CheckboxIndeterminate.svg'
 import colors from '@anyvision/style-guide/abstracts/_colors.scss'
 import styles from './Checkbox.module.scss'
 
 const styleGuideColors = Object.keys(colors)
 
-const Checkbox = ({ color, checked, indeterminate, disabled, onChange, className }) => {
+const Checkbox = ({ color, checked, indeterminate, disabled, onChange, className, id }) => {
   const classes = classNames(
     styles.checkbox,
     styles[color],
@@ -21,10 +21,10 @@ const Checkbox = ({ color, checked, indeterminate, disabled, onChange, className
 
   const renderCheckboxIcon = () => {
     if (checked) {
-      return <img src={ checkedIcon } />
+      return <CheckboxChecked />
     }
     if (indeterminate) {
-      return <img src={ indeterminateIcon } />
+      return <CheckboxIndeterminate />
     }
     return null
   }
@@ -39,6 +39,7 @@ const Checkbox = ({ color, checked, indeterminate, disabled, onChange, className
         disabled={ disabled }
         ref={ el => el && (el.indeterminate = indeterminate) }
         onChange={ onChange }
+        id={ id }
       />
       <span className={ styles.iconContainer }>
         { renderCheckboxIcon() }
@@ -66,6 +67,8 @@ Checkbox.propTypes = {
   checked: propTypes.bool,
   /** Whether the checkbox is indeterminate, or not. */
   indeterminate: propTypes.bool,
+  /** Form control ID - for label association. */
+  id: propTypes.string,
   /** Callback when changed. */
   onChange: propTypes.func,
 }

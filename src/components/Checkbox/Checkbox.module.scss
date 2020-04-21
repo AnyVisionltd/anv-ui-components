@@ -19,6 +19,7 @@
     opacity: 0;
     height: 100%;
     width: 100%;
+    cursor: inherit;
   }
 
   .iconContainer {
@@ -69,8 +70,22 @@
       .iconContainer {
         border-color: $value;
         background-color: $value;
+
+        svg {
+          fill: white;
+        }
       }
     }
   }
 }
 
+.checkbox-purewhite {
+  &.checked,
+  &.indeterminate {
+    .iconContainer {
+      svg {
+        fill: black;
+      }
+    }
+  }
+}
