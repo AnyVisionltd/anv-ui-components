@@ -11,7 +11,6 @@ const Button = ({
 }) => {
   const classes = classNames(
     styles.button,
-    styles[color],
     styles[size],
     styles[`${color}-${variant}`],
     className,
@@ -57,7 +56,7 @@ Button.propTypes = {
   /** For css customization. */
   className: propTypes.string,
   /** The component content. */
-  children: propTypes.node,
+  children: propTypes.node.isRequired,
 }
 
 export default Button
