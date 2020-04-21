@@ -64,9 +64,9 @@ Checkbox.defaultProps = {
 }
 
 Checkbox.propTypes = {
-  /** The color of the button. */
+  /** The color of the checkbox. */
   color: propTypes.oneOf(styleGuideColors),
-  /** If true, the button will be disabled. */
+  /** If true, the checkbox will be disabled. */
   disabled: propTypes.bool,
   /** For css customization. */
   className: propTypes.string,

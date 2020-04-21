@@ -1,4 +1,5 @@
 @import "~@anyvision/style-guide";
+@import "../../styles/mixin/ripple";
 
 .checkbox {
   position: relative;
@@ -9,13 +10,21 @@
   align-items: center;
   cursor: pointer;
   border-radius: av-radius();
+  padding: av-space(tiny);
+
+  &:before,
+  &:after {
+    border-radius: inherit;
+  }
+  &:before {
+    z-index: -1;
+  }
+  &:after {
+    z-index: -2;
+  }
 
   .parent {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     opacity: 0;
     height: 100%;
     width: 100%;
@@ -26,11 +35,10 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    width: 50%;
-    height: 50%;
-    border-radius: 4px;
-    border: solid 2px av-color(surface);
-    opacity: av-opacity(disabled);
+    height: 100%;
+    width: 100%;
+    border-radius: av-radius(tidy);
+    border: solid 2px av-color(surface, av-opacity(disabled));
 
     svg {
       position: absolute;
@@ -40,35 +48,31 @@
   &:not(&.isDisabled) {
     &:focus,
     &:active {
-      .iconContainer {
-        opacity: 1;
-        border-color: av-color(surface);
-      }
+      border-color: av-color(surface);
     }
   }
 
   &.checked,
   &.indeterminate {
     .iconContainer {
-      opacity: 1;
+      border-color: av-color(surface);
     }
   }
 
   &.isDisabled {
     cursor: not-allowed;
+    .iconContainer {
+      opacity: av-opacity(disabled);
+    }
   }
 }
 @each $key, $value in $color-palate {
   .checkbox-#{$key} {
     &:not(.isDisabled) {
-      &:hover {
-        background-color: av-color($key, av-opacity(ghost));
-      }
-
-      &:focus,
-      &:active {
-        background-color: av-color($key, av-opacity(divider));
-      }
+      background: center;
+      color: av-color($key);
+      fill: currentColor;
+      @include av-ripple(av-color($key));
     }
 
     &.checked,
