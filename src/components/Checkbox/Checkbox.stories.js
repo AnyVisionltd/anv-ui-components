@@ -20,7 +20,7 @@ export const Default = () => {
   }
 
   return (
-    <label htmlFor="check-me">
+    <label htmlFor="check-me" className={ styles.checkboxLabel }>
       <Checkbox
         id="check-me"
         checked={ isChecked }
@@ -68,7 +68,7 @@ export const playground = () => (
       disabled={ boolean('disabled', false) }
       id="checkbox-playground"
     />
-    <label htmlFor="checkbox-playground">
+    <label htmlFor="checkbox-playground" className={ styles.checkboxLabel }>
       { text('Label text', 'Hit me!') }
     </label>
   </>

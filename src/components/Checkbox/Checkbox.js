@@ -41,10 +41,10 @@ const Checkbox = ({
     <label className={ classes } htmlFor={ id }>
       <input
         type="checkbox"
+        ref={ ref }
         className={ styles.parent }
         checked={ checked }
         disabled={ disabled }
-        ref={ ref }
         onChange={ onChange }
         id={ id }
       />
