@@ -13,10 +13,10 @@ const Checkbox = ({ color, checked, indeterminate, disabled, onChange, className
     styles.checkbox,
     styles[color],
     styles[`checkbox-${color}`],
-    className,
     checked && styles.checked,
     indeterminate && styles.indeterminate,
-    disabled && styles.isDisabled
+    disabled && styles.isDisabled,
+    className
   )
 
   const renderCheckboxIcon = () => {

@@ -8,7 +8,7 @@ import styles from '../../styles/storybook/index.module.scss'
 export default {
   title: 'Checkbox',
   component: Checkbox,
-  decorators: [centerDecorator],
+  decorators: [ centerDecorator ],
 }
 
 export const Default = () => {

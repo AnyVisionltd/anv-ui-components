@@ -56,20 +56,22 @@
 }
 @each $key, $value in $color-palate {
   .checkbox-#{$key} {
-    &:hover {
-      background-color: av-color($key, av-opacity(ghost));
-    }
+    &:not(.isDisabled) {
+      &:hover {
+        background-color: av-color($key, av-opacity(ghost));
+      }
 
-    &:focus,
-    &:active {
-      background-color: av-color($key, av-opacity(divider));
+      &:focus,
+      &:active {
+        background-color: av-color($key, av-opacity(divider));
+      }
     }
 
     &.checked,
     &.indeterminate {
       .iconContainer {
-        border-color: $value;
-        background-color: $value;
+        border-color: av-color($key);
+        background-color: av-color($key);
 
         svg {
           fill: white;
