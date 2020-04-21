@@ -1,14 +1,16 @@
 import React from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
+import colors from '@anyvision/style-guide/abstracts/_colors.scss'
 import { ReactComponent as CheckboxChecked } from '../../assets/svg/CheckboxChecked.svg'
 import { ReactComponent as CheckboxIndeterminate } from '../../assets/svg/CheckboxIndeterminate.svg'
-import colors from '@anyvision/style-guide/abstracts/_colors.scss'
 import styles from './Checkbox.module.scss'
 
 const styleGuideColors = Object.keys(colors)
 
-const Checkbox = ({ color, checked, indeterminate, disabled, onChange, className, id }) => {
+const Checkbox = ({
+  color, checked, indeterminate, disabled, onChange, className, id,
+}) => {
   const classes = classNames(
     styles.checkbox,
     styles[color],
@@ -16,7 +18,7 @@ const Checkbox = ({ color, checked, indeterminate, disabled, onChange, className
     checked && styles.checked,
     indeterminate && styles.indeterminate,
     disabled && styles.isDisabled,
-    className
+    className,
   )
 
   const renderCheckboxIcon = () => {
@@ -29,15 +31,20 @@ const Checkbox = ({ color, checked, indeterminate, disabled, onChange, className
     return null
   }
 
+  const ref = (el) => {
+    if (el) {
+      el.indeterminate = indeterminate // eslint-disable-line no-param-reassign
+    }
+  }
 
   return (
-    <label className={ classes }>
+    <label className={ classes } htmlFor={ id }>
       <input
-        type='checkbox'
+        type="checkbox"
         className={ styles.parent }
         checked={ checked }
         disabled={ disabled }
-        ref={ el => el && (el.indeterminate = indeterminate) }
+        ref={ ref }
         onChange={ onChange }
         id={ id }
       />
@@ -53,7 +60,7 @@ Checkbox.defaultProps = {
   disabled: false,
   checked: false,
   indeterminate: false,
-  onChange: () => {}
+  onChange: () => {},
 }
 
 Checkbox.propTypes = {
