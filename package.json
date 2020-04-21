@@ -68,11 +68,11 @@
     "react-test-renderer": "^16.13.1",
     "url-loader": "^4.1.0"
   },
-  "jest":{
-    "moduleNameMapper":{
-      "\\.(css|less|sass|scss)$": "<rootDir>/jest/__mocks__/styleMock.js",
-      "\\.(gif|ttf|eot)$": "<rootDir>/jest/__mocks__/fileMock.js",
-      "\\.(svg)$": "<rootDir>/jest/__mocks__/svgMock.js"
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less|sass|scss)$": "<rootDir>/jest/__mocks__/style.js",
+      "\\.(gif|ttf|eot)$": "<rootDir>/jest/__mocks__/file.js",
+      "\\.(svg)$": "<rootDir>/jest/__mocks__/svg.js"
     }
   }
 }
