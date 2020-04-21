@@ -54,3 +54,10 @@
     @include av-ripple(av-color($key))
   }
 }
+
+.purewhite-fill {
+  color: av-color(trueblack);
+  fill: currentColor;
+  background-color: av-color(purewhite);
+  @include av-ripple(av-color(trueblack))
+}
