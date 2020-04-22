@@ -9,7 +9,7 @@ import styles from './Checkbox.module.scss'
 const styleGuideColors = Object.keys(colors)
 
 const Checkbox = ({
-  color, checked, indeterminate, disabled, onChange, className, id,
+  color, checked, indeterminate, disabled, onChange, className, id, ...otherProps
 }) => {
   const classes = classNames(
     styles.checkbox,
@@ -47,6 +47,7 @@ const Checkbox = ({
         disabled={ disabled }
         onChange={ onChange }
         id={ id }
+        { ...otherProps }
       />
       <span className={ styles.iconContainer }>
         { renderCheckboxIcon() }

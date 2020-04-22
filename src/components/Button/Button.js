@@ -7,7 +7,16 @@ import styles from './Button.module.scss'
 const styleGuideColors = Object.keys(colors)
 
 const Button = ({
-  color, size, variant, startIcon: StartIcon, disabled, onClick, className, children, type,
+  color,
+  size,
+  variant,
+  startIcon: StartIcon,
+  disabled,
+  onClick,
+  className,
+  children,
+  type,
+  ...otherProps
 }) => {
   const classes = classNames(
     styles.button,
@@ -22,6 +31,7 @@ const Button = ({
       className={ classes }
       onClick={ onClick }
       disabled={ disabled }
+      { ...otherProps }
     >
       { StartIcon && <StartIcon className={ styles.startIcon } /> }
       { children }
