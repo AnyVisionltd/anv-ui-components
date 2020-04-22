@@ -12,12 +12,6 @@
   border-radius: av-radius();
   padding: av-space(tiny);
 
-  &:before,
-  &:after {
-    border-radius: inherit;
-    z-index: -1;
-  }
-
   .parent {
     position: absolute;
     opacity: 0;
@@ -68,7 +62,7 @@
       background: center;
       color: av-color($key);
       fill: currentColor;
-      @include av-ripple(av-color($key));
+      @include av-ripple(av-color($key), true);
     }
 
     &.checked,

@@ -8,7 +8,11 @@ import styles from './IconButton.module.scss'
 const styleGuideColors = Object.keys(colors)
 
 const IconButton = ({
-  size, variant, className, children, ...buttonProps
+  size,
+  variant,
+  className,
+  children,
+  ...buttonProps
 }) => {
   const classes = classNames(
     styles.iconButton,
@@ -30,7 +34,6 @@ IconButton.defaultProps = {
   variant: 'fill',
   disabled: false,
   onClick: () => {},
-  type: 'button',
 }
 
 IconButton.propTypes = {
@@ -44,12 +47,10 @@ IconButton.propTypes = {
   disabled: propTypes.bool,
   /** Callback when click. */
   onClick: propTypes.func,
-  /** Defines HTML button type attribute. */
-  type: propTypes.oneOf(['button', 'reset', 'submit']),
   /** For css customization. */
   className: propTypes.string,
   /** The component icon. */
-  children: propTypes.node,
+  children: propTypes.node.isRequired,
 }
 
 export default IconButton
