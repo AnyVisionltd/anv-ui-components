@@ -15,7 +15,6 @@ const Button = ({
   onClick,
   className,
   children,
-  type,
   ...otherProps
 }) => {
   const classes = classNames(
@@ -27,7 +26,6 @@ const Button = ({
 
   return (
     <button
-      type={ type }
       className={ classes }
       onClick={ onClick }
       disabled={ disabled }
@@ -45,7 +43,6 @@ Button.defaultProps = {
   variant: 'fill',
   disabled: false,
   onClick: () => {},
-  type: 'button',
 }
 
 Button.propTypes = {
@@ -61,8 +58,6 @@ Button.propTypes = {
   disabled: propTypes.bool,
   /** Callback when click. */
   onClick: propTypes.func,
-  /** Defines HTML button type attribute. */
-  type: propTypes.oneOf(['button', 'reset', 'submit']),
   /** For css customization. */
   className: propTypes.string,
   /** The component content. */

@@ -11,7 +11,6 @@ exports[`Storyshots Button Colors 1`] = `
       className="button large primary-fill microMargin"
       disabled={false}
       onClick={[Function]}
-      type="button"
     >
       primary
     </button>
@@ -30,7 +29,6 @@ exports[`Storyshots Button Default 1`] = `
       className="button large primary-fill"
       disabled={false}
       onClick={[Function]}
-      type="button"
     >
       Text
     </button>
@@ -49,7 +47,6 @@ exports[`Storyshots Button Disable 1`] = `
       className="button large primary-fill microMargin"
       disabled={false}
       onClick={[Function]}
-      type="button"
     >
       Enable
     </button>
@@ -57,7 +54,6 @@ exports[`Storyshots Button Disable 1`] = `
       className="button large primary-fill microMargin"
       disabled={true}
       onClick={[Function]}
-      type="button"
     >
       Disabled
     </button>
@@ -76,7 +72,6 @@ exports[`Storyshots Button Play Ground 1`] = `
       className="button large primary-fill"
       disabled={false}
       onClick={[Function]}
-      type="button"
     >
       Button Text
     </button>
@@ -95,7 +90,6 @@ exports[`Storyshots Button Sizes 1`] = `
       className="button large primary-fill microMargin"
       disabled={false}
       onClick={[Function]}
-      type="button"
     >
       Large
     </button>
@@ -103,7 +97,6 @@ exports[`Storyshots Button Sizes 1`] = `
       className="button small primary-fill microMargin"
       disabled={false}
       onClick={[Function]}
-      type="button"
     >
       small
     </button>
@@ -122,7 +115,6 @@ exports[`Storyshots Button Variants 1`] = `
       className="button large primary-fill microMargin"
       disabled={false}
       onClick={[Function]}
-      type="button"
     >
       fill
     </button>
@@ -130,7 +122,6 @@ exports[`Storyshots Button Variants 1`] = `
       className="button large primary-outline microMargin"
       disabled={false}
       onClick={[Function]}
-      type="button"
     >
       outline
     </button>
@@ -138,7 +129,6 @@ exports[`Storyshots Button Variants 1`] = `
       className="button large primary-ghost microMargin"
       disabled={false}
       onClick={[Function]}
-      type="button"
     >
       ghost
     </button>
@@ -157,7 +147,6 @@ exports[`Storyshots Button With Icon 1`] = `
       className="button large primary-fill microMargin"
       disabled={false}
       onClick={[Function]}
-      type="button"
     >
       <svg
         className="startIcon"
@@ -343,7 +332,6 @@ exports[`Storyshots IconButton Colors 1`] = `
       className="button large primary-fill iconButton small fill microMargin"
       disabled={false}
       onClick={[Function]}
-      type="button"
     >
       <svg />
     </button>
@@ -362,7 +350,6 @@ exports[`Storyshots IconButton Default 1`] = `
       className="button large primary-fill iconButton small fill"
       disabled={false}
       onClick={[Function]}
-      type="button"
     >
       <svg />
     </button>
@@ -381,7 +368,6 @@ exports[`Storyshots IconButton Disable 1`] = `
       className="button large primary-fill iconButton small fill microMargin"
       disabled={false}
       onClick={[Function]}
-      type="button"
     >
       <svg />
     </button>
@@ -389,7 +375,6 @@ exports[`Storyshots IconButton Disable 1`] = `
       className="button large primary-fill iconButton small fill microMargin"
       disabled={true}
       onClick={[Function]}
-      type="button"
     >
       <svg />
     </button>
@@ -408,7 +393,6 @@ exports[`Storyshots IconButton Play Ground 1`] = `
       className="button large primary-fill iconButton small fill"
       disabled={false}
       onClick={[Function]}
-      type="button"
     >
       <svg />
     </button>
@@ -427,7 +411,6 @@ exports[`Storyshots IconButton Sizes 1`] = `
       className="button large primary-fill iconButton small fill microMargin"
       disabled={false}
       onClick={[Function]}
-      type="button"
     >
       <svg />
     </button>
@@ -435,7 +418,6 @@ exports[`Storyshots IconButton Sizes 1`] = `
       className="button large primary-fill iconButton large fill microMargin"
       disabled={false}
       onClick={[Function]}
-      type="button"
     >
       <svg />
     </button>
@@ -454,7 +436,6 @@ exports[`Storyshots IconButton Variants 1`] = `
       className="button large primary-fill iconButton small fill microMargin"
       disabled={false}
       onClick={[Function]}
-      type="button"
     >
       <svg />
     </button>
@@ -462,7 +443,6 @@ exports[`Storyshots IconButton Variants 1`] = `
       className="button large primary-outline iconButton small outline microMargin"
       disabled={false}
       onClick={[Function]}
-      type="button"
     >
       <svg />
     </button>
@@ -470,7 +450,6 @@ exports[`Storyshots IconButton Variants 1`] = `
       className="button large primary-ghost iconButton small ghost microMargin"
       disabled={false}
       onClick={[Function]}
-      type="button"
     >
       <svg />
     </button>

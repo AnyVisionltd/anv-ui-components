@@ -34,7 +34,6 @@ IconButton.defaultProps = {
   variant: 'fill',
   disabled: false,
   onClick: () => {},
-  type: 'button',
 }
 
 IconButton.propTypes = {
@@ -48,8 +47,6 @@ IconButton.propTypes = {
   disabled: propTypes.bool,
   /** Callback when click. */
   onClick: propTypes.func,
-  /** Defines HTML button type attribute. */
-  type: propTypes.oneOf(['button', 'reset', 'submit']),
   /** For css customization. */
   className: propTypes.string,
   /** The component icon. */
