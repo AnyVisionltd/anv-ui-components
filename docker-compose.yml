@@ -15,8 +15,7 @@ networks:
 
 services:
   storybook:
-#    image: gcr.io/anyvision-training/anv-ui-components:development
-    image: storybook:latest
+    image: gcr.io/anyvision-training/anv-ui-components-storybook:development
     restart: always
     ports:
       - "80:80"
