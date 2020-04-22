@@ -1,0 +1,25 @@
+version: '2.4'
+
+networks:
+  bridge:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.177.59.0/24
+
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.177.60.0/24
+
+services:
+  storybook:
+#    image: gcr.io/anyvision-training/anv-ui-components:development
+    image: storybook:latest
+    restart: always
+    ports:
+      - "80:80"
+    logging:
+      options:
+        max-size: 1g
