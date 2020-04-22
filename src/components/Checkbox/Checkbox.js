@@ -9,7 +9,14 @@ import styles from './Checkbox.module.scss'
 const styleGuideColors = Object.keys(colors)
 
 const Checkbox = ({
-  color, checked, indeterminate, disabled, onChange, className, id, ...otherProps
+  color,
+  checked,
+  indeterminate,
+  disabled,
+  onChange,
+  className,
+  id,
+  ...otherProps
 }) => {
   const classes = classNames(
     styles.checkbox,

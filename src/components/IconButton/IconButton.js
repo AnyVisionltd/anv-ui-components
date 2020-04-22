@@ -8,7 +8,11 @@ import styles from './IconButton.module.scss'
 const styleGuideColors = Object.keys(colors)
 
 const IconButton = ({
-  size, variant, className, children, ...buttonProps
+  size,
+  variant,
+  className,
+  children,
+  ...buttonProps
 }) => {
   const classes = classNames(
     styles.iconButton,

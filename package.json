@@ -62,7 +62,7 @@
     "@testing-library/user-event": "^7.1.2",
     "cross-env": "^7.0.2",
     "eslint-config-airbnb": "^18.1.0",
-    "husky": "^4.2.3",
+    "husky": "^4.2.5",
     "lint-staged": "^10.1.1",
     "react-scripts": "3.4.1",
     "react-test-renderer": "^16.13.1",
