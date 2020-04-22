@@ -1,8 +1,8 @@
 # Anyvision React Component Library
 
-<div align="center">
-  To our storybook - <a href="http://52.210.160.176/">Click Here</a>
-</div>
+<h4 align="center">
+  Storybook - <a href="http://52.210.160.176/">Click Here</a>
+</h4>
 
 ## Install
 ```bash
