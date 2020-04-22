@@ -3,6 +3,6 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/extend-expect'
-import initStoryshots from '@storybook/addon-storyshots';
+import initStoryshots from '@storybook/addon-storyshots'
 
-initStoryshots();
+initStoryshots()

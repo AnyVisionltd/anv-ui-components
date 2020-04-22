@@ -25,9 +25,9 @@ export const Default = () => {
         indeterminate={ isIndeterminate }
         checked={ isChecked }
         onChange={ onChange }
-        id="checkbox-playground"
+        id="checkbox-example"
       />
-      <label htmlFor="checkbox-playground" className={ styles.checkboxLabel }>
+      <label htmlFor="checkbox-example" className={ styles.checkboxLabel }>
         Check me out!
       </label>
     </>
