@@ -33,29 +33,21 @@
   height: av-size(sz-48);
 }
 
-@each $key, $value in $color-palate {
-  .#{$key}-fill {
-    color: av-color(purewhite);
-    fill: currentColor;
-    background-color: av-color($key);
-  }
-
-  .#{$key}-outline {
-    background: center;
-    color: av-color($key);
-    fill: currentColor;
-    border: 2px solid currentColor;
-  }
-
-  .#{$key}-ghost {
-    background: center;
-    color: av-color($key);
-    fill: currentColor;
-  }
+.fill {
+  color: av-color(purewhite);
+  fill: currentColor;
+  background-color: av-color(primary);
 }
 
-.purewhite-fill {
-  color: av-color(trueblack);
+.outline {
+  background: center;
+  color: av-color(primary);
   fill: currentColor;
-  background-color: av-color(purewhite);
+  border: 2px solid currentColor;
+}
+
+.ghost {
+  background: center;
+  color: av-color(primary);
+  fill: currentColor;
 }

@@ -1,6 +1,5 @@
 import React from 'react'
 import { select, boolean } from '@storybook/addon-knobs'
-import styleGuideColors from '@anyvision/style-guide/abstracts/_colors.scss'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
 import IconButton from './IconButton'
 import styles from '../../styles/storybook/index.module.scss'
@@ -16,13 +15,6 @@ export const Default = () => (
   <IconButton>
     <SunIcon />
   </IconButton>
-)
-
-export const colors = () => (Object.keys(styleGuideColors).map((color) => (
-  <IconButton className={ styles.microMargin } key={ color } color={ color }>
-    <SunIcon />
-  </IconButton>
-))
 )
 
 export const variants = () => (['fill', 'outline', 'ghost'].map((variant) => (
@@ -47,9 +39,25 @@ export const disable = () => (
   </>
 )
 
+export const withClassName = () => (
+  <div className={ styles.marginFlexContainer }>
+    { /* background-color: av-color(success); */ }
+    <IconButton className={ styles.successBackgroundColor }>
+      <SunIcon />
+    </IconButton>
+    { /* color: av-color(alert); */ }
+    <IconButton className={ styles.alertColor } variant="outline">
+      <SunIcon />
+    </IconButton>
+    { /* color: av-color(error); */ }
+    <IconButton className={ styles.errorColor } variant="ghost">
+      <SunIcon />
+    </IconButton>
+  </div>
+)
+
 export const playGround = () => (
   <IconButton
-    color={ select('color', Object.keys(styleGuideColors), 'primary') }
     size={ select('size', ['small', 'large'], 'small') }
     variant={ select('variant', ['fill', 'outline', 'ghost'], 'fill') }
     disabled={ boolean('disabled', false) }

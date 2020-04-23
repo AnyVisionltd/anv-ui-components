@@ -4,8 +4,28 @@
   margin: av-space(micro);
 }
 
+.marginFlexContainer {
+  display: flex;
+  > * {
+    margin: av-space(micro);
+  }
+}
+
 .checkboxLabel {
   display: flex;
   align-items: center;
   font-size: av-font-size(small);
 }
+
+.successBackgroundColor {
+  background-color: av-color(success);
+}
+
+.alertColor {
+  color: av-color(alert);
+}
+
+.errorColor {
+  color: av-color(error);
+}
+

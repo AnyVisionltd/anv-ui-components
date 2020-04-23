@@ -1,13 +1,9 @@
 import React from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
-import colors from '@anyvision/style-guide/abstracts/_colors.scss'
 import styles from './Button.module.scss'
 
-const styleGuideColors = Object.keys(colors)
-
 const Button = ({
-  color,
   size,
   variant,
   startIcon,
@@ -20,7 +16,7 @@ const Button = ({
   const classes = classNames(
     styles.button,
     styles[size],
-    styles[`${color}-${variant}`],
+    styles[variant],
     className,
   )
 
@@ -38,7 +34,6 @@ const Button = ({
 }
 
 Button.defaultProps = {
-  color: 'primary',
   size: 'large',
   variant: 'fill',
   disabled: false,
@@ -46,8 +41,6 @@ Button.defaultProps = {
 }
 
 Button.propTypes = {
-  /** The color of the button. */
-  color: propTypes.oneOf(styleGuideColors),
   /** The size of the button. */
   size: propTypes.oneOf(['small', 'large']),
   /** The variant of the button. */
