@@ -83,7 +83,7 @@ const Chip = ({
   const renderTrailingIcon = () => {
     const displayedTrailingIcon = onTrailingIconClick && !trailingIcon && deletable
       ? <CloseIcon />
-      : null
+      : trailingIcon
     const trailingIconClasses = classNames(
       styles.trailingIcon,
       onTrailingIconClick && styles.trailingIconClickable,

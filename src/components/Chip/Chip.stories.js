@@ -77,11 +77,11 @@ export const Variants = () => (
 export const playground = () => {
   const leadingIcon = boolean('Display leading icon?', false)
     ? <SunIcon />
-    : undefined
+    : null
   const isDeletable = boolean('Will clicking on trailing icon end with deleting the chip?', true)
   const trailingIcon = boolean('Display custom trailing icon?', false)
     ? <CheckedIcon />
-    : undefined
+    : null
   return (
     <>
       <Chip
