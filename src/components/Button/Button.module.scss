@@ -3,7 +3,7 @@
 
 .button {
   @extend %av-button;
-  @include av-ripple(currentColor);
+  @include av-ripple();
   position: relative;
   border: none;
   text-decoration: none;
