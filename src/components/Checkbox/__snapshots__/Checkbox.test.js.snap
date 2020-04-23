@@ -193,13 +193,13 @@ exports[`Storyshots Checkbox Default 1`] = `
   >
     <label
       className="checkbox primary checkbox-primary"
-      htmlFor="checkbox-playground"
+      htmlFor="checkbox-example"
     >
       <input
         checked={false}
         className="parent"
         disabled={false}
-        id="checkbox-playground"
+        id="checkbox-example"
         onChange={[Function]}
         type="checkbox"
       />
@@ -209,7 +209,7 @@ exports[`Storyshots Checkbox Default 1`] = `
     </label>
     <label
       className="checkboxLabel"
-      htmlFor="checkbox-playground"
+      htmlFor="checkbox-example"
     >
       Check me out!
     </label>
@@ -453,6 +453,249 @@ exports[`Storyshots IconButton Variants 1`] = `
     >
       <svg />
     </button>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Snackbar Action Text 1`] = `
+<div
+  className="story-wrapper"
+>
+  <div
+    className="center"
+  >
+    <div
+      className="snackbar isOpen"
+    >
+      <div
+        className="messageContainer"
+      >
+        <span
+          className="message"
+        >
+          This Is The Message
+        </span>
+      </div>
+      <div
+        className="actionsContainer"
+      >
+        <button
+          className="button small primary-ghost"
+          disabled={false}
+          onClick={[Function]}
+        >
+          undo
+        </button>
+        <button
+          className="button large purewhite-ghost iconButton small ghost trailingIcon"
+          disabled={false}
+          onClick={[Function]}
+        >
+          <svg />
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Snackbar Color 1`] = `
+<div
+  className="story-wrapper"
+>
+  <div
+    className="center"
+  >
+    <div
+      className="snackbar isOpen microMargin"
+    >
+      <div
+        className="messageContainer"
+      >
+        <span
+          className="message"
+        >
+          This Is The Message
+        </span>
+      </div>
+      <div
+        className="actionsContainer"
+      >
+        <button
+          className="button small alert-ghost"
+          disabled={false}
+          onClick={[Function]}
+        >
+          undo
+        </button>
+        <button
+          className="button large purewhite-ghost iconButton small ghost trailingIcon"
+          disabled={false}
+          onClick={[Function]}
+        >
+          <svg />
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Snackbar Default 1`] = `
+<div
+  className="story-wrapper"
+>
+  <div
+    className="center"
+  >
+    <div
+      className="snackbar isOpen"
+    >
+      <div
+        className="messageContainer"
+      >
+        <span
+          className="message"
+        >
+          This Is The Message
+        </span>
+      </div>
+      <div
+        className="actionsContainer"
+      >
+        <button
+          className="button large purewhite-ghost iconButton small ghost trailingIcon"
+          disabled={false}
+          onClick={[Function]}
+        >
+          <svg />
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Snackbar Leading Icon 1`] = `
+<div
+  className="story-wrapper"
+>
+  <div
+    className="center"
+  >
+    <div
+      className="snackbar isOpen"
+    >
+      <div
+        className="messageContainer"
+      >
+        <svg
+          className="leadingIcon"
+        />
+        <span
+          className="message"
+        >
+          This Is The Message
+        </span>
+      </div>
+      <div
+        className="actionsContainer"
+      >
+        <button
+          className="button small primary-ghost"
+          disabled={false}
+          onClick={[Function]}
+        >
+          undo
+        </button>
+        <button
+          className="button large purewhite-ghost iconButton small ghost trailingIcon"
+          disabled={false}
+          onClick={[Function]}
+        >
+          <svg />
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Snackbar Trailing Icon 1`] = `
+<div
+  className="story-wrapper"
+>
+  <div
+    className="center"
+  >
+    <div
+      className="flexRow"
+    >
+      <div
+        className="snackbar isOpen microMargin"
+      >
+        <div
+          className="messageContainer"
+        >
+          <span
+            className="message"
+          >
+            Default trailing icon
+          </span>
+        </div>
+        <div
+          className="actionsContainer"
+        >
+          <button
+            className="button large purewhite-ghost iconButton small ghost trailingIcon"
+            disabled={false}
+            onClick={[Function]}
+          >
+            <svg />
+          </button>
+        </div>
+      </div>
+      <div
+        className="snackbar isOpen microMargin"
+      >
+        <div
+          className="messageContainer"
+        >
+          <span
+            className="message"
+          >
+            Custom trailing icon
+          </span>
+        </div>
+        <div
+          className="actionsContainer"
+        >
+          <button
+            className="button large purewhite-ghost iconButton small ghost trailingIcon"
+            disabled={false}
+            onClick={[Function]}
+          >
+            <svg />
+          </button>
+        </div>
+      </div>
+      <div
+        className="snackbar isOpen microMargin"
+      >
+        <div
+          className="messageContainer"
+        >
+          <span
+            className="message"
+          >
+            Without trailing icon
+          </span>
+        </div>
+        <div
+          className="actionsContainer"
+        />
+      </div>
+    </div>
   </div>
 </div>
 `;

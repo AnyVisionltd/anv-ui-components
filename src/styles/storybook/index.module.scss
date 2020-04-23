@@ -9,3 +9,8 @@
   align-items: center;
   font-size: av-font-size(small);
 }
+
+.flexRow {
+  display: flex;
+  flex-direction: row;
+}
