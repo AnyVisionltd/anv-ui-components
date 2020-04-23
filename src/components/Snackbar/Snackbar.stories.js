@@ -22,7 +22,6 @@ export const leadingIcon = () => (
     open
     message="This Is The Message"
     leadingIcon={ SunIcon }
-    actionText="undo"
   />
 )
 

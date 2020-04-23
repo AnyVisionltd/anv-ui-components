@@ -21,12 +21,12 @@
   align-items: center;
 
   .message {
-    color: white;
+    color: av-color(content);
   }
 
   .leadingIcon {
-    color: white;
-    fill: white;
+    color: av-color(content);
+    fill: av-color(content);
     margin-right: av-space(tiny);
   }
 }
