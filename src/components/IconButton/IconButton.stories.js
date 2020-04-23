@@ -17,26 +17,33 @@ export const Default = () => (
   </IconButton>
 )
 
-export const variants = () => (['fill', 'outline', 'ghost'].map((variant) => (
-  <IconButton className={ styles.microMargin } key={ variant } variant={ variant }>
-    <SunIcon />
-  </IconButton>
-))
+export const variants = () => (
+  <div className={ styles.marginFlexContainer }>
+    <IconButton>
+      <SunIcon />
+    </IconButton>
+    <IconButton variant="outline">
+      <SunIcon />
+    </IconButton>
+    <IconButton variant="ghost">
+      <SunIcon />
+    </IconButton>
+  </div>
 )
 
 export const sizes = () => (
-  <>
-    <IconButton className={ styles.microMargin }><SunIcon /></IconButton>
-    <IconButton className={ styles.microMargin } size="large"><SunIcon /></IconButton>
-  </>
+  <div className={ styles.marginFlexContainer }>
+    <IconButton><SunIcon /></IconButton>
+    <IconButton size="large"><SunIcon /></IconButton>
+  </div>
 )
 
 
 export const disable = () => (
-  <>
-    <IconButton className={ styles.microMargin }><SunIcon /></IconButton>
-    <IconButton className={ styles.microMargin } disabled><SunIcon /></IconButton>
-  </>
+  <div className={ styles.marginFlexContainer }>
+    <IconButton><SunIcon /></IconButton>
+    <IconButton disabled><SunIcon /></IconButton>
+  </div>
 )
 
 export const withClassName = () => (

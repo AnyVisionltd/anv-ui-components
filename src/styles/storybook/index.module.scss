@@ -6,6 +6,7 @@
 
 .marginFlexContainer {
   display: flex;
+  align-items: center;
   > * {
     margin: av-space(micro);
   }
