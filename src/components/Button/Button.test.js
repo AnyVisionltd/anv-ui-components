@@ -11,7 +11,7 @@ describe('<Button />', () => {
   })
 
   it('should render startIcon', () => {
-    const { container } = render(<Button startIcon={ SvgIcon }>Button Text</Button>)
+    const { container } = render(<Button startIcon={ <SvgIcon /> }>Button Text</Button>)
     const node = container.querySelector('svg')
     expect(node).toBeTruthy()
   })

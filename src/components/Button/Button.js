@@ -10,7 +10,7 @@ const Button = ({
   color,
   size,
   variant,
-  startIcon: StartIcon,
+  startIcon,
   disabled,
   onClick,
   className,
@@ -31,7 +31,7 @@ const Button = ({
       disabled={ disabled }
       { ...otherProps }
     >
-      { StartIcon && <StartIcon className={ styles.startIcon } /> }
+      { startIcon && <span className={ styles.startIcon }>{ startIcon }</span> }
       { children }
     </button>
   )
@@ -53,7 +53,7 @@ Button.propTypes = {
   /** The variant of the button. */
   variant: propTypes.oneOf(['fill', 'outline', 'ghost']),
   /** Icon before the children. */
-  startIcon: propTypes.elementType,
+  startIcon: propTypes.element,
   /** If true, the button will be disabled. */
   disabled: propTypes.bool,
   /** Callback when click. */

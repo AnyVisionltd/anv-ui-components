@@ -148,9 +148,11 @@ exports[`Storyshots Button With Icon 1`] = `
       disabled={false}
       onClick={[Function]}
     >
-      <svg
+      <span
         className="startIcon"
-      />
+      >
+        <svg />
+      </span>
       Start
     </button>
   </div>
@@ -193,13 +195,13 @@ exports[`Storyshots Checkbox Default 1`] = `
   >
     <label
       className="checkbox primary checkbox-primary"
-      htmlFor="checkbox-playground"
+      htmlFor="checkbox-example"
     >
       <input
         checked={false}
         className="parent"
         disabled={false}
-        id="checkbox-playground"
+        id="checkbox-example"
         onChange={[Function]}
         type="checkbox"
       />
@@ -209,7 +211,7 @@ exports[`Storyshots Checkbox Default 1`] = `
     </label>
     <label
       className="checkboxLabel"
-      htmlFor="checkbox-playground"
+      htmlFor="checkbox-example"
     >
       Check me out!
     </label>
