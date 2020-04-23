@@ -21,7 +21,7 @@ export const leadingIcon = () => (
   <Snackbar
     open
     message="This Is The Message"
-    leadingIcon={ SunIcon }
+    leadingIcon={ <SunIcon /> }
   />
 )
 

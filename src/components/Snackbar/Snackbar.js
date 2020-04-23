@@ -9,7 +9,7 @@ const Snackbar = ({
   message,
   color,
   actionText,
-  leadingIcon: LeadingIcon,
+  leadingIcon,
   trailingIcon: TrailingIcon,
   open,
   className,
@@ -24,8 +24,12 @@ const Snackbar = ({
     <div className={ classes }>
       <div className={ styles.messageContainer }>
         {
-          LeadingIcon
-            ? <LeadingIcon className={ styles.leadingIcon } />
+          leadingIcon
+            ? (
+              <span className={ styles.leadingIcon }>
+                { leadingIcon }
+              </span>
+            )
             : null
         }
         <span className={ styles.message }>
