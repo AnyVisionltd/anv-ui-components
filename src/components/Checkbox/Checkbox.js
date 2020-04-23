@@ -2,7 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 import colors from '@anyvision/style-guide/abstracts/_colors.scss'
-import { ReactComponent as CheckboxChecked } from '../../assets/svg/CheckboxChecked.svg'
+import { ReactComponent as CheckboxChecked } from '../../assets/svg/Checked.svg'
 import { ReactComponent as CheckboxIndeterminate } from '../../assets/svg/CheckboxIndeterminate.svg'
 import styles from './Checkbox.module.scss'
 

@@ -1,0 +1,108 @@
+@import "~@anyvision/style-guide";
+@import "../../styles/mixin/ripple";
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: av-radius(round);
+  height: av-size(sz-32);
+  padding: av-space(micro);
+  position: relative;
+
+  &.clickable {
+    cursor: pointer;
+  }
+
+  &.disabled {
+    opacity: av-opacity(disabled);
+  }
+
+  .leadingIcon,
+  .trailingIcon {
+    svg {
+      display: block;
+    }
+
+    img {
+      border-radius: 100%;
+    }
+  }
+
+  .leadingIcon {
+    height: av-size(sz-24);
+    width: av-size(sz-24);
+
+    img {
+      border-radius: 100%;
+    }
+  }
+
+  .trailingIcon {
+    background: none;
+    border: none;
+    padding: 0;
+    color: inherit;
+    height: var(--sz-16, 16px);
+    width: var(--sz-16, 16px);
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: av-space(micro);
+    margin-inline-start: 0;
+    z-index: 1; // To overcome ripple layer drawing above the icon
+
+    &.trailingIconClickable {
+      cursor: pointer;
+    }
+  }
+
+  .label {
+    padding: 0 av-space(tiny);
+  }
+}
+
+@each $key, $value in $color-palate {
+  .chip-#{$key} {
+    background-color: av-color($key, av-opacity(divider));
+    color: av-color($key);
+
+    &.focusable {
+      @include av-ripple(av-color($key));
+
+      &:focus {
+        background-color: av-color($key, av-opacity(disabled))
+      }
+    }
+
+    .leadingIcon,
+    .trailingIcon {
+      fill: currentColor;
+    }
+
+    .trailingIconClickable {
+      &:hover {
+        background-color: av-color($key, av-opacity(disabled));
+      }
+    }
+  }
+}
+
+.chip-purewhite {
+  color: av-color(trueblack);
+
+  &.focusable {
+    @include av-ripple(av-color(trueblack));
+
+    &:focus {
+      background-color: av-color(trueblack, av-opacity(disabled))
+    }
+  }
+
+  .trailingIcon {
+    &:hover {
+      background-color: av-color(trueblack, av-opacity(disabled));
+    }
+  }
+}

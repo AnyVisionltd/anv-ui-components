@@ -72,7 +72,7 @@
         background-color: av-color($key);
 
         svg {
-          fill: white;
+          fill: av-color(purewhite);
         }
       }
     }
@@ -84,7 +84,7 @@
   &.indeterminate {
     .iconContainer {
       svg {
-        fill: black;
+        fill: av-color(trueblack);
       }
     }
   }
