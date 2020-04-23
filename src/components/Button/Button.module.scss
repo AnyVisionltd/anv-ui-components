@@ -3,6 +3,7 @@
 
 .button {
   @extend %av-button;
+  @include av-ripple(currentColor);
   position: relative;
   border: none;
   text-decoration: none;
@@ -37,7 +38,6 @@
     color: av-color(purewhite);
     fill: currentColor;
     background-color: av-color($key);
-    @include av-ripple(av-color(purewhite))
   }
 
   .#{$key}-outline {
@@ -45,14 +45,12 @@
     color: av-color($key);
     fill: currentColor;
     border: 2px solid currentColor;
-    @include av-ripple(av-color($key))
   }
 
   .#{$key}-ghost {
     background: center;
     color: av-color($key);
     fill: currentColor;
-    @include av-ripple(av-color($key))
   }
 }
 
@@ -60,5 +58,4 @@
   color: av-color(trueblack);
   fill: currentColor;
   background-color: av-color(purewhite);
-  @include av-ripple(av-color(trueblack))
 }
