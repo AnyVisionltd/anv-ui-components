@@ -1,8 +1,12 @@
 @import "~@anyvision/style-guide";
 
 .snackbar {
-  display: none;
+  position: fixed;
+  display: flex;
+  //ask israel
+  z-index: 100;
   min-width: av-size(sz-480);
+  max-width: av-size(sz-640);
   height: 64px;
   color: av-color(primary);
   background-color: av-color(surface);
@@ -11,10 +15,8 @@
   border-radius: 0 av-radius() av-radius() 0 ;
   padding: 0 16px;
   justify-content: space-between;
-}
-
-.isOpen {
-  display: flex;
+  left: av-space(medium);
+  bottom: av-space(medium);
 }
 
 .messageContainer {
