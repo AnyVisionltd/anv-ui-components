@@ -197,7 +197,7 @@ exports[`Storyshots Checkbox Colors 1`] = `
     className="center"
   >
     <label
-      className="checkbox primary checkbox-primary checked microMargin"
+      className="checkbox primary checkbox-primary checked enabled microMargin"
     >
       <input
         checked={true}
@@ -224,7 +224,7 @@ exports[`Storyshots Checkbox Default 1`] = `
     className="center"
   >
     <label
-      className="checkbox primary checkbox-primary"
+      className="checkbox primary checkbox-primary enabled"
       htmlFor="checkbox-example"
     >
       <input
@@ -257,7 +257,7 @@ exports[`Storyshots Checkbox Playground 1`] = `
     className="center"
   >
     <label
-      className="checkbox primary checkbox-primary"
+      className="checkbox primary checkbox-primary enabled"
       htmlFor="checkbox-playground"
     >
       <input
@@ -290,7 +290,7 @@ exports[`Storyshots Checkbox States 1`] = `
     className="center"
   >
     <label
-      className="checkbox primary checkbox-primary checked microMargin"
+      className="checkbox primary checkbox-primary checked enabled microMargin"
     >
       <input
         checked={true}
@@ -306,7 +306,7 @@ exports[`Storyshots Checkbox States 1`] = `
       </span>
     </label>
     <label
-      className="checkbox primary checkbox-primary microMargin"
+      className="checkbox primary checkbox-primary enabled microMargin"
     >
       <input
         checked={false}
@@ -320,7 +320,7 @@ exports[`Storyshots Checkbox States 1`] = `
       />
     </label>
     <label
-      className="checkbox primary checkbox-primary indeterminate microMargin"
+      className="checkbox primary checkbox-primary indeterminate enabled microMargin"
     >
       <input
         checked={false}
@@ -336,7 +336,7 @@ exports[`Storyshots Checkbox States 1`] = `
       </span>
     </label>
     <label
-      className="checkbox primary checkbox-primary isDisabled microMargin"
+      className="checkbox primary checkbox-primary disabled microMargin"
     >
       <input
         checked={false}

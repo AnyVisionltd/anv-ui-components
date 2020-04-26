@@ -3,7 +3,6 @@
 
 .button {
   @extend %av-button;
-  @include av-ripple();
   position: relative;
   border: none;
   text-decoration: none;
@@ -17,6 +16,10 @@
 
   &:disabled {
     opacity: av-opacity(disabled);
+  }
+
+  &:enabled {
+    @include av-ripple();
   }
 }
 
