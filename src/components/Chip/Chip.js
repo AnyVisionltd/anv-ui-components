@@ -131,9 +131,9 @@ Chip.propTypes = {
    */
   onClick: propTypes.func,
   /**
-   * Provide trailing icon.
-   * If <code>onTrailingIconClick</code> is passed, this button will default to closeIcon,
-   * unless set otherwise
+   * The trailing icon for the chip.
+   * If not set, <u>but</u> <code>onTrailingIconClick</code> and <code>deletable</code> are passed,
+   * this button will default to closeIcon
    */
   trailingIcon: propTypes.element,
   /**
@@ -143,7 +143,6 @@ Chip.propTypes = {
   deletable: propTypes.bool,
   /**
    * Callback function when trailing icon clicked.
-   * Passing a function will make a close icon to be displayed.
    */
   onTrailingIconClick: propTypes.func,
   onKeyUp: propTypes.func,
