@@ -49,8 +49,6 @@ const Chip = ({
     }
 
     onClick(event)
-    // When clicked using mouse, we would expect the chip to not be focused anymore.
-    chipRef.current.blur()
   }
 
   const onTrailingIconClickHandler = (event) => {
@@ -73,14 +71,15 @@ const Chip = ({
     const displayedTrailingIcon = onTrailingIconClick && !trailingIcon && deletable
       ? <CloseIcon />
       : trailingIcon
-    const trailingIconClasses = classNames(
-      styles.trailingIcon,
-      onTrailingIconClick && styles.trailingIconClickable,
-    )
 
     if (!displayedTrailingIcon) {
       return null
     }
+
+    const trailingIconClasses = classNames(
+      styles.trailingIcon,
+      onTrailingIconClick && styles.trailingIconClickable,
+    )
 
     return (
       <button
