@@ -179,11 +179,11 @@ exports[`Storyshots Button With Icon 1`] = `
       onClick={[Function]}
     >
       <span
-        className="startIcon"
+        className="leadingIcon"
       >
         <svg />
       </span>
-      Start
+      leading
     </button>
   </div>
 </div>

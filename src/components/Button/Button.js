@@ -6,7 +6,7 @@ import styles from './Button.module.scss'
 const Button = ({
   size,
   variant,
-  startIcon,
+  leadingIcon,
   disabled,
   onClick,
   className,
@@ -27,7 +27,7 @@ const Button = ({
       disabled={ disabled }
       { ...otherProps }
     >
-      { startIcon && <span className={ styles.startIcon }>{ startIcon }</span> }
+      { leadingIcon && <span className={ styles.leadingIcon }>{ leadingIcon }</span> }
       { children }
     </button>
   )
@@ -46,7 +46,7 @@ Button.propTypes = {
   /** The variant of the button. */
   variant: propTypes.oneOf(['fill', 'outline', 'ghost']),
   /** Icon before the children. */
-  startIcon: propTypes.element,
+  leadingIcon: propTypes.element,
   /** If true, the button will be disabled. */
   disabled: propTypes.bool,
   /** Callback when click. */

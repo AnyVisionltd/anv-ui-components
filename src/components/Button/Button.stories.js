@@ -47,8 +47,8 @@ export const disable = () => (
 )
 
 export const withIcon = () => (
-  <Button startIcon={ <SunIcon /> }>
-    Start
+  <Button leadingIcon={ <SunIcon /> }>
+    leading
   </Button>
 )
 
