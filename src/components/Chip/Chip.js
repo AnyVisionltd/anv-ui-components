@@ -68,7 +68,7 @@ const Chip = ({
     event.stopPropagation()
     // When clicked using mouse, we would expect the chip to not be focused anymore.
     chipRef.current.blur()
-    return onTrailingIconClick(event)
+    onTrailingIconClick(event)
   }
 
   const renderLeadingIcon = () => leadingIcon && (
