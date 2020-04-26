@@ -72,7 +72,6 @@ export const TrailingIcon = () => {
   )
 }
 
-
 export const ActionText = () => {
   const [isOpen, setIsOpen] = useState(false)
   return (

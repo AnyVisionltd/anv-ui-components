@@ -12,15 +12,12 @@ const Snackbar = ({
   trailingIcon,
   open,
   className,
+  onOpen,
   onClose,
   hideTimeout,
+  onAction,
 }) => {
   const timerHide = React.useRef()
-
-  const classes = classNames(
-    styles.snackbar,
-    className,
-  )
 
   const setHideTimeout = useCallback(() => {
     if (hideTimeout === null) {
@@ -35,13 +32,20 @@ const Snackbar = ({
 
   useEffect(() => {
     if (open) {
+      onOpen()
       setHideTimeout()
     }
 
     return () => {
       clearTimeout(timerHide.current)
     }
-  }, [open, hideTimeout, setHideTimeout])
+  }, [open, hideTimeout, setHideTimeout, onOpen])
+
+
+  const classes = classNames(
+    styles.snackbar,
+    className,
+  )
 
   return !open ? null : (
     <Portal containerId="snackbar-portal">
@@ -67,6 +71,7 @@ const Snackbar = ({
                 variant="ghost"
                 size="small"
                 className={ styles.actionButton }
+                onClick={ onAction }
               >
                 { actionText }
               </Button>
@@ -93,9 +98,10 @@ const Snackbar = ({
 
 Snackbar.defaultProps = {
   trailingIcon: <CloseIcon />,
+  onOpen: () => {},
   onClose: () => {},
   hideTimeout: 5000,
-  // onAction: () => {}
+  onAction: () => {},
 }
 
 Snackbar.propTypes = {
@@ -116,8 +122,8 @@ Snackbar.propTypes = {
    *  Disable this behavior by <code>null</code> value.
    *  */
   hideTimeout: propTypes.number,
-  // /** Callback fired when the component opened. */
-  // onOpen: propTypes.bool,
+  /** Callback fired when the component opened. */
+  onOpen: propTypes.func,
   /**
    * Callback fired when the component requests to be closed.
    * Typically onClose is used to set state in the parent component,
@@ -125,7 +131,7 @@ Snackbar.propTypes = {
    * */
   onClose: propTypes.func,
   /** Callback fired when <code>trailingIcon</code> click or after hideTimeout */
-  // onAction: propTypes.bool,
+  onAction: propTypes.func,
   /** For css customization. */
   className: propTypes.string,
 }
