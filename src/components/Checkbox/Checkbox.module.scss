@@ -49,7 +49,7 @@
     }
   }
 
-  &.isDisabled {
+  &.disabled {
     cursor: not-allowed;
     .iconContainer {
       border: solid 2px av-color(surface, av-opacity(disabled));
@@ -59,7 +59,7 @@
 }
 @each $key, $value in $color-palate {
   .checkbox-#{$key} {
-    &:not(.isDisabled) {
+    &.enabled {
       background: center;
       color: av-color($key);
       fill: currentColor;

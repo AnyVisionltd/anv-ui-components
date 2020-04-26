@@ -24,7 +24,7 @@ const Checkbox = ({
     styles[`checkbox-${color}`],
     checked && styles.checked,
     indeterminate && styles.indeterminate,
-    disabled && styles.isDisabled,
+    disabled ? styles.disabled : styles.enabled,
     className,
   )
 
