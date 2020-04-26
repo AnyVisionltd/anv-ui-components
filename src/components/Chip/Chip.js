@@ -68,12 +68,13 @@ const Chip = ({
   )
 
   const renderTrailingIcon = () => {
-    const displayedTrailingIcon = onTrailingIconClick && !trailingIcon && deletable
-      ? <CloseIcon />
-      : trailingIcon
-
+    let displayedTrailingIcon = trailingIcon
     if (!displayedTrailingIcon) {
-      return null
+      if (onTrailingIconClick && deletable) {
+        displayedTrailingIcon = <CloseIcon />
+      } else {
+        return null
+      }
     }
 
     const trailingIconClasses = classNames(
@@ -126,7 +127,7 @@ Chip.propTypes = {
   label: propTypes.node,
   /**
    * Callback function fired when clicked.
-   * Passing a function will make the chip look clickable (by hover effect, mouse pointer, etc).
+   * Passing a function will make the chip look clickable (by hover effect, mouse pointer, focus).
    */
   onClick: propTypes.func,
   /**
@@ -137,7 +138,7 @@ Chip.propTypes = {
   trailingIcon: propTypes.element,
   /**
    * If enabled, the chip will handle backspace or delete keyboard actions by calling
-   * <code>onTrailingIconClick</code> handler when focused by keyboard.
+   * <code>onTrailingIconClick</code> handler when focused.
    */
   deletable: propTypes.bool,
   /**
