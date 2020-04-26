@@ -343,6 +343,183 @@ exports[`Storyshots Checkbox States 1`] = `
 </div>
 `;
 
+exports[`Storyshots Chip Default 1`] = `
+<div
+  className="story-wrapper"
+>
+  <div
+    className="center"
+  >
+    <div
+      className="chip focusable clickable"
+      onClick={[Function]}
+      onKeyUp={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      <div
+        className="leadingIcon"
+      >
+        <svg />
+      </div>
+      <span
+        className="label"
+      >
+        Chocolate
+      </span>
+      <button
+        className="trailingIcon trailingIconClickable"
+        onClick={[Function]}
+      >
+        <svg />
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Chip Playground 1`] = `
+<div
+  className="story-wrapper"
+>
+  <div
+    className="center"
+  >
+    <div
+      className="chip focusable clickable microMargin"
+      onClick={[Function]}
+      onKeyUp={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      <span
+        className="label"
+      >
+        Chip
+      </span>
+      <button
+        className="trailingIcon trailingIconClickable"
+        onClick={[Function]}
+      >
+        <svg />
+      </button>
+    </div>
+    <small
+      className="tinyText"
+    >
+      Try focusing the chip using your keyboard, then clicking on backspace!
+    </small>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Chip Variants 1`] = `
+<div
+  className="story-wrapper"
+>
+  <div
+    className="center"
+  >
+    <div
+      className="chip microMargin"
+      onClick={[Function]}
+      onKeyUp={[Function]}
+      role="button"
+    >
+      <span
+        className="label"
+      >
+        Simple
+      </span>
+    </div>
+    <div
+      className="chip focusable clickable microMargin"
+      onClick={[Function]}
+      onKeyUp={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      <span
+        className="label"
+      >
+        Clickable
+      </span>
+    </div>
+    <div
+      aria-disabled={true}
+      className="chip disabled microMargin"
+      onClick={[Function]}
+      onKeyUp={[Function]}
+      role="button"
+    >
+      <span
+        className="label"
+      >
+        Disabled
+      </span>
+    </div>
+    <div
+      className="chip microMargin"
+      onClick={[Function]}
+      onKeyUp={[Function]}
+      role="button"
+    >
+      <div
+        className="leadingIcon"
+      >
+        <svg />
+      </div>
+      <span
+        className="label"
+      >
+        Leading Icon
+      </span>
+    </div>
+    <div
+      className="chip microMargin"
+      onClick={[Function]}
+      onKeyUp={[Function]}
+      role="button"
+    >
+      <span
+        className="label"
+      >
+        Trailing Icon
+      </span>
+      <button
+        className="trailingIcon"
+        onClick={[Function]}
+      >
+        <svg />
+      </button>
+    </div>
+    <div
+      className="chip microMargin"
+      onClick={[Function]}
+      onKeyUp={[Function]}
+      role="button"
+    >
+      <div
+        className="leadingIcon"
+      >
+        <svg />
+      </div>
+      <span
+        className="label"
+      >
+        Both Icons
+      </span>
+      <button
+        className="trailingIcon"
+        onClick={[Function]}
+      >
+        <svg />
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots IconButton Default 1`] = `
 <div
   className="story-wrapper"
