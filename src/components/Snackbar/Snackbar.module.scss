@@ -15,8 +15,8 @@
   border-radius: 0 av-radius() av-radius() 0 ;
   padding: 0 16px;
   justify-content: space-between;
-  left: av-space(medium);
-  bottom: av-space(medium);
+  left: av-space(grand);
+  bottom: av-space(grand);
 }
 
 .messageContainer {
@@ -28,8 +28,8 @@
   }
 
   .leadingIcon {
-    color: currentColor;
-    fill: currentColor;
+    color: av-color(content);
+    fill: av-color(content);
     margin-right: av-space(tiny);
   }
 }
@@ -37,11 +37,7 @@
 .actionsContainer {
   display: flex;
 
-  .actionButton {
-    color: currentColor;
-  }
-
-  .trailingIcon {
+  .closeIcon {
     color: av-color(content);
     margin-left: av-space(tiny);
   }

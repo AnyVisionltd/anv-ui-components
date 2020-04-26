@@ -9,7 +9,7 @@ const Snackbar = ({
   message,
   actionText,
   leadingIcon,
-  trailingIcon,
+  closeIcon,
   open,
   className,
   onOpen,
@@ -70,7 +70,6 @@ const Snackbar = ({
               <Button
                 variant="ghost"
                 size="small"
-                className={ styles.actionButton }
                 onClick={ onAction }
               >
                 { actionText }
@@ -78,14 +77,14 @@ const Snackbar = ({
             )
             : null }
           {
-            trailingIcon
+            closeIcon
               ? (
                 <IconButton
                   variant="ghost"
-                  className={ styles.trailingIcon }
+                  className={ styles.closeIcon }
                   onClick={ onClose }
                 >
-                  { trailingIcon }
+                  { closeIcon }
                 </IconButton>
               )
               : null
@@ -97,7 +96,7 @@ const Snackbar = ({
 }
 
 Snackbar.defaultProps = {
-  trailingIcon: <CloseIcon />,
+  closeIcon: <CloseIcon />,
   onOpen: () => {},
   onClose: () => {},
   hideTimeout: 5000,
@@ -112,7 +111,7 @@ Snackbar.propTypes = {
   /** The icon before the message.  */
   leadingIcon: propTypes.element,
   /** The icon trailing icon, used for close. Set to false for remove */
-  trailingIcon: propTypes.oneOfType([propTypes.element, propTypes.bool]),
+  closeIcon: propTypes.oneOfType([propTypes.element, propTypes.bool]),
   /** If <code>true</code> display the snackbar. */
   open: propTypes.bool,
   /**
@@ -130,7 +129,7 @@ Snackbar.propTypes = {
    * which is used to control the Snackbar open prop.
    * */
   onClose: propTypes.func,
-  /** Callback fired when <code>trailingIcon</code> click or after hideTimeout */
+  /** Callback fired when <code>closeIcon</code> click or after hideTimeout */
   onAction: propTypes.func,
   /** For css customization. */
   className: propTypes.string,

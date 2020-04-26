@@ -40,7 +40,7 @@ export const LeadingIcon = () => {
   )
 }
 
-export const TrailingIcon = () => {
+export const CloseIcon = () => {
   const [isOpenDefault, setIsOpenDefault] = useState(false)
   const [isOpenCustom, setIsOpenCustom] = useState(false)
   const [isOpenWithout, setIsOpenWithout] = useState(false)
@@ -60,13 +60,13 @@ export const TrailingIcon = () => {
         open={ isOpenCustom }
         onClose={ () => setIsOpenCustom(false) }
         message="Custom trailing icon"
-        trailingIcon={ <SunIcon /> }
+        closeIcon={ <SunIcon /> }
       />
       <Snackbar
         open={ isOpenWithout }
         onClose={ () => setIsOpenWithout(false) }
         message="Without trailing icon"
-        trailingIcon={ false }
+        closeIcon={ false }
       />
     </>
   )
