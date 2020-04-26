@@ -1,15 +1,12 @@
 import React from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
-import colors from '@anyvision/style-guide/abstracts/_colors.scss'
-import { ReactComponent as CheckboxChecked } from '../../assets/svg/CheckboxChecked.svg'
+import { ReactComponent as CheckboxChecked } from '../../assets/svg/Checked.svg'
 import { ReactComponent as CheckboxIndeterminate } from '../../assets/svg/CheckboxIndeterminate.svg'
 import styles from './Checkbox.module.scss'
 
-const styleGuideColors = Object.keys(colors)
 
 const Checkbox = ({
-  color,
   checked,
   indeterminate,
   disabled,
@@ -20,11 +17,9 @@ const Checkbox = ({
 }) => {
   const classes = classNames(
     styles.checkbox,
-    styles[color],
-    styles[`checkbox-${color}`],
     checked && styles.checked,
     indeterminate && styles.indeterminate,
-    disabled && styles.isDisabled,
+    disabled ? styles.disabled : styles.enabled,
     className,
   )
 
@@ -64,7 +59,6 @@ const Checkbox = ({
 }
 
 Checkbox.defaultProps = {
-  color: 'primary',
   disabled: false,
   checked: false,
   indeterminate: false,
@@ -72,8 +66,6 @@ Checkbox.defaultProps = {
 }
 
 Checkbox.propTypes = {
-  /** The color of the checkbox. */
-  color: propTypes.oneOf(styleGuideColors),
   /** If true, the checkbox will be disabled. */
   disabled: propTypes.bool,
   /** For css customization. */

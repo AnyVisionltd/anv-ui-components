@@ -12,6 +12,8 @@
   cursor: pointer;
   border-radius: av-radius();
   padding: av-space(tiny);
+  color: av-color(primary);
+  fill: currentColor;
 
   .parent {
     position: absolute;
@@ -45,47 +47,18 @@
   &.checked,
   &.indeterminate {
     .iconContainer {
-      border-color: av-color(surface);
+      border-color: currentColor;
+      background-color: currentColor;
+      fill: av-color(purewhite);
     }
   }
 
-  &.isDisabled {
+  &.disabled {
     cursor: not-allowed;
-    .iconContainer {
+    opacity: av-opacity(disabled);
+
+    &:not(&.checked):not(&.indeterminate) {
       border: solid 2px av-color(surface, av-opacity(disabled));
-      opacity: av-opacity(disabled);
-    }
-  }
-}
-@each $key, $value in $color-palate {
-  .checkbox-#{$key} {
-    &:not(.isDisabled) {
-      background: center;
-      color: av-color($key);
-      fill: currentColor;
-    }
-
-    &.checked,
-    &.indeterminate {
-      .iconContainer {
-        border-color: av-color($key);
-        background-color: av-color($key);
-
-        svg {
-          fill: white;
-        }
-      }
-    }
-  }
-}
-
-.checkbox-purewhite {
-  &.checked,
-  &.indeterminate {
-    .iconContainer {
-      svg {
-        fill: black;
-      }
     }
   }
 }

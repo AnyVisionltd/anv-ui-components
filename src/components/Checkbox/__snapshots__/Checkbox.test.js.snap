@@ -189,33 +189,6 @@ exports[`Storyshots Button With Icon 1`] = `
 </div>
 `;
 
-exports[`Storyshots Checkbox Colors 1`] = `
-<div
-  className="story-wrapper"
->
-  <div
-    className="center"
-  >
-    <label
-      className="checkbox primary checkbox-primary checked microMargin"
-    >
-      <input
-        checked={true}
-        className="parent"
-        disabled={false}
-        onChange={[Function]}
-        type="checkbox"
-      />
-      <span
-        className="iconContainer"
-      >
-        <svg />
-      </span>
-    </label>
-  </div>
-</div>
-`;
-
 exports[`Storyshots Checkbox Default 1`] = `
 <div
   className="story-wrapper"
@@ -224,7 +197,7 @@ exports[`Storyshots Checkbox Default 1`] = `
     className="center"
   >
     <label
-      className="checkbox primary checkbox-primary"
+      className="checkbox enabled"
       htmlFor="checkbox-example"
     >
       <input
@@ -257,12 +230,13 @@ exports[`Storyshots Checkbox Playground 1`] = `
     className="center"
   >
     <label
-      className="checkbox primary checkbox-primary"
+      className="checkbox enabled"
       htmlFor="checkbox-playground"
     >
       <input
         checked={false}
         className="parent"
+        color="primary"
         disabled={false}
         id="checkbox-playground"
         onChange={[Function]}
@@ -290,7 +264,7 @@ exports[`Storyshots Checkbox States 1`] = `
     className="center"
   >
     <label
-      className="checkbox primary checkbox-primary checked microMargin"
+      className="checkbox checked enabled microMargin"
     >
       <input
         checked={true}
@@ -306,7 +280,7 @@ exports[`Storyshots Checkbox States 1`] = `
       </span>
     </label>
     <label
-      className="checkbox primary checkbox-primary microMargin"
+      className="checkbox enabled microMargin"
     >
       <input
         checked={false}
@@ -320,7 +294,23 @@ exports[`Storyshots Checkbox States 1`] = `
       />
     </label>
     <label
-      className="checkbox primary checkbox-primary indeterminate microMargin"
+      className="checkbox checked disabled microMargin"
+    >
+      <input
+        checked={true}
+        className="parent"
+        disabled={true}
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <span
+        className="iconContainer"
+      >
+        <svg />
+      </span>
+    </label>
+    <label
+      className="checkbox indeterminate enabled microMargin"
     >
       <input
         checked={false}
@@ -336,7 +326,7 @@ exports[`Storyshots Checkbox States 1`] = `
       </span>
     </label>
     <label
-      className="checkbox primary checkbox-primary isDisabled microMargin"
+      className="checkbox disabled microMargin"
     >
       <input
         checked={false}
@@ -349,6 +339,183 @@ exports[`Storyshots Checkbox States 1`] = `
         className="iconContainer"
       />
     </label>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Chip Default 1`] = `
+<div
+  className="story-wrapper"
+>
+  <div
+    className="center"
+  >
+    <div
+      className="chip focusable clickable"
+      onClick={[Function]}
+      onKeyUp={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      <div
+        className="leadingIcon"
+      >
+        <svg />
+      </div>
+      <span
+        className="label"
+      >
+        Chocolate
+      </span>
+      <button
+        className="trailingIcon trailingIconClickable"
+        onClick={[Function]}
+      >
+        <svg />
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Chip Playground 1`] = `
+<div
+  className="story-wrapper"
+>
+  <div
+    className="center"
+  >
+    <div
+      className="chip focusable clickable microMargin"
+      onClick={[Function]}
+      onKeyUp={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      <span
+        className="label"
+      >
+        Chip
+      </span>
+      <button
+        className="trailingIcon trailingIconClickable"
+        onClick={[Function]}
+      >
+        <svg />
+      </button>
+    </div>
+    <small
+      className="tinyText"
+    >
+      Try focusing the chip using your keyboard, then clicking on backspace!
+    </small>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Chip Variants 1`] = `
+<div
+  className="story-wrapper"
+>
+  <div
+    className="center"
+  >
+    <div
+      className="chip microMargin"
+      onClick={[Function]}
+      onKeyUp={[Function]}
+      role="button"
+    >
+      <span
+        className="label"
+      >
+        Simple
+      </span>
+    </div>
+    <div
+      className="chip focusable clickable microMargin"
+      onClick={[Function]}
+      onKeyUp={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      <span
+        className="label"
+      >
+        Clickable
+      </span>
+    </div>
+    <div
+      aria-disabled={true}
+      className="chip disabled microMargin"
+      onClick={[Function]}
+      onKeyUp={[Function]}
+      role="button"
+    >
+      <span
+        className="label"
+      >
+        Disabled
+      </span>
+    </div>
+    <div
+      className="chip microMargin"
+      onClick={[Function]}
+      onKeyUp={[Function]}
+      role="button"
+    >
+      <div
+        className="leadingIcon"
+      >
+        <svg />
+      </div>
+      <span
+        className="label"
+      >
+        Leading Icon
+      </span>
+    </div>
+    <div
+      className="chip microMargin"
+      onClick={[Function]}
+      onKeyUp={[Function]}
+      role="button"
+    >
+      <span
+        className="label"
+      >
+        Trailing Icon
+      </span>
+      <button
+        className="trailingIcon"
+        onClick={[Function]}
+      >
+        <svg />
+      </button>
+    </div>
+    <div
+      className="chip microMargin"
+      onClick={[Function]}
+      onKeyUp={[Function]}
+      role="button"
+    >
+      <div
+        className="leadingIcon"
+      >
+        <svg />
+      </div>
+      <span
+        className="label"
+      >
+        Both Icons
+      </span>
+      <button
+        className="trailingIcon"
+        onClick={[Function]}
+      >
+        <svg />
+      </button>
+    </div>
   </div>
 </div>
 `;
@@ -526,43 +693,18 @@ exports[`Storyshots Snackbar Action Text 1`] = `
   <div
     className="center"
   >
-    <div
-      className="snackbar isOpen"
+    <button
+      className="button large fill"
+      disabled={false}
+      onClick={[Function]}
     >
-      <div
-        className="messageContainer"
-      >
-        <span
-          className="message"
-        >
-          This Is The Message
-        </span>
-      </div>
-      <div
-        className="actionsContainer"
-      >
-        <button
-          className="button small ghost actionButton"
-          disabled={false}
-          onClick={[Function]}
-        >
-          undo
-        </button>
-        <button
-          className="button large ghost iconButton small ghost trailingIcon"
-          color="purewhite"
-          disabled={false}
-          onClick={[Function]}
-        >
-          <svg />
-        </button>
-      </div>
-    </div>
+      Open
+    </button>
   </div>
 </div>
 `;
 
-exports[`Storyshots Snackbar Color 1`] = `
+exports[`Storyshots Snackbar Close Icon 1`] = `
 <div
   className="story-wrapper"
 >
@@ -570,36 +712,29 @@ exports[`Storyshots Snackbar Color 1`] = `
     className="center"
   >
     <div
-      className="snackbar isOpen microMargin"
+      className="marginFlexContainer"
     >
-      <div
-        className="messageContainer"
+      <button
+        className="button large fill"
+        disabled={false}
+        onClick={[Function]}
       >
-        <span
-          className="message"
-        >
-          This Is The Message
-        </span>
-      </div>
-      <div
-        className="actionsContainer"
+        Default Icon
+      </button>
+      <button
+        className="button large fill"
+        disabled={false}
+        onClick={[Function]}
       >
-        <button
-          className="button small ghost actionButton"
-          disabled={false}
-          onClick={[Function]}
-        >
-          undo
-        </button>
-        <button
-          className="button large ghost iconButton small ghost trailingIcon"
-          color="purewhite"
-          disabled={false}
-          onClick={[Function]}
-        >
-          <svg />
-        </button>
-      </div>
+        Custom Icon
+      </button>
+      <button
+        className="button large fill"
+        disabled={false}
+        onClick={[Function]}
+      >
+        Without Icon
+      </button>
     </div>
   </div>
 </div>
@@ -612,31 +747,13 @@ exports[`Storyshots Snackbar Default 1`] = `
   <div
     className="center"
   >
-    <div
-      className="snackbar isOpen"
+    <button
+      className="button large fill"
+      disabled={false}
+      onClick={[Function]}
     >
-      <div
-        className="messageContainer"
-      >
-        <span
-          className="message"
-        >
-          This Is The Message
-        </span>
-      </div>
-      <div
-        className="actionsContainer"
-      >
-        <button
-          className="button large ghost iconButton small ghost trailingIcon"
-          color="purewhite"
-          disabled={false}
-          onClick={[Function]}
-        >
-          <svg />
-        </button>
-      </div>
-    </div>
+      Open
+    </button>
   </div>
 </div>
 `;
@@ -648,117 +765,13 @@ exports[`Storyshots Snackbar Leading Icon 1`] = `
   <div
     className="center"
   >
-    <div
-      className="snackbar isOpen"
+    <button
+      className="button large fill"
+      disabled={false}
+      onClick={[Function]}
     >
-      <div
-        className="messageContainer"
-      >
-        <span
-          className="leadingIcon"
-        >
-          <svg />
-        </span>
-        <span
-          className="message"
-        >
-          This Is The Message
-        </span>
-      </div>
-      <div
-        className="actionsContainer"
-      >
-        <button
-          className="button large ghost iconButton small ghost trailingIcon"
-          color="purewhite"
-          disabled={false}
-          onClick={[Function]}
-        >
-          <svg />
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Snackbar Trailing Icon 1`] = `
-<div
-  className="story-wrapper"
->
-  <div
-    className="center"
-  >
-    <div
-      className="flexRow"
-    >
-      <div
-        className="snackbar isOpen microMargin"
-      >
-        <div
-          className="messageContainer"
-        >
-          <span
-            className="message"
-          >
-            Default trailing icon
-          </span>
-        </div>
-        <div
-          className="actionsContainer"
-        >
-          <button
-            className="button large ghost iconButton small ghost trailingIcon"
-            color="purewhite"
-            disabled={false}
-            onClick={[Function]}
-          >
-            <svg />
-          </button>
-        </div>
-      </div>
-      <div
-        className="snackbar isOpen microMargin"
-      >
-        <div
-          className="messageContainer"
-        >
-          <span
-            className="message"
-          >
-            Custom trailing icon
-          </span>
-        </div>
-        <div
-          className="actionsContainer"
-        >
-          <button
-            className="button large ghost iconButton small ghost trailingIcon"
-            color="purewhite"
-            disabled={false}
-            onClick={[Function]}
-          >
-            <svg />
-          </button>
-        </div>
-      </div>
-      <div
-        className="snackbar isOpen microMargin"
-      >
-        <div
-          className="messageContainer"
-        >
-          <span
-            className="message"
-          >
-            Without trailing icon
-          </span>
-        </div>
-        <div
-          className="actionsContainer"
-        />
-      </div>
-    </div>
+      Open
+    </button>
   </div>
 </div>
 `;
