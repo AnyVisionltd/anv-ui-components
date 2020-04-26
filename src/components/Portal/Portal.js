@@ -3,7 +3,7 @@ import propTypes from 'prop-types'
 
 /**
  * getPortalElement - Should check if there is a div in the dom for the portal
- * if not -> create and return it
+ * if not -> create on body and return it
  * @return {HTMLElement} (element)
  */
 const getPortalElement = (elementId) => {
