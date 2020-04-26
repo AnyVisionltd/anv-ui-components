@@ -1,23 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots Button Colors 1`] = `
-<div
-  className="story-wrapper"
->
-  <div
-    className="center"
-  >
-    <button
-      className="button large primary-fill microMargin"
-      disabled={false}
-      onClick={[Function]}
-    >
-      primary
-    </button>
-  </div>
-</div>
-`;
-
 exports[`Storyshots Button Default 1`] = `
 <div
   className="story-wrapper"
@@ -26,7 +8,7 @@ exports[`Storyshots Button Default 1`] = `
     className="center"
   >
     <button
-      className="button large primary-fill"
+      className="button large fill"
       disabled={false}
       onClick={[Function]}
     >
@@ -43,20 +25,24 @@ exports[`Storyshots Button Disable 1`] = `
   <div
     className="center"
   >
-    <button
-      className="button large primary-fill microMargin"
-      disabled={false}
-      onClick={[Function]}
+    <div
+      className="marginFlexContainer"
     >
-      Enable
-    </button>
-    <button
-      className="button large primary-fill microMargin"
-      disabled={true}
-      onClick={[Function]}
-    >
-      Disabled
-    </button>
+      <button
+        className="button large fill"
+        disabled={false}
+        onClick={[Function]}
+      >
+        Enable
+      </button>
+      <button
+        className="button large fill"
+        disabled={true}
+        onClick={[Function]}
+      >
+        Disabled
+      </button>
+    </div>
   </div>
 </div>
 `;
@@ -69,7 +55,7 @@ exports[`Storyshots Button Play Ground 1`] = `
     className="center"
   >
     <button
-      className="button large primary-fill"
+      className="button large fill"
       disabled={false}
       onClick={[Function]}
     >
@@ -86,20 +72,24 @@ exports[`Storyshots Button Sizes 1`] = `
   <div
     className="center"
   >
-    <button
-      className="button large primary-fill microMargin"
-      disabled={false}
-      onClick={[Function]}
+    <div
+      className="marginFlexContainer"
     >
-      Large
-    </button>
-    <button
-      className="button small primary-fill microMargin"
-      disabled={false}
-      onClick={[Function]}
-    >
-      small
-    </button>
+      <button
+        className="button large fill"
+        disabled={false}
+        onClick={[Function]}
+      >
+        Large
+      </button>
+      <button
+        className="button small fill"
+        disabled={false}
+        onClick={[Function]}
+      >
+        small
+      </button>
+    </div>
   </div>
 </div>
 `;
@@ -111,27 +101,67 @@ exports[`Storyshots Button Variants 1`] = `
   <div
     className="center"
   >
-    <button
-      className="button large primary-fill microMargin"
-      disabled={false}
-      onClick={[Function]}
+    <div
+      className="marginFlexContainer"
     >
-      fill
-    </button>
-    <button
-      className="button large primary-outline microMargin"
-      disabled={false}
-      onClick={[Function]}
+      <button
+        className="button large fill"
+        disabled={false}
+        onClick={[Function]}
+      >
+        fill
+      </button>
+      <button
+        className="button large outline"
+        disabled={false}
+        onClick={[Function]}
+      >
+        outline
+      </button>
+      <button
+        className="button large ghost"
+        disabled={false}
+        onClick={[Function]}
+      >
+        ghost
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Button With Class Name 1`] = `
+<div
+  className="story-wrapper"
+>
+  <div
+    className="center"
+  >
+    <div
+      className="marginFlexContainer"
     >
-      outline
-    </button>
-    <button
-      className="button large primary-ghost microMargin"
-      disabled={false}
-      onClick={[Function]}
-    >
-      ghost
-    </button>
+      <button
+        className="button large fill successBackgroundColor"
+        disabled={false}
+        onClick={[Function]}
+      >
+        Text
+      </button>
+      <button
+        className="button large outline alertColor"
+        disabled={false}
+        onClick={[Function]}
+      >
+        Text
+      </button>
+      <button
+        className="button large ghost errorColor"
+        disabled={false}
+        onClick={[Function]}
+      >
+        Text
+      </button>
+    </div>
   </div>
 </div>
 `;
@@ -144,14 +174,16 @@ exports[`Storyshots Button With Icon 1`] = `
     className="center"
   >
     <button
-      className="button large primary-fill microMargin"
+      className="button large fill"
       disabled={false}
       onClick={[Function]}
     >
-      <svg
-        className="startIcon"
-      />
-      Start
+      <span
+        className="leadingIcon"
+      >
+        <svg />
+      </span>
+      leading
     </button>
   </div>
 </div>
@@ -193,13 +225,13 @@ exports[`Storyshots Checkbox Default 1`] = `
   >
     <label
       className="checkbox primary checkbox-primary"
-      htmlFor="checkbox-playground"
+      htmlFor="checkbox-example"
     >
       <input
         checked={false}
         className="parent"
         disabled={false}
-        id="checkbox-playground"
+        id="checkbox-example"
         onChange={[Function]}
         type="checkbox"
       />
@@ -209,7 +241,7 @@ exports[`Storyshots Checkbox Default 1`] = `
     </label>
     <label
       className="checkboxLabel"
-      htmlFor="checkbox-playground"
+      htmlFor="checkbox-example"
     >
       Check me out!
     </label>
@@ -321,24 +353,6 @@ exports[`Storyshots Checkbox States 1`] = `
 </div>
 `;
 
-exports[`Storyshots IconButton Colors 1`] = `
-<div
-  className="story-wrapper"
->
-  <div
-    className="center"
-  >
-    <button
-      className="button large primary-fill iconButton small fill microMargin"
-      disabled={false}
-      onClick={[Function]}
-    >
-      <svg />
-    </button>
-  </div>
-</div>
-`;
-
 exports[`Storyshots IconButton Default 1`] = `
 <div
   className="story-wrapper"
@@ -347,7 +361,7 @@ exports[`Storyshots IconButton Default 1`] = `
     className="center"
   >
     <button
-      className="button large primary-fill iconButton small fill"
+      className="button large fill iconButton small fill"
       disabled={false}
       onClick={[Function]}
     >
@@ -364,20 +378,24 @@ exports[`Storyshots IconButton Disable 1`] = `
   <div
     className="center"
   >
-    <button
-      className="button large primary-fill iconButton small fill microMargin"
-      disabled={false}
-      onClick={[Function]}
+    <div
+      className="marginFlexContainer"
     >
-      <svg />
-    </button>
-    <button
-      className="button large primary-fill iconButton small fill microMargin"
-      disabled={true}
-      onClick={[Function]}
-    >
-      <svg />
-    </button>
+      <button
+        className="button large fill iconButton small fill"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <svg />
+      </button>
+      <button
+        className="button large fill iconButton small fill"
+        disabled={true}
+        onClick={[Function]}
+      >
+        <svg />
+      </button>
+    </div>
   </div>
 </div>
 `;
@@ -390,7 +408,7 @@ exports[`Storyshots IconButton Play Ground 1`] = `
     className="center"
   >
     <button
-      className="button large primary-fill iconButton small fill"
+      className="button large fill iconButton small fill"
       disabled={false}
       onClick={[Function]}
     >
@@ -407,20 +425,24 @@ exports[`Storyshots IconButton Sizes 1`] = `
   <div
     className="center"
   >
-    <button
-      className="button large primary-fill iconButton small fill microMargin"
-      disabled={false}
-      onClick={[Function]}
+    <div
+      className="marginFlexContainer"
     >
-      <svg />
-    </button>
-    <button
-      className="button large primary-fill iconButton large fill microMargin"
-      disabled={false}
-      onClick={[Function]}
-    >
-      <svg />
-    </button>
+      <button
+        className="button large fill iconButton small fill"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <svg />
+      </button>
+      <button
+        className="button large fill iconButton large fill"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <svg />
+      </button>
+    </div>
   </div>
 </div>
 `;
@@ -432,27 +454,67 @@ exports[`Storyshots IconButton Variants 1`] = `
   <div
     className="center"
   >
-    <button
-      className="button large primary-fill iconButton small fill microMargin"
-      disabled={false}
-      onClick={[Function]}
+    <div
+      className="marginFlexContainer"
     >
-      <svg />
-    </button>
-    <button
-      className="button large primary-outline iconButton small outline microMargin"
-      disabled={false}
-      onClick={[Function]}
+      <button
+        className="button large fill iconButton small fill"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <svg />
+      </button>
+      <button
+        className="button large outline iconButton small outline"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <svg />
+      </button>
+      <button
+        className="button large ghost iconButton small ghost"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <svg />
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots IconButton With Class Name 1`] = `
+<div
+  className="story-wrapper"
+>
+  <div
+    className="center"
+  >
+    <div
+      className="marginFlexContainer"
     >
-      <svg />
-    </button>
-    <button
-      className="button large primary-ghost iconButton small ghost microMargin"
-      disabled={false}
-      onClick={[Function]}
-    >
-      <svg />
-    </button>
+      <button
+        className="button large fill iconButton small fill successBackgroundColor"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <svg />
+      </button>
+      <button
+        className="button large outline iconButton small outline alertColor"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <svg />
+      </button>
+      <button
+        className="button large ghost iconButton small ghost errorColor"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <svg />
+      </button>
+    </div>
   </div>
 </div>
 `;
