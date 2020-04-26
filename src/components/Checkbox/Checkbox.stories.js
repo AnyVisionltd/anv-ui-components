@@ -34,28 +34,11 @@ export const Default = () => {
   )
 }
 
-export const colors = () => Object
-  .keys(styleGuideColors)
-  .map((color) => {
-    const [isChecked, setChecked] = useState(true)
-    const onChange = ({ target }) => {
-      setChecked(target.checked)
-    }
-    return (
-      <Checkbox
-        className={ styles.microMargin }
-        key={ color }
-        color={ color }
-        checked={ isChecked }
-        onChange={ onChange }
-      />
-    )
-  })
-
 export const states = () => (
   <>
     <Checkbox className={ styles.microMargin } checked />
     <Checkbox className={ styles.microMargin } />
+    <Checkbox className={ styles.microMargin } checked disabled />
     <Checkbox className={ styles.microMargin } indeterminate />
     <Checkbox className={ styles.microMargin } disabled />
   </>
