@@ -2,38 +2,41 @@
 $ripple-transition-duration: 0.3s;
 
 @mixin av-ripple($color: currentColor, $toBackground: false) {
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0;
-    border-radius: inherit;
+  &:not([disabled]):not(.disabled) {
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0;
+      border-radius: inherit;
 
-    @if $toBackground {
-      z-index: -1;
+      @if $toBackground {
+        z-index: -1;
+      }
     }
-  }
 
-  &::before {
-    background-color: $color;
-    transition: opacity 0.2s;
-  }
-  &::after {
-    background: radial-gradient(circle at center, $color 1%, transparent 1%) center/10000% 10000% no-repeat;
-    transition: opacity 1s, background-size $ripple-transition-duration;
-  }
+    &::before {
+      background-color: $color;
+      transition: opacity 0.2s;
+    }
 
-  &:hover::before {
-    opacity: av-opacity(divider);
-  }
+    &::after {
+      background: radial-gradient(circle at center, $color 1%, transparent 1%) center/10000% 10000% no-repeat;
+      transition: opacity 1s, background-size $ripple-transition-duration;
+    }
 
-  &:active::after {
-    opacity: av-opacity(disabled);
-    background-size: 100% 100%;
-    transition: background-size 0s;
+    &:hover::before {
+      opacity: av-opacity(divider);
+    }
+
+    &:active::after {
+      opacity: av-opacity(disabled);
+      background-size: 100% 100%;
+      transition: background-size 0s;
+    }
   }
 }
