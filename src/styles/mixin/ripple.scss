@@ -1,7 +1,7 @@
 // Consider other ripple approach fix white and black
 $ripple-transition-duration: 0.3s;
 
-@mixin av-ripple($color, $toBackground: false) {
+@mixin av-ripple($color: currentColor, $toBackground: false) {
   &::before,
   &::after {
     content: "";

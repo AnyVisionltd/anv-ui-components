@@ -1,16 +1,12 @@
 import React from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
-import colors from '@anyvision/style-guide/abstracts/_colors.scss'
 import styles from './Button.module.scss'
 
-const styleGuideColors = Object.keys(colors)
-
 const Button = ({
-  color,
   size,
   variant,
-  startIcon: StartIcon,
+  leadingIcon,
   disabled,
   onClick,
   className,
@@ -20,7 +16,7 @@ const Button = ({
   const classes = classNames(
     styles.button,
     styles[size],
-    styles[`${color}-${variant}`],
+    styles[variant],
     className,
   )
 
@@ -31,14 +27,13 @@ const Button = ({
       disabled={ disabled }
       { ...otherProps }
     >
-      { StartIcon && <StartIcon className={ styles.startIcon } /> }
+      { leadingIcon && <span className={ styles.leadingIcon }>{ leadingIcon }</span> }
       { children }
     </button>
   )
 }
 
 Button.defaultProps = {
-  color: 'primary',
   size: 'large',
   variant: 'fill',
   disabled: false,
@@ -46,14 +41,12 @@ Button.defaultProps = {
 }
 
 Button.propTypes = {
-  /** The color of the button. */
-  color: propTypes.oneOf(styleGuideColors),
   /** The size of the button. */
   size: propTypes.oneOf(['small', 'large']),
   /** The variant of the button. */
   variant: propTypes.oneOf(['fill', 'outline', 'ghost']),
   /** Icon before the children. */
-  startIcon: propTypes.elementType,
+  leadingIcon: propTypes.element,
   /** If true, the button will be disabled. */
   disabled: propTypes.bool,
   /** Callback when click. */
