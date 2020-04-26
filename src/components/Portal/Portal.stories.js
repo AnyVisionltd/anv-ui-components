@@ -7,7 +7,7 @@ export default {
 }
 
 export const Usage = () => (
-  <Portal containerId="component-name">
-    <h1>Inspect Me! Im on the body element!!</h1>
+  <Portal containerId="portal-name">
+    <h3>Inspect Me! Im on the body element!!</h3>
   </Portal>
 )

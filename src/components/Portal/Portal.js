@@ -6,7 +6,7 @@ import propTypes from 'prop-types'
  * if not -> create and return it
  * @return {HTMLElement} (element)
  */
-export const getPortalElement = (elementId) => {
+const getPortalElement = (elementId) => {
   let portalElement = document.getElementById(elementId)
   if (!portalElement) {
     portalElement = document.createElement('div')
@@ -17,12 +17,7 @@ export const getPortalElement = (elementId) => {
   return portalElement
 }
 
-/**
- * Portals provide a first-class way to render children into a DOM node
- * that exists outside the DOM hierarchy of the parent component.
- */
-const Portal = (props) => {
-  const { children, containerId } = props
+const Portal = ({ children, containerId }) => {
   const mountNode = getPortalElement(containerId)
 
   return createPortal(children, mountNode)
