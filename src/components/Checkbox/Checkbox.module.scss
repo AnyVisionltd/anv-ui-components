@@ -2,6 +2,7 @@
 @import "../../styles/mixin/ripple";
 
 .checkbox {
+  @include av-ripple(currentColor, true);
   position: relative;
   height: av-size(sz-32);
   width: av-size(sz-32);
@@ -11,10 +12,6 @@
   cursor: pointer;
   border-radius: av-radius();
   padding: av-space(tiny);
-
-  &.enabled {
-    @include av-ripple(currentColor, true);
-  }
 
   .parent {
     position: absolute;
