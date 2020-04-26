@@ -12,6 +12,10 @@
   }
 }
 
+.flexColumn {
+  flex-direction: column;
+}
+
 .checkboxLabel {
   display: flex;
   align-items: center;
@@ -28,11 +32,4 @@
 
 .errorColor {
   color: av-color(error);
-}
-
-
-
-.flexRow {
-  display: flex;
-  flex-direction: row;
 }

@@ -1,8 +1,8 @@
 import React from 'react'
 import Snackbar from './Snackbar'
-import styles from '../../styles/storybook/index.module.scss'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
 import { centerDecorator } from '../../utils/storybook/decorators'
+import styles from '../../styles/storybook/index.module.scss'
 
 export default {
   title: 'Snackbar',
@@ -26,22 +26,19 @@ export const leadingIcon = () => (
 )
 
 export const trailingIcon = () => (
-  <div className={ styles.flexRow }>
+  <div className={ styles.marginFlexContainer }>
     <Snackbar
       open
       message="Default trailing icon"
-      className={ styles.microMargin }
     />
     <Snackbar
       open
       message="Custom trailing icon"
-      className={ styles.microMargin }
       trailingIcon={ <SunIcon /> }
     />
     <Snackbar
       open
       message="Without trailing icon"
-      className={ styles.microMargin }
       trailingIcon={ false }
     />
   </div>
@@ -55,12 +52,11 @@ export const actionText = () => (
   />
 )
 
-export const color = () => (
+export const withClassName = () => (
   <Snackbar
-    color="alert"
     open
     message="This Is The Message"
     actionText="undo"
-    className={ styles.microMargin }
+    className={ styles.alertColor }
   />
 )

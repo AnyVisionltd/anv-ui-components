@@ -52,7 +52,6 @@ const Snackbar = ({
             ? (
               <IconButton
                 variant="ghost"
-                color="purewhite"
                 className={ styles.trailingIcon }
               >
                 { trailingIcon }
@@ -67,6 +66,7 @@ const Snackbar = ({
 
 Snackbar.defaultProps = {
   trailingIcon: <CloseIcon />,
+  // onAction: () => {}
 }
 
 Snackbar.propTypes = {
