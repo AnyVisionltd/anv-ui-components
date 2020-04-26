@@ -14,7 +14,6 @@ const Chip = ({
   onClick,
   onTrailingIconClick,
   onKeyUp,
-  onKeyDown,
   ...otherProps
 }) => {
   const chipRef = React.createRef()
@@ -29,13 +28,6 @@ const Chip = ({
   )
 
   const isDeleteKeyboardEvent = (event) => deletable && ['Backspace', 'Delete'].includes(event.key)
-
-  const handleKeyDown = (event) => {
-    if (event.currentTarget === event.target && isDeleteKeyboardEvent(event)) {
-      event.preventDefault()
-    }
-    return onKeyDown && onKeyDown(event)
-  }
 
   const handleKeyUp = (event) => {
     if (event.currentTarget === event.target) {
@@ -110,7 +102,6 @@ const Chip = ({
       className={ classes }
       onClick={ onClickHandler }
       onKeyUp={ handleKeyUp }
-      onKeyDown={ handleKeyDown }
       ref={ chipRef }
       { ...otherProps }
     >
@@ -156,7 +147,6 @@ Chip.propTypes = {
    */
   onTrailingIconClick: propTypes.func,
   onKeyUp: propTypes.func,
-  onKeyDown: propTypes.func,
 }
 
 export default Chip
