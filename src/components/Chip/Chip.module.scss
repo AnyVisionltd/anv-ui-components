@@ -56,8 +56,8 @@
     border: none;
     padding: 0;
     color: inherit;
-    height: var(--sz-16, 16px);
-    width: var(--sz-16, 16px);
+    height: av-size(sz-16);
+    width: av-size(sz-16);
     display: flex;
     justify-content: center;
     align-items: center;
