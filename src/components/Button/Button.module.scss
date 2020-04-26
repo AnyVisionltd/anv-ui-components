@@ -3,6 +3,7 @@
 
 .button {
   @extend %av-button;
+  @include av-ripple();
   position: relative;
   border: none;
   text-decoration: none;
@@ -19,7 +20,8 @@
   }
 }
 
-.startIcon {
+.leadingIcon {
+  display: flex;
   margin-left: calc(#{av-space(micro)} * -1);
 }
 
@@ -31,33 +33,21 @@
   height: av-size(sz-48);
 }
 
-@each $key, $value in $color-palate {
-  .#{$key}-fill {
-    color: av-color(purewhite);
-    fill: currentColor;
-    background-color: av-color($key);
-    @include av-ripple(av-color(purewhite))
-  }
-
-  .#{$key}-outline {
-    background: center;
-    color: av-color($key);
-    fill: currentColor;
-    border: 2px solid currentColor;
-    @include av-ripple(av-color($key))
-  }
-
-  .#{$key}-ghost {
-    background: center;
-    color: av-color($key);
-    fill: currentColor;
-    @include av-ripple(av-color($key))
-  }
+.fill {
+  color: av-color(purewhite);
+  fill: currentColor;
+  background-color: av-color(primary);
 }
 
-.purewhite-fill {
-  color: av-color(trueblack);
+.outline {
+  background: center;
+  color: av-color(primary);
   fill: currentColor;
-  background-color: av-color(purewhite);
-  @include av-ripple(av-color(trueblack))
+  border: 2px solid currentColor;
+}
+
+.ghost {
+  background: center;
+  color: av-color(primary);
+  fill: currentColor;
 }

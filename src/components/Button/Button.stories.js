@@ -1,6 +1,5 @@
 import React from 'react'
 import { select, boolean, text } from '@storybook/addon-knobs'
-import styleGuideColors from '@anyvision/style-guide/abstracts/_colors.scss'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
 import Button from './Button'
 import styles from '../../styles/storybook/index.module.scss'
@@ -18,44 +17,60 @@ export const Default = () => (
   </Button>
 )
 
-export const colors = () => (Object.keys(styleGuideColors).map((color) => (
-  <Button className={ styles.microMargin } key={ color } color={ color }>
-    { color }
-  </Button>
-))
-)
-
-export const variants = () => (['fill', 'outline', 'ghost'].map((variant) => (
-  <Button className={ styles.microMargin } key={ variant } variant={ variant }>
-    { variant }
-  </Button>
-))
+export const variants = () => (
+  <div className={ styles.marginFlexContainer }>
+    <Button>
+      fill
+    </Button>
+    <Button variant="outline">
+      outline
+    </Button>
+    <Button variant="ghost">
+      ghost
+    </Button>
+  </div>
 )
 
 export const sizes = () => (
-  <>
-    <Button className={ styles.microMargin }>Large</Button>
-    <Button className={ styles.microMargin } size="small">small</Button>
-  </>
+  <div className={ styles.marginFlexContainer }>
+    <Button>Large</Button>
+    <Button size="small">small</Button>
+  </div>
 )
 
 
 export const disable = () => (
-  <>
-    <Button className={ styles.microMargin }>Enable</Button>
-    <Button className={ styles.microMargin } disabled>Disabled</Button>
-  </>
+  <div className={ styles.marginFlexContainer }>
+    <Button>Enable</Button>
+    <Button disabled>Disabled</Button>
+  </div>
 )
 
 export const withIcon = () => (
-  <Button className={ styles.microMargin } startIcon={ SunIcon }>
-    Start
+  <Button leadingIcon={ <SunIcon /> }>
+    leading
   </Button>
+)
+
+export const withClassName = () => (
+  <div className={ styles.marginFlexContainer }>
+    { /* background-color: av-color(success); */ }
+    <Button className={ styles.successBackgroundColor }>
+      Text
+    </Button>
+    { /* color: av-color(alert); */ }
+    <Button className={ styles.alertColor } variant="outline">
+      Text
+    </Button>
+    { /* color: av-color(error); */ }
+    <Button className={ styles.errorColor } variant="ghost">
+      Text
+    </Button>
+  </div>
 )
 
 export const playGround = () => (
   <Button
-    color={ select('color', Object.keys(styleGuideColors), 'primary') }
     size={ select('size', ['small', 'large'], 'large') }
     variant={ select('variant', ['fill', 'outline', 'ghost'], 'fill') }
     disabled={ boolean('disabled', false) }
