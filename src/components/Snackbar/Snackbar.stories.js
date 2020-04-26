@@ -36,7 +36,7 @@ export const trailingIcon = () => (
       open
       message="Custom trailing icon"
       className={ styles.microMargin }
-      trailingIcon={ SunIcon }
+      trailingIcon={ <SunIcon /> }
     />
     <Snackbar
       open

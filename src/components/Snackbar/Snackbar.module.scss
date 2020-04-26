@@ -4,9 +4,10 @@
   display: none;
   min-width: av-size(sz-480);
   height: 64px;
+  color: av-color(primary);
   background-color: av-color(surface);
   align-items: center;
-  border-left: solid 4px av-color(primary);
+  border-left: solid 4px currentColor;
   border-radius: 0 av-radius() av-radius() 0 ;
   padding: 0 16px;
   justify-content: space-between;
@@ -25,14 +26,18 @@
   }
 
   .leadingIcon {
-    color: av-color(content);
-    fill: av-color(content);
+    color: currentColor;
+    fill: currentColor;
     margin-right: av-space(tiny);
   }
 }
 
 .actionsContainer {
   display: flex;
+
+  .actionButton {
+    color: currentColor;
+  }
 
   .trailingIcon {
     margin-left: av-space(tiny);

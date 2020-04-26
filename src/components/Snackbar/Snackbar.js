@@ -7,10 +7,9 @@ import styles from './Snackbar.module.scss'
 
 const Snackbar = ({
   message,
-  color,
   actionText,
   leadingIcon,
-  trailingIcon: TrailingIcon,
+  trailingIcon,
   open,
   className,
 }) => {
@@ -42,21 +41,21 @@ const Snackbar = ({
             <Button
               variant="ghost"
               size="small"
-              color={ color }
+              className={ styles.actionButton }
             >
               { actionText }
             </Button>
           )
           : null }
         {
-          TrailingIcon
+          trailingIcon
             ? (
               <IconButton
                 variant="ghost"
                 color="purewhite"
                 className={ styles.trailingIcon }
               >
-                <TrailingIcon />
+                { trailingIcon }
               </IconButton>
             )
             : null
@@ -67,21 +66,18 @@ const Snackbar = ({
 }
 
 Snackbar.defaultProps = {
-  color: 'primary',
-  trailingIcon: CloseIcon,
+  trailingIcon: <CloseIcon />,
 }
 
 Snackbar.propTypes = {
   /** The message to display. */
   message: propTypes.string.isRequired,
-  /** The border, leading icon and action button color. */
-  color: propTypes.string,
   /** The action text. */
   actionText: propTypes.string,
   /** The icon before the message.  */
-  leadingIcon: propTypes.elementType,
+  leadingIcon: propTypes.element,
   /** The icon trailing icon, used for close. Set to false for remove */
-  trailingIcon: propTypes.oneOfType([propTypes.elementType, propTypes.bool]),
+  trailingIcon: propTypes.oneOfType([propTypes.element, propTypes.bool]),
   /** If true display the snackbar. */
   open: propTypes.bool,
   // /** Callback fired when the component opened. */
