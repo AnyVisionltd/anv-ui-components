@@ -189,6 +189,33 @@ exports[`Storyshots Button With Icon 1`] = `
 </div>
 `;
 
+exports[`Storyshots Checkbox Colors 1`] = `
+<div
+  className="story-wrapper"
+>
+  <div
+    className="center"
+  >
+    <label
+      className="checkbox primary checkbox-primary checked microMargin"
+    >
+      <input
+        checked={true}
+        className="parent"
+        disabled={false}
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <span
+        className="iconContainer"
+      >
+        <svg />
+      </span>
+    </label>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Checkbox Default 1`] = `
 <div
   className="story-wrapper"
@@ -197,7 +224,7 @@ exports[`Storyshots Checkbox Default 1`] = `
     className="center"
   >
     <label
-      className="checkbox enabled"
+      className="checkbox primary checkbox-primary"
       htmlFor="checkbox-example"
     >
       <input
@@ -230,13 +257,12 @@ exports[`Storyshots Checkbox Playground 1`] = `
     className="center"
   >
     <label
-      className="checkbox enabled"
+      className="checkbox primary checkbox-primary"
       htmlFor="checkbox-playground"
     >
       <input
         checked={false}
         className="parent"
-        color="primary"
         disabled={false}
         id="checkbox-playground"
         onChange={[Function]}
@@ -264,7 +290,7 @@ exports[`Storyshots Checkbox States 1`] = `
     className="center"
   >
     <label
-      className="checkbox checked enabled microMargin"
+      className="checkbox primary checkbox-primary checked microMargin"
     >
       <input
         checked={true}
@@ -280,7 +306,7 @@ exports[`Storyshots Checkbox States 1`] = `
       </span>
     </label>
     <label
-      className="checkbox enabled microMargin"
+      className="checkbox primary checkbox-primary microMargin"
     >
       <input
         checked={false}
@@ -294,23 +320,7 @@ exports[`Storyshots Checkbox States 1`] = `
       />
     </label>
     <label
-      className="checkbox checked disabled microMargin"
-    >
-      <input
-        checked={true}
-        className="parent"
-        disabled={true}
-        onChange={[Function]}
-        type="checkbox"
-      />
-      <span
-        className="iconContainer"
-      >
-        <svg />
-      </span>
-    </label>
-    <label
-      className="checkbox indeterminate enabled microMargin"
+      className="checkbox primary checkbox-primary indeterminate microMargin"
     >
       <input
         checked={false}
@@ -326,7 +336,7 @@ exports[`Storyshots Checkbox States 1`] = `
       </span>
     </label>
     <label
-      className="checkbox disabled microMargin"
+      className="checkbox primary checkbox-primary isDisabled microMargin"
     >
       <input
         checked={false}
