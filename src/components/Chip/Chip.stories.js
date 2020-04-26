@@ -1,6 +1,5 @@
 import React from 'react'
-import styleGuideColors from '@anyvision/style-guide/abstracts/_colors.scss'
-import { boolean, select, text } from '@storybook/addon-knobs'
+import { boolean, text } from '@storybook/addon-knobs'
 import Chip from './Chip'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
 import { ReactComponent as CheckedIcon } from '../../assets/svg/Checked.svg'
@@ -22,21 +21,6 @@ export const Default = () => (
     deletable
   />
 )
-
-export const colors = () => Object
-  .keys(styleGuideColors)
-  .map((color) => (
-    <Chip
-      key={ color }
-      color={ color }
-      label={ color }
-      leadingIcon={ <SunIcon /> }
-      onClick={ () => {} }
-      onTrailingIconClick={ () => {} }
-      className={ styles.microMargin }
-      deletable
-    />
-  ))
 
 export const Variants = () => (
   <>
@@ -86,7 +70,6 @@ export const playground = () => {
     <>
       <Chip
         label={ text('label', 'Chip') }
-        color={ select('color', Object.keys(styleGuideColors), 'primary') }
         className={ styles.microMargin }
         leadingIcon={ leadingIcon }
         trailingIcon={ trailingIcon }

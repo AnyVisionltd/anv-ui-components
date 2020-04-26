@@ -1,16 +1,12 @@
 import React from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
-import colors from '@anyvision/style-guide/abstracts/_colors.scss'
 import { ReactComponent as CloseIcon } from '../../assets/svg/Cancel.svg'
 import styles from './Chip.module.scss'
-
-const styleGuideColors = Object.keys(colors)
 
 const Chip = ({
   leadingIcon,
   className,
-  color,
   trailingIcon,
   disabled,
   deletable,
@@ -26,8 +22,6 @@ const Chip = ({
   const focusable = clickable || deletable
   const classes = classNames(
     styles.chip,
-    styles[color],
-    styles[`chip-${color}`],
     focusable && styles.focusable,
     clickable && styles.clickable,
     disabled && styles.disabled,
@@ -45,7 +39,7 @@ const Chip = ({
 
   const handleKeyUp = (event) => {
     if (event.currentTarget === event.target) {
-      if (isDeleteKeyboardEvent(event)) {
+      if (isDeleteKeyboardEvent(event) && onTrailingIconClick) {
         onTrailingIconClick(event)
       } else if (event.key === 'Enter' && chipRef.current && clickable) {
         onClick(event)
@@ -68,6 +62,9 @@ const Chip = ({
   }
 
   const onTrailingIconClickHandler = (event) => {
+    if (!onTrailingIconClick) {
+      return
+    }
     event.stopPropagation()
     // When clicked using mouse, we would expect the chip to not be focused anymore.
     chipRef.current.blur()
@@ -125,7 +122,6 @@ const Chip = ({
 }
 
 Chip.defaultProps = {
-  color: 'primary',
   disabled: false,
 }
 
@@ -134,8 +130,6 @@ Chip.propTypes = {
   leadingIcon: propTypes.element,
   /** For css customization. */
   className: propTypes.string,
-  /** The color of the chip. */
-  color: propTypes.oneOf(styleGuideColors),
   /** If <code>true</code>, the chip will be disabled. */
   disabled: propTypes.bool,
   /** The label/content of the chip */
