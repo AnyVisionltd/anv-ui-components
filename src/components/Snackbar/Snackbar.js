@@ -1,13 +1,13 @@
 import React, { useEffect, useCallback } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
-import { Button, IconButton, Portal } from '../../index'
+import { IconButton, Portal } from '../../index'
 import { ReactComponent as CloseIcon } from '../../assets/svg/Close.svg'
 import styles from './Snackbar.module.scss'
 
 const Snackbar = ({
   message,
-  actionText,
+  action,
   leadingIcon,
   closeIcon,
   open,
@@ -15,7 +15,6 @@ const Snackbar = ({
   onOpen,
   onClose,
   hideTimeout,
-  onAction,
 }) => {
   const timerHide = React.useRef()
 
@@ -41,6 +40,32 @@ const Snackbar = ({
     }
   }, [open, hideTimeout, setHideTimeout, onOpen])
 
+  const renderLeadingIcon = () => {
+    if (!leadingIcon) {
+      return null
+    }
+    return (
+      <span className={ styles.leadingIcon }>
+        { leadingIcon }
+      </span>
+    )
+  }
+
+  const renderCloseIcon = () => {
+    if (!closeIcon) {
+      return null
+    }
+    return (
+      <IconButton
+        variant="ghost"
+        className={ styles.closeIcon }
+        onClick={ onClose }
+      >
+        { closeIcon }
+      </IconButton>
+    )
+  }
+
   const classes = classNames(
     styles.snackbar,
     className,
@@ -57,44 +82,14 @@ const Snackbar = ({
         onMouseLeave={ setHideTimeout }
       >
         <div className={ styles.messageContainer }>
-          {
-            leadingIcon
-              ? (
-                <span className={ styles.leadingIcon }>
-                  { leadingIcon }
-                </span>
-              )
-              : null
-          }
+          { renderLeadingIcon() }
           <span className={ styles.message }>
             { message }
           </span>
         </div>
         <div className={ styles.actionsContainer }>
-          { actionText
-            ? (
-              <Button
-                variant="ghost"
-                size="small"
-                onClick={ onAction }
-              >
-                { actionText }
-              </Button>
-            )
-            : null }
-          {
-            closeIcon
-              ? (
-                <IconButton
-                  variant="ghost"
-                  className={ styles.closeIcon }
-                  onClick={ onClose }
-                >
-                  { closeIcon }
-                </IconButton>
-              )
-              : null
-          }
+          { action }
+          { renderCloseIcon() }
         </div>
       </div>
     </Portal>
@@ -106,26 +101,29 @@ Snackbar.defaultProps = {
   onOpen: () => {},
   onClose: () => {},
   hideTimeout: 5000,
-  onAction: () => {},
 }
 
 Snackbar.propTypes = {
   /** The message to display. */
   message: propTypes.string.isRequired,
-  /** The action text. */
-  actionText: propTypes.string,
-  /** The icon before the message.  */
+  /**
+   * The action to display. Its renders after the <code>message</code>,
+   *  before <code>closeIcon</code>.
+   * */
+  action: propTypes.node,
+  /** The icon before the <code>message</code>.  */
   leadingIcon: propTypes.element,
-  /** The icon trailing icon, used for close. Set to false for remove */
+  /** The icon at the end of the snackbar, fire <code>onClose</code>. Set to false for remove */
   closeIcon: propTypes.oneOfType([propTypes.element, propTypes.bool]),
   /** If <code>true</code> display the snackbar. */
   open: propTypes.bool,
   /**
-   *  The number of milliseconds to wait before automatically calling
-   *  the <code>onClose</code> function.
-   *  <code>onClose</code> should then set the state of the open prop to hide the Snackbar.
-   *  Disable this behavior by <code>null</code> value.
-   *  */
+   * The number of milliseconds to wait before automatically calling
+   * the <code>onClose</code> function.
+   * Timeout pause on hover and reset by leaving the snackbar.
+   * <code>onClose</code> should then set the state of the open prop to hide the Snackbar.
+   * Disable this behavior by <code>null</code> value.
+   * */
   hideTimeout: propTypes.number,
   /** Callback fired when the component opened. */
   onOpen: propTypes.func,
@@ -135,8 +133,6 @@ Snackbar.propTypes = {
    * which is used to control the Snackbar open prop.
    * */
   onClose: propTypes.func,
-  /** Callback fired when <code>closeIcon</code> click or after hideTimeout */
-  onAction: propTypes.func,
   /** For css customization. */
   className: propTypes.string,
 }

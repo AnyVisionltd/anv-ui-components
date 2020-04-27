@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import Snackbar from './Snackbar'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
+import { ReactComponent as CheckIcon } from '../../assets/svg/Check.svg'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import styles from '../../styles/storybook/index.module.scss'
 import { Button } from '../Button'
@@ -18,7 +19,7 @@ export const Default = () => {
       <Button onClick={ () => setIsOpen(true) }>Open</Button>
       <Snackbar
         open={ isOpen }
-        onClose={ () => setIsOpen(false) }
+        onClose={ useCallback(() => setIsOpen(false), []) }
         message="This Is The Message"
       />
     </>
@@ -32,7 +33,7 @@ export const LeadingIcon = () => {
       <Button onClick={ () => setIsOpen(true) }>Open</Button>
       <Snackbar
         open={ isOpen }
-        onClose={ () => setIsOpen(false) }
+        onClose={ useCallback(() => setIsOpen(false), []) }
         message="This Is The Message"
         leadingIcon={ <SunIcon /> }
       />
@@ -53,18 +54,18 @@ export const CloseIcon = () => {
       </div>
       <Snackbar
         open={ isOpenDefault }
-        onClose={ () => setIsOpenDefault(false) }
+        onClose={ useCallback(() => setIsOpenDefault(false), []) }
         message="Default trailing icon"
       />
       <Snackbar
         open={ isOpenCustom }
-        onClose={ () => setIsOpenCustom(false) }
+        onClose={ useCallback(() => setIsOpenCustom(false), []) }
         message="Custom trailing icon"
-        closeIcon={ <SunIcon /> }
+        closeIcon={ <CheckIcon /> }
       />
       <Snackbar
         open={ isOpenWithout }
-        onClose={ () => setIsOpenWithout(false) }
+        onClose={ useCallback(() => setIsOpenWithout(false), []) }
         message="Without trailing icon"
         closeIcon={ false }
       />
@@ -72,16 +73,16 @@ export const CloseIcon = () => {
   )
 }
 
-export const ActionText = () => {
+export const Action = () => {
   const [isOpen, setIsOpen] = useState(false)
   return (
     <>
-      <Button onClick={ () => setIsOpen(true) }>Open</Button>
+      <Button onClick={ () => setIsOpen(true) }>With Action</Button>
       <Snackbar
         open={ isOpen }
-        onClose={ () => setIsOpen(false) }
+        onClose={ useCallback(() => setIsOpen(false), []) }
         message="This Is The Message"
-        actionText="undo"
+        action={ <Button variant="ghost" size="small"> undo </Button> }
       />
     </>
   )
