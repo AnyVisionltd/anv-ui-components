@@ -83,7 +83,7 @@ const Snackbar = ({
       >
         <div className={ styles.messageContainer }>
           { renderLeadingIcon() }
-          <span className={ styles.message }>
+          <span>
             { message }
           </span>
         </div>

@@ -2,7 +2,7 @@
 
 .snackbar {
   display: flex;
-  //ask israel
+  @include av-elevation(temporary);
   z-index: 100;
   min-width: av-size(sz-480);
   max-width: av-size(sz-640);
@@ -29,14 +29,10 @@
 .messageContainer {
   display: flex;
   align-items: center;
-
-  .message {
-    color: av-color(content);
-  }
+  color: av-color(content);
+  fill: av-color(content);
 
   .leadingIcon {
-    color: av-color(content);
-    fill: av-color(content);
     margin-right: av-space(tiny);
   }
 }
