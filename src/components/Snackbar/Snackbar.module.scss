@@ -1,7 +1,6 @@
 @import "~@anyvision/style-guide";
 
 .snackbar {
-  position: fixed;
   display: flex;
   //ask israel
   z-index: 100;
@@ -15,6 +14,14 @@
   border-radius: 0 av-radius() av-radius() 0 ;
   padding: 0 16px;
   justify-content: space-between;
+}
+
+.snackbar:not(:first-child) {
+  margin-top: av-space(tiny);
+}
+
+.portal {
+  position: fixed;
   left: av-space(grand);
   bottom: av-space(grand);
 }

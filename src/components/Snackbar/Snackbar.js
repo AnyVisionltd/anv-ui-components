@@ -41,15 +41,21 @@ const Snackbar = ({
     }
   }, [open, hideTimeout, setHideTimeout, onOpen])
 
-
   const classes = classNames(
     styles.snackbar,
     className,
   )
 
   return !open ? null : (
-    <Portal containerId="snackbar-portal">
-      <div className={ classes }>
+    <Portal
+      containerId="snackbar-portal"
+      className={ styles.portal }
+    >
+      <div
+        className={ classes }
+        onMouseEnter={ () => clearTimeout(timerHide.current) }
+        onMouseLeave={ setHideTimeout }
+      >
         <div className={ styles.messageContainer }>
           {
             leadingIcon

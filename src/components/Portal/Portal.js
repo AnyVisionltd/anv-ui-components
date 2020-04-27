@@ -1,3 +1,4 @@
+import React from 'react'
 import { createPortal } from 'react-dom'
 import propTypes from 'prop-types'
 
@@ -17,10 +18,15 @@ const getPortalElement = (elementId) => {
   return portalElement
 }
 
-const Portal = ({ children, containerId }) => {
+const Portal = ({ children, containerId, className }) => {
   const mountNode = getPortalElement(containerId)
+  mountNode.classList.add(className)
 
-  return createPortal(children, mountNode)
+  return (
+    <>
+      { createPortal(children, mountNode) }
+    </>
+  )
 }
 
 Portal.propTypes = {
@@ -28,6 +34,8 @@ Portal.propTypes = {
   children: propTypes.node,
   /** Container id is unique per component (dialog, snackbar etc..).  */
   containerId: propTypes.string.isRequired,
+  /** For css customization. */
+  className: propTypes.string,
 }
 
 export default Portal
