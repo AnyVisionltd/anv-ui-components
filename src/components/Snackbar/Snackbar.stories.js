@@ -30,7 +30,7 @@ export const LeadingIcon = () => {
   const [isOpen, setIsOpen] = useState(false)
   return (
     <>
-      <Button onClick={ () => setIsOpen(true) }>Open</Button>
+      <Button onClick={ () => setIsOpen(true) }>With Leading Icon</Button>
       <Snackbar
         isOpen={ isOpen }
         onClose={ useCallback(() => setIsOpen(false), []) }
