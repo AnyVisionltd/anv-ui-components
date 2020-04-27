@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
-import { IconButton, Portal } from '../../index'
+import { IconButton, Portal, Slide } from '../../index'
 import { ReactComponent as CloseIcon } from '../../assets/svg/Close.svg'
 import styles from './Snackbar.module.scss'
 
@@ -10,7 +10,7 @@ const Snackbar = ({
   action,
   leadingIcon,
   closeIcon,
-  open,
+  isOpen,
   className,
   onOpen,
   onClose,
@@ -30,7 +30,7 @@ const Snackbar = ({
   }, [hideTimeout, onClose])
 
   useEffect(() => {
-    if (open) {
+    if (isOpen) {
       onOpen()
       setHideTimeout()
     }
@@ -38,7 +38,7 @@ const Snackbar = ({
     return () => {
       clearTimeout(timerHide.current)
     }
-  }, [open, hideTimeout, setHideTimeout, onOpen])
+  }, [isOpen, hideTimeout, setHideTimeout, onOpen])
 
   const renderLeadingIcon = () => {
     if (!leadingIcon) {
@@ -71,28 +71,30 @@ const Snackbar = ({
     className,
   )
 
-  return !open ? null : (
-    <Portal
-      containerId="snackbar-portal"
-      className={ styles.portal }
-    >
-      <div
-        className={ classes }
-        onMouseEnter={ () => clearTimeout(timerHide.current) }
-        onMouseLeave={ setHideTimeout }
+  return (
+    <Slide isOpen={ isOpen }>
+      <Portal
+        containerId="snackbar-portal"
+        className={ styles.portal }
       >
-        <div className={ styles.messageContainer }>
-          { renderLeadingIcon() }
-          <span>
-            { message }
-          </span>
+        <div
+          className={ classes }
+          onMouseEnter={ () => clearTimeout(timerHide.current) }
+          onMouseLeave={ setHideTimeout }
+        >
+          <div className={ styles.messageContainer }>
+            { renderLeadingIcon() }
+            <span>
+              { message }
+            </span>
+          </div>
+          <div className={ styles.actionsContainer }>
+            { action }
+            { renderCloseIcon() }
+          </div>
         </div>
-        <div className={ styles.actionsContainer }>
-          { action }
-          { renderCloseIcon() }
-        </div>
-      </div>
-    </Portal>
+      </Portal>
+    </Slide>
   )
 }
 
@@ -116,12 +118,13 @@ Snackbar.propTypes = {
   /** The icon at the end of the snackbar, fire <code>onClose</code>. Set to false for remove */
   closeIcon: propTypes.oneOfType([propTypes.element, propTypes.bool]),
   /** If <code>true</code> display the snackbar. */
-  open: propTypes.bool,
+  isOpen: propTypes.bool,
   /**
    * The number of milliseconds to wait before automatically calling
    * the <code>onClose</code> function.
    * Timeout pause on hover and reset by leaving the snackbar.
-   * <code>onClose</code> should then set the state of the open prop to hide the Snackbar.
+   * <code>onClose</code> should then set the state of the
+   * <code>isOpen</code> prop to hide the Snackbar.g
    * Disable this behavior by <code>null</code> value.
    * */
   hideTimeout: propTypes.number,
@@ -130,7 +133,7 @@ Snackbar.propTypes = {
   /**
    * Callback fired when the component requests to be closed.
    * Typically onClose is used to set state in the parent component,
-   * which is used to control the Snackbar open prop.
+   * which is used to control the Snackbar <code>open</code> prop.
    * */
   onClose: propTypes.func,
   /** For css customization. */

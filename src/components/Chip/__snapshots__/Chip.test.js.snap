@@ -698,7 +698,27 @@ exports[`Storyshots Portal Default 1`] = `
 </div>
 `;
 
-exports[`Storyshots Snackbar Action Text 1`] = `
+exports[`Storyshots Slide Basic 1`] = `
+<div
+  className="story-wrapper"
+>
+  <div
+    className="center"
+  >
+    <div>
+      <button
+        className="button large fill"
+        disabled={false}
+        onClick={[Function]}
+      >
+        Open
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Snackbar Action 1`] = `
 <div
   className="story-wrapper"
 >
@@ -710,7 +730,7 @@ exports[`Storyshots Snackbar Action Text 1`] = `
       disabled={false}
       onClick={[Function]}
     >
-      Open
+      With Action
     </button>
   </div>
 </div>

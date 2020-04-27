@@ -3,14 +3,13 @@
 .snackbar {
   display: flex;
   @include av-elevation(temporary);
-  z-index: 100;
   min-width: av-size(sz-480);
   max-width: av-size(sz-640);
   height: 64px;
-  color: av-color(primary);
+  // remove when elevation fix
   background-color: av-color(surface);
   align-items: center;
-  border-left: solid 4px currentColor;
+  border-left: solid 4px av-color(primary);
   border-radius: 0 av-radius() av-radius() 0 ;
   padding: 0 16px;
   justify-content: space-between;

@@ -1,0 +1,48 @@
+// not using css module because react-transition-group
+
+@mixin slide($from, $axis) {
+  &-enter {
+    opacity: 0;
+    @if $axis == Y {
+      transform: translateY($from);
+    } @else {
+      transform: translateX($from);
+    }
+  }
+
+  &-enter-active {
+    opacity: 1;
+    @if $axis == Y {
+      transform: translateY(0%);
+    } @else {
+      transform: translateX(0%);
+    }
+    transition: transform 200ms, opacity 200ms;
+  }
+
+  &-exit-active {
+    opacity: 0;
+    @if $axis == Y {
+      transform: translateY($from);
+    } @else {
+      transform: translateX($from);
+    }
+    transition: transform 200ms, opacity 200ms;
+  }
+}
+
+.slide-up {
+  @include slide(100%, Y)
+}
+
+.slide-down {
+  @include slide(-100%, Y)
+}
+
+.slide-left {
+  @include slide(100%, X)
+}
+
+.slide-right {
+  @include slide(-100%, X)
+}

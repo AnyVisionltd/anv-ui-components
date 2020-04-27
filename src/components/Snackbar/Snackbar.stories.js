@@ -18,7 +18,7 @@ export const Default = () => {
     <>
       <Button onClick={ () => setIsOpen(true) }>Open</Button>
       <Snackbar
-        open={ isOpen }
+        isOpen={ isOpen }
         onClose={ useCallback(() => setIsOpen(false), []) }
         message="This Is The Message"
       />
@@ -32,7 +32,7 @@ export const LeadingIcon = () => {
     <>
       <Button onClick={ () => setIsOpen(true) }>Open</Button>
       <Snackbar
-        open={ isOpen }
+        isOpen={ isOpen }
         onClose={ useCallback(() => setIsOpen(false), []) }
         message="This Is The Message"
         leadingIcon={ <SunIcon /> }
@@ -53,18 +53,18 @@ export const CloseIcon = () => {
         <Button onClick={ () => setIsOpenWithout(true) }>Without Icon</Button>
       </div>
       <Snackbar
-        open={ isOpenDefault }
+        isOpen={ isOpenDefault }
         onClose={ useCallback(() => setIsOpenDefault(false), []) }
         message="Default trailing icon"
       />
       <Snackbar
-        open={ isOpenCustom }
+        isOpen={ isOpenCustom }
         onClose={ useCallback(() => setIsOpenCustom(false), []) }
         message="Custom trailing icon"
         closeIcon={ <CheckIcon /> }
       />
       <Snackbar
-        open={ isOpenWithout }
+        isOpen={ isOpenWithout }
         onClose={ useCallback(() => setIsOpenWithout(false), []) }
         message="Without trailing icon"
         closeIcon={ false }
@@ -79,7 +79,7 @@ export const Action = () => {
     <>
       <Button onClick={ () => setIsOpen(true) }>With Action</Button>
       <Snackbar
-        open={ isOpen }
+        isOpen={ isOpen }
         onClose={ useCallback(() => setIsOpen(false), []) }
         message="This Is The Message"
         action={ <Button variant="ghost" size="small"> undo </Button> }
