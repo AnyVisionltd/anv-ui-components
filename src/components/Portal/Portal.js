@@ -14,7 +14,6 @@ const getPortalElement = (elementId) => {
     portalElement.id = elementId
     document.body.appendChild(portalElement)
   }
-
   return portalElement
 }
 

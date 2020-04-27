@@ -1,2 +1,5 @@
 export { Button } from './components/Button'
 export { IconButton } from './components/IconButton'
+export { Portal } from './components/Portal'
+export { Chip } from './components/Chip'
+export { Checkbox } from './components/Checkbox'
