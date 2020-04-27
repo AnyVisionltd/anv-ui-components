@@ -685,3 +685,15 @@ exports[`Storyshots IconButton With Class Name 1`] = `
   </div>
 </div>
 `;
+
+exports[`Storyshots Portal Default 1`] = `
+<div
+  className="story-wrapper"
+>
+  <portal-for-test>
+    <h3>
+      Inspect Me. Im on the body
+    </h3>
+  </portal-for-test>
+</div>
+`;
