@@ -53,6 +53,20 @@ describe('<Snackbar />', () => {
   })
 
   describe('Closing events', () => {
+    it('should fire onClose when click closeButton', () => {
+      const onClose = jest.fn()
+      const { getByRole } = render(
+        <Snackbar
+          message="test message"
+          isOpen
+          onClose={ onClose }
+        />,
+      )
+      const node = getByRole('button')
+      fireEvent.click(node)
+      expect(onClose).toHaveBeenCalledTimes(1)
+    })
+
     it('should fire onClose after hideTimeout', async () => {
       const onClose = jest.fn()
       render(
