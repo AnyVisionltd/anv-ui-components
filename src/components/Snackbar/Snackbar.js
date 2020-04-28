@@ -115,7 +115,7 @@ Snackbar.propTypes = {
   action: propTypes.node,
   /** The icon before the <code>message</code>.  */
   leadingIcon: propTypes.element,
-  /** The icon at the end of the snackbar, fire <code>onClose</code>. Set to false for remove */
+  /** The icon at the end of the snackbar, fire <code>onClose</code>. Set to false for remove. */
   closeIcon: propTypes.oneOfType([propTypes.element, propTypes.bool]),
   /** If <code>true</code> display the snackbar. */
   isOpen: propTypes.bool,

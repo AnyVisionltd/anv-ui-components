@@ -24,7 +24,7 @@ SlideAnimation.propTypes = {
   /** Animation direction. */
   direction: propTypes.oneOf(['up', 'right', 'down', 'left']),
   /** The component content. */
-  children: propTypes.node.isRequired,
+  children: propTypes.element.isRequired,
 }
 
 export default SlideAnimation

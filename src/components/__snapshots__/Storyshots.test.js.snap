@@ -4,7 +4,13 @@ exports[`Storyshots Animations|SlideAnimation Basic 1`] = `
 <div
   className="center"
 >
-  <div>
+  <div
+    style={
+      Object {
+        "height": "150px",
+      }
+    }
+  >
     <div
       className="marginFlexContainer"
     >
@@ -20,6 +26,13 @@ exports[`Storyshots Animations|SlideAnimation Basic 1`] = `
         disabled={false}
         onClick={[Function]}
       >
+        right
+      </button>
+      <button
+        className="button large fill"
+        disabled={false}
+        onClick={[Function]}
+      >
         down
       </button>
       <button
@@ -28,13 +41,6 @@ exports[`Storyshots Animations|SlideAnimation Basic 1`] = `
         onClick={[Function]}
       >
         left
-      </button>
-      <button
-        className="button large fill"
-        disabled={false}
-        onClick={[Function]}
-      >
-        right
       </button>
     </div>
     <div
