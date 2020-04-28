@@ -7,7 +7,7 @@ import styles from '../../styles/storybook/index.module.scss'
 import { Button } from '../Button'
 
 export default {
-  title: 'Snackbar',
+  title: 'Components|Snackbar',
   component: Snackbar,
   decorators: [centerDecorator],
 }

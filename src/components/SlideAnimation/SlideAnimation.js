@@ -1,9 +1,9 @@
 import React from 'react'
 import propTypes from 'prop-types'
 import { CSSTransition } from 'react-transition-group'
-import './Slide.scss'
+import './SlideAnimation.scss'
 
-const Slide = ({ children, isOpen, direction }) => (
+const SlideAnimation = ({ children, isOpen, direction }) => (
   <CSSTransition
     in={ isOpen }
     unmountOnExit
@@ -14,11 +14,11 @@ const Slide = ({ children, isOpen, direction }) => (
   </CSSTransition>
 )
 
-Slide.defaultProps = {
+SlideAnimation.defaultProps = {
   direction: 'up',
 }
 
-Slide.propTypes = {
+SlideAnimation.propTypes = {
   /** If <code>true</code> display <code>children</code>. */
   isOpen: propTypes.bool.isRequired,
   /** Animation direction. */
@@ -27,4 +27,4 @@ Slide.propTypes = {
   children: propTypes.node.isRequired,
 }
 
-export default Slide
+export default SlideAnimation

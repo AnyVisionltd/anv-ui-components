@@ -6,7 +6,6 @@
   min-width: av-size(sz-480);
   max-width: av-size(sz-640);
   height: 64px;
-  // remove when elevation fix
   background-color: av-color(surface);
   align-items: center;
   border-left: solid 4px av-color(primary);
@@ -23,6 +22,7 @@
   position: fixed;
   left: av-space(grand);
   bottom: av-space(grand);
+  overflow: hidden;
 }
 
 .messageContainer {
