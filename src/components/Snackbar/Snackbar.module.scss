@@ -1,0 +1,46 @@
+@import "~@anyvision/style-guide";
+
+.snackbar {
+  display: flex;
+  @include av-elevation(temporary);
+  min-width: av-size(sz-480);
+  max-width: av-size(sz-640);
+  height: 64px;
+  background-color: av-color(surface);
+  align-items: center;
+  border-left: solid 4px av-color(primary);
+  border-radius: 0 av-radius() av-radius() 0 ;
+  padding: 0 16px;
+  justify-content: space-between;
+}
+
+.snackbar:not(:first-child) {
+  margin-top: av-space(tiny);
+}
+
+.portal {
+  position: fixed;
+  left: av-space(grand);
+  bottom: av-space(grand);
+  overflow: hidden;
+}
+
+.messageContainer {
+  display: flex;
+  align-items: center;
+  color: av-color(content);
+  fill: av-color(content);
+
+  .leadingIcon {
+    margin-right: av-space(tiny);
+  }
+}
+
+.actionsContainer {
+  display: flex;
+
+  .closeIcon {
+    color: av-color(content);
+    margin-left: av-space(tiny);
+  }
+}

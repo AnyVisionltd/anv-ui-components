@@ -1,0 +1,138 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Snackbar /> Render Snapshots should NOT render closeIcon 1`] = `
+<div>
+  <portal-for-test>
+    <div
+      class="snackbar"
+    >
+      <div
+        class="messageContainer"
+      >
+        <span>
+          test message
+        </span>
+      </div>
+      <div
+        class="actionsContainer"
+      />
+    </div>
+  </portal-for-test>
+</div>
+`;
+
+exports[`<Snackbar /> Render Snapshots should NOT render snackbar when isOpen false 1`] = `<div />`;
+
+exports[`<Snackbar /> Render Snapshots should render action 1`] = `
+<div>
+  <portal-for-test>
+    <div
+      class="snackbar"
+    >
+      <div
+        class="messageContainer"
+      >
+        <span>
+          test message
+        </span>
+      </div>
+      <div
+        class="actionsContainer"
+      >
+        action
+        <button
+          class="button large ghost iconButton small ghost closeIcon"
+        >
+          <svg />
+        </button>
+      </div>
+    </div>
+  </portal-for-test>
+</div>
+`;
+
+exports[`<Snackbar /> Render Snapshots should render custom closeIcon 1`] = `
+<div>
+  <portal-for-test>
+    <div
+      class="snackbar"
+    >
+      <div
+        class="messageContainer"
+      >
+        <span>
+          test message
+        </span>
+      </div>
+      <div
+        class="actionsContainer"
+      >
+        <button
+          class="button large ghost iconButton small ghost closeIcon"
+        >
+          <svg />
+        </button>
+      </div>
+    </div>
+  </portal-for-test>
+</div>
+`;
+
+exports[`<Snackbar /> Render Snapshots should render leadingIcon 1`] = `
+<div>
+  <portal-for-test>
+    <div
+      class="snackbar"
+    >
+      <div
+        class="messageContainer"
+      >
+        <span
+          class="leadingIcon"
+        >
+          <svg />
+        </span>
+        <span>
+          test message
+        </span>
+      </div>
+      <div
+        class="actionsContainer"
+      >
+        <button
+          class="button large ghost iconButton small ghost closeIcon"
+        >
+          <svg />
+        </button>
+      </div>
+    </div>
+  </portal-for-test>
+</div>
+`;
+
+exports[`<Snackbar /> Render Snapshots should render snackbar when isOpen true 1`] = `
+<div>
+  <portal-for-test>
+    <div
+      class="snackbar"
+    >
+      <div
+        class="messageContainer"
+      >
+        <span>
+          test message
+        </span>
+      </div>
+      <div
+        class="actionsContainer"
+      >
+        <button
+          class="button large ghost iconButton small ghost closeIcon"
+        >
+          <svg />
+        </button>
+      </div>
+    </div>
+  </portal-for-test>
+</div>
+`;

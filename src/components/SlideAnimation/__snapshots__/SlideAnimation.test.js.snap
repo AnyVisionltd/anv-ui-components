@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SlideAnimation/> should NOT render when isOpen false 1`] = `<div />`;
+
+exports[`<SlideAnimation/> should render when isOpen true 1`] = `
+<div>
+  <div>
+    test
+  </div>
+</div>
+`;
