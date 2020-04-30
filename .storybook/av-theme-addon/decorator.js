@@ -7,12 +7,12 @@ const avTheme = storyFn => {
   const channel = addons.getChannel();
   const [isDarkTheme, setIsDarkTheme] = useState(false)
 
-  const handleThemeChange = useCallback(() => setIsDarkTheme(!isDarkTheme), [isDarkTheme])
+  const handleThemeChange = useCallback(isDarkTheme => setIsDarkTheme(isDarkTheme), [isDarkTheme])
 
   useEffect(() => {
     channel.on('changeTheme', handleThemeChange)
 
-    return () => channel.off('changeTheme', handleThemeChange)
+    return () => channel.off('changeTheme', isDarkTheme => handleThemeChange(isDarkTheme))
   }, [handleThemeChange])
 
 
