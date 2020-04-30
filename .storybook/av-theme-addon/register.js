@@ -23,11 +23,12 @@ const ADDON_ID = 'avThemeAddon';
 const AvThemeAddon = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(false)
   const emit = useChannel({})
+  emit('changeTheme', isDarkTheme)
   return (
     <>
       <IconButton title={ `Toggle to ${ isDarkTheme ? 'light' : 'dark' } theme` } onClick={ () => {
         setIsDarkTheme(!isDarkTheme)
-        emit('changeTheme')
+        emit('changeTheme', isDarkTheme)
       }}>
         {isDarkTheme ? lightThemeIcon : darkThemeIcon }
       </IconButton>
