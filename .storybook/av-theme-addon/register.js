@@ -3,7 +3,6 @@ import { useChannel } from '@storybook/api'
 import { IconButton, Separator } from '@storybook/components'
 import { addons, types } from '@storybook/addons'
 import { Global } from '@storybook/theming'
-import './index.scss'
 
 const darkThemeIcon = (
   <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true">
