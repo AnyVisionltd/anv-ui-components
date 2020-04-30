@@ -1,4 +1,4 @@
-import { useContainerDimensions } from '../ContainerDimensions'
+import { useContainerDimensions } from '../../hooks/ContainerDimensions'
 
 const useElementAbsolutePositioning = (snapToSide, anchorElement, floatingElement) => {
   const {
@@ -10,18 +10,6 @@ const useElementAbsolutePositioning = (snapToSide, anchorElement, floatingElemen
     return {}
   }
 
-  const cumulativeOffset = (element) => {
-    let top = 0
-    let left = 0
-    do {
-      top += element.offsetTop || 0
-      left += element.offsetLeft || 0
-      // eslint-disable-next-line no-param-reassign
-      element = element.offsetParent
-    } while (element)
-    return { top, left }
-  }
-
   const { offsetWidth: floatingElementWidth, offsetHeight: floatingElementHeight } = floatingElement
   const [htmlTag] = document.getElementsByTagName('html')
   const htmlDirection = htmlTag.getAttribute('dir')
@@ -30,51 +18,71 @@ const useElementAbsolutePositioning = (snapToSide, anchorElement, floatingElemen
     offsetHeight: anchorHeight,
     offsetWidth: anchorWidth,
   } = anchorElement
-  const { top: offsetTop, left: offsetLeft } = cumulativeOffset(anchorElement)
+  const { offsetTop: anchorTop, offsetLeft } = anchorElement
+  const offsetTop = snapToSide ? 0 : anchorTop
   const styles = {}
+  const classNames = {
+    vertical: '',
+    horizontal: '',
+  }
 
   const displayElementFromAnchorElementTopUpwards = () => {
     styles.top = offsetTop - floatingElementHeight
+    classNames.vertical = 'fromAnchorElementTopUpwards'
   }
   const displayElementFromAnchorElementBottomUpwards = () => {
     styles.top = offsetTop + anchorHeight - floatingElementHeight
+    classNames.vertical = 'fromAnchorElementBottomUpwards'
   }
   const displayElementFromAnchorElementTopDownwards = () => {
     styles.top = offsetTop
+    classNames.vertical = 'fromAnchorElementTopDownwards'
   }
   const displayElementFromAnchorElementBottomDownwards = () => {
     styles.top = offsetTop + anchorHeight
+    classNames.vertical = 'fromAnchorElementBottomDownwards'
   }
 
   const displayElementFromAnchorElementStartToAnchorElementEnd = () => {
     styles.left = isWindowRtl
       ? offsetLeft + anchorWidth - floatingElementWidth
       : offsetLeft
+    classNames.horizontal = 'fromAnchorElementStartToAnchorElementEnd'
   }
   const displayElementFromAnchorElementStart = () => {
     styles.left = isWindowRtl
       ? offsetLeft + anchorWidth
       : offsetLeft - floatingElementWidth
+    classNames.horizontal = 'fromAnchorElementStart'
   }
   const displayElementFromAnchorElementEndToAnchorElementStart = () => {
     styles.left = isWindowRtl
       ? offsetLeft
       : offsetLeft + anchorWidth - floatingElementWidth
+    classNames.horizontal = 'fromAnchorElementEndToAnchorElementStart'
   }
   const displayElementFromAnchorElementEnd = () => {
     styles.left = isWindowRtl
       ? offsetLeft - floatingElementWidth
       : offsetLeft + anchorWidth
+    classNames.horizontal = 'fromAnchorElementEnd'
   }
 
   const isFloatingElementOutOfVerticalBounds = () => {
-    const topPoint = styles.top
-    const bottomPoint = styles.top + floatingElementHeight
+    let topPoint = styles.top
+    if (snapToSide) {
+      const { top: anchorTopOffsetInRelationToViewport } = anchorElement.getBoundingClientRect()
+      topPoint += anchorTopOffsetInRelationToViewport
+    }
+    const bottomPoint = topPoint + floatingElementHeight
     return topPoint < 0 || bottomPoint > containerHeight
   }
   const isFloatingElementOutOfHorizontalBounds = () => {
-    const leftPoint = styles.left
-    const rightPoint = styles.left + floatingElementWidth
+    let leftPoint = styles.left
+    if (snapToSide) {
+      leftPoint += anchorElement.getBoundingClientRect().left
+    }
+    const rightPoint = leftPoint + floatingElementWidth
     return leftPoint < 0 || rightPoint > containerWidth
   }
 
@@ -100,7 +108,10 @@ const useElementAbsolutePositioning = (snapToSide, anchorElement, floatingElemen
     }
   }
 
-  return styles
+  return {
+    styles,
+    classNames,
+  }
 }
 
 export default useElementAbsolutePositioning

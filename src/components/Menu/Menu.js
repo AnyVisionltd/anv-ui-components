@@ -2,34 +2,35 @@ import React, { useRef } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import styles from './Menu.module.scss'
-import useClickOutsideListener from '../../hooks/ClickOutsideListener/ClickOutsideListener'
+import { useClickOutsideListener } from '../../hooks/ClickOutsideListener'
+import useElementAbsolutePositioning from './ElementAbsolutePositioning'
 import { Portal } from '../Portal'
-import { useElementAbsolutePositioning } from '../../hooks/ElementAbsolutePositioning'
 
 const Menu = ({
   opened, variant, onClickOutside, children, className,
-  controllingElementRef, snapToSide,
+  controllingElementRef, snapToSide, usePortal,
 }) => {
   const menuWrapperRef = useRef()
   useClickOutsideListener((event) => {
     const { target } = event
-    if (target === controllingElementRef) {
+    if (!opened || target === controllingElementRef) {
       return
     }
-    onClickOutside()
+    onClickOutside(event)
   }, menuWrapperRef)
+  const { styles: positionStyles, classNames: positionClassNames } = useElementAbsolutePositioning(
+    snapToSide,
+    controllingElementRef,
+    menuWrapperRef && menuWrapperRef.current,
+  )
   const classes = classNames(
     styles.menu,
     styles[variant],
     !opened && styles.closed,
     opened && styles.opened,
+    positionClassNames && styles[positionClassNames.vertical],
+    positionClassNames && styles[positionClassNames.horizontal],
     className,
-  )
-
-  const menuPositionStyles = useElementAbsolutePositioning(
-    snapToSide,
-    controllingElementRef,
-    menuWrapperRef && menuWrapperRef.current,
   )
 
   const getMenuStyles = () => {
@@ -39,7 +40,7 @@ const Menu = ({
 
     return {
       position: 'absolute',
-      ...menuPositionStyles,
+      ...positionStyles,
     }
   }
 
@@ -54,7 +55,7 @@ const Menu = ({
     </ul>
   )
 
-  return controllingElementRef
+  return controllingElementRef && usePortal
     ? (
       <Portal containerId="menu-portal" className={ styles.menuPortal }>
         { renderMenu() }
@@ -66,7 +67,9 @@ const Menu = ({
 Menu.defaultProps = {
   opened: false,
   variant: 'regular',
-  onClickOutside: () => {},
+  onClickOutside: () => {
+  },
+  usePortal: true,
 }
 
 Menu.propTypes = {
@@ -82,6 +85,7 @@ Menu.propTypes = {
     offsetHeight: propTypes.number,
     offsetWidth: propTypes.number,
   }),
+  usePortal: propTypes.bool,
 }
 
 export default Menu

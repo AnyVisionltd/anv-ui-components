@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import Menu from '.'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import { Button } from '../Button'
 import styles from '../../styles/storybook/index.module.scss'
+import Menu from '.'
 
 export default {
   title: 'Components/Menu',
@@ -13,38 +13,46 @@ export default {
 export const Default = () => {
   const [anchorEl, setAnchorEl] = useState(null)
 
-  const handleClose = () => {
+  const handleMenuClose = () => {
     setAnchorEl(null)
   }
 
-  const handleClick = (event) => (anchorEl
-    ? handleClose(event)
+  const handleButtonClick = (event) => (anchorEl
+    ? handleMenuClose(event)
     : setAnchorEl(event.currentTarget))
 
   return (
     <div className={ styles.menuExampleContainer }>
+
       <Button
         aria-controls="menu-story"
         aria-haspopup="true"
-        onClick={ handleClick }
+        onClick={ handleButtonClick }
       >
         Open Menu
       </Button>
+
       <Menu
         ariaLabelledby="menu-story"
         controllingElementRef={ anchorEl }
         opened={ !!anchorEl }
-        onClickOutside={ handleClose }
+        onClickOutside={ handleMenuClose }
       >
         <Menu.Item>List Item #1</Menu.Item>
         <Menu.Item>List Item #2</Menu.Item>
-        <Menu.SubMenu label="Sub Menu">
-          <Menu.Item>Sub Menu Item #1</Menu.Item>
-          <Menu.Item>Sub Menu Item #2</Menu.Item>
-          <Menu.Item>Sub Menu Item #3</Menu.Item>
+        <Menu.SubMenu label="Sub menu #1">
+          <Menu.Item>Item #1</Menu.Item>
+          <Menu.Item>Item #2</Menu.Item>
+          <Menu.SubMenu label="Sub menu #2">
+            <Menu.Item>Item #1</Menu.Item>
+            <Menu.Item>Item #2</Menu.Item>
+            <Menu.Item>Item #3</Menu.Item>
+            <Menu.Item>Item #4</Menu.Item>
+          </Menu.SubMenu>
         </Menu.SubMenu>
         <Menu.Item>List Item #4</Menu.Item>
       </Menu>
+
     </div>
   )
 }
@@ -107,6 +115,7 @@ export const AutomaticOpeningPosition = () => {
         <Menu.Item>List Item #4</Menu.Item>
         <Menu.Item>List Item #4</Menu.Item>
       </Menu>
+
     </div>
   )
 }

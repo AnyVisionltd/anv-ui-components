@@ -1,1 +1,1 @@
-export { default as ClickOutsideListener } from './ClickOutsideListener'
+export { default as useClickOutsideListener } from './ClickOutsideListener'
