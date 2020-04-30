@@ -7,13 +7,14 @@ import propTypes from 'prop-types'
  * if not -> create on body and return it
  * @return {HTMLElement} (element)
  */
-const getPortalElement = elementId => {
+const getPortalElement = (elementId) => {
   let portalElement = document.getElementById(elementId)
   if (!portalElement) {
     portalElement = document.createElement('div')
     portalElement.id = elementId
     document.body.appendChild(portalElement)
   }
+
   return portalElement
 }
 

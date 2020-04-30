@@ -12,6 +12,10 @@
   }
 }
 
+.flexColumn {
+  flex-direction: column;
+}
+
 .checkboxLabel {
   display: flex;
   align-items: center;
