@@ -40,16 +40,13 @@ const Snackbar = ({
     }
   }, [isOpen, hideTimeout, setHideTimeout, onOpen])
 
-  const renderLeadingIcon = () => {
-    if (!leadingIcon) {
-      return null
-    }
-    return (
+  const renderLeadingIcon = () => (
+    leadingIcon && (
       <span className={ styles.leadingIcon }>
         { leadingIcon }
       </span>
     )
-  }
+  )
 
   const renderCloseIcon = () => {
     if (!closeIcon) {
