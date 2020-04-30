@@ -15,7 +15,7 @@
     } @else {
       transform: translateX(0%);
     }
-    transition: transform 300ms, opacity 300ms;
+    transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
   }
 
   &-exit-active {
@@ -24,7 +24,7 @@
     } @else {
       transform: translateX($from);
     }
-    transition: transform 300ms, opacity 300ms;
+    transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
   }
 }
 

@@ -3,6 +3,7 @@ import addons  from '@storybook/addons';
 import './index.scss'
 
 const avTheme = storyFn => {
+  document.body.classList.add('light')
   const channel = addons.getChannel();
   const [isDarkTheme, setIsDarkTheme] = useState(false)
 
