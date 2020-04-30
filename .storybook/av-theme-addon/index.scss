@@ -1,0 +1,13 @@
+@import "~@anyvision/style-guide";
+
+.light {
+    --surface: #fcfcff;
+    --content: #02244d;
+    color: av-color(content);
+}
+
+.dark {
+    --surface: #02244d;
+    --content: #fcfcff;
+    color: av-color(content);
+}
