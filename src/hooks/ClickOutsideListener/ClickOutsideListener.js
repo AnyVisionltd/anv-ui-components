@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 const useClickOutsideListener = (onClickOutside, ref) => {
   useEffect(() => {
-    const onClickOutsideHandler = event => {
+    const onClickOutsideHandler = (event) => {
       if (ref && ref.current && onClickOutside && !ref.current.contains(event.target)) {
         onClickOutside(event)
       }
@@ -10,7 +10,7 @@ const useClickOutsideListener = (onClickOutside, ref) => {
 
     document.addEventListener('mouseup', onClickOutsideHandler)
     return () => document.removeEventListener('mouseup', onClickOutsideHandler)
-  }, [])
+  }, [onClickOutside, ref])
 }
 
 export default useClickOutsideListener

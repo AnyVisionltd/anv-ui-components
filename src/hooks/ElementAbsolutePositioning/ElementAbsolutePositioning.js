@@ -1,10 +1,25 @@
-import {useWindowDimensions} from "../WindowDimensions"
+import { useContainerDimensions } from '../ContainerDimensions'
 
-const useElementAbsolutePositioning = (position, anchorElement, floatingElement) => {
-  const { width: windowWidth, height: windowHeight } = useWindowDimensions()
+const useElementAbsolutePositioning = (snapToSide, anchorElement, floatingElement) => {
+  const {
+    width: containerWidth,
+    height: containerHeight,
+  } = useContainerDimensions()
 
   if (!anchorElement || !floatingElement) {
     return {}
+  }
+
+  const cumulativeOffset = (element) => {
+    let top = 0
+    let left = 0
+    do {
+      top += element.offsetTop || 0
+      left += element.offsetLeft || 0
+      // eslint-disable-next-line no-param-reassign
+      element = element.offsetParent
+    } while (element)
+    return { top, left }
   }
 
   const { offsetWidth: floatingElementWidth, offsetHeight: floatingElementHeight } = floatingElement
@@ -14,54 +29,75 @@ const useElementAbsolutePositioning = (position, anchorElement, floatingElement)
   const {
     offsetHeight: anchorHeight,
     offsetWidth: anchorWidth,
-    offsetTop,
-    offsetLeft
   } = anchorElement
-  const offsetRight = windowWidth - anchorWidth - offsetLeft
-
-  // If the floating element is larger than it's window, no point of positioning it
-  if (floatingElement.width > windowWidth || floatingElementHeight > windowHeight) {
-    return {}
-  }
-
-  if (position === 'auto') {
-    // TODO automatic positioning
-    return {}
-  }
-
+  const { top: offsetTop, left: offsetLeft } = cumulativeOffset(anchorElement)
   const styles = {}
-  const [verticalPosition, horizontalPosition] = position.split('-')
 
-  if (verticalPosition === 'bottom') {
-    styles.top = offsetTop + anchorHeight
-  } else {
+  const displayElementFromAnchorElementTopUpwards = () => {
     styles.top = offsetTop - floatingElementHeight
   }
-
-  if (horizontalPosition) {
-    if (horizontalPosition === 'start') {
-      if (isWindowRtl) {
-        styles.right = offsetRight
-      } else {
-        styles.left = offsetLeft
-      }
-    } else {
-      if (isWindowRtl) {
-        styles.left = offsetLeft
-      } else {
-        styles.right = offsetRight
-      }
-    }
-  } else {
-    const delta = floatingElementWidth - anchorWidth
-    styles.left = offsetLeft - delta / 2
+  const displayElementFromAnchorElementBottomUpwards = () => {
+    styles.top = offsetTop + anchorHeight - floatingElementHeight
+  }
+  const displayElementFromAnchorElementTopDownwards = () => {
+    styles.top = offsetTop
+  }
+  const displayElementFromAnchorElementBottomDownwards = () => {
+    styles.top = offsetTop + anchorHeight
   }
 
-  // Normalize vertical values
-  if (styles.top < 0) {
-    styles.top = 0
-  } else if (styles.top + floatingElementHeight > windowHeight) {
-    styles.top = windowHeight - floatingElementHeight
+  const displayElementFromAnchorElementStartToAnchorElementEnd = () => {
+    styles.left = isWindowRtl
+      ? offsetLeft + anchorWidth - floatingElementWidth
+      : offsetLeft
+  }
+  const displayElementFromAnchorElementStart = () => {
+    styles.left = isWindowRtl
+      ? offsetLeft + anchorWidth
+      : offsetLeft - floatingElementWidth
+  }
+  const displayElementFromAnchorElementEndToAnchorElementStart = () => {
+    styles.left = isWindowRtl
+      ? offsetLeft
+      : offsetLeft + anchorWidth - floatingElementWidth
+  }
+  const displayElementFromAnchorElementEnd = () => {
+    styles.left = isWindowRtl
+      ? offsetLeft - floatingElementWidth
+      : offsetLeft + anchorWidth
+  }
+
+  const isFloatingElementOutOfVerticalBounds = () => {
+    const topPoint = styles.top
+    const bottomPoint = styles.top + floatingElementHeight
+    return topPoint < 0 || bottomPoint > containerHeight
+  }
+  const isFloatingElementOutOfHorizontalBounds = () => {
+    const leftPoint = styles.left
+    const rightPoint = styles.left + floatingElementWidth
+    return leftPoint < 0 || rightPoint > containerWidth
+  }
+
+  if (snapToSide) {
+    displayElementFromAnchorElementTopDownwards()
+    displayElementFromAnchorElementEnd()
+
+    if (isFloatingElementOutOfVerticalBounds()) {
+      displayElementFromAnchorElementBottomUpwards()
+    }
+    if (isFloatingElementOutOfHorizontalBounds()) {
+      displayElementFromAnchorElementStart()
+    }
+  } else {
+    displayElementFromAnchorElementBottomDownwards()
+    displayElementFromAnchorElementStartToAnchorElementEnd()
+
+    if (isFloatingElementOutOfVerticalBounds()) {
+      displayElementFromAnchorElementTopUpwards()
+    }
+    if (isFloatingElementOutOfHorizontalBounds()) {
+      displayElementFromAnchorElementEndToAnchorElementStart()
+    }
   }
 
   return styles

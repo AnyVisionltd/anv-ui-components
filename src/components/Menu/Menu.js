@@ -1,34 +1,21 @@
-import React, {useRef} from 'react'
+import React, { useRef } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import styles from './Menu.module.scss'
-import MenuItem from "./MenuItem"
-import useClickOutsideListener from "../../hooks/ClickOutsideListener/ClickOutsideListener"
-import {Portal} from "../Portal"
-import {useWindowDimensions} from "../../hooks/WindowDimensions"
-import {useElementAbsolutePositioning} from "../../hooks/ElementAbsolutePositioning"
+import useClickOutsideListener from '../../hooks/ClickOutsideListener/ClickOutsideListener'
+import { Portal } from '../Portal'
+import { useElementAbsolutePositioning } from '../../hooks/ElementAbsolutePositioning'
 
-
-/*
-    TODO: Support positioning: bottomStart, bottomEnd, bottomCenter
-                               topStart, topEnd, topCenter
-                               auto
- */
-const Menu = ({ opened, variant, onClickOutside, children, onClose, className, controllingElementRef, position }) => {
-  console.log(controllingElementRef)
+const Menu = ({
+  opened, variant, onClickOutside, children, className,
+  controllingElementRef, snapToSide,
+}) => {
   const menuWrapperRef = useRef()
-  console.log(opened)
-  useClickOutsideListener(event => {
+  useClickOutsideListener((event) => {
     const { target } = event
     if (target === controllingElementRef) {
       return
     }
-
-    if (!onClickOutside && onClose) {
-      onClose(event)
-      return
-    }
-
     onClickOutside()
   }, menuWrapperRef)
   const classes = classNames(
@@ -40,9 +27,9 @@ const Menu = ({ opened, variant, onClickOutside, children, onClose, className, c
   )
 
   const menuPositionStyles = useElementAbsolutePositioning(
-    position,
+    snapToSide,
     controllingElementRef,
-    menuWrapperRef && menuWrapperRef.current
+    menuWrapperRef && menuWrapperRef.current,
   )
 
   const getMenuStyles = () => {
@@ -52,7 +39,7 @@ const Menu = ({ opened, variant, onClickOutside, children, onClose, className, c
 
     return {
       position: 'absolute',
-      ...menuPositionStyles
+      ...menuPositionStyles,
     }
   }
 
@@ -61,14 +48,15 @@ const Menu = ({ opened, variant, onClickOutside, children, onClose, className, c
       role="menu"
       className={ classes }
       ref={ menuWrapperRef }
-      style={ getMenuStyles() }>
+      style={ getMenuStyles() }
+    >
       { children }
     </ul>
   )
 
   return controllingElementRef
     ? (
-      <Portal containerId="menu-portal">
+      <Portal containerId="menu-portal" className={ styles.menuPortal }>
         { renderMenu() }
       </Portal>
     )
@@ -78,25 +66,22 @@ const Menu = ({ opened, variant, onClickOutside, children, onClose, className, c
 Menu.defaultProps = {
   opened: false,
   variant: 'regular',
-  position: 'auto',
-  onOpen: () => {},
-  onClose: () => {},
-  onOutsideClick: () => {},
+  onClickOutside: () => {},
 }
 
 Menu.propTypes = {
   opened: propTypes.bool,
   variant: propTypes.oneOf(['regular', 'dense']),
-  position: propTypes.oneOf([
-    'auto',
-    'bottom', 'bottom-start', 'bottom-end',
-    'top', 'top-start', 'top-end'
-  ]),
-  onOpen: propTypes.func,
-  onClose: propTypes.func,
+  snapToSide: propTypes.bool,
   onClickOutside: propTypes.func,
-  className: propTypes.string
+  className: propTypes.string,
+  children: propTypes.node.isRequired,
+  controllingElementRef: propTypes.shape({
+    offsetLeft: propTypes.number,
+    offsetRight: propTypes.number,
+    offsetHeight: propTypes.number,
+    offsetWidth: propTypes.number,
+  }),
 }
 
-Menu.Item = MenuItem
 export default Menu

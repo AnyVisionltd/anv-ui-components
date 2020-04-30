@@ -2,12 +2,8 @@
 @import "../../styles/mixin/ripple";
 
 .menu {
-  // TODO: Re-introduce
-  //background-color: av-color(surface);
-  //color: av-color(content);
-
-  // TODO: Remove when font fixed
-  font-family: "Poppins";
+  background-color: av-color(content);
+  color: av-color(surface);
 
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1); // TODO: Change with elevation mixin
   border-radius: av-radius();
@@ -16,6 +12,36 @@
   z-index: -1; // So that the menu will not appear (transparently) on top of other elements
   visibility: hidden;
   opacity: 0;
+  max-height: av-size(sz-240);
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 20px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: av-color(surface, av-opacity(divider));
+    border: 8px solid transparent;
+    border-radius: 90px;
+    background-clip: padding-box;
+
+    &:hover {
+      background-color: av-color(surface, av-opacity(disabled));
+    }
+
+    &:active {
+      background-color: av-color(primary);
+    }
+  }
+
+  &.subMenu {
+    margin-top: calc(#{av-space(tiny)} * -1)
+  }
+
+  &.closed {
+    height: 0;
+    padding: 0;
+  }
 
   &.opened {
     z-index: initial;
@@ -30,6 +56,14 @@
     align-items: center;
     padding: 0 av-space();
     cursor: pointer;
+
+    .menuItemLabel {
+      flex: 1;
+
+      .subMenuArrowIconContainer {
+        fill: av-color(surface);
+      }
+    }
   }
 
   &.regular {
@@ -50,9 +84,9 @@
 }
 
 .menuPortal {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  //height: 100%;
 }
