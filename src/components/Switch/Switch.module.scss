@@ -12,7 +12,7 @@
     overflow: hidden;
 
     .switchInner {
-      background-color: av-color(secondary);
+      background-color: av-color(surface);
       height: av-size(sz-8);
       width: av-size(sz-24);
       border-radius: av-radius();
@@ -30,22 +30,23 @@
       transition: all 3s; //just to show that it is not jumping
     }
   }
-  &.disabled {
-    opacity: av-opacity(disabled);
-
-    .switchLabel {
-      cursor: not-allowed;
-    }
-  }
 
   &.on {
     .switchInner {
-      background-color: av-color(surface);
+      background-color: av-color(primary);
     }
 
     .switchToggle {
       left: calc(100% - #{av-size(sz-16)});
       background-color: av-color(primary);
+    }
+  }
+
+  &.disabled {
+    opacity: av-opacity(disabled);
+
+    .switchLabel {
+      cursor: not-allowed;
     }
   }
 }

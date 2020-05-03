@@ -11,13 +11,13 @@ export default {
 }
 
 export const Default = () => {
-  const [isEnabled, setIsEnabled] = useState(false)
+  const [isEnabled, setIsEnabled] = useState(true)
 
   const onChange = ({ target }) => {
     setIsEnabled(target.checked)
   }
   return (
-    <>
+    <div className={ styles.marginFlexContainer }>
       <Switch
         status={ isEnabled }
         onChange={ onChange }
@@ -26,7 +26,7 @@ export const Default = () => {
       <label htmlFor="switch-example">
         Check me out!
       </label>
-    </>
+    </div>
   )
 }
 
