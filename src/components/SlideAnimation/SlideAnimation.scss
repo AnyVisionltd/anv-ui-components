@@ -2,6 +2,7 @@
 
 @mixin slide($from, $axis) {
   &-enter {
+    opacity: 0;
     @if $axis == Y {
       transform: translateY($from);
     } @else {
@@ -10,21 +11,23 @@
   }
 
   &-enter-active {
+    opacity: 1;
     @if $axis == Y {
       transform: translateY(0%);
     } @else {
       transform: translateX(0%);
     }
-    transition: transform 200ms, opacity 200ms;
+    transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
   }
 
   &-exit-active {
+    opacity: 0;
     @if $axis == Y {
       transform: translateY($from);
     } @else {
       transform: translateX($from);
     }
-    transition: transform 200ms, opacity 200ms;
+    transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
   }
 }
 

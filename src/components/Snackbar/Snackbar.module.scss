@@ -6,7 +6,7 @@
   min-width: av-size(sz-480);
   max-width: av-size(sz-640);
   height: 64px;
-  background-color: av-color(surface);
+  background-color: av-color(secondary);
   align-items: center;
   border-left: solid 4px av-color(primary);
   border-radius: 0 av-radius() av-radius() 0 ;
@@ -28,8 +28,8 @@
 .messageContainer {
   display: flex;
   align-items: center;
-  color: av-color(content);
-  fill: av-color(content);
+  color: av-color(purewhite);
+  fill: av-color(purewhite);
 
   .leadingIcon {
     margin-right: av-space(tiny);
@@ -40,7 +40,7 @@
   display: flex;
 
   .closeIcon {
-    color: av-color(content);
+    color: av-color(purewhite);
     margin-left: av-space(tiny);
   }
 }
