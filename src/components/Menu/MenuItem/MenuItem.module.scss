@@ -14,13 +14,21 @@
 
   &:not(.subMenuItem):not(.menuItemDisabled) {
     @include av-ripple();
-
-    &:focus {
-      background-color: av-color(primary, av-opacity(divider));
-    }
   }
 
   &.subMenuItem:not(.menuItemDisabled):hover {
-    background-color: av-color(primary, av-opacity(divider));
+    &:before {
+      // to fake ripple, without click effect
+      background-color: currentColor;
+      opacity: var(--divider, 0.12);
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
   }
 }
