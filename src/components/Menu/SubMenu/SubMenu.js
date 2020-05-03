@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import styles from './Menu.module.scss'
-import { ReactComponent as ArrowIcon } from '../../assets/svg/ArrowSolidRight.svg'
-import Menu from './Menu'
+import { ReactComponent as ArrowIcon } from '../../../assets/svg/ArrowSolidRight.svg'
+import Menu from '../Menu'
+import { MenuItem } from '../MenuItem'
+import styles from './SubMenu.module.scss'
 
 const SubMenu = ({
   label, disabled, className, children, subMenuClassName, ...otherProps
 }) => {
   const classes = classNames(
-    styles.menuItem,
-    disabled && styles.menuItemDisabled,
     styles.subMenuItem,
     className,
   )
@@ -42,28 +41,24 @@ const SubMenu = ({
   // Which actually harms the behaviour
   /* eslint-disable jsx-a11y/mouse-events-have-key-events */
   return (
-    <li
-      role={ !disabled ? 'menuitem' : undefined }
-      tabIndex={ !disabled ? '0' : undefined }
+    <MenuItem
       className={ classes }
       onMouseOver={ handleMouseOver }
       onMouseOut={ handleMouseOut }
       onFocus={ handleOnFocus }
       { ...otherProps }
     >
-      <span className={ styles.menuItemLabel }>{ label }</span>
-      <span className={ styles.subMenuArrowIconContainer }>
-        <ArrowIcon />
-      </span>
+      <span className={ styles.parentItemLabel }>{ label }</span>
+      <ArrowIcon />
       <Menu
         className={ subMenuClasses }
-        opened={ isOpened }
+        isOpen={ isOpened }
         controllingElementRef={ currentElement }
         snapToSide
       >
         { children }
       </Menu>
-    </li>
+    </MenuItem>
   )
   /* eslint-enable jsx-a11y/mouse-events-have-key-events */
 }

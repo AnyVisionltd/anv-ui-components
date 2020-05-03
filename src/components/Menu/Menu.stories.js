@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import { Button } from '../Button'
-import styles from '../../styles/storybook/index.module.scss'
 import Menu from '.'
-import Checkbox from "../Checkbox/Checkbox"
+import styles from '../../styles/storybook/index.module.scss'
 
 export default {
   title: 'Components/Menu',
@@ -11,31 +10,19 @@ export default {
   decorators: [centerDecorator],
 }
 
-export const Default = () => {
-  const [anchorEl, setAnchorEl] = useState(null)
-
-  const handleMenuClose = () => {
-    setAnchorEl(null)
-  }
-
-  const handleButtonClick = (event) => (anchorEl
-    ? handleMenuClose(event)
-    : setAnchorEl(event.currentTarget))
-
-  return (
-    <div className={ styles.menuExampleContainer }>
-      <Menu
-        ariaLabelledby="menu-story"
-        opened={ true }
-      >
-        <Menu.Item>List Item #1</Menu.Item>
-        <Menu.Item>List Item #2</Menu.Item>
-        <Menu.Item>List Item #3</Menu.Item>
-        <Menu.Item>List Item #4</Menu.Item>
-      </Menu>
-    </div>
-  )
-}
+export const Default = () => (
+  <div className={ styles.menuExampleContainer }>
+    <Menu
+      ariaLabelledby="menu-story"
+      isOpen
+    >
+      <Menu.Item>List Item #1</Menu.Item>
+      <Menu.Item>List Item #2</Menu.Item>
+      <Menu.Item>List Item #3</Menu.Item>
+      <Menu.Item>List Item #4</Menu.Item>
+    </Menu>
+  </div>
+)
 
 export const DifferentPositions = () => {
   const [anchorEl, setAnchorEl] = useState(null)
@@ -87,8 +74,8 @@ export const DifferentPositions = () => {
       <Menu
         ariaLabelledby="menu-story"
         controllingElementRef={ anchorEl }
-        opened={ !!anchorEl }
-        onClickOutside={ handleClose }
+        isOpen={ !!anchorEl }
+        onClose={ handleClose }
       >
         <Menu.Item>List Item #1</Menu.Item>
         <Menu.Item>List Item #2</Menu.Item>
@@ -125,8 +112,8 @@ export const WithSubMenus = () => {
       <Menu
         ariaLabelledby="menu-story"
         controllingElementRef={ anchorEl }
-        opened={ !!anchorEl }
-        onClickOutside={ handleMenuClose }
+        isOpen={ !!anchorEl }
+        onClose={ handleMenuClose }
       >
         <Menu.Item>List Item #1</Menu.Item>
         <Menu.Item>List Item #2</Menu.Item>
@@ -152,14 +139,14 @@ export const Variants = () => {
   const [anchorDense, setAnchorDense] = useState(null)
 
   const handleRegularMenuClose = () => setAnchorRegular(null)
-  const handleRegularButtonClick = (event) => anchorRegular
+  const handleRegularButtonClick = (event) => (anchorRegular
     ? handleRegularButtonClick(event)
-    : setAnchorRegular(event.currentTarget)
+    : setAnchorRegular(event.currentTarget))
 
   const handleDenseMenuClose = () => setAnchorDense(null)
-  const handleDenseButtonClick = (event) => anchorDense
+  const handleDenseButtonClick = (event) => (anchorDense
     ? handleDenseButtonClick(event)
-    : setAnchorDense(event.currentTarget)
+    : setAnchorDense(event.currentTarget))
 
   return (
     <div className={ styles.menuExampleContainer }>
@@ -176,8 +163,8 @@ export const Variants = () => {
       <Menu
         ariaLabelledby="menu-story-regular"
         controllingElementRef={ anchorRegular }
-        opened={ !!anchorRegular }
-        onClickOutside={ handleRegularMenuClose }
+        isOpen={ !!anchorRegular }
+        onClose={ handleRegularMenuClose }
       >
         <Menu.Item>Item #1</Menu.Item>
         <Menu.Item>Item #2</Menu.Item>
@@ -197,9 +184,9 @@ export const Variants = () => {
       <Menu
         ariaLabelledby="menu-story-dense"
         controllingElementRef={ anchorDense }
-        opened={ !!anchorDense }
-        onClickOutside={ handleDenseMenuClose }
-        variant='dense'
+        isOpen={ !!anchorDense }
+        onClose={ handleDenseMenuClose }
+        variant="dense"
       >
         <Menu.Item>Item #1</Menu.Item>
         <Menu.Item>Item #2</Menu.Item>

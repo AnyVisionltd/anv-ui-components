@@ -1,5 +1,5 @@
-import MenuItem from './MenuItem'
-import SubMenu from './SubMenu'
+import MenuItem from './MenuItem/MenuItem'
+import SubMenu from './SubMenu/SubMenu'
 import Menu from './Menu'
 
 Menu.Item = MenuItem

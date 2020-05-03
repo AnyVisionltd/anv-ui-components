@@ -11,19 +11,6 @@
   position: absolute;
   z-index: 1;
 
-  &.subMenu {
-    &.fromAnchorElementEnd,
-    &.fromAnchorElementStart {
-      &.fromAnchorElementBottomUpwards {
-        margin-top: av-space(tiny);
-      }
-
-      &.fromAnchorElementTopDownwards {
-        margin-top: calc(#{av-space(tiny)} * -1);
-      }
-    }
-  }
-
   &.closed {
     // To make sure that the element is in full size, but outside of view
     position: fixed;
@@ -41,43 +28,30 @@
     left: unset;
   }
 
-  .menuItem {
-    position: relative;
-    display: flex;
-    align-items: center;
-    padding: 0 av-space();
-    cursor: pointer;
-
-    .menuItemLabel {
-      flex: 1;
-    }
-
-    &:not(.subMenuItem):not(.menuItemDisabled) {
-      @include av-ripple(av-color(primary));
-
-      &:focus {
-        background-color: av-color(primary, av-opacity(divider));
-      }
-    }
-
-    &.subMenuItem:not(.menuItemDisabled):hover {
-      background-color: av-color(primary, av-opacity(divider));
-    }
-  }
-
   &.regular {
     width: av-size(sz-240);
 
-    .menuItem {
-      height: av-size(sz-48);
+    li {
+      height: 48px;
     }
   }
 
   &.dense {
     width: av-size(sz-144);
 
-    .menuItem {
-      height: av-size(sz-32);
+    li {
+      height: 32px;
+    }
+  }
+
+  &.fromAnchorElementEnd,
+  &.fromAnchorElementStart {
+    &.fromAnchorElementBottomUpwards {
+      margin-top: av-space(tiny);
+    }
+
+    &.fromAnchorElementTopDownwards {
+      margin-top: calc(#{av-space(tiny)} * -1);
     }
   }
 }

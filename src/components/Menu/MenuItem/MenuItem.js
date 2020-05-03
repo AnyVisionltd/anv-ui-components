@@ -1,7 +1,7 @@
 import React from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import styles from './Menu.module.scss'
+import styles from './MenuItem.module.scss'
 
 const MenuItem = ({
   className, children, onClick, disabled, ...otherProps
@@ -37,7 +37,7 @@ const MenuItem = ({
       onKeyDown={ !disabled && handleOnKeyDown }
       { ...otherProps }
     >
-      <span className={ styles.menuItemLabel }>{ children }</span>
+      { children }
     </li>
   )
   /* eslint-enable jsx-a11y/no-noninteractive-element-interactions */
