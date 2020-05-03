@@ -13,7 +13,7 @@
   }
 
   &:not(.subMenuItem):not(.menuItemDisabled) {
-    @include av-ripple(av-color(primary));
+    @include av-ripple();
 
     &:focus {
       background-color: av-color(primary, av-opacity(divider));

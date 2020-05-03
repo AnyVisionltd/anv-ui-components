@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import { Button } from '../Button'
 import Menu from '.'
@@ -10,28 +10,53 @@ export default {
   decorators: [centerDecorator],
 }
 
-export const Default = () => (
-  <div className={ styles.menuExampleContainer }>
-    <Menu
-      ariaLabelledby="menu-story"
-      isOpen
-    >
-      <Menu.Item>List Item #1</Menu.Item>
-      <Menu.Item>List Item #2</Menu.Item>
-      <Menu.Item>List Item #3</Menu.Item>
-      <Menu.Item>List Item #4</Menu.Item>
-    </Menu>
-  </div>
-)
+export const Default = () => {
+  const ref = useRef()
+  const [isOpen, setIsOpen] = useState(false)
+
+  const handleMenuClose = () => setIsOpen(false)
+  const handleButtonClick = () => setIsOpen(true)
+
+  return (
+    <div className={ styles.menuExampleContainer }>
+
+      <Button
+        aria-controls="menu-story"
+        aria-haspopup="true"
+        onClick={ handleButtonClick }
+        ref={ ref }
+      >
+        Pizza Toppings
+      </Button>
+
+      <Menu
+        aria-labelledby="menu-story"
+        controllingElementRef={ ref.current }
+        isOpen={ isOpen }
+        onClose={ handleMenuClose }
+      >
+        <Menu.Item>Extra cheese</Menu.Item>
+        <Menu.Item>Tomatoes</Menu.Item>
+        <Menu.Item>Onions</Menu.Item>
+        <Menu.Item>NOT pineapple.</Menu.Item>
+      </Menu>
+
+    </div>
+  )
+}
 
 export const DifferentPositions = () => {
   const [anchorEl, setAnchorEl] = useState(null)
+  const [isOpen, setIsOpen] = useState(false)
 
-  const handleClose = () => setAnchorEl(null)
-
-  const handleClick = (event) => (anchorEl
-    ? handleClose(event)
-    : setAnchorEl(event.currentTarget))
+  const handleClose = () => setIsOpen(false)
+  const handleButtonClick = (event) => {
+    if (isOpen) {
+      return handleClose()
+    }
+    setAnchorEl(event.currentTarget)
+    return setIsOpen(true)
+  }
 
   return (
     <div className={ styles.menuExampleContainer }>
@@ -39,7 +64,7 @@ export const DifferentPositions = () => {
         style={ { position: 'absolute', top: 10, left: 10 } }
         aria-controls="menu-story"
         aria-haspopup="true"
-        onClick={ handleClick }
+        onClick={ handleButtonClick }
       >
         Top, Left
       </Button>
@@ -48,7 +73,7 @@ export const DifferentPositions = () => {
         style={ { position: 'absolute', top: 10, right: 10 } }
         aria-controls="menu-story"
         aria-haspopup="true"
-        onClick={ handleClick }
+        onClick={ handleButtonClick }
       >
         Top, Right
       </Button>
@@ -57,7 +82,7 @@ export const DifferentPositions = () => {
         style={ { position: 'absolute', bottom: 10, left: 10 } }
         aria-controls="menu-story"
         aria-haspopup="true"
-        onClick={ handleClick }
+        onClick={ handleButtonClick }
       >
         Bottom, Left
       </Button>
@@ -66,15 +91,15 @@ export const DifferentPositions = () => {
         style={ { position: 'absolute', bottom: 10, right: 10 } }
         aria-controls="menu-story"
         aria-haspopup="true"
-        onClick={ handleClick }
+        onClick={ handleButtonClick }
       >
         Bottom, Right
       </Button>
 
       <Menu
-        ariaLabelledby="menu-story"
+        aria-labelledby="menu-story"
         controllingElementRef={ anchorEl }
-        isOpen={ !!anchorEl }
+        isOpen={ isOpen }
         onClose={ handleClose }
       >
         <Menu.Item>List Item #1</Menu.Item>
@@ -88,15 +113,11 @@ export const DifferentPositions = () => {
 }
 
 export const WithSubMenus = () => {
-  const [anchorEl, setAnchorEl] = useState(null)
+  const ref = useRef()
+  const [isOpen, setIsOpen] = useState(false)
 
-  const handleMenuClose = () => {
-    setAnchorEl(null)
-  }
-
-  const handleButtonClick = (event) => (anchorEl
-    ? handleMenuClose(event)
-    : setAnchorEl(event.currentTarget))
+  const handleMenuClose = () => setIsOpen(false)
+  const handleButtonClick = () => setIsOpen(true)
 
   return (
     <div className={ styles.menuExampleContainer }>
@@ -105,14 +126,15 @@ export const WithSubMenus = () => {
         aria-controls="menu-story"
         aria-haspopup="true"
         onClick={ handleButtonClick }
+        ref={ ref }
       >
         Open Menu
       </Button>
 
       <Menu
-        ariaLabelledby="menu-story"
-        controllingElementRef={ anchorEl }
-        isOpen={ !!anchorEl }
+        aria-labelledby="menu-story"
+        controllingElementRef={ ref.current }
+        isOpen={ isOpen }
         onClose={ handleMenuClose }
       >
         <Menu.Item>List Item #1</Menu.Item>
@@ -135,36 +157,35 @@ export const WithSubMenus = () => {
 }
 
 export const Variants = () => {
-  const [anchorRegular, setAnchorRegular] = useState(null)
-  const [anchorDense, setAnchorDense] = useState(null)
+  const regularControllingElementRef = useRef()
+  const denseControllingElementRef = useRef()
 
-  const handleRegularMenuClose = () => setAnchorRegular(null)
-  const handleRegularButtonClick = (event) => (anchorRegular
-    ? handleRegularButtonClick(event)
-    : setAnchorRegular(event.currentTarget))
+  const [isRegularMenuOpened, setRegularMenuOpened] = useState(false)
+  const [isDenseMenuOpened, setDenseMenuOpened] = useState(false)
 
-  const handleDenseMenuClose = () => setAnchorDense(null)
-  const handleDenseButtonClick = (event) => (anchorDense
-    ? handleDenseButtonClick(event)
-    : setAnchorDense(event.currentTarget))
+  const openRegularMenu = () => setRegularMenuOpened(true)
+  const openDenseMenu = () => setDenseMenuOpened(true)
+
+  const closeRegularMenu = () => setRegularMenuOpened(false)
+  const closeDenseMenu = () => setDenseMenuOpened(false)
 
   return (
     <div className={ styles.menuExampleContainer }>
-
       <Button
         aria-controls="menu-story-regular"
         aria-haspopup="true"
-        onClick={ handleRegularButtonClick }
+        onClick={ openRegularMenu }
         className={ styles.microMargin }
+        ref={ regularControllingElementRef }
       >
         Regular
       </Button>
 
       <Menu
-        ariaLabelledby="menu-story-regular"
-        controllingElementRef={ anchorRegular }
-        isOpen={ !!anchorRegular }
-        onClose={ handleRegularMenuClose }
+        aria-labelledby="menu-story-regular"
+        controllingElementRef={ regularControllingElementRef.current }
+        isOpen={ isRegularMenuOpened }
+        onClose={ closeRegularMenu }
       >
         <Menu.Item>Item #1</Menu.Item>
         <Menu.Item>Item #2</Menu.Item>
@@ -175,17 +196,18 @@ export const Variants = () => {
       <Button
         aria-controls="menu-story-dense"
         aria-haspopup="true"
-        onClick={ handleDenseButtonClick }
+        onClick={ openDenseMenu }
         className={ styles.microMargin }
+        ref={ denseControllingElementRef }
       >
         Dense
       </Button>
 
       <Menu
-        ariaLabelledby="menu-story-dense"
-        controllingElementRef={ anchorDense }
-        isOpen={ !!anchorDense }
-        onClose={ handleDenseMenuClose }
+        aria-labelledby="menu-story-dense"
+        controllingElementRef={ denseControllingElementRef.current }
+        isOpen={ isDenseMenuOpened }
+        onClose={ closeDenseMenu }
         variant="dense"
       >
         <Menu.Item>Item #1</Menu.Item>
@@ -193,7 +215,6 @@ export const Variants = () => {
         <Menu.Item>Item #3</Menu.Item>
         <Menu.Item>Item #4</Menu.Item>
       </Menu>
-
     </div>
   )
 }

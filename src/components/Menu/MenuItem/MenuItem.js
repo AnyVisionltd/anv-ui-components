@@ -1,14 +1,19 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import styles from './MenuItem.module.scss'
 
-const MenuItem = ({
-  className, children, onClick, disabled, ...otherProps
-}) => {
+const MenuItem = forwardRef(({
+  className,
+  onClick,
+  disabled,
+  isSubMenu,
+  children,
+  ...otherProps
+}, ref) => {
   const classes = classNames(
     styles.menuItem,
-    disabled && styles.menuItemDisabled,
+    isSubMenu && styles.subMenuItem,
     className,
   )
 
@@ -35,16 +40,18 @@ const MenuItem = ({
       className={ classes }
       onClick={ !disabled && handleOnClick }
       onKeyDown={ !disabled && handleOnKeyDown }
+      ref={ ref }
       { ...otherProps }
     >
       { children }
     </li>
   )
   /* eslint-enable jsx-a11y/no-noninteractive-element-interactions */
-}
+})
 
 MenuItem.defaultProps = {
   disabled: false,
+  isSubMenu: false,
   onClick: () => {},
 }
 
@@ -57,6 +64,9 @@ MenuItem.propTypes = {
   className: propTypes.string,
   /** Menu item label (or any other elements attached to the label). */
   children: propTypes.node.isRequired,
+  /** <code>INTERNAL</code> If the element is sub menu type,
+   * should usually only used by the Menu component. */
+  isSubMenu: propTypes.bool,
 }
 
 export default MenuItem

@@ -4,7 +4,7 @@ const useElementAbsolutePositioning = (snapToSide, anchorElement, floatingElemen
   const {
     width: containerWidth,
     height: containerHeight,
-  } = useContainerDimensions(floatingElement)
+  } = useContainerDimensions()
 
   if (!anchorElement || !floatingElement) {
     return {}

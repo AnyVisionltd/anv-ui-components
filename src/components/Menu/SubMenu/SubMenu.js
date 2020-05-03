@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { ReactComponent as ArrowIcon } from '../../../assets/svg/ArrowSolidRight.svg'
@@ -7,30 +7,30 @@ import { MenuItem } from '../MenuItem'
 import styles from './SubMenu.module.scss'
 
 const SubMenu = ({
-  label, disabled, className, children, subMenuClassName, ...otherProps
+  label,
+  disabled,
+  className,
+  children,
+  subMenuClassName,
+  ...otherProps
 }) => {
+  const ref = useRef()
   const classes = classNames(
     styles.subMenuItem,
     className,
   )
-  const subMenuClasses = classNames(
-    styles.subMenu,
-    subMenuClassName,
-  )
   const [isOpened, setIsOpened] = useState(false)
-  const [currentElement, setCurrentElement] = useState(null)
 
-  const handleMouseOver = (event) => {
+  const handleMouseEnter = () => {
     if (disabled) {
       return
     }
     setIsOpened(true)
-    setCurrentElement(event.currentTarget)
   }
   const handleOnFocus = (event) => {
-    handleMouseOver(event)
+    handleMouseEnter(event)
   }
-  const handleMouseOut = () => {
+  const handleMouseLeave = () => {
     if (disabled) {
       return
     }
@@ -43,17 +43,20 @@ const SubMenu = ({
   return (
     <MenuItem
       className={ classes }
-      onMouseOver={ handleMouseOver }
-      onMouseOut={ handleMouseOut }
+      onMouseEnter={ handleMouseEnter }
+      onMouseLeave={ handleMouseLeave }
       onFocus={ handleOnFocus }
+      isSubMenu
+      ref={ ref }
       { ...otherProps }
     >
       <span className={ styles.parentItemLabel }>{ label }</span>
       <ArrowIcon />
       <Menu
-        className={ subMenuClasses }
+        className={ subMenuClassName }
         isOpen={ isOpened }
-        controllingElementRef={ currentElement }
+        controllingElementRef={ ref.current }
+        usePortal={ false }
         snapToSide
       >
         { children }

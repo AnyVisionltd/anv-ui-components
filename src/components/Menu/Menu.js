@@ -1,64 +1,114 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { useClickOutsideListener } from '../../hooks/ClickOutsideListener'
 import useElementAbsolutePositioning from './UseElementAbsolutePositioning'
+import { Portal } from '../Portal'
+import ScaleAnimation from '../ScaleAnimation/ScaleAnimation'
 import styles from './Menu.module.scss'
 
 const Menu = ({
-  isOpen, variant, onClose, children, className,
-  controllingElementRef, snapToSide,
+  isOpen,
+  variant,
+  onClose,
+  className,
+  controllingElementRef,
+  snapToSide,
+  usePortal,
+  children,
+  ...otherProps
 }) => {
+  const [isDisplayed, setDisplayed] = useState(false)
   const menuWrapperRef = useRef()
   useClickOutsideListener((event) => {
     const { target } = event
-    if (!isOpen || target === controllingElementRef) {
+    if (!isDisplayed || target === controllingElementRef) {
       return
     }
     onClose(event)
   }, menuWrapperRef)
-  const { styles: positionStyles, classNames: positionClassNames } = useElementAbsolutePositioning(
+  const {
+    styles: positionStyles = {},
+    classNames: positionClassNames = {},
+  } = useElementAbsolutePositioning(
     snapToSide,
     controllingElementRef,
     menuWrapperRef && menuWrapperRef.current,
   )
-  const classes = classNames(
-    styles.menu,
-    styles[variant],
-    !isOpen && styles.closed,
-    isOpen && styles.opened,
+  const containerClasses = classNames(
+    styles.menuContainer,
     positionClassNames && styles[positionClassNames.vertical],
     positionClassNames && styles[positionClassNames.horizontal],
+  )
+  const menuClasses = classNames(
+    styles.menu,
+    styles[variant],
     className,
   )
 
-  const getMenuStyles = () => {
-    if (!controllingElementRef) {
-      return null
-    }
-
-    return {
-      position: 'absolute',
-      ...positionStyles,
-    }
+  let animationVerticalStartingPoint
+  let animationHorizontalStartingPoint
+  switch (positionClassNames.vertical) {
+    case 'fromAnchorElementTopUpwards':
+    case 'fromAnchorElementBottomUpwards':
+      animationVerticalStartingPoint = 'bottom'
+      break
+    default: animationHorizontalStartingPoint = 'top'
   }
 
-  return (
+  switch (positionClassNames.horizontal) {
+    case 'fromAnchorElementEndToAnchorElementStart':
+    case 'fromAnchorElementStart':
+      animationHorizontalStartingPoint = 'end'
+      break
+    default: animationHorizontalStartingPoint = 'start'
+  }
+
+  const renderMenuList = () => (
     <ul
       role="menu"
-      className={ classes }
+      className={ menuClasses }
       ref={ menuWrapperRef }
-      style={ getMenuStyles() }
+      { ...otherProps }
     >
       { children }
     </ul>
   )
+
+  const renderMenu = () => (
+    <div
+      className={ containerClasses }
+      style={ positionStyles }
+    >
+      <ScaleAnimation
+        isOpen={ isOpen }
+        onEnter={ () => setDisplayed(true) }
+        onExited={ () => setDisplayed(false) }
+        verticalStart={ animationVerticalStartingPoint }
+        horizontalStart={ animationHorizontalStartingPoint }
+      >
+        { renderMenuList() }
+      </ScaleAnimation>
+    </div>
+  )
+
+  const renderMenuInPortal = () => (
+    <Portal containerId="menu-container">
+      { renderMenu() }
+    </Portal>
+  )
+
+  return usePortal
+    ? renderMenuInPortal()
+    : renderMenu()
 }
 
 Menu.defaultProps = {
   isOpen: false,
   variant: 'regular',
-  onClose: () => {},
+  onClose: () => {
+  },
+  usePortal: true,
 }
 
 Menu.propTypes = {
@@ -68,12 +118,10 @@ Menu.propTypes = {
   variant: propTypes.oneOf(['regular', 'dense']),
   /** Reference to the controlling element,
    *  used to snap the to the element which causes it to open. */
-  controllingElementRef: propTypes.shape({
-    offsetLeft: propTypes.number,
-    offsetRight: propTypes.number,
-    offsetHeight: propTypes.number,
-    offsetWidth: propTypes.number,
-  }),
+  controllingElementRef: propTypes.oneOfType([
+    propTypes.func,
+    propTypes.shape({ current: propTypes.any }),
+  ]),
   /** Determine whether the menu should snap to
    *  the controlling element from the sides, or top/bottom. */
   snapToSide: propTypes.bool,
@@ -84,6 +132,8 @@ Menu.propTypes = {
   /** A callback triggered whenever the user is clicking outside the menu scope.
    * Usually should close the menu. */
   onClose: propTypes.func,
+  /** Should the menu be wrapped with a portal */
+  usePortal: propTypes.bool,
 }
 
 export default Menu

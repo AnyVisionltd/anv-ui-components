@@ -1,6 +1,11 @@
 @import "~@anyvision/style-guide";
 @import "../../styles/mixin/ripple";
 
+.menuContainer {
+  position: absolute;
+  z-index: 1;
+}
+
 .menu {
   @include av-elevation(temporary);
   background-color: av-color(surface);
@@ -8,25 +13,6 @@
   fill: currentColor;
   border-radius: av-radius();
   padding: av-space(tiny) 0;
-  position: absolute;
-  z-index: 1;
-
-  &.closed {
-    // To make sure that the element is in full size, but outside of view
-    position: fixed;
-    visibility: hidden;
-    opacity: 0;
-    top: -100vh;
-    left: -100vh;
-  }
-
-  &.opened {
-    position: absolute;
-    visibility: visible;
-    opacity: 1;
-    right: unset;
-    left: unset;
-  }
 
   &.regular {
     width: av-size(sz-240);
@@ -43,15 +29,16 @@
       height: 32px;
     }
   }
+}
 
-  &.fromAnchorElementEnd,
-  &.fromAnchorElementStart {
-    &.fromAnchorElementBottomUpwards {
-      margin-top: av-space(tiny);
-    }
+.fromAnchorElementEnd,
+.fromAnchorElementStart {
+  color: red;
+  &.fromAnchorElementBottomUpwards {
+    margin-top: av-space(tiny);
+  }
 
-    &.fromAnchorElementTopDownwards {
-      margin-top: calc(#{av-space(tiny)} * -1);
-    }
+  &.fromAnchorElementTopDownwards {
+    margin-top: calc(#{av-space(tiny)} * -1);
   }
 }
