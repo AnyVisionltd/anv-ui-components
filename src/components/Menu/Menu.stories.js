@@ -18,7 +18,7 @@ export const Default = () => {
   const handleButtonClick = () => setIsOpen(true)
 
   return (
-    <div className={ styles.menuExampleContainer }>
+    <div className={ styles.microMargin }>
 
       <Button
         aria-controls="menu-story"
@@ -59,7 +59,7 @@ export const DifferentPositions = () => {
   }
 
   return (
-    <div className={ styles.menuExampleContainer }>
+    <div className={ styles.microMargin }>
       <Button
         style={ { position: 'absolute', top: 10, left: 10 } }
         aria-controls="menu-story"
@@ -120,7 +120,7 @@ export const WithSubMenus = () => {
   const handleButtonClick = () => setIsOpen(true)
 
   return (
-    <div className={ styles.menuExampleContainer }>
+    <div className={ styles.microMargin }>
 
       <Button
         aria-controls="menu-story"
@@ -170,7 +170,7 @@ export const Variants = () => {
   const closeDenseMenu = () => setDenseMenuOpened(false)
 
   return (
-    <div className={ styles.menuExampleContainer }>
+    <div className={ styles.microMargin }>
       <Button
         aria-controls="menu-story-regular"
         aria-haspopup="true"
