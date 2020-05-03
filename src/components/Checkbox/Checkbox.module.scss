@@ -30,7 +30,7 @@
     height: 100%;
     width: 100%;
     border-radius: av-radius(tidy);
-    border: solid 2px av-color(surface, av-opacity(disabled));
+    border: solid 2px av-color(content, av-opacity(disabled));
 
     svg {
       position: absolute;
@@ -40,7 +40,7 @@
   &:focus,
   &:active {
     .iconContainer {
-      border-color: av-color(surface);
+      border-color: av-color(content);
     }
   }
 
@@ -58,7 +58,7 @@
     opacity: av-opacity(disabled);
 
     &:not(&.checked):not(&.indeterminate) {
-      border: solid 2px av-color(surface, av-opacity(disabled));
+      border: solid 2px av-color(content, av-opacity(disabled));
     }
   }
 }
