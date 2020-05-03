@@ -1,4 +1,4 @@
-import { useContainerDimensions } from '../../hooks/UseContainerDimensions'
+import { useContainerDimensions } from '../../hooks'
 
 const useElementAbsolutePositioning = (snapToSide, anchorElement, floatingElement) => {
   const {

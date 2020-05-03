@@ -1,8 +1,8 @@
-import MenuItem from './MenuItem/MenuItem'
-import SubMenu from './SubMenu/SubMenu'
-import Menu from './Menu'
+import { default as MenuItem } from './MenuItem/MenuItem'
+import { default as SubMenu } from './SubMenu/SubMenu'
+import { default as MenuComponent } from './Menu'
 
-Menu.Item = MenuItem
-Menu.SubMenu = SubMenu
+MenuComponent.Item = MenuItem
+MenuComponent.SubMenu = SubMenu
 
-export default Menu
+export const Menu = MenuComponent

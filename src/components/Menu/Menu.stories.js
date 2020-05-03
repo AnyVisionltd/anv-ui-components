@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { centerDecorator } from '../../utils/storybook/decorators'
-import { Button } from '../Button'
-import Menu from '.'
+import { Menu, Button } from '../../index'
 import styles from '../../styles/storybook/index.module.scss'
 
 export default {

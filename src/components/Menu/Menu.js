@@ -1,10 +1,9 @@
 import React, { useRef, useState } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import { useClickOutsideListener } from '../../hooks/ClickOutsideListener'
+import { useClickOutsideListener } from '../../hooks'
 import useElementAbsolutePositioning from './UseElementAbsolutePositioning'
-import { Portal } from '../Portal'
-import ScaleAnimation from '../ScaleAnimation/ScaleAnimation'
+import { Animations, Portal } from '../../index'
 import styles from './Menu.module.scss'
 
 const Menu = ({
@@ -80,7 +79,7 @@ const Menu = ({
       className={ containerClasses }
       style={ positionStyles }
     >
-      <ScaleAnimation
+      <Animations.Scale
         isOpen={ isOpen }
         onEnter={ () => setDisplayed(true) }
         onExited={ () => setDisplayed(false) }
@@ -88,7 +87,7 @@ const Menu = ({
         horizontalStart={ animationHorizontalStartingPoint }
       >
         { renderMenuList() }
-      </ScaleAnimation>
+      </Animations.Scale>
     </div>
   )
 
