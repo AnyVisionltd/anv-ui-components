@@ -4,11 +4,10 @@ import classNames from 'classnames'
 import styles from './Menu.module.scss'
 import { useClickOutsideListener } from '../../hooks/ClickOutsideListener'
 import useElementAbsolutePositioning from './ElementAbsolutePositioning'
-import { Portal } from '../Portal'
 
 const Menu = ({
   opened, variant, onClickOutside, children, className,
-  controllingElementRef, snapToSide, usePortal,
+  controllingElementRef, snapToSide,
 }) => {
   const menuWrapperRef = useRef()
   useClickOutsideListener((event) => {
@@ -44,7 +43,7 @@ const Menu = ({
     }
   }
 
-  const renderMenu = () => (
+  return (
     <ul
       role="menu"
       className={ classes }
@@ -54,38 +53,35 @@ const Menu = ({
       { children }
     </ul>
   )
-
-  return controllingElementRef && usePortal
-    ? (
-      <Portal containerId="menu-portal" className={ styles.menuPortal }>
-        { renderMenu() }
-      </Portal>
-    )
-    : renderMenu()
 }
 
 Menu.defaultProps = {
   opened: false,
   variant: 'regular',
-  onClickOutside: () => {
-  },
-  usePortal: true,
+  onClickOutside: () => {}
 }
 
 Menu.propTypes = {
+  /** Should the menu appear on screen or not. */
   opened: propTypes.bool,
+  /** Determine the size of the menu's items. */
   variant: propTypes.oneOf(['regular', 'dense']),
-  snapToSide: propTypes.bool,
-  onClickOutside: propTypes.func,
-  className: propTypes.string,
-  children: propTypes.node.isRequired,
+  /** Reference to the controlling element, used to snap the to the element which causes it to open. */
   controllingElementRef: propTypes.shape({
     offsetLeft: propTypes.number,
     offsetRight: propTypes.number,
     offsetHeight: propTypes.number,
     offsetWidth: propTypes.number,
   }),
-  usePortal: propTypes.bool,
+  /** Determine whether the menu should snap to the controlling element from the sides, or top/bottom. */
+  snapToSide: propTypes.bool,
+  /** Add custom styling to the menu. */
+  className: propTypes.string,
+  /** Menu items (Menu.Item) or sub menus (Menu.SubMenu). */
+  children: propTypes.node.isRequired,
+  /** A callback triggered whenever the user is clicking outside the menu scope.
+   * Usually should close the menu. */
+  onClickOutside: propTypes.func
 }
 
 export default Menu

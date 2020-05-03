@@ -5,7 +5,6 @@ const getContainerDimensions = (container = window) => {
     const { innerWidth: width, innerHeight: height } = window
     return { width, height }
   }
-
   const { clientWidth: width, clientHeight: height } = container.offsetParent
   return { width, height }
 }

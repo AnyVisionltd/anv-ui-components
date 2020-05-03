@@ -1,16 +1,18 @@
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 
 const useClickOutsideListener = (onClickOutside, ref) => {
-  useEffect(() => {
-    const onClickOutsideHandler = (event) => {
+  const onClickOutsideHandler = useCallback(
+    (event) => {
       if (ref && ref.current && onClickOutside && !ref.current.contains(event.target)) {
         onClickOutside(event)
       }
-    }
-
+    },
+    [onClickOutside, ref],
+  )
+  useEffect(() => {
     document.addEventListener('mouseup', onClickOutsideHandler)
     return () => document.removeEventListener('mouseup', onClickOutsideHandler)
-  }, [onClickOutside, ref])
+  }, [onClickOutsideHandler])
 }
 
 export default useClickOutsideListener

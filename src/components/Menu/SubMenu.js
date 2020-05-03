@@ -6,10 +6,11 @@ import { ReactComponent as ArrowIcon } from '../../assets/svg/ArrowSolidRight.sv
 import Menu from './Menu'
 
 const SubMenu = ({
-  label, className, children, subMenuClassName, ...otherProps
+  label, disabled, className, children, subMenuClassName, ...otherProps
 }) => {
   const classes = classNames(
     styles.menuItem,
+    disabled && styles.menuItemDisabled,
     styles.subMenuItem,
     className,
   )
@@ -21,10 +22,19 @@ const SubMenu = ({
   const [currentElement, setCurrentElement] = useState(null)
 
   const handleMouseOver = (event) => {
+    if (disabled) {
+      return
+    }
     setIsOpened(true)
     setCurrentElement(event.currentTarget)
   }
+  const handleOnFocus = (event) => {
+    handleMouseOver(event)
+  }
   const handleMouseOut = () => {
+    if (disabled) {
+      return
+    }
     setIsOpened(false)
   }
 
@@ -33,12 +43,12 @@ const SubMenu = ({
   /* eslint-disable jsx-a11y/mouse-events-have-key-events */
   return (
     <li
-      role="menuitem"
-      tabIndex="0"
+      role={ !disabled ? 'menuitem' : undefined }
+      tabIndex={ !disabled ? '0' : undefined }
       className={ classes }
       onMouseOver={ handleMouseOver }
       onMouseOut={ handleMouseOut }
-      onFocus={ handleMouseOver }
+      onFocus={ handleOnFocus }
       { ...otherProps }
     >
       <span className={ styles.menuItemLabel }>{ label }</span>
@@ -49,7 +59,6 @@ const SubMenu = ({
         className={ subMenuClasses }
         opened={ isOpened }
         controllingElementRef={ currentElement }
-        usePortal={ false }
         snapToSide
       >
         { children }
@@ -59,11 +68,21 @@ const SubMenu = ({
   /* eslint-enable jsx-a11y/mouse-events-have-key-events */
 }
 
+SubMenu.defaultProps = {
+  disabled: false,
+}
+
 SubMenu.propTypes = {
-  className: propTypes.string,
-  subMenuClassName: propTypes.string,
+  /** The sub menu's item label. */
   label: propTypes.string,
+  /** Attach custom styling to the sub menu's list item. */
+  className: propTypes.string,
+  /** Attach custom styling to the sub menu. */
+  subMenuClassName: propTypes.string,
+  /** Menu items (Menu.Item) for the sub menu, or more nested sub menus (Menu.SubMenu). */
   children: propTypes.node.isRequired,
+  /** Should the sub menu item be disabled. */
+  disabled: propTypes.bool,
 }
 
 export default SubMenu

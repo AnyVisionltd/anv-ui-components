@@ -2,33 +2,14 @@
 @import "../../styles/mixin/ripple";
 
 .menu {
+  @include av-elevation(temporary);
   background-color: av-color(surface);
-  color: av-color(content);
+  color: av-color(content, av-opacity(divider));
   fill: currentColor;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1); // TODO: Change with elevation mixin
   border-radius: av-radius();
   padding: av-space(tiny) 0;
   position: absolute;
   z-index: 1;
-
-  &::-webkit-scrollbar {
-    width: 20px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: av-color(surface, av-opacity(divider));
-    border: 8px solid transparent;
-    border-radius: 90px;
-    background-clip: padding-box;
-
-    &:hover {
-      background-color: av-color(surface, av-opacity(disabled));
-    }
-
-    &:active {
-      background-color: av-color(primary);
-    }
-  }
 
   &.subMenu {
     &.fromAnchorElementEnd,
@@ -69,18 +50,17 @@
 
     .menuItemLabel {
       flex: 1;
+    }
 
-      .subMenuArrowIconContainer {
-        fill: av-color(surface);
+    &:not(.subMenuItem):not(.menuItemDisabled) {
+      @include av-ripple(av-color(primary));
+
+      &:focus {
+        background-color: av-color(primary, av-opacity(divider));
       }
     }
 
-    &:not(.subMenuItem) {
-      @include av-ripple(av-color(primary));
-    }
-
-    &.menuItem:focus,
-    &.subMenuItem:hover {
+    &.subMenuItem:not(.menuItemDisabled):hover {
       background-color: av-color(primary, av-opacity(divider));
     }
   }
@@ -100,11 +80,4 @@
       height: av-size(sz-32);
     }
   }
-}
-
-.menuPortal {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
 }
