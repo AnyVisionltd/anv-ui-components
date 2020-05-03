@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
-import { IconButton, Portal, SlideAnimation } from '../../index'
+import { IconButton, Portal, Animations } from '../../index'
 import { ReactComponent as CloseIcon } from '../../assets/svg/Close.svg'
 import styles from './Snackbar.module.scss'
 
@@ -69,7 +69,7 @@ const Snackbar = ({
   )
 
   return (
-    <SlideAnimation isOpen={ isOpen }>
+    <Animations.Slide isOpen={ isOpen }>
       <Portal
         containerId="snackbar-portal"
         className={ styles.portal }
@@ -91,7 +91,7 @@ const Snackbar = ({
           </div>
         </div>
       </Portal>
-    </SlideAnimation>
+    </Animations.Slide>
   )
 }
 
