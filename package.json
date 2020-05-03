@@ -12,7 +12,7 @@
     "url": "https://github.com/AnyVisionltd/anv-ui-components"
   },
   "dependencies": {
-    "@anyvision/style-guide": "1.0.1-beta.8",
+    "@anyvision/style-guide": "1.0.1-beta.10",
     "classnames": "^2.2.6",
     "jest-environment-jsdom-sixteen": "^1.0.3",
     "node-sass": "^4.13.1",
