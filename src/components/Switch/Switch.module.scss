@@ -3,7 +3,7 @@
 
 .switch {
   margin: 0 av-space();
-  color: av-color(content);
+  color: av-color(primary);
 
   .switchLabel {
     cursor: pointer;
@@ -23,16 +23,17 @@
     .switchToggle {
       @include av-ripple();
       position: absolute;
-      left: calc(#{av-size(sz-16)} * -1);
+      left: 0;
       align-items: center;
       justify-content: center;
       display: flex;
       height: av-size(sz-32);
       width: av-size(sz-32);
       border-radius: av-radius(circle);
+      transition: 0.3s ease-in-out;
 
-      span {
-        background-color: av-color(surface);
+      .switchToggleInner {
+        background-color: currentColor;
         @include av-elevation(sticky);
         height: av-size(sz-16);
         width: av-size(sz-16);
@@ -41,26 +42,21 @@
     }
   }
 
-  &.checked {
-    color: av-color(primary);
-    .switchLine {
-      background-color: currentColor;
-    }
+  &.unchecked {
+    color: av-color(content);
 
     .switchToggle {
-      right: calc(#{av-size(sz-16)} * -1);
-      left: unset;
-      span {
-        background-color: currentColor;
+      left: calc(#{av-size(sz-8)} * -1);
+      transition: 0.3s ease-in-out;
+
+      .switchToggleInner {
+        background-color: av-color(surface);
       }
     }
   }
 
   &.disabled {
     opacity: av-opacity(disabled);
-
-    .switchLabel {
-      cursor: not-allowed;
-    }
+    pointer-events: none;
   }
 }

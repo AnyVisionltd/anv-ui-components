@@ -13,7 +13,7 @@ const Switch = ({
 }) => {
   const classes = classNames(
     styles.switch,
-    checked && styles.checked,
+    !checked && styles.unchecked,
     disabled ? styles.disabled : styles.enabled,
     className,
   )
@@ -35,7 +35,7 @@ const Switch = ({
       >
         <div className={ styles.switchLine } />
         <div className={ styles.switchToggle }>
-          <span />
+          <span className={ styles.switchToggleInner } />
         </div>
       </label>
     </div>
