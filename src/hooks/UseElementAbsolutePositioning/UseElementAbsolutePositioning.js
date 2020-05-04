@@ -1,6 +1,11 @@
-import { useContainerDimensions } from '../../hooks'
+import { useContainerDimensions } from '../index'
 
-const useElementAbsolutePositioning = (snapToSide, anchorElement, floatingElement) => {
+const useElementAbsolutePositioning = (
+  anchorElement,
+  floatingElement,
+  snapToSide,
+  isUsingPortal,
+) => {
   const {
     width: containerWidth,
     height: containerHeight,
@@ -18,8 +23,13 @@ const useElementAbsolutePositioning = (snapToSide, anchorElement, floatingElemen
     offsetHeight: anchorHeight,
     offsetWidth: anchorWidth,
   } = anchorElement
-  const { offsetTop: anchorTop, offsetLeft } = anchorElement
-  const offsetTop = snapToSide ? 0 : anchorTop
+  const offsetTop = isUsingPortal
+    ? anchorElement.getBoundingClientRect().top + window.scrollY
+    : 0
+  const offsetLeft = isUsingPortal
+    ? anchorElement.getBoundingClientRect().left + window.scrollX
+    : anchorElement.offsetLeft
+
   const styles = {}
   const classNames = {
     vertical: '',
@@ -68,22 +78,30 @@ const useElementAbsolutePositioning = (snapToSide, anchorElement, floatingElemen
     classNames.horizontal = 'fromAnchorElementEnd'
   }
 
-  const isFloatingElementOutOfVerticalBounds = () => {
-    let topPoint = styles.top
-    if (snapToSide) {
-      const { top: anchorTopOffsetInRelationToViewport } = anchorElement.getBoundingClientRect()
-      topPoint += anchorTopOffsetInRelationToViewport
+  const getClosestScrollableParent = (node) => {
+    if (node == null) {
+      return null
     }
-    const bottomPoint = topPoint + floatingElementHeight
-    return topPoint < 0 || bottomPoint > containerHeight
+
+    if (node.scrollHeight > node.clientHeight) {
+      return node
+    } else {
+      return getClosestScrollableParent(node.parentNode)
+    }
+  }
+
+  const isFloatingElementOutOfVerticalBounds = () => {
+    const { top } = styles
+    const bottom = top + floatingElementHeight
+    return bottom > containerHeight
   }
   const isFloatingElementOutOfHorizontalBounds = () => {
-    let leftPoint = styles.left
-    if (snapToSide) {
-      leftPoint += anchorElement.getBoundingClientRect().left
+    let { left } = styles
+    if (!isUsingPortal) {
+      left += anchorElement.getBoundingClientRect().left
     }
-    const rightPoint = leftPoint + floatingElementWidth
-    return leftPoint < 0 || rightPoint > containerWidth
+    const right = left + floatingElementWidth
+    return left < 0 || right > containerWidth
   }
 
   if (snapToSide) {

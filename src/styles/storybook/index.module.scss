@@ -37,3 +37,10 @@
 .tinyText {
   font-size: av-font-size(tiny);
 }
+
+.menuExample {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

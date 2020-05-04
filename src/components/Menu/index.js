@@ -1,6 +1,6 @@
-import { default as MenuItem } from './MenuItem/MenuItem'
-import { default as SubMenu } from './SubMenu/SubMenu'
-import { default as MenuComponent } from './Menu'
+import MenuItem from './MenuItem/MenuItem'
+import SubMenu from './SubMenu/SubMenu'
+import MenuComponent from './Menu'
 
 MenuComponent.Item = MenuItem
 MenuComponent.SubMenu = SubMenu

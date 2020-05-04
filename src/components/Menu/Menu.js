@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import { useClickOutsideListener } from '../../hooks'
-import useElementAbsolutePositioning from './UseElementAbsolutePositioning'
-import { Animations, Portal } from '../../index'
+import { useClickOutsideListener, useElementAbsolutePositioning } from '../../hooks'
+import { Animations } from '../Animations'
+import { Portal } from '../Portal'
 import styles from './Menu.module.scss'
 
 const Menu = ({
@@ -30,9 +30,10 @@ const Menu = ({
     styles: positionStyles = {},
     classNames: positionClassNames = {},
   } = useElementAbsolutePositioning(
-    snapToSide,
     controllingElementRef,
     menuWrapperRef && menuWrapperRef.current,
+    snapToSide,
+    usePortal,
   )
   const containerClasses = classNames(
     styles.menuContainer,

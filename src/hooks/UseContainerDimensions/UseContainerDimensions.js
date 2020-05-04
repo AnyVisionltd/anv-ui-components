@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 
 const getContainerDimensions = (container = window) => {
-  if (container && container.offsetParent) {
-    const { clientWidth: width, clientHeight: height } = container.offsetParent
+  if (container) {
+    const { offsetWidth: width, offsetHeight: height } = container
     return { width, height }
   }
 

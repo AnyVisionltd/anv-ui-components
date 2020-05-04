@@ -17,7 +17,7 @@ export const Default = () => {
   const handleButtonClick = () => setIsOpen(true)
 
   return (
-    <div className={ styles.microMargin }>
+    <div className={ styles.menuExample }>
 
       <Button
         aria-controls="menu-story"
@@ -58,7 +58,7 @@ export const DifferentPositions = () => {
   }
 
   return (
-    <div className={ styles.microMargin }>
+    <div className={ styles.menuExample }>
       <Button
         style={ { position: 'absolute', top: 10, left: 10 } }
         aria-controls="menu-story"
@@ -95,6 +95,10 @@ export const DifferentPositions = () => {
         Bottom, Right
       </Button>
 
+      <div className={ styles.tinyText }>
+        Best viewed in canvas mode
+      </div>
+
       <Menu
         aria-labelledby="menu-story"
         controllingElementRef={ anchorEl }
@@ -119,7 +123,7 @@ export const WithSubMenus = () => {
   const handleButtonClick = () => setIsOpen(true)
 
   return (
-    <div className={ styles.microMargin }>
+    <div className={ styles.menuExample }>
 
       <Button
         aria-controls="menu-story"
@@ -169,17 +173,15 @@ export const Variants = () => {
   const closeDenseMenu = () => setDenseMenuOpened(false)
 
   return (
-    <div className={ styles.microMargin }>
+    <div className={ styles.menuExample }>
       <Button
         aria-controls="menu-story-regular"
         aria-haspopup="true"
         onClick={ openRegularMenu }
-        className={ styles.microMargin }
         ref={ regularControllingElementRef }
       >
         Regular
       </Button>
-
       <Menu
         aria-labelledby="menu-story-regular"
         controllingElementRef={ regularControllingElementRef.current }
@@ -191,17 +193,14 @@ export const Variants = () => {
         <Menu.Item>Item #3</Menu.Item>
         <Menu.Item>Item #4</Menu.Item>
       </Menu>
-
       <Button
         aria-controls="menu-story-dense"
         aria-haspopup="true"
         onClick={ openDenseMenu }
-        className={ styles.microMargin }
         ref={ denseControllingElementRef }
       >
         Dense
       </Button>
-
       <Menu
         aria-labelledby="menu-story-dense"
         controllingElementRef={ denseControllingElementRef.current }
