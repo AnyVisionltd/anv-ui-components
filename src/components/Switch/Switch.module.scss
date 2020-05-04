@@ -9,35 +9,36 @@
     display: inline-block;
     height: av-size(sz-32);
     position: relative;
-    overflow: hidden;
 
-    .switchInner {
-      background-color: av-color(surface);
+    .switchLine {
+      background-color: av-color(content);
       height: av-size(sz-8);
-      width: av-size(sz-24);
+      width: av-size(sz-64);
       border-radius: av-radius();
       opacity: av-opacity(disabled);
-      margin-top: 50%;
+      margin-top: av-size(sz-16);
     }
 
     .switchToggle {
+      @include av-ripple(currentColor, false);
+      @include av-elevation(sticky);
       position: absolute;
-      top: 25%;
-      background-color: av-color(content);
-      height: av-size(sz-16);
-      width: av-size(sz-16);
-      border-radius: av-radius();
-      transition: all 3s; //just to show that it is not jumping
+      top: av-space(micro);
+      padding: av-size(sz-8);
+      background-color: av-color(surface);
+      height: av-size(sz-32);
+      width: av-size(sz-32);
+      border-radius: av-radius(circle);
     }
   }
 
-  &.on {
-    .switchInner {
+  &.checked {
+    .switchLine {
       background-color: av-color(primary);
     }
 
     .switchToggle {
-      left: calc(100% - #{av-size(sz-16)});
+      left: av-size(sz-32);
       background-color: av-color(primary);
     }
   }

@@ -19,7 +19,7 @@ export const Default = () => {
   return (
     <div className={ styles.marginFlexContainer }>
       <Switch
-        status={ isEnabled }
+        checked={ isEnabled }
         onChange={ onChange }
         id="switch-example"
       />
@@ -43,25 +43,25 @@ export const MultipleSwitches = () => {
   return (
     <div className={ styles.marginFlexContainer }>
       <Switch
-        status={ isEnabled1 }
-        onChange={ (status) => onChange(status, setIsEnabled1) }
+        checked={ isEnabled1 }
+        onChange={ (value) => onChange(value, setIsEnabled1) }
         id="switch-example1"
       />
       <Switch
-        status={ isEnabled2 }
-        onChange={ (status) => onChange(status, setIsEnabled2) }
+        checked={ isEnabled2 }
+        onChange={ (value) => onChange(value, setIsEnabled2) }
         id="switch-example2"
       />
       <Switch
-        status={ isEnabled3 }
+        checked={ isEnabled3 }
         disabled
-        onChange={ (status) => onChange(status, setIsEnabled3) }
+        onChange={ (value) => onChange(value, setIsEnabled3) }
         id="switch-example3"
       />
       <Switch
-        status={ isEnabled4 }
+        checked={ isEnabled4 }
         disabled
-        onChange={ (status) => onChange(status, setIsEnabled4) }
+        onChange={ (value) => onChange(value, setIsEnabled4) }
         id="switch-example4"
       />
     </div>
@@ -71,7 +71,7 @@ export const MultipleSwitches = () => {
 export const playground = () => (
   <div className={ styles.marginFlexContainer }>
     <Switch
-      status={ boolean('checked', false) }
+      checked={ boolean('checked', false) }
       disabled={ boolean('disabled', false) }
       id="switch-playground"
     />
