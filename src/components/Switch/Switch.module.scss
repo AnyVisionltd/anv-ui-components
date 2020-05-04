@@ -2,6 +2,9 @@
 @import "../../styles/mixin/ripple";
 
 .switch {
+  margin: 0 av-space();
+  color: av-color(content);
+
   .switchLabel {
     cursor: pointer;
     display: flex;
@@ -10,33 +13,46 @@
     height: 32px;
 
     .switchLine {
-      background-color: av-color(content);
+      background-color: currentColor;
       height: 8px;
-      width: av-size(sz-64);
+      width: av-size(sz-24);
       border-radius: av-radius();
       opacity: av-opacity(disabled);
     }
 
     .switchToggle {
       @include av-ripple();
-      @include av-elevation(sticky);
       position: absolute;
-      padding: av-size(sz-8);
-      background-color: av-color(surface);
-      height: 32px;
+      left: calc(#{av-size(sz-16)} * -1);
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      height: av-size(sz-32);
       width: av-size(sz-32);
       border-radius: av-radius(circle);
+
+      span {
+        background-color: av-color(surface);
+        @include av-elevation(sticky);
+        height: av-size(sz-16);
+        width: av-size(sz-16);
+        border-radius: inherit;
+      }
     }
   }
 
   &.checked {
+    color: av-color(primary);
     .switchLine {
-      background-color: av-color(primary);
+      background-color: currentColor;
     }
 
     .switchToggle {
-      right: 0;
-      background-color: av-color(primary);
+      right: calc(#{av-size(sz-16)} * -1);
+      left: unset;
+      span {
+        background-color: currentColor;
+      }
     }
   }
 
