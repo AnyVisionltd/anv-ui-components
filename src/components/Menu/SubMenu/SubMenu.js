@@ -55,9 +55,9 @@ const SubMenu = ({
       <Menu
         className={ subMenuClassName }
         isOpen={ isOpened }
-        controllingElementRef={ ref.current }
+        anchorElement={ ref.current }
         usePortal={ false }
-        snapToSide
+        attachDirection="horizontal"
       >
         { children }
       </Menu>

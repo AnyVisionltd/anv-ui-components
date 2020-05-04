@@ -11,7 +11,7 @@ const Menu = ({
   variant,
   onClose,
   className,
-  controllingElementRef,
+  anchorElement,
   attachDirection,
   usePortal,
   children,
@@ -22,7 +22,7 @@ const Menu = ({
   const menuWrapperRef = useRef()
   useClickOutsideListener((event) => {
     const { target } = event
-    if (!isDisplayed || target === controllingElementRef) {
+    if (!isDisplayed || target === anchorElement) {
       return
     }
     onClose(event)
@@ -31,7 +31,7 @@ const Menu = ({
     styles: positionStyles = {},
     classNames: positionClassNames = {},
   } = useElementAbsolutePositioning(
-    controllingElementRef,
+    anchorElement,
     menuWrapperRef && menuWrapperRef.current,
     attachDirection,
     openDirection,
@@ -122,7 +122,7 @@ Menu.propTypes = {
   variant: propTypes.oneOf(['regular', 'dense']),
   /** Reference to the controlling element,
    *  used to attached the to the menu to the controller which causes it to open. */
-  controllingElementRef: propTypes.oneOfType([
+  anchorElement: propTypes.oneOfType([
     propTypes.func,
     propTypes.shape({ current: propTypes.any }),
   ]),

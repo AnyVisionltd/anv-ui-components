@@ -31,7 +31,7 @@ export const Default = () => {
 
       <Menu
         aria-labelledby="menu-story-default"
-        controllingElementRef={ ref.current }
+        anchorElement={ ref.current }
         isOpen={ isOpen }
         onClose={ handleMenuClose }
       >
@@ -102,7 +102,7 @@ export const DifferentPositions = () => {
 
       <Menu
         aria-labelledby="menu-story"
-        controllingElementRef={ anchorEl }
+        anchorElement={ anchorEl }
         isOpen={ isOpen }
         onClose={ handleClose }
       >
@@ -140,7 +140,7 @@ export const ForceOpenToDirection = () => {
 
       <Menu
         aria-labelledby="menu-story"
-        controllingElementRef={ ref.current }
+        anchorElement={ ref.current }
         isOpen={ isOpen }
         onClose={ handleClose }
         openDirection={ `${vertical}-${horizontal}` }
@@ -175,7 +175,7 @@ export const WithSubMenus = () => {
 
       <Menu
         aria-labelledby="menu-story-submenu"
-        controllingElementRef={ ref.current }
+        anchorElement={ ref.current }
         isOpen={ isOpen }
         onClose={ handleMenuClose }
       >
@@ -199,8 +199,8 @@ export const WithSubMenus = () => {
 }
 
 export const Variants = () => {
-  const regularControllingElementRef = useRef()
-  const denseControllingElementRef = useRef()
+  const regularAnchorElement = useRef()
+  const denseAnchorElement = useRef()
 
   const [isRegularMenuOpened, setRegularMenuOpened] = useState(false)
   const [isDenseMenuOpened, setDenseMenuOpened] = useState(false)
@@ -218,13 +218,13 @@ export const Variants = () => {
           aria-controls="menu-story-regular"
           aria-haspopup="true"
           onClick={ openRegularMenu }
-          ref={ regularControllingElementRef }
+          ref={ regularAnchorElement }
         >
           Regular
         </Button>
         <Menu
           aria-labelledby="menu-story-regular"
-          controllingElementRef={ regularControllingElementRef.current }
+          anchorElement={ regularAnchorElement.current }
           isOpen={ isRegularMenuOpened }
           onClose={ closeRegularMenu }
         >
@@ -239,13 +239,13 @@ export const Variants = () => {
           aria-controls="menu-story-dense"
           aria-haspopup="true"
           onClick={ openDenseMenu }
-          ref={ denseControllingElementRef }
+          ref={ denseAnchorElement }
         >
           Dense
         </Button>
         <Menu
           aria-labelledby="menu-story-dense"
-          controllingElementRef={ denseControllingElementRef.current }
+          anchorElement={ denseAnchorElement.current }
           isOpen={ isDenseMenuOpened }
           onClose={ closeDenseMenu }
           variant="dense"
