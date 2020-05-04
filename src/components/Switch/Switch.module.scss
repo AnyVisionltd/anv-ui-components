@@ -30,7 +30,7 @@
       height: av-size(sz-32);
       width: av-size(sz-32);
       border-radius: av-radius(circle);
-      transition: 0.3s ease-in-out;
+      transition: transform 200ms ease-in-out, opacity 100ms ease-in-out;
 
       .switchToggleInner {
         background-color: currentColor;
@@ -47,7 +47,7 @@
 
     .switchToggle {
       left: calc(#{av-size(sz-8)} * -1);
-      transition: 0.3s ease-in-out;
+      transition: transform 200ms ease-in-out, opacity 100ms ease-in-out;
 
       .switchToggleInner {
         background-color: av-color(surface);
