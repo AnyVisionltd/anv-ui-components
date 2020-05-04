@@ -1,0 +1,102 @@
+@mixin scale($fromVertical, $fromHorizontal) {
+  transform-origin: $fromVertical $fromHorizontal;
+  &-enter {
+    opacity: 0;
+    transform: scale(0.8);
+    transform-origin: $fromVertical $fromHorizontal;
+  }
+  &-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 200ms, transform 200ms;
+    transform-origin: $fromVertical $fromHorizontal;
+  }
+  &-exit {
+    opacity: 1;
+    transform-origin: $fromVertical $fromHorizontal;
+  }
+  &-exit-active {
+    opacity: 0;
+    transform: scale(0.8);
+    transform-origin: $fromVertical $fromHorizontal;
+    transition: opacity 200ms, transform 200ms;
+  }
+}
+
+.scale {
+  &-top {
+    &-start {
+      @include scale(top, left)
+    }
+
+    &-center {
+      @include scale(top, center)
+    }
+
+    &-end {
+      @include scale(top, right)
+    }
+  }
+
+  &-center {
+    &-start {
+      @include scale(center, left)
+    }
+
+    &-center {
+      @include scale(center, center)
+    }
+
+    &-end {
+      @include scale(center, right)
+    }
+  }
+
+  &-bottom {
+    &-start {
+      @include scale(bottom, left)
+    }
+
+    &-center {
+      @include scale(bottom, center)
+    }
+
+    &-end {
+      @include scale(bottom, right)
+    }
+  }
+}
+
+html[dir=rtl] {
+  .scale {
+    &-top {
+      &-start {
+        @include scale(top, right)
+      }
+
+      &-end {
+        @include scale(top, left)
+      }
+    }
+
+    &-center {
+      &-start {
+        @include scale(center, right)
+      }
+
+      &-end {
+        @include scale(center, left)
+      }
+    }
+
+    &-bottom {
+      &-start {
+        @include scale(bottom, right)
+      }
+
+      &-end {
+        @include scale(left, left)
+      }
+    }
+  }
+}
