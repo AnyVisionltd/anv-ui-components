@@ -29,14 +29,36 @@
       @include scale(top, left)
     }
 
+    &-center {
+      @include scale(top, center)
+    }
+
     &-end {
       @include scale(top, right)
+    }
+  }
+
+  &-center {
+    &-start {
+      @include scale(center, left)
+    }
+
+    &-center {
+      @include scale(center, center)
+    }
+
+    &-end {
+      @include scale(center, right)
     }
   }
 
   &-bottom {
     &-start {
       @include scale(bottom, left)
+    }
+
+    &-center {
+      @include scale(bottom, center)
     }
 
     &-end {
@@ -54,6 +76,16 @@ html[dir=rtl] {
 
       &-end {
         @include scale(top, left)
+      }
+    }
+
+    &-center {
+      &-start {
+        @include scale(center, right)
+      }
+
+      &-end {
+        @include scale(center, left)
       }
     }
 
