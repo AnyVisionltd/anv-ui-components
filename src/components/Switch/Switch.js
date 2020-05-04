@@ -6,14 +6,14 @@ import styles from './Switch.module.scss'
 const Switch = ({
   id,
   className,
-  status,
+  checked,
   disabled,
   onChange,
   ...otherProps
 }) => {
   const classes = classNames(
     styles.switch,
-    status && styles.on,
+    checked && styles.checked,
     disabled ? styles.disabled : styles.enabled,
     className,
   )
@@ -25,7 +25,7 @@ const Switch = ({
         type="checkbox"
         disabled={ disabled }
         hidden="hidden"
-        defaultChecked={ status }
+        defaultChecked={ checked }
         onChange={ onChange }
         { ...otherProps }
       />
@@ -33,7 +33,7 @@ const Switch = ({
         className={ styles.switchLabel }
         htmlFor={ id }
       >
-        <div className={ styles.switchInner } />
+        <div className={ styles.switchLine } />
         <span className={ styles.switchToggle } />
       </label>
     </div>
@@ -41,7 +41,7 @@ const Switch = ({
 }
 
 Switch.defaultProps = {
-  status: true,
+  checked: true,
   disabled: false,
   onChange: () => {},
 }
@@ -51,8 +51,8 @@ Switch.propTypes = {
   id: propTypes.string,
   /** For css customization. */
   className: propTypes.string,
-  /** Whether the switch is on or off. */
-  status: propTypes.bool,
+  /** Whether the switch is checked or not. */
+  checked: propTypes.bool,
   /** If true, the switch will be disabled. */
   disabled: propTypes.bool,
   /** Callback when changed. */
