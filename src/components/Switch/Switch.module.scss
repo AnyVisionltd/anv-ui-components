@@ -2,31 +2,28 @@
 @import "../../styles/mixin/ripple";
 
 .switch {
-  position: relative;
-
   .switchLabel {
     cursor: pointer;
-    display: inline-block;
-    height: av-size(sz-32);
+    display: flex;
     position: relative;
+    align-items: center;
+    height: 32px;
 
     .switchLine {
       background-color: av-color(content);
-      height: av-size(sz-8);
+      height: 8px;
       width: av-size(sz-64);
       border-radius: av-radius();
       opacity: av-opacity(disabled);
-      margin-top: av-size(sz-16);
     }
 
     .switchToggle {
-      @include av-ripple(currentColor, false);
+      @include av-ripple();
       @include av-elevation(sticky);
       position: absolute;
-      top: av-space(micro);
       padding: av-size(sz-8);
       background-color: av-color(surface);
-      height: av-size(sz-32);
+      height: 32px;
       width: av-size(sz-32);
       border-radius: av-radius(circle);
     }
@@ -38,7 +35,7 @@
     }
 
     .switchToggle {
-      left: av-size(sz-32);
+      right: 0;
       background-color: av-color(primary);
     }
   }

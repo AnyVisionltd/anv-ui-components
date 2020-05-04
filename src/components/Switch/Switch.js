@@ -34,7 +34,9 @@ const Switch = ({
         htmlFor={ id }
       >
         <div className={ styles.switchLine } />
-        <span className={ styles.switchToggle } />
+        <div className={ styles.switchToggle }>
+          <span />
+        </div>
       </label>
     </div>
   )
