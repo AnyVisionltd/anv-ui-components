@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import { select } from '@storybook/addon-knobs'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import { Menu, Button } from '../../index'
 import styles from '../../styles/storybook/index.module.scss'
@@ -109,6 +110,44 @@ export const DifferentPositions = () => {
         <Menu.Item>List Item #2</Menu.Item>
         <Menu.Item>List Item #4</Menu.Item>
         <Menu.Item>List Item #4</Menu.Item>
+      </Menu>
+
+    </div>
+  )
+}
+
+export const ForceOpenToDirection = () => {
+  const ref = useRef()
+  const [isOpen, setIsOpen] = useState(false)
+
+  const handleClose = () => setIsOpen(false)
+  const handleButtonClick = () => setIsOpen(true)
+
+  const vertical = select('Vertical axis', ['up', 'down'], 'down')
+  const horizontal = select('Horizontal axis', ['start', 'end'], 'end')
+  const attachDirection = select('Attach direction', ['vertical', 'horizontal'], 'vertical')
+
+  return (
+    <div className={ styles.menuExample }>
+      <Button
+        aria-controls="menu-story"
+        aria-haspopup="true"
+        onClick={ handleButtonClick }
+        ref={ ref }
+      >
+        Open Menu
+      </Button>
+
+      <Menu
+        aria-labelledby="menu-story"
+        controllingElementRef={ ref.current }
+        isOpen={ isOpen }
+        onClose={ handleClose }
+        openDirection={ `${vertical}-${horizontal}` }
+        attachDirection={ attachDirection }
+      >
+        <Menu.Item>List Item #1</Menu.Item>
+        <Menu.Item>List Item #2</Menu.Item>
       </Menu>
 
     </div>

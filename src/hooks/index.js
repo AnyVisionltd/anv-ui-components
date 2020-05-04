@@ -1,3 +1,3 @@
 export { useClickOutsideListener } from './UseClickOutsideListener'
-export { useContainerDimensions } from './UseContainerDimensions'
+export { useWindowDimensions } from './UseWindowDimensions'
 export { useElementAbsolutePositioning } from './UseElementAbsolutePositioning'

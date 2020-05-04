@@ -1,15 +1,16 @@
-import { useContainerDimensions } from '../index'
+import { useWindowDimensions } from '../index'
 
 const useElementAbsolutePositioning = (
   anchorElement,
   floatingElement,
-  snapToSide,
+  attachDirection,
+  openDirection,
   isUsingPortal,
 ) => {
   const {
     width: containerWidth,
     height: containerHeight,
-  } = useContainerDimensions()
+  } = useWindowDimensions()
 
   if (!anchorElement || !floatingElement) {
     return {}
@@ -92,7 +93,21 @@ const useElementAbsolutePositioning = (
     return left < 0 || right > containerWidth
   }
 
-  if (snapToSide) {
+  if (openDirection && openDirection !== 'auto') {
+    const [vertical, horizontal] = openDirection.split('-')
+
+    if (vertical === 'up') {
+      displayElementFromAnchorElementTopUpwards()
+    } else if (vertical === 'down') {
+      displayElementFromAnchorElementBottomDownwards()
+    }
+
+    if (horizontal === 'start') {
+      displayElementFromAnchorElementEndToAnchorElementStart()
+    } else if (horizontal === 'end') {
+      displayElementFromAnchorElementStartToAnchorElementEnd()
+    }
+  } else if (attachDirection === 'horizontal') {
     displayElementFromAnchorElementTopDownwards()
     displayElementFromAnchorElementEnd()
 

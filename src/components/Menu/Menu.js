@@ -12,9 +12,10 @@ const Menu = ({
   onClose,
   className,
   controllingElementRef,
-  snapToSide,
+  attachDirection,
   usePortal,
   children,
+  openDirection,
   ...otherProps
 }) => {
   const [isDisplayed, setDisplayed] = useState(false)
@@ -32,7 +33,8 @@ const Menu = ({
   } = useElementAbsolutePositioning(
     controllingElementRef,
     menuWrapperRef && menuWrapperRef.current,
-    snapToSide,
+    attachDirection,
+    openDirection,
     usePortal,
   )
   const containerClasses = classNames(
@@ -109,6 +111,8 @@ Menu.defaultProps = {
   onClose: () => {
   },
   usePortal: true,
+  openDirection: 'auto',
+  attachDirection: 'vertical',
 }
 
 Menu.propTypes = {
@@ -117,14 +121,14 @@ Menu.propTypes = {
   /** Determine the size of the menu's items. */
   variant: propTypes.oneOf(['regular', 'dense']),
   /** Reference to the controlling element,
-   *  used to snap the to the element which causes it to open. */
+   *  used to attached the to the menu to the controller which causes it to open. */
   controllingElementRef: propTypes.oneOfType([
     propTypes.func,
     propTypes.shape({ current: propTypes.any }),
   ]),
-  /** Determine whether the menu should snap to
-   *  the controlling element from the sides, or top/bottom. */
-  snapToSide: propTypes.bool,
+  /** Determine whether the menu should be attached to
+   *  the controlling element from the side, or top/bottom. */
+  attachDirection: propTypes.oneOf(['vertical', 'horizontal']),
   /** Add custom styling to the menu. */
   className: propTypes.string,
   /** Menu items (Menu.Item) or sub menus (Menu.SubMenu). */
@@ -132,6 +136,19 @@ Menu.propTypes = {
   /** A callback triggered whenever the user is clicking outside the menu scope.
    * Usually should close the menu. */
   onClose: propTypes.func,
+  /** Force the menu to open <b>to</b> a certain side.<br />
+   * <code>up</code> - means that the menu will open <u>upwards</u><br />
+   * <code>down</code> - means that the menu will open <u>downwards</u><br />
+   * <code>start</code> - means that the menu will open
+   * <u>towards the inline-start</u> of the document<br />
+   * <code>end</code> - means that the menu will open
+   * <u>towards the inline-end</u> of the document<br />
+   * */
+  openDirection: propTypes.oneOf([
+    'auto',
+    'up-start', 'up-end',
+    'down-start', 'down-end',
+  ]),
   /** Should the menu be wrapped with a portal */
   usePortal: propTypes.bool,
 }
