@@ -1,0 +1,64 @@
+@import "~@anyvision/style-guide";
+@import "../../styles/mixin/ripple";
+
+.switch {
+  margin: 0 av-space();
+  color: av-color(primary);
+
+  .switchLabel {
+    cursor: pointer;
+    display: flex;
+    position: relative;
+    align-items: center;
+    height: 32px;
+
+    .switchLine {
+      background-color: currentColor;
+      height: 8px;
+      width: av-size(sz-24);
+      border-radius: av-radius();
+      opacity: av-opacity(disabled);
+    }
+
+    .switchToggle {
+      @include av-ripple();
+      position: absolute;
+      left: 0;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      height: av-size(sz-32);
+      width: av-size(sz-32);
+      border-radius: av-radius(circle);
+      transition: transform 200ms ease-in-out, color 100ms ease-in-out;
+
+      .switchToggleInner {
+        background-color: currentColor;
+        @include av-elevation(sticky);
+        height: av-size(sz-16);
+        width: av-size(sz-16);
+        border-radius: inherit;
+      }
+    }
+  }
+
+  &.unchecked {
+    .switchLine {
+      color: av-color(content);
+    }
+
+    .switchToggle {
+      left: calc(#{av-size(sz-8)} * -1);
+      transition: transform 200ms ease-in-out, color 100ms ease-in-out;
+
+      .switchToggleInner {
+        background-color: av-color(surface);
+      }
+    }
+  }
+
+  &.disabled {
+    opacity: av-opacity(disabled);
+    pointer-events: none;
+  }
+}
