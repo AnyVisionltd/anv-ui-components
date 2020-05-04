@@ -2,10 +2,13 @@
 
 .inputBase {
   width: av-size(sz-240);
+  height: 40px;
   display: flex;
   justify-content: center;
   padding: av-space(tiny);
   align-items: center;
+  border: solid 2px av-color(content, av-opacity(divider));
+  border-radius: av-radius(tidy);
 
   &.disabled {
     opacity: av-opacity(medium);
@@ -44,14 +47,6 @@
   margin-right: av-space(tiny);
 }
 
-.lastIcon {
+.trailingIcon {
   color: av-color(content);
-}
-
-.small {
-  height: 40px;
-}
-
-.large {
-  height: 56px;
 }

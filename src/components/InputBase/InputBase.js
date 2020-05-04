@@ -18,16 +18,15 @@ const inputTypes = Object.freeze({
 
 const InputBase = React.forwardRef((props, ref) => {
   const {
-    size,
     type,
     resize,
-    lastIcon,
+    trailingIcon,
     disabled,
     className,
     multiline,
     leadingIcon,
     onFocus,
-    onLastIconClick,
+    onTrailingIconClick,
     ...inputProps
   } = props
   const [inputType, setInputType] = useState(type)
@@ -35,7 +34,6 @@ const InputBase = React.forwardRef((props, ref) => {
   const inputRef = ref || React.createRef()
   const inputClasses = classNames(
     styles.inputBase,
-    styles[size],
     styles[type],
     resize && styles.resize,
     disabled && styles.disabled,
@@ -49,20 +47,20 @@ const InputBase = React.forwardRef((props, ref) => {
   const onPasswordIconClick = (e) => {
     setInputType(inputType === inputTypes.PASSWORD ? inputTypes.TEXT : inputTypes.PASSWORD)
     e.stopPropagation()
-    onLastIconClick()
+    onTrailingIconClick()
   }
 
   const onIconClick = (e) => {
     e.stopPropagation()
-    onLastIconClick()
+    onTrailingIconClick()
   }
 
-  const renderLastIcon = () => {
-    if (!lastIcon && type !== inputTypes.PASSWORD) {
+  const renderTrailingIcon = () => {
+    if (!trailingIcon && type !== inputTypes.PASSWORD) {
       return null
     }
-    let icon = lastIcon
-    const shouldRenderPasswordIcon = inputTypes.PASSWORD && !lastIcon
+    let icon = trailingIcon
+    const shouldRenderPasswordIcon = inputTypes.PASSWORD && !trailingIcon
 
     if (shouldRenderPasswordIcon) {
       icon = inputType === inputTypes.PASSWORD ? <EyeDisabledIcon /> : <EyeEnabledIcon />
@@ -73,7 +71,7 @@ const InputBase = React.forwardRef((props, ref) => {
         variant="ghost"
         onClick={ shouldRenderPasswordIcon ? onPasswordIconClick : onIconClick }
         disabled={ disabled }
-        className={ styles.lastIcon }
+        className={ styles.trailingIcon }
       >
         { icon }
       </IconButton>
@@ -90,22 +88,19 @@ const InputBase = React.forwardRef((props, ref) => {
         disabled={ disabled }
         { ...inputProps }
       />
-      { renderLastIcon() }
+      { renderTrailingIcon() }
     </div>
   )
 })
 
 InputBase.defaultProps = {
-  size: 'large',
   type: 'text',
   // Events
   onFocus: (e) => e,
-  onLastIconClick: (e) => e,
+  onTrailingIconClick: (e) => e,
 }
 
 InputBase.propTypes = {
-  /** The size of the button. */
-  size: propTypes.oneOf(['small', 'large']),
   /** Must be one of the HTML input types. */
   type: propTypes.string,
   /** If true, the text field will be able to resize. */
@@ -119,13 +114,13 @@ InputBase.propTypes = {
   /** Icon before the children. */
   leadingIcon: propTypes.element,
   /** Icon after the children. */
-  lastIcon: propTypes.element,
+  trailingIcon: propTypes.element,
   /** Icon after on click. */
-  lastIconClick: propTypes.func,
+  trailingIconClick: propTypes.func,
   /** Event fires when a change appeared in the input element. */
   onChange: propTypes.func,
   /** Event fires when the user click on the last icon */
-  onLastIconClick: propTypes.func,
+  onTrailingIconClick: propTypes.func,
   /** @ignore */
   onClick: propTypes.func,
   /** @ignore */

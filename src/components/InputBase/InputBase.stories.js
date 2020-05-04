@@ -13,13 +13,6 @@ export default {
 
 export const Default = () => <InputBase placeholder="Placeholder" />
 
-export const sizes = () => (
-  <div className={ styles.marginFlexContainer }>
-    <InputBase placeholder="Large Size" />
-    <InputBase size="small" placeholder="Small Size" />
-  </div>
-)
-
 export const disable = () => (
   <div className={ styles.marginFlexContainer }>
     <InputBase placeholder="Enabled" />
@@ -29,7 +22,7 @@ export const disable = () => (
 
 export const withIcon = () => <InputBase leadingIcon={ <SunIcon /> } placeholder="With Icon" />
 
-export const withLastIcon = () => <InputBase lastIcon={ <SunIcon /> } placeholder="With Last Icon" />
+export const withLastIcon = () => <InputBase trailingIcon={ <SunIcon /> } placeholder="With Last Icon" />
 
 export const states = () => (
   <>
@@ -43,7 +36,6 @@ export const states = () => (
 export const playground = () => (
   <>
     <InputBase
-      size={ select('size', ['small', 'large'], 'large') }
       disabled={ boolean('disabled', false) }
       type={ select('type', ['number', 'password', 'text'], 'text') }
     />
