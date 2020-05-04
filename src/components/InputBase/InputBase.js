@@ -122,18 +122,18 @@ InputBase.propTypes = {
   lastIcon: propTypes.element,
   /** Icon after on click. */
   lastIconClick: propTypes.func,
-  /**  @ignore */
-  onClick: propTypes.func,
-  /**  @ignore */
-  onFocus: propTypes.func,
   /** Event fires when a change appeared in the input element. */
   onChange: propTypes.func,
-  /** @ignore */
-  onKeyUp: propTypes.func,
-  /**  @ignore */
-  onKeyDown: propTypes.func,
   /** Event fires when the user click on the last icon */
   onLastIconClick: propTypes.func,
+  /** @ignore */
+  onClick: propTypes.func,
+  /** @ignore */
+  onFocus: propTypes.func,
+  /** @ignore */
+  onKeyUp: propTypes.func,
+  /** @ignore */
+  onKeyDown: propTypes.func,
 }
 
 export default memo(InputBase)

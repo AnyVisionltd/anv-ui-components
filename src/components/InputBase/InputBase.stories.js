@@ -1,5 +1,5 @@
 import React from 'react'
-import { text } from '@storybook/addon-knobs'
+import { boolean, select } from '@storybook/addon-knobs'
 import InputBase from './InputBase'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
 import { centerDecorator } from '../../utils/storybook/decorators'
@@ -42,9 +42,10 @@ export const states = () => (
 
 export const playground = () => (
   <>
-    <InputBase />
-    <label htmlFor="checkbox-playground">
-      { text('Label text', 'Hit me!') }
-    </label>
+    <InputBase
+      size={ select('size', ['small', 'large'], 'large') }
+      disabled={ boolean('disabled', false) }
+      type={ select('type', ['number', 'password', 'text'], 'text') }
+    />
   </>
 )
