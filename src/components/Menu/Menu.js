@@ -45,8 +45,8 @@ const Menu = ({
     className,
   )
 
-  let animationVerticalStartingPoint
-  let animationHorizontalStartingPoint
+  let animationVerticalStartingPoint = 'top'
+  let animationHorizontalStartingPoint = 'start'
   switch (positionClassNames.vertical) {
     case 'fromAnchorElementTopUpwards':
     case 'fromAnchorElementBottomUpwards':
