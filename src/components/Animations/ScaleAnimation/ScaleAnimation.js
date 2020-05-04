@@ -18,17 +18,17 @@ const ScaleAnimation = ({
 )
 
 ScaleAnimation.defaultProps = {
-  verticalStart: 'top',
-  horizontalStart: 'start',
+  verticalStart: 'center',
+  horizontalStart: 'center',
 }
 
 ScaleAnimation.propTypes = {
   /** If <code>true</code> display <code>children</code>. */
   isOpen: propTypes.bool.isRequired,
   /** Animation vertical starting position. */
-  verticalStart: propTypes.oneOf(['top', 'bottom']),
+  verticalStart: propTypes.oneOf(['center', 'top', 'bottom']),
   /** Animation vertical starting position. */
-  horizontalStart: propTypes.oneOf(['start', 'end']),
+  horizontalStart: propTypes.oneOf(['center', 'start', 'end']),
   /** The component content. */
   children: propTypes.element.isRequired,
 }

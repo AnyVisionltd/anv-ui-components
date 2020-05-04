@@ -24,6 +24,10 @@
 }
 
 .scale {
+  &-center-center {
+    @include scale(center, center)
+  }
+
   &-top {
     &-start {
       @include scale(top, left)

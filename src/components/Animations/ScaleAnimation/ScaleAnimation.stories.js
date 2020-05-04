@@ -5,7 +5,7 @@ import { centerDecorator } from '../../../utils/storybook/decorators'
 import styles from '../../../styles/storybook/index.module.scss'
 
 export default {
-  title: 'Animations/ScaleAnimation',
+  title: 'Animations/Scale',
   component: ScaleAnimation,
   decorators: [centerDecorator],
 }
@@ -17,7 +17,7 @@ export const Basic = () => {
     horizontalStart: 'start',
   })
   const { isOpen, verticalStart, horizontalStart } = scaleConfig
-  const scale = (vertical, horizontal) => {
+  const scale = (vertical='center', horizontal='center') => {
     setScaleConfig({
       isOpen: !isOpen,
       verticalStart: vertical,
@@ -27,6 +27,11 @@ export const Basic = () => {
 
   return (
     <div style={ { height: '150px' } }>
+      <div className={ styles.marginFlexContainer }>
+        <Button onClick={ () => scale() }>
+          Pop from center
+        </Button>
+      </div>
       <div className={ styles.marginFlexContainer }>
         <Button onClick={ () => scale('top', 'start') }>
           start from top, left to right
