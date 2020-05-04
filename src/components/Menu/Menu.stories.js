@@ -20,7 +20,7 @@ export const Default = () => {
     <div className={ styles.menuExample }>
 
       <Button
-        aria-controls="menu-story"
+        aria-controls="menu-story-default"
         aria-haspopup="true"
         onClick={ handleButtonClick }
         ref={ ref }
@@ -29,7 +29,7 @@ export const Default = () => {
       </Button>
 
       <Menu
-        aria-labelledby="menu-story"
+        aria-labelledby="menu-story-default"
         controllingElementRef={ ref.current }
         isOpen={ isOpen }
         onClose={ handleMenuClose }
@@ -126,7 +126,7 @@ export const WithSubMenus = () => {
     <div className={ styles.menuExample }>
 
       <Button
-        aria-controls="menu-story"
+        aria-controls="menu-story-submenu"
         aria-haspopup="true"
         onClick={ handleButtonClick }
         ref={ ref }
@@ -135,7 +135,7 @@ export const WithSubMenus = () => {
       </Button>
 
       <Menu
-        aria-labelledby="menu-story"
+        aria-labelledby="menu-story-submenu"
         controllingElementRef={ ref.current }
         isOpen={ isOpen }
         onClose={ handleMenuClose }
@@ -174,45 +174,49 @@ export const Variants = () => {
 
   return (
     <div className={ styles.menuExample }>
-      <Button
-        aria-controls="menu-story-regular"
-        aria-haspopup="true"
-        onClick={ openRegularMenu }
-        ref={ regularControllingElementRef }
-      >
-        Regular
-      </Button>
-      <Menu
-        aria-labelledby="menu-story-regular"
-        controllingElementRef={ regularControllingElementRef.current }
-        isOpen={ isRegularMenuOpened }
-        onClose={ closeRegularMenu }
-      >
-        <Menu.Item>Item #1</Menu.Item>
-        <Menu.Item>Item #2</Menu.Item>
-        <Menu.Item>Item #3</Menu.Item>
-        <Menu.Item>Item #4</Menu.Item>
-      </Menu>
-      <Button
-        aria-controls="menu-story-dense"
-        aria-haspopup="true"
-        onClick={ openDenseMenu }
-        ref={ denseControllingElementRef }
-      >
-        Dense
-      </Button>
-      <Menu
-        aria-labelledby="menu-story-dense"
-        controllingElementRef={ denseControllingElementRef.current }
-        isOpen={ isDenseMenuOpened }
-        onClose={ closeDenseMenu }
-        variant="dense"
-      >
-        <Menu.Item>Item #1</Menu.Item>
-        <Menu.Item>Item #2</Menu.Item>
-        <Menu.Item>Item #3</Menu.Item>
-        <Menu.Item>Item #4</Menu.Item>
-      </Menu>
+      <div className={ styles.microMargin }>
+        <Button
+          aria-controls="menu-story-regular"
+          aria-haspopup="true"
+          onClick={ openRegularMenu }
+          ref={ regularControllingElementRef }
+        >
+          Regular
+        </Button>
+        <Menu
+          aria-labelledby="menu-story-regular"
+          controllingElementRef={ regularControllingElementRef.current }
+          isOpen={ isRegularMenuOpened }
+          onClose={ closeRegularMenu }
+        >
+          <Menu.Item>Item #1</Menu.Item>
+          <Menu.Item>Item #2</Menu.Item>
+          <Menu.Item>Item #3</Menu.Item>
+          <Menu.Item>Item #4</Menu.Item>
+        </Menu>
+      </div>
+      <div className={ styles.microMargin }>
+        <Button
+          aria-controls="menu-story-dense"
+          aria-haspopup="true"
+          onClick={ openDenseMenu }
+          ref={ denseControllingElementRef }
+        >
+          Dense
+        </Button>
+        <Menu
+          aria-labelledby="menu-story-dense"
+          controllingElementRef={ denseControllingElementRef.current }
+          isOpen={ isDenseMenuOpened }
+          onClose={ closeDenseMenu }
+          variant="dense"
+        >
+          <Menu.Item>Item #1</Menu.Item>
+          <Menu.Item>Item #2</Menu.Item>
+          <Menu.Item>Item #3</Menu.Item>
+          <Menu.Item>Item #4</Menu.Item>
+        </Menu>
+      </div>
     </div>
   )
 }

@@ -78,22 +78,10 @@ const useElementAbsolutePositioning = (
     classNames.horizontal = 'fromAnchorElementEnd'
   }
 
-  const getClosestScrollableParent = (node) => {
-    if (node == null) {
-      return null
-    }
-
-    if (node.scrollHeight > node.clientHeight) {
-      return node
-    } else {
-      return getClosestScrollableParent(node.parentNode)
-    }
-  }
-
   const isFloatingElementOutOfVerticalBounds = () => {
     const { top } = styles
     const bottom = top + floatingElementHeight
-    return bottom > containerHeight
+    return bottom > (containerHeight + window.scrollY)
   }
   const isFloatingElementOutOfHorizontalBounds = () => {
     let { left } = styles
