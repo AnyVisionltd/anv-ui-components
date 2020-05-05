@@ -19,6 +19,7 @@ const inputTypes = Object.freeze({
 const InputBase = React.forwardRef((props, ref) => {
   const {
     type,
+    value,
     resize,
     trailingIcon,
     disabled,
@@ -84,6 +85,7 @@ const InputBase = React.forwardRef((props, ref) => {
       <Input
         ref={ inputRef }
         type={ inputType }
+        value={ value }
         onFocus={ onFocus }
         disabled={ disabled }
         { ...inputProps }
@@ -103,11 +105,13 @@ InputBase.defaultProps = {
 InputBase.propTypes = {
   /** Must be one of the HTML input types. */
   type: propTypes.string,
+  /** The value of the input element, required for a controlled component. */
+  value: propTypes.oneOfType([propTypes.string, propTypes.number]),
   /** If true, the text field will be able to resize. */
   resize: propTypes.bool,
-  /** If true, the checkbox will be disabled. */
+  /** If true, the input will be disabled. */
   disabled: propTypes.bool,
-  /** Will change thee input to text field */
+  /** Will change the input to text field */
   multiline: propTypes.bool,
   /** For css customization. */
   className: propTypes.string,

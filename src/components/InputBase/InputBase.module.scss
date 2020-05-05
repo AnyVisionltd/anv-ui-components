@@ -11,7 +11,7 @@
   border-radius: av-radius(tidy);
 
   &.disabled {
-    opacity: av-opacity(medium);
+    opacity: av-opacity(disabled);
   }
 
   &.resize {
