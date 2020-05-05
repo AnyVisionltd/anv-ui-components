@@ -1,5 +1,7 @@
 import React from 'react'
-import { boolean, select } from '@storybook/addon-knobs'
+import {
+  boolean, number, select, text,
+} from '@storybook/addon-knobs'
 import InputBase from './InputBase'
 import { IconButton } from '../IconButton'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
@@ -41,11 +43,27 @@ export const states = () => (
   </div>
 )
 
-export const playground = () => (
+export const inputPlayground = () => (
   <>
     <InputBase
-      disabled={ boolean('disabled', false) }
       type={ select('type', ['number', 'password', 'text'], 'text') }
+      value={ text('value', '') }
+      onChange={ () => {} }
+      disabled={ boolean('disabled', false) }
+      readOnly={ boolean('read-only', false) }
+    />
+  </>
+)
+
+export const textAreaPlayground = () => (
+  <>
+    <InputBase
+      multiline
+      rows={ number('rows', 3) }
+      value={ text('value', '') }
+      onChange={ () => {} }
+      disabled={ boolean('disabled', false) }
+      readOnly={ boolean('read-only', false) }
     />
   </>
 )

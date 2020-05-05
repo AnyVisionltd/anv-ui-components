@@ -17,7 +17,7 @@ export const Basic = () => {
     horizontalStart: 'start',
   })
   const { isOpen, verticalStart, horizontalStart } = scaleConfig
-  const scale = (vertical='center', horizontal='center') => {
+  const scale = (vertical = 'center', horizontal = 'center') => {
     setScaleConfig({
       isOpen: !isOpen,
       verticalStart: vertical,
@@ -26,7 +26,10 @@ export const Basic = () => {
   }
 
   return (
-    <div style={ { height: '250px', display: 'flex', flexDirection: 'column', alignItems: 'center' } }>
+    <div style={ {
+      height: '250px', display: 'flex', flexDirection: 'column', alignItems: 'center',
+    } }
+    >
       <div className={ styles.marginFlexContainer }>
         <Button onClick={ () => scale('top', 'start') }>
           start from top, left to right
