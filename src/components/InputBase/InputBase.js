@@ -81,7 +81,6 @@ const InputBase = React.forwardRef((props, ref) => {
       { leadingIcon && <span className={ styles.leadingIcon }>{ leadingIcon }</span> }
       <Input
         ref={ inputRef }
-        type={ inputType }
         value={ value }
         onFocus={ onFocus }
         disabled={ disabled }
