@@ -4,6 +4,16 @@
 .menuContainer {
   position: absolute;
   z-index: 1;
+
+  &.subMenu {
+    &.down {
+      margin-top: calc(#{av-space(tiny)} * -1);
+    }
+
+    &.up {
+      margin-top: av-space(tiny);
+    }
+  }
 }
 
 .menu {
@@ -28,16 +38,5 @@
     li {
       height: 32px;
     }
-  }
-}
-
-.fromAnchorElementEnd,
-.fromAnchorElementStart {
-  &.fromAnchorElementBottomUpwards {
-    margin-top: av-space(tiny);
-  }
-
-  &.fromAnchorElementTopDownwards {
-    margin-top: calc(#{av-space(tiny)} * -1);
   }
 }

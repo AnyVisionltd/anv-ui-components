@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { useClickOutsideListener, useElementAbsolutePositioning } from '../../hooks'
@@ -13,13 +13,42 @@ const Menu = ({
   className,
   anchorElement,
   attachDirection,
-  usePortal,
   children,
   openDirection,
+  isSubMenu,
   ...otherProps
 }) => {
+  const [preservedPositioning, setPreservedPositioning] = useState(null)
   const [isDisplayed, setDisplayed] = useState(false)
   const menuWrapperRef = useRef()
+  let {
+    styles: positionStyles,
+    openDirection: actualOpenDirection,
+  } = useElementAbsolutePositioning(
+    anchorElement,
+    menuWrapperRef && menuWrapperRef.current,
+    attachDirection,
+    openDirection,
+    !isSubMenu,
+  )
+  // Override the positions received from useElementAbsolutePositioning
+  // For closing the menu the same way it opened
+  if (isDisplayed && preservedPositioning) {
+    positionStyles = preservedPositioning.styles
+    actualOpenDirection = preservedPositioning.openDirection
+  }
+
+  useEffect(() => {
+    if (isDisplayed && !preservedPositioning && positionStyles && actualOpenDirection) {
+      // Save a preserved positioning to use while closing
+      // We would only want the last position received when menu was opened
+      setPreservedPositioning({
+        styles: positionStyles,
+        openDirection: actualOpenDirection,
+      })
+    }
+  }, [positionStyles, actualOpenDirection, isDisplayed, preservedPositioning])
+
   useClickOutsideListener((event) => {
     const { target } = event
     if (!isDisplayed || target === anchorElement) {
@@ -27,20 +56,12 @@ const Menu = ({
     }
     onClose(event)
   }, menuWrapperRef)
-  const {
-    styles: positionStyles = {},
-    classNames: positionClassNames = {},
-  } = useElementAbsolutePositioning(
-    anchorElement,
-    menuWrapperRef && menuWrapperRef.current,
-    attachDirection,
-    openDirection,
-    usePortal,
-  )
+
   const containerClasses = classNames(
     styles.menuContainer,
-    positionClassNames && styles[positionClassNames.vertical],
-    positionClassNames && styles[positionClassNames.horizontal],
+    actualOpenDirection && styles[actualOpenDirection.vertical],
+    actualOpenDirection && styles[actualOpenDirection.horizontal],
+    isSubMenu && styles.subMenu,
   )
   const menuClasses = classNames(
     styles.menu,
@@ -48,23 +69,25 @@ const Menu = ({
     className,
   )
 
-  let animationVerticalStartingPoint = 'top'
-  let animationHorizontalStartingPoint = 'start'
-  switch (positionClassNames.vertical) {
-    case 'fromAnchorElementTopUpwards':
-    case 'fromAnchorElementBottomUpwards':
-      animationVerticalStartingPoint = 'bottom'
-      break
-    default: animationHorizontalStartingPoint = 'top'
+  const handleMenuOpen = () => {
+    setDisplayed(true)
   }
 
-  switch (positionClassNames.horizontal) {
-    case 'fromAnchorElementEndToAnchorElementStart':
-    case 'fromAnchorElementStart':
-      animationHorizontalStartingPoint = 'end'
-      break
-    default: animationHorizontalStartingPoint = 'start'
+  const handleMenuClose = () => {
+    setDisplayed(false)
+    setPreservedPositioning(null)
   }
+
+  // Scale animations direction props represent the start point,
+  // whilst open direction means the opposite.
+  // Therefore, we need to switch the directions
+  const animationVerticalStartingPoint = actualOpenDirection && actualOpenDirection.vertical === 'up'
+    ? 'bottom'
+    : 'top'
+
+  const animationHorizontalStartingPoint = actualOpenDirection && actualOpenDirection.horizontal === 'start'
+    ? 'end'
+    : 'start'
 
   const renderMenuList = () => (
     <ul
@@ -84,8 +107,8 @@ const Menu = ({
     >
       <Animations.Scale
         isOpen={ isOpen }
-        onEnter={ () => setDisplayed(true) }
-        onExited={ () => setDisplayed(false) }
+        onEnter={ () => handleMenuOpen() }
+        onExited={ () => handleMenuClose() }
         verticalStart={ animationVerticalStartingPoint }
         horizontalStart={ animationHorizontalStartingPoint }
       >
@@ -100,7 +123,7 @@ const Menu = ({
     </Portal>
   )
 
-  return usePortal
+  return !isSubMenu
     ? renderMenuInPortal()
     : renderMenu()
 }
@@ -110,7 +133,7 @@ Menu.defaultProps = {
   variant: 'regular',
   onClose: () => {
   },
-  usePortal: true,
+  isSubMenu: false,
   openDirection: 'auto',
   attachDirection: 'vertical',
 }
@@ -133,8 +156,7 @@ Menu.propTypes = {
   className: propTypes.string,
   /** Menu items (Menu.Item) or sub menus (Menu.SubMenu). */
   children: propTypes.node.isRequired,
-  /** A callback triggered whenever the user is clicking outside the menu scope.
-   * Usually should close the menu. */
+  /** A callback triggered whenever the user is clicking outside the menu scope. */
   onClose: propTypes.func,
   /** Force the menu to open <b>to</b> a certain side.<br />
    * <code>up</code> - means that the menu will open <u>upwards</u><br />
@@ -149,8 +171,9 @@ Menu.propTypes = {
     'up-start', 'up-end',
     'down-start', 'down-end',
   ]),
-  /** Should the menu be wrapped with a portal */
-  usePortal: propTypes.bool,
+  /** <code>INTERNAL</code> Is the menu is in-fact a sub menu.
+   * Is set internally by <code>Menu.SubMenu</code> */
+  isSubMenu: propTypes.bool,
 }
 
 export default Menu

@@ -32,51 +32,51 @@ const useElementAbsolutePositioning = (
     : anchorElement.offsetLeft
 
   const styles = {}
-  const classNames = {
+  const actualOpenDirection = {
     vertical: '',
     horizontal: '',
   }
 
   const displayElementFromAnchorElementTopUpwards = () => {
     styles.top = offsetTop - floatingElementHeight
-    classNames.vertical = 'fromAnchorElementTopUpwards'
+    actualOpenDirection.vertical = 'up'
   }
   const displayElementFromAnchorElementBottomUpwards = () => {
     styles.top = offsetTop + anchorHeight - floatingElementHeight
-    classNames.vertical = 'fromAnchorElementBottomUpwards'
+    actualOpenDirection.vertical = 'up'
   }
   const displayElementFromAnchorElementTopDownwards = () => {
     styles.top = offsetTop
-    classNames.vertical = 'fromAnchorElementTopDownwards'
+    actualOpenDirection.vertical = 'down'
   }
   const displayElementFromAnchorElementBottomDownwards = () => {
     styles.top = offsetTop + anchorHeight
-    classNames.vertical = 'fromAnchorElementBottomDownwards'
+    actualOpenDirection.vertical = 'down'
   }
 
   const displayElementFromAnchorElementStartToAnchorElementEnd = () => {
     styles.left = isWindowRtl
       ? offsetLeft + anchorWidth - floatingElementWidth
       : offsetLeft
-    classNames.horizontal = 'fromAnchorElementStartToAnchorElementEnd'
-  }
-  const displayElementFromAnchorElementStart = () => {
-    styles.left = isWindowRtl
-      ? offsetLeft + anchorWidth
-      : offsetLeft - floatingElementWidth
-    classNames.horizontal = 'fromAnchorElementStart'
-  }
-  const displayElementFromAnchorElementEndToAnchorElementStart = () => {
-    styles.left = isWindowRtl
-      ? offsetLeft
-      : offsetLeft + anchorWidth - floatingElementWidth
-    classNames.horizontal = 'fromAnchorElementEndToAnchorElementStart'
+    actualOpenDirection.horizontal = 'end'
   }
   const displayElementFromAnchorElementEnd = () => {
     styles.left = isWindowRtl
       ? offsetLeft - floatingElementWidth
       : offsetLeft + anchorWidth
-    classNames.horizontal = 'fromAnchorElementEnd'
+    actualOpenDirection.horizontal = 'end'
+  }
+  const displayElementFromAnchorElementEndToAnchorElementStart = () => {
+    styles.left = isWindowRtl
+      ? offsetLeft
+      : offsetLeft + anchorWidth - floatingElementWidth
+    actualOpenDirection.horizontal = 'start'
+  }
+  const displayElementFromAnchorElementStart = () => {
+    styles.left = isWindowRtl
+      ? offsetLeft + anchorWidth
+      : offsetLeft - floatingElementWidth
+    actualOpenDirection.horizontal = 'start'
   }
 
   const isFloatingElementOutOfVerticalBounds = () => {
@@ -93,7 +93,33 @@ const useElementAbsolutePositioning = (
     return left < 0 || right > containerWidth
   }
 
-  if (openDirection && openDirection !== 'auto') {
+  if (attachDirection === 'horizontal') {
+    if (openDirection && openDirection !== 'auto') {
+      const [vertical, horizontal] = openDirection.split('-')
+
+      if (vertical === 'up') {
+        displayElementFromAnchorElementBottomUpwards()
+      } else if (vertical === 'down') {
+        displayElementFromAnchorElementTopDownwards()
+      }
+
+      if (horizontal === 'start') {
+        displayElementFromAnchorElementStart()
+      } else if (horizontal === 'end') {
+        displayElementFromAnchorElementEnd()
+      }
+    } else {
+      displayElementFromAnchorElementTopDownwards()
+      displayElementFromAnchorElementEnd()
+
+      if (isFloatingElementOutOfVerticalBounds()) {
+        displayElementFromAnchorElementBottomUpwards()
+      }
+      if (isFloatingElementOutOfHorizontalBounds()) {
+        displayElementFromAnchorElementStart()
+      }
+    }
+  } else if (openDirection && openDirection !== 'auto') {
     const [vertical, horizontal] = openDirection.split('-')
 
     if (vertical === 'up') {
@@ -106,16 +132,6 @@ const useElementAbsolutePositioning = (
       displayElementFromAnchorElementEndToAnchorElementStart()
     } else if (horizontal === 'end') {
       displayElementFromAnchorElementStartToAnchorElementEnd()
-    }
-  } else if (attachDirection === 'horizontal') {
-    displayElementFromAnchorElementTopDownwards()
-    displayElementFromAnchorElementEnd()
-
-    if (isFloatingElementOutOfVerticalBounds()) {
-      displayElementFromAnchorElementBottomUpwards()
-    }
-    if (isFloatingElementOutOfHorizontalBounds()) {
-      displayElementFromAnchorElementStart()
     }
   } else {
     displayElementFromAnchorElementBottomDownwards()
@@ -131,7 +147,7 @@ const useElementAbsolutePositioning = (
 
   return {
     styles,
-    classNames,
+    openDirection: actualOpenDirection,
   }
 }
 

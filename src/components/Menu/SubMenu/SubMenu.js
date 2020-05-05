@@ -56,8 +56,8 @@ const SubMenu = ({
         className={ subMenuClassName }
         isOpen={ isOpened }
         anchorElement={ ref.current }
-        usePortal={ false }
         attachDirection="horizontal"
+        isSubMenu
       >
         { children }
       </Menu>
