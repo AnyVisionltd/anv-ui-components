@@ -44,7 +44,7 @@ const InputBase = React.forwardRef((props, ref) => {
   let elementProps = inputProps
   if (multiline) {
     Input = inputElements.TEXTAREA
-    elementProps = { rows, resize, ...elementProps }
+    elementProps = { rows, ...elementProps }
   } else {
     elementProps = { type, ...elementProps }
   }

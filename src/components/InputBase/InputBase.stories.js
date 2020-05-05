@@ -52,18 +52,13 @@ export const inputPlayground = () => (
       disabled={ boolean('disabled', false) }
       readOnly={ boolean('read-only', false) }
     />
-  </>
-)
-
-export const textAreaPlayground = () => (
-  <>
     <InputBase
       multiline
-      rows={ number('rows', 3) }
-      value={ text('value', '') }
+      rows={ number('multiline - rows', 3) }
+      value={ text('multiline - value', '') }
       onChange={ () => {} }
-      disabled={ boolean('disabled', false) }
-      readOnly={ boolean('read-only', false) }
+      disabled={ boolean('multiline - disabled', false) }
+      readOnly={ boolean('multiline - read-only', false) }
     />
   </>
 )

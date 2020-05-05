@@ -21,6 +21,7 @@
   &.resize {
     > textarea {
       resize: vertical;
+      min-height: 40px;
     }
   }
 
