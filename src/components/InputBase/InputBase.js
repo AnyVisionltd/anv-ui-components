@@ -18,16 +18,16 @@ const inputTypes = Object.freeze({
 
 const InputBase = React.forwardRef((props, ref) => {
   const {
+    rows,
     type,
     value,
     resize,
-    trailingIcon,
     disabled,
     className,
     multiline,
     leadingIcon,
+    trailingComponent,
     onFocus,
-    onTrailingIconClick,
     ...inputProps
   } = props
   const [inputType, setInputType] = useState(type)
@@ -38,43 +38,40 @@ const InputBase = React.forwardRef((props, ref) => {
     styles[type],
     resize && styles.resize,
     disabled && styles.disabled,
+    multiline && styles.multiline,
     className,
   )
-
+  let elementProps = inputProps
   if (multiline) {
     Input = inputElements.TEXTAREA
+    elementProps = { rows, resize, ...elementProps }
+  } else {
+    elementProps = { type, ...elementProps }
   }
 
   const onPasswordIconClick = (e) => {
     setInputType(inputType === inputTypes.PASSWORD ? inputTypes.TEXT : inputTypes.PASSWORD)
     e.stopPropagation()
-    onTrailingIconClick()
-  }
-
-  const onIconClick = (e) => {
-    e.stopPropagation()
-    onTrailingIconClick()
   }
 
   const renderTrailingIcon = () => {
-    if (!trailingIcon && type !== inputTypes.PASSWORD) {
+    if (!trailingComponent && type !== inputTypes.PASSWORD) {
       return null
     }
-    let icon = trailingIcon
-    const shouldRenderPasswordIcon = inputTypes.PASSWORD && !trailingIcon
-
-    if (shouldRenderPasswordIcon) {
-      icon = inputType === inputTypes.PASSWORD ? <EyeDisabledIcon /> : <EyeEnabledIcon />
+    if (trailingComponent) {
+      return (
+        <>{ trailingComponent }</>
+      )
     }
 
     return (
       <IconButton
         variant="ghost"
-        onClick={ shouldRenderPasswordIcon ? onPasswordIconClick : onIconClick }
+        onClick={ onPasswordIconClick }
         disabled={ disabled }
         className={ styles.trailingIcon }
       >
-        { icon }
+        { inputType === inputTypes.PASSWORD ? <EyeDisabledIcon /> : <EyeEnabledIcon /> }
       </IconButton>
     )
   }
@@ -88,7 +85,7 @@ const InputBase = React.forwardRef((props, ref) => {
         value={ value }
         onFocus={ onFocus }
         disabled={ disabled }
-        { ...inputProps }
+        { ...elementProps }
       />
       { renderTrailingIcon() }
     </div>
@@ -99,7 +96,6 @@ InputBase.defaultProps = {
   type: 'text',
   // Events
   onFocus: (e) => e,
-  onTrailingIconClick: (e) => e,
 }
 
 InputBase.propTypes = {
@@ -109,22 +105,22 @@ InputBase.propTypes = {
   value: propTypes.oneOfType([propTypes.string, propTypes.number]),
   /** If true, the text field will be able to resize. */
   resize: propTypes.bool,
+  /** Number of rows to display when multiline option is set to true. */
+  rows: propTypes.oneOfType([propTypes.string, propTypes.number]),
   /** If true, the input will be disabled. */
   disabled: propTypes.bool,
   /** Will change the input to text field */
   multiline: propTypes.bool,
+  /** Will change the input read-only */
+  readOnly: propTypes.bool,
   /** For css customization. */
   className: propTypes.string,
   /** Icon before the children. */
   leadingIcon: propTypes.element,
   /** Icon after the children. */
-  trailingIcon: propTypes.element,
-  /** Icon after on click. */
-  trailingIconClick: propTypes.func,
+  trailingComponent: propTypes.element,
   /** Event fires when a change appeared in the input element. */
   onChange: propTypes.func,
-  /** Event fires when the user click on the last icon */
-  onTrailingIconClick: propTypes.func,
   /** @ignore */
   onClick: propTypes.func,
   /** @ignore */

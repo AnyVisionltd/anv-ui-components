@@ -1,14 +1,18 @@
 @import "~@anyvision/style-guide";
 
 .inputBase {
-  width: av-size(sz-240);
   height: 40px;
+  width: av-size(sz-240);
   display: flex;
   justify-content: center;
   padding: av-space(tiny);
   align-items: center;
   border: solid 2px av-color(content, av-opacity(divider));
   border-radius: av-radius(tidy);
+
+  &.multiline {
+    height: auto;
+  }
 
   &.disabled {
     opacity: av-opacity(disabled);
