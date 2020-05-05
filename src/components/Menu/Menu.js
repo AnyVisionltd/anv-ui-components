@@ -51,7 +51,7 @@ const Menu = ({
 
   useClickOutsideListener((event) => {
     const { target } = event
-    if (!isDisplayed || target === anchorElement) {
+    if (!isOpen || target === anchorElement) {
       return
     }
     onClose(event)
@@ -164,7 +164,7 @@ Menu.propTypes = {
    * <code>start</code> - means that the menu will open
    * <u>towards the inline-start</u> of the document<br />
    * <code>end</code> - means that the menu will open
-   * <u>towards the inline-end</u> of the document<br />
+   * <u>towards the inline-end</u> of the document
    * */
   openDirection: propTypes.oneOf([
     'auto',

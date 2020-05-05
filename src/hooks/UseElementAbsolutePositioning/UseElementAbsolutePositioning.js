@@ -80,7 +80,10 @@ const useElementAbsolutePositioning = (
   }
 
   const isFloatingElementOutOfVerticalBounds = () => {
-    const { top } = styles
+    let { top } = styles
+    if (!isUsingPortal) {
+      top += anchorElement.getBoundingClientRect().bottom
+    }
     const bottom = top + floatingElementHeight
     return bottom > (containerHeight + window.scrollY)
   }
