@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { select, boolean, text } from '@storybook/addon-knobs'
-import styleGuideColors from '@anyvision/style-guide/abstracts/_colors.scss'
+import { boolean, text } from '@storybook/addon-knobs'
 import Checkbox from './Checkbox'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import styles from '../../styles/storybook/index.module.scss'
@@ -47,7 +46,6 @@ export const states = () => (
 export const playground = () => (
   <>
     <Checkbox
-      color={ select('color', Object.keys(styleGuideColors), 'primary') }
       indeterminate={ boolean('indeterminate', false) }
       checked={ boolean('checked', false) }
       disabled={ boolean('disabled', false) }
