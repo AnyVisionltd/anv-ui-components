@@ -34,7 +34,7 @@ export const withTrailingComponent = () => (
 
 export const states = () => (
   <div className={ styles.flexMultipleRows }>
-    <InputBase readOnly placeholder="readOnly" />
+    <InputBase readOnly placeholder="readOnly" defaultValue="dadad" />
     <InputBase type="password" placeholder="Password" />
     <InputBase type="number" placeholder="number" />
     <InputBase multiline placeholder="Multiline" />
@@ -49,16 +49,11 @@ export const inputPlayground = () => (
       type={ select('type', ['number', 'password', 'text'], 'text') }
       value={ text('value', '') }
       onChange={ () => {} }
+      resize={ number('multiline - resize', 3) }
+      multiline={ boolean('multiline', false) }
+      rows={ number('multiline - rows', 3) }
       disabled={ boolean('disabled', false) }
       readOnly={ boolean('read-only', false) }
-    />
-    <InputBase
-      multiline
-      rows={ number('multiline - rows', 3) }
-      value={ text('multiline - value', '') }
-      onChange={ () => {} }
-      disabled={ boolean('multiline - disabled', false) }
-      readOnly={ boolean('multiline - read-only', false) }
     />
   </>
 )

@@ -20,14 +20,12 @@ const InputBase = React.forwardRef((props, ref) => {
   const {
     rows,
     type,
-    value,
     resize,
     disabled,
     className,
     multiline,
     leadingIcon,
     trailingComponent,
-    onFocus,
     ...inputProps
   } = props
   const [inputType, setInputType] = useState(type)
@@ -81,8 +79,6 @@ const InputBase = React.forwardRef((props, ref) => {
       { leadingIcon && <span className={ styles.leadingIcon }>{ leadingIcon }</span> }
       <Input
         ref={ inputRef }
-        value={ value }
-        onFocus={ onFocus }
         disabled={ disabled }
         { ...elementProps }
       />
@@ -93,8 +89,6 @@ const InputBase = React.forwardRef((props, ref) => {
 
 InputBase.defaultProps = {
   type: 'text',
-  // Events
-  onFocus: () => {},
 }
 
 InputBase.propTypes = {
