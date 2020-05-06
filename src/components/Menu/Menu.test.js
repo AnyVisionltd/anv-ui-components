@@ -75,7 +75,7 @@ describe('<Menu />', () => {
 
       const { getByText } = render(
         <Menu isOpen>
-          <Menu.SubMenu onClosed={onClosedHandler} label="Sub menu label">
+          <Menu.SubMenu onClosed={ onClosedHandler } label="Sub menu label">
             <Menu.Item>Sub menu item</Menu.Item>
           </Menu.SubMenu>
         </Menu>,
