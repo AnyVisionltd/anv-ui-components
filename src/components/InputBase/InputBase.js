@@ -58,9 +58,7 @@ const InputBase = React.forwardRef((props, ref) => {
       return null
     }
     if (trailingComponent) {
-      return (
-        <>{ trailingComponent }</>
-      )
+      return <>{ trailingComponent }</>
     }
 
     return (
