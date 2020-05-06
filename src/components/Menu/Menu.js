@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import { useClickOutsideListener, useElementAbsolutePositioning, usePrevious } from '../../hooks'
+import { useClickOutsideListener, useElementAbsolutePositioning } from '../../hooks'
 import { Animations } from '../Animations'
 import { Portal } from '../Portal'
 import styles from './Menu.module.scss'
@@ -20,43 +20,20 @@ const Menu = ({
   onOpened,
   ...otherProps
 }) => {
-  const [preservedPositioning, setPreservedPositioning] = useState(null)
   const [isDisplayed, setDisplayed] = useState(false)
   const menuWrapperRef = useRef()
-  const previousAnchorElement = usePrevious(anchorElement)
-  let {
+
+  const {
     styles: positionStyles,
     openDirection: actualOpenDirection,
   } = useElementAbsolutePositioning(
     anchorElement,
     menuWrapperRef && menuWrapperRef.current,
     attachDirection,
+    isDisplayed,
     openDirection,
     !isSubMenu,
   )
-  // Override the positions received from useElementAbsolutePositioning
-  // For closing the menu the same way it opened
-  if (isDisplayed && preservedPositioning) {
-    positionStyles = preservedPositioning.styles
-    actualOpenDirection = preservedPositioning.openDirection
-  }
-
-  useEffect(() => {
-    if (anchorElement && anchorElement !== previousAnchorElement) {
-      setPreservedPositioning(null)
-    }
-  }, [anchorElement, previousAnchorElement])
-
-  useEffect(() => {
-    if (isDisplayed && !preservedPositioning && positionStyles && actualOpenDirection) {
-      // Save a preserved positioning to use while closing
-      // We would only want the last position received when menu was opened
-      setPreservedPositioning({
-        styles: positionStyles,
-        openDirection: actualOpenDirection,
-      })
-    }
-  }, [positionStyles, actualOpenDirection, isDisplayed, preservedPositioning])
 
   useClickOutsideListener((event) => {
     const { target } = event
@@ -85,7 +62,6 @@ const Menu = ({
 
   const handleMenuClose = () => {
     setDisplayed(false)
-    setPreservedPositioning(null)
     onClosed()
   }
 
