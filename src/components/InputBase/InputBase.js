@@ -29,7 +29,6 @@ const InputBase = React.forwardRef((props, ref) => {
     ...inputProps
   } = props
   const [inputType, setInputType] = useState(type)
-  let Input = inputElements.INPUT
   const inputRef = ref || React.createRef()
   const inputClasses = classNames(
     styles.inputBase,
@@ -39,7 +38,9 @@ const InputBase = React.forwardRef((props, ref) => {
     multiline && styles.multiline,
     className,
   )
+  let Input = inputElements.INPUT
   let elementProps = inputProps
+
   if (multiline) {
     Input = inputElements.TEXTAREA
     elementProps = { rows, ...elementProps }
