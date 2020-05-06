@@ -26,7 +26,7 @@ const InputBase = React.forwardRef((props, ref) => {
     multiline,
     leadingIcon,
     trailingComponent,
-    ...inputProps
+    ...otherProps
   } = props
   const [inputType, setInputType] = useState(type)
   const inputRef = ref || React.createRef()
@@ -39,7 +39,7 @@ const InputBase = React.forwardRef((props, ref) => {
     className,
   )
   let Input = inputElements.INPUT
-  let elementProps = inputProps
+  let elementProps = otherProps
 
   if (multiline) {
     Input = inputElements.TEXTAREA
