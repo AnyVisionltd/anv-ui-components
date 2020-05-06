@@ -94,7 +94,7 @@ const InputBase = React.forwardRef((props, ref) => {
 InputBase.defaultProps = {
   type: 'text',
   // Events
-  onFocus: (e) => e,
+  onFocus: () => {},
 }
 
 InputBase.propTypes = {
@@ -102,6 +102,8 @@ InputBase.propTypes = {
   type: propTypes.string,
   /** The value of the input element, required for a controlled component. */
   value: propTypes.oneOfType([propTypes.string, propTypes.number]),
+  /** The default input element value. Use when the component is not controlled. */
+  defaultValue: propTypes.oneOfType([propTypes.string, propTypes.number]),
   /** If true, the text field will be able to resize. */
   resize: propTypes.bool,
   /** Number of rows to display when multiline option is set to true. */
