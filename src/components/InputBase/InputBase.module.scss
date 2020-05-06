@@ -18,13 +18,6 @@
     opacity: av-opacity(disabled);
   }
 
-  &.resize {
-    > textarea {
-      resize: vertical;
-      min-height: 40px;
-    }
-  }
-
  > input,
  > textarea {
     color: av-color(content);

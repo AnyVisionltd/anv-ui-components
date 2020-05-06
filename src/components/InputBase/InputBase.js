@@ -20,7 +20,6 @@ const InputBase = React.forwardRef((props, ref) => {
   const {
     rows,
     type,
-    resize,
     disabled,
     className,
     multiline,
@@ -33,7 +32,6 @@ const InputBase = React.forwardRef((props, ref) => {
   const inputClasses = classNames(
     styles.inputBase,
     styles[type],
-    resize && styles.resize,
     disabled && styles.disabled,
     multiline && styles.multiline,
     className,
@@ -97,8 +95,6 @@ InputBase.propTypes = {
   value: propTypes.oneOfType([propTypes.string, propTypes.number]),
   /** The default input element value. Use when the component is not controlled. */
   defaultValue: propTypes.oneOfType([propTypes.string, propTypes.number]),
-  /** If true, the text field will be able to resize. */
-  resize: propTypes.bool,
   /** Number of rows to display when multiline option is set to true. */
   rows: propTypes.oneOfType([propTypes.string, propTypes.number]),
   /** If true, the input will be disabled. */

@@ -39,7 +39,6 @@ export const states = () => (
     <InputBase type="password" placeholder="Password" />
     <InputBase type="number" placeholder="number" />
     <InputBase multiline placeholder="Multiline" />
-    <InputBase multiline resize placeholder="Multiline Resize" />
     <InputBase multiline rows={ 10 } placeholder="Multiline 10 Rows" />
   </div>
 )
@@ -48,7 +47,6 @@ export const inputPlayground = () => {
   const isMultiline = boolean('multiline', false)
   const multilineProps = isMultiline && {
     rows: number('rows', 3),
-    resize: boolean('resize', false),
   }
   const inputProps = !isMultiline && {
     type: select('type', ['number', 'password', 'text'], 'text'),
