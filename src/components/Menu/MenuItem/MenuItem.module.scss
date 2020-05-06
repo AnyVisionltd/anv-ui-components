@@ -1,0 +1,33 @@
+@import "~@anyvision/style-guide";
+@import "../../../styles/mixin/ripple";
+
+.menuItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 av-space();
+  cursor: pointer;
+
+  .menuItemLabel {
+    flex: 1;
+  }
+
+  &:not(.subMenuItem):not(.menuItemDisabled) {
+    @include av-ripple();
+  }
+
+  &.subMenuItem:not(.menuItemDisabled):hover {
+    &:before {
+      // to fake ripple, without click effect
+      background-color: currentColor;
+      opacity: var(--divider, 0.12);
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

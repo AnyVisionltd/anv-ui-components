@@ -18,7 +18,7 @@
 ```bash
 npm install @anyvision/anv-ui-components
 ```
-__## Theming
+## Theming
 This library uses `@anyvision/style-guide`.
 </br>
 You can customize your theme by change the colors, the typography and much more.

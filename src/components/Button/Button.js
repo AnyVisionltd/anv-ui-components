@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 import styles from './Button.module.scss'
 
-const Button = ({
+const Button = forwardRef(({
   size,
   variant,
   leadingIcon,
@@ -12,7 +12,7 @@ const Button = ({
   className,
   children,
   ...otherProps
-}) => {
+}, ref) => {
   const classes = classNames(
     styles.button,
     styles[size],
@@ -25,13 +25,14 @@ const Button = ({
       className={ classes }
       onClick={ onClick }
       disabled={ disabled }
+      ref={ ref }
       { ...otherProps }
     >
       { leadingIcon && <span className={ styles.leadingIcon }>{ leadingIcon }</span> }
       { children }
     </button>
   )
-}
+})
 
 Button.defaultProps = {
   size: 'large',
