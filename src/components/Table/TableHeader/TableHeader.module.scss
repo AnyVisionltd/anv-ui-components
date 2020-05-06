@@ -31,8 +31,8 @@
   &:hover {
     @include av-elevation(sticky);
 
-    .sortingIcon {
-       opacity: 1;
+    .sortingIcon:not(.activeSort) {
+       opacity: av-opacity(medium);
     }
   }
 }
@@ -43,9 +43,9 @@
 }
 
 .activeSort {
-  opacity: 1;
+  opacity: av-opacity(high);
 }
 
 .sortingIconDesc {
-  transform: rotate(180deg);
+  transform: rotate(-180deg);
 }

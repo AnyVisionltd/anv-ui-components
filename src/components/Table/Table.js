@@ -1,24 +1,36 @@
 import React from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
+import TableContext from './TableContext'
+import UseTableReducer from './UseTableReducer'
 import styles from './Table.module.scss'
 
-const Table = ({ children, className, ...otherProps }) => {
+const Table = ({
+  children,
+  className,
+  ...otherProps
+}) => {
+  const [state, actions] = UseTableReducer()
+
+  console.log('table')
   const classes = classNames(
     styles.table,
     className,
   )
 
   return (
-    <div className={ classes } { ...otherProps }>
-      { children }
-    </div>
+    <TableContext.Provider value={ { state, ...actions } }>
+      <div className={ classes } { ...otherProps }>
+        { children }
+      </div>
+    </TableContext.Provider>
   )
 }
 
 Table.propTypes = {
   /** For css customization. */
   className: propTypes.string,
+  /** Table components */
   children: propTypes.node,
 }
 
