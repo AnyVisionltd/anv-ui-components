@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import { useClickOutsideListener, useElementAbsolutePositioning } from '../../hooks'
+import { useClickOutsideListener, useElementAbsolutePositioning, usePrevious } from '../../hooks'
 import { Animations } from '../Animations'
 import { Portal } from '../Portal'
 import styles from './Menu.module.scss'
@@ -23,6 +23,7 @@ const Menu = ({
   const [preservedPositioning, setPreservedPositioning] = useState(null)
   const [isDisplayed, setDisplayed] = useState(false)
   const menuWrapperRef = useRef()
+  const previousAnchorElement = usePrevious(anchorElement)
   let {
     styles: positionStyles,
     openDirection: actualOpenDirection,
@@ -39,6 +40,12 @@ const Menu = ({
     positionStyles = preservedPositioning.styles
     actualOpenDirection = preservedPositioning.openDirection
   }
+
+  useEffect(() => {
+    if (anchorElement && anchorElement !== previousAnchorElement) {
+      setPreservedPositioning(null)
+    }
+  }, [anchorElement, previousAnchorElement])
 
   useEffect(() => {
     if (isDisplayed && !preservedPositioning && positionStyles && actualOpenDirection) {

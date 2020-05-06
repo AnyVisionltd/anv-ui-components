@@ -85,7 +85,8 @@ const useElementAbsolutePositioning = (
       top += anchorElement.getBoundingClientRect().bottom
     }
     const bottom = top + floatingElementHeight
-    return bottom > (containerHeight + window.scrollY)
+    const calculatedContainerHeight = containerHeight + (isUsingPortal ? window.scrollY : 0)
+    return bottom > calculatedContainerHeight
   }
   const isFloatingElementOutOfHorizontalBounds = () => {
     let { left } = styles
