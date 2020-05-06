@@ -34,7 +34,8 @@ export const withTrailingComponent = () => (
 
 export const states = () => (
   <div className={ styles.flexMultipleRows }>
-    <InputBase readOnly placeholder="readOnly" defaultValue="dadad" />
+    <InputBase readOnly placeholder="readOnly" defaultValue="default value" />
+    <InputBase defaultValue="Default Value" />
     <InputBase type="password" placeholder="Password" />
     <InputBase type="number" placeholder="number" />
     <InputBase multiline placeholder="Multiline" />
@@ -43,17 +44,26 @@ export const states = () => (
   </div>
 )
 
-export const inputPlayground = () => (
-  <>
-    <InputBase
-      type={ select('type', ['number', 'password', 'text'], 'text') }
-      value={ text('value', '') }
-      onChange={ () => {} }
-      resize={ number('multiline - resize', 3) }
-      multiline={ boolean('multiline', false) }
-      rows={ number('multiline - rows', 3) }
-      disabled={ boolean('disabled', false) }
-      readOnly={ boolean('read-only', false) }
-    />
-  </>
-)
+export const inputPlayground = () => {
+  const isMultiline = boolean('multiline', false)
+  const multilineProps = isMultiline && {
+    rows: number('rows', 3),
+    resize: boolean('resize', false),
+  }
+  const inputProps = !isMultiline && {
+    type: select('type', ['number', 'password', 'text'], 'text'),
+  }
+  return (
+    <>
+      <InputBase
+        value={ text('value', '') }
+        onChange={ () => {} }
+        multiline={ boolean('multiline', false) }
+        disabled={ boolean('disabled', false) }
+        readOnly={ boolean('read-only', false) }
+        { ...inputProps }
+        { ...multilineProps }
+      />
+    </>
+  )
+}
