@@ -9,13 +9,15 @@ import styles from './Menu.module.scss'
 const Menu = ({
   isOpen,
   variant,
-  onClose,
   className,
   anchorElement,
   attachDirection,
   children,
   openDirection,
   isSubMenu,
+  onClose,
+  onClosed,
+  onOpened,
   ...otherProps
 }) => {
   const [preservedPositioning, setPreservedPositioning] = useState(null)
@@ -71,11 +73,13 @@ const Menu = ({
 
   const handleMenuOpen = () => {
     setDisplayed(true)
+    onOpened()
   }
 
   const handleMenuClose = () => {
     setDisplayed(false)
     setPreservedPositioning(null)
+    onClosed()
   }
 
   // Scale animations direction props represent the start point,
@@ -133,6 +137,10 @@ Menu.defaultProps = {
   variant: 'regular',
   onClose: () => {
   },
+  onClosed: () => {
+  },
+  onOpened: () => {
+  },
   isSubMenu: false,
   openDirection: 'auto',
   attachDirection: 'vertical',
@@ -158,6 +166,10 @@ Menu.propTypes = {
   children: propTypes.node.isRequired,
   /** A callback triggered whenever the user is clicking outside the menu scope. */
   onClose: propTypes.func,
+  /** A callback triggered after the menu is opened. */
+  onOpened: propTypes.func,
+  /** A callback triggered after the menu is closed. */
+  onClosed: propTypes.func,
   /** Force the menu to open <b>to</b> a certain side.<br />
    * <code>up</code> - means that the menu will open <u>upwards</u><br />
    * <code>down</code> - means that the menu will open <u>downwards</u><br />

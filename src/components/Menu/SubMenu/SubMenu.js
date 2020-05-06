@@ -48,7 +48,6 @@ const SubMenu = ({
       onFocus={ handleOnFocus }
       isSubMenu
       ref={ ref }
-      { ...otherProps }
     >
       <span className={ styles.parentItemLabel }>{ label }</span>
       <ArrowIcon />
@@ -58,6 +57,7 @@ const SubMenu = ({
         anchorElement={ ref.current }
         attachDirection="horizontal"
         isSubMenu
+        { ...otherProps }
       >
         { children }
       </Menu>
