@@ -6,10 +6,10 @@
   height: 32px;
   border-radius: av-radius(tidy);
   padding: 0 av-space(tiny);
-  color: rgba(av-color(content), av-opacity(medium));
-  fill: rgba(av-color(content), av-opacity(medium));
-  background-color: rgba(av-color(content), av-opacity(ghost));
-  border: rgba(av-color(content), av-opacity(divider)) solid 1px;
+  color: av-color(content, av-opacity(medium));
+  fill: av-color(content, av-opacity(medium));
+  background-color: av-color(content, av-opacity(ghost));
+  border: av-color(content, av-opacity(divider)) solid 1px;
 }
 
 .tableHeaderCell {
