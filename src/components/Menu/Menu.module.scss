@@ -19,7 +19,7 @@
 .menu {
   @include av-elevation(temporary);
   background-color: av-color(surface);
-  color: av-color(content, av-opacity(divider));
+  color: av-color(content);
   fill: currentColor;
   border-radius: av-radius();
   padding: av-space(tiny) 0;
