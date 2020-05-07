@@ -55,7 +55,7 @@ export const states = () => (
   </div>
 )
 
-export const inputPlayground = () => {
+export const Playground = () => {
   const isMultiline = boolean('multiline', false)
   const multilineProps = isMultiline && {
     rows: number('rows', 3),
