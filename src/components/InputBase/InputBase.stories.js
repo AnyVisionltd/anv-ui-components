@@ -23,13 +23,25 @@ export const disable = () => (
   </div>
 )
 
-export const withIcon = () => <InputBase leadingIcon={ <SunIcon /> } placeholder="With Icon" />
+export const withIcon = () => (
+  <div className={ styles.flexMultipleRows }>
+    <InputBase leadingIcon={ <SunIcon /> } placeholder="With Icon" />
+    <InputBase multiline leadingIcon={ <SunIcon /> } placeholder="With Icon" />
+  </div>
+)
 
 export const withTrailingComponent = () => (
-  <InputBase
-    trailingComponent={ <IconButton variant="ghost"><SunIcon /></IconButton> }
-    placeholder="With Last Icon"
-  />
+  <div className={ styles.flexMultipleRows }>
+    <InputBase
+      trailingComponent={ <IconButton variant="ghost"><SunIcon /></IconButton> }
+      placeholder="With Last Icon"
+    />
+    <InputBase
+      multiline
+      trailingComponent={ <IconButton variant="ghost"><SunIcon /></IconButton> }
+      placeholder="With Last Icon"
+    />
+  </div>
 )
 
 export const states = () => (
