@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import { ReactComponent as SunIcon } from '../../../assets/svg/Check.svg'
+import { ReactComponent as LongArrow } from '../../../assets/svg/LongArrow.svg'
 import TableContext from '../TableContext'
 import styles from './TableHeader.module.scss'
 
@@ -12,19 +12,18 @@ const sortOrderTypes = {
 
 const TableHeader = ({
   headers,
-  sortable,
   onHeaderCellClick,
   className,
   ...otherProps
 }) => {
-  const { state, setSort } = useContext(TableContext)
-  const { sort: sortBy } = state
+  const { state, setSortBy, setHeaders } = useContext(TableContext)
+  const { headers: contextHeader, sort } = state
+  const { sortBy, sortable } = sort
 
   useEffect(() => {
-    setSort({ ...sortBy, sortable })
-  }, [sortable, setSort, sortBy])
+    setHeaders(headers)
+  }, [setHeaders, headers])
 
-  console.log('header render')
   const renderSortingIcon = (field) => {
     const activeSort = sortBy && sortBy.field === field
     const activeSortOrder = activeSort && sortBy.order === sortOrderTypes.DESC
@@ -33,15 +32,19 @@ const TableHeader = ({
       activeSort && styles.activeSort,
       activeSortOrder && styles.sortingIconDesc,
     )
-    return <SunIcon className={ classes } />
+    return <LongArrow className={ classes } />
   }
 
   const sortColumn = (headerCell) => {
     const sortOrder = headerCell.field === sortBy.field && sortBy.order === sortOrderTypes.ASC
       ? sortOrderTypes.DESC
       : sortOrderTypes.ASC
-    setSort({ ...sortBy, field: headerCell.field, order: sortOrder })
+    setSortBy({ field: headerCell.field, order: sortOrder })
+  }
+
+  const handleHeaderCellClick = (headerCell, sortableColumn) => {
     onHeaderCellClick(headerCell)
+    sortableColumn && sortColumn(headerCell)
   }
 
   const renderCell = (headerCell) => {
@@ -53,14 +56,14 @@ const TableHeader = ({
     }
     const style = size ? { flex: `0 1 ${size}` } : {}
 
-    const sortableColumn = sortBy.sortable && !disableSort
+    const sortableColumn = sortable && !disableSort
     return (
       <div
         key={ field }
         role="cell"
         style={ style }
         className={ styles.tableHeaderCell }
-        onClick={ () => sortableColumn && sortColumn(headerCell) }
+        onClick={ () => handleHeaderCellClick(headerCell, sortableColumn) }
       >
         {
           typeof content === 'function'
@@ -85,7 +88,7 @@ const TableHeader = ({
       className={ classes }
       { ...otherProps }
     >
-      { headers.map(renderCell) }
+      { contextHeader.map(renderCell) }
     </div>
   )
 }
@@ -95,25 +98,32 @@ TableHeader.defaultProps = {
 }
 
 TableHeader.propTypes = {
+  /** Table header fields. */
   headers: propTypes.arrayOf(
     propTypes.shape({
-      field: propTypes.string,
-      displayName: propTypes.string,
+      field: propTypes.string.isRequired,
+      /** Cell content. */
       content: propTypes.oneOfType([
         propTypes.string,
         propTypes.func,
-      ]),
+      ]).isRequired,
+      /** For columnManagement when dont want to display content value. */
+      displayName: propTypes.string,
+      /** Render column by function. */
       columnRender: propTypes.func,
+      /** Disable sort for the column */
       disableSort: propTypes.bool,
+      /** Custom sort for the column */
       customSort: propTypes.func,
+      /** Hide the column */
       hide: propTypes.bool,
+      /** Set the column width */
       size: propTypes.string,
+      /** Column type, use for controlled sorting */
       type: propTypes.oneOf(['string', 'number', 'date']),
     }),
   ).isRequired,
-  /** Is the table sortable */
-  sortable: propTypes.bool,
-  /** Callback fire when header cell click. */
+  /** Callback fire when header cell click with cell field. */
   onHeaderCellClick: propTypes.func,
   /** For css customization. */
   className: propTypes.string,

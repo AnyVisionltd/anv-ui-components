@@ -1,10 +1,11 @@
 import React from 'react'
+import { boolean } from '@storybook/addon-knobs'
+import { action } from '@storybook/addon-actions'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import Table from './Table'
-import TableHeader from './TableHeader/TableHeader'
 
 export default {
-  title: 'Components/Table/Table',
+  title: 'Components/Table',
   component: Table,
   decorators: [centerDecorator],
 }
@@ -26,8 +27,15 @@ const headers = [
   },
 ]
 
-export const Default = () => (
+export const Playground = () => (
   <Table style={ { width: '80%' } }>
-    <TableHeader headers={ headers } />
+    <Table.TableHeader
+      headers={ headers }
+      onHeaderCellClick={ action('header cell clicked') }
+    />
+    {
+      boolean('sortable', true)
+      && <Table.Sortable onSortChange={ action('sort changed') } />
+    }
   </Table>
 )

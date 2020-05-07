@@ -13,6 +13,7 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
     'jsx-a11y/label-has-associated-control': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
-    'jsx-a11y/no-noninteractive-element-interactions': 'off'
+    'jsx-a11y/no-noninteractive-element-interactions': 'off',
+    'no-unused-expressions': [2, { allowShortCircuit: true }]
   },
 };

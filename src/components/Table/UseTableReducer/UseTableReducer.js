@@ -5,17 +5,21 @@ const initialState = {
   headers: [],
   sort: {
     sortable: false,
-    field: null,
-    order: null,
+    sortBy: {
+      field: null,
+      order: null,
+    },
   },
 }
 
 const reducer = (state, action) => {
   switch (action.type) {
     case actionTypes.SET_HEADERS:
-      return { ...state, headers: [...action.payload] }
-    case actionTypes.SET_SORT:
-      return { ...state, sort: { ...action.payload } }
+      return { ...state, headers: action.payload }
+    case actionTypes.SET_SORTABLE:
+      return { ...state, sort: { ...state.sort, sortable: action.payload } }
+    case actionTypes.SET_SORT_BY:
+      return { ...state, sort: { ...state.sort, sortBy: action.payload } }
     default:
       return state
   }

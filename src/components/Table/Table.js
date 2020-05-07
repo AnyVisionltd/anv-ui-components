@@ -12,7 +12,6 @@ const Table = ({
 }) => {
   const [state, actions] = UseTableReducer()
 
-  console.log('table')
   const classes = classNames(
     styles.table,
     className,

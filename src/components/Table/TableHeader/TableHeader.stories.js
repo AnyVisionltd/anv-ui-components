@@ -1,4 +1,5 @@
 import React from 'react'
+import { boolean, text } from '@storybook/addon-knobs'
 import { centerDecorator } from '../../../utils/storybook/decorators'
 import Table from '../Table'
 import TableHeader from './TableHeader'
@@ -9,50 +10,29 @@ export default {
   decorators: [centerDecorator],
 }
 
-const headers = [
-  {
-    field: 'img',
-    content: 'Profile Image',
-    disableSort: true,
-    columnRender: () => <img alt="profile" />,
-    size: '30%',
-  },
-  {
-    field: 'username',
-    content: () => <div>Username</div>,
-    displayName: 'User Name', // for dynamic column dialog
-  }, {
-    field: 'firstname',
-    content: 'First Name',
-  }, {
-    field: 'lastname',
-    content: 'Last Name',
-    customSort: (items) => items,
-  },
-  {
-    field: 'hidden',
-    content: 'Hidden',
-    hide: true,
-  }, {
-    field: 'date',
-    content: 'Date',
-    type: 'date',
-  },
-]
+export const Basic = () => {
+  const headers = [
+    {
+      field: 'img',
+      content: 'profile image',
+      columnRender: () => <img alt="profile" />,
+    },
+    {
+      field: 'username',
+      content: 'user name',
+      size: text('size user name', '20%'),
+    }, {
+      field: 'firstname',
+      content: 'First Name',
+      hide: boolean(' hide first name ', false),
+    },
+  ]
 
-export const Default = () => (
-  <Table style={ { width: '80%' } }>
-    <TableHeader headers={ headers } />
-  </Table>
-)
-
-export const Sortable = () => (
-  <Table
-    style={ { width: '80%' } }
-  >
-    <TableHeader
-      headers={ headers }
-      sortable
-    />
-  </Table>
-)
+  return (
+    <Table style={ { width: '80%' } }>
+      <TableHeader
+        headers={ headers }
+      />
+    </Table>
+  )
+}
