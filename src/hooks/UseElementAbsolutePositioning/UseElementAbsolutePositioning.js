@@ -9,6 +9,7 @@ const useElementAbsolutePositioning = (
   openDirection,
   isUsingPortal,
 ) => {
+  const previousAnchorElement = usePrevious(anchorElement)
   const previousOpenState = usePrevious(isOpen)
   const [closeDirection, setCloseDirection] = useState(null)
   const {
@@ -20,6 +21,13 @@ const useElementAbsolutePositioning = (
     vertical: '',
     horizontal: '',
   }
+
+  useEffect(() => {
+    if (anchorElement && anchorElement !== previousAnchorElement) {
+      setCloseDirection(null)
+    }
+  }, [anchorElement, previousAnchorElement])
+
   const direction = closeDirection || openDirection
 
   if (floatingElement && anchorElement) {

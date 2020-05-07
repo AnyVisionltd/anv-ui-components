@@ -30,7 +30,7 @@ const Menu = ({
     anchorElement,
     menuWrapperRef && menuWrapperRef.current,
     attachDirection,
-    isOpen && isDisplayed,
+    isDisplayed,
     openDirection,
     !isSubMenu,
   )
