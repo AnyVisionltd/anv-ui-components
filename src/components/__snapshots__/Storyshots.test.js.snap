@@ -801,224 +801,217 @@ exports[`Storyshots Components/IconButton With Class Name 1`] = `
 </div>
 `;
 
-exports[`Storyshots Components/Menu Default 1`] = `
+exports[`Storyshots Components/InputBase Default 1`] = `
 <div>
   <div
     className="center"
   >
     <div
-      className="menuExample"
+      className="inputBase text"
     >
-      <button
-        aria-controls="menu-story-default"
-        aria-haspopup="true"
-        className="button large fill"
-        disabled={false}
-        onClick={[Function]}
-      >
-        Pizza Toppings
-      </button>
-      <portal-for-test>
-        <div
-          className="menuContainer"
-          style={Object {}}
-        />
-      </portal-for-test>
+      <input
+        placeholder="Placeholder"
+        type="text"
+      />
     </div>
   </div>
 </div>
 `;
 
-exports[`Storyshots Components/Menu Different Positions 1`] = `
+exports[`Storyshots Components/InputBase Disable 1`] = `
 <div>
   <div
     className="center"
   >
     <div
-      className="menuExample"
+      className="flexMultipleRows"
     >
-      <button
-        aria-controls="menu-story"
-        aria-haspopup="true"
-        className="button large fill"
-        disabled={false}
-        onClick={[Function]}
-        style={
-          Object {
-            "left": 10,
-            "position": "absolute",
-            "top": 10,
-          }
-        }
-      >
-        Top, Left
-      </button>
-      <button
-        aria-controls="menu-story"
-        aria-haspopup="true"
-        className="button large fill"
-        disabled={false}
-        onClick={[Function]}
-        style={
-          Object {
-            "position": "absolute",
-            "right": 10,
-            "top": 10,
-          }
-        }
-      >
-        Top, Right
-      </button>
-      <button
-        aria-controls="menu-story"
-        aria-haspopup="true"
-        className="button large fill"
-        disabled={false}
-        onClick={[Function]}
-        style={
-          Object {
-            "bottom": 10,
-            "left": 10,
-            "position": "absolute",
-          }
-        }
-      >
-        Bottom, Left
-      </button>
-      <button
-        aria-controls="menu-story"
-        aria-haspopup="true"
-        className="button large fill"
-        disabled={false}
-        onClick={[Function]}
-        style={
-          Object {
-            "bottom": 10,
-            "position": "absolute",
-            "right": 10,
-          }
-        }
-      >
-        Bottom, Right
-      </button>
       <div
-        className="tinyText"
+        className="inputBase text"
       >
-        Best viewed in canvas mode
+        <input
+          placeholder="Enabled"
+          type="text"
+        />
       </div>
-      <portal-for-test>
-        <div
-          className="menuContainer"
-          style={Object {}}
-        />
-      </portal-for-test>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components/Menu Force Open To Direction 1`] = `
-<div>
-  <div
-    className="center"
-  >
-    <div
-      className="menuExample"
-    >
-      <button
-        aria-controls="menu-story"
-        aria-haspopup="true"
-        className="button large fill"
-        disabled={false}
-        onClick={[Function]}
+      <div
+        className="inputBase text disabled"
       >
-        Open Menu
-      </button>
-      <portal-for-test>
-        <div
-          className="menuContainer"
-          style={Object {}}
+        <input
+          disabled={true}
+          placeholder="Disabled"
+          type="text"
         />
-      </portal-for-test>
+      </div>
     </div>
   </div>
 </div>
 `;
 
-exports[`Storyshots Components/Menu Variants 1`] = `
+exports[`Storyshots Components/InputBase Input Playground 1`] = `
 <div>
   <div
     className="center"
   >
     <div
-      className="menuExample"
+      className="inputBase text"
+    >
+      <input
+        disabled={false}
+        onChange={[Function]}
+        readOnly={false}
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/InputBase States 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexMultipleRows"
     >
       <div
-        className="microMargin"
+        className="inputBase text"
       >
+        <input
+          defaultValue="default value"
+          placeholder="readOnly"
+          readOnly={true}
+          type="text"
+        />
+      </div>
+      <div
+        className="inputBase text"
+      >
+        <input
+          defaultValue="Default Value"
+          type="text"
+        />
+      </div>
+      <div
+        className="inputBase password"
+      >
+        <input
+          placeholder="Password"
+          type="password"
+        />
         <button
-          aria-controls="menu-story-regular"
-          aria-haspopup="true"
-          className="button large fill"
+          className="button large ghost iconButton small ghost trailingIcon"
           disabled={false}
           onClick={[Function]}
         >
-          Regular
+          <svg />
         </button>
-        <portal-for-test>
-          <div
-            className="menuContainer"
-            style={Object {}}
-          />
-        </portal-for-test>
       </div>
       <div
-        className="microMargin"
+        className="inputBase number"
       >
-        <button
-          aria-controls="menu-story-dense"
-          aria-haspopup="true"
-          className="button large fill"
-          disabled={false}
-          onClick={[Function]}
-        >
-          Dense
-        </button>
-        <portal-for-test>
-          <div
-            className="menuContainer"
-            style={Object {}}
-          />
-        </portal-for-test>
+        <input
+          placeholder="number"
+          type="number"
+        />
+      </div>
+      <div
+        className="inputBase text multiline"
+      >
+        <textarea
+          placeholder="Multiline"
+        />
+      </div>
+      <div
+        className="inputBase text multiline"
+      >
+        <textarea
+          placeholder="Multiline 10 Rows"
+          rows={10}
+        />
       </div>
     </div>
   </div>
 </div>
 `;
 
-exports[`Storyshots Components/Menu With Sub Menus 1`] = `
+exports[`Storyshots Components/InputBase With Icon 1`] = `
 <div>
   <div
     className="center"
   >
     <div
-      className="menuExample"
+      className="flexMultipleRows"
     >
-      <button
-        aria-controls="menu-story-submenu"
-        aria-haspopup="true"
-        className="button large fill"
-        disabled={false}
-        onClick={[Function]}
+      <div
+        className="inputBase text"
       >
-        Open Menu
-      </button>
-      <portal-for-test>
-        <div
-          className="menuContainer"
-          style={Object {}}
+        <span
+          className="leadingIcon"
+        >
+          <svg />
+        </span>
+        <input
+          placeholder="With Icon"
+          type="text"
         />
-      </portal-for-test>
+      </div>
+      <div
+        className="inputBase text multiline"
+      >
+        <span
+          className="leadingIcon"
+        >
+          <svg />
+        </span>
+        <textarea
+          placeholder="With Icon"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/InputBase With Trailing Component 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexMultipleRows"
+    >
+      <div
+        className="inputBase text"
+      >
+        <input
+          placeholder="With Last Icon"
+          type="text"
+        />
+        <button
+          className="button large ghost iconButton small ghost"
+          disabled={false}
+          onClick={[Function]}
+        >
+          <svg />
+        </button>
+      </div>
+      <div
+        className="inputBase text multiline"
+      >
+        <textarea
+          placeholder="With Last Icon"
+        />
+        <button
+          className="button large ghost iconButton small ghost"
+          disabled={false}
+          onClick={[Function]}
+        >
+          <svg />
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -1100,317 +1093,16 @@ exports[`Storyshots Components/Snackbar Default 1`] = `
 </div>
 `;
 
-exports[`Storyshots Components/Snackbar Leading Icon 1`] = `
-<div>
-  <div
-    className="center"
+exports[`Storyshots Components|Snackbar Leading Icon 1`] = `
+<div
+  className="center"
+>
+  <button
+    className="button large fill"
+    disabled={false}
+    onClick={[Function]}
   >
-    <button
-      className="button large fill"
-      disabled={false}
-      onClick={[Function]}
-    >
-      With Leading Icon
-    </button>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components/Switch Default 1`] = `
-<div>
-  <div
-    className="center"
-  >
-    <div
-      className="marginFlexContainer"
-    >
-      <div
-        className="switch enabled"
-      >
-        <input
-          defaultChecked={true}
-          disabled={false}
-          hidden="hidden"
-          id="switch-example"
-          onChange={[Function]}
-          type="checkbox"
-        />
-        <label
-          className="switchLabel"
-          htmlFor="switch-example"
-        >
-          <div
-            className="switchLine"
-          />
-          <div
-            className="switchToggle"
-          >
-            <span
-              className="switchToggleInner"
-            />
-          </div>
-        </label>
-      </div>
-      <label
-        htmlFor="switch-example"
-      >
-        Check me out!
-      </label>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components/Switch Multiple Switches 1`] = `
-<div>
-  <div
-    className="center"
-  >
-    <div
-      className="marginFlexContainer"
-    >
-      <div
-        className="switch unchecked enabled"
-      >
-        <input
-          defaultChecked={false}
-          disabled={false}
-          hidden="hidden"
-          id="switch-example1"
-          onChange={[Function]}
-          type="checkbox"
-        />
-        <label
-          className="switchLabel"
-          htmlFor="switch-example1"
-        >
-          <div
-            className="switchLine"
-          />
-          <div
-            className="switchToggle"
-          >
-            <span
-              className="switchToggleInner"
-            />
-          </div>
-        </label>
-      </div>
-      <div
-        className="switch enabled"
-      >
-        <input
-          defaultChecked={true}
-          disabled={false}
-          hidden="hidden"
-          id="switch-example2"
-          onChange={[Function]}
-          type="checkbox"
-        />
-        <label
-          className="switchLabel"
-          htmlFor="switch-example2"
-        >
-          <div
-            className="switchLine"
-          />
-          <div
-            className="switchToggle"
-          >
-            <span
-              className="switchToggleInner"
-            />
-          </div>
-        </label>
-      </div>
-      <div
-        className="switch unchecked disabled"
-      >
-        <input
-          defaultChecked={false}
-          disabled={true}
-          hidden="hidden"
-          id="switch-example3"
-          onChange={[Function]}
-          type="checkbox"
-        />
-        <label
-          className="switchLabel"
-          htmlFor="switch-example3"
-        >
-          <div
-            className="switchLine"
-          />
-          <div
-            className="switchToggle"
-          >
-            <span
-              className="switchToggleInner"
-            />
-          </div>
-        </label>
-      </div>
-      <div
-        className="switch disabled"
-      >
-        <input
-          defaultChecked={true}
-          disabled={true}
-          hidden="hidden"
-          id="switch-example4"
-          onChange={[Function]}
-          type="checkbox"
-        />
-        <label
-          className="switchLabel"
-          htmlFor="switch-example4"
-        >
-          <div
-            className="switchLine"
-          />
-          <div
-            className="switchToggle"
-          >
-            <span
-              className="switchToggleInner"
-            />
-          </div>
-        </label>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components/Switch Playground 1`] = `
-<div>
-  <div
-    className="center"
-  >
-    <div
-      className="marginFlexContainer"
-    >
-      <div
-        className="switch unchecked enabled"
-      >
-        <input
-          defaultChecked={false}
-          disabled={false}
-          hidden="hidden"
-          id="switch-playground"
-          onChange={[Function]}
-          type="checkbox"
-        />
-        <label
-          className="switchLabel"
-          htmlFor="switch-playground"
-        >
-          <div
-            className="switchLine"
-          />
-          <div
-            className="switchToggle"
-          >
-            <span
-              className="switchToggleInner"
-            />
-          </div>
-        </label>
-      </div>
-      <label
-        htmlFor="switch-playground"
-      >
-        Hit me!
-      </label>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components/Table Playground 1`] = `
-<div>
-  <div
-    className="center"
-  >
-    <div
-      className="table"
-      style={
-        Object {
-          "width": "80%",
-        }
-      }
-    >
-      <div
-        className="tableHeader"
-        role="row"
-      />
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components/Table/Sortable Basic 1`] = `
-<div>
-  <div
-    className="center"
-  >
-    <div
-      className="table"
-      style={
-        Object {
-          "width": "80%",
-        }
-      }
-    >
-      <div
-        className="tableHeader"
-        role="row"
-      />
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components/Table/Sortable With Default Sort 1`] = `
-<div>
-  <div
-    className="center"
-  >
-    <div
-      className="table"
-      style={
-        Object {
-          "width": "80%",
-        }
-      }
-    >
-      <div
-        className="tableHeader"
-        role="row"
-      />
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components/Table/TableHeader Basic 1`] = `
-<div>
-  <div
-    className="center"
-  >
-    <div
-      className="table"
-      style={
-        Object {
-          "width": "80%",
-        }
-      }
-    >
-      <div
-        className="tableHeader"
-        role="row"
-      />
-    </div>
-  </div>
+    With Leading Icon
+  </button>
 </div>
 `;
