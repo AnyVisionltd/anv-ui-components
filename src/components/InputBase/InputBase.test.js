@@ -34,13 +34,6 @@ describe('<InputBase />', () => {
   })
 
   describe('render textarea', () => {
-    it('should render textarea', () => {
-      const numberOfRows = 3
-      const { getByRole } = render(<InputBase multiline rows={ numberOfRows } />)
-      const input = getByRole('textbox')
-      expect(input).toHaveAttribute('rows', numberOfRows.toString())
-    })
-
     it('should not render type attribute', () => {
       const type = 'password'
       const { getByRole } = render(<InputBase multiline type={ type } />)
