@@ -1,13 +1,13 @@
 @import "~@anyvision/style-guide";
 
 .light {
-    --surface: #fcfcff;
-    --content: #02244d;
+    --surface: hex-to-rgb-string(#fcfcff);
+    --content: hex-to-rgb-string(#02244d);
     color: av-color(decorative);
 }
 
 .dark {
-    --surface: #02244d;
-    --content: #fcfcff;
+    --surface: hex-to-rgb-string(#02244d);
+    --content: hex-to-rgb-string(#fcfcff);
     color: av-color(decorative);
 }
