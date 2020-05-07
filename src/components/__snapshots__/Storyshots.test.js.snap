@@ -1,6 +1,104 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots Animations/SlideAnimation Basic 1`] = `
+exports[`Storyshots Animations/Scale Basic 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "column",
+          "height": "250px",
+        }
+      }
+    >
+      <div
+        className="marginFlexContainer"
+      >
+        <button
+          className="button large fill"
+          disabled={false}
+          onClick={[Function]}
+        >
+          start from top, left to right
+        </button>
+        <button
+          className="button large fill"
+          disabled={false}
+          onClick={[Function]}
+        >
+          start from top, center
+        </button>
+        <button
+          className="button large fill"
+          disabled={false}
+          onClick={[Function]}
+        >
+          start from top, right to left
+        </button>
+      </div>
+      <div
+        className="marginFlexContainer"
+      >
+        <button
+          className="button large fill"
+          disabled={false}
+          onClick={[Function]}
+        >
+          start from the middle, left to right
+        </button>
+        <button
+          className="button large fill"
+          disabled={false}
+          onClick={[Function]}
+        >
+          pop from center
+        </button>
+        <button
+          className="button large fill"
+          disabled={false}
+          onClick={[Function]}
+        >
+          start from middle, right to left
+        </button>
+      </div>
+      <div
+        className="marginFlexContainer"
+      >
+        <button
+          className="button large fill"
+          disabled={false}
+          onClick={[Function]}
+        >
+          start from bottom, left to right
+        </button>
+        <button
+          className="button large fill"
+          disabled={false}
+          onClick={[Function]}
+        >
+          start from bottom, center
+        </button>
+        <button
+          className="button large fill"
+          disabled={false}
+          onClick={[Function]}
+        >
+          start from bottom, right to left
+        </button>
+      </div>
+      <div
+        className="marginFlexContainer"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Animations/Slide Basic 1`] = `
 <div>
   <div
     className="center"
@@ -52,60 +150,6 @@ exports[`Storyshots Animations/SlideAnimation Basic 1`] = `
         }
       />
     </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Animations|SlideAnimation Basic 1`] = `
-<div
-  className="center"
->
-  <div
-    style={
-      Object {
-        "height": "150px",
-      }
-    }
-  >
-    <div
-      className="marginFlexContainer"
-    >
-      <button
-        className="button large fill"
-        disabled={false}
-        onClick={[Function]}
-      >
-        up
-      </button>
-      <button
-        className="button large fill"
-        disabled={false}
-        onClick={[Function]}
-      >
-        right
-      </button>
-      <button
-        className="button large fill"
-        disabled={false}
-        onClick={[Function]}
-      >
-        down
-      </button>
-      <button
-        className="button large fill"
-        disabled={false}
-        onClick={[Function]}
-      >
-        left
-      </button>
-    </div>
-    <div
-      style={
-        Object {
-          "overflow": "hidden",
-        }
-      }
-    />
   </div>
 </div>
 `;
@@ -764,11 +808,9 @@ exports[`Storyshots Components/InputBase Default 1`] = `
     className="center"
   >
     <div
-      className="inputBase large text"
-      onClick={[Function]}
+      className="inputBase text"
     >
       <input
-        onFocus={[Function]}
         placeholder="Placeholder"
         type="text"
       />
@@ -783,25 +825,21 @@ exports[`Storyshots Components/InputBase Disable 1`] = `
     className="center"
   >
     <div
-      className="marginFlexContainer"
+      className="flexMultipleRows"
     >
       <div
-        className="inputBase large text"
-        onClick={[Function]}
+        className="inputBase text"
       >
         <input
-          onFocus={[Function]}
           placeholder="Enabled"
           type="text"
         />
       </div>
       <div
-        className="inputBase large text disabled"
-        onClick={[Function]}
+        className="inputBase text disabled"
       >
         <input
           disabled={true}
-          onFocus={[Function]}
           placeholder="Disabled"
           type="text"
         />
@@ -811,57 +849,21 @@ exports[`Storyshots Components/InputBase Disable 1`] = `
 </div>
 `;
 
-exports[`Storyshots Components/InputBase Playground 1`] = `
+exports[`Storyshots Components/InputBase Input Playground 1`] = `
 <div>
   <div
     className="center"
   >
     <div
-      className="inputBase large text"
-      onClick={[Function]}
+      className="inputBase text"
     >
       <input
-        onFocus={[Function]}
+        disabled={false}
+        onChange={[Function]}
+        readOnly={false}
         type="text"
+        value=""
       />
-    </div>
-    <label
-      htmlFor="checkbox-playground"
-    >
-      Hit me!
-    </label>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components/InputBase Sizes 1`] = `
-<div>
-  <div
-    className="center"
-  >
-    <div
-      className="marginFlexContainer"
-    >
-      <div
-        className="inputBase large text"
-        onClick={[Function]}
-      >
-        <input
-          onFocus={[Function]}
-          placeholder="Large Size"
-          type="text"
-        />
-      </div>
-      <div
-        className="inputBase small text"
-        onClick={[Function]}
-      >
-        <input
-          onFocus={[Function]}
-          placeholder="Small Size"
-          type="text"
-        />
-      </div>
     </div>
   </div>
 </div>
@@ -873,51 +875,64 @@ exports[`Storyshots Components/InputBase States 1`] = `
     className="center"
   >
     <div
-      className="inputBase large password"
-      onClick={[Function]}
+      className="flexMultipleRows"
     >
-      <input
-        onFocus={[Function]}
-        placeholder="Password"
-        type="password"
-      />
-      <button
-        className="button large ghost iconButton small ghost lastIcon"
-        disabled={false}
-        onClick={[Function]}
+      <div
+        className="inputBase text"
       >
-        <svg />
-      </button>
-    </div>
-    <div
-      className="inputBase large number"
-      onClick={[Function]}
-    >
-      <input
-        onFocus={[Function]}
-        placeholder="number"
-        type="number"
-      />
-    </div>
-    <div
-      className="inputBase large text"
-      onClick={[Function]}
-    >
-      <textarea
-        onFocus={[Function]}
-        placeholder="Multiline"
-        type="text"
-      />
-    </div>
-    <div
-      className="inputBase large text resize"
-      onClick={[Function]}
-    >
-      <textarea
-        onFocus={[Function]}
-        placeholder="Multiline Resize"
-        type="text"
-      />
+        <input
+          defaultValue="default value"
+          placeholder="readOnly"
+          readOnly={true}
+          type="text"
+        />
+      </div>
+      <div
+        className="inputBase text"
+      >
+        <input
+          defaultValue="Default Value"
+          type="text"
+        />
+      </div>
+      <div
+        className="inputBase password"
+      >
+        <input
+          placeholder="Password"
+          type="password"
+        />
+        <button
+          className="button large ghost iconButton small ghost trailingIcon"
+          disabled={false}
+          onClick={[Function]}
+        >
+          <svg />
+        </button>
+      </div>
+      <div
+        className="inputBase number"
+      >
+        <input
+          placeholder="number"
+          type="number"
+        />
+      </div>
+      <div
+        className="inputBase text multiline"
+      >
+        <textarea
+          placeholder="Multiline"
+        />
+      </div>
+      <div
+        className="inputBase text multiline"
+      >
+        <textarea
+          placeholder="Multiline 10 Rows"
+          rows={10}
+        />
+      </div>
     </div>
   </div>
 </div>
@@ -929,45 +944,75 @@ exports[`Storyshots Components/InputBase With Icon 1`] = `
     className="center"
   >
     <div
-      className="inputBase large text"
-      onClick={[Function]}
+      className="flexMultipleRows"
     >
-      <span
-        className="leadingIcon"
+      <div
+        className="inputBase text"
       >
-        <svg />
-      </span>
-      <input
-        onFocus={[Function]}
-        placeholder="With Icon"
-        type="text"
-      />
+        <span
+          className="leadingIcon"
+        >
+          <svg />
+        </span>
+        <input
+          placeholder="With Icon"
+          type="text"
+        />
+      </div>
+      <div
+        className="inputBase text multiline"
+      >
+        <span
+          className="leadingIcon"
+        >
+          <svg />
+        </span>
+        <textarea
+          placeholder="With Icon"
+        />
+      </div>
     </div>
   </div>
 </div>
 `;
 
-exports[`Storyshots Components/InputBase With Last Icon 1`] = `
+exports[`Storyshots Components/InputBase With Trailing Component 1`] = `
 <div>
   <div
     className="center"
   >
     <div
-      className="inputBase large text"
-      onClick={[Function]}
+      className="flexMultipleRows"
     >
-      <input
-        onFocus={[Function]}
-        placeholder="With Last Icon"
-        type="text"
-      />
-      <button
-        className="button large ghost iconButton small ghost lastIcon"
-        disabled={false}
-        onClick={[Function]}
+      <div
+        className="inputBase text"
       >
-        <svg />
-      </button>
+        <input
+          placeholder="With Last Icon"
+          type="text"
+        />
+        <button
+          className="button large ghost iconButton small ghost"
+          disabled={false}
+          onClick={[Function]}
+        >
+          <svg />
+        </button>
+      </div>
+      <div
+        className="inputBase text multiline"
+      >
+        <textarea
+          placeholder="With Last Icon"
+        />
+        <button
+          className="button large ghost iconButton small ghost"
+          disabled={false}
+          onClick={[Function]}
+        >
+          <svg />
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -1062,697 +1107,5 @@ exports[`Storyshots Components/Snackbar Leading Icon 1`] = `
       With Leading Icon
     </button>
   </div>
-</div>
-`;
-
-exports[`Storyshots Components|Button Default 1`] = `
-<div
-  className="center"
->
-  <button
-    className="button large fill"
-    disabled={false}
-    onClick={[Function]}
-  >
-    Text
-  </button>
-</div>
-`;
-
-exports[`Storyshots Components|Button Disable 1`] = `
-<div
-  className="center"
->
-  <div
-    className="marginFlexContainer"
-  >
-    <button
-      className="button large fill"
-      disabled={false}
-      onClick={[Function]}
-    >
-      Enable
-    </button>
-    <button
-      className="button large fill"
-      disabled={true}
-      onClick={[Function]}
-    >
-      Disabled
-    </button>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components|Button Play Ground 1`] = `
-<div
-  className="center"
->
-  <button
-    className="button large fill"
-    disabled={false}
-    onClick={[Function]}
-  >
-    Button Text
-  </button>
-</div>
-`;
-
-exports[`Storyshots Components|Button Sizes 1`] = `
-<div
-  className="center"
->
-  <div
-    className="marginFlexContainer"
-  >
-    <button
-      className="button large fill"
-      disabled={false}
-      onClick={[Function]}
-    >
-      Large
-    </button>
-    <button
-      className="button small fill"
-      disabled={false}
-      onClick={[Function]}
-    >
-      small
-    </button>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components|Button Variants 1`] = `
-<div
-  className="center"
->
-  <div
-    className="marginFlexContainer"
-  >
-    <button
-      className="button large fill"
-      disabled={false}
-      onClick={[Function]}
-    >
-      fill
-    </button>
-    <button
-      className="button large outline"
-      disabled={false}
-      onClick={[Function]}
-    >
-      outline
-    </button>
-    <button
-      className="button large ghost"
-      disabled={false}
-      onClick={[Function]}
-    >
-      ghost
-    </button>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components|Button With Class Name 1`] = `
-<div
-  className="center"
->
-  <div
-    className="marginFlexContainer"
-  >
-    <button
-      className="button large fill successBackgroundColor"
-      disabled={false}
-      onClick={[Function]}
-    >
-      Text
-    </button>
-    <button
-      className="button large outline alertColor"
-      disabled={false}
-      onClick={[Function]}
-    >
-      Text
-    </button>
-    <button
-      className="button large ghost errorColor"
-      disabled={false}
-      onClick={[Function]}
-    >
-      Text
-    </button>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components|Button With Icon 1`] = `
-<div
-  className="center"
->
-  <button
-    className="button large fill"
-    disabled={false}
-    onClick={[Function]}
-  >
-    <span
-      className="leadingIcon"
-    >
-      <svg />
-    </span>
-    leading
-  </button>
-</div>
-`;
-
-exports[`Storyshots Components|Checkbox Default 1`] = `
-<div
-  className="center"
->
-  <label
-    className="checkbox enabled"
-    htmlFor="checkbox-example"
-  >
-    <input
-      checked={false}
-      className="parent"
-      disabled={false}
-      id="checkbox-example"
-      onChange={[Function]}
-      type="checkbox"
-    />
-    <span
-      className="iconContainer"
-    />
-  </label>
-  <label
-    className="checkboxLabel"
-    htmlFor="checkbox-example"
-  >
-    Check me out!
-  </label>
-</div>
-`;
-
-exports[`Storyshots Components|Checkbox Playground 1`] = `
-<div
-  className="center"
->
-  <label
-    className="checkbox enabled"
-    htmlFor="checkbox-playground"
-  >
-    <input
-      checked={false}
-      className="parent"
-      color="primary"
-      disabled={false}
-      id="checkbox-playground"
-      onChange={[Function]}
-      type="checkbox"
-    />
-    <span
-      className="iconContainer"
-    />
-  </label>
-  <label
-    className="checkboxLabel"
-    htmlFor="checkbox-playground"
-  >
-    Hit me!
-  </label>
-</div>
-`;
-
-exports[`Storyshots Components|Checkbox States 1`] = `
-<div
-  className="center"
->
-  <label
-    className="checkbox checked enabled microMargin"
-  >
-    <input
-      checked={true}
-      className="parent"
-      disabled={false}
-      onChange={[Function]}
-      type="checkbox"
-    />
-    <span
-      className="iconContainer"
-    >
-      <svg />
-    </span>
-  </label>
-  <label
-    className="checkbox enabled microMargin"
-  >
-    <input
-      checked={false}
-      className="parent"
-      disabled={false}
-      onChange={[Function]}
-      type="checkbox"
-    />
-    <span
-      className="iconContainer"
-    />
-  </label>
-  <label
-    className="checkbox checked disabled microMargin"
-  >
-    <input
-      checked={true}
-      className="parent"
-      disabled={true}
-      onChange={[Function]}
-      type="checkbox"
-    />
-    <span
-      className="iconContainer"
-    >
-      <svg />
-    </span>
-  </label>
-  <label
-    className="checkbox indeterminate enabled microMargin"
-  >
-    <input
-      checked={false}
-      className="parent"
-      disabled={false}
-      onChange={[Function]}
-      type="checkbox"
-    />
-    <span
-      className="iconContainer"
-    >
-      <svg />
-    </span>
-  </label>
-  <label
-    className="checkbox disabled microMargin"
-  >
-    <input
-      checked={false}
-      className="parent"
-      disabled={true}
-      onChange={[Function]}
-      type="checkbox"
-    />
-    <span
-      className="iconContainer"
-    />
-  </label>
-</div>
-`;
-
-exports[`Storyshots Components|Chip Default 1`] = `
-<div
-  className="center"
->
-  <div
-    className="chip focusable clickable"
-    onClick={[Function]}
-    onKeyUp={[Function]}
-    role="button"
-    tabIndex={0}
-  >
-    <div
-      className="leadingIcon"
-    >
-      <svg />
-    </div>
-    <span
-      className="label"
-    >
-      Chocolate
-    </span>
-    <button
-      className="trailingIcon trailingIconClickable"
-      onClick={[Function]}
-    >
-      <svg />
-    </button>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components|Chip Playground 1`] = `
-<div
-  className="center"
->
-  <div
-    className="chip focusable clickable microMargin"
-    onClick={[Function]}
-    onKeyUp={[Function]}
-    role="button"
-    tabIndex={0}
-  >
-    <span
-      className="label"
-    >
-      Chip
-    </span>
-    <button
-      className="trailingIcon trailingIconClickable"
-      onClick={[Function]}
-    >
-      <svg />
-    </button>
-  </div>
-  <small
-    className="tinyText"
-  >
-    Try focusing the chip using your keyboard, then clicking on backspace!
-  </small>
-</div>
-`;
-
-exports[`Storyshots Components|Chip Variants 1`] = `
-<div
-  className="center"
->
-  <div
-    className="chip microMargin"
-    onClick={[Function]}
-    onKeyUp={[Function]}
-    role="button"
-  >
-    <span
-      className="label"
-    >
-      Simple
-    </span>
-  </div>
-  <div
-    className="chip focusable clickable microMargin"
-    onClick={[Function]}
-    onKeyUp={[Function]}
-    role="button"
-    tabIndex={0}
-  >
-    <span
-      className="label"
-    >
-      Clickable
-    </span>
-  </div>
-  <div
-    aria-disabled={true}
-    className="chip disabled microMargin"
-    onClick={[Function]}
-    onKeyUp={[Function]}
-    role="button"
-  >
-    <span
-      className="label"
-    >
-      Disabled
-    </span>
-  </div>
-  <div
-    className="chip microMargin"
-    onClick={[Function]}
-    onKeyUp={[Function]}
-    role="button"
-  >
-    <div
-      className="leadingIcon"
-    >
-      <svg />
-    </div>
-    <span
-      className="label"
-    >
-      Leading Icon
-    </span>
-  </div>
-  <div
-    className="chip microMargin"
-    onClick={[Function]}
-    onKeyUp={[Function]}
-    role="button"
-  >
-    <span
-      className="label"
-    >
-      Trailing Icon
-    </span>
-    <button
-      className="trailingIcon"
-      onClick={[Function]}
-    >
-      <svg />
-    </button>
-  </div>
-  <div
-    className="chip microMargin"
-    onClick={[Function]}
-    onKeyUp={[Function]}
-    role="button"
-  >
-    <div
-      className="leadingIcon"
-    >
-      <svg />
-    </div>
-    <span
-      className="label"
-    >
-      Both Icons
-    </span>
-    <button
-      className="trailingIcon"
-      onClick={[Function]}
-    >
-      <svg />
-    </button>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components|IconButton Default 1`] = `
-<div
-  className="center"
->
-  <button
-    className="button large fill iconButton small fill"
-    disabled={false}
-    onClick={[Function]}
-  >
-    <svg />
-  </button>
-</div>
-`;
-
-exports[`Storyshots Components|IconButton Disable 1`] = `
-<div
-  className="center"
->
-  <div
-    className="marginFlexContainer"
-  >
-    <button
-      className="button large fill iconButton small fill"
-      disabled={false}
-      onClick={[Function]}
-    >
-      <svg />
-    </button>
-    <button
-      className="button large fill iconButton small fill"
-      disabled={true}
-      onClick={[Function]}
-    >
-      <svg />
-    </button>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components|IconButton Play Ground 1`] = `
-<div
-  className="center"
->
-  <button
-    className="button large fill iconButton small fill"
-    disabled={false}
-    onClick={[Function]}
-  >
-    <svg />
-  </button>
-</div>
-`;
-
-exports[`Storyshots Components|IconButton Sizes 1`] = `
-<div
-  className="center"
->
-  <div
-    className="marginFlexContainer"
-  >
-    <button
-      className="button large fill iconButton small fill"
-      disabled={false}
-      onClick={[Function]}
-    >
-      <svg />
-    </button>
-    <button
-      className="button large fill iconButton large fill"
-      disabled={false}
-      onClick={[Function]}
-    >
-      <svg />
-    </button>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components|IconButton Variants 1`] = `
-<div
-  className="center"
->
-  <div
-    className="marginFlexContainer"
-  >
-    <button
-      className="button large fill iconButton small fill"
-      disabled={false}
-      onClick={[Function]}
-    >
-      <svg />
-    </button>
-    <button
-      className="button large outline iconButton small outline"
-      disabled={false}
-      onClick={[Function]}
-    >
-      <svg />
-    </button>
-    <button
-      className="button large ghost iconButton small ghost"
-      disabled={false}
-      onClick={[Function]}
-    >
-      <svg />
-    </button>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components|IconButton With Class Name 1`] = `
-<div
-  className="center"
->
-  <div
-    className="marginFlexContainer"
-  >
-    <button
-      className="button large fill iconButton small fill successBackgroundColor"
-      disabled={false}
-      onClick={[Function]}
-    >
-      <svg />
-    </button>
-    <button
-      className="button large outline iconButton small outline alertColor"
-      disabled={false}
-      onClick={[Function]}
-    >
-      <svg />
-    </button>
-    <button
-      className="button large ghost iconButton small ghost errorColor"
-      disabled={false}
-      onClick={[Function]}
-    >
-      <svg />
-    </button>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components|Portal Default 1`] = `
-<portal-for-test>
-  <h3>
-    Inspect Me. Im on the body
-  </h3>
-</portal-for-test>
-`;
-
-exports[`Storyshots Components|Snackbar Action 1`] = `
-<div
-  className="center"
->
-  <button
-    className="button large fill"
-    disabled={false}
-    onClick={[Function]}
-  >
-    With Action
-  </button>
-</div>
-`;
-
-exports[`Storyshots Components|Snackbar Close Icon 1`] = `
-<div
-  className="center"
->
-  <div
-    className="marginFlexContainer"
-  >
-    <button
-      className="button large fill"
-      disabled={false}
-      onClick={[Function]}
-    >
-      Default Icon
-    </button>
-    <button
-      className="button large fill"
-      disabled={false}
-      onClick={[Function]}
-    >
-      Custom Icon
-    </button>
-    <button
-      className="button large fill"
-      disabled={false}
-      onClick={[Function]}
-    >
-      Without Icon
-    </button>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components|Snackbar Default 1`] = `
-<div
-  className="center"
->
-  <button
-    className="button large fill"
-    disabled={false}
-    onClick={[Function]}
-  >
-    Open
-  </button>
-</div>
-`;
-
-exports[`Storyshots Components|Snackbar Leading Icon 1`] = `
-<div
-  className="center"
->
-  <button
-    className="button large fill"
-    disabled={false}
-    onClick={[Function]}
-  >
-    With Leading Icon
-  </button>
 </div>
 `;
