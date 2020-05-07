@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  boolean, number, select, text,
+  boolean, number, select,
 } from '@storybook/addon-knobs'
 import InputBase from './InputBase'
 import { IconButton } from '../IconButton'
@@ -66,7 +66,6 @@ export const Playground = () => {
   return (
     <>
       <InputBase
-        value={ text('value', '') }
         onChange={ () => {} }
         multiline={ boolean('multiline', false) }
         disabled={ boolean('disabled', false) }
