@@ -12,17 +12,14 @@
 }
 
 .tableHeaderCell {
+  @extend %av-overline;
   display: flex;
   align-items: center;
   flex: 1 1 0;
   padding: 0 av-space();
-  font-size: av-font-size(micro);
-  text-transform: uppercase;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  line-height: 1.6;
-  letter-spacing: 1.5px;
   transition: background-color 100ms ease-in-out;
 
   &:hover {
