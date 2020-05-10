@@ -1,6 +1,7 @@
 @import "~@anyvision/style-guide";
 
 .tableHeader {
+  box-sizing: border-box;
   display: flex;
   align-items: stretch;
   height: 32px;
@@ -14,10 +15,12 @@
 
 .tableHeaderCell {
   @extend %av-overline;
+  cursor: pointer;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   flex: 1 1 0;
-  padding: 0 av-space();
+  padding-left: av-space();
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -30,6 +33,10 @@
        opacity: av-opacity(medium);
     }
   }
+}
+
+.actionsPlaceholder {
+  width: av-size(sz-64)
 }
 
 .sortingIcon {

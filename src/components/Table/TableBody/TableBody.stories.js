@@ -1,4 +1,5 @@
 import React from 'react'
+import { action } from "@storybook/addon-actions";
 import { centerDecorator } from '../../../utils/storybook/decorators'
 import { Chip } from "../../Chip"
 import Table from '../Table'
@@ -43,12 +44,18 @@ export const Basic = () => {
     { id: '4', username: 'Operator', firstname: 'Neelam', lastname: 'Harris', location: 'Haifa', date: '04/12/2020' },
     { id: '5', username: 'Superator', firstname: 'Carole', lastname: 'Howe', location: 'Tzfat', date: '23/03/2009' },
   ]
+
+  const rowActions = [
+    { content: 'Delete', onClick: action('delete action clicked') },
+    { content: 'Edit', onClick: action('edit action clicked') }
+  ]
+
   const style = { width: '80%' }
 
   return (
     <Table style={ style }>
       <Table.TableHeader headers={ headers }/>
-      <Table.TableBody data={ data }/>
+      <Table.TableBody data={ data } rowActions={ rowActions }/>
     </Table>
   )
 }

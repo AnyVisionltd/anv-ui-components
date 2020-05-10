@@ -1,16 +1,16 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 import { Button } from '../Button'
 import styles from './IconButton.module.scss'
 
-const IconButton = ({
+const IconButton = forwardRef(({
   size,
   variant,
   className,
   children,
   ...buttonProps
-}) => {
+}, ref) => {
   const classes = classNames(
     styles.iconButton,
     styles[size],
@@ -19,11 +19,16 @@ const IconButton = ({
   )
 
   return (
-    <Button className={ classes } variant={ variant } { ...buttonProps }>
+    <Button
+      ref={ ref }
+      className={ classes }
+      variant={ variant }
+      { ...buttonProps }
+    >
       { children }
     </Button>
   )
-}
+})
 
 IconButton.defaultProps = {
   size: 'small',

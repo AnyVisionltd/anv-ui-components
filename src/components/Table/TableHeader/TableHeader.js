@@ -17,7 +17,7 @@ const TableHeader = ({
   ...otherProps
 }) => {
   const { state, setSortBy, setHeaders } = useContext(TableContext)
-  const { headers: contextHeader, sort } = state
+  const { headers: contextHeaders, sort, withRowActions } = state
   const { sortBy, sortable } = sort
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const TableHeader = ({
     if (hide) {
       return null
     }
-    const style = flexWidth ? { flex: `0 1 ${ flexWidth }` } : {}
+    const style = flexWidth ? { flex: `0 0 ${ flexWidth }` } : {}
 
     const sortableColumn = sortable && !disableSort
     return (
@@ -77,6 +77,10 @@ const TableHeader = ({
     )
   }
 
+  const renderActionsPlaceholder = () => (
+    withRowActions && <div className={ styles.actionsPlaceholder }/>
+  )
+
   const classes = classNames(
     styles.tableHeader,
     className,
@@ -88,7 +92,8 @@ const TableHeader = ({
       className={ classes }
       { ...otherProps }
     >
-      { contextHeader.map(renderCell) }
+      { contextHeaders.map(renderCell) }
+      { renderActionsPlaceholder() }
     </div>
   )
 }

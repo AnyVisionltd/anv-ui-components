@@ -131,7 +131,7 @@ Menu.defaultProps = {
 
 Menu.propTypes = {
   /** Should the menu appear on screen or not. */
-  isOpen: propTypes.bool,
+  isOpen: propTypes.bool.isRequired,
   /** Determine the size of the menu's items. */
   variant: propTypes.oneOf(['regular', 'dense']),
   /** Reference to the controlling element,

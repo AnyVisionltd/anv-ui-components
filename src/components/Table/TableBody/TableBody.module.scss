@@ -1,14 +1,18 @@
 @import "~@anyvision/style-guide";
 
 .tableBody {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   color: av-color(content)
 }
 
 .tableRow {
+  box-sizing: border-box;
+  min-height: 48px;
   display: flex;
   border-bottom: 1px av-color(content, av-opacity(divider)) solid;
+  padding: av-space(tiny) 0;
 
   &:hover:not(.selectedRow) {
     background-color: av-color(primary, av-opacity(ghost));
@@ -22,8 +26,23 @@
 }
 
 .tableCell {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   flex: 1 1 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
   padding-left: av-space();
+}
+
+.actionsCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: av-size(sz-64);
+
+  .actionButton {
+    color: av-color(content)
+  }
 }
