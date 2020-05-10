@@ -3,6 +3,7 @@ import { actionTypes, actions } from './actions'
 
 const initialState = {
   headers: [],
+  data: [],
   sort: {
     sortable: false,
     sortBy: {
@@ -16,6 +17,8 @@ const reducer = (state, action) => {
   switch (action.type) {
     case actionTypes.SET_HEADERS:
       return { ...state, headers: action.payload }
+    case actionTypes.SET_DATA:
+      return { ...state, data: [...action.payload] }
     case actionTypes.SET_SORTABLE:
       return { ...state, sort: { ...state.sort, sortable: action.payload } }
     case actionTypes.SET_SORT_BY:

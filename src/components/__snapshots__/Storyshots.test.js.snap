@@ -1608,7 +1608,7 @@ exports[`Storyshots Components/Table/Sortable With Default Sort 1`] = `
 </div>
 `;
 
-exports[`Storyshots Components/Table/TableHeader Basic 1`] = `
+exports[`Storyshots Components/Table/TableBody Basic 1`] = `
 <div>
   <div
     className="center"

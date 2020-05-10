@@ -15,7 +15,6 @@ export const Basic = () => {
     {
       field: 'img',
       content: 'profile image',
-      columnRender: () => <img alt="profile" />,
     },
     {
       field: 'username',

@@ -1,0 +1,29 @@
+@import "~@anyvision/style-guide";
+
+.tableBody {
+  display: flex;
+  flex-direction: column;
+  color: av-color(content)
+}
+
+.tableRow {
+  display: flex;
+  border-bottom: 1px av-color(content, av-opacity(divider)) solid;
+
+  &:hover:not(.selectedRow) {
+    background-color: av-color(primary, av-opacity(ghost));
+  }
+}
+
+.selectedRow {
+  color: av-color(purewhite);
+  fill: currentColor;
+  background-color: av-color(primary);
+}
+
+.tableCell {
+  display: flex;
+  align-items: center;
+  flex: 1 1 0;
+  padding-left: av-space();
+}
