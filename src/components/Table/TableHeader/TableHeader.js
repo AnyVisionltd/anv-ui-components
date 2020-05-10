@@ -49,12 +49,12 @@ const TableHeader = ({
 
   const renderCell = (headerCell) => {
     const {
-      field, content, disableSort, hide, size,
+      field, content, disableSort, hide, flexWidth,
     } = headerCell
     if (hide) {
       return null
     }
-    const style = size ? { flex: `0 1 ${size}` } : {}
+    const style = flexWidth ? { flex: `0 1 ${ flexWidth }` } : {}
 
     const sortableColumn = sortable && !disableSort
     return (
@@ -117,8 +117,8 @@ TableHeader.propTypes = {
       customSort: propTypes.func,
       /** Hide the column */
       hide: propTypes.bool,
-      /** Set the column width */
-      size: propTypes.string,
+      /** Set the column width by flex basis */
+      flexWidth: propTypes.string,
       /** Column type, use for controlled sorting */
       type: propTypes.oneOf(['string', 'number', 'date']),
     }),

@@ -5,11 +5,10 @@
   align-items: stretch;
   height: 32px;
   border-radius: av-radius(tidy);
-  padding: 0 av-space(tiny);
   color: av-color(content, av-opacity(medium));
   fill: av-color(content, av-opacity(medium));
   background-color: av-color(content, av-opacity(ghost));
-  border: av-color(content, av-opacity(divider)) solid 1px;
+  border: 1px av-color(content, av-opacity(divider)) solid;
 }
 
 .tableHeaderCell {
@@ -24,13 +23,10 @@
   white-space: nowrap;
   line-height: 1.6;
   letter-spacing: 1.5px;
-
-  &:first-child {
-    padding-left: av-space(tiny);
-  }
+  transition: background-color 100ms ease-in-out;
 
   &:hover {
-    @include av-elevation(sticky);
+    background-color: av-color(content, av-opacity(ghost));
 
     .sortingIcon:not(.activeSort) {
        opacity: av-opacity(medium);

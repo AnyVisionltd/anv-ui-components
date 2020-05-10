@@ -27,15 +27,18 @@ const headers = [
   },
 ]
 
-export const Playground = () => (
-  <Table style={ { width: '80%' } }>
-    <Table.TableHeader
-      headers={ headers }
-      onHeaderCellClick={ action('header cell clicked') }
-    />
-    {
-      boolean('sortable', true)
-      && <Table.Sortable onSortChange={ action('sort changed') } />
-    }
-  </Table>
-)
+export const Playground = () => {
+  const style = { width: '80%' }
+  return (
+    <Table style={ style }>
+      <Table.TableHeader
+        headers={ headers }
+        onHeaderCellClick={ action('header cell clicked') }
+      />
+      {
+        boolean('sortable', true)
+        && <Table.Sortable onSortChange={ action('sort changed') } />
+      }
+    </Table>
+  )
+}

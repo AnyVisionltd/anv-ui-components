@@ -26,24 +26,26 @@ const headers = [
   },
 ]
 
-export const Basic = () => (
-  <Table
-    style={ { width: '80%' } }
-  >
-    <Table.TableHeader headers={ headers } />
-    <Table.Sortable />
-  </Table>
-)
+export const Basic = () => {
+  const style = { width: '80%' }
+  return (
+    <Table style={ style }>
+      <Table.TableHeader headers={ headers } />
+      <Table.Sortable />
+    </Table>
+  )
+}
 
-export const withDefaultSort = () => (
-  <Table
-    style={ { width: '80%' } }
-  >
-    <Table.TableHeader
-      headers={ headers }
-    />
-    <Table.Sortable
-      defaultSortBy={ { field: 'username', order: 'asc' } }
-    />
-  </Table>
-)
+export const withDefaultSort = () =>{
+  const style = { width: '80%' }
+  return (
+    <Table style={ style }>
+      <Table.TableHeader
+        headers={ headers }
+      />
+      <Table.Sortable
+        defaultSortBy={ { field: 'username', order: 'asc' } }
+      />
+    </Table>
+  )
+}

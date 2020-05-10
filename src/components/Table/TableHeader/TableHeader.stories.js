@@ -20,7 +20,7 @@ export const Basic = () => {
     {
       field: 'username',
       content: 'user name',
-      size: text('size user name', '20%'),
+      flexWidth: text('size user name', '20%'),
     }, {
       field: 'firstname',
       content: 'First Name',
@@ -28,8 +28,10 @@ export const Basic = () => {
     },
   ]
 
+  const style = { width: '80%' }
+
   return (
-    <Table style={ { width: '80%' } }>
+    <Table style={ style }>
       <TableHeader
         headers={ headers }
       />

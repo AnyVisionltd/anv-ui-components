@@ -22,6 +22,7 @@ const Sortable = ({
 
   useEffect(() => {
     defaultSortBy && setSortBy(defaultSortBy)
+    // because we want defaultSortBy only on mount
   }, [setSortBy]) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
