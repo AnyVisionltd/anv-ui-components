@@ -372,7 +372,6 @@ exports[`Storyshots Components/Checkbox Playground 1`] = `
       <input
         checked={false}
         className="parent"
-        color="primary"
         disabled={false}
         id="checkbox-playground"
         onChange={[Function]}
@@ -849,7 +848,7 @@ exports[`Storyshots Components/InputBase Disable 1`] = `
 </div>
 `;
 
-exports[`Storyshots Components/InputBase Input Playground 1`] = `
+exports[`Storyshots Components/InputBase Playground 1`] = `
 <div>
   <div
     className="center"
@@ -862,7 +861,6 @@ exports[`Storyshots Components/InputBase Input Playground 1`] = `
         onChange={[Function]}
         readOnly={false}
         type="text"
-        value=""
       />
     </div>
   </div>
@@ -1018,6 +1016,229 @@ exports[`Storyshots Components/InputBase With Trailing Component 1`] = `
 </div>
 `;
 
+exports[`Storyshots Components/Menu Default 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="menuExample"
+    >
+      <button
+        aria-controls="menu-story-default"
+        aria-haspopup="true"
+        className="button large fill"
+        disabled={false}
+        onClick={[Function]}
+      >
+        Pizza Toppings
+      </button>
+      <portal-for-test>
+        <div
+          className="menuContainer"
+          style={Object {}}
+        />
+      </portal-for-test>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Menu Different Positions 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="menuExample"
+    >
+      <button
+        aria-controls="menu-story"
+        aria-haspopup="true"
+        className="button large fill"
+        disabled={false}
+        onClick={[Function]}
+        style={
+          Object {
+            "left": 10,
+            "position": "absolute",
+            "top": 10,
+          }
+        }
+      >
+        Top, Left
+      </button>
+      <button
+        aria-controls="menu-story"
+        aria-haspopup="true"
+        className="button large fill"
+        disabled={false}
+        onClick={[Function]}
+        style={
+          Object {
+            "position": "absolute",
+            "right": 10,
+            "top": 10,
+          }
+        }
+      >
+        Top, Right
+      </button>
+      <button
+        aria-controls="menu-story"
+        aria-haspopup="true"
+        className="button large fill"
+        disabled={false}
+        onClick={[Function]}
+        style={
+          Object {
+            "bottom": 10,
+            "left": 10,
+            "position": "absolute",
+          }
+        }
+      >
+        Bottom, Left
+      </button>
+      <button
+        aria-controls="menu-story"
+        aria-haspopup="true"
+        className="button large fill"
+        disabled={false}
+        onClick={[Function]}
+        style={
+          Object {
+            "bottom": 10,
+            "position": "absolute",
+            "right": 10,
+          }
+        }
+      >
+        Bottom, Right
+      </button>
+      <div
+        className="tinyText"
+      >
+        Best viewed in canvas mode
+      </div>
+      <portal-for-test>
+        <div
+          className="menuContainer"
+          style={Object {}}
+        />
+      </portal-for-test>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Menu Force Open To Direction 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="menuExample"
+    >
+      <button
+        aria-controls="menu-story"
+        aria-haspopup="true"
+        className="button large fill"
+        disabled={false}
+        onClick={[Function]}
+      >
+        Open Menu
+      </button>
+      <portal-for-test>
+        <div
+          className="menuContainer"
+          style={Object {}}
+        />
+      </portal-for-test>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Menu Variants 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="menuExample"
+    >
+      <div
+        className="microMargin"
+      >
+        <button
+          aria-controls="menu-story-regular"
+          aria-haspopup="true"
+          className="button large fill"
+          disabled={false}
+          onClick={[Function]}
+        >
+          Regular
+        </button>
+        <portal-for-test>
+          <div
+            className="menuContainer"
+            style={Object {}}
+          />
+        </portal-for-test>
+      </div>
+      <div
+        className="microMargin"
+      >
+        <button
+          aria-controls="menu-story-dense"
+          aria-haspopup="true"
+          className="button large fill"
+          disabled={false}
+          onClick={[Function]}
+        >
+          Dense
+        </button>
+        <portal-for-test>
+          <div
+            className="menuContainer"
+            style={Object {}}
+          />
+        </portal-for-test>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Menu With Sub Menus 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="menuExample"
+    >
+      <button
+        aria-controls="menu-story-submenu"
+        aria-haspopup="true"
+        className="button large fill"
+        disabled={false}
+        onClick={[Function]}
+      >
+        Open Menu
+      </button>
+      <portal-for-test>
+        <div
+          className="menuContainer"
+          style={Object {}}
+        />
+      </portal-for-test>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Components/Portal Default 1`] = `
 <div>
   <portal-for-test>
@@ -1106,6 +1327,305 @@ exports[`Storyshots Components/Snackbar Leading Icon 1`] = `
     >
       With Leading Icon
     </button>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Switch Default 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="marginFlexContainer"
+    >
+      <div
+        className="switch enabled"
+      >
+        <input
+          defaultChecked={true}
+          disabled={false}
+          hidden="hidden"
+          id="switch-example"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          className="switchLabel"
+          htmlFor="switch-example"
+        >
+          <div
+            className="switchLine"
+          />
+          <div
+            className="switchToggle"
+          >
+            <span
+              className="switchToggleInner"
+            />
+          </div>
+        </label>
+      </div>
+      <label
+        htmlFor="switch-example"
+      >
+        Check me out!
+      </label>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Switch Multiple Switches 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="marginFlexContainer"
+    >
+      <div
+        className="switch unchecked enabled"
+      >
+        <input
+          defaultChecked={false}
+          disabled={false}
+          hidden="hidden"
+          id="switch-example1"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          className="switchLabel"
+          htmlFor="switch-example1"
+        >
+          <div
+            className="switchLine"
+          />
+          <div
+            className="switchToggle"
+          >
+            <span
+              className="switchToggleInner"
+            />
+          </div>
+        </label>
+      </div>
+      <div
+        className="switch enabled"
+      >
+        <input
+          defaultChecked={true}
+          disabled={false}
+          hidden="hidden"
+          id="switch-example2"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          className="switchLabel"
+          htmlFor="switch-example2"
+        >
+          <div
+            className="switchLine"
+          />
+          <div
+            className="switchToggle"
+          >
+            <span
+              className="switchToggleInner"
+            />
+          </div>
+        </label>
+      </div>
+      <div
+        className="switch unchecked disabled"
+      >
+        <input
+          defaultChecked={false}
+          disabled={true}
+          hidden="hidden"
+          id="switch-example3"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          className="switchLabel"
+          htmlFor="switch-example3"
+        >
+          <div
+            className="switchLine"
+          />
+          <div
+            className="switchToggle"
+          >
+            <span
+              className="switchToggleInner"
+            />
+          </div>
+        </label>
+      </div>
+      <div
+        className="switch disabled"
+      >
+        <input
+          defaultChecked={true}
+          disabled={true}
+          hidden="hidden"
+          id="switch-example4"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          className="switchLabel"
+          htmlFor="switch-example4"
+        >
+          <div
+            className="switchLine"
+          />
+          <div
+            className="switchToggle"
+          >
+            <span
+              className="switchToggleInner"
+            />
+          </div>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Switch Playground 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="marginFlexContainer"
+    >
+      <div
+        className="switch unchecked enabled"
+      >
+        <input
+          defaultChecked={false}
+          disabled={false}
+          hidden="hidden"
+          id="switch-playground"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          className="switchLabel"
+          htmlFor="switch-playground"
+        >
+          <div
+            className="switchLine"
+          />
+          <div
+            className="switchToggle"
+          >
+            <span
+              className="switchToggleInner"
+            />
+          </div>
+        </label>
+      </div>
+      <label
+        htmlFor="switch-playground"
+      >
+        Hit me!
+      </label>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Table Playground 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="table"
+      style={
+        Object {
+          "width": "80%",
+        }
+      }
+    >
+      <div
+        className="tableHeader"
+        role="row"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Table/Sortable Basic 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="table"
+      style={
+        Object {
+          "width": "80%",
+        }
+      }
+    >
+      <div
+        className="tableHeader"
+        role="row"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Table/Sortable With Default Sort 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="table"
+      style={
+        Object {
+          "width": "80%",
+        }
+      }
+    >
+      <div
+        className="tableHeader"
+        role="row"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Table/TableHeader Basic 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="table"
+      style={
+        Object {
+          "width": "80%",
+        }
+      }
+    >
+      <div
+        className="tableHeader"
+        role="row"
+      />
+    </div>
   </div>
 </div>
 `;

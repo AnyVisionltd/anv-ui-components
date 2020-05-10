@@ -11,6 +11,9 @@ module.exports = {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react/jsx-curly-spacing': ['error', { 'when': 'always', 'children': true }],
     'object-curly-spacing': ['error', 'always'],
-    'jsx-a11y/label-has-associated-control': 'off'
+    'jsx-a11y/label-has-associated-control': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/no-noninteractive-element-interactions': 'off',
+    'no-unused-expressions': [2, { allowShortCircuit: true }]
   },
 };

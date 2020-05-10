@@ -1,0 +1,46 @@
+@import "~@anyvision/style-guide";
+
+.tableHeader {
+  display: flex;
+  align-items: stretch;
+  height: 32px;
+  border-radius: av-radius(tidy);
+  color: av-color(content, av-opacity(medium));
+  fill: av-color(content, av-opacity(medium));
+  background-color: av-color(content, av-opacity(ghost));
+  border: 1px av-color(content, av-opacity(divider)) solid;
+}
+
+.tableHeaderCell {
+  @extend %av-overline;
+  display: flex;
+  align-items: center;
+  flex: 1 1 0;
+  padding: 0 av-space();
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: background-color 100ms ease-in-out;
+
+  &:hover {
+    background-color: av-color(content, av-opacity(ghost));
+
+    .sortingIcon:not(.activeSort) {
+       opacity: av-opacity(medium);
+    }
+  }
+}
+
+.sortingIcon {
+  opacity: 0;
+  width: av-size(sz-16);
+  transition: transform 200ms ease-in-out, opacity 200ms ease-in-out;
+}
+
+.activeSort {
+  opacity: av-opacity(high);
+}
+
+.sortingIconDesc {
+  transform: rotate(-180deg);
+}
