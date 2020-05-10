@@ -2,6 +2,7 @@
 @import "../../styles/mixin/ripple";
 
 .checkbox {
+  box-sizing: border-box;
   @include av-ripple(currentColor, true);
   position: relative;
   height: av-size(sz-32);
@@ -16,6 +17,7 @@
   fill: currentColor;
 
   .parent {
+    box-sizing: border-box;
     position: absolute;
     opacity: 0;
     height: 100%;
@@ -24,6 +26,7 @@
   }
 
   .iconContainer {
+    box-sizing: border-box;
     display: inline-flex;
     justify-content: center;
     align-items: center;
