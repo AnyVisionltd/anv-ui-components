@@ -30,6 +30,11 @@ const useElementAbsolutePositioning = (
 
   const direction = closeDirection || openDirection
 
+  // Preserve position when close the menu by null anchorElement
+  if(anchorElement === null && previousAnchorElement) {
+    anchorElement = previousAnchorElement
+  }
+
   if (floatingElement && anchorElement) {
     const {
       offsetWidth: floatingElementWidth,

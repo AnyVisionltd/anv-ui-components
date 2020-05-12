@@ -57,12 +57,13 @@ const TableHeader = ({
     const style = flexWidth ? { flex: `0 0 ${ flexWidth }` } : {}
 
     const sortableColumn = sortable && !disableSort
+    const tableCellClass = classNames(styles.tableHeaderCell, {[styles.sortableColumn]: sortableColumn})
     return (
       <div
         key={ field }
         role="cell"
         style={ style }
-        className={ styles.tableHeaderCell }
+        className={ tableCellClass }
         onClick={ () => handleHeaderCellClick(headerCell, sortableColumn) }
       >
         {

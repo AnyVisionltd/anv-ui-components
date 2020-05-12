@@ -24,11 +24,14 @@ const TableBody = ({
 
   useEffect(() => {
     setWithRowActions(!!rowActions)
-    // TODO check if need not just for mount
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [setWithRowActions, rowActions])
 
   const handleActionsClick = event => {
     setActionsAnchorElement(event.currentTarget)
+  }
+
+  const handleActionsClose = () => {
+    setActionsAnchorElement(null)
   }
 
   const renderActions = row => {
@@ -41,7 +44,7 @@ const TableBody = ({
           anchorElement={ actionsAnchorElement }
           isOpen={ !!actionsAnchorElement }
           openDirection={ 'down-start' }
-          onClose={ () => setActionsAnchorElement(null) }
+          onClose={ handleActionsClose }
         >
           {
             rowActions.map(({content, onClick}, index) => (

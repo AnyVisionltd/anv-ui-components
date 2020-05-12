@@ -15,7 +15,6 @@
 
 .tableHeaderCell {
   @extend %av-overline;
-  cursor: pointer;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -33,6 +32,10 @@
        opacity: av-opacity(medium);
     }
   }
+}
+
+.sortableColumn {
+  cursor: pointer;
 }
 
 .actionsPlaceholder {

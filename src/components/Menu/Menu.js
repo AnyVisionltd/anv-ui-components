@@ -118,12 +118,9 @@ const Menu = ({
 Menu.defaultProps = {
   isOpen: false,
   variant: 'regular',
-  onClose: () => {
-  },
-  onClosed: () => {
-  },
-  onOpened: () => {
-  },
+  onClose: () => {},
+  onClosed: () => {},
+  onOpened: () => {},
   isSubMenu: false,
   openDirection: 'auto',
   attachDirection: 'vertical',
