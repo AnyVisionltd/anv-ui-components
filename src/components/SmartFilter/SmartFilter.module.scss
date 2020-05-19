@@ -1,21 +1,22 @@
 @import "~@anyvision/style-guide";
 
-.smartSearch {
-  @include av-elevation(overlay);
+.SmartFilter {
+  @include av-elevation(raised);
   min-width: av-size(sz-640);
   border-radius: av-radius();
   display: flex;
 
   .searchFilter {
-    background-color: av-color(surface);
+    padding: 9px;
+    //background-color: av-color(surface);
 
     &:focus {
-     background-color: av-color(primary);
+    // background-color: av-color(primary);
     }
 
     .filterIcon {
       &:focus {
-        background-color: av-color(surface);
+        //background-color: av-color(surface);
       }
     }
   }
@@ -29,6 +30,11 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
+      flex: 1;
+
+      &:focus {
+        opacity: av-opacity(ghost);
+      }
 
       .chipStyle {
         margin: 5px;
@@ -37,6 +43,7 @@
       .inputStyle {
         height: auto;
         border: none;
+        flex: 1;
       }
     }
 

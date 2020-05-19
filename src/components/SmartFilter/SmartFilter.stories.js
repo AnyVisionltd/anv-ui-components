@@ -1,36 +1,35 @@
 import React from 'react'
-import SmartSearch from './SmartSearch'
+import SmartFilter from './SmartFilter'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import { ReactComponent as EyeEnabled } from '../../assets/svg/EyeEnabled.svg'
 import { ReactComponent as ArrowSolidRight } from '../../assets/svg/ArrowSolidRight.svg'
 import styles from '../../styles/storybook/index.module.scss'
 
 export default {
-  title: 'Components/SmartSearch',
-  component: SmartSearch,
+  title: 'Components/SmartFilter',
+  component: SmartFilter,
   decorators: [centerDecorator],
 }
 
-const rows = [
-  {
-    column: 'subjectName', label: 'Subject Name', type: 'text', isDefault: true,
-  },
-  {
-    column: 'age', type: 'number', label: 'Age', isDefault: false, icon: <ArrowSolidRight />,
-  },
-  {
-    column: 'subjectDescription', label: 'Description', type: 'text', isDefault: true, icon: <EyeEnabled />,
-  },
-]
-
 export const Default = () => {
+  const fields = [
+    {
+      field: 'subjectName', label: 'Subject Name', type: 'text',
+    },
+    {
+      field: 'age', type: 'number', label: 'Age', icon: <ArrowSolidRight />,
+    },
+    {
+      field: 'subjectDescription', label: 'Description', type: 'text', icon: <EyeEnabled />,
+    },
+  ]
   const onChange = (search) => {
     console.log(search) // eslint-disable-line no-console
   }
   return (
     <div className={ styles.marginFlexContainer }>
-      <SmartSearch
-        fields={ rows }
+      <SmartFilter
+        fields={ fields }
         onChange={ onChange }
       />
     </div>

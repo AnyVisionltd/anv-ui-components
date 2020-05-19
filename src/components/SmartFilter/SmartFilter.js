@@ -6,60 +6,43 @@ import InputBase from '../InputBase/InputBase'
 import IconButton from '../IconButton/IconButton'
 import Menu from '../Menu/Menu'
 import Chip from '../Chip/Chip'
+import keymap from '../../utils/enums/keymap'
 import { ReactComponent as FilterIcon } from '../../assets/svg/Filter.svg'
 import { ReactComponent as CloseIcon } from '../../assets/svg/Close.svg'
-import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
-import styles from './SmartSearch.module.scss'
-
-const ENTER_CODE = 13
+import styles from './SmartFilter.module.scss'
 
 const getChipKey = (name, text) => `${name}${text}`
 
-const SmartSearch = ({
+const INPUT_ID = 'input-id'
+
+const SmartFilter = ({
   className,
   fields,
   onChange,
-  defaultIcon,
-  defaultMenuItemIcon,
+  placeholder,
   ...otherProps
 }) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [inputValue, setInputValue] = useState('')
   const [baseInputValue, setBaseInputValue] = useState('')
-  const [chosenChips, setChosenChips] = useState([])
+  const [filterChips, setFilterChips] = useState([])
   const ref = useRef()
 
-  const defaultColumns = fields.reduce((acc, { column, isDefault }) => {
-    if (isDefault) {
-      acc.push(column)
-    }
-    return acc
-  }, [])
-
   useEffect(() => {
-    const searchQuery = chosenChips.map(({ name, text }) => {
-      const { column } = fields.find(({ label }) => label === name) || {}
-      if (column) {
-        return { [column]: text }
-      }
-      return defaultColumns.reduce((acc, item) => {
-        acc[item] = text
-        return acc
-      }, {})
+    const searchQuery = filterChips.map(({ name, text }) => {
+      const { field } = fields.find(({ label }) => label === name) || {}
+      return { ...field && { field }, value: text }
     })
     onChange(searchQuery)
-  }, [chosenChips, defaultColumns, fields, onChange])
+  }, [filterChips]) // eslint-disable-line
 
   const baseInputLabel = baseInputValue.slice(0, -2)
-  const handleMenuClose = () => setIsOpen(false)
-  const handleButtonClick = () => setIsOpen(!isOpen)
+  const handleMenuClose = () => setIsMenuOpen(false)
+  const handleButtonClick = () => setIsMenuOpen(!isMenuOpen)
 
   const getChipIcon = (name) => {
-    const [menuItem] = fields.filter(({ label }) => label === name)
-    if (menuItem) {
-      return menuItem.icon || defaultMenuItemIcon
-    }
-    return defaultIcon
+    const [menuItem = {}] = fields.filter(({ label }) => label === name)
+    return menuItem.icon
   }
 
   const getInputType = () => {
@@ -68,22 +51,23 @@ const SmartSearch = ({
   }
 
   const classes = classNames(
-    styles.smartSearch,
+    styles.SmartFilter,
     className,
   )
 
   const removeChip = (removedKey) => {
-    const chips = chosenChips.filter(({ name, text }) => removedKey !== getChipKey(name, text))
-    setChosenChips(chips)
+    const chips = filterChips.filter(({ name, text }) => removedKey !== getChipKey(name, text))
+    setFilterChips(chips)
   }
 
-  const removeAllChips = () => setChosenChips([])
+  const removeAllChips = () => setFilterChips([])
 
   const onItemClick = (label) => {
     const value = `${label}: `
     setBaseInputValue(value)
     setInputValue(value)
     handleMenuClose()
+    document.getElementById(INPUT_ID).focus()
   }
 
   const onInputChange = ({ target }) => {
@@ -103,7 +87,7 @@ const SmartSearch = ({
 
   const validateChipData = ({ name: newName, text: newText }) => {
     const compareChips = ({ name, text }) => getChipKey(name, text) === getChipKey(newName, newText)
-    const chipsEqualToNewChip = chosenChips.filter(compareChips)
+    const chipsEqualToNewChip = filterChips.filter(compareChips)
     return !chipsEqualToNewChip.length
   }
 
@@ -119,24 +103,20 @@ const SmartSearch = ({
     chip.icon = getChipIcon(chip.name)
     setInputValue('')
     if (chip.text && validateChipData(chip)) {
-      const allChips = [...chosenChips, chip]
-      setChosenChips(allChips)
+      const allChips = [...filterChips, chip]
+      setFilterChips(allChips)
     }
   }
 
   const keyPress = ({ keyCode }) => {
-    if (keyCode === ENTER_CODE) {
+    if (keyCode === keymap.ENTER) {
       onChipSubmit()
     }
   }
 
-  const renderMenuRow = fields.map(({ label }) => (
-    <Menu.Item key={ label } onClick={ () => onItemClick(label) }>{ label }</Menu.Item>
-  ))
-
   const renderChips = (
     <>
-      { chosenChips.map(({ name, text, icon }) => (
+      { filterChips.map(({ name, text, icon }) => (
         <Chip
           key={ getChipKey(name, text) }
           className={ styles.chipStyle }
@@ -149,7 +129,7 @@ const SmartSearch = ({
     </>
   )
 
-  const renderRemoveAllChipsIcon = chosenChips.length
+  const renderRemoveAllChipsIcon = filterChips.length
     ? (
       <IconButton className={ styles.closeButton } onClick={ removeAllChips }>
         <CloseIcon className={ styles.closeIcon } />
@@ -165,17 +145,19 @@ const SmartSearch = ({
       <Menu
         aria-labelledby="menu-story-default"
         anchorElement={ ref.current }
-        isOpen={ isOpen }
+        isOpen={ isMenuOpen }
         onClose={ handleMenuClose }
       >
-        { renderMenuRow }
+        { fields.map(({ label }) => (
+          <Menu.Item key={ label } onClick={ () => onItemClick(label) }>{ label }</Menu.Item>
+        )) }
       </Menu>
     )
   }
 
   return (
     <div className={ classes }>
-      <Button className={ styles.searchFilter } onClick={ handleButtonClick } ref={ ref }>
+      <Button className={ styles.searchFilter } onClick={ handleButtonClick }>
         <FilterIcon className={ styles.filterIcon } />
       </Button>
       { renderMenu() }
@@ -183,12 +165,13 @@ const SmartSearch = ({
         <div className={ styles.chipsAndInput }>
           { renderChips }
           <InputBase
+            id={ INPUT_ID }
             autoFocus
             value={ inputValue }
             className={ styles.inputStyle }
             ref={ ref }
             onChange={ onInputChange }
-            placeholder="With Icon"
+            placeholder={ filterChips.length ? `+ ${placeholder}` : placeholder }
             onKeyDown={ keyPress }
             { ...otherProps }
           />
@@ -199,39 +182,32 @@ const SmartSearch = ({
   )
 }
 
-SmartSearch.defaultProps = {
+SmartFilter.defaultProps = {
   onChange: () => {},
-  placeholder: '+ Add tag to filter or free type to search',
+  placeholder: 'Add tag to filter or free type to search',
   fields: [],
-  defaultIcon: <SunIcon />,
-  defaultMenuItemIcon: <SunIcon />,
 }
 
-SmartSearch.propTypes = {
-  /** For css customization. */
-  className: propTypes.string,
-  /** Fields that are going to appear in the search menu:
-   *  column    - name of the key that would be returned if the user choose this line in the menu.
-   *  label     - the name of the menu item that appears.
-   *  type      - number or text as the possible input types.
-   *  isDefault - if the user does not choose the column, he will receive the chosen input
-   *              in all the isDefault=true columns.
-   *  icon      - the icon on the chip that will appear if the user choose this line in the menu. */
+SmartFilter.propTypes = {
+  /** Fields that are going to appear in the search menu:<br />
+   *  <code>field</code>     - name of the value of field key that would be returned
+   *                           if the user choose this line in the menu.<br />
+   *  <code>label</code>     - the name of the menu item that appears.<br />
+   *  <code>type</code>      - number or text as the possible input types.<br />
+   *  <code>icon</code>      - the icon on the chip that will appear
+   *                           if the user choose this line in the menu. */
   fields: propTypes.arrayOf(propTypes.shape({
-    column: propTypes.string.isRequired,
+    field: propTypes.string.isRequired,
     label: propTypes.string.isRequired,
     type: propTypes.oneOf(['text', 'number']),
-    isDefault: propTypes.bool,
     icon: propTypes.element,
   })),
   /** Callback when changed. */
   onChange: propTypes.func,
   /** Default input place holder. */
   placeholder: propTypes.string,
-  /** The default icon on the chip for free typing. */
-  defaultIcon: propTypes.element,
-  /** The default icon on the chip for menu items. */
-  defaultMenuItemIcon: propTypes.element,
+  /** For css customization. */
+  className: propTypes.string,
 }
 
-export default SmartSearch
+export default SmartFilter

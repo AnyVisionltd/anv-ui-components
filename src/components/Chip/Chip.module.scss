@@ -15,10 +15,6 @@
   color: av-color(primary);
   fill: currentColor;
 
-  > button {
-    outline: none;
-  }
-
   &.focusable {
     @include av-ripple();
 
@@ -96,5 +92,9 @@
 
   .label {
     padding: 0 av-space(tiny);
+  }
+
+  > button {
+    outline: none;
   }
 }
