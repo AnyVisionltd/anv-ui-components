@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { usePrevious, useWindowDimensions } from '../index'
 
-const useElementAbsolutePositioning = (
+const usePopoverPositioning = (
   anchorElement,
   floatingElement,
   attachDirection,
@@ -16,7 +16,7 @@ const useElementAbsolutePositioning = (
     width: containerWidth,
     height: containerHeight,
   } = useWindowDimensions()
-  const styles = {}
+  const positionStyles = {}
   const actualOpenDirection = {
     vertical: '',
     horizontal: '',
@@ -50,49 +50,49 @@ const useElementAbsolutePositioning = (
       : anchorElement.offsetLeft
 
     const displayElementFromAnchorElementTopUpwards = () => {
-      styles.top = offsetTop - floatingElementHeight
+      positionStyles.top = offsetTop - floatingElementHeight
       actualOpenDirection.vertical = 'up'
     }
     const displayElementFromAnchorElementBottomUpwards = () => {
-      styles.top = offsetTop + anchorHeight - floatingElementHeight
+      positionStyles.top = offsetTop + anchorHeight - floatingElementHeight
       actualOpenDirection.vertical = 'up'
     }
     const displayElementFromAnchorElementTopDownwards = () => {
-      styles.top = offsetTop
+      positionStyles.top = offsetTop
       actualOpenDirection.vertical = 'down'
     }
     const displayElementFromAnchorElementBottomDownwards = () => {
-      styles.top = offsetTop + anchorHeight
+      positionStyles.top = offsetTop + anchorHeight
       actualOpenDirection.vertical = 'down'
     }
 
     const displayElementFromAnchorElementStartToAnchorElementEnd = () => {
-      styles.left = isWindowRtl
+      positionStyles.left = isWindowRtl
         ? offsetLeft + anchorWidth - floatingElementWidth
         : offsetLeft
       actualOpenDirection.horizontal = 'end'
     }
     const displayElementFromAnchorElementEnd = () => {
-      styles.left = isWindowRtl
+      positionStyles.left = isWindowRtl
         ? offsetLeft - floatingElementWidth
         : offsetLeft + anchorWidth
       actualOpenDirection.horizontal = 'end'
     }
     const displayElementFromAnchorElementEndToAnchorElementStart = () => {
-      styles.left = isWindowRtl
+      positionStyles.left = isWindowRtl
         ? offsetLeft
         : offsetLeft + anchorWidth - floatingElementWidth
       actualOpenDirection.horizontal = 'start'
     }
     const displayElementFromAnchorElementStart = () => {
-      styles.left = isWindowRtl
+      positionStyles.left = isWindowRtl
         ? offsetLeft + anchorWidth
         : offsetLeft - floatingElementWidth
       actualOpenDirection.horizontal = 'start'
     }
 
     const isFloatingElementOutOfVerticalBounds = () => {
-      let { top } = styles
+      let { top } = positionStyles
       if (!isUsingPortal) {
         top += anchorElement.getBoundingClientRect().bottom
       }
@@ -101,7 +101,7 @@ const useElementAbsolutePositioning = (
       return bottom > calculatedContainerHeight
     }
     const isFloatingElementOutOfHorizontalBounds = () => {
-      let { left } = styles
+      let { left } = positionStyles
       if (!isUsingPortal) {
         left += anchorElement.getBoundingClientRect().left
       }
@@ -172,10 +172,14 @@ const useElementAbsolutePositioning = (
     }
   }, [isOpen, previousOpenState, closeDirection, actualOpenDirection])
 
+  if(isOpen) {
+    floatingElement.style.top = `${positionStyles.top}px`
+    floatingElement.style.left = `${positionStyles.left}px`
+  }
+
   return {
-    styles,
     openDirection: actualOpenDirection,
   }
 }
 
-export default useElementAbsolutePositioning
+export default usePopoverPositioning

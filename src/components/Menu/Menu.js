@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import { useClickOutsideListener, useElementAbsolutePositioning } from '../../hooks'
+import { useClickOutsideListener, usePopoverPositioning } from '../../hooks'
 import { Animations } from '../Animations'
 import { Portal } from '../Portal'
 import styles from './Menu.module.scss'
@@ -24,9 +24,8 @@ const Menu = ({
   const menuWrapperRef = useRef()
 
   const {
-    styles: positionStyles,
     openDirection: actualOpenDirection,
-  } = useElementAbsolutePositioning(
+  } = usePopoverPositioning(
     anchorElement,
     menuWrapperRef && menuWrapperRef.current,
     attachDirection,
@@ -36,8 +35,7 @@ const Menu = ({
   )
 
   useClickOutsideListener((event) => {
-    const { target } = event
-    if (!isOpen || target === anchorElement) {
+    if (!isOpen) {
       return
     }
     onClose(event)
@@ -80,7 +78,6 @@ const Menu = ({
     <ul
       role="menu"
       className={ menuClasses }
-      ref={ menuWrapperRef }
       { ...otherProps }
     >
       { children }
@@ -89,8 +86,8 @@ const Menu = ({
 
   const renderMenu = () => (
     <div
+      ref={ menuWrapperRef }
       className={ containerClasses }
-      style={ positionStyles }
     >
       <Animations.Scale
         isOpen={ isOpen }
