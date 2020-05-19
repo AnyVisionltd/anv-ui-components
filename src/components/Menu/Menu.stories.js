@@ -12,10 +12,10 @@ export default {
 
 export const Default = () => {
   const ref = useRef()
-  const [isOpen, setIsOpen] = useState(false)
+  const [anchorElement, setAnchorElement] = useState(null)
 
-  const handleMenuClose = () => setIsOpen(false)
-  const handleButtonClick = () => setIsOpen(true)
+  const handleMenuClose = () => setAnchorElement(null)
+  const handleButtonClick = () => setAnchorElement(ref.current)
 
   return (
     <div className={ styles.menuExample }>
@@ -31,8 +31,8 @@ export const Default = () => {
 
       <Menu
         aria-labelledby="menu-story-default"
-        anchorElement={ ref.current }
-        isOpen={ isOpen }
+        anchorElement={ anchorElement }
+        isOpen={ !!anchorElement }
         onClose={ handleMenuClose }
       >
         <Menu.Item>Extra cheese</Menu.Item>
@@ -46,16 +46,11 @@ export const Default = () => {
 }
 
 export const DifferentPositions = () => {
-  const [anchorEl, setAnchorEl] = useState(null)
-  const [isOpen, setIsOpen] = useState(false)
+  const [anchorElement, setAnchorElement] = useState(null)
 
-  const handleClose = () => setIsOpen(false)
+  const handleClose = () => setAnchorElement(null)
   const handleButtonClick = (event) => {
-    if (isOpen) {
-      return handleClose()
-    }
-    setAnchorEl(event.currentTarget)
-    return setIsOpen(true)
+    setAnchorElement(event.currentTarget)
   }
 
   return (
@@ -102,8 +97,8 @@ export const DifferentPositions = () => {
 
       <Menu
         aria-labelledby="menu-story"
-        anchorElement={ anchorEl }
-        isOpen={ isOpen }
+        anchorElement={ anchorElement }
+        isOpen={ !!anchorElement }
         onClose={ handleClose }
       >
         <Menu.Item>List Item #1</Menu.Item>
@@ -118,10 +113,10 @@ export const DifferentPositions = () => {
 
 export const ForceOpenToDirection = () => {
   const ref = useRef()
-  const [isOpen, setIsOpen] = useState(false)
+  const [anchorElement, setAnchorElement] = useState(null)
 
-  const handleClose = () => setIsOpen(false)
-  const handleButtonClick = () => setIsOpen(true)
+  const handleClose = () => setAnchorElement(null)
+  const handleButtonClick = () => setAnchorElement(ref.current)
 
   const vertical = select('Vertical axis', ['up', 'down'], 'down')
   const horizontal = select('Horizontal axis', ['start', 'end'], 'end')
@@ -140,8 +135,8 @@ export const ForceOpenToDirection = () => {
 
       <Menu
         aria-labelledby="menu-story"
-        anchorElement={ ref.current }
-        isOpen={ isOpen }
+        anchorElement={ anchorElement }
+        isOpen={ !!anchorElement }
         onClose={ handleClose }
         openDirection={ `${vertical}-${horizontal}` }
         attachDirection={ attachDirection }
@@ -156,10 +151,10 @@ export const ForceOpenToDirection = () => {
 
 export const WithSubMenus = () => {
   const ref = useRef()
-  const [isOpen, setIsOpen] = useState(false)
+  const [anchorElement, setAnchorElement] = useState(null)
 
-  const handleMenuClose = () => setIsOpen(false)
-  const handleButtonClick = () => setIsOpen(true)
+  const handleMenuClose = () => setAnchorElement(null)
+  const handleButtonClick = () => setAnchorElement(ref.current)
 
   return (
     <div className={ styles.menuExample }>
@@ -175,8 +170,8 @@ export const WithSubMenus = () => {
 
       <Menu
         aria-labelledby="menu-story-submenu"
-        anchorElement={ ref.current }
-        isOpen={ isOpen }
+        anchorElement={ anchorElement }
+        isOpen={ !!anchorElement }
         onClose={ handleMenuClose }
       >
         <Menu.Item>List Item #1</Menu.Item>
@@ -202,14 +197,14 @@ export const Variants = () => {
   const regularAnchorElement = useRef()
   const denseAnchorElement = useRef()
 
-  const [isRegularMenuOpened, setRegularMenuOpened] = useState(false)
-  const [isDenseMenuOpened, setDenseMenuOpened] = useState(false)
+  const [regularAnchorElementOpened, setRegularAnchorElementOpened] = useState(false)
+  const [denseAnchorElementOpened, setDenseAnchorElementOpened] = useState(false)
 
-  const openRegularMenu = () => setRegularMenuOpened(true)
-  const openDenseMenu = () => setDenseMenuOpened(true)
+  const openRegularMenu = () => setRegularAnchorElementOpened(regularAnchorElement.current)
+  const openDenseMenu = () => setDenseAnchorElementOpened(denseAnchorElement.current)
 
-  const closeRegularMenu = () => setRegularMenuOpened(false)
-  const closeDenseMenu = () => setDenseMenuOpened(false)
+  const closeRegularMenu = () => setRegularAnchorElementOpened(null)
+  const closeDenseMenu = () => setDenseAnchorElementOpened(null)
 
   return (
     <div className={ styles.menuExample }>
@@ -224,8 +219,8 @@ export const Variants = () => {
         </Button>
         <Menu
           aria-labelledby="menu-story-regular"
-          anchorElement={ regularAnchorElement.current }
-          isOpen={ isRegularMenuOpened }
+          anchorElement={ regularAnchorElementOpened }
+          isOpen={ !!regularAnchorElementOpened }
           onClose={ closeRegularMenu }
         >
           <Menu.Item>Item #1</Menu.Item>
@@ -245,8 +240,8 @@ export const Variants = () => {
         </Button>
         <Menu
           aria-labelledby="menu-story-dense"
-          anchorElement={ denseAnchorElement.current }
-          isOpen={ isDenseMenuOpened }
+          anchorElement={ denseAnchorElementOpened }
+          isOpen={ !!denseAnchorElementOpened }
           onClose={ closeDenseMenu }
           variant="dense"
         >
