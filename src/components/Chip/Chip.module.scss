@@ -15,6 +15,10 @@
   color: av-color(primary);
   fill: currentColor;
 
+  > button {
+    outline: none;
+  }
+
   &.focusable {
     @include av-ripple();
 

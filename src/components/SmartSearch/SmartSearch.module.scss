@@ -1,0 +1,55 @@
+@import "~@anyvision/style-guide";
+
+.smartSearch {
+  @include av-elevation(overlay);
+  min-width: av-size(sz-640);
+  border-radius: av-radius();
+  display: flex;
+
+  .searchFilter {
+    background-color: av-color(surface);
+
+    &:focus {
+     background-color: av-color(primary);
+    }
+
+    .filterIcon {
+      &:focus {
+        background-color: av-color(surface);
+      }
+    }
+  }
+  .searchInput {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+
+    .chipsAndInput {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+
+      .chipStyle {
+        margin: 5px;
+      }
+
+      .inputStyle {
+        height: auto;
+        border: none;
+      }
+    }
+
+    .closeButton {
+      border-radius: av-radius(circle);
+      background-color: av-color(secondary);
+      height: av-size(sz-16);
+      width: av-size(sz-16);
+      margin: 16px 8px 8px 8px;
+
+      .closeIcon {
+        height: av-size(sz-16);
+        width: av-size(sz-16);
+      }
+    }
+  }
+}
