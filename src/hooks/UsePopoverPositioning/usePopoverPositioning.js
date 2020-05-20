@@ -1,3 +1,4 @@
+import {useEffect, useState} from "react"
 import { useWindowDimensions } from '../index'
 
 const usePopoverPositioning = (
@@ -9,6 +10,14 @@ const usePopoverPositioning = (
   isUsingPortal,
 ) => {
 
+  const [currentAnchor, setCurrentAnchor] = useState(null)
+
+  useEffect(() => {
+    if(anchorElement) {
+      setCurrentAnchor(anchorElement)
+    }
+  }, [anchorElement])
+
   const {
     width: containerWidth,
     height: containerHeight,
@@ -19,7 +28,7 @@ const usePopoverPositioning = (
     horizontal: '',
   }
 
-  if (floatingElement && anchorElement) {
+  if (floatingElement && currentAnchor) {
     const {
       offsetWidth: floatingElementWidth,
       offsetHeight: floatingElementHeight,
@@ -30,13 +39,13 @@ const usePopoverPositioning = (
     const {
       offsetHeight: anchorHeight,
       offsetWidth: anchorWidth,
-    } = anchorElement
+    } = currentAnchor
     const offsetTop = isUsingPortal
-      ? anchorElement.getBoundingClientRect().top + window.scrollY
+      ? currentAnchor.getBoundingClientRect().top + window.scrollY
       : 0
     const offsetLeft = isUsingPortal
-      ? anchorElement.getBoundingClientRect().left + window.scrollX
-      : anchorElement.offsetLeft
+      ? currentAnchor.getBoundingClientRect().left + window.scrollX
+      : currentAnchor.offsetLeft
 
     const displayElementFromAnchorElementTopUpwards = () => {
       positionStyles.top = offsetTop - floatingElementHeight
@@ -83,7 +92,7 @@ const usePopoverPositioning = (
     const isFloatingElementOutOfVerticalBounds = () => {
       let { top } = positionStyles
       if (!isUsingPortal) {
-        top += anchorElement.getBoundingClientRect().bottom
+        top += currentAnchor.getBoundingClientRect().bottom
       }
       const bottom = top + floatingElementHeight
       const calculatedContainerHeight = containerHeight + (isUsingPortal ? window.scrollY : 0)
@@ -92,7 +101,7 @@ const usePopoverPositioning = (
     const isFloatingElementOutOfHorizontalBounds = () => {
       let { left } = positionStyles
       if (!isUsingPortal) {
-        left += anchorElement.getBoundingClientRect().left
+        left += currentAnchor.getBoundingClientRect().left
       }
       const right = left + floatingElementWidth
       return left < 0 || right > containerWidth
