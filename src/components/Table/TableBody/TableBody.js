@@ -43,7 +43,7 @@ const TableBody = ({
         <Menu
           anchorElement={ actionsAnchorElement }
           isOpen={ !!actionsAnchorElement }
-          openDirection={ 'down-start' }
+          preferOpenDirection={ 'down-start' }
           onClose={ handleActionsClose }
         >
           {
