@@ -13,9 +13,8 @@ import styles from './SmartFilter.module.scss'
 
 const getChipKey = (name, text) => `${name}${text}`
 
-const INPUT_ID = 'input-id'
-
 const SmartFilter = ({
+  id,
   className,
   fields,
   onChange,
@@ -67,7 +66,7 @@ const SmartFilter = ({
     setBaseInputValue(value)
     setInputValue(value)
     handleMenuClose()
-    document.getElementById(INPUT_ID).focus()
+    document.getElementById(id).focus()
   }
 
   const onInputChange = ({ target }) => {
@@ -158,21 +157,22 @@ const SmartFilter = ({
   return (
     <div className={ classes }>
       <Button className={ styles.searchFilter } onClick={ handleButtonClick }>
-        <FilterIcon className={ styles.filterIcon } />
+        <FilterIcon />
       </Button>
       { renderMenu() }
       <div className={ styles.searchInput }>
         <div className={ styles.chipsAndInput }>
           { renderChips }
           <InputBase
-            id={ INPUT_ID }
-            autoFocus
+            id={ id }
+            autoComplete="off"
             value={ inputValue }
             className={ styles.inputStyle }
             ref={ ref }
             onChange={ onInputChange }
             placeholder={ filterChips.length ? `+ ${placeholder}` : placeholder }
             onKeyDown={ keyPress }
+            onFocus={ handleButtonClick }
             { ...otherProps }
           />
         </div>
@@ -183,12 +183,15 @@ const SmartFilter = ({
 }
 
 SmartFilter.defaultProps = {
+  id: 'input-id',
   onChange: () => {},
   placeholder: 'Add tag to filter or free type to search',
   fields: [],
 }
 
 SmartFilter.propTypes = {
+  /** @ignore */
+  id: propTypes.string,
   /** Fields that are going to appear in the search menu:<br />
    *  <code>field</code>     - name of the value of field key that would be returned
    *                           if the user choose this line in the menu.<br />

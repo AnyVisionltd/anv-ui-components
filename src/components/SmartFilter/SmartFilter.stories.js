@@ -1,4 +1,5 @@
 import React from 'react'
+import { action } from '@storybook/addon-actions'
 import SmartFilter from './SmartFilter'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import { ReactComponent as EyeEnabled } from '../../assets/svg/EyeEnabled.svg'
@@ -23,14 +24,11 @@ export const Default = () => {
       field: 'subjectDescription', label: 'Description', type: 'text', icon: <EyeEnabled />,
     },
   ]
-  const onChange = (search) => {
-    console.log(search) // eslint-disable-line no-console
-  }
   return (
     <div className={ styles.marginFlexContainer }>
       <SmartFilter
         fields={ fields }
-        onChange={ onChange }
+        onChange={ action('Result') }
       />
     </div>
   )

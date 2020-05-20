@@ -8,16 +8,12 @@
 
   .searchFilter {
     padding: 9px;
-    //background-color: av-color(surface);
+    background-color: av-color(surface);
+    fill: av-color(content);
 
     &:focus {
-    // background-color: av-color(primary);
-    }
-
-    .filterIcon {
-      &:focus {
-        //background-color: av-color(surface);
-      }
+     background-color: av-color(primary);
+     fill: av-color(surface);
     }
   }
 
