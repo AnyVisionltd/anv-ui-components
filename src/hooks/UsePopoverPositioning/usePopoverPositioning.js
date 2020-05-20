@@ -1,17 +1,14 @@
-import { useEffect, useState } from 'react'
-import { usePrevious, useWindowDimensions } from '../index'
+import { useWindowDimensions } from '../index'
 
 const usePopoverPositioning = (
   anchorElement,
   floatingElement,
-  attachDirection,
+  attachAxis,
   isOpen,
-  openDirection,
+  preferOpenDirection,
   isUsingPortal,
 ) => {
-  const previousAnchorElement = usePrevious(anchorElement)
-  const previousOpenState = usePrevious(isOpen)
-  const [closeDirection, setCloseDirection] = useState(null)
+
   const {
     width: containerWidth,
     height: containerHeight,
@@ -21,14 +18,6 @@ const usePopoverPositioning = (
     vertical: '',
     horizontal: '',
   }
-
-  useEffect(() => {
-    if (anchorElement && anchorElement !== previousAnchorElement) {
-      setCloseDirection(null)
-    }
-  }, [anchorElement, previousAnchorElement])
-
-  const direction = closeDirection || openDirection
 
   if (floatingElement && anchorElement) {
     const {
@@ -109,77 +98,39 @@ const usePopoverPositioning = (
       return left < 0 || right > containerWidth
     }
 
-    if (attachDirection === 'horizontal') {
-      if (direction && direction !== 'auto') {
-        const [vertical, horizontal] = direction.split('-')
-
-        if (vertical === 'up') {
-          displayElementFromAnchorElementBottomUpwards()
-        } else if (vertical === 'down') {
-          displayElementFromAnchorElementTopDownwards()
-        }
-
-        if (horizontal === 'start') {
-          displayElementFromAnchorElementStart()
-        } else if (horizontal === 'end') {
-          displayElementFromAnchorElementEnd()
-        }
-      } else {
-        displayElementFromAnchorElementTopDownwards()
-        displayElementFromAnchorElementEnd()
-
-        if (isFloatingElementOutOfVerticalBounds()) {
-          displayElementFromAnchorElementBottomUpwards()
-        }
-        if (isFloatingElementOutOfHorizontalBounds()) {
-          displayElementFromAnchorElementStart()
-        }
-      }
-    } else if (direction && direction !== 'auto') {
-      const [vertical, horizontal] = direction.split('-')
-
-      if (vertical === 'up') {
-        displayElementFromAnchorElementTopUpwards()
-      } else if (vertical === 'down') {
-        displayElementFromAnchorElementBottomDownwards()
-      }
-
-      if (horizontal === 'start') {
-        displayElementFromAnchorElementEndToAnchorElementStart()
-      } else if (horizontal === 'end') {
-        displayElementFromAnchorElementStartToAnchorElementEnd()
-      }
-    } else {
+    if (attachAxis === 'vertical') {
+      const [vertical, horizontal] = preferOpenDirection.split('-')
       displayElementFromAnchorElementBottomDownwards()
       displayElementFromAnchorElementStartToAnchorElementEnd()
 
-      if (isFloatingElementOutOfVerticalBounds()) {
+      if (vertical === 'up' || isFloatingElementOutOfVerticalBounds()) {
         displayElementFromAnchorElementTopUpwards()
       }
-      if (isFloatingElementOutOfHorizontalBounds()) {
+
+      if (horizontal === 'start' || isFloatingElementOutOfHorizontalBounds()) {
         displayElementFromAnchorElementEndToAnchorElementStart()
+      }
+    } else {
+      const [vertical, horizontal] = preferOpenDirection.split('-')
+      displayElementFromAnchorElementTopDownwards()
+      displayElementFromAnchorElementEnd()
+
+      if (vertical === 'up' || isFloatingElementOutOfVerticalBounds()) {
+        displayElementFromAnchorElementBottomUpwards()
+      }
+
+      if (horizontal === 'start' || isFloatingElementOutOfHorizontalBounds()) {
+        displayElementFromAnchorElementStart()
       }
     }
   }
-
-  useEffect(() => {
-    if (!previousOpenState && isOpen && actualOpenDirection) {
-      setCloseDirection(
-        `${actualOpenDirection.vertical}-${actualOpenDirection.horizontal}`,
-      )
-    } else if (previousOpenState && !isOpen && closeDirection) {
-      setCloseDirection(null)
-    }
-  }, [isOpen, previousOpenState, closeDirection, actualOpenDirection])
 
   if(isOpen) {
     floatingElement.style.top = `${positionStyles.top}px`
     floatingElement.style.left = `${positionStyles.left}px`
   }
 
-  return {
-    openDirection: actualOpenDirection,
-  }
+  return actualOpenDirection
 }
 
 export default usePopoverPositioning

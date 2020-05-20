@@ -112,7 +112,7 @@ export const DifferentPositions = () => {
   )
 }
 
-export const ForceOpenToDirection = () => {
+export const PreferOpenToDirection = () => {
   const ref = useRef()
   const [anchorElement, setAnchorElement] = useState(null)
 
@@ -123,7 +123,7 @@ export const ForceOpenToDirection = () => {
 
   const vertical = select('Vertical axis', ['up', 'down'], 'down')
   const horizontal = select('Horizontal axis', ['start', 'end'], 'end')
-  const attachDirection = select('Attach direction', ['vertical', 'horizontal'], 'vertical')
+  const attachAxis = select('Attach axis', ['vertical', 'horizontal'], 'vertical')
 
   return (
     <div className={ styles.menuExample }>
@@ -141,8 +141,8 @@ export const ForceOpenToDirection = () => {
         anchorElement={ anchorElement }
         isOpen={ !!anchorElement }
         onClose={ handleClose }
-        openDirection={ `${vertical}-${horizontal}` }
-        attachDirection={ attachDirection }
+        preferOpenDirection={ `${vertical}-${horizontal}` }
+        attachAxis={ attachAxis }
       >
         <Menu.Item>List Item #1</Menu.Item>
         <Menu.Item>List Item #2</Menu.Item>
