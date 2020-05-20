@@ -173,10 +173,10 @@ const SmartFilter = ({
             placeholder={ filterChips.length ? `+ ${placeholder}` : placeholder }
             onKeyDown={ keyPress }
             onFocus={ handleButtonClick }
+            trailingComponent={ renderRemoveAllChipsIcon }
             { ...otherProps }
           />
         </div>
-        { renderRemoveAllChipsIcon }
       </div>
     </div>
   )
