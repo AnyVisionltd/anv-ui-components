@@ -15,7 +15,7 @@ export const Default = () => {
   const [anchorElement, setAnchorElement] = useState(null)
 
   const handleMenuClose = () => setAnchorElement(null)
-  const handleButtonClick = () => setAnchorElement(ref.current)
+  const handleButtonClick = () => anchorElement ? setAnchorElement(null) : setAnchorElement(ref.current)
 
   return (
     <div className={ styles.menuExample }>
@@ -49,9 +49,10 @@ export const DifferentPositions = () => {
   const [anchorElement, setAnchorElement] = useState(null)
 
   const handleClose = () => setAnchorElement(null)
-  const handleButtonClick = (event) => {
+  const handleButtonClick = (event) => anchorElement ?
+    setAnchorElement(null) :
     setAnchorElement(event.currentTarget)
-  }
+
 
   return (
     <div className={ styles.menuExample }>
@@ -116,7 +117,9 @@ export const ForceOpenToDirection = () => {
   const [anchorElement, setAnchorElement] = useState(null)
 
   const handleClose = () => setAnchorElement(null)
-  const handleButtonClick = () => setAnchorElement(ref.current)
+  const handleButtonClick = () => anchorElement ?
+    setAnchorElement(null) :
+    setAnchorElement(ref.current)
 
   const vertical = select('Vertical axis', ['up', 'down'], 'down')
   const horizontal = select('Horizontal axis', ['start', 'end'], 'end')
@@ -154,7 +157,9 @@ export const WithSubMenus = () => {
   const [anchorElement, setAnchorElement] = useState(null)
 
   const handleMenuClose = () => setAnchorElement(null)
-  const handleButtonClick = () => setAnchorElement(ref.current)
+  const handleButtonClick = () => anchorElement ?
+    setAnchorElement(null) :
+    setAnchorElement(ref.current)
 
   return (
     <div className={ styles.menuExample }>
@@ -200,8 +205,12 @@ export const Variants = () => {
   const [regularAnchorElementOpened, setRegularAnchorElementOpened] = useState(false)
   const [denseAnchorElementOpened, setDenseAnchorElementOpened] = useState(false)
 
-  const openRegularMenu = () => setRegularAnchorElementOpened(regularAnchorElement.current)
-  const openDenseMenu = () => setDenseAnchorElementOpened(denseAnchorElement.current)
+  const openRegularMenu = () => regularAnchorElementOpened ?
+    setRegularAnchorElementOpened(null) :
+    setRegularAnchorElementOpened(regularAnchorElement.current)
+  const openDenseMenu = () => denseAnchorElementOpened ?
+    setDenseAnchorElementOpened(null) :
+    setDenseAnchorElementOpened(denseAnchorElement.current)
 
   const closeRegularMenu = () => setRegularAnchorElementOpened(null)
   const closeDenseMenu = () => setDenseAnchorElementOpened(null)

@@ -20,7 +20,7 @@ const Menu = ({
   onOpened,
   ...otherProps
 }) => {
-  const [isDisplayed, setDisplayed] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const menuWrapperRef = useRef()
 
   const {
@@ -29,13 +29,13 @@ const Menu = ({
     anchorElement,
     menuWrapperRef && menuWrapperRef.current,
     attachDirection,
-    isDisplayed,
+    isMenuOpen,
     openDirection,
     !isSubMenu,
   )
 
   useClickOutsideListener((event) => {
-    if (!isOpen) {
+    if (!isOpen || event.target === anchorElement) {
       return
     }
     onClose(event)
@@ -54,12 +54,12 @@ const Menu = ({
   )
 
   const handleMenuOpen = () => {
-    setDisplayed(true)
+    setIsMenuOpen(true)
     onOpened()
   }
 
   const handleMenuClose = () => {
-    setDisplayed(false)
+    setIsMenuOpen(false)
     onClosed()
   }
 
