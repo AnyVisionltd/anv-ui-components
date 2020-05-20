@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useMemo } from 'react'
 import { boolean, text } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 import { centerDecorator } from '../../utils/storybook/decorators'
@@ -12,7 +12,7 @@ export default {
 }
 
 export const Playground = () => {
-  const headers = [
+  const headers = useMemo(() => [
     {
       field: 'username',
       content: 'user name',
@@ -37,20 +37,20 @@ export const Playground = () => {
       content: 'date',
       hide: true
     }
-  ]
+  ],[])
 
-  const data = [
+  const data = useMemo(() => [
     { id: '1', username: 'Admin', firstname: 'Donte', lastname: 'Castaneda', location: 'Tel Aviv', date: '20/01/2019' },
     { id: '2', username: 'User', firstname: 'Cleo', lastname: 'Mcnamara', location: 'Jerusalem', date: '15/05/1998' },
     { id: '3', username: 'Admin', firstname: 'Rafael', lastname: 'Andersen', location: 'Eilat', date: '10/11/1989' },
     { id: '4', username: 'Operator', firstname: 'Neelam', lastname: 'Harris', location: 'Haifa', date: '04/12/2020' },
     { id: '5', username: 'Superator', firstname: 'Carole', lastname: 'Howe', location: 'Tzfat', date: '23/03/2009' },
-  ]
+  ],[])
 
-  const rowActions = [
+  const rowActions = useMemo(() => [
     { content: 'Delete', onClick: action('delete action clicked') },
     { content: 'Edit', onClick: action('edit action clicked') }
-  ]
+  ],[])
 
   const style = { width: '80%' }
   return (
