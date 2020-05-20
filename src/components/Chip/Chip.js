@@ -11,6 +11,7 @@ const Chip = ({
   disabled,
   deletable,
   label,
+  isFocused,
   onClick,
   onTrailingIconClick,
   onKeyUp,
@@ -22,6 +23,7 @@ const Chip = ({
   const classes = classNames(
     styles.chip,
     focusable && styles.focusable,
+    isFocused && styles.isFocused,
     clickable && styles.clickable,
     disabled && styles.disabled,
     className,
@@ -125,6 +127,8 @@ Chip.propTypes = {
   disabled: propTypes.bool,
   /** The label/content of the chip */
   label: propTypes.node,
+  /** Give the chip focused style */
+  isFocused: propTypes.bool,
   /**
    * Callback function fired when clicked.
    * Passing a function will make the chip look clickable (by hover effect, mouse pointer, focus).

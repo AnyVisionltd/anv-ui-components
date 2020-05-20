@@ -25,6 +25,7 @@ const SmartFilter = ({
   const [inputValue, setInputValue] = useState('')
   const [baseInputValue, setBaseInputValue] = useState('')
   const [filterChips, setFilterChips] = useState([])
+  const [focusedChip, setFocusedChip] = useState(null)
   const ref = useRef()
 
   useEffect(() => {
@@ -66,7 +67,7 @@ const SmartFilter = ({
     setBaseInputValue(value)
     setInputValue(value)
     handleMenuClose()
-    document.getElementById(id).focus()
+    ref.current.focus()
   }
 
   const onInputChange = ({ target }) => {
@@ -107,18 +108,66 @@ const SmartFilter = ({
     }
   }
 
-  const keyPress = ({ keyCode }) => {
-    if (keyCode === keymap.ENTER) {
-      onChipSubmit()
+  const keyPress = (event) => {
+    const inputElement = document.getElementById(id)
+    const cursorPosition = inputElement.selectionStart
+    const chipsLength = filterChips.length
+    switch (event.keyCode) {
+      case keymap.ENTER:
+        onChipSubmit()
+        break
+      case keymap.ARROW_LEFT:
+        if (!cursorPosition && chipsLength) {
+          if (focusedChip === null) {
+            setFocusedChip(chipsLength - 1)
+          } else if (focusedChip > 0) {
+            setFocusedChip(focusedChip - 1)
+          }
+        }
+        break
+      case keymap.ARROW_RIGHT:
+        if (focusedChip !== null && focusedChip < chipsLength - 1) {
+          setFocusedChip(focusedChip + 1)
+          event.preventDefault()
+        } else {
+          setFocusedChip(null)
+        }
+        break
+      case keymap.BACKSPACE:
+        if (!cursorPosition && chipsLength) {
+          if (focusedChip !== null) {
+            const { name, text } = filterChips[focusedChip]
+            removeChip(getChipKey(name, text))
+            const nextFocused = focusedChip ? focusedChip - 1 : null
+            setFocusedChip(nextFocused)
+          } else {
+            const { name, text } = filterChips[chipsLength - 1]
+            removeChip(getChipKey(name, text))
+          }
+        }
+        break
+      case keymap.DELETE:
+        if (!cursorPosition && focusedChip !== null) {
+          const { name, text } = filterChips[focusedChip]
+          removeChip(getChipKey(name, text))
+          if (focusedChip === chipsLength - 1) {
+            setFocusedChip(null)
+          }
+        }
+        break
+      default:
+        setFocusedChip(null)
+        break
     }
   }
 
   const renderChips = (
     <>
-      { filterChips.map(({ name, text, icon }) => (
+      { filterChips.map(({ name, text, icon }, index) => (
         <Chip
           key={ getChipKey(name, text) }
           className={ styles.chipStyle }
+          isFocused={ index === focusedChip }
           label={ name ? `${name}: ${text}` : text }
           leadingIcon={ icon }
           onTrailingIconClick={ () => removeChip(getChipKey(name, text)) }

@@ -33,3 +33,11 @@ export const Default = () => {
     </div>
   )
 }
+
+export const WithoutMenuFields = () => (
+  <div className={ styles.marginFlexContainer }>
+    <SmartFilter
+      onChange={ action('Result') }
+    />
+  </div>
+)

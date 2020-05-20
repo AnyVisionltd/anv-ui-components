@@ -19,8 +19,12 @@
     @include av-ripple();
 
     &:focus {
-      background-color: av-color(primary, av-opacity(disabled))
+      background-color: av-color(primary, av-opacity(disabled));
     }
+  }
+
+  &.isFocused {
+    background-color: av-color(primary, av-opacity(disabled));
   }
 
   &.clickable {
