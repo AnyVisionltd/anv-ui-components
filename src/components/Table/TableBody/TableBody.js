@@ -27,11 +27,16 @@ const TableBody = ({
   }, [setWithRowActions, rowActions])
 
   const handleActionsClick = event => {
-    setActionsAnchorElement(event.currentTarget)
+    setActionsAnchorElement(actionsAnchorElement ? null : event.currentTarget)
   }
 
   const handleActionsClose = () => {
     setActionsAnchorElement(null)
+  }
+
+  const handleMenuItemClick = (row, onClick) => {
+    handleActionsClose()
+    onClick(row)
   }
 
   const renderActions = row => {
@@ -48,7 +53,7 @@ const TableBody = ({
         >
           {
             rowActions.map(({content, onClick}, index) => (
-              <Menu.Item key={ index } onClick={ () => onClick(row) }>{ content }</Menu.Item>
+              <Menu.Item key={ index } onClick={ () => handleMenuItemClick(row, onClick) }>{ content }</Menu.Item>
             ))
           }
         </Menu>
