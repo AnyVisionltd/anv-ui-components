@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import { useClickOutsideListener, useElementAbsolutePositioning } from '../../hooks'
+import { useClickOutsideListener, usePopoverPositioning } from '../../hooks'
 import { Animations } from '../Animations'
 import { Portal } from '../Portal'
 import styles from './Menu.module.scss'
@@ -11,33 +11,29 @@ const Menu = ({
   variant,
   className,
   anchorElement,
-  attachDirection,
+  attachAxis,
   children,
-  openDirection,
+  preferOpenDirection,
   isSubMenu,
   onClose,
   onClosed,
   onOpened,
   ...otherProps
 }) => {
-  const [isDisplayed, setDisplayed] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const menuWrapperRef = useRef()
 
-  const {
-    styles: positionStyles,
-    openDirection: actualOpenDirection,
-  } = useElementAbsolutePositioning(
+  const popoverDirection = usePopoverPositioning(
     anchorElement,
     menuWrapperRef && menuWrapperRef.current,
-    attachDirection,
-    isDisplayed,
-    openDirection,
+    attachAxis,
+    isMenuOpen,
+    preferOpenDirection,
     !isSubMenu,
   )
 
   useClickOutsideListener((event) => {
-    const { target } = event
-    if (!isOpen || target === anchorElement) {
+    if (!isOpen || event.target === anchorElement) {
       return
     }
     onClose(event)
@@ -45,8 +41,8 @@ const Menu = ({
 
   const containerClasses = classNames(
     styles.menuContainer,
-    actualOpenDirection && styles[actualOpenDirection.vertical],
-    actualOpenDirection && styles[actualOpenDirection.horizontal],
+    popoverDirection && styles[popoverDirection.vertical],
+    popoverDirection && styles[popoverDirection.horizontal],
     isSubMenu && styles.subMenu,
   )
   const menuClasses = classNames(
@@ -56,23 +52,23 @@ const Menu = ({
   )
 
   const handleMenuOpen = () => {
-    setDisplayed(true)
+    setIsMenuOpen(true)
     onOpened()
   }
 
   const handleMenuClose = () => {
-    setDisplayed(false)
+    setIsMenuOpen(false)
     onClosed()
   }
 
   // Scale animations direction props represent the start point,
   // whilst open direction means the opposite.
   // Therefore, we need to switch the directions
-  const animationVerticalStartingPoint = actualOpenDirection && actualOpenDirection.vertical === 'up'
+  const animationVerticalStartingPoint = popoverDirection && popoverDirection.vertical === 'up'
     ? 'bottom'
     : 'top'
 
-  const animationHorizontalStartingPoint = actualOpenDirection && actualOpenDirection.horizontal === 'start'
+  const animationHorizontalStartingPoint = popoverDirection && popoverDirection.horizontal === 'start'
     ? 'end'
     : 'start'
 
@@ -80,7 +76,6 @@ const Menu = ({
     <ul
       role="menu"
       className={ menuClasses }
-      ref={ menuWrapperRef }
       { ...otherProps }
     >
       { children }
@@ -89,8 +84,8 @@ const Menu = ({
 
   const renderMenu = () => (
     <div
+      ref={ menuWrapperRef }
       className={ containerClasses }
-      style={ positionStyles }
     >
       <Animations.Scale
         isOpen={ isOpen }
@@ -118,15 +113,12 @@ const Menu = ({
 Menu.defaultProps = {
   isOpen: false,
   variant: 'regular',
-  onClose: () => {
-  },
-  onClosed: () => {
-  },
-  onOpened: () => {
-  },
+  onClose: () => {},
+  onClosed: () => {},
+  onOpened: () => {},
   isSubMenu: false,
-  openDirection: 'auto',
-  attachDirection: 'vertical',
+  preferOpenDirection: 'down-end',
+  attachAxis: 'vertical',
 }
 
 Menu.propTypes = {
@@ -142,7 +134,7 @@ Menu.propTypes = {
   ]),
   /** Determine whether the menu should be attached to
    *  the controlling element from the side, or top/bottom. */
-  attachDirection: propTypes.oneOf(['vertical', 'horizontal']),
+  attachAxis: propTypes.oneOf(['vertical', 'horizontal']),
   /** Add custom styling to the menu. */
   className: propTypes.string,
   /** Menu items (Menu.Item) or sub menus (Menu.SubMenu). */
@@ -161,8 +153,7 @@ Menu.propTypes = {
    * <code>end</code> - means that the menu will open
    * <u>towards the inline-end</u> of the document
    * */
-  openDirection: propTypes.oneOf([
-    'auto',
+  preferOpenDirection: propTypes.oneOf([
     'up-start', 'up-end',
     'down-start', 'down-end',
   ]),

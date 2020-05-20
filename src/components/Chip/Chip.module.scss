@@ -2,6 +2,8 @@
 @import "../../styles/mixin/ripple";
 
 .chip {
+  outline: none;
+  box-sizing: border-box;
   position: relative;
   display: inline-flex;
   align-items: center;
