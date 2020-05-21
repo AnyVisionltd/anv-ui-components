@@ -1,6 +1,6 @@
 {
   "hooks": {
     "pre-commit": "lint-staged",
-    "pre-push": "eslint -c .eslintrc.js src && npm run test-ci"
+    "pre-push": "npm run lint && npm run test-ci"
   }
 }
