@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import { IconButton, Menu } from "../../../index"
+import { IconButton, Menu } from '../../../index'
 import { ReactComponent as SunIcon } from '../../../assets/svg/Options.svg'
 import TableContext from '../TableContext'
 import styles from './TableBody.module.scss'
@@ -40,7 +40,7 @@ const TableBody = ({
   }
 
   const renderActions = row => {
-    if(!rowActions) {
+    if (!rowActions) {
       return
     }
     return (
@@ -48,22 +48,27 @@ const TableBody = ({
         <Menu
           anchorElement={ actionsAnchorElement }
           isOpen={ !!actionsAnchorElement }
-          preferOpenDirection={ 'down-start' }
+          preferOpenDirection="down-start"
           onClose={ handleActionsClose }
         >
           {
-            rowActions.map(({content, onClick}, index) => (
-              <Menu.Item key={ index } onClick={ () => handleMenuItemClick(row, onClick) }>{ content }</Menu.Item>
+            rowActions.map(({ content, onClick }, index) => (
+              <Menu.Item
+                key={ index }
+                onClick={ () => handleMenuItemClick(row, onClick) }
+              >
+                { content }
+              </Menu.Item>
             ))
           }
         </Menu>
         <div
-          role={ 'cell' }
+          role="cell"
           className={ styles.actionsCell }
         >
           <IconButton
             className={ styles.actionButton }
-            variant={ 'ghost' }
+            variant="ghost"
             onClick={ handleActionsClick }
           >
             <SunIcon />
@@ -75,19 +80,21 @@ const TableBody = ({
 
   const renderRow = row => (
     <>
-      {/*{ renderCheckbox(row) }*/}
-      { headers.map(({ field, columnRender, hide, flexWidth }) => {
+      { /* { renderCheckbox(row) } */ }
+      { headers.map(({
+        field, columnRender, hide, flexWidth,
+      }) => {
         if (hide) {
           return null
         }
-        const style = flexWidth ? { flex: `0 0 ${ flexWidth }` } : {}
+        const style = flexWidth ? { flex: `0 0 ${flexWidth}` } : {}
         return (
-          <div role={ 'cell' } style={ style } className={ styles.tableCell } key={ field }>
+          <div role="cell" style={ style } className={ styles.tableCell } key={ field }>
             { columnRender ? columnRender(row[field], row) : row[field] }
           </div>
         )
       }) }
-      {/*{ renderDynamicColumnPlaceholder() }*/}
+      { /* { renderDynamicColumnPlaceholder() } */ }
       { renderActions(row) }
     </>
   )
@@ -97,9 +104,10 @@ const TableBody = ({
       const tableRowClassNames = classNames(styles.tableRow, { [styles.selectedRow]: false })
       return (
         <div
-          role={ 'row' }
+          role="row"
           style={ { height: rowHeight } }
-          className={ tableRowClassNames } key={ index }
+          className={ tableRowClassNames }
+          key={ index }
         >
           { renderRow(row) }
         </div>
@@ -123,20 +131,22 @@ const TableBody = ({
 }
 
 TableBody.defaultProps = {
-  rowHeight: '56px'
+  rowHeight: '56px',
 }
 
 TableBody.propTypes = {
-  /**  Each object represent row in the table. The rows rely on <code>headers</code>, <code>prop</code> from <code><Table.Header/></code> component.*/
+  /**  Each object represent row in the table. The rows rely on <code>headers</code>,
+   *  <code>prop</code> from <code><Table.Header/></code> component.
+   *  */
   data: propTypes.arrayOf(propTypes.object).isRequired,
-  /** The row height. <code>min-height: 48px</code>.*/
+  /** The row height. <code>min-height: 48px</code>. */
   rowHeight: propTypes.string,
   /** If pass, render action menu at the end of each row. */
   rowActions: propTypes.arrayOf(propTypes.shape({
     /** The content to render inside the <Menu.Items/>. */
     content: propTypes.node,
     /** The callback when click the <Menu.Items/> */
-    onClick: propTypes.func
+    onClick: propTypes.func,
   })),
   /** For css customization. */
   className: propTypes.string,

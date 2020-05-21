@@ -36,7 +36,7 @@ export const Basic = () => {
   )
 }
 
-export const withDefaultSort = () =>{
+export const withDefaultSort = () => {
   const style = { width: '80%' }
   return (
     <Table style={ style }>

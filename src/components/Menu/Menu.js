@@ -32,7 +32,7 @@ const Menu = ({
     !isSubMenu,
   )
 
-  useClickOutsideListener((event) => {
+  useClickOutsideListener(event => {
     if (!isOpen || event.target === anchorElement) {
       return
     }

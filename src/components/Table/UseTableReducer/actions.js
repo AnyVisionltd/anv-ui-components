@@ -6,8 +6,8 @@ export const actionTypes = Object.freeze({
   SET_SORT_BY: 'SET_SORT_BY',
 })
 
-export const actions = (dispatch) => ({
-  setHeaders: (headers) => {
+export const actions = dispatch => ({
+  setHeaders: headers => {
     dispatch({
       type: actionTypes.SET_HEADERS,
       payload: headers,
@@ -16,22 +16,22 @@ export const actions = (dispatch) => ({
   setData: data => {
     dispatch({
       type: actionTypes.SET_DATA,
-      payload: data
+      payload: data,
     })
   },
   setWithRowActions: withSortActions => {
     dispatch({
       type: actionTypes.SET_WITH_ROW_ACTIONS,
-      payload: withSortActions
+      payload: withSortActions,
     })
   },
-  setSortable: (sortable) => {
+  setSortable: sortable => {
     dispatch({
       type: actionTypes.SET_SORTABLE,
       payload: sortable,
     })
   },
-  setSortBy: (sortBy) => {
+  setSortBy: sortBy => {
     dispatch({
       type: actionTypes.SET_SORT_BY,
       payload: sortBy,

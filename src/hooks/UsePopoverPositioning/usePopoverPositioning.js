@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react'
 import { useWindowDimensions } from '../index'
 
 const usePopoverPositioning = (
@@ -9,11 +9,10 @@ const usePopoverPositioning = (
   preferOpenDirection,
   isUsingPortal,
 ) => {
-
   const [currentAnchor, setCurrentAnchor] = useState(null)
 
   useEffect(() => {
-    if(anchorElement) {
+    if (anchorElement) {
       setCurrentAnchor(anchorElement)
     }
   }, [anchorElement])
@@ -134,7 +133,7 @@ const usePopoverPositioning = (
     }
   }
 
-  if(isOpen) {
+  if (isOpen) {
     floatingElement.style.top = `${positionStyles.top}px`
     floatingElement.style.left = `${positionStyles.left}px`
   }

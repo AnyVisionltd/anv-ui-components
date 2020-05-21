@@ -7,4 +7,4 @@ import ReactDOM from 'react-dom'
 import '@testing-library/jest-dom/extend-expect'
 
 // Tests portal workaround - https://github.com/Quramy/storyshots-with-portal-repro
-ReactDOM.createPortal = (node) => React.createElement('portal-for-test', null, node)
+ReactDOM.createPortal = node => React.createElement('portal-for-test', null, node)
