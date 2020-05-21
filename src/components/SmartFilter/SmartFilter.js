@@ -14,7 +14,6 @@ import styles from './SmartFilter.module.scss'
 const getChipKey = (name, text) => `${name}${text}`
 
 const SmartFilter = ({
-  id,
   className,
   fields,
   onChange,
@@ -56,7 +55,16 @@ const SmartFilter = ({
   )
 
   const removeChip = (removedKey) => {
-    const chips = filterChips.filter(({ name, text }) => removedKey !== getChipKey(name, text))
+    const lastIndex = filterChips.length - 1
+    const chips = filterChips.filter(({ name, text }, index) => {
+      if (removedKey !== getChipKey(name, text)) {
+        return true
+      }
+      if (index === lastIndex) {
+        ref.current.focus()
+      }
+      return false
+    })
     setFilterChips(chips)
   }
 
@@ -106,10 +114,11 @@ const SmartFilter = ({
       const allChips = [...filterChips, chip]
       setFilterChips(allChips)
     }
+    handleButtonClick()
   }
 
   const keyPress = (event) => {
-    const inputElement = document.getElementById(id)
+    const inputElement = ref.current
     const cursorPosition = inputElement.selectionStart
     const chipsLength = filterChips.length
     switch (event.keyCode) {
@@ -125,35 +134,30 @@ const SmartFilter = ({
           }
         }
         break
+      case keymap.ESCAPE:
+        if (focusedChip !== null) {
+          ref.current.focus()
+        }
+        break
       case keymap.ARROW_RIGHT:
         if (focusedChip !== null && focusedChip < chipsLength - 1) {
           setFocusedChip(focusedChip + 1)
           event.preventDefault()
-        } else {
+        } else if (focusedChip >= chipsLength - 1) {
           setFocusedChip(null)
+          ref.current.focus()
+          event.preventDefault()
         }
         break
       case keymap.BACKSPACE:
         if (!cursorPosition && chipsLength) {
-          if (focusedChip !== null) {
-            const { name, text } = filterChips[focusedChip]
-            removeChip(getChipKey(name, text))
-            const nextFocused = focusedChip ? focusedChip - 1 : null
-            setFocusedChip(nextFocused)
-          } else {
+          if (focusedChip === null) {
             const { name, text } = filterChips[chipsLength - 1]
             removeChip(getChipKey(name, text))
           }
         }
         break
       case keymap.DELETE:
-        if (!cursorPosition && focusedChip !== null) {
-          const { name, text } = filterChips[focusedChip]
-          removeChip(getChipKey(name, text))
-          if (focusedChip === chipsLength - 1) {
-            setFocusedChip(null)
-          }
-        }
         break
       default:
         setFocusedChip(null)
@@ -162,7 +166,7 @@ const SmartFilter = ({
   }
 
   const renderChips = (
-    <>
+    <div onKeyDown={ keyPress }>
       { filterChips.map(({ name, text, icon }, index) => (
         <Chip
           key={ getChipKey(name, text) }
@@ -174,7 +178,7 @@ const SmartFilter = ({
           deletable
         />
       )) }
-    </>
+    </div>
   )
 
   const renderRemoveAllChipsIcon = filterChips.length
@@ -186,7 +190,9 @@ const SmartFilter = ({
     : null
 
   const renderMenu = () => {
-    if (!fields.length) {
+    const typedText = inputValue.slice(baseInputValue.length).toLowerCase()
+    const menuItems = fields.filter(({ label }) => label.toLowerCase().includes(typedText))
+    if (!menuItems.length) {
       return null
     }
     return (
@@ -196,7 +202,7 @@ const SmartFilter = ({
         isOpen={ isMenuOpen }
         onClose={ handleMenuClose }
       >
-        { fields.map(({ label }) => (
+        { menuItems.map(({ label }) => (
           <Menu.Item key={ label } onClick={ () => onItemClick(label) }>{ label }</Menu.Item>
         )) }
       </Menu>
@@ -213,7 +219,6 @@ const SmartFilter = ({
         <div className={ styles.chipsAndInput }>
           { renderChips }
           <InputBase
-            id={ id }
             autoComplete="off"
             value={ inputValue }
             className={ styles.inputStyle }
@@ -232,15 +237,12 @@ const SmartFilter = ({
 }
 
 SmartFilter.defaultProps = {
-  id: 'input-id',
   onChange: () => {},
   placeholder: 'Add tag to filter or free type to search',
   fields: [],
 }
 
 SmartFilter.propTypes = {
-  /** @ignore */
-  id: propTypes.string,
   /** Fields that are going to appear in the search menu:<br />
    *  <code>field</code>     - name of the value of field key that would be returned
    *                           if the user choose this line in the menu.<br />

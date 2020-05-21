@@ -4,6 +4,7 @@
 .button {
   @extend %av-button;
   @include av-ripple();
+  cursor: pointer;
   outline: none;
   position: relative;
   border: none;

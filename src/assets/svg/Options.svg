@@ -1,0 +1,6 @@
+<svg id="more_vertical" data-name="more vertical" xmlns="http://www.w3.org/2000/svg" width="12" height="24" viewBox="0 0 12 24">
+  <g id="dots" transform="translate(12) rotate(90)">
+    <rect id="Shape" width="24" height="12" opacity="0"/>
+    <path id="Union_48" data-name="Union 48" d="M12,1.5A1.5,1.5,0,1,1,13.5,3,1.5,1.5,0,0,1,12,1.5Zm-6,0A1.5,1.5,0,1,1,7.5,3,1.5,1.5,0,0,1,6,1.5Zm-6,0A1.5,1.5,0,1,1,1.5,3,1.5,1.5,0,0,1,0,1.5Z" transform="translate(4.5 4.499)"/>
+  </g>
+</svg>

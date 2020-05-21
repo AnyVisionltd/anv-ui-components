@@ -23,10 +23,6 @@
     }
   }
 
-  &.isFocused {
-    background-color: av-color(primary, av-opacity(disabled));
-  }
-
   &.clickable {
     cursor: pointer;
   }
@@ -57,6 +53,7 @@
   }
 
   .trailingIcon {
+    outline: none;
     position: relative;
     background: none;
     border: none;
