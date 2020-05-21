@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <g id="prefix__Filter" transform="translate(-8 -12)">
+        <path id="prefix__Shape" d="M0 0H24V24H0z" transform="translate(8 12)" style="opacity:0;fill:#fcfcfc"/>
+        <path id="prefix__Filter-2" d="M2.75 7.5h13.5a.75.75 0 1 0 0-1.5H2.75a.75.75 0 1 0 0 1.5zm9.75 6h-6a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zm1.875-3.75h-9.75a.75.75 0 0 0 0 1.5h9.75a.75.75 0 0 0 0-1.5z" data-name="Filter" transform="translate(10.5 13.5)"/>
+    </g>
+</svg>

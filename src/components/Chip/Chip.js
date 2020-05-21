@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 import { ReactComponent as CloseIcon } from '../../assets/svg/Cancel.svg'
@@ -11,6 +11,7 @@ const Chip = ({
   disabled,
   deletable,
   label,
+  isFocused,
   onClick,
   onTrailingIconClick,
   onKeyUp,
@@ -19,6 +20,17 @@ const Chip = ({
   const chipRef = React.createRef()
   const clickable = !disabled && !!onClick
   const focusable = clickable || deletable
+
+  useEffect(() => {
+    if(chipRef.current) {
+      if (isFocused) {
+        chipRef.current.focus()
+      } else {
+        chipRef.current.blur()
+      }
+    }
+  }, [isFocused, chipRef])
+
   const classes = classNames(
     styles.chip,
     focusable && styles.focusable,
@@ -125,6 +137,8 @@ Chip.propTypes = {
   disabled: propTypes.bool,
   /** The label/content of the chip */
   label: propTypes.node,
+  /** Make the chip focused */
+  isFocused: propTypes.bool,
   /**
    * Callback function fired when clicked.
    * Passing a function will make the chip look clickable (by hover effect, mouse pointer, focus).

@@ -19,7 +19,7 @@
     @include av-ripple();
 
     &:focus {
-      background-color: av-color(primary, av-opacity(disabled))
+      background-color: av-color(primary, av-opacity(disabled));
     }
   }
 
@@ -93,5 +93,9 @@
 
   .label {
     padding: 0 av-space(tiny);
+  }
+
+  > button {
+    outline: none;
   }
 }

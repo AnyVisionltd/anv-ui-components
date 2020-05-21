@@ -1,0 +1,59 @@
+@import "~@anyvision/style-guide";
+
+.SmartFilter {
+  @include av-elevation(raised);
+  min-width: av-size(sz-640);
+  border-radius: av-radius();
+  display: flex;
+
+  .searchFilter {
+    padding: 9px;
+    background-color: av-color(surface);
+    fill: av-color(content);
+
+    &.openedMenu {
+     background-color: av-color(primary);
+     fill: av-color(surface);
+    }
+  }
+
+  .searchInput {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+
+    .chipsAndInput {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      flex: 1;
+
+      &:focus {
+        opacity: av-opacity(ghost);
+      }
+
+      .chipStyle {
+        margin: 5px;
+      }
+
+      .inputStyle {
+        height: auto;
+        border: none;
+        flex: 1;
+      }
+    }
+
+    .closeButton {
+      border-radius: av-radius(circle);
+      background-color: av-color(secondary);
+      height: av-size(sz-16);
+      width: av-size(sz-16);
+      margin-right: 5px;
+
+      .closeIcon {
+        height: av-size(sz-16);
+        width: av-size(sz-16);
+      }
+    }
+  }
+}
