@@ -33,7 +33,7 @@ const Checkbox = ({
     return null
   }
 
-  const ref = (el) => {
+  const ref = el => {
     if (el) {
       el.indeterminate = indeterminate // eslint-disable-line no-param-reassign
     }

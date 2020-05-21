@@ -2,7 +2,7 @@ import { useCallback, useEffect } from 'react'
 
 const useClickOutsideListener = (onClickOutside, ref) => {
   const onClickOutsideHandler = useCallback(
-    (event) => {
+    event => {
       if (ref && ref.current && onClickOutside && !ref.current.contains(event.target)) {
         onClickOutside(event)
       }

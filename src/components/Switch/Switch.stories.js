@@ -44,24 +44,24 @@ export const MultipleSwitches = () => {
     <div className={ styles.marginFlexContainer }>
       <Switch
         checked={ isEnabled1 }
-        onChange={ (value) => onChange(value, setIsEnabled1) }
+        onChange={ value => onChange(value, setIsEnabled1) }
         id="switch-example1"
       />
       <Switch
         checked={ isEnabled2 }
-        onChange={ (value) => onChange(value, setIsEnabled2) }
+        onChange={ value => onChange(value, setIsEnabled2) }
         id="switch-example2"
       />
       <Switch
         checked={ isEnabled3 }
         disabled
-        onChange={ (value) => onChange(value, setIsEnabled3) }
+        onChange={ value => onChange(value, setIsEnabled3) }
         id="switch-example3"
       />
       <Switch
         checked={ isEnabled4 }
         disabled
-        onChange={ (value) => onChange(value, setIsEnabled4) }
+        onChange={ value => onChange(value, setIsEnabled4) }
         id="switch-example4"
       />
     </div>

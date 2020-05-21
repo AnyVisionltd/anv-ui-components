@@ -1160,6 +1160,33 @@ exports[`Storyshots Components/Menu Force Open To Direction 1`] = `
 </div>
 `;
 
+exports[`Storyshots Components/Menu Prefer Open To Direction 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="menuExample"
+    >
+      <button
+        aria-controls="menu-story"
+        aria-haspopup="true"
+        className="button large fill"
+        disabled={false}
+        onClick={[Function]}
+      >
+        Open Menu
+      </button>
+      <portal-for-test>
+        <div
+          className="menuContainer"
+        />
+      </portal-for-test>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Components/Menu Variants 1`] = `
 <div>
   <div
