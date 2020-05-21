@@ -1036,7 +1036,6 @@ exports[`Storyshots Components/Menu Default 1`] = `
       <portal-for-test>
         <div
           className="menuContainer"
-          style={Object {}}
         />
       </portal-for-test>
     </div>
@@ -1124,35 +1123,6 @@ exports[`Storyshots Components/Menu Different Positions 1`] = `
       <portal-for-test>
         <div
           className="menuContainer"
-          style={Object {}}
-        />
-      </portal-for-test>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components/Menu Force Open To Direction 1`] = `
-<div>
-  <div
-    className="center"
-  >
-    <div
-      className="menuExample"
-    >
-      <button
-        aria-controls="menu-story"
-        aria-haspopup="true"
-        className="button large fill"
-        disabled={false}
-        onClick={[Function]}
-      >
-        Open Menu
-      </button>
-      <portal-for-test>
-        <div
-          className="menuContainer"
-          style={Object {}}
         />
       </portal-for-test>
     </div>
@@ -1210,7 +1180,6 @@ exports[`Storyshots Components/Menu Variants 1`] = `
         <portal-for-test>
           <div
             className="menuContainer"
-            style={Object {}}
           />
         </portal-for-test>
       </div>
@@ -1229,7 +1198,6 @@ exports[`Storyshots Components/Menu Variants 1`] = `
         <portal-for-test>
           <div
             className="menuContainer"
-            style={Object {}}
           />
         </portal-for-test>
       </div>
@@ -1258,7 +1226,6 @@ exports[`Storyshots Components/Menu With Sub Menus 1`] = `
       <portal-for-test>
         <div
           className="menuContainer"
-          style={Object {}}
         />
       </portal-for-test>
     </div>
@@ -1586,6 +1553,9 @@ exports[`Storyshots Components/Table Playground 1`] = `
         className="tableHeader"
         role="row"
       />
+      <div
+        className="tableBody"
+      />
     </div>
   </div>
 </div>
@@ -1652,6 +1622,9 @@ exports[`Storyshots Components/Table/TableBody Basic 1`] = `
         className="tableHeader"
         role="row"
       />
+      <div
+        className="tableBody"
+      />
     </div>
   </div>
 </div>
@@ -1659,9 +1632,11 @@ exports[`Storyshots Components/Table/TableBody Basic 1`] = `
 
 exports[`Storyshots Components/Table/TableHeader Basic 1`] = `
 <div>
-  <div>
+  <div
+    className="center"
+  >
     <div
-      className=""
+      className="table"
       style={
         Object {
           "width": "80%",
@@ -1669,7 +1644,7 @@ exports[`Storyshots Components/Table/TableHeader Basic 1`] = `
       }
     >
       <div
-        className=""
+        className="tableHeader"
         role="row"
       />
     </div>
