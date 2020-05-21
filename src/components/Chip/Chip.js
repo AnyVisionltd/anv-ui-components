@@ -22,12 +22,14 @@ const Chip = ({
   const focusable = clickable || deletable
 
   useEffect(() => {
-    if (isFocused) {
-      chipRef.current.focus()
-    } else {
-      chipRef.current.blur()
+    if(chipRef.current) {
+      if (isFocused) {
+        chipRef.current.focus()
+      } else {
+        chipRef.current.blur()
+      }
     }
-  }, [isFocused]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [isFocused, chipRef])
 
   const classes = classNames(
     styles.chip,
