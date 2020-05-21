@@ -20,14 +20,14 @@ const Menu = ({
   onOpened,
   ...otherProps
 }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [menuAnchor, setMenuAnchor] = useState(false)
   const menuWrapperRef = useRef()
 
   const popoverDirection = usePopoverPositioning(
     anchorElement,
     menuWrapperRef && menuWrapperRef.current,
     attachAxis,
-    isMenuOpen,
+    menuAnchor,
     preferOpenDirection,
     !isSubMenu,
   )
@@ -52,12 +52,12 @@ const Menu = ({
   )
 
   const handleMenuOpen = () => {
-    setIsMenuOpen(true)
+    setMenuAnchor(true)
     onOpened()
   }
 
   const handleMenuClose = () => {
-    setIsMenuOpen(false)
+    setMenuAnchor(false)
     onClosed()
   }
 
