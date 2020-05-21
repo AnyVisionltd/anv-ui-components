@@ -11,7 +11,7 @@
     background-color: av-color(surface);
     fill: av-color(content);
 
-    &:focus {
+    &.openedMenu {
      background-color: av-color(primary);
      fill: av-color(surface);
     }

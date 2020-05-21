@@ -27,7 +27,7 @@ const Chip = ({
     } else {
       chipRef.current.blur()
     }
-  }, [isFocused])
+  }, [isFocused]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const classes = classNames(
     styles.chip,

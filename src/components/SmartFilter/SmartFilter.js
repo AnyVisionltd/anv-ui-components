@@ -20,7 +20,7 @@ const SmartFilter = ({
   placeholder,
   ...otherProps
 }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(null)
   const [inputValue, setInputValue] = useState('')
   const [baseInputValue, setBaseInputValue] = useState('')
   const [filterChips, setFilterChips] = useState([])
@@ -33,13 +33,22 @@ const SmartFilter = ({
       return { ...field && { field }, value: text }
     })
     onChange(searchQuery)
-  }, [filterChips]) // eslint-disable-line
+  }, [filterChips])  // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (baseInputValue) {
+      handleMenuClose()
+    }
+  }, [baseInputValue])  // eslint-disable-line react-hooks/exhaustive-deps
 
   const baseInputLabel = baseInputValue.slice(0, -2)
-  const handleMenuClose = () => setIsMenuOpen(false)
-  const handleButtonClick = () => setIsMenuOpen(!isMenuOpen)
+  const handleMenuOpen = () => setIsMenuOpen(ref.current)
+  const handleMenuClose = () => setIsMenuOpen(null)
+  const handleButtonClick = () => (isMenuOpen
+    ? setIsMenuOpen(null)
+    : setIsMenuOpen(ref.current))
 
-  const getChipIcon = (name) => {
+  const getChipIcon = name => {
     const [menuItem = {}] = fields.filter(({ label }) => label === name)
     return menuItem.icon
   }
@@ -54,7 +63,7 @@ const SmartFilter = ({
     className,
   )
 
-  const removeChip = (removedKey) => {
+  const removeChip = removedKey => {
     const lastIndex = filterChips.length - 1
     const chips = filterChips.filter(({ name, text }, index) => {
       if (removedKey !== getChipKey(name, text)) {
@@ -70,7 +79,7 @@ const SmartFilter = ({
 
   const removeAllChips = () => setFilterChips([])
 
-  const onItemClick = (label) => {
+  const onItemClick = label => {
     const value = `${label}: `
     setBaseInputValue(value)
     setInputValue(value)
@@ -114,10 +123,10 @@ const SmartFilter = ({
       const allChips = [...filterChips, chip]
       setFilterChips(allChips)
     }
-    handleButtonClick()
+    handleMenuOpen()
   }
 
-  const keyPress = (event) => {
+  const keyPress = event => {
     const inputElement = ref.current
     const cursorPosition = inputElement.selectionStart
     const chipsLength = filterChips.length
@@ -132,6 +141,7 @@ const SmartFilter = ({
           } else if (focusedChip > 0) {
             setFocusedChip(focusedChip - 1)
           }
+          handleMenuClose()
         }
         break
       case keymap.ESCAPE:
@@ -166,7 +176,7 @@ const SmartFilter = ({
   }
 
   const renderChips = (
-    <div onKeyDown={ keyPress }>
+    <>
       { filterChips.map(({ name, text, icon }, index) => (
         <Chip
           key={ getChipKey(name, text) }
@@ -178,7 +188,7 @@ const SmartFilter = ({
           deletable
         />
       )) }
-    </div>
+    </>
   )
 
   const renderRemoveAllChipsIcon = filterChips.length
@@ -192,14 +202,14 @@ const SmartFilter = ({
   const renderMenu = () => {
     const typedText = inputValue.slice(baseInputValue.length).toLowerCase()
     const menuItems = fields.filter(({ label }) => label.toLowerCase().includes(typedText))
-    if (!menuItems.length) {
-      return null
-    }
+    // if (!menuItems.length) {
+    //   return null
+    // }
     return (
       <Menu
-        aria-labelledby="menu-story-default"
-        anchorElement={ ref.current }
-        isOpen={ isMenuOpen }
+        aria-labelledby="menu-element"
+        anchorElement={ isMenuOpen }
+        isOpen={ !!isMenuOpen }
         onClose={ handleMenuClose }
       >
         { menuItems.map(({ label }) => (
@@ -211,12 +221,12 @@ const SmartFilter = ({
 
   return (
     <div className={ classes }>
-      <Button className={ styles.searchFilter } onClick={ handleButtonClick }>
+      <Button className={ classNames(styles.searchFilter, isMenuOpen && styles.openedMenu) } onClick={ handleButtonClick }>
         <FilterIcon />
       </Button>
       { renderMenu() }
       <div className={ styles.searchInput }>
-        <div className={ styles.chipsAndInput }>
+        <div  onKeyDown={ keyPress } className={ styles.chipsAndInput }>
           { renderChips }
           <InputBase
             autoComplete="off"
@@ -226,7 +236,7 @@ const SmartFilter = ({
             onChange={ onInputChange }
             placeholder={ filterChips.length ? `+ ${placeholder}` : placeholder }
             onKeyDown={ keyPress }
-            onFocus={ handleButtonClick }
+            onFocus={ handleMenuOpen }
             trailingComponent={ renderRemoveAllChipsIcon }
             { ...otherProps }
           />
