@@ -63,15 +63,20 @@ const SmartFilter = ({
     className,
   )
 
-  const removeChip = removedKey => {
+  const removeChip = (removedKey, event) => {
     const lastIndex = filterChips.length - 1
     const chips = filterChips.filter(({ name, text }, index) => {
       if (removedKey !== getChipKey(name, text)) {
         return true
       }
-      if (index === lastIndex) {
+      const isRemovedByBackspace = event && event.keyCode === keymap.BACKSPACE
+      const isRemovedFirstByBackspace = !index && isRemovedByBackspace
+      const isRemovedLastByDelete = index === lastIndex && event && event.keyCode === keymap.DELETE
+      if (isRemovedFirstByBackspace || isRemovedLastByDelete) {
         ref.current.focus()
         setFocusedChip(null)
+      } else if (isRemovedByBackspace) {
+        setFocusedChip(focusedChip - 1)
       }
       return false
     })
@@ -176,6 +181,11 @@ const SmartFilter = ({
     }
   }
 
+  const onInputFocus = () => {
+    handleMenuOpen()
+    setFocusedChip(null)
+  }
+
   const renderChips = (
     <>
       { filterChips.map(({ name, text, icon }, index) => (
@@ -185,7 +195,7 @@ const SmartFilter = ({
           isFocused={ index === focusedChip }
           label={ name ? `${name}: ${text}` : text }
           leadingIcon={ icon }
-          onTrailingIconClick={ () => removeChip(getChipKey(name, text)) }
+          onTrailingIconClick={ event => removeChip(getChipKey(name, text), event) }
           deletable
         />
       )) }
@@ -237,7 +247,7 @@ const SmartFilter = ({
             onChange={ onInputChange }
             placeholder={ filterChips.length ? `+ ${placeholder}` : placeholder }
             onKeyDown={ keyPress }
-            onFocus={ handleMenuOpen }
+            onFocus={ onInputFocus }
             trailingComponent={ renderRemoveAllChipsIcon }
             { ...otherProps }
           />
