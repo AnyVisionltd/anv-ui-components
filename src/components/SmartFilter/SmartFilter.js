@@ -71,6 +71,7 @@ const SmartFilter = ({
       }
       if (index === lastIndex) {
         ref.current.focus()
+        setFocusedChip(null)
       }
       return false
     })
