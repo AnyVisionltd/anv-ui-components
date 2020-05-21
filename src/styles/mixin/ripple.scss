@@ -33,6 +33,14 @@ $ripple-transition-duration: 0.3s;
       opacity: av-opacity(divider);
     }
 
+    &:focus::before {
+      opacity: av-opacity(ghost);
+    }
+
+    &:hover:focus::before {
+      opacity: av-opacity(divider);
+    }
+
     &:active::after {
       opacity: av-opacity(disabled);
       background-size: 100% 100%;
