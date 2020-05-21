@@ -37,9 +37,9 @@ const Chip = ({
     className,
   )
 
-  const isDeleteKeyboardEvent = (event) => deletable && ['Backspace', 'Delete'].includes(event.key)
+  const isDeleteKeyboardEvent = event => deletable && ['Backspace', 'Delete'].includes(event.key)
 
-  const handleKeyUp = (event) => {
+  const handleKeyUp = event => {
     if (event.currentTarget === event.target) {
       if (isDeleteKeyboardEvent(event) && onTrailingIconClick) {
         onTrailingIconClick(event)
@@ -53,7 +53,7 @@ const Chip = ({
     return onKeyUp && onKeyUp(event)
   }
 
-  const onClickHandler = (event) => {
+  const onClickHandler = event => {
     if (!clickable) {
       return
     }
@@ -61,7 +61,7 @@ const Chip = ({
     onClick(event)
   }
 
-  const onTrailingIconClickHandler = (event) => {
+  const onTrailingIconClickHandler = event => {
     if (!onTrailingIconClick) {
       return
     }

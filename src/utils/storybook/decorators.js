@@ -2,7 +2,7 @@ import React, { createElement } from 'react'
 import { addDecorator } from '@storybook/react'
 import styles from './decorators.module.scss'
 
-export const centerDecorator = (story) => <div className={ styles.center }>{ story() }</div>
+export const centerDecorator = story => <div className={ styles.center }>{ story() }</div>
 
 /**
  * The following function was added to overcome a bug with Storyshot lib,

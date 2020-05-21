@@ -24,7 +24,7 @@ const TableHeader = ({
     setHeaders(headers)
   }, [setHeaders, headers])
 
-  const renderSortingIcon = (field) => {
+  const renderSortingIcon = field => {
     const activeSort = sortBy && sortBy.field === field
     const activeSortOrder = activeSort && sortBy.order === sortOrderTypes.DESC
     const classes = classNames(
@@ -35,7 +35,7 @@ const TableHeader = ({
     return <LongArrow className={ classes } />
   }
 
-  const sortColumn = (headerCell) => {
+  const sortColumn = headerCell => {
     const sortOrder = headerCell.field === sortBy.field && sortBy.order === sortOrderTypes.ASC
       ? sortOrderTypes.DESC
       : sortOrderTypes.ASC
@@ -47,17 +47,20 @@ const TableHeader = ({
     sortableColumn && sortColumn(headerCell)
   }
 
-  const renderCell = (headerCell) => {
+  const renderCell = headerCell => {
     const {
       field, content, disableSort, hide, flexWidth,
     } = headerCell
     if (hide) {
       return null
     }
-    const style = flexWidth ? { flex: `0 0 ${ flexWidth }` } : {}
+    const style = flexWidth ? { flex: `0 0 ${flexWidth}` } : {}
 
     const sortableColumn = sortable && !disableSort
-    const tableCellClass = classNames(styles.tableHeaderCell, {[styles.sortableColumn]: sortableColumn})
+    const tableCellClass = classNames(
+      styles.tableHeaderCell,
+      { [styles.sortableColumn]: sortableColumn },
+    )
     return (
       <div
         key={ field }
@@ -79,7 +82,7 @@ const TableHeader = ({
   }
 
   const renderActionsPlaceholder = () => (
-    withRowActions && <div className={ styles.actionsPlaceholder }/>
+    withRowActions && <div className={ styles.actionsPlaceholder } />
   )
 
   const classes = classNames(

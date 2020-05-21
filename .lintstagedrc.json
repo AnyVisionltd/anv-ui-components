@@ -1,6 +1,6 @@
 {
   "*.+(js|jsx)": [
     "npm run test:staged",
-    "eslint -c .eslintrc.js ./src --fix"
+    "npm run lint"
   ]
 }

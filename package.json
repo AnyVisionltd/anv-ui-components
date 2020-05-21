@@ -26,6 +26,7 @@
     "lint": "eslint -c .eslintrc.js src",
     "lint:fix": "eslint -c .eslintrc.js src --fix",
     "test:staged": "cross-env CI=true react-scripts test --bail --env=jest-environment-jsdom-sixteen --findRelatedTests",
+    "test-ci": "CI=true npm test",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
     "prepublishOnly": "npm run build"
@@ -64,7 +65,7 @@
     "@testing-library/react-hooks": "^3.2.1",
     "@testing-library/user-event": "^10.1.0",
     "cross-env": "^7.0.2",
-    "eslint-config-airbnb": "^18.1.0",
+    "eslint-plugin-react-hooks": "^4.0.2",
     "husky": "^4.2.5",
     "lint-staged": "^10.1.1",
     "react-scripts": "3.4.1",

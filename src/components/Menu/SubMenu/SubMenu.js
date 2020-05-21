@@ -27,7 +27,7 @@ const SubMenu = ({
     }
     setIsOpened(true)
   }
-  const handleOnFocus = (event) => {
+  const handleOnFocus = event => {
     handleMouseEnter(event)
   }
   const handleMouseLeave = () => {

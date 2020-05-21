@@ -17,14 +17,14 @@ const MenuItem = forwardRef(({
     className,
   )
 
-  const handleOnClick = (event) => {
+  const handleOnClick = event => {
     if (disabled) {
       return
     }
     onClick(event)
   }
 
-  const handleOnKeyDown = (event) => {
+  const handleOnKeyDown = event => {
     if (event.key === 'Enter') {
       handleOnClick(event)
     }

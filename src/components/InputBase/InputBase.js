@@ -46,7 +46,7 @@ const InputBase = React.forwardRef((props, ref) => {
     elementProps = { type, ...elementProps }
   }
 
-  const onPasswordIconClick = (e) => {
+  const onPasswordIconClick = e => {
     setInputType(inputType === inputTypes.PASSWORD ? inputTypes.TEXT : inputTypes.PASSWORD)
     e.stopPropagation()
   }
