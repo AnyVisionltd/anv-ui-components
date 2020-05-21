@@ -1629,3 +1629,23 @@ exports[`Storyshots Components/Table/TableBody Basic 1`] = `
   </div>
 </div>
 `;
+
+exports[`Storyshots Components/Table/TableHeader Basic 1`] = `
+<div>
+  <div>
+    <div
+      className=""
+      style={
+        Object {
+          "width": "80%",
+        }
+      }
+    >
+      <div
+        className=""
+        role="row"
+      />
+    </div>
+  </div>
+</div>
+`;
