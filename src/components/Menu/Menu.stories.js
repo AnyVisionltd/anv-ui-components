@@ -204,8 +204,8 @@ export const Variants = () => {
   const regularAnchorElement = useRef()
   const denseAnchorElement = useRef()
 
-  const [regularAnchorElementOpened, setRegularAnchorElementOpened] = useState(false)
-  const [denseAnchorElementOpened, setDenseAnchorElementOpened] = useState(false)
+  const [regularAnchorElementOpened, setRegularAnchorElementOpened] = useState(null)
+  const [denseAnchorElementOpened, setDenseAnchorElementOpened] = useState(null)
 
   const openRegularMenu = () => (regularAnchorElementOpened
     ? setRegularAnchorElementOpened(null)
