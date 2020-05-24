@@ -1,6 +1,7 @@
-import React, { useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
+import keymap from "../../utils/enums/keymap"
 import { useClickOutsideListener, usePopoverPositioning } from '../../hooks'
 import { Animations } from '../Animations'
 import { Portal } from '../Portal'
@@ -21,6 +22,8 @@ const Menu = ({
   ...otherProps
 }) => {
   const [menuAnchor, setMenuAnchor] = useState(false)
+  const [currentFocus, setCurrentFocus] = useState(false)
+
   const menuWrapperRef = useRef()
 
   const popoverDirection = usePopoverPositioning(
@@ -39,17 +42,48 @@ const Menu = ({
     onClose(event)
   }, menuWrapperRef)
 
-  const containerClasses = classNames(
-    styles.menuContainer,
-    popoverDirection && styles[popoverDirection.vertical],
-    popoverDirection && styles[popoverDirection.horizontal],
-    isSubMenu && styles.subMenu,
-  )
-  const menuClasses = classNames(
-    styles.menu,
-    styles[variant],
-    className,
-  )
+  const handleKeyDown = useCallback(event => {
+    const nextFocus = (nextFocusDirection, firstFocus) => {
+      if(!currentFocus) {
+        const focusItem = menuWrapperRef.current.firstChild[firstFocus]
+        focusItem.focus()
+        setCurrentFocus(focusItem)
+      }
+      else if(!currentFocus[nextFocusDirection]) {
+        anchorElement.focus()
+        setCurrentFocus(null)
+      }
+      else if (currentFocus[nextFocusDirection]) {
+        const focusItem = currentFocus[nextFocusDirection]
+        focusItem.focus()
+        setCurrentFocus(focusItem)
+      }
+    }
+
+    switch (event.keyCode) {
+      case keymap.ARROW_DOWN:
+        nextFocus('nextElementSibling', 'firstChild')
+        break
+      case keymap.ARROW_UP:
+        nextFocus('previousElementSibling', 'lastChild')
+        break
+      case keymap.ESCAPE:
+        onClose()
+        break
+      default:
+        break
+    }
+  }, [currentFocus, anchorElement, onClose])
+
+  useEffect(() => {
+    if(isOpen) {
+      document.addEventListener('keydown', handleKeyDown)
+    } else {
+      setCurrentFocus(null)
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen, handleKeyDown])
 
   const handleMenuOpen = () => {
     setMenuAnchor(true)
@@ -80,6 +114,18 @@ const Menu = ({
     >
       { children }
     </ul>
+  )
+
+  const containerClasses = classNames(
+    styles.menuContainer,
+    popoverDirection && styles[popoverDirection.vertical],
+    popoverDirection && styles[popoverDirection.horizontal],
+    isSubMenu && styles.subMenu,
+  )
+  const menuClasses = classNames(
+    styles.menu,
+    styles[variant],
+    className,
   )
 
   const renderMenu = () => (

@@ -7,7 +7,7 @@
   display: flex;
 
   .searchFilter {
-    padding: 9px;
+    padding: av-space(tiny);
     background-color: av-color(surface);
     fill: av-color(content);
 
@@ -20,40 +20,33 @@
   .searchInput {
     display: flex;
     justify-content: space-between;
-    flex: 1;
+    flex-grow: 1;
 
     .chipsAndInput {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      flex: 1;
+      flex-grow: 1;
 
       &:focus {
         opacity: av-opacity(ghost);
       }
 
-      .chipStyle {
-        margin: 5px;
+      .chipStyle:not(:last-child) {
+        margin-left: av-space(tiny);
       }
 
-      .inputStyle {
+      .inputBase {
+        min-width: av-size(sz-320);
+        padding-left: av-space(tiny);
         height: auto;
         border: none;
-        flex: 1;
+        flex-grow: 1;
       }
     }
 
-    .closeButton {
-      border-radius: av-radius(circle);
-      background-color: av-color(secondary);
-      height: av-size(sz-16);
-      width: av-size(sz-16);
-      margin-right: 5px;
-
-      .closeIcon {
-        height: av-size(sz-16);
-        width: av-size(sz-16);
-      }
+    .cancelIcon {
+      fill: av-color(content);
     }
   }
 }
