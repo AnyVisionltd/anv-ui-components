@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
+import { MenuItem } from './MenuItem'
+import { SubMenu } from './SubMenu'
 import keymap from "../../utils/enums/keymap"
 import { useClickOutsideListener, usePopoverPositioning } from '../../hooks'
 import { Animations } from '../Animations'
@@ -207,5 +209,8 @@ Menu.propTypes = {
    * Is set internally by <code>Menu.SubMenu</code> */
   isSubMenu: propTypes.bool,
 }
+
+Menu.Item = MenuItem
+Menu.SubMenu = SubMenu
 
 export default Menu
