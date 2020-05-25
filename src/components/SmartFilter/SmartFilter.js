@@ -169,7 +169,6 @@ const SmartFilter = ({
       case keymap.DELETE:
         break
       default:
-        setFocusedChip(null)
         break
     }
   }
@@ -207,7 +206,7 @@ const SmartFilter = ({
     }
     const typedText = inputValue.slice(prefixInputValue.length).toLowerCase()
     const menuItems = fields.filter(({ label }) => label.toLowerCase().includes(typedText))
-    if(menuItems) {
+    if(menuItems.length) {
       handleMenuOpen()
     } else {
       handleMenuClose()
