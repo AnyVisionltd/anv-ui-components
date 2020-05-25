@@ -92,7 +92,7 @@ describe('<SmartFilter />', () => {
   describe('chips deletion', () => {
     it('should delete chip by leading icon', () => {
       const onChange = jest.fn()
-      const { debug, getByRole, getAllByRole } = render(<SmartFilter onChange={ onChange }/>)
+      const { getByRole, getAllByRole } = render(<SmartFilter onChange={ onChange }/>)
       const input = getByRole('textbox')
       addFreeTextChip(input, 'mockData')
       const buttons = getAllByRole('button')
