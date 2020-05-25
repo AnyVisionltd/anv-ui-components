@@ -90,4 +90,61 @@ describe('<Menu />', () => {
       expect(subMenuItem).not.toBeInTheDocument()
     })
   })
+
+  describe('keydown navigation', () => {
+    it('ESCAPE key should close the menu by firing \'on close\' event', () => {
+      const handleClose = jest.fn()
+      render(
+        <>
+          <Menu isOpen onClose={ handleClose }>
+            <Menu.Item>Simple menu item</Menu.Item>
+          </Menu>
+        </>,
+      )
+      fireEvent.keyDown(document, { keyCode: 27 })
+      expect(handleClose).toBeCalled()
+    })
+
+    it('Arrow Down key should focus the first > second > anchor > first <Menu.Item/>', () => {
+      const button = document.createElement('button')
+      const { getAllByRole } = render(
+        <>
+          <Menu anchorElement={ button } isOpen>
+            <Menu.Item>Simple menu item</Menu.Item>
+            <Menu.Item>Simple menu item</Menu.Item>
+          </Menu>
+        </>,
+      )
+      const [firstMenuItem, secondMenuItem] = getAllByRole('menuitem')
+      fireEvent.keyDown(document, { keyCode: 40 })
+      expect(document.activeElement).toBe(firstMenuItem)
+      fireEvent.keyDown(document, { keyCode: 40 })
+      expect(document.activeElement).toBe(secondMenuItem)
+      fireEvent.keyDown(document, { keyCode: 40 })
+      expect(document.activeElement).toBe(button)
+      fireEvent.keyDown(document, { keyCode: 40 })
+      expect(document.activeElement).toBe(firstMenuItem)
+    })
+
+    it('Arrow Up key should focus the last <Menu.Item/>', () => {
+      const button = document.createElement('button')
+      const { getAllByRole } = render(
+        <>
+          <Menu anchorElement={ button } isOpen>
+            <Menu.Item>Simple menu item</Menu.Item>
+            <Menu.Item>Simple menu item</Menu.Item>
+          </Menu>
+        </>,
+      )
+      const [firstMenuItem, secondMenuItem] = getAllByRole('menuitem')
+      fireEvent.keyDown(document, { keyCode: 38 })
+      expect(document.activeElement).toBe(secondMenuItem)
+      fireEvent.keyDown(document, { keyCode: 38 })
+      expect(document.activeElement).toBe(firstMenuItem)
+      fireEvent.keyDown(document, { keyCode: 38 })
+      expect(document.activeElement).toBe(button)
+      fireEvent.keyDown(document, { keyCode: 38 })
+      expect(document.activeElement).toBe(secondMenuItem)
+    })
+  })
 })

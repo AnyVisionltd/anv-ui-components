@@ -4,6 +4,7 @@
 .menuContainer {
   position: absolute;
   z-index: 1;
+  outline: none;
 
   &.subMenu {
     &.down {

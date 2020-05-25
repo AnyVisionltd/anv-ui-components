@@ -1274,13 +1274,12 @@ exports[`Storyshots Components/SmartFilter Default 1`] = `
             onKeyDown={[Function]}
           >
             <div
-              className="inputBase text inputStyle"
+              className="inputBase text inputBase"
             >
               <input
                 autoComplete="off"
                 onChange={[Function]}
                 onFocus={[Function]}
-                onKeyDown={[Function]}
                 placeholder="Add tag to filter or free type to search"
                 type="text"
                 value=""
@@ -1325,13 +1324,12 @@ exports[`Storyshots Components/SmartFilter Without Menu Fields 1`] = `
             onKeyDown={[Function]}
           >
             <div
-              className="inputBase text inputStyle"
+              className="inputBase text inputBase"
             >
               <input
                 autoComplete="off"
                 onChange={[Function]}
                 onFocus={[Function]}
-                onKeyDown={[Function]}
                 placeholder="Add tag to filter or free type to search"
                 type="text"
                 value=""
