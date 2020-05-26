@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
-import SmartFilter from "./SmartFilter"
+import SmartFilter from "./SSF"
 import { ReactComponent as ArrowSolidRight } from "../../assets/svg/ArrowSolidRight.svg"
 
 const fields = [
@@ -28,7 +28,7 @@ const addFieldsChip = (input, getByText, value) => {
   fireEvent.keyDown(input, { keyCode: 13 })
 }
 
-describe('<SmartFilter />', () => {
+describe('<SSF />', () => {
   describe('auto complete menu', () => {
     it('should open auto complete menu when input focus', () => {
       const { getByRole } = render(<SmartFilter fields={ fields } />)
@@ -46,7 +46,7 @@ describe('<SmartFilter />', () => {
       expect(autoComplete).toBeTruthy()
     })
 
-    it('should show menu items that much typing', () => {
+    it('should show menu items that match typing', () => {
       const { getByRole, getAllByRole } = render(<SmartFilter fields={ fields } />)
       const input = getByRole('textbox')
       input.focus()

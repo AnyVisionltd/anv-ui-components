@@ -9,7 +9,7 @@ import Chip from '../Chip/Chip'
 import keymap from '../../utils/enums/keymap'
 import { ReactComponent as FilterIcon } from '../../assets/svg/Filter.svg'
 import { ReactComponent as CancelFilledIcon } from '../../assets/svg/CancelFilled.svg'
-import styles from './SmartFilter.module.scss'
+import styles from './SSF.module.scss'
 
 const getChipKey = (name, text) => `${name}${text}`
 

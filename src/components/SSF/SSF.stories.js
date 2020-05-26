@@ -1,13 +1,13 @@
 import React from 'react'
 import { action } from '@storybook/addon-actions'
-import SmartFilter from './SmartFilter'
+import SmartFilter from './SSF'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import { ReactComponent as EyeEnabled } from '../../assets/svg/EyeEnabled.svg'
 import { ReactComponent as ArrowSolidRight } from '../../assets/svg/ArrowSolidRight.svg'
 import styles from '../../styles/storybook/index.module.scss'
 
 export default {
-  title: 'Components/SmartFilter',
+  title: 'Components/SSF',
   component: SmartFilter,
   decorators: [centerDecorator],
 }
