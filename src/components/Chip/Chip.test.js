@@ -42,7 +42,7 @@ describe('<Chip />', () => {
     )
     const node = getByRole('button')
     fireEvent.focus(node)
-    fireEvent.keyUp(node, { key: 'Enter' })
+    fireEvent.keyDown(node, { key: 'Enter' })
     expect(handleClick).toBeCalled()
   })
 
@@ -57,7 +57,7 @@ describe('<Chip />', () => {
     )
     const [node] = getAllByRole('button')
     fireEvent.focus(node)
-    fireEvent.keyUp(node, { key: 'Backspace' })
+    fireEvent.keyDown(node, { key: 'Backspace' })
     expect(handleClick).toBeCalled()
   })
 
@@ -72,7 +72,7 @@ describe('<Chip />', () => {
     )
     const [node] = getAllByRole('button')
     fireEvent.focus(node)
-    fireEvent.keyUp(node, { key: 'Delete' })
+    fireEvent.keyDown(node, { key: 'Delete' })
     expect(handleClick).toBeCalled()
   })
 

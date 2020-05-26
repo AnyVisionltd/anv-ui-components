@@ -111,14 +111,27 @@ describe('<SSF />', () => {
   })
 
   describe('keys navigation', () => {
-    it('should remove last chip when BACKSPACE and input cursor on start ', () => {
+    it('should remove chip when BACKSPACE', () => {
       const onChange = jest.fn()
       const { getByRole } = render(<SmartFilter onChange={ onChange } />)
       const input = getByRole('textbox')
       addFreeTextChip('mockData')
-      input.focus()
+      addFreeTextChip('mockData2')
       fireEvent.keyDown(input, { keyCode: 8 })
-      expect(onChange.mock.calls[2][0]).toEqual([])
+      fireEvent.keyDown(input, { keyCode: 8 })
+      expect(onChange.mock.calls[4][0]).toEqual([])
+    })
+
+    it('should remove chip when DELETE', () => {
+      const onChange = jest.fn()
+      const { getAllByTestId } = render(<SmartFilter onChange={ onChange } />)
+      addFreeTextChip('mockData')
+      addFreeTextChip('mockData2')
+      const chips = getAllByTestId('chip')
+      const [firstChip,secondChip] = chips
+      fireEvent.keyDown(firstChip, { keyCode: 46 })
+      fireEvent.keyDown(secondChip, { keyCode: 46 })
+      expect(onChange.mock.calls[4][0]).toEqual([])
     })
 
     it('should arrow left/right should focus chips', () => {

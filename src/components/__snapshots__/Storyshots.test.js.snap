@@ -485,7 +485,7 @@ exports[`Storyshots Components/Chip Default 1`] = `
       className="chip focusable clickable"
       data-testid="chip"
       onClick={[Function]}
-      onKeyUp={[Function]}
+      onKeyDown={[Function]}
       role="button"
       tabIndex={0}
     >
@@ -519,7 +519,7 @@ exports[`Storyshots Components/Chip Playground 1`] = `
       className="chip focusable clickable microMargin"
       data-testid="chip"
       onClick={[Function]}
-      onKeyUp={[Function]}
+      onKeyDown={[Function]}
       role="button"
       tabIndex={0}
     >
@@ -553,7 +553,7 @@ exports[`Storyshots Components/Chip Variants 1`] = `
       className="chip microMargin"
       data-testid="chip"
       onClick={[Function]}
-      onKeyUp={[Function]}
+      onKeyDown={[Function]}
       role="button"
     >
       <span
@@ -566,7 +566,7 @@ exports[`Storyshots Components/Chip Variants 1`] = `
       className="chip focusable clickable microMargin"
       data-testid="chip"
       onClick={[Function]}
-      onKeyUp={[Function]}
+      onKeyDown={[Function]}
       role="button"
       tabIndex={0}
     >
@@ -581,7 +581,7 @@ exports[`Storyshots Components/Chip Variants 1`] = `
       className="chip disabled microMargin"
       data-testid="chip"
       onClick={[Function]}
-      onKeyUp={[Function]}
+      onKeyDown={[Function]}
       role="button"
     >
       <span
@@ -594,7 +594,7 @@ exports[`Storyshots Components/Chip Variants 1`] = `
       className="chip microMargin"
       data-testid="chip"
       onClick={[Function]}
-      onKeyUp={[Function]}
+      onKeyDown={[Function]}
       role="button"
     >
       <div
@@ -612,7 +612,7 @@ exports[`Storyshots Components/Chip Variants 1`] = `
       className="chip microMargin"
       data-testid="chip"
       onClick={[Function]}
-      onKeyUp={[Function]}
+      onKeyDown={[Function]}
       role="button"
     >
       <span
@@ -631,7 +631,7 @@ exports[`Storyshots Components/Chip Variants 1`] = `
       className="chip microMargin"
       data-testid="chip"
       onClick={[Function]}
-      onKeyUp={[Function]}
+      onKeyDown={[Function]}
       role="button"
     >
       <div
