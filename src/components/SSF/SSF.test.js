@@ -1,6 +1,7 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
-import SmartFilter from "./SmartFilter"
+import { screen } from "@testing-library/dom"
+import SmartFilter from "./SSF"
 import { ReactComponent as ArrowSolidRight } from "../../assets/svg/ArrowSolidRight.svg"
 
 const fields = [
@@ -15,12 +16,14 @@ const fields = [
   }
 ]
 
-const addFreeTextChip = (input, value) => {
+const addFreeTextChip = value => {
+  const input = screen.getByRole('textbox')
   fireEvent.change(input, { target: { value } })
   fireEvent.keyDown(input, { keyCode: 13 })
 }
 
-const addFieldsChip = (input, getByText, value) => {
+const addFieldsChip = (getByText, value) => {
+  const input = screen.getByRole('textbox')
   input.focus()
   const menuItemText = getByText('Menu Item Text')
   menuItemText.click()
@@ -28,7 +31,7 @@ const addFieldsChip = (input, getByText, value) => {
   fireEvent.keyDown(input, { keyCode: 13 })
 }
 
-describe('<SmartFilter />', () => {
+describe('<SSF />', () => {
   describe('auto complete menu', () => {
     it('should open auto complete menu when input focus', () => {
       const { getByRole } = render(<SmartFilter fields={ fields } />)
@@ -46,7 +49,7 @@ describe('<SmartFilter />', () => {
       expect(autoComplete).toBeTruthy()
     })
 
-    it('should show menu items that much typing', () => {
+    it('should show menu items that match typing', () => {
       const { getByRole, getAllByRole } = render(<SmartFilter fields={ fields } />)
       const input = getByRole('textbox')
       input.focus()
@@ -60,29 +63,26 @@ describe('<SmartFilter />', () => {
 
   describe('chips creation', () => {
     it('should create unique free text chip', () => {
-      const { getByRole, getAllByText } = render(<SmartFilter />)
-      const input = getByRole('textbox')
-      addFreeTextChip(input, 'mockData')
-      addFreeTextChip(input, 'mockData')
+      const { getAllByText } = render(<SmartFilter />)
+      addFreeTextChip('mockData')
+      addFreeTextChip('mockData')
       const chips = getAllByText('mockData')
       expect(chips).toHaveLength(1)
     })
 
     it('should create chip by auto complete', () => {
       const onChange = jest.fn()
-      const { getByRole, getByText } = render(<SmartFilter fields={ fields } onChange={ onChange } />)
-      const input = getByRole('textbox')
-      addFieldsChip(input, getByText, 'mockData')
+      const { getByText } = render(<SmartFilter fields={ fields } onChange={ onChange } />)
+      addFieldsChip(getByText, 'mockData')
       getByText('Menu Item Text: mockData')
       expect(onChange.mock.calls[1][0]).toEqual( [ { field: 'menuItemText', value: 'mockData' }])
     })
 
     it('should fire onChange with data when chip created', () => {
       const onChange = jest.fn()
-      const { getByRole } = render(<SmartFilter onChange={ onChange } />)
-      const input = getByRole('textbox')
-      addFreeTextChip(input, 'mockData')
-      addFreeTextChip(input, 'mockData2')
+      render(<SmartFilter onChange={ onChange } />)
+      addFreeTextChip('mockData')
+      addFreeTextChip('mockData2')
       // 3 because onChange fire on first render
       expect(onChange).toBeCalledTimes(3)
       expect(onChange.mock.calls[2][0]).toEqual( [ { value: 'mockData' }, { value: 'mockData2' } ] )
@@ -92,9 +92,8 @@ describe('<SmartFilter />', () => {
   describe('chips deletion', () => {
     it('should delete chip by leading icon', () => {
       const onChange = jest.fn()
-      const { getByRole, getAllByRole } = render(<SmartFilter onChange={ onChange }/>)
-      const input = getByRole('textbox')
-      addFreeTextChip(input, 'mockData')
+      const { getAllByRole } = render(<SmartFilter onChange={ onChange }/>)
+      addFreeTextChip('mockData')
       const buttons = getAllByRole('button')
       fireEvent.click(buttons[2])
       expect(onChange.mock.calls[2][0]).toEqual([])
@@ -102,17 +101,56 @@ describe('<SmartFilter />', () => {
 
     it('should delete all chips', () => {
       const onChange = jest.fn()
-      const { getByRole, getAllByRole } = render(<SmartFilter onChange={ onChange }/>)
-      const input = getByRole('textbox')
-      addFreeTextChip(input, 'mockData')
-      addFreeTextChip(input, 'mockData1')
-      const buttons = getAllByRole('button')
-      fireEvent.click(buttons[5])
+      const { getByLabelText } = render(<SmartFilter onChange={ onChange }/>)
+      addFreeTextChip('mockData')
+      addFreeTextChip('mockData1')
+      const removeAllButton = getByLabelText('remove all')
+      fireEvent.click(removeAllButton)
       expect(onChange.mock.calls[3][0]).toEqual([])
     })
   })
 
   describe('keys navigation', () => {
+    it('should remove chip when BACKSPACE', () => {
+      const onChange = jest.fn()
+      const { getByRole } = render(<SmartFilter onChange={ onChange } />)
+      const input = getByRole('textbox')
+      addFreeTextChip('mockData')
+      addFreeTextChip('mockData2')
+      fireEvent.keyDown(input, { keyCode: 8 })
+      fireEvent.keyDown(input, { keyCode: 8 })
+      expect(onChange.mock.calls[4][0]).toEqual([])
+    })
 
+    it('should remove chip when DELETE', () => {
+      const onChange = jest.fn()
+      const { getAllByTestId } = render(<SmartFilter onChange={ onChange } />)
+      addFreeTextChip('mockData')
+      addFreeTextChip('mockData2')
+      const chips = getAllByTestId('chip')
+      const [firstChip,secondChip] = chips
+      fireEvent.keyDown(firstChip, { keyCode: 46 })
+      fireEvent.keyDown(secondChip, { keyCode: 46 })
+      expect(onChange.mock.calls[4][0]).toEqual([])
+    })
+
+    it('should arrow left/right should focus chips', () => {
+      const { getByRole, getAllByTestId } = render(<SmartFilter />)
+      const input = getByRole('textbox')
+      addFreeTextChip('mockData')
+      addFreeTextChip('mockData2')
+      fireEvent.keyDown(input, { keyCode: 37 })
+      const chips = getAllByTestId('chip')
+      const [firstChip,secondChip] = chips
+      expect(document.activeElement).toBe(secondChip)
+      fireEvent.keyDown(input, { keyCode: 37 })
+      expect(document.activeElement).toBe(firstChip)
+      fireEvent.keyDown(input, { keyCode: 37 })
+      expect(document.activeElement).toBe(firstChip)
+      fireEvent.keyDown(input, { keyCode: 39 })
+      expect(document.activeElement).toBe(secondChip)
+      fireEvent.keyDown(input, { keyCode: 39 })
+      expect(document.activeElement).toBe(input)
+    })
   })
 })

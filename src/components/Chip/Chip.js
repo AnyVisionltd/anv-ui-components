@@ -14,7 +14,7 @@ const Chip = ({
   isFocused,
   onClick,
   onTrailingIconClick,
-  onKeyUp,
+  onKeyDown,
   ...otherProps
 }) => {
   const chipRef = React.createRef()
@@ -31,17 +31,9 @@ const Chip = ({
     }
   }, [isFocused, chipRef])
 
-  const classes = classNames(
-    styles.chip,
-    focusable && styles.focusable,
-    clickable && styles.clickable,
-    disabled && styles.disabled,
-    className,
-  )
-
   const isDeleteKeyboardEvent = event => deletable && ['Backspace', 'Delete'].includes(event.key)
 
-  const handleKeyUp = event => {
+  const handleKeyDown = event => {
     if (event.currentTarget === event.target) {
       if (isDeleteKeyboardEvent(event) && onTrailingIconClick) {
         onTrailingIconClick(event)
@@ -52,7 +44,7 @@ const Chip = ({
       }
     }
 
-    return onKeyUp && onKeyUp(event)
+    return onKeyDown && onKeyDown(event)
   }
 
   const onClickHandler = event => {
@@ -106,6 +98,14 @@ const Chip = ({
 
   const renderLabel = () => <span className={ styles.label }>{ label }</span>
 
+  const classes = classNames(
+      styles.chip,
+      focusable && styles.focusable,
+      clickable && styles.clickable,
+      disabled && styles.disabled,
+      className,
+  )
+
   return (
     <div
       role="button"
@@ -113,8 +113,9 @@ const Chip = ({
       tabIndex={ focusable ? 0 : undefined }
       className={ classes }
       onClick={ onClickHandler }
-      onKeyUp={ handleKeyUp }
+      onKeyDown={ handleKeyDown }
       ref={ chipRef }
+      data-testid={ 'chip' }
       { ...otherProps }
     >
       { renderLeadingIcon() }
@@ -159,7 +160,7 @@ Chip.propTypes = {
    * Callback function when trailing icon clicked.
    */
   onTrailingIconClick: propTypes.func,
-  onKeyUp: propTypes.func,
+  onKeyDown: propTypes.func,
 }
 
 export default Chip

@@ -483,8 +483,9 @@ exports[`Storyshots Components/Chip Default 1`] = `
   >
     <div
       className="chip focusable clickable"
+      data-testid="chip"
       onClick={[Function]}
-      onKeyUp={[Function]}
+      onKeyDown={[Function]}
       role="button"
       tabIndex={0}
     >
@@ -516,8 +517,9 @@ exports[`Storyshots Components/Chip Playground 1`] = `
   >
     <div
       className="chip focusable clickable microMargin"
+      data-testid="chip"
       onClick={[Function]}
-      onKeyUp={[Function]}
+      onKeyDown={[Function]}
       role="button"
       tabIndex={0}
     >
@@ -549,8 +551,9 @@ exports[`Storyshots Components/Chip Variants 1`] = `
   >
     <div
       className="chip microMargin"
+      data-testid="chip"
       onClick={[Function]}
-      onKeyUp={[Function]}
+      onKeyDown={[Function]}
       role="button"
     >
       <span
@@ -561,8 +564,9 @@ exports[`Storyshots Components/Chip Variants 1`] = `
     </div>
     <div
       className="chip focusable clickable microMargin"
+      data-testid="chip"
       onClick={[Function]}
-      onKeyUp={[Function]}
+      onKeyDown={[Function]}
       role="button"
       tabIndex={0}
     >
@@ -575,8 +579,9 @@ exports[`Storyshots Components/Chip Variants 1`] = `
     <div
       aria-disabled={true}
       className="chip disabled microMargin"
+      data-testid="chip"
       onClick={[Function]}
-      onKeyUp={[Function]}
+      onKeyDown={[Function]}
       role="button"
     >
       <span
@@ -587,8 +592,9 @@ exports[`Storyshots Components/Chip Variants 1`] = `
     </div>
     <div
       className="chip microMargin"
+      data-testid="chip"
       onClick={[Function]}
-      onKeyUp={[Function]}
+      onKeyDown={[Function]}
       role="button"
     >
       <div
@@ -604,8 +610,9 @@ exports[`Storyshots Components/Chip Variants 1`] = `
     </div>
     <div
       className="chip microMargin"
+      data-testid="chip"
       onClick={[Function]}
-      onKeyUp={[Function]}
+      onKeyDown={[Function]}
       role="button"
     >
       <span
@@ -622,8 +629,9 @@ exports[`Storyshots Components/Chip Variants 1`] = `
     </div>
     <div
       className="chip microMargin"
+      data-testid="chip"
       onClick={[Function]}
-      onKeyUp={[Function]}
+      onKeyDown={[Function]}
       role="button"
     >
       <div
@@ -1243,7 +1251,7 @@ exports[`Storyshots Components/Portal Default 1`] = `
 </div>
 `;
 
-exports[`Storyshots Components/SmartFilter Default 1`] = `
+exports[`Storyshots Components/SSF Default 1`] = `
 <div>
   <div
     className="center"
@@ -1254,6 +1262,9 @@ exports[`Storyshots Components/SmartFilter Default 1`] = `
       <div
         className="SmartFilter"
       >
+        <div
+          className="elevationOverlay"
+        />
         <button
           className="button large fill searchFilter"
           disabled={false}
@@ -1293,7 +1304,7 @@ exports[`Storyshots Components/SmartFilter Default 1`] = `
 </div>
 `;
 
-exports[`Storyshots Components/SmartFilter Without Menu Fields 1`] = `
+exports[`Storyshots Components/SSF Without Menu Fields 1`] = `
 <div>
   <div
     className="center"
@@ -1304,6 +1315,9 @@ exports[`Storyshots Components/SmartFilter Without Menu Fields 1`] = `
       <div
         className="SmartFilter"
       >
+        <div
+          className="elevationOverlay"
+        />
         <button
           className="button large fill searchFilter"
           disabled={false}

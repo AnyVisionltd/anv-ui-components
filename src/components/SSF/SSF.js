@@ -9,7 +9,7 @@ import Chip from '../Chip/Chip'
 import keymap from '../../utils/enums/keymap'
 import { ReactComponent as FilterIcon } from '../../assets/svg/Filter.svg'
 import { ReactComponent as CancelFilledIcon } from '../../assets/svg/CancelFilled.svg'
-import styles from './SmartFilter.module.scss'
+import styles from './SSF.module.scss'
 
 const getChipKey = (name, text) => `${name}${text}`
 
@@ -194,6 +194,7 @@ const SmartFilter = ({
       <IconButton
         variant="ghost"
         onClick={ removeAllChips }
+        aria-label="remove all"
       >
         <CancelFilledIcon className={ styles.cancelIcon } />
       </IconButton>
@@ -206,7 +207,7 @@ const SmartFilter = ({
     }
     const typedText = inputValue.slice(prefixInputValue.length).toLowerCase()
     const menuItems = fields.filter(({ label }) => label.toLowerCase().includes(typedText))
-    if(menuItems.length) {
+    if(menuItems.length && document.activeElement === inputBaseRef.current) {
       handleMenuOpen()
     } else {
       handleMenuClose()
@@ -241,6 +242,7 @@ const SmartFilter = ({
 
   return (
     <div className={ classes }>
+      <div className={ styles.elevationOverlay }/>
       <Button className={ classNames(styles.searchFilter, menuAnchor && styles.openedMenu) } onClick={ handleButtonClick }>
         <FilterIcon />
       </Button>
