@@ -206,7 +206,7 @@ const SmartFilter = ({
     }
     const typedText = inputValue.slice(prefixInputValue.length).toLowerCase()
     const menuItems = fields.filter(({ label }) => label.toLowerCase().includes(typedText))
-    if(menuItems.length) {
+    if(menuItems.length && document.activeElement === inputBaseRef.current) {
       handleMenuOpen()
     } else {
       handleMenuClose()
@@ -241,6 +241,7 @@ const SmartFilter = ({
 
   return (
     <div className={ classes }>
+      <div className={ styles.elevationOverlay }/>
       <Button className={ classNames(styles.searchFilter, menuAnchor && styles.openedMenu) } onClick={ handleButtonClick }>
         <FilterIcon />
       </Button>
