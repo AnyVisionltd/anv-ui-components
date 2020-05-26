@@ -483,6 +483,7 @@ exports[`Storyshots Components/Chip Default 1`] = `
   >
     <div
       className="chip focusable clickable"
+      data-testid="chip"
       onClick={[Function]}
       onKeyUp={[Function]}
       role="button"
@@ -516,6 +517,7 @@ exports[`Storyshots Components/Chip Playground 1`] = `
   >
     <div
       className="chip focusable clickable microMargin"
+      data-testid="chip"
       onClick={[Function]}
       onKeyUp={[Function]}
       role="button"
@@ -549,6 +551,7 @@ exports[`Storyshots Components/Chip Variants 1`] = `
   >
     <div
       className="chip microMargin"
+      data-testid="chip"
       onClick={[Function]}
       onKeyUp={[Function]}
       role="button"
@@ -561,6 +564,7 @@ exports[`Storyshots Components/Chip Variants 1`] = `
     </div>
     <div
       className="chip focusable clickable microMargin"
+      data-testid="chip"
       onClick={[Function]}
       onKeyUp={[Function]}
       role="button"
@@ -575,6 +579,7 @@ exports[`Storyshots Components/Chip Variants 1`] = `
     <div
       aria-disabled={true}
       className="chip disabled microMargin"
+      data-testid="chip"
       onClick={[Function]}
       onKeyUp={[Function]}
       role="button"
@@ -587,6 +592,7 @@ exports[`Storyshots Components/Chip Variants 1`] = `
     </div>
     <div
       className="chip microMargin"
+      data-testid="chip"
       onClick={[Function]}
       onKeyUp={[Function]}
       role="button"
@@ -604,6 +610,7 @@ exports[`Storyshots Components/Chip Variants 1`] = `
     </div>
     <div
       className="chip microMargin"
+      data-testid="chip"
       onClick={[Function]}
       onKeyUp={[Function]}
       role="button"
@@ -622,6 +629,7 @@ exports[`Storyshots Components/Chip Variants 1`] = `
     </div>
     <div
       className="chip microMargin"
+      data-testid="chip"
       onClick={[Function]}
       onKeyUp={[Function]}
       role="button"

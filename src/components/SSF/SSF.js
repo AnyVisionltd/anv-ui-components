@@ -194,6 +194,7 @@ const SmartFilter = ({
       <IconButton
         variant="ghost"
         onClick={ removeAllChips }
+        aria-label="remove all"
       >
         <CancelFilledIcon className={ styles.cancelIcon } />
       </IconButton>

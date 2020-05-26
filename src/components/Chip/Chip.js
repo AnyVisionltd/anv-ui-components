@@ -31,14 +31,6 @@ const Chip = ({
     }
   }, [isFocused, chipRef])
 
-  const classes = classNames(
-    styles.chip,
-    focusable && styles.focusable,
-    clickable && styles.clickable,
-    disabled && styles.disabled,
-    className,
-  )
-
   const isDeleteKeyboardEvent = event => deletable && ['Backspace', 'Delete'].includes(event.key)
 
   const handleKeyUp = event => {
@@ -106,6 +98,14 @@ const Chip = ({
 
   const renderLabel = () => <span className={ styles.label }>{ label }</span>
 
+  const classes = classNames(
+      styles.chip,
+      focusable && styles.focusable,
+      clickable && styles.clickable,
+      disabled && styles.disabled,
+      className,
+  )
+
   return (
     <div
       role="button"
@@ -115,6 +115,7 @@ const Chip = ({
       onClick={ onClickHandler }
       onKeyUp={ handleKeyUp }
       ref={ chipRef }
+      data-testid={ 'chip' }
       { ...otherProps }
     >
       { renderLeadingIcon() }
