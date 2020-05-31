@@ -1251,7 +1251,7 @@ exports[`Storyshots Components/Portal Default 1`] = `
 </div>
 `;
 
-exports[`Storyshots Components/SSF Default 1`] = `
+exports[`Storyshots Components/TableSSF Default 1`] = `
 <div>
   <div
     className="center"
@@ -1304,7 +1304,7 @@ exports[`Storyshots Components/SSF Default 1`] = `
 </div>
 `;
 
-exports[`Storyshots Components/SSF Without Menu Fields 1`] = `
+exports[`Storyshots Components/TableSSF Without Menu Fields 1`] = `
 <div>
   <div
     className="center"
@@ -1675,7 +1675,7 @@ exports[`Storyshots Components/Table Playground 1`] = `
 </div>
 `;
 
-exports[`Storyshots Components/Table/Sortable Basic 1`] = `
+exports[`Storyshots Components/Table/TableSSF Basic 1`] = `
 <div>
   <div
     className="center"
@@ -1697,7 +1697,7 @@ exports[`Storyshots Components/Table/Sortable Basic 1`] = `
 </div>
 `;
 
-exports[`Storyshots Components/Table/Sortable With Default Sort 1`] = `
+exports[`Storyshots Components/Table/TableSSF With Default Sort 1`] = `
 <div>
   <div
     className="center"

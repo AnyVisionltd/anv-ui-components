@@ -1,1 +1,1 @@
-export { default as SmartFilter } from './SSF'
+export { default as SSF } from './SSF'

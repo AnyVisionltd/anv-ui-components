@@ -107,29 +107,29 @@ TableHeader.defaultProps = {
 }
 
 TableHeader.propTypes = {
-  /** Table header fields. */
+  /** Table header fields. <br />
+   *  <code>field</code>        - match to the data properties. <br />
+   *  <code>content</code>      - what to render in the header cell.<br />
+   *  <code>label</code>        - display name to render on SSF and Column Management. <br />
+   *  <code>type</code>         - column type, use by SSF and controlled sort. <br />
+   *  <code>columnRender</code> - function for custom column render. <br />
+   *  <code>disableSort</code>  - disable sort for the column. <br />
+   *  <code>hide</code>         - hide the column. <br />
+   *  <code>flexWidth</code>    - set the column width by flex basis. <br />
+   **/
   headers: propTypes.arrayOf(
     propTypes.shape({
       field: propTypes.string.isRequired,
-      /** Cell content. */
       content: propTypes.oneOfType([
         propTypes.string,
         propTypes.func,
       ]).isRequired,
-      /** For columnManagement when dont want to display content value. */
-      displayName: propTypes.string,
-      /** Render column by function. */
-      columnRender: propTypes.func,
-      /** Disable sort for the column */
-      disableSort: propTypes.bool,
-      /** Custom sort for the column */
-      customSort: propTypes.func,
-      /** Hide the column */
-      hide: propTypes.bool,
-      /** Set the column width by flex basis */
-      flexWidth: propTypes.string,
-      /** Column type, use for controlled sorting */
+      label: propTypes.string,
       type: propTypes.oneOf(['string', 'number', 'date']),
+      columnRender: propTypes.func,
+      disableSort: propTypes.bool,
+      hide: propTypes.bool,
+      flexWidth: propTypes.string,
     }),
   ).isRequired,
   /** Callback fire when header cell click with cell field. */

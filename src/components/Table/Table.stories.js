@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import Table from './Table'
 import { Chip } from '../Chip'
+import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
 
 export default {
   title: 'Components/Table',
@@ -14,46 +15,82 @@ export default {
 export const Playground = () => {
   const headers = useMemo(() => [
     {
-      field: 'username',
-      content: 'user name',
-      flexWidth: text('size user name', '20%'),
-    },
-    {
       field: 'firstname',
-      content: 'first name',
+      content: 'First Name',
       hide: boolean(' hide first name ', false),
     },
     {
       field: 'lastname',
-      content: 'lastname',
+      content: 'Last Name',
+    },
+    {
+      field: 'role',
+      content: 'Role',
+      flexWidth: text('size role', '20%'),
     },
     {
       field: 'location',
-      content: 'location',
+      content: 'Location',
       columnRender: data => <Chip label={ data } />,
     },
     {
-      field: 'date',
-      content: 'date',
-      hide: true,
-    },
+      field: 'weather',
+      content: () => <span
+        style={ { display: 'flex', alignItems: 'center' } }
+      >
+        Weather
+        <SunIcon style={ { marginLeft: '5px' } }/>
+      </span>,
+      label: 'Weather',
+      type: 'number'
+    }
   ], [])
 
   const data = useMemo(() => [
     {
-      id: '1', username: 'Admin', firstname: 'Donte', lastname: 'Castaneda', location: 'Tel Aviv', date: '20/01/2019',
+      id: '1',
+      role: 'Admin',
+      firstname: 'Donte',
+      lastname: 'Castaneda',
+      location: 'Tel Aviv',
+      weather: '30°',
+      date: '20/01/2019',
     },
     {
-      id: '2', username: 'User', firstname: 'Cleo', lastname: 'Mcnamara', location: 'Jerusalem', date: '15/05/1998',
+      id: '2',
+      role: 'User',
+      firstname: 'Cleo',
+      lastname: 'Mcnamara',
+      location: 'Jerusalem',
+      weather: '15°',
+      date: '15/05/1998',
     },
     {
-      id: '3', username: 'Admin', firstname: 'Rafael', lastname: 'Andersen', location: 'Eilat', date: '10/11/1989',
+      id: '3',
+      role: 'Admin',
+      firstname: 'Rafael',
+      lastname: 'Andersen',
+      location: 'Eilat',
+      weather: '40°',
+      date: '10/11/1989',
     },
     {
-      id: '4', username: 'Operator', firstname: 'Neelam', lastname: 'Harris', location: 'Haifa', date: '04/12/2020',
+      id: '4',
+      role: 'Operator',
+      firstname: 'Neelam',
+      lastname: 'Harris',
+      location: 'Haifa',
+      weather: '25°',
+      date: '04/12/2020',
     },
     {
-      id: '5', username: 'Superator', firstname: 'Carole', lastname: 'Howe', location: 'Tzfat', date: '23/03/2009',
+      id: '5',
+      role: 'Superator',
+      firstname: 'Carole',
+      lastname: 'Howe',
+      location: 'Tzfat',
+      weather: '20°',
+      date: '23/03/2009',
     },
   ], [])
 
@@ -64,12 +101,16 @@ export const Playground = () => {
 
   const style = { width: '80%' }
   return (
-    <Table style={ style }>
-      <Table.TableHeader
+    <Table style={ style } controlled={ false }>
+      {
+        boolean('SSF', true)
+        && <Table.SSF onChange={ action('SSF changed') }/>
+      }
+      <Table.Header
         headers={ headers }
         onHeaderCellClick={ action('header cell clicked') }
       />
-      <Table.TableBody
+      <Table.Body
         data={ data }
         rowHeight={ text('row height', '56px') }
         rowActions={ boolean('row actions', true) ? rowActions : null }
