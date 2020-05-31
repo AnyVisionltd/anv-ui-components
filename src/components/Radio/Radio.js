@@ -43,6 +43,12 @@ const Radio = ({
     )
 }
 
+Radio.defaultProps = {
+    disabled: false,
+    checked: false,
+    onChange: () => {}
+}
+
 Radio.propTypes = {
     /** If true, the radio will be disabled. */
     disabled: propTypes.bool,

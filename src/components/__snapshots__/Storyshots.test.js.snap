@@ -1257,12 +1257,12 @@ exports[`Storyshots Components/Radio Default 1`] = `
     className="center"
   >
     <label
-      className="radio enabled"
+      className="radio"
       htmlFor="radio-example"
     >
       <input
         checked={false}
-        className="parent"
+        disabled={false}
         id="radio-example"
         onChange={[Function]}
         type="radio"
@@ -1287,14 +1287,14 @@ exports[`Storyshots Components/Radio Playground 1`] = `
     className="center"
   >
     <label
-      className="radio enabled"
+      className="radio"
       htmlFor="radio-playground"
     >
       <input
         checked={false}
-        className="parent"
         disabled={false}
         id="radio-playground"
+        onChange={[Function]}
         type="radio"
       />
       <span
@@ -1317,11 +1317,12 @@ exports[`Storyshots Components/Radio States 1`] = `
     className="center"
   >
     <label
-      className="radio checked enabled microMargin"
+      className="radio checked microMargin"
     >
       <input
         checked={true}
-        className="parent"
+        disabled={false}
+        onChange={[Function]}
         type="radio"
       />
       <span
@@ -1333,10 +1334,12 @@ exports[`Storyshots Components/Radio States 1`] = `
       </span>
     </label>
     <label
-      className="radio enabled microMargin"
+      className="radio microMargin"
     >
       <input
-        className="parent"
+        checked={false}
+        disabled={false}
+        onChange={[Function]}
         type="radio"
       />
       <span
@@ -1348,8 +1351,8 @@ exports[`Storyshots Components/Radio States 1`] = `
     >
       <input
         checked={true}
-        className="parent"
         disabled={true}
+        onChange={[Function]}
         type="radio"
       />
       <span
@@ -1364,8 +1367,9 @@ exports[`Storyshots Components/Radio States 1`] = `
       className="radio disabled microMargin"
     >
       <input
-        className="parent"
+        checked={false}
         disabled={true}
+        onChange={[Function]}
         type="radio"
       />
       <span
