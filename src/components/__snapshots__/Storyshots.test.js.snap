@@ -1251,6 +1251,131 @@ exports[`Storyshots Components/Portal Default 1`] = `
 </div>
 `;
 
+exports[`Storyshots Components/Radio Default 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <label
+      className="radio enabled"
+      htmlFor="radio-example"
+    >
+      <input
+        checked={false}
+        className="parent"
+        id="radio-example"
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="iconContainer"
+      />
+    </label>
+    <label
+      className="checkboxLabel"
+      htmlFor="radio-example"
+    >
+      Check me out!
+    </label>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Radio Playground 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <label
+      className="radio enabled"
+      htmlFor="radio-playground"
+    >
+      <input
+        checked={false}
+        className="parent"
+        disabled={false}
+        id="radio-playground"
+        type="radio"
+      />
+      <span
+        className="iconContainer"
+      />
+    </label>
+    <label
+      className="checkboxLabel"
+      htmlFor="radio-playground"
+    >
+      Hit me!
+    </label>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Radio States 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <label
+      className="radio checked enabled microMargin"
+    >
+      <input
+        checked={true}
+        className="parent"
+        type="radio"
+      />
+      <span
+        className="iconContainer"
+      >
+        <span
+          className="circle"
+        />
+      </span>
+    </label>
+    <label
+      className="radio enabled microMargin"
+    >
+      <input
+        className="parent"
+        type="radio"
+      />
+      <span
+        className="iconContainer"
+      />
+    </label>
+    <label
+      className="radio checked disabled microMargin"
+    >
+      <input
+        checked={true}
+        className="parent"
+        disabled={true}
+        type="radio"
+      />
+      <span
+        className="iconContainer"
+      >
+        <span
+          className="circle"
+        />
+      </span>
+    </label>
+    <label
+      className="radio disabled microMargin"
+    >
+      <input
+        className="parent"
+        disabled={true}
+        type="radio"
+      />
+      <span
+        className="iconContainer"
+      />
+    </label>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Components/SSF Default 1`] = `
 <div>
   <div
