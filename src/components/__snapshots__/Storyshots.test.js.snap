@@ -1779,7 +1779,7 @@ exports[`Storyshots Components/Switch Playground 1`] = `
 </div>
 `;
 
-exports[`Storyshots Components/Table Playground 1`] = `
+exports[`Storyshots Components/Table Basic 1`] = `
 <div>
   <div
     className="center"
@@ -1838,97 +1838,6 @@ exports[`Storyshots Components/Table Playground 1`] = `
       />
       <div
         className="tableBody"
-      />
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components/Table/Sortable Basic 1`] = `
-<div>
-  <div
-    className="center"
-  >
-    <div
-      className="table"
-      style={
-        Object {
-          "width": "80%",
-        }
-      }
-    >
-      <div
-        className="tableHeader"
-        role="row"
-      />
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components/Table/Sortable With Default Sort 1`] = `
-<div>
-  <div
-    className="center"
-  >
-    <div
-      className="table"
-      style={
-        Object {
-          "width": "80%",
-        }
-      }
-    >
-      <div
-        className="tableHeader"
-        role="row"
-      />
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components/Table/TableBody Basic 1`] = `
-<div>
-  <div
-    className="center"
-  >
-    <div
-      className="table"
-      style={
-        Object {
-          "width": "80%",
-        }
-      }
-    >
-      <div
-        className="tableHeader"
-        role="row"
-      />
-      <div
-        className="tableBody"
-      />
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components/Table/TableHeader Basic 1`] = `
-<div>
-  <div
-    className="center"
-  >
-    <div
-      className="table"
-      style={
-        Object {
-          "width": "80%",
-        }
-      }
-    >
-      <div
-        className="tableHeader"
-        role="row"
       />
     </div>
   </div>

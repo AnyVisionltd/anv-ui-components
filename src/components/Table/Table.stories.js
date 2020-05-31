@@ -1,23 +1,27 @@
 import React, { useMemo } from 'react'
-import { boolean, text } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import Table from './Table'
+import TableHeader from "./TableHeader/TableHeader"
+import TableBody from "./TableBody/TableBody"
+import TableSSF from "./TableSSF/TableSSF"
+import Sortable from "./Sortable/Sortable"
 import { Chip } from '../Chip'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
 
 export default {
   title: 'Components/Table',
   component: Table,
+  subcomponents: { TableHeader, TableBody, TableSSF, Sortable },
   decorators: [centerDecorator],
 }
 
-export const Playground = () => {
+export const Basic = () => {
   const headers = useMemo(() => [
     {
       field: 'firstname',
       content: 'First Name',
-      hide: boolean(' hide first name ', false),
+      flexWidth: '200px',
     },
     {
       field: 'lastname',
@@ -26,7 +30,6 @@ export const Playground = () => {
     {
       field: 'role',
       content: 'Role',
-      flexWidth: text('size role', '20%'),
     },
     {
       field: 'location',
@@ -102,23 +105,16 @@ export const Playground = () => {
   const style = { width: '80%' }
   return (
     <Table style={ style } controlled={ false }>
-      {
-        boolean('SSF', true)
-        && <Table.SSF onChange={ action('SSF changed') }/>
-      }
+      <Table.SSF onChange={ action('SSF changed') }/>
       <Table.Header
         headers={ headers }
         onHeaderCellClick={ action('header cell clicked') }
       />
       <Table.Body
         data={ data }
-        rowHeight={ text('row height', '56px') }
-        rowActions={ boolean('row actions', true) ? rowActions : null }
+        rowActions={ rowActions }
       />
-      {
-        boolean('sortable', true)
-        && <Table.Sortable onSortChange={ action('sort changed') } />
-      }
+      <Table.Sortable onSortChange={ action('sort changed') } />
     </Table>
   )
 }
