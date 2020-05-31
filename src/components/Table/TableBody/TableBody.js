@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import { IconButton, Menu } from '../../../index'
 import { ReactComponent as SunIcon } from '../../../assets/svg/Options.svg'
 import TableContext from '../TableContext'
+import { useTableData } from "../UseTableData"
 import styles from './TableBody.module.scss'
 
 const TableBody = ({
@@ -14,7 +15,9 @@ const TableBody = ({
   ...otherProps
 }) => {
   const { state, setData, setWithRowActions } = useContext(TableContext)
-  const { headers, data: contextData } = state
+  const { headers } = state
+
+  const tableData = useTableData()
 
   const [actionsAnchorElement, setActionsAnchorElement] = useState(null)
 
@@ -100,7 +103,7 @@ const TableBody = ({
   )
 
   const renderTableRows = () => (
-    contextData.map((row, index) => {
+    tableData.map((row, index) => {
       const tableRowClassNames = classNames(styles.tableRow, { [styles.selectedRow]: false })
       return (
         <div

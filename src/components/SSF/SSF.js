@@ -44,9 +44,6 @@ const SmartFilter = ({
   const baseInputLabel = prefixInputValue.slice(0, -2)
   const handleMenuOpen = () => setMenuAnchor(inputBaseRef.current)
   const handleMenuClose = () => setMenuAnchor(null)
-  const handleButtonClick = () => menuAnchor || prefixInputValue.length
-    ? setMenuAnchor(null)
-    : setMenuAnchor(inputBaseRef.current)
 
   const getChipIcon = name => {
     const [menuItem = {}] = fields.filter(({ label }) => label === name)
@@ -215,6 +212,10 @@ const SmartFilter = ({
     return menuItems
   }, [inputValue, prefixInputValue.length, fields])
 
+  const handleButtonClick = () => menuAnchor || menuItems.length === 0
+    ? setMenuAnchor(null)
+    : setMenuAnchor(inputBaseRef.current)
+
   const renderAutoComplete = () => {
     return (
       <Menu
@@ -280,7 +281,8 @@ SmartFilter.propTypes = {
    *  <code>label</code>     - the name of the menu item that appears.<br />
    *  <code>type</code>      - number or text as the possible input types.<br />
    *  <code>icon</code>      - the icon on the chip that will appear
-   *                           if the user choose this line in the menu. */
+   *                           if the user choose this line in the menu.
+   **/
   fields: propTypes.arrayOf(propTypes.shape({
     field: propTypes.string.isRequired,
     label: propTypes.string.isRequired,

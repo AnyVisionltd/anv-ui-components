@@ -32,8 +32,8 @@
         opacity: av-opacity(ghost);
       }
 
-      .chipStyle:not(:last-child) {
-        margin-left: av-space(tiny);
+      .chipStyle {
+        margin: av-space(micro) 0 av-space(micro) av-space(tiny);
       }
 
       .inputBase {

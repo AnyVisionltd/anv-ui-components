@@ -30,7 +30,7 @@ export const Basic = () => {
   const style = { width: '80%' }
   return (
     <Table style={ style }>
-      <Table.TableHeader headers={ headers } />
+      <Table.Header headers={ headers } />
       <Table.Sortable />
     </Table>
   )
@@ -40,7 +40,7 @@ export const withDefaultSort = () => {
   const style = { width: '80%' }
   return (
     <Table style={ style }>
-      <Table.TableHeader
+      <Table.Header
         headers={ headers }
       />
       <Table.Sortable

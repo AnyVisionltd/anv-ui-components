@@ -31,7 +31,7 @@ export const Basic = () => {
 
   return (
     <Table style={ style }>
-      <TableHeader
+      <Table.Header
         headers={ headers }
       />
     </Table>

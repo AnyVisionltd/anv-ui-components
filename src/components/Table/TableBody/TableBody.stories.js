@@ -64,8 +64,8 @@ export const Basic = () => {
 
   return (
     <Table style={ style }>
-      <Table.TableHeader headers={ headers } />
-      <Table.TableBody data={ data } rowActions={ rowActions } />
+      <Table.Header headers={ headers } />
+      <Table.Body data={ data } rowActions={ rowActions } />
     </Table>
   )
 }
