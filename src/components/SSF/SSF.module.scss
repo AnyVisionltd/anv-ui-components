@@ -33,10 +33,7 @@
       }
 
       .chipStyle {
-        margin: av-space(micro) 0;
-        &:not(:last-child) {
-          margin-left: av-space(tiny);
-        }
+        margin: av-space(micro) 0 0 av-space(tiny);
       }
 
       .inputBase {

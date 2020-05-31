@@ -9,14 +9,12 @@ const TableSSF = ({ onChange, className }) => {
   const { state, setFilters } = useContext(TableContext)
   const { headers } = state
 
-  const fields = useMemo(() => headers.reduce((fields, headers) => {
-      fields.push({
+  const fields = useMemo(() => headers.map(headers => ({
         field: headers.field,
         label: headers.label || headers.content,
         ...(headers.type  && { type: headers.type })
       })
-      return fields
-    }, [])
+    )
   , [headers])
 
   const handleOnChange = filters => {
