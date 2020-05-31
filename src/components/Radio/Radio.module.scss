@@ -48,7 +48,7 @@ $radio-container-size: 32px;
       height: av-size(sz-8);
       width: av-size(sz-8);
       background: currentColor;
-      border-radius: 50%;
+      border-radius: av-radius(circle);
       display: inline-block;
     }
   }
@@ -60,12 +60,6 @@ $radio-container-size: 32px;
     &:not(&.checked) {
       border: solid 2px av-color(content, av-opacity(disabled));
     }
-  }
-
-  &.circle {
-    content: ' \25CF';
-    font-size: av-size(sz-8);
-    position: absolute;
   }
 }
 
