@@ -13,7 +13,7 @@ $radio-container-size: 32px;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  border-radius: av-radius(circle);
+  border-radius: av-radius();
   padding: av-space(tiny);
   color: av-color(primary);
   fill: currentColor;
