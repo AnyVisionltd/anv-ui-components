@@ -32,13 +32,13 @@ const useTableData = () => {
   }, [sort])
 
   return useMemo(() => {
-    let tableData
+    let tableData = data
     if(controlled) {
-      return data
+      return tableData
     }
 
-    tableData = filterData(data)
-    tableData = sortData(data)
+    tableData = filterData(tableData)
+    tableData = sortData(tableData)
 
     return tableData
   }, [data, controlled, sortData, filterData])

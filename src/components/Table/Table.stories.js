@@ -24,10 +24,6 @@ export const Basic = () => {
       flexWidth: '200px',
     },
     {
-      field: 'lastname',
-      content: 'Last Name',
-    },
-    {
       field: 'role',
       content: 'Role',
     },
@@ -44,9 +40,15 @@ export const Basic = () => {
         Weather
         <SunIcon style={ { marginLeft: '5px' } }/>
       </span>,
+      columnRender: data =>  `${data}°`,
       label: 'Weather',
       type: 'number'
+    },
+    {
+      field: 'date',
+      content: 'Date'
     }
+
   ], [])
 
   const data = useMemo(() => [
@@ -54,45 +56,40 @@ export const Basic = () => {
       id: '1',
       role: 'Admin',
       firstname: 'Donte',
-      lastname: 'Castaneda',
       location: 'Tel Aviv',
-      weather: '30°',
+      weather: 30,
       date: '20/01/2019',
     },
     {
       id: '2',
       role: 'User',
       firstname: 'Cleo',
-      lastname: 'Mcnamara',
       location: 'Jerusalem',
-      weather: '15°',
+      weather: 15,
       date: '15/05/1998',
     },
     {
       id: '3',
       role: 'Admin',
       firstname: 'Rafael',
-      lastname: 'Andersen',
       location: 'Eilat',
-      weather: '40°',
+      weather: 40,
       date: '10/11/1989',
     },
     {
       id: '4',
       role: 'Operator',
       firstname: 'Neelam',
-      lastname: 'Harris',
       location: 'Haifa',
-      weather: '25°',
+      weather: 25,
       date: '04/12/2020',
     },
     {
       id: '5',
       role: 'Superator',
       firstname: 'Carole',
-      lastname: 'Howe',
       location: 'Tzfat',
-      weather: '20°',
+      weather: 20,
       date: '23/03/2009',
     },
   ], [])
