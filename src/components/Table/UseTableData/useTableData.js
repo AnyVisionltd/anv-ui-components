@@ -1,5 +1,5 @@
 import { useMemo, useContext, useCallback } from 'react'
-import { orderTypes } from "../../../utils/enums/common"
+import { numberSort, stringSort } from '../../../utils/sort'
 import TableContext from '../TableContext'
 
 const useTableData = () => {
@@ -10,9 +10,9 @@ const useTableData = () => {
     return data.filter(row => {
       return filters.every(({ field, value }) => {
         if(field) {
-          return row[field].toLowerCase().includes(value)
+          return row[field].toString().toLowerCase().includes(value)
         } else {
-          return Object.values(row).some(cellValue => cellValue.toLowerCase().includes(value))
+          return Object.values(row).some(cellValue => cellValue.toString().toLowerCase().includes(value))
         }
       })
     })
@@ -22,13 +22,14 @@ const useTableData = () => {
     if(!sort.sortBy.field) {
       return data
     }
-    const defaultSort = (data, field) => data.sort((rowA, rowB) => (
-      rowA[field].localeCompare(rowB[field], undefined, { sensitivity: 'base' }))
-    )
-    const { field, order } = sort.sortBy
-    const sortedData = defaultSort(data, field).reverse()
-    return order === orderTypes.DESC ? sortedData.reverse() : sortedData
 
+    const { field, order, type } = sort.sortBy
+    switch(type) {
+      case 'text':
+        return stringSort(data, field, order)
+      default:
+        return numberSort(data, field, order)
+    }
   }, [sort])
 
   return useMemo(() => {

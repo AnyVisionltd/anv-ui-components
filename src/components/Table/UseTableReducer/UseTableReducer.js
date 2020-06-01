@@ -12,6 +12,7 @@ const initialState = {
     sortBy: {
       field: null,
       order: null,
+      type: '',
     },
   },
 }

@@ -35,7 +35,7 @@ const TableHeader = ({
     const sortOrder = headerCell.field === sortBy.field && sortBy.order === orderTypes.ASC
       ? orderTypes.DESC
       : orderTypes.ASC
-    setSortBy({ field: headerCell.field, order: sortOrder })
+    setSortBy({ field: headerCell.field, order: sortOrder, type: headerCell.type })
   }
 
   const handleHeaderCellClick = (headerCell, sortableColumn) => {

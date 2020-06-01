@@ -46,7 +46,9 @@ export const Basic = () => {
     },
     {
       field: 'date',
-      content: 'Date'
+      content: 'Date',
+      type: 'date',
+      columnRender: data => data.toISOString().slice(0, 10)
     }
 
   ], [])
@@ -58,7 +60,7 @@ export const Basic = () => {
       firstname: 'Donte',
       location: 'Tel Aviv',
       weather: 30,
-      date: '20/01/2019',
+      date: new Date(2020, 1),
     },
     {
       id: '2',
@@ -66,7 +68,7 @@ export const Basic = () => {
       firstname: 'Cleo',
       location: 'Jerusalem',
       weather: 15,
-      date: '15/05/1998',
+      date: new Date(2020,2),
     },
     {
       id: '3',
@@ -74,7 +76,7 @@ export const Basic = () => {
       firstname: 'Rafael',
       location: 'Eilat',
       weather: 40,
-      date: '10/11/1989',
+      date: new Date(2020, 3),
     },
     {
       id: '4',
@@ -82,7 +84,7 @@ export const Basic = () => {
       firstname: 'Neelam',
       location: 'Haifa',
       weather: 25,
-      date: '04/12/2020',
+      date: new Date(2020, 4),
     },
     {
       id: '5',
@@ -90,7 +92,7 @@ export const Basic = () => {
       firstname: 'Carole',
       location: 'Tzfat',
       weather: 20,
-      date: '23/03/2009',
+      date: new Date(2020, 5),
     },
   ], [])
 
