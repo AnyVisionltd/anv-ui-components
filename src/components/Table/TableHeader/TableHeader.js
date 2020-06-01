@@ -1,14 +1,10 @@
 import React, { useContext, useEffect } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
+import { orderTypes } from "../../../utils/enums/common"
 import { ReactComponent as LongArrow } from '../../../assets/svg/LongArrow.svg'
 import TableContext from '../TableContext'
 import styles from './TableHeader.module.scss'
-
-const sortOrderTypes = {
-  ASC: 'asc',
-  DESC: 'desc',
-}
 
 const TableHeader = ({
   headers,
@@ -26,7 +22,7 @@ const TableHeader = ({
 
   const renderSortingIcon = field => {
     const activeSort = sortBy && sortBy.field === field
-    const activeSortOrder = activeSort && sortBy.order === sortOrderTypes.DESC
+    const activeSortOrder = activeSort && sortBy.order === orderTypes.DESC
     const classes = classNames(
       styles.sortingIcon,
       activeSort && styles.activeSort,
@@ -36,10 +32,10 @@ const TableHeader = ({
   }
 
   const sortColumn = headerCell => {
-    const sortOrder = headerCell.field === sortBy.field && sortBy.order === sortOrderTypes.ASC
-      ? sortOrderTypes.DESC
-      : sortOrderTypes.ASC
-    setSortBy({ field: headerCell.field, order: sortOrder })
+    const sortOrder = headerCell.field === sortBy.field && sortBy.order === orderTypes.ASC
+      ? orderTypes.DESC
+      : orderTypes.ASC
+    setSortBy({ field: headerCell.field, order: sortOrder, type: headerCell.type })
   }
 
   const handleHeaderCellClick = (headerCell, sortableColumn) => {

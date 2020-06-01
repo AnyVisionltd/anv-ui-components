@@ -286,7 +286,7 @@ SmartFilter.propTypes = {
   fields: propTypes.arrayOf(propTypes.shape({
     field: propTypes.string.isRequired,
     label: propTypes.string.isRequired,
-    type: propTypes.oneOf(['text', 'number']),
+    type: propTypes.oneOf(['text', 'number', 'date']),
     icon: propTypes.element,
   })),
   /** Callback when changed. */

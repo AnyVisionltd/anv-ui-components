@@ -1,29 +1,48 @@
 import { useMemo, useContext, useCallback } from 'react'
+import { numberSort, stringSort } from '../../../utils/sort'
 import TableContext from '../TableContext'
 
 const useTableData = () => {
   const { state } = useContext(TableContext)
-  const { data, controlled, filters } = state
+  const { data, controlled, filters, sort } = state
 
-  const filterData = useCallback(() => {
+  const filterData = useCallback(data => {
     return data.filter(row => {
       return filters.every(({ field, value }) => {
         if(field) {
-          return row[field].toLowerCase().includes(value)
+          return row[field].toString().toLowerCase().includes(value)
         } else {
-          return Object.values(row).some(cellValue => cellValue.toLowerCase().includes(value))
+          return Object.values(row).some(cellValue => cellValue.toString().toLowerCase().includes(value))
         }
       })
     })
-  }, [data, filters])
+  }, [filters])
 
-  return useMemo(() => {
-    if(controlled) {
+  const sortData = useCallback(data => {
+    if(!sort.sortBy.field) {
       return data
     }
 
-    return filterData()
-  }, [data, controlled, filterData])
+    const { field, order, type } = sort.sortBy
+    switch(type) {
+      case 'text':
+        return stringSort(data, field, order)
+      default:
+        return numberSort(data, field, order)
+    }
+  }, [sort])
+
+  return useMemo(() => {
+    let tableData = data
+    if(controlled) {
+      return tableData
+    }
+
+    tableData = filterData(tableData)
+    tableData = sortData(tableData)
+
+    return tableData
+  }, [data, controlled, sortData, filterData])
 
 }
 

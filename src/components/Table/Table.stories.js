@@ -1,32 +1,31 @@
 import React, { useMemo } from 'react'
-import { boolean, text } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import Table from './Table'
+import TableHeader from "./TableHeader/TableHeader"
+import TableBody from "./TableBody/TableBody"
+import TableSSF from "./TableSSF/TableSSF"
+import Sortable from "./Sortable/Sortable"
 import { Chip } from '../Chip'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
 
 export default {
   title: 'Components/Table',
   component: Table,
+  subcomponents: { TableHeader, TableBody, TableSSF, Sortable },
   decorators: [centerDecorator],
 }
 
-export const Playground = () => {
+export const Basic = () => {
   const headers = useMemo(() => [
     {
       field: 'firstname',
       content: 'First Name',
-      hide: boolean(' hide first name ', false),
-    },
-    {
-      field: 'lastname',
-      content: 'Last Name',
+      flexWidth: '200px',
     },
     {
       field: 'role',
       content: 'Role',
-      flexWidth: text('size role', '20%'),
     },
     {
       field: 'location',
@@ -41,9 +40,17 @@ export const Playground = () => {
         Weather
         <SunIcon style={ { marginLeft: '5px' } }/>
       </span>,
+      columnRender: data =>  `${data}°`,
       label: 'Weather',
       type: 'number'
+    },
+    {
+      field: 'date',
+      content: 'Date',
+      type: 'date',
+      columnRender: data => data.toISOString().slice(0, 10)
     }
+
   ], [])
 
   const data = useMemo(() => [
@@ -51,46 +58,41 @@ export const Playground = () => {
       id: '1',
       role: 'Admin',
       firstname: 'Donte',
-      lastname: 'Castaneda',
       location: 'Tel Aviv',
-      weather: '30°',
-      date: '20/01/2019',
+      weather: 30,
+      date: new Date(2020, 1),
     },
     {
       id: '2',
       role: 'User',
       firstname: 'Cleo',
-      lastname: 'Mcnamara',
       location: 'Jerusalem',
-      weather: '15°',
-      date: '15/05/1998',
+      weather: 15,
+      date: new Date(2020,2),
     },
     {
       id: '3',
       role: 'Admin',
       firstname: 'Rafael',
-      lastname: 'Andersen',
       location: 'Eilat',
-      weather: '40°',
-      date: '10/11/1989',
+      weather: 40,
+      date: new Date(2020, 3),
     },
     {
       id: '4',
       role: 'Operator',
       firstname: 'Neelam',
-      lastname: 'Harris',
       location: 'Haifa',
-      weather: '25°',
-      date: '04/12/2020',
+      weather: 25,
+      date: new Date(2020, 4),
     },
     {
       id: '5',
       role: 'Superator',
       firstname: 'Carole',
-      lastname: 'Howe',
       location: 'Tzfat',
-      weather: '20°',
-      date: '23/03/2009',
+      weather: 20,
+      date: new Date(2020, 5),
     },
   ], [])
 
@@ -102,23 +104,16 @@ export const Playground = () => {
   const style = { width: '80%' }
   return (
     <Table style={ style } controlled={ false }>
-      {
-        boolean('SSF', true)
-        && <Table.SSF onChange={ action('SSF changed') }/>
-      }
+      <Table.SSF onChange={ action('SSF changed') }/>
       <Table.Header
         headers={ headers }
         onHeaderCellClick={ action('header cell clicked') }
       />
       <Table.Body
         data={ data }
-        rowHeight={ text('row height', '56px') }
-        rowActions={ boolean('row actions', true) ? rowActions : null }
+        rowActions={ rowActions }
       />
-      {
-        boolean('sortable', true)
-        && <Table.Sortable onSortChange={ action('sort changed') } />
-      }
+      <Table.Sortable onSortChange={ action('sort changed') } />
     </Table>
   )
 }
