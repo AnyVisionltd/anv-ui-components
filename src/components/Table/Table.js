@@ -10,10 +10,10 @@ import UseTableReducer from './UseTableReducer'
 import styles from './Table.module.scss'
 
 const Table = ({
-                 controlled,
-                 children,
-                 className,
-                 ...otherProps
+  controlled,
+  children,
+  className,
+  ...otherProps
 }) => {
   const [state, actions] = UseTableReducer()
   const { setControlled } = actions

@@ -18,17 +18,17 @@ export const Default = () => {
   const handleCloseDialog = () => setDialogOpen(false)
 
   return (
-      <div>
-        <Button
-          aria-controls='menu-story-default'
-          aria-haspopup='true'
-          onClick={ handleOpenDialog }
-        >
+    <div>
+      <Button
+        aria-controls='menu-story-default'
+        aria-haspopup='true'
+        onClick={ handleOpenDialog }
+      >
           Open Dialog
-        </Button>
-        <Dialog className={ styles.dialogExample } isOpen={ isDialogOpen } onClose={ handleCloseDialog }>
+      </Button>
+      <Dialog className={ styles.dialogExample } isOpen={ isDialogOpen } onClose={ handleCloseDialog }>
           Click outside to close
-        </Dialog>
-      </div>
-    )
+      </Dialog>
+    </div>
+  )
 }

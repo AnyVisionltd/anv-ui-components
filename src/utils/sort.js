@@ -8,9 +8,9 @@ export const stringSort = (data, field, order) => data.sort((rowA, rowB) => {
 })
 
 export const numberSort = (data, field, order) => data.sort((rowA, rowB) => {
-    if (order === orderTypes.ASC) {
-      return rowB[field] - rowA[field]
-    }
-    return rowA[field] - rowB[field]
+  if (order === orderTypes.ASC) {
+    return rowB[field] - rowA[field]
   }
+  return rowA[field] - rowB[field]
+}
 )

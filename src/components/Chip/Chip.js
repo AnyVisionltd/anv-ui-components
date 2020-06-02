@@ -99,11 +99,11 @@ const Chip = ({
   const renderLabel = () => <span className={ styles.label }>{ label }</span>
 
   const classes = classNames(
-      styles.chip,
-      focusable && styles.focusable,
-      clickable && styles.clickable,
-      disabled && styles.disabled,
-      className,
+    styles.chip,
+    focusable && styles.focusable,
+    clickable && styles.clickable,
+    disabled && styles.disabled,
+    className,
   )
 
   return (
