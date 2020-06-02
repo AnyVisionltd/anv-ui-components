@@ -6,39 +6,39 @@ import { SSF } from '../../../index'
 import styles from './TableSSF.module.scss'
 
 const TableSSF = ({ onChange, className }) => {
-	const { state, setFilters } = useContext(TableContext)
-	const { headers } = state
+  const { state, setFilters } = useContext(TableContext)
+  const { headers } = state
 
-	const fields = useMemo(() => headers.map(headers => ({
-		field: headers.field,
-		label: headers.label || headers.content,
-		...(headers.type  && { type: headers.type })
-	})
-	)
-	, [headers])
+  const fields = useMemo(() => headers.map(headers => ({
+    field: headers.field,
+    label: headers.label || headers.content,
+    ...(headers.type  && { type: headers.type })
+  })
+  )
+  , [headers])
 
-	const handleOnChange = filters => {
-		onChange(filters)
-		setFilters(filters)
-	}
+  const handleOnChange = filters => {
+    onChange(filters)
+    setFilters(filters)
+  }
 
-	const classes = classNames(
-		styles.TableSSF,
-		className
-	)
+  const classes = classNames(
+    styles.TableSSF,
+    className
+  )
 
-	return <SSF className={ classes } fields={ fields } onChange={ handleOnChange }/>
+  return <SSF className={ classes } fields={ fields } onChange={ handleOnChange }/>
 }
 
 TableSSF.defaultProps = {
-	onChange: () => {}
+  onChange: () => {}
 }
 
 TableSSF.propTypes = {
-	/** Callback fired when filters changed. */
-	onChange: propTypes.func,
-	/** For css customization. */
-	className: propTypes.string,
+  /** Callback fired when filters changed. */
+  onChange: propTypes.func,
+  /** For css customization. */
+  className: propTypes.string,
 }
 
 export default TableSSF

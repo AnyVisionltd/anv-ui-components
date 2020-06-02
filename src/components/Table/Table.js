@@ -11,43 +11,43 @@ import UseTableReducer from './UseTableReducer'
 import styles from './Table.module.scss'
 
 const Table = ({
-	selfControlled,
-	children,
-	className,
-	...otherProps
+  selfControlled,
+  children,
+  className,
+  ...otherProps
 }) => {
-	const [state, actions] = UseTableReducer()
-	const { setSelfControlled } = actions
+  const [state, actions] = UseTableReducer()
+  const { setSelfControlled } = actions
 
-	useEffect(() => {
-		setSelfControlled(selfControlled)
-	}, [selfControlled, setSelfControlled])
+  useEffect(() => {
+    setSelfControlled(selfControlled)
+  }, [selfControlled, setSelfControlled])
 
-	const classes = classNames(
-		styles.table,
-		className,
-	)
+  const classes = classNames(
+    styles.table,
+    className,
+  )
 
-	return (
-		<TableContext.Provider value={ { state, ...actions } }>
-			<div className={ classes } { ...otherProps }>
-				{ children }
-			</div>
-		</TableContext.Provider>
-	)
+  return (
+    <TableContext.Provider value={ { state, ...actions } }>
+      <div className={ classes } { ...otherProps }>
+        { children }
+      </div>
+    </TableContext.Provider>
+  )
 }
 
 Table.defaultProps = {
-	selfControlled: false
+  selfControlled: false
 }
 
 Table.propTypes = {
-	/** If true, SSF, Sort, etc.. controlled by the table component */
-	selfControlled: propTypes.bool,
-	/** For css customization. */
-	className: propTypes.string,
-	/** Table components */
-	children: propTypes.node,
+  /** If true, SSF, Sort, etc.. controlled by the table component */
+  selfControlled: propTypes.bool,
+  /** For css customization. */
+  className: propTypes.string,
+  /** Table components */
+  children: propTypes.node,
 }
 
 Table.Body = TableBody

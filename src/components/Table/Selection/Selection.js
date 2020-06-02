@@ -3,30 +3,30 @@ import propTypes from 'prop-types'
 import TableContext from '../TableContext'
 
 const Selection = ({
-	onSelectionChange,
+  onSelectionChange,
 }) => {
-	const { state, setSelectionActivity } = useContext(TableContext)
-	const { items, subtractionMode } = state.selection
+  const { state, setSelectionActivity } = useContext(TableContext)
+  const { items, subtractionMode } = state.selection
 
-	useEffect(() => {
-		onSelectionChange({ items, subtractionMode })
-	}, [onSelectionChange, items, subtractionMode])
+  useEffect(() => {
+    onSelectionChange({ items, subtractionMode })
+  }, [onSelectionChange, items, subtractionMode])
 
-	useEffect(() => {
-		setSelectionActivity(true)
-	}, [setSelectionActivity])
+  useEffect(() => {
+    setSelectionActivity(true)
+  }, [setSelectionActivity])
 
-	return <></>
+  return <></>
 }
 
 Selection.defaultProps = {
-	onSelectionChange: () => {
-	},
+  onSelectionChange: () => {
+  },
 }
 
 Selection.propTypes = {
-	/** Callback fire when selection changed */
-	onSelectionChange: propTypes.func,
+  /** Callback fire when selection changed */
+  onSelectionChange: propTypes.func,
 }
 
 export default Selection
