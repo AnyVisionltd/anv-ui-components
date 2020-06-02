@@ -1,0 +1,25 @@
+@import "~@anyvision/style-guide";
+
+.dialog {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0 av-space(medium);
+  border-radius: av-radius(base);
+  background-color: av-color(surface);
+  color: av-color(content);
+  z-index: 1;
+}
+
+.backdrop {
+  top: 0;
+  right: 0;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: av-color(secondary);
+  opacity: av-opacity(medium);
+  backdrop-filter: blur(1px);
+  z-index: 1;
+}
