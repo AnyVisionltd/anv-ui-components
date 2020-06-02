@@ -1,33 +1,25 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 import { Portal } from '../Portal'
 import { Scale } from '../Animations/ScaleAnimation'
-import { useClickOutsideListener } from '../../hooks/UseClickOutsideListener'
 import styles from './Dialog.module.scss'
 
 
-const Dialog = ({ isOpen, className, onClose, children, ...otherProps }) => {
-
-  const menuWrapperRef = useRef()
+const Dialog = ({ isOpen, className, onClose, disableBackdropClick, children, ...otherProps }) => {
 
   const classes = classNames(
     styles.dialog,
     className,
   )
 
-  useClickOutsideListener(event => {
-    if (!isOpen) {
-      return
-    }
-    onClose(event)
-  }, menuWrapperRef)
+  const onBackdropClick = event => !disableBackdropClick ? onClose(event) : null
 
   return (
     <Portal containerId="dialog-container">
-      { isOpen && <div className={ styles.backdrop }/> }
+      { isOpen && <div className={ styles.backdrop } onClick={ onBackdropClick } data-testid={ 'backdrop' }/> }
       <Scale isOpen={ isOpen }>
-        <div className={ classes } ref={ menuWrapperRef } { ...otherProps }>
+        <div className={ classes } { ...otherProps } data-testid={ 'dialog' }>
           { children }
         </div>
       </Scale>
@@ -37,7 +29,8 @@ const Dialog = ({ isOpen, className, onClose, children, ...otherProps }) => {
 
 Dialog.defaultProps = {
   isOpen: false,
-  onClose: () => {}
+  onClose: () => {},
+  disableBackdropClick: false
 }
 
 Dialog.propTypes = {
@@ -48,7 +41,9 @@ Dialog.propTypes = {
   /** Should the dialog appear on screen or not */
   isOpen: propTypes.bool.isRequired,
   /** A callback triggered whenever the menu is closed */
-  onClose: propTypes.func
+  onClose: propTypes.func,
+  /** Disable onClose firing when backdrop is clicked */
+  disableBackdropClick: propTypes.bool
 }
 
 export default Dialog

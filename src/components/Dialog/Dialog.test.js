@@ -1,40 +1,39 @@
 import React from 'react'
-import { fireEvent, render } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import Dialog from './Dialog'
 
 
 describe('<Dialog />', () => {
   it('should render dialog and backdrop when isOpen', () => {
-    const { container } = render(<Dialog isOpen/>)
-    expect(container.querySelector('.dialog')).not.toEqual(null)
-    expect(container.querySelector('.backdrop')).not.toEqual(null)
+    const { queryByTestId } = render(<Dialog isOpen/>)
+    expect(queryByTestId('dialog')).not.toEqual(null)
+    expect(queryByTestId('backdrop')).not.toEqual(null)
   })
 
   it('should not render dialog and backdrop when not isOpen', () => {
-    const { container } = render(<Dialog />)
-    expect(container.querySelector('.dialog')).toEqual(null)
-    expect(container.querySelector('.backdrop')).toEqual(null)
+    const { queryByTestId } = render(<Dialog />)
+    expect(queryByTestId('dialog')).toEqual(null)
+    expect(queryByTestId('backdrop')).toEqual(null)
   })
 
   it('should render children into dialog', () => {
-    const { container } = render(<Dialog isOpen><div className={ 'test-child' }/></Dialog>)
-    const dialog = container.querySelector('.dialog')
-    expect(dialog.firstChild.className).toEqual('test-child')
+    const { queryByTestId } = render(<Dialog isOpen><div data-testid={ 'test-child' }/></Dialog>)
+    expect(queryByTestId('test-child')).not.toEqual(null)
   })
 
   it('should call onClose when clicked outside the dialog', () => {
     const onClose = jest.fn()
-    const { getByText } = render(
-      <>
-        <div>This is outside the dialog</div>
-        <Dialog isOpen onClose={ onClose }>This is inside the dialog</Dialog>
-      </>
-    )
-    const insideNode = getByText('This is inside the dialog')
-    fireEvent.mouseUp(insideNode)
+    const { queryByTestId } = render(<Dialog isOpen onClose={ onClose } />)
+    queryByTestId('dialog').click()
     expect(onClose).not.toBeCalled()
-    const outsideNode = getByText('This is outside the dialog')
-    fireEvent.mouseUp(outsideNode)
+    queryByTestId('backdrop').click()
     expect(onClose).toBeCalled()
+  })
+
+  it('should not call onClose when clicked outside the dialog when backdrop click is disabled ', () => {
+    const onClose = jest.fn()
+    const { queryByTestId } = render(<Dialog isOpen disableBackdropClick onClose={ onClose } />)
+    queryByTestId('backdrop').click()
+    expect(onClose).not.toBeCalled()
   })
 })
