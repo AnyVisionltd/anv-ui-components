@@ -6,13 +6,14 @@ import TableHeader from "./TableHeader/TableHeader"
 import TableBody from "./TableBody/TableBody"
 import TableSSF from "./TableSSF/TableSSF"
 import Sortable from "./Sortable/Sortable"
+import Selection from "./Selection/Selection"
 import { Chip } from '../Chip'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
 
 export default {
   title: 'Components/Table',
   component: Table,
-  subcomponents: { TableHeader, TableBody, TableSSF, Sortable },
+  subcomponents: { TableHeader, TableBody, TableSSF, Sortable, Selection },
   decorators: [centerDecorator],
 }
 
