@@ -27,11 +27,7 @@ const TableBody = ({
   }, [setData, data])
 
   useEffect(() => {
-    if (selfControlled) {
-	  setTotalItems(data.length)
-    } else {
-	  setTotalItems(totalItems)
-    }
+    setTotalItems(selfControlled ? data.length : totalItems)
   }, [data, totalItems, selfControlled, setTotalItems])
 
   useEffect(() => {
@@ -96,10 +92,7 @@ const TableBody = ({
 	  return null
     }
     let isSelected = selection.items.some(row1 => row1 === row)
-    if (exceptMode) {
-	  isSelected = !isSelected
-    }
-    return isSelected
+    return exceptMode ? !isSelected : isSelected
   }
 
   const renderSelection = (row, isSelected) => (
@@ -107,7 +100,7 @@ const TableBody = ({
 	  role="cell"
 	  className={ styles.selectionCell }
     >
-	  <Checkbox className={ styles.selectedCheckbox } onChange={ () => toggleSelectedItem(row, isSelected) }
+	  <Checkbox onChange={ () => toggleSelectedItem(row, isSelected) }
         checked={ isSelected }/>
     </div>
   )

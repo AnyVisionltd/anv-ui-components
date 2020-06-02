@@ -23,6 +23,21 @@ const initialState = {
   },
 }
 
+const toggleSelection = (selection, totalItems, payload) => {
+  const { exceptMode, items } = selection
+  const { item, isSelected } = payload
+  if((exceptMode === isSelected)) {
+    if(items.length + 1 === totalItems) {
+      return { items: [] , exceptMode: !exceptMode }
+    }
+    return { items: [...items, item] , exceptMode: exceptMode }
+  }
+  return {
+    items: items.filter(item => item !== payload.item),
+    exceptMode: exceptMode
+  }
+}
+
 const reducer = (state, action) => {
   switch (action.type) {
   case actionTypes.SET_HEADERS:
@@ -40,17 +55,8 @@ const reducer = (state, action) => {
   case actionTypes.SET_SELECTION:
     return { ...state, selection: { ...state.selection, items: action.payload.items, exceptMode: action.payload.exceptMode } }
   case actionTypes.TOGGLE_SELECTED_ITEM:
-    let items
-    if((!state.selection.exceptMode && !action.payload.isSelected) ||
-	  (action.payload.isSelected && state.selection.exceptMode)) {
-	  if(state.selection.items.length + 1 === state.totalItems) {
-        return { ...state, selection: { ...state.selection, exceptMode: !state.selection.exceptMode, items: [] } }
-	  }
-      items = [...state.selection.items, action.payload.item]
-    } else {
-	  items = state.selection.items.filter(item => item !== action.payload.item )
-    }
-    return { ...state, selection: { ...state.selection, items } }
+    const selection = toggleSelection(state.selection, state.totalItems, action.payload)
+    return { ...state, selection: { ...state.selection, items: selection.items, exceptMode: selection.exceptMode } }
   case actionTypes.TOGGLE_SELECT_ALL:
     const exceptMode = !(state.selection.exceptMode || state.selection.items.length)
     return { ...state, selection: { ...state.selection, exceptMode, items: [] } }
