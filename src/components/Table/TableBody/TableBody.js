@@ -27,7 +27,7 @@ const TableBody = ({
   }, [setData, data])
 
   useEffect(() => {
-    if(selfControlled) {
+    if (selfControlled) {
 	  setTotalItems(data.length)
     } else {
 	  setTotalItems(totalItems)
@@ -92,10 +92,10 @@ const TableBody = ({
 
   const renderSelection = row => {
     const { isActive, subtractionMode } = selection
-    if(!isActive) {
-      return null
+    if (!isActive) {
+	  return null
     }
-    const isSelected = subtractionMode ? !selection.items.some(row1 => row1 === row): selection.items.some(row1 => row1 === row)
+    const isSelected = subtractionMode ? !selection.items.some(row1 => row1 === row) : selection.items.some(row1 => row1 === row)
     return (
 	  <div
         role="cell"
