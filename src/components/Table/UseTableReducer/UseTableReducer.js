@@ -26,7 +26,8 @@ const initialState = {
 const toggleSelection = (selection, totalItems, payload) => {
   const { exceptMode, items } = selection
   const { item, isSelected } = payload
-  if((exceptMode === isSelected)) {
+  const addItem = exceptMode === isSelected
+  if(addItem) {
     if(items.length + 1 === totalItems) {
       return { items: [] , exceptMode: !exceptMode }
     }
