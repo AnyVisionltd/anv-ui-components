@@ -655,6 +655,27 @@ exports[`Storyshots Components/Chip Variants 1`] = `
 </div>
 `;
 
+exports[`Storyshots Components/Dialog Default 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div>
+      <button
+        aria-controls="menu-story-default"
+        aria-haspopup="true"
+        className="button large fill"
+        disabled={false}
+        onClick={[Function]}
+      >
+        Open Dialog
+      </button>
+      <portal-for-test />
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Components/IconButton Default 1`] = `
 <div>
   <div
