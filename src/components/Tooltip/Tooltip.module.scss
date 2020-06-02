@@ -1,0 +1,10 @@
+@import '~@anyvision/style-guide';
+
+.popperContainer{
+  @include av-elevation(overlay);
+  background-color: av-color(secondary);
+  padding: av-space(tiny);
+  border-radius: av-radius(tidy);
+  color: av-color(purewhite);
+  font-size: av-font-size(tiny);
+}

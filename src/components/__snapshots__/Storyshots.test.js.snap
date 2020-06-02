@@ -1843,3 +1843,23 @@ exports[`Storyshots Components/Table Basic 1`] = `
   </div>
 </div>
 `;
+
+exports[`Storyshots Components/Tooltip Default 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <h6
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+      >
+        Hover over me
+      </h6>
+    </div>
+  </div>
+</div>
+`;
