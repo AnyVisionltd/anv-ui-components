@@ -19,12 +19,6 @@
   }
 }
 
-.selectedRow {
-  color: av-color(purewhite);
-  fill: currentColor;
-  background-color: av-color(primary);
-}
-
 .tableCell {
   box-sizing: border-box;
   display: flex;
@@ -36,6 +30,10 @@
   padding-left: av-space();
 }
 
+.selectionCell {
+  margin-left: av-space(tiny);
+}
+
 .actionsCell {
   display: flex;
   align-items: center;
@@ -45,4 +43,8 @@
   .actionButton {
     color: av-color(content)
   }
+}
+
+.selectedRow {
+  background-color: av-color(primary, av-opacity(divider));
 }

@@ -4,7 +4,7 @@ import TableContext from '../TableContext'
 
 const useTableData = () => {
   const { state } = useContext(TableContext)
-  const { data, controlled, filters, sort } = state
+  const { data, selfControlled, filters, sort } = state
 
   const filterData = useCallback(data => {
     return data.filter(row => {
@@ -34,7 +34,7 @@ const useTableData = () => {
 
   return useMemo(() => {
     let tableData = data
-    if(controlled) {
+    if(!selfControlled) {
       return tableData
     }
 
@@ -42,7 +42,7 @@ const useTableData = () => {
     tableData = sortData(tableData)
 
     return tableData
-  }, [data, controlled, sortData, filterData])
+  }, [data, selfControlled, sortData, filterData])
 
 }
 
