@@ -79,7 +79,7 @@ const TableHeader = ({
   }
 
   const renderSelection = () => {
-    const { isActive, subtractionMode, items } = selection
+    const { isActive, exceptMode, items } = selection
     if (!isActive) {
 	  return null
     }
@@ -88,7 +88,7 @@ const TableHeader = ({
         role={ 'cell' }
         className={ styles.selectionCell }>
         <Checkbox
-		  checked={ subtractionMode && !items.length }
+		  checked={ exceptMode && !items.length }
 		  indeterminate={ !!items.length }
 		  onChange={ toggleSelectAll }
         />

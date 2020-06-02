@@ -11,7 +11,7 @@ const initialState = {
   selection: {
     isActive: false,
     items: [],
-    subtractionMode: false,
+    exceptMode: false,
   },
   sort: {
     sortable: false,
@@ -39,10 +39,10 @@ const reducer = (state, action) => {
     return { ...state, selection: { ...state.selection, isActive: action.payload } }
   case actionTypes.TOGGLE_SELECTED_ITEM:
     let items
-    if((!state.selection.subtractionMode && !action.payload.isSelected) ||
-	  (action.payload.isSelected && state.selection.subtractionMode)) {
+    if((!state.selection.exceptMode && !action.payload.isSelected) ||
+	  (action.payload.isSelected && state.selection.exceptMode)) {
 	  if(state.selection.items.length + 1 === state.totalItems) {
-        return { ...state, selection: { ...state.selection, subtractionMode: !state.selection.subtractionMode, items: [] } }
+        return { ...state, selection: { ...state.selection, exceptMode: !state.selection.exceptMode, items: [] } }
 	  }
       items = [...state.selection.items, action.payload.item]
     } else {
@@ -50,8 +50,8 @@ const reducer = (state, action) => {
     }
     return { ...state, selection: { ...state.selection, items } }
   case actionTypes.TOGGLE_SELECT_ALL:
-    const subtractionMode = !(state.selection.subtractionMode || state.selection.items.length)
-    return { ...state, selection: { ...state.selection, subtractionMode, items: [] } }
+    const exceptMode = !(state.selection.exceptMode || state.selection.items.length)
+    return { ...state, selection: { ...state.selection, exceptMode, items: [] } }
   case actionTypes.SET_SORTABLE:
     return { ...state, sort: { ...state.sort, sortable: action.payload } }
   case actionTypes.SET_FILTERS:

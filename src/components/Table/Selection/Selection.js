@@ -6,11 +6,11 @@ const Selection = ({
   onSelectionChange,
 }) => {
   const { state, setSelectionActivity } = useContext(TableContext)
-  const { items, subtractionMode } = state.selection
+  const { items, exceptMode } = state.selection
 
   useEffect(() => {
-    onSelectionChange({ items, subtractionMode })
-  }, [onSelectionChange, items, subtractionMode])
+    onSelectionChange({ items, exceptMode })
+  }, [onSelectionChange, items, exceptMode])
 
   useEffect(() => {
     setSelectionActivity(true)

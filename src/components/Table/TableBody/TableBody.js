@@ -90,25 +90,31 @@ const TableBody = ({
     )
   }
 
-  const renderSelection = row => {
-    const { isActive, subtractionMode } = selection
+  const isRowSelected = row => {
+    const { isActive, exceptMode } = selection
     if (!isActive) {
 	  return null
     }
-    const isSelected = subtractionMode ? !selection.items.some(row1 => row1 === row) : selection.items.some(row1 => row1 === row)
-    return (
-	  <div
-        role="cell"
-        className={ styles.selectionCell }
-	  >
-        <Checkbox onChange={ () => toggleSelectedItem(row, isSelected) } checked={ isSelected }/>
-	  </div>
-    )
+    let isSelected = selection.items.some(row1 => row1 === row)
+    if (exceptMode) {
+	  isSelected = !isSelected
+    }
+    return isSelected
   }
 
-  const renderRow = row => (
+  const renderSelection = (row, isSelected) => (
+    <div
+	  role="cell"
+	  className={ styles.selectionCell }
+    >
+	  <Checkbox className={ styles.selectedCheckbox } onChange={ () => toggleSelectedItem(row, isSelected) }
+        checked={ isSelected }/>
+    </div>
+  )
+
+  const renderRow = (row, isSelected) => (
     <>
-	  { renderSelection(row) }
+	  { renderSelection(row, isSelected) }
 	  { headers.map(({
         field, columnRender, hide, flexWidth,
 	  }) => {
@@ -129,7 +135,8 @@ const TableBody = ({
 
   const renderTableRows = () => (
     tableData.map((row, index) => {
-	  const tableRowClassNames = classNames(styles.tableRow, { [styles.selectedRow]: false })
+	  const isSelected = isRowSelected(row)
+	  const tableRowClassNames = classNames(styles.tableRow, { [styles.selectedRow]: isSelected })
 	  return (
         <div
 		  role="row"
@@ -137,7 +144,7 @@ const TableBody = ({
 		  className={ tableRowClassNames }
 		  key={ index }
         >
-		  { renderRow(row) }
+		  { renderRow(row, isSelected) }
         </div>
 	  )
     })
