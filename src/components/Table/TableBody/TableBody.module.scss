@@ -36,6 +36,10 @@
   padding-left: av-space();
 }
 
+.selectionCell {
+  margin-left: av-space(tiny);
+}
+
 .actionsCell {
   display: flex;
   align-items: center;

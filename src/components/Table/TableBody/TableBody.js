@@ -1,158 +1,185 @@
 import React, { useState, useContext, useEffect } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import { IconButton, Menu } from '../../../index'
+import { IconButton, Menu, Checkbox } from '../../../index'
 import { ReactComponent as SunIcon } from '../../../assets/svg/Options.svg'
 import TableContext from '../TableContext'
 import { useTableData } from "../UseTableData"
 import styles from './TableBody.module.scss'
 
 const TableBody = ({
-  data,
-  rowHeight,
-  rowActions,
-  className,
-  ...otherProps
+	data,
+	totalItems,
+	rowHeight,
+	rowActions,
+	className,
+	...otherProps
 }) => {
-  const { state, setData, setWithRowActions } = useContext(TableContext)
-  const { headers } = state
+	const { state, setData, setWithRowActions, toggleSelectedItem, setTotalItems } = useContext(TableContext)
+	const { headers, selection, selfControlled } = state
 
-  const tableData = useTableData()
+	const tableData = useTableData()
 
-  const [actionsAnchorElement, setActionsAnchorElement] = useState(null)
+	const [actionsAnchorElement, setActionsAnchorElement] = useState(null)
 
-  useEffect(() => {
-    setData(data)
-  }, [setData, data])
+	useEffect(() => {
+		setData(data)
+	}, [setData, data])
 
-  useEffect(() => {
-    setWithRowActions(!!rowActions)
-  }, [setWithRowActions, rowActions])
+	useEffect(() => {
+		if(selfControlled) {
+	  setTotalItems(data.length)
+		} else {
+	  setTotalItems(totalItems)
+		}
+	}, [data, totalItems, selfControlled, setTotalItems])
 
-  const handleActionsClick = event => {
-    setActionsAnchorElement(actionsAnchorElement ? null : event.currentTarget)
-  }
+	useEffect(() => {
+		setWithRowActions(!!rowActions)
+	}, [setWithRowActions, rowActions])
 
-  const handleActionsClose = () => {
-    setActionsAnchorElement(null)
-  }
+	const handleActionsClick = event => {
+		setActionsAnchorElement(actionsAnchorElement ? null : event.currentTarget)
+	}
 
-  const handleMenuItemClick = (row, onClick) => {
-    handleActionsClose()
-    onClick(row)
-  }
+	const handleActionsClose = () => {
+		setActionsAnchorElement(null)
+	}
 
-  const renderActions = row => {
-    if (!rowActions) {
-      return
-    }
-    return (
-      <>
-        <Menu
-          anchorElement={ actionsAnchorElement }
-          isOpen={ !!actionsAnchorElement }
-          preferOpenDirection="down-start"
-          onClose={ handleActionsClose }
-        >
-          {
-            rowActions.map(({ content, onClick }, index) => (
-              <Menu.Item
-                key={ index }
-                onClick={ () => handleMenuItemClick(row, onClick) }
-              >
-                { content }
-              </Menu.Item>
-            ))
-          }
-        </Menu>
-        <div
-          role="cell"
-          className={ styles.actionsCell }
-        >
-          <IconButton
-            className={ styles.actionButton }
-            variant="ghost"
-            onClick={ handleActionsClick }
-          >
-            <SunIcon />
-          </IconButton>
-        </div>
-      </>
-    )
-  }
+	const handleMenuItemClick = (row, onClick) => {
+		handleActionsClose()
+		onClick(row)
+	}
 
-  const renderRow = row => (
-    <>
-      { /* { renderCheckbox(row) } */ }
-      { headers.map(({
-        field, columnRender, hide, flexWidth,
-      }) => {
-        if (hide) {
-          return null
-        }
-        const style = flexWidth ? { flex: `0 0 ${flexWidth}` } : {}
-        return (
-          <div role="cell" style={ style } className={ styles.tableCell } key={ field }>
-            { columnRender ? columnRender(row[field], row) : row[field] }
-          </div>
-        )
-      }) }
-      { /* { renderDynamicColumnPlaceholder() } */ }
-      { renderActions(row) }
-    </>
-  )
+	const renderActions = row => {
+		if (!rowActions) {
+	  return
+		}
+		return (
+	  <>
+				<Menu
+		  anchorElement={ actionsAnchorElement }
+		  isOpen={ !!actionsAnchorElement }
+		  preferOpenDirection="down-start"
+		  onClose={ handleActionsClose }
+				>
+		  {
+						rowActions.map(({ content, onClick }, index) => (
+			  <Menu.Item
+								key={ index }
+								onClick={ () => handleMenuItemClick(row, onClick) }
+			  >
+								{ content }
+			  </Menu.Item>
+						))
+		  }
+				</Menu>
+				<div
+		  role="cell"
+		  className={ styles.actionsCell }
+				>
+		  <IconButton
+						className={ styles.actionButton }
+						variant="ghost"
+						onClick={ handleActionsClick }
+		  >
+						<SunIcon/>
+		  </IconButton>
+				</div>
+	  </>
+		)
+	}
 
-  const renderTableRows = () => (
-    tableData.map((row, index) => {
-      const tableRowClassNames = classNames(styles.tableRow, { [styles.selectedRow]: false })
-      return (
-        <div
-          role="row"
-          style={ { height: rowHeight } }
-          className={ tableRowClassNames }
-          key={ index }
-        >
-          { renderRow(row) }
-        </div>
-      )
-    })
-  )
+	const renderSelection = row => {
+		const { isActive, subtractionMode } = selection
+		if(!isActive) {
+			return null
+		}
+		const isSelected = subtractionMode ? !selection.items.some(row1 => row1 === row): selection.items.some(row1 => row1 === row)
+		return (
+	  <div
+				role="cell"
+				className={ styles.selectionCell }
+	  >
+				<Checkbox onChange={ () => toggleSelectedItem(row, isSelected) } checked={ isSelected }/>
+	  </div>
+		)
+	}
 
-  const classes = classNames(
-    styles.tableBody,
-    className,
-  )
+	const renderRow = row => (
+		<>
+	  { renderSelection(row) }
+	  { headers.map(({
+				field, columnRender, hide, flexWidth,
+	  }) => {
+				if (hide) {
+		  return null
+				}
+				const style = flexWidth ? { flex: `0 0 ${flexWidth}` } : {}
+				return (
+		  <div role="cell" style={ style } className={ styles.tableCell } key={ field }>
+						{ columnRender ? columnRender(row[field], row) : row[field] }
+		  </div>
+				)
+	  }) }
+	  { /* { renderDynamicColumnPlaceholder() } */ }
+	  { renderActions(row) }
+		</>
+	)
 
-  return (
-    <div
-      className={ classes }
-      { ...otherProps }
-    >
-      { renderTableRows() }
-    </div>
-  )
+	const renderTableRows = () => (
+		tableData.map((row, index) => {
+	  const tableRowClassNames = classNames(styles.tableRow, { [styles.selectedRow]: false })
+	  return (
+				<div
+		  role="row"
+		  style={ { height: rowHeight } }
+		  className={ tableRowClassNames }
+		  key={ index }
+				>
+		  { renderRow(row) }
+				</div>
+	  )
+		})
+	)
+
+	const classes = classNames(
+		styles.tableBody,
+		className,
+	)
+
+	return (
+		<div
+	  className={ classes }
+	  { ...otherProps }
+		>
+	  { renderTableRows() }
+		</div>
+	)
 }
 
 TableBody.defaultProps = {
-  rowHeight: '56px',
+	rowHeight: '56px',
 }
 
 TableBody.propTypes = {
-  /**  Each object represent row in the table. The rows rely on <code>headers</code>,
+	/**  Each object represent row in the table. The rows rely on <code>headers</code>,
    *  <code>prop</code> from <code><Table.Header/></code> component.
    *  */
-  data: propTypes.arrayOf(propTypes.object).isRequired,
-  /** The row height. <code>min-height: 48px</code>. */
-  rowHeight: propTypes.string,
-  /** If pass, render action menu at the end of each row. */
-  rowActions: propTypes.arrayOf(propTypes.shape({
-    /** The content to render inside the <Menu.Items/>. */
-    content: propTypes.node,
-    /** The callback when click the <Menu.Items/> */
-    onClick: propTypes.func,
-  })),
-  /** For css customization. */
-  className: propTypes.string,
+	data: propTypes.arrayOf(propTypes.object).isRequired,
+	/** The number of items. required when not self controlled*/
+	totalItems: propTypes.number,
+	/** The row height. <code>min-height: 48px</code>. */
+	rowHeight: propTypes.string,
+	/** If pass, render action menu at the end of each row. */
+	rowActions: propTypes.arrayOf(propTypes.shape({
+	/** The content to render inside the <Menu.Items/>. */
+		content: propTypes.node,
+		/** The callback when click the <Menu.Items/> */
+		onClick: propTypes.func,
+	})),
+	/** For css customization. */
+	className: propTypes.string,
 }
 
 export default TableBody
