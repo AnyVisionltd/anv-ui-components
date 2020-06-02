@@ -27,8 +27,54 @@ export const Default = () => {
           Open Dialog
         </Button>
         <Dialog className={ styles.dialogExample } isOpen={ isDialogOpen } onClose={ handleCloseDialog }>
-          Click outside to close
+          Click outside or press escape to close
         </Dialog>
       </div>
     )
+}
+
+export const ClickOutsideDisabled = () => {
+
+  const [isDialogOpen, setDialogOpen] = useState(false)
+
+  const handleOpenDialog = () => setDialogOpen(true)
+  const handleCloseDialog = () => setDialogOpen(false)
+
+  return (
+    <div>
+      <Button
+        aria-controls='menu-story-default'
+        aria-haspopup='true'
+        onClick={ handleOpenDialog }
+      >
+        Open Dialog
+      </Button>
+      <Dialog className={ styles.dialogExample } isOpen={ isDialogOpen } onClose={ handleCloseDialog } disableBackdropClick>
+        Press escape to close
+      </Dialog>
+    </div>
+  )
+}
+
+export const EscapeDisabled = () => {
+
+  const [isDialogOpen, setDialogOpen] = useState(false)
+
+  const handleOpenDialog = () => setDialogOpen(true)
+  const handleCloseDialog = () => setDialogOpen(false)
+
+  return (
+    <div>
+      <Button
+        aria-controls='menu-story-default'
+        aria-haspopup='true'
+        onClick={ handleOpenDialog }
+      >
+        Open Dialog
+      </Button>
+      <Dialog className={ styles.dialogExample } isOpen={ isDialogOpen } onClose={ handleCloseDialog } disableEscapeKeyDown>
+        Click outside to close
+      </Dialog>
+    </div>
+  )
 }

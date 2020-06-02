@@ -2,6 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 import keymap from '../../utils/enums/keymap'
+import { DialogHeader } from './DialogHeader'
 import { Portal } from '../Portal'
 import { Scale } from '../Animations/ScaleAnimation'
 import { UseKeyDownListener } from '../../hooks/UseKeyDownListener'
@@ -46,7 +47,7 @@ Dialog.defaultProps = {
 }
 
 Dialog.propTypes = {
-  /** For css customization. */
+  /** For css customization */
   className: propTypes.string,
   /** Dialog components */
   children: propTypes.node,
@@ -59,5 +60,7 @@ Dialog.propTypes = {
   /** Disable onClose firing when escape button is clicked */
   disableEscapeKeyDown: propTypes.bool
 }
+
+Dialog.DialogHeader = DialogHeader
 
 export default Dialog

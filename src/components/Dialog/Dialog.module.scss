@@ -10,6 +10,9 @@
   background-color: av-color(surface);
   color: av-color(content);
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .backdrop {
