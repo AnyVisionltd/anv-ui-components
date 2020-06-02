@@ -1,12 +1,14 @@
 import React from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
+import keymap from '../../utils/enums/keymap'
 import { Portal } from '../Portal'
 import { Scale } from '../Animations/ScaleAnimation'
+import { UseKeyDownListener } from '../../hooks/UseKeyDownListener'
 import styles from './Dialog.module.scss'
 
 
-const Dialog = ({ isOpen, className, onClose, disableBackdropClick, children, ...otherProps }) => {
+const Dialog = ({ isOpen, className, onClose, disableBackdropClick, disableEscapeKeyDown, children, ...otherProps }) => {
 
   const classes = classNames(
     styles.dialog,
@@ -14,6 +16,15 @@ const Dialog = ({ isOpen, className, onClose, disableBackdropClick, children, ..
   )
 
   const onBackdropClick = event => !disableBackdropClick ? onClose(event) : null
+
+  const onEscapeKeyDown = event => {
+    event.stopPropagation()
+    if (!disableEscapeKeyDown) {
+      onClose(event)
+    }
+  }
+
+  UseKeyDownListener({ [keymap.ESCAPE]: onEscapeKeyDown })
 
   return (
     <Portal containerId="dialog-container">
@@ -30,7 +41,8 @@ const Dialog = ({ isOpen, className, onClose, disableBackdropClick, children, ..
 Dialog.defaultProps = {
   isOpen: false,
   onClose: () => {},
-  disableBackdropClick: false
+  disableBackdropClick: false,
+  disableEscapeKeyDown: false
 }
 
 Dialog.propTypes = {
@@ -43,7 +55,9 @@ Dialog.propTypes = {
   /** A callback triggered whenever the menu is closed */
   onClose: propTypes.func,
   /** Disable onClose firing when backdrop is clicked */
-  disableBackdropClick: propTypes.bool
+  disableBackdropClick: propTypes.bool,
+  /** Disable onClose firing when escape button is clicked */
+  disableEscapeKeyDown: propTypes.bool
 }
 
 export default Dialog
