@@ -16,6 +16,6 @@ module.exports = {
     'arrow-parens': ["error", "as-needed"],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "indent": ["error", 'tab']
+    "indent": ["error", 2]
   },
 };
