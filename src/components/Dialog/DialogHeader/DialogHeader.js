@@ -17,7 +17,7 @@ const DialogHeader = ({ className, onClose, children, ...otherProps }) => {
       { children }
       { onClose
         ? (
-        <IconButton variant={ 'ghost' } onClick={ onClose }>
+        <IconButton variant={ 'ghost' } onClick={ onClose } data-testid={ 'dialog-header-close-icon' }>
           <CancelIcon />
         </IconButton>
       )
