@@ -114,7 +114,7 @@ export const Basic = () => {
         rowActions={ rowActions }
 	  />
 	  <Table.Sortable onSortChange={ action('sort changed') }/>
-	  <Table.Selection onSelectionChange={ action('selection changed') }/>
+	  <Table.Selection onChange={ action('selection changed') }/>
     </Table>
   )
 }

@@ -37,6 +37,8 @@ const reducer = (state, action) => {
     return { ...state, withRowActions: action.payload }
   case actionTypes.SET_SELECTION_ACTIVITY:
     return { ...state, selection: { ...state.selection, isActive: action.payload } }
+  case actionTypes.SET_SELECTION:
+    return { ...state, selection: { ...state.selection, items: action.payload.items, exceptMode: action.payload.exceptMode } }
   case actionTypes.TOGGLE_SELECTED_ITEM:
     let items
     if((!state.selection.exceptMode && !action.payload.isSelected) ||
