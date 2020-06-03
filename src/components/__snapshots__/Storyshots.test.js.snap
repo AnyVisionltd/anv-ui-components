@@ -655,7 +655,7 @@ exports[`Storyshots Components/Chip Variants 1`] = `
 </div>
 `;
 
-exports[`Storyshots Components/Dialog Default 1`] = `
+exports[`Storyshots Components/Dialog Basic 1`] = `
 <div>
   <div
     className="center"

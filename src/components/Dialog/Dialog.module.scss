@@ -1,16 +1,19 @@
 @import "~@anyvision/style-guide";
 
 .dialog {
-  position: absolute;
+  @include av-elevation(pop-out);
+  position: fixed;
   left: 50%;
   top: 50%;
   box-sizing: border-box;
   transform: translate(-50%, -50%);
-  padding: 0 av-space(medium);
+  padding: 0 av-space(medium) av-space(medium) av-space(medium);
   border-radius: av-radius(base);
   background-color: av-color(surface);
   color: av-color(content);
   z-index: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .backdrop {
