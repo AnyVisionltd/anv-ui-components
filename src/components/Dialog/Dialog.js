@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Children, isValidElement, cloneElement } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 import keymap from '../../utils/enums/keymap'
@@ -16,6 +16,14 @@ const Dialog = ({ isOpen, className, onClose, disableBackdropClick, disableEscap
     className,
   )
 
+  const childrenWithProps = Children.map(children, child => {
+    // Checking isValidElement is the safe way and avoids a TS error too.
+    if (isValidElement(child)) {
+      return cloneElement(child, { onClose })
+    }
+    return child
+  })
+
   const onBackdropClick = event => !disableBackdropClick ? onClose(event) : null
 
   const onEscapeKeyDown = event => {
@@ -32,7 +40,7 @@ const Dialog = ({ isOpen, className, onClose, disableBackdropClick, disableEscap
       { isOpen && <div className={ styles.backdrop } onClick={ onBackdropClick } data-testid={ 'backdrop' }/> }
       <Scale isOpen={ isOpen }>
         <div className={ classes } { ...otherProps } data-testid={ 'dialog' }>
-          { children }
+          { childrenWithProps }
         </div>
       </Scale>
     </Portal>

@@ -21,7 +21,7 @@ export const Basic = () => {
 
   const disableBackdropClick = boolean('Disable backdrop click to close dialog', false)
   const disableEscapeKeyDown = boolean('Disable escape key press to close dialog', false)
-  const withOnCloseInHeader = boolean('Pass onClose prop to header', true)
+  const disableCloseIcon = boolean('Disable the close icon in header', false)
 
   return (
     <div>
@@ -39,7 +39,7 @@ export const Basic = () => {
         disableBackdropClick={ disableBackdropClick }
         disableEscapeKeyDown={ disableEscapeKeyDown }
       >
-        <Dialog.Header onClose={ withOnCloseInHeader && handleCloseDialog }>
+        <Dialog.Header disableCloseIcon={ disableCloseIcon }>
           Dialog Header Title
         </Dialog.Header>
         <div className={ styles.tmp }>

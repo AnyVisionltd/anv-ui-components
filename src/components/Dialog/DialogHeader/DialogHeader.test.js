@@ -9,13 +9,13 @@ describe('<DialogHeader />', () => {
     expect(queryByTestId('test-child')).not.toEqual(null)
   })
 
-  it('should not render close icon without on close function', () => {
+  it('should render close icon', () => {
     const { queryByTestId } = render(<DialogHeader />)
-    expect(queryByTestId('dialog-header-close-icon')).toEqual(null)
+    expect(queryByTestId('dialog-header-close-icon')).not.toEqual(null)
   })
 
-  it('should render close icon with on close function', () => {
-    const { queryByTestId } = render(<DialogHeader onClose={ () => {} }/>)
-    expect(queryByTestId('dialog-header-close-icon')).not.toEqual(null)
+  it('should not render close icon when close icon is disabled', () => {
+    const { queryByTestId } = render(<DialogHeader disableCloseIcon/>)
+    expect(queryByTestId('dialog-header-close-icon')).toEqual(null)
   })
 })
