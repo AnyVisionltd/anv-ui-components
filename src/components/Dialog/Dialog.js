@@ -61,6 +61,6 @@ Dialog.propTypes = {
   disableEscapeKeyDown: propTypes.bool
 }
 
-Dialog.DialogHeader = DialogHeader
+Dialog.Header = DialogHeader
 
 export default Dialog

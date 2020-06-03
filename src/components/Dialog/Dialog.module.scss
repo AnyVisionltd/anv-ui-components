@@ -1,6 +1,7 @@
 @import "~@anyvision/style-guide";
 
 .dialog {
+  @include av-elevation(pop-out);
   position: fixed;
   left: 50%;
   top: 50%;

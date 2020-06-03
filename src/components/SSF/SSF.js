@@ -129,44 +129,44 @@ const SmartFilter = ({
     const cursorPosition = inputElement.selectionStart
     const chipsLength = filterChips.length
     switch (event.keyCode) {
-      case keymap.ENTER:
-        onChipSubmit()
-        break
-      case keymap.ARROW_LEFT:
-        if (!cursorPosition && chipsLength) {
-          if (focusedChip === null) {
-            setFocusedChip(chipsLength - 1)
-          } else if (focusedChip > 0) {
-            setFocusedChip(focusedChip - 1)
-          }
-          handleMenuClose()
+    case keymap.ENTER:
+      onChipSubmit()
+      break
+    case keymap.ARROW_LEFT:
+      if (!cursorPosition && chipsLength) {
+        if (focusedChip === null) {
+          setFocusedChip(chipsLength - 1)
+        } else if (focusedChip > 0) {
+          setFocusedChip(focusedChip - 1)
         }
-        break
-      case keymap.ESCAPE:
-        if (focusedChip !== null) {
-          inputBaseRef.current.focus()
-        }
-        break
-      case keymap.ARROW_RIGHT:
-        if (focusedChip !== null && focusedChip < chipsLength - 1) {
-          setFocusedChip(focusedChip + 1)
-          event.preventDefault()
-        } else if (focusedChip >= chipsLength - 1) {
-          setFocusedChip(null)
-          inputBaseRef.current.focus()
-          event.preventDefault()
-        }
-        break
-      case keymap.BACKSPACE:
-        if (!cursorPosition && chipsLength && focusedChip === null) {
-          const { name, text } = filterChips[chipsLength - 1]
-          removeChip(getChipKey(name, text))
-        }
-        break
-      case keymap.DELETE:
-        break
-      default:
-        break
+        handleMenuClose()
+      }
+      break
+    case keymap.ESCAPE:
+      if (focusedChip !== null) {
+        inputBaseRef.current.focus()
+      }
+      break
+    case keymap.ARROW_RIGHT:
+      if (focusedChip !== null && focusedChip < chipsLength - 1) {
+        setFocusedChip(focusedChip + 1)
+        event.preventDefault()
+      } else if (focusedChip >= chipsLength - 1) {
+        setFocusedChip(null)
+        inputBaseRef.current.focus()
+        event.preventDefault()
+      }
+      break
+    case keymap.BACKSPACE:
+      if (!cursorPosition && chipsLength && focusedChip === null) {
+        const { name, text } = filterChips[chipsLength - 1]
+        removeChip(getChipKey(name, text))
+      }
+      break
+    case keymap.DELETE:
+      break
+    default:
+      break
     }
   }
 
@@ -286,7 +286,7 @@ SmartFilter.propTypes = {
   fields: propTypes.arrayOf(propTypes.shape({
     field: propTypes.string.isRequired,
     label: propTypes.string.isRequired,
-    type: propTypes.oneOf(['text', 'number']),
+    type: propTypes.oneOf(['text', 'number', 'date']),
     icon: propTypes.element,
   })),
   /** Callback when changed. */

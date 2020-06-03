@@ -1,6 +1,6 @@
 {
   "name": "@anyvision/anv-ui-components",
-  "version": "0.1.1-beta.7",
+  "version": "0.1.1-beta.8",
   "main": "dist/index.js",
   "private": false,
   "files": [
@@ -15,7 +15,7 @@
     "@anyvision/style-guide": "1.0.1-beta.12",
     "classnames": "^2.2.6",
     "jest-environment-jsdom-sixteen": "^1.0.3",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
     "react-scripts": "3.4.1",
     "react-transition-group": "^4.3.0"

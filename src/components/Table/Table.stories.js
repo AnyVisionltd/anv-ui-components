@@ -1,96 +1,99 @@
 import React, { useMemo } from 'react'
-import { boolean, text } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import Table from './Table'
+import TableHeader from "./TableHeader/TableHeader"
+import TableBody from "./TableBody/TableBody"
+import TableSSF from "./TableSSF/TableSSF"
+import Sortable from "./Sortable/Sortable"
+import Selection from "./Selection/Selection"
 import { Chip } from '../Chip'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
 
 export default {
   title: 'Components/Table',
   component: Table,
+  subcomponents: { TableHeader, TableBody, TableSSF, Sortable, Selection },
   decorators: [centerDecorator],
 }
 
-export const Playground = () => {
+export const Basic = () => {
   const headers = useMemo(() => [
     {
-      field: 'firstname',
-      content: 'First Name',
-      hide: boolean(' hide first name ', false),
+	  field: 'firstname',
+	  content: 'First Name',
+	  flexWidth: '200px',
     },
     {
-      field: 'lastname',
-      content: 'Last Name',
+	  field: 'role',
+	  content: 'Role',
     },
     {
-      field: 'role',
-      content: 'Role',
-      flexWidth: text('size role', '20%'),
+	  field: 'location',
+	  content: 'Location',
+	  columnRender: data => <Chip label={ data }/>,
     },
     {
-      field: 'location',
-      content: 'Location',
-      columnRender: data => <Chip label={ data } />,
-    },
-    {
-      field: 'weather',
-      content: () => <span
+	  field: 'weather',
+	  content: () => <span
         style={ { display: 'flex', alignItems: 'center' } }
-      >
+	  >
         Weather
         <SunIcon style={ { marginLeft: '5px' } }/>
       </span>,
-      label: 'Weather',
-      type: 'number'
+	  columnRender: data => `${data}°`,
+	  label: 'Weather',
+	  type: 'number'
+    },
+    {
+	  field: 'date',
+	  content: 'Date',
+	  type: 'date',
+	  columnRender: data => data.toISOString().slice(0, 10)
     }
+
   ], [])
 
   const data = useMemo(() => [
     {
-      id: '1',
-      role: 'Admin',
-      firstname: 'Donte',
-      lastname: 'Castaneda',
-      location: 'Tel Aviv',
-      weather: '30°',
-      date: '20/01/2019',
+	  id: '1',
+	  role: 'Admin',
+	  firstname: 'Donte',
+	  location: 'Tel Aviv',
+	  weather: 30,
+	  date: new Date(2020, 1),
     },
     {
-      id: '2',
-      role: 'User',
-      firstname: 'Cleo',
-      lastname: 'Mcnamara',
-      location: 'Jerusalem',
-      weather: '15°',
-      date: '15/05/1998',
+	  id: '2',
+	  role: 'User',
+	  firstname: 'Cleo',
+	  location: 'Jerusalem',
+	  weather: 15,
+	  date: new Date(2020, 2),
     },
     {
-      id: '3',
-      role: 'Admin',
-      firstname: 'Rafael',
-      lastname: 'Andersen',
-      location: 'Eilat',
-      weather: '40°',
-      date: '10/11/1989',
+	  id: '3',
+	  role: 'Admin',
+	  firstname: 'Rafael',
+	  location: 'Eilat',
+	  weather: 40,
+	  date: new Date(2020, 3),
     },
     {
-      id: '4',
-      role: 'Operator',
-      firstname: 'Neelam',
-      lastname: 'Harris',
-      location: 'Haifa',
-      weather: '25°',
-      date: '04/12/2020',
+	  id: '4',
+	  role: 'Operator',
+	  firstname: 'Neelam',
+	  location: 'Haifa',
+	  weather: 25,
+	  date: new Date(2020, 4),
     },
     {
-      id: '5',
-      role: 'Superator',
-      firstname: 'Carole',
-      lastname: 'Howe',
-      location: 'Tzfat',
-      weather: '20°',
-      date: '23/03/2009',
+	  id: '5',
+	  role: 'Superator',
+	  firstname: 'Carole',
+	  location: 'Tzfat',
+	  weather: 20,
+	  date: new Date(2020, 5),
     },
   ], [])
 
@@ -101,24 +104,18 @@ export const Playground = () => {
 
   const style = { width: '80%' }
   return (
-    <Table style={ style } controlled={ false }>
-      {
-        boolean('SSF', true)
-        && <Table.SSF onChange={ action('SSF changed') }/>
-      }
-      <Table.Header
+    <Table style={ style } selfControlled={ true }>
+	  <Table.SSF onChange={ action('SSF changed') }/>
+	  <Table.Header
         headers={ headers }
         onHeaderCellClick={ action('header cell clicked') }
-      />
-      <Table.Body
+	  />
+	  <Table.Body
         data={ data }
-        rowHeight={ text('row height', '56px') }
-        rowActions={ boolean('row actions', true) ? rowActions : null }
-      />
-      {
-        boolean('sortable', true)
-        && <Table.Sortable onSortChange={ action('sort changed') } />
-      }
+        rowActions={ rowActions }
+	  />
+	  <Table.Sortable onSortChange={ action('sort changed') }/>
+	  <Table.Selection onChange={ action('selection changed') }/>
     </Table>
   )
 }

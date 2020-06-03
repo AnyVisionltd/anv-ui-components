@@ -63,17 +63,17 @@ const Menu = ({
     }
 
     switch (event.keyCode) {
-      case keymap.ARROW_DOWN:
-        nextFocus('nextElementSibling', 'firstChild')
-        break
-      case keymap.ARROW_UP:
-        nextFocus('previousElementSibling', 'lastChild')
-        break
-      case keymap.ESCAPE:
-        onClose()
-        break
-      default:
-        break
+    case keymap.ARROW_DOWN:
+      nextFocus('nextElementSibling', 'firstChild')
+      break
+    case keymap.ARROW_UP:
+      nextFocus('previousElementSibling', 'lastChild')
+      break
+    case keymap.ESCAPE:
+      onClose()
+      break
+    default:
+      break
     }
   }, [currentFocus, anchorElement, onClose])
 

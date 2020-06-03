@@ -1,14 +1,11 @@
 import React, { useContext, useEffect } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
+import { orderTypes } from "../../../utils/enums/common"
 import { ReactComponent as LongArrow } from '../../../assets/svg/LongArrow.svg'
 import TableContext from '../TableContext'
+import { Checkbox } from '../../../index'
 import styles from './TableHeader.module.scss'
-
-const sortOrderTypes = {
-  ASC: 'asc',
-  DESC: 'desc',
-}
 
 const TableHeader = ({
   headers,
@@ -16,8 +13,8 @@ const TableHeader = ({
   className,
   ...otherProps
 }) => {
-  const { state, setSortBy, setHeaders } = useContext(TableContext)
-  const { headers: contextHeaders, sort, withRowActions } = state
+  const { state, setSortBy, setHeaders, toggleSelectAll } = useContext(TableContext)
+  const { headers: contextHeaders, sort, withRowActions, selection } = state
   const { sortBy, sortable } = sort
 
   useEffect(() => {
@@ -26,20 +23,20 @@ const TableHeader = ({
 
   const renderSortingIcon = field => {
     const activeSort = sortBy && sortBy.field === field
-    const activeSortOrder = activeSort && sortBy.order === sortOrderTypes.DESC
+    const activeSortOrder = activeSort && sortBy.order === orderTypes.DESC
     const classes = classNames(
-      styles.sortingIcon,
-      activeSort && styles.activeSort,
-      activeSortOrder && styles.sortingIconDesc,
+	  styles.sortingIcon,
+	  activeSort && styles.activeSort,
+	  activeSortOrder && styles.sortingIconDesc,
     )
-    return <LongArrow className={ classes } />
+    return <LongArrow className={ classes }/>
   }
 
   const sortColumn = headerCell => {
-    const sortOrder = headerCell.field === sortBy.field && sortBy.order === sortOrderTypes.ASC
-      ? sortOrderTypes.DESC
-      : sortOrderTypes.ASC
-    setSortBy({ field: headerCell.field, order: sortOrder })
+    const sortOrder = headerCell.field === sortBy.field && sortBy.order === orderTypes.ASC
+	  ? orderTypes.DESC
+	  : orderTypes.ASC
+    setSortBy({ field: headerCell.field, order: sortOrder, type: headerCell.type })
   }
 
   const handleHeaderCellClick = (headerCell, sortableColumn) => {
@@ -49,40 +46,58 @@ const TableHeader = ({
 
   const renderCell = headerCell => {
     const {
-      field, content, disableSort, hide, flexWidth,
+	  field, content, disableSort, hide, flexWidth,
     } = headerCell
     if (hide) {
-      return null
+	  return null
     }
     const style = flexWidth ? { flex: `0 0 ${flexWidth}` } : {}
 
     const sortableColumn = sortable && !disableSort
     const tableCellClass = classNames(
-      styles.tableHeaderCell,
-      { [styles.sortableColumn]: sortableColumn },
+	  styles.headerCell,
+	  { [styles.sortableColumn]: sortableColumn },
     )
     return (
-      <div
+	  <div
         key={ field }
         role="cell"
         style={ style }
         className={ tableCellClass }
         onClick={ () => handleHeaderCellClick(headerCell, sortableColumn) }
-      >
+	  >
         {
-          typeof content === 'function'
+		  typeof content === 'function'
             ? content()
             : content
         }
         {
-          sortableColumn && renderSortingIcon(field)
+		  sortableColumn && renderSortingIcon(field)
         }
-      </div>
+	  </div>
+    )
+  }
+
+  const renderSelection = () => {
+    const { isActive, exceptMode, items } = selection
+    if (!isActive) {
+	  return null
+    }
+    return (
+	  <div
+        role={ 'cell' }
+        className={ styles.selectionCell }>
+        <Checkbox
+		  checked={ exceptMode && !items.length }
+		  indeterminate={ !!items.length }
+		  onChange={ toggleSelectAll }
+        />
+	  </div>
     )
   }
 
   const renderActionsPlaceholder = () => (
-    withRowActions && <div className={ styles.actionsPlaceholder } />
+    withRowActions && <div className={ styles.actionsPlaceholder }/>
   )
 
   const classes = classNames(
@@ -92,18 +107,20 @@ const TableHeader = ({
 
   return (
     <div
-      role="row"
-      className={ classes }
-      { ...otherProps }
+	  role="row"
+	  className={ classes }
+	  { ...otherProps }
     >
-      { contextHeaders.map(renderCell) }
-      { renderActionsPlaceholder() }
+	  { renderSelection() }
+	  { contextHeaders.map(renderCell) }
+	  { renderActionsPlaceholder() }
     </div>
   )
 }
 
 TableHeader.defaultProps = {
-  onHeaderCellClick: () => {},
+  onHeaderCellClick: () => {
+  },
 }
 
 TableHeader.propTypes = {
@@ -111,7 +128,7 @@ TableHeader.propTypes = {
    *  <code>field</code>        - match to the data properties. <br />
    *  <code>content</code>      - what to render in the header cell.<br />
    *  <code>label</code>        - display name to render on SSF and Column Management. <br />
-   *  <code>type</code>         - column type, use by SSF and controlled sort. <br />
+   *  <code>type</code>         - column type, use by SSF sort etc... <br />
    *  <code>columnRender</code> - function for custom column render. <br />
    *  <code>disableSort</code>  - disable sort for the column. <br />
    *  <code>hide</code>         - hide the column. <br />
@@ -119,17 +136,17 @@ TableHeader.propTypes = {
    **/
   headers: propTypes.arrayOf(
     propTypes.shape({
-      field: propTypes.string.isRequired,
-      content: propTypes.oneOfType([
+	  field: propTypes.string.isRequired,
+	  content: propTypes.oneOfType([
         propTypes.string,
         propTypes.func,
-      ]).isRequired,
-      label: propTypes.string,
-      type: propTypes.oneOf(['string', 'number', 'date']),
-      columnRender: propTypes.func,
-      disableSort: propTypes.bool,
-      hide: propTypes.bool,
-      flexWidth: propTypes.string,
+	  ]).isRequired,
+	  label: propTypes.string,
+	  type: propTypes.oneOf(['string', 'number', 'date']),
+	  columnRender: propTypes.func,
+	  disableSort: propTypes.bool,
+	  hide: propTypes.bool,
+	  flexWidth: propTypes.string,
     }),
   ).isRequired,
   /** Callback fire when header cell click with cell field. */

@@ -17,10 +17,10 @@ const DialogHeader = ({ className, onClose, children, ...otherProps }) => {
       { children }
       { onClose
         ? (
-        <IconButton variant={ 'ghost' } onClick={ onClose } data-testid={ 'dialog-header-close-icon' }>
-          <CancelIcon />
-        </IconButton>
-      )
+          <IconButton variant={ 'ghost' } onClick={ onClose } data-testid={ 'dialog-header-close-icon' }>
+            <CancelIcon />
+          </IconButton>
+        )
         : null }
     </div>
   )
@@ -31,7 +31,7 @@ DialogHeader.propTypes = {
   className: propTypes.string,
   /** Dialog components */
   children: propTypes.node,
-  /** Should the dialog appear on screen or not */
+  /** If callback is passed the header will have a close icon, the callback will be triggered whenever the menu is closed by this icon */
   onClose: propTypes.func
 }
 

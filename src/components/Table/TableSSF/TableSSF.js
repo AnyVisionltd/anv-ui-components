@@ -10,11 +10,11 @@ const TableSSF = ({ onChange, className }) => {
   const { headers } = state
 
   const fields = useMemo(() => headers.map(headers => ({
-        field: headers.field,
-        label: headers.label || headers.content,
-        ...(headers.type  && { type: headers.type })
-      })
-    )
+    field: headers.field,
+    label: headers.label || headers.content,
+    ...(headers.type  && { type: headers.type })
+  })
+  )
   , [headers])
 
   const handleOnChange = filters => {
