@@ -18,7 +18,7 @@ const Dialog = ({ isOpen, className, onClose, disableBackdropClick, disableEscap
 
   const childrenWithProps = Children.map(children, child => {
     // Checking isValidElement is the safe way and avoids a TS error too.
-    if (isValidElement(child)) {
+    if (isValidElement(child) && child.type === DialogHeader) {
       return cloneElement(child, { onClose })
     }
     return child
