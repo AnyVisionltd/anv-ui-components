@@ -19,7 +19,12 @@ const DialogHeader = ({ className, onClose,  disableCloseIcon, children, ...othe
       { disableCloseIcon
         ? null
         : (
-          <IconButton variant={ 'ghost' } onClick={ onClose } data-testid={ 'dialog-header-close-icon' }>
+          <IconButton
+            variant={ 'ghost' }
+            className={ styles.closeIcon }
+            onClick={ onClose }
+            data-testid={ 'dialog-header-close-icon' }
+          >
             <CancelIcon />
           </IconButton>
         ) }
