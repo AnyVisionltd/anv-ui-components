@@ -1,12 +1,16 @@
+@import "~@anyvision/style-guide";
+
 .dialogExample {
   height: 200px;
   width: 300px;
 
-  .tmp {
-    height: 100%;
-    width: 100%;
+  .dialogBodyExample {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: av-color(ac-vega);
+    border-radius: av-radius(base);
+    white-space: pre-wrap;
+    text-align: center;
   }
 }

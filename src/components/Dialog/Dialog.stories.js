@@ -8,7 +8,7 @@ import styles from '../../styles/storybook/dialog.module.scss'
 export default {
   title: 'Components/Dialog',
   component: Dialog,
-  subcomponents: { Header: Dialog.Header },
+  subcomponents: { Header: Dialog.Header, Body: Dialog.Body },
   decorators: [centerDecorator],
 }
 
@@ -42,9 +42,9 @@ export const Basic = () => {
         <Dialog.Header disableCloseIcon={ disableCloseIcon }>
           Dialog Header Title
         </Dialog.Header>
-        <div className={ styles.tmp }>
-          Click outside or press escape to close
-        </div>
+        <Dialog.Body className={ styles.dialogBodyExample }>
+          { 'Click outside or press escape key\nin order to close the dialog' }
+        </Dialog.Body>
       </Dialog>
     </div>
   )
