@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import { Portal, Animations, Checkbox, IconButton } from '../../../index'
+import { Portal, Animations, Checkbox, IconButton, Menu } from '../../../index'
 import TableContext from '../TableContext'
 import { ReactComponent as OptionsIcon } from '../../../assets/svg/Options.svg'
 import styles from './Selection.module.scss'
@@ -16,6 +16,14 @@ const Selection = ({
   const { totalItems } = state
   const { items, exceptMode } = state.selection
 
+  const moreActionsRef = useRef()
+  const [anchorElement, setAnchorElement] = useState(null)
+
+  const handleMenuClose = () => setAnchorElement(null)
+  const handleButtonClick = () => (anchorElement
+    ? setAnchorElement(null)
+    : setAnchorElement(moreActionsRef.current))
+
   useEffect(() => {
     onChange({ items, exceptMode })
   }, [onChange, items, exceptMode])
@@ -28,9 +36,46 @@ const Selection = ({
     value && setSelection(value)
   }, [value, setSelection])
 
+  const renderMoreActions = moreActions => {
+    if(!moreActions.length) {
+      return
+    }
+    return (
+      <>
+        <IconButton
+          onClick={ handleButtonClick }
+          variant={ 'ghost' }
+          ref={ moreActionsRef }
+          className={ classNames(styles.actionButton, styles.moreActionsButton) }
+        >
+          <OptionsIcon/>
+        </IconButton>
+        <Menu
+          isOpen={ !!anchorElement }
+          onClose={ handleMenuClose }
+          anchorElement={ anchorElement }
+          preferOpenDirection={ 'up-start' }
+        >
+          { moreActions.map(({ icon, label }) => {
+            return (
+              <Menu.Item>
+                <IconButton
+                  className={ '' }
+                  variant={ 'ghost' }>
+                  { icon }
+                </IconButton>
+                { label }
+              </Menu.Item>
+            )
+          } ) }
+        </Menu>
+      </>
+    )
+  }
+
   const renderActions = () => {
     const mainActions = bulkActions.slice(0,2)
-    // const moreActions = bulkActions.slice(2)
+    const moreActions = bulkActions.slice(2)
     return (
       <div className={ styles.actionsContainer }>
         {
@@ -38,19 +83,14 @@ const Selection = ({
             <IconButton
               key={ index }
               variant={ 'ghost' }
-              onClick={ onClick }
+              onClick={ () => onClick({ items, exceptMode }) }
               className={ styles.actionButton }
             >
               { icon }
             </IconButton>
           ))
         }
-        <IconButton
-          variant={ 'ghost' }
-          className={ classNames(styles.actionButton, styles.moreActionsButton) }
-        >
-          <OptionsIcon/>
-        </IconButton>
+        { renderMoreActions(moreActions) }
       </div>
     )
   }
