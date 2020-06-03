@@ -1,8 +1,8 @@
 @import "~@anyvision/style-guide";
 
 .dialogExample {
-  height: 200px;
-  width: 300px;
+  height: 300px;
+  width: 400px;
 
   .dialogBodyExample {
     display: flex;
@@ -12,5 +12,18 @@
     border-radius: av-radius(base);
     white-space: pre-wrap;
     text-align: center;
+  }
+
+  .dialogFooterExample {
+    display: flex;
+    align-items: center;
+    margin-top: av-space(tiny);
+
+    .dialogFooterButtonsExample {
+      margin-left: auto;
+      display: grid;
+      grid-column-gap: av-space(tiny);
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 }

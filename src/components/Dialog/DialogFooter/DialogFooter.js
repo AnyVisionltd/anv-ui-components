@@ -1,28 +1,28 @@
 import React from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import styles from './DialogBody.module.scss'
+import styles from './DialogFooter.module.scss'
 
 
-const DialogBody = ({ className, children, ...otherProps }) => {
+const DialogFooter = ({ className, children, ...otherProps }) => {
 
   const classes = classNames(
-    styles.dialogBody,
+    styles.dialogFooter,
     className,
   )
 
   return (
-    <div className={ classes } { ...otherProps } data-testid={ 'dialog-body' }>
+    <div className={ classes } { ...otherProps } data-testid={ 'dialog-footer' }>
       { children }
     </div>
   )
 }
 
-DialogBody.propTypes = {
+DialogFooter.propTypes = {
   /** For css customization */
   className: propTypes.string,
   /** Dialog components */
   children: propTypes.node
 }
 
-export default DialogBody
+export default DialogFooter

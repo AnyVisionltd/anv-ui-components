@@ -8,7 +8,7 @@ import styles from '../../styles/storybook/dialog.module.scss'
 export default {
   title: 'Components/Dialog',
   component: Dialog,
-  subcomponents: { Header: Dialog.Header, Body: Dialog.Body },
+  subcomponents: { Header: Dialog.Header, Body: Dialog.Body, Footer: Dialog.Footer },
   decorators: [centerDecorator],
 }
 
@@ -45,6 +45,16 @@ export const Basic = () => {
         <Dialog.Body className={ styles.dialogBodyExample }>
           { 'Click outside or press escape key\nin order to close the dialog' }
         </Dialog.Body>
+        <Dialog.Footer className={ styles.dialogFooterExample }>
+          <div className={ styles.dialogFooterButtonsExample }>
+            <Button variant={ 'ghost' } onClick={ handleCloseDialog }>
+              Cancel
+            </Button>
+            <Button onClick={ handleCloseDialog }>
+              Done
+            </Button>
+          </div>
+        </Dialog.Footer>
       </Dialog>
     </div>
   )

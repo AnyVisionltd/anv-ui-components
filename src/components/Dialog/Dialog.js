@@ -4,6 +4,7 @@ import propTypes from 'prop-types'
 import keymap from '../../utils/enums/keymap'
 import { DialogHeader } from './DialogHeader'
 import { DialogBody } from './DialogBody'
+import { DialogFooter } from './DialogFooter'
 import { Portal } from '../Portal'
 import { Scale } from '../Animations/ScaleAnimation'
 import { UseKeyDownListener } from '../../hooks/UseKeyDownListener'
@@ -72,5 +73,6 @@ Dialog.propTypes = {
 
 Dialog.Header = DialogHeader
 Dialog.Body = DialogBody
+Dialog.Footer = DialogFooter
 
 export default Dialog
