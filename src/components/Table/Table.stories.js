@@ -9,6 +9,7 @@ import Sortable from "./Sortable/Sortable"
 import Selection from "./Selection/Selection"
 import { Chip } from '../Chip'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
+import { ReactComponent as EyeEnabledIcon } from '../../assets/svg/EyeEnabled.svg'
 
 export default {
   title: 'Components/Table',
@@ -102,6 +103,24 @@ export const Basic = () => {
     { content: 'Edit', onClick: action('edit action clicked') },
   ], [])
 
+  const bulkActions = [
+    {
+      icon: <SunIcon/>,
+      label: 'action 1',
+      onClick: action('bulk action 1'),
+    },
+    {
+      icon: <EyeEnabledIcon/>,
+      label: 'action 2',
+      onClick: action('bulk action 2'),
+    },
+    {
+      icon: <EyeEnabledIcon/>,
+      label: 'action 3',
+      onClick: action('bulk action 3')
+    }
+  ]
+
   const style = { width: '80%' }
   return (
     <Table style={ style } selfControlled={ true }>
@@ -115,7 +134,7 @@ export const Basic = () => {
         rowActions={ rowActions }
 	  />
 	  <Table.Sortable onSortChange={ action('sort changed') }/>
-	  <Table.Selection onChange={ action('selection changed') }/>
+	  <Table.Selection bulkActions={ bulkActions } onChange={ action('selection changed') }/>
     </Table>
   )
 }
