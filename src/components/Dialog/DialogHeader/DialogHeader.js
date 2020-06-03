@@ -16,18 +16,16 @@ const DialogHeader = ({ className, onClose,  disableCloseIcon, children, ...othe
   return (
     <div className={ classes } { ...otherProps } data-testid={ 'dialog-header' }>
       { children }
-      { disableCloseIcon
-        ? null
-        : (
-          <IconButton
-            variant={ 'ghost' }
-            className={ styles.closeIcon }
-            onClick={ onClose }
-            data-testid={ 'dialog-header-close-icon' }
-          >
-            <CancelIcon />
-          </IconButton>
-        ) }
+      { !disableCloseIcon && (
+        <IconButton
+          variant={ 'ghost' }
+          className={ styles.closeIcon }
+          onClick={ onClose }
+          data-testid={ 'dialog-header-close-icon' }
+        >
+          <CancelIcon />
+        </IconButton>
+      ) }
     </div>
   )
 }
