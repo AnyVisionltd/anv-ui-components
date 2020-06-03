@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { Children, isValidElement, cloneElement } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 import keymap from '../../utils/enums/keymap'
+import { DialogHeader } from './DialogHeader'
 import { Portal } from '../Portal'
 import { Scale } from '../Animations/ScaleAnimation'
 import { UseKeyDownListener } from '../../hooks/UseKeyDownListener'
@@ -14,6 +15,14 @@ const Dialog = ({ isOpen, className, onClose, disableBackdropClick, disableEscap
     styles.dialog,
     className,
   )
+
+  const childrenWithProps = Children.map(children, child => {
+    // Checking isValidElement is the safe way and avoids a TS error too.
+    if (isValidElement(child) && child.type === DialogHeader) {
+      return cloneElement(child, { onClose })
+    }
+    return child
+  })
 
   const onBackdropClick = event => !disableBackdropClick ? onClose(event) : null
 
@@ -31,7 +40,7 @@ const Dialog = ({ isOpen, className, onClose, disableBackdropClick, disableEscap
       { isOpen && <div className={ styles.backdrop } onClick={ onBackdropClick } data-testid={ 'backdrop' }/> }
       <Scale isOpen={ isOpen }>
         <div className={ classes } { ...otherProps } data-testid={ 'dialog' }>
-          { children }
+          { childrenWithProps }
         </div>
       </Scale>
     </Portal>
@@ -46,7 +55,7 @@ Dialog.defaultProps = {
 }
 
 Dialog.propTypes = {
-  /** For css customization. */
+  /** For css customization */
   className: propTypes.string,
   /** Dialog components */
   children: propTypes.node,
@@ -59,5 +68,7 @@ Dialog.propTypes = {
   /** Disable onClose firing when escape button is clicked */
   disableEscapeKeyDown: propTypes.bool
 }
+
+Dialog.Header = DialogHeader
 
 export default Dialog
