@@ -9,6 +9,12 @@
   padding: 0 av-space();
   cursor: pointer;
 
+  .menuLeadingComponent {
+    display: flex;
+    align-items: center;
+    margin-right: av-space();
+  }
+
   .menuItemLabel {
     flex: 1;
   }

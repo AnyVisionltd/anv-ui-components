@@ -2,18 +2,21 @@ import React, { useMemo } from 'react'
 import { action } from '@storybook/addon-actions'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import Table from './Table'
-import TableHeader from "./TableHeader/TableHeader"
-import TableBody from "./TableBody/TableBody"
-import TableSSF from "./TableSSF/TableSSF"
-import Sortable from "./Sortable/Sortable"
-import Selection from "./Selection/Selection"
 import { Chip } from '../Chip'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
+import { ReactComponent as EyeEnabledIcon } from '../../assets/svg/EyeEnabled.svg'
+import { ReactComponent as EyeDisabledIcon } from '../../assets/svg/EyeDisabled.svg'
 
 export default {
   title: 'Components/Table',
   component: Table,
-  subcomponents: { TableHeader, TableBody, TableSSF, Sortable, Selection },
+  subcomponents: {
+    TableHeader: Table.Header,
+    TableBody: Table.Body,
+    TableSSF: Table.SSF,
+    Sortable: Table.Sortable,
+    Selection: Table.Selection
+  },
   decorators: [centerDecorator],
 }
 
@@ -102,6 +105,24 @@ export const Basic = () => {
     { content: 'Edit', onClick: action('edit action clicked') },
   ], [])
 
+  const bulkActions = [
+    {
+      icon: <SunIcon/>,
+      label: 'action 1',
+      onClick: action('bulk action 1'),
+    },
+    {
+      icon: <EyeEnabledIcon/>,
+      label: 'action 2',
+      onClick: action('bulk action 2'),
+    },
+    {
+      icon: <EyeDisabledIcon/>,
+      label: 'action 3',
+      onClick: action('bulk action 3')
+    }
+  ]
+
   const style = { width: '80%' }
   return (
     <Table style={ style } selfControlled={ true }>
@@ -115,7 +136,7 @@ export const Basic = () => {
         rowActions={ rowActions }
 	  />
 	  <Table.Sortable onSortChange={ action('sort changed') }/>
-	  <Table.Selection onChange={ action('selection changed') }/>
+	  <Table.Selection bulkActions={ bulkActions } onChange={ action('selection changed') }/>
     </Table>
   )
 }

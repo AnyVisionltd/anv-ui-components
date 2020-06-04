@@ -9,6 +9,7 @@ const MenuItem = forwardRef(({
   disabled,
   isSubMenu,
   children,
+  leadingComponent,
   ...otherProps
 }, ref) => {
   const classes = classNames(
@@ -43,6 +44,9 @@ const MenuItem = forwardRef(({
       ref={ ref }
       { ...otherProps }
     >
+      <div className={ styles.menuLeadingComponent }>
+        { leadingComponent }
+      </div>
       { children }
     </li>
   )
@@ -64,6 +68,8 @@ MenuItem.propTypes = {
   className: propTypes.string,
   /** Menu item label (or any other elements attached to the label). */
   children: propTypes.node.isRequired,
+  /** Component to render before the children. */
+  leadingComponent: propTypes.node,
   /** <code>INTERNAL</code> If the element is sub menu type,
    * should usually only used by the Menu component. */
   isSubMenu: propTypes.bool,

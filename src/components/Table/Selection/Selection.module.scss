@@ -1,0 +1,53 @@
+@import "~@anyvision/style-guide";
+
+.selectionBar {
+  @include av-elevation(temporary);
+  position: fixed;
+  display: flex;
+  align-items: center;
+  width: av-size(sz-640);
+  height: 64px;
+  background-color: av-color(secondary);
+  color: av-color(purewhite);
+  fill: av-color(purewhite);
+  bottom: av-space(large);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  padding: 0 av-space();
+  border-radius: av-radius(tidy);
+
+  .countContainer {
+    display: flex;
+    margin-left: av-space();
+    @extend %av-body2;
+
+    .counter {
+      box-sizing: border-box;
+      text-align: center;
+      height: 20px;
+      min-width: av-size(sz-32);
+      padding: 0 av-space(tiny);
+      background-color: av-color(purewhite, av-opacity(divider));
+      border-radius: av-radius();
+    }
+    .counterLabel {
+      margin-left: av-space(tiny);
+    }
+  }
+
+  .actionsContainer {
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+
+    .actionButton {
+      margin-left: av-space(tiny);
+      color: av-color(purewhite);
+    }
+
+    .moreActionsButton {
+      transform: rotate(90deg);
+    }
+  }
+}

@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { IconButton, Menu, Checkbox } from '../../../index'
-import { ReactComponent as SunIcon } from '../../../assets/svg/Options.svg'
+import { ReactComponent as OptionsIcon } from '../../../assets/svg/Options.svg'
 import TableContext from '../TableContext'
 import { useTableData } from "../UseTableData"
 import styles from './TableBody.module.scss'
@@ -79,7 +79,7 @@ const TableBody = ({
             variant="ghost"
             onClick={ handleActionsClick }
 		  >
-            <SunIcon/>
+            <OptionsIcon/>
 		  </IconButton>
         </div>
 	  </>
@@ -87,12 +87,12 @@ const TableBody = ({
   }
 
   const isRowSelected = row => {
-    const { isActive, exceptMode } = selection
+    const { isActive, excludeMode } = selection
     if (!isActive) {
 	  return null
     }
     let isSelected = selection.items.some(row1 => row1 === row)
-    return exceptMode ? !isSelected : isSelected
+    return excludeMode ? !isSelected : isSelected
   }
 
   const renderSelection = (row, isSelected) => (
