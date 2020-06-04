@@ -58,12 +58,7 @@ const Selection = ({
         >
           { moreActions.map(({ icon, label }) => {
             return (
-              <Menu.Item>
-                <IconButton
-                  className={ '' }
-                  variant={ 'ghost' }>
-                  { icon }
-                </IconButton>
+              <Menu.Item key={ label } leadingComponent={ icon }>
                 { label }
               </Menu.Item>
             )
@@ -105,7 +100,7 @@ const Selection = ({
 
   return (
     <Animations.Scale isOpen={ renderBar }>
-      <Portal containerId={ 'table-id' }>
+      <Portal containerId={ 'table-selection-bar' }>
         <div className={ classes }>
           <Checkbox
             checked={ exceptMode && !items.length }
@@ -124,8 +119,7 @@ const Selection = ({
 }
 
 Selection.defaultProps = {
-  onChange: () => {
-  },
+  onChange: () => {},
 }
 
 Selection.propTypes = {

@@ -8,6 +8,7 @@ export default {
   title: 'Components/Menu',
   component: Menu,
   decorators: [centerDecorator],
+  subcomponents: { Item: Menu.Item }
 }
 
 export const Default = () => {

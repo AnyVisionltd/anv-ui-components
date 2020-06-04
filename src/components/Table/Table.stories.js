@@ -2,19 +2,21 @@ import React, { useMemo } from 'react'
 import { action } from '@storybook/addon-actions'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import Table from './Table'
-import TableHeader from "./TableHeader/TableHeader"
-import TableBody from "./TableBody/TableBody"
-import TableSSF from "./TableSSF/TableSSF"
-import Sortable from "./Sortable/Sortable"
-import Selection from "./Selection/Selection"
 import { Chip } from '../Chip'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
 import { ReactComponent as EyeEnabledIcon } from '../../assets/svg/EyeEnabled.svg'
+import { ReactComponent as EyeDisabledIcon } from '../../assets/svg/EyeDisabled.svg'
 
 export default {
   title: 'Components/Table',
   component: Table,
-  subcomponents: { TableHeader, TableBody, TableSSF, Sortable, Selection },
+  subcomponents: {
+    TableHeader: Table.Header,
+    TableBody: Table.Body,
+    TableSSF: Table.SSF,
+    Sortable: Table.Sortable,
+    Selection: Table.Selection
+  },
   decorators: [centerDecorator],
 }
 
@@ -115,7 +117,7 @@ export const Basic = () => {
       onClick: action('bulk action 2'),
     },
     {
-      icon: <EyeEnabledIcon/>,
+      icon: <EyeDisabledIcon/>,
       label: 'action 3',
       onClick: action('bulk action 3')
     }
