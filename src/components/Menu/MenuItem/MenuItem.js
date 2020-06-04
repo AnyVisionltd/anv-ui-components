@@ -44,7 +44,7 @@ const MenuItem = forwardRef(({
       ref={ ref }
       { ...otherProps }
     >
-      <div className={ styles.menuItemLeading }>
+      <div className={ styles.menuLeadingComponent }>
         { leadingComponent }
       </div>
       { children }

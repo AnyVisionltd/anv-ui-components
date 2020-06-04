@@ -87,12 +87,12 @@ const TableBody = ({
   }
 
   const isRowSelected = row => {
-    const { isActive, exceptMode } = selection
+    const { isActive, excludeMode } = selection
     if (!isActive) {
 	  return null
     }
     let isSelected = selection.items.some(row1 => row1 === row)
-    return exceptMode ? !isSelected : isSelected
+    return excludeMode ? !isSelected : isSelected
   }
 
   const renderSelection = (row, isSelected) => (

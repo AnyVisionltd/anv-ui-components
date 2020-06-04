@@ -14,7 +14,7 @@ const Selection = ({
 }) => {
   const { state, setSelectionActivity, setSelection, toggleSelectAll } = useContext(TableContext)
   const { totalItems } = state
-  const { items, exceptMode } = state.selection
+  const { items, excludeMode } = state.selection
 
   const moreActionsRef = useRef()
   const [anchorElement, setAnchorElement] = useState(null)
@@ -25,8 +25,8 @@ const Selection = ({
     : setAnchorElement(moreActionsRef.current))
 
   useEffect(() => {
-    onChange({ items, exceptMode })
-  }, [onChange, items, exceptMode])
+    onChange({ items, excludeMode })
+  }, [onChange, items, excludeMode])
 
   useEffect(() => {
     setSelectionActivity(true)
@@ -78,7 +78,7 @@ const Selection = ({
             <IconButton
               key={ index }
               variant={ 'ghost' }
-              onClick={ () => onClick({ items, exceptMode }) }
+              onClick={ () => onClick({ items, excludeMode }) }
               className={ styles.actionButton }
             >
               { icon }
@@ -90,8 +90,8 @@ const Selection = ({
     )
   }
 
-  const renderBar = exceptMode || !!items.length
-  const selectedCount = renderBar && (exceptMode ? totalItems - items.length : items.length)
+  const renderBar = excludeMode || !!items.length
+  const selectedCount = renderBar && (excludeMode ? totalItems - items.length : items.length)
 
   const classes = classNames(
     styles.selectionBar,
@@ -103,7 +103,7 @@ const Selection = ({
       <Portal containerId={ 'table-selection-bar' }>
         <div className={ classes }>
           <Checkbox
-            checked={ exceptMode && !items.length }
+            checked={ excludeMode && !items.length }
             indeterminate={ !!items.length }
             onChange={ toggleSelectAll }
           />
@@ -129,7 +129,7 @@ Selection.propTypes = {
   value: propTypes.arrayOf(
     propTypes.shape({
       items: propTypes.array,
-      exceptMode: propTypes.bool
+      excludeMode: propTypes.bool
     })
   ),
   /** Table bulk actions. <br />
