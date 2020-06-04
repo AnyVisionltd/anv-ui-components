@@ -1,5 +1,7 @@
 @import '~@anyvision/style-guide';
 
+$container-width: global value;
+
 .popperContainer{
   @include av-elevation(overlay);
   background-color: av-color(secondary);
@@ -9,5 +11,37 @@
   font-size: av-font-size(tiny);
   * {
     margin: 0;
+  }
+
+  &[data-popper-placement*="bottom"] .popperArrow{
+    @include av-elevation(overlay);
+    top: -0.60em;
+    border-left: av-size(sz-8) solid transparent;
+    border-right: av-size(sz-8) solid transparent;
+    border-bottom: av-size(sz-8) solid av-color(secondary);
+  }
+
+  &[data-popper-placement*="top"] .popperArrow {
+    @include av-elevation(overlay);
+    bottom: -0.60em;
+    border-left: av-size(sz-8) solid transparent;
+    border-right: av-size(sz-8) solid transparent;
+    border-top: av-size(sz-8) solid av-color(secondary);
+  }
+
+  &[data-popper-placement*="right"] .popperArrow{
+    @include av-elevation(overlay);
+    left: -0.60em;
+    border-bottom: av-size(sz-8) solid transparent;
+    border-top: av-size(sz-8) solid transparent;
+    border-right: av-size(sz-8) solid av-color(secondary);
+  }
+
+  &[data-popper-placement*="left"] .popperArrow{
+    @include av-elevation(overlay);
+    right: -0.60em;
+    border-bottom: av-size(sz-8) solid transparent;
+    border-top: av-size(sz-8) solid transparent;
+    border-left: av-size(sz-8) solid av-color(secondary);
   }
 }

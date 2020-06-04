@@ -1844,6 +1844,35 @@ exports[`Storyshots Components/Table Basic 1`] = `
 </div>
 `;
 
+exports[`Storyshots Components/Tooltip Arrow Variations 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      style={
+        Object {
+          "textAlign": "center",
+        }
+      }
+    >
+      <h6>
+        Left
+      </h6>
+      <h6>
+        Top
+      </h6>
+      <h6>
+        Bottom
+      </h6>
+      <h6>
+        Right
+      </h6>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Components/Tooltip Default 1`] = `
 <div>
   <div

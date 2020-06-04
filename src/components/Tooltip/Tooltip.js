@@ -1,27 +1,30 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react'
+import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react'
 import propTypes from 'prop-types'
 import classes from './Tooltip.module.scss'
 import { usePopper } from 'react-popper'
 import ScaleAnimation from "../Animations/ScaleAnimation/ScaleAnimation"
 
-
-const Tooltip = props => {
-    const {
-        anchorRef,
-        placement,
-        enterTimer,
-        leaveTimer,
-        children } = props
+const Tooltip = ({
+     anchorRef,
+     placement,
+     enterTimer,
+     leaveTimer,
+     children,
+     arrow,
+     offset }) => {
 
     const popperRef = useRef(null)
     const [isOpen, setIsOpen ] = useState(false)
-    const { styles, attributes } = usePopper(anchorRef.current, popperRef.current, {
+    const [arrowRef, setArrowRef] = useState(null)
+    const { styles, attributes, update: updatePopper  } = usePopper(anchorRef.current, popperRef.current, {
         placement: placement,
         modifiers: [
             {
                 name:'computeStyles',
-                options: { 'adaptive': false }
-            }
+                options: { adaptive: false }
+            },
+            { name: 'arrow', options: { element: arrowRef } },
+            { name: 'offset', options: { offset: [0, offset] } }
         ]
     })
 
@@ -33,6 +36,15 @@ const Tooltip = props => {
         setTimeout(() => setIsOpen(false), leaveTimer)
     }, [leaveTimer])
 
+    useEffect(  () => {
+        async function update() {
+            if(arrow && arrowRef && isOpen && updatePopper){
+                await updatePopper()
+            }
+        }
+        update()
+    }, [arrow, arrowRef, isOpen, updatePopper])
+
     useEffect(() => {
         if(anchorRef.current) {
             anchorRef.current.onmouseenter = handleMouseEnter
@@ -40,29 +52,28 @@ const Tooltip = props => {
         }
     },[anchorRef, handleMouseEnter, handleMouseLeave])
 
-    const renderPopper =  () =>
-        (
-            <ScaleAnimation isOpen={ isOpen }>
-                <div
-                    className={ classes.popperContainer }
-                    ref={ popperRef }
-                    style={ styles.popper }
-                    { ...attributes.popper }>
-                    { children }
-                </div>
-            </ScaleAnimation>
-            
-        )
-
-    return renderPopper()
+    return (
+        <ScaleAnimation isOpen={ isOpen }>
+            <div
+                className={ classes.popperContainer }
+                ref={ popperRef }
+                style={ styles.popper }
+                { ...attributes.popper }>
+                { children }
+                { arrow && <div ref={ setArrowRef } style={ styles.arrow } className={ classes.popperArrow } /> }
+            </div>
+        </ScaleAnimation>
+    )
 }
 
 Tooltip.defaultProps = {
-    title: 'placeholder',
+    anchorRef: null,
     placement: 'bottom',
     enterTimer: 100,
     leaveTimer: 200,
-    children: null
+    children: null,
+    arrow: false,
+    offset: 5
 }
 
 export default Tooltip
