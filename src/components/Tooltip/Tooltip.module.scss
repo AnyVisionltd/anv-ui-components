@@ -7,4 +7,7 @@
   border-radius: av-radius(tidy);
   color: av-color(purewhite);
   font-size: av-font-size(tiny);
+  * {
+    margin: 0;
+  }
 }

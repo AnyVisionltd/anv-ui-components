@@ -1,61 +1,68 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState, useRef, useCallback } from 'react'
 import propTypes from 'prop-types'
-import classNames from 'classnames'
 import classes from './Tooltip.module.scss'
 import { usePopper } from 'react-popper'
+import ScaleAnimation from "../Animations/ScaleAnimation/ScaleAnimation"
 
-const Tooltip = ({ children, tooltipContent: tooltipContent, placement }) => {
-    const [referenceElement, setReferenceElement] = useState(null)
-    const [popperElement, setPopperElement] = useState(null)
-    const [ popperVisibility, setPopperVisibility ] = useState(false)
-    const { styles, attributes } = usePopper(referenceElement, popperElement, {
-        placement: placement
+
+const Tooltip = props => {
+    const {
+        anchorRef,
+        placement,
+        enterTimer,
+        leaveTimer,
+        children } = props
+
+    const popperRef = useRef(null)
+    const [isOpen, setIsOpen ] = useState(false)
+    const { styles, attributes } = usePopper(anchorRef.current, popperRef.current, {
+        placement: placement,
+        modifiers: [
+            {
+                name:'computeStyles',
+                options: { 'adaptive': false }
+            }
+        ]
     })
 
-    const handleMouseEnter = () => !popperVisibility && setPopperVisibility(true)
-    const handleMouseLeave = () => !!popperVisibility && setPopperVisibility(false)
+    const handleMouseEnter = useCallback(() => {
+        setTimeout(() => setIsOpen(true), enterTimer)
+    },[enterTimer])
 
-    const renderPopperElement = () => (
-         <div
-             className={ classes.popperContainer }
-             ref={ setPopperElement }
-             style={ styles.popper }
-             { ...attributes.popper }>
-             { tooltipContent }
-        </div>
-    )
+    const handleMouseLeave = useCallback(() => {
+        setTimeout(() => setIsOpen(false), leaveTimer)
+    }, [leaveTimer])
 
-    return (
-        <>
-            <div
-                onMouseEnter={ handleMouseEnter }
-                onMouseLeave={ handleMouseLeave }>
-                { React.cloneElement( children,
-                    {
-                        onMouseEnter: handleMouseEnter,
-                        onMouseLeave: handleMouseLeave,
-                        ref: setReferenceElement
-                    })
-                }
-            </div>
-            { !!popperVisibility && renderPopperElement() }
-        </>
-    )
+    useEffect(() => {
+        if(anchorRef.current) {
+            anchorRef.current.onmouseenter = handleMouseEnter
+            anchorRef.current.onmouseleave = handleMouseLeave
+        }
+    },[anchorRef, handleMouseEnter, handleMouseLeave])
+
+    const renderPopper =  () =>
+        (
+            <ScaleAnimation isOpen={ isOpen }>
+                <div
+                    className={ classes.popperContainer }
+                    ref={ popperRef }
+                    style={ styles.popper }
+                    { ...attributes.popper }>
+                    { children }
+                </div>
+            </ScaleAnimation>
+            
+        )
+
+    return renderPopper()
 }
 
 Tooltip.defaultProps = {
     title: 'placeholder',
     placement: 'bottom',
+    enterTimer: 100,
+    leaveTimer: 200,
     children: null
-}
-
-Tooltip.propTypes = {
-    /** The content in the tooltip*/
-    title: propTypes.string,
-    /** Where the tooltip will show from the reference element*/
-    placement: propTypes.string,
-    /** The the element(s) the tooltip will be using as a reference */
-    children: propTypes.node.isRequired
 }
 
 export default Tooltip

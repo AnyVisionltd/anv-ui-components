@@ -1849,17 +1849,9 @@ exports[`Storyshots Components/Tooltip Default 1`] = `
   <div
     className="center"
   >
-    <div
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-    >
-      <h6
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-      >
-        Hover over me
-      </h6>
-    </div>
+    <h6>
+      Hover over me!
+    </h6>
   </div>
 </div>
 `;
