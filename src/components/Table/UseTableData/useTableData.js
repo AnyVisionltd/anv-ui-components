@@ -10,9 +10,9 @@ const useTableData = () => {
     return data.filter(row => {
       return filters.every(({ field, value }) => {
         if(field) {
-          return row[field].toString().toLowerCase().includes(value)
+          return row[field].toString().toLowerCase().includes(value.toString().toLowerCase())
         } else {
-          return Object.values(row).some(cellValue => cellValue.toString().toLowerCase().includes(value))
+          return Object.values(row).some(cellValue => cellValue.toString().toLowerCase().includes(value.toString().toLowerCase()))
         }
       })
     })

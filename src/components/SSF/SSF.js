@@ -219,6 +219,7 @@ const SmartFilter = ({
   const renderAutoComplete = () => {
     return (
       <Menu
+        variant={ 'dense' }
         aria-labelledby="menu-element"
         anchorElement={ menuAnchor }
         isOpen={ !!menuAnchor }
