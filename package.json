@@ -18,7 +18,9 @@
     "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
     "react-scripts": "3.4.1",
-    "react-transition-group": "^4.3.0"
+    "react-transition-group": "^4.3.0",
+    "react-window": "^1.8.5",
+    "react-window-infinite-loader": "^1.0.5"
   },
   "scripts": {
     "build": "rm -rf dist && NODE_ENV=production babel src --out-dir dist --copy-files --no-copy-ignored --ignore src/**/*.test.js,src/**/*.stories.js,src/setupTests.js",

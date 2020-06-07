@@ -1507,6 +1507,44 @@ exports[`Storyshots Components/SSF Without Menu Fields 1`] = `
 </div>
 `;
 
+exports[`Storyshots Components/SkeletonLoader Default 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      style={
+        Object {
+          "width": "500px",
+        }
+      }
+    >
+      <div
+        className="skeletonLoader microMargin"
+        style={
+          Object {
+            "height": "30px",
+            "width": "30px",
+          }
+        }
+      />
+      <div
+        className="skeletonLoader microMargin"
+      />
+      <div
+        className="skeletonLoader microMargin"
+      />
+      <div
+        className="skeletonLoader microMargin"
+      />
+      <div
+        className="skeletonLoader microMargin"
+      />
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Components/Snackbar Action 1`] = `
 <div>
   <div
