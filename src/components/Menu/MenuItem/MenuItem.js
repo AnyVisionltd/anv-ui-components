@@ -44,9 +44,13 @@ const MenuItem = forwardRef(({
       ref={ ref }
       { ...otherProps }
     >
-      <div className={ styles.menuLeadingComponent }>
-        { leadingComponent }
-      </div>
+      {
+        leadingComponent &&  (
+          <div className={ styles.menuLeadingComponent }>
+            { leadingComponent }
+          </div>
+        )
+      }
       { children }
     </li>
   )

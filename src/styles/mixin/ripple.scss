@@ -21,12 +21,12 @@ $ripple-transition-duration: 0.3s;
 
     &::before {
       background-color: $color;
-      transition: opacity 0.2s;
+      transition: opacity 0.2s ease-in-out;
     }
 
     &::after {
       background: radial-gradient(circle at center, $color 1%, transparent 1%) center/10000% 10000% no-repeat;
-      transition: opacity 1s, background-size $ripple-transition-duration;
+      transition: opacity 1s ease-in-out, background-size $ripple-transition-duration ease-in-out;
     }
 
     &:hover::before {
@@ -44,7 +44,7 @@ $ripple-transition-duration: 0.3s;
     &:active::after {
       opacity: av-opacity(disabled);
       background-size: 100% 100%;
-      transition: background-size 0s;
+      transition: background-size 0s ease-in-out;
     }
   }
 }
