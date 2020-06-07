@@ -103,8 +103,7 @@ const Selection = ({
       <Portal containerId={ 'table-selection-bar' }>
         <div className={ classes }>
           <Checkbox
-            checked={ excludeMode && !items.length }
-            indeterminate={ !!items.length }
+            indeterminate
             onChange={ toggleSelectAll }
           />
           <div className={ styles.countContainer }>

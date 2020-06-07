@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import { IconButton, Menu, Checkbox } from '../../../index'
+import { IconButton, Menu, Checkbox, SkeletonLoading } from '../../../index'
 import { ReactComponent as OptionsIcon } from '../../../assets/svg/Options.svg'
 import TableContext from '../TableContext'
 import { useTableData } from "../UseTableData"
@@ -21,6 +21,8 @@ const TableBody = ({
   const tableData = useTableData()
 
   const [actionsAnchorElement, setActionsAnchorElement] = useState(null)
+
+  const isLoading = false
 
   useEffect(() => {
     setData(data)
@@ -107,22 +109,22 @@ const TableBody = ({
 
   const renderRow = (row, isSelected) => (
     <>
-	  { renderSelection(row, isSelected) }
-	  { headers.map(({
+      { renderSelection(row, isSelected) }
+      { headers.map(({
         field, columnRender, hide, flexWidth,
-	  }) => {
+      }) => {
         if (hide) {
-		  return null
+          return null
         }
         const style = flexWidth ? { flex: `0 0 ${flexWidth}` } : {}
         return (
-		  <div role="cell" style={ style } className={ styles.tableCell } key={ field }>
+          <div role="cell" style={ style } className={ styles.tableCell } key={ field }>
             { columnRender ? columnRender(row[field], row) : row[field] }
-		  </div>
+          </div>
         )
-	  }) }
-	  { /* { renderDynamicColumnPlaceholder() } */ }
-	  { renderActions(row) }
+      }) }
+      { /* { renderDynamicColumnPlaceholder() } */ }
+      { renderActions(row) }
     </>
   )
 
@@ -132,16 +134,53 @@ const TableBody = ({
 	  const tableRowClassNames = classNames(styles.tableRow, { [styles.selectedRow]: isSelected })
 	  return (
         <div
-		  role="row"
-		  style={ { height: rowHeight } }
-		  className={ tableRowClassNames }
-		  key={ index }
+          role="row"
+		      style={ { height: rowHeight } }
+          className={ tableRowClassNames }
+          key={ index }
         >
-		  { renderRow(row, isSelected) }
+          { renderRow(row, isSelected) }
         </div>
-	  )
+      )
     })
   )
+
+  const renderLoading = () => {
+    if(!isLoading) {
+      return
+    }
+
+    return Array.from({ length: 5 }, (_, index) => (
+      <div
+        role={ 'row' }
+        className={ styles.tableRow }
+        key={ index }
+      >
+        <div
+          role="cell"
+          className={ styles.selectionCell }
+        >
+          <SkeletonLoading className={ styles.circleSkeleton }/>
+        </div>
+        {
+          headers.map(({
+            field, hide, flexWidth
+          }) => {
+            if (hide) {
+              return null
+            }
+            const style = flexWidth ? { flex: `0 0 ${flexWidth}` } : {}
+            return (
+              <div role="cell" style={ style } className={ styles.tableCell } key={ field }>
+                <SkeletonLoading/>
+              </div>
+            )
+          })
+        }
+        <div className={ styles.actionsCell }/>
+      </div>
+    ))
+  }
 
   const classes = classNames(
     styles.tableBody,
@@ -150,10 +189,11 @@ const TableBody = ({
 
   return (
     <div
-	  className={ classes }
-	  { ...otherProps }
+      className={ classes }
+	    { ...otherProps }
     >
-	  { renderTableRows() }
+	    { renderTableRows() }
+      { renderLoading() }
     </div>
   )
 }
