@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import { IconButton, Menu, Checkbox, SkeletonLoading } from '../../../index'
+import { IconButton, Menu, Checkbox, SkeletonLoader } from '../../../index'
 import { ReactComponent as OptionsIcon } from '../../../assets/svg/Options.svg'
 import TableContext from '../TableContext'
 import { useTableData } from "../UseTableData"
@@ -160,7 +160,7 @@ const TableBody = ({
           role="cell"
           className={ styles.selectionCell }
         >
-          <SkeletonLoading className={ styles.circleSkeleton }/>
+          <SkeletonLoader className={ styles.circleSkeleton }/>
         </div>
         {
           headers.map(({
@@ -172,7 +172,7 @@ const TableBody = ({
             const style = flexWidth ? { flex: `0 0 ${flexWidth}` } : {}
             return (
               <div role="cell" style={ style } className={ styles.tableCell } key={ field }>
-                <SkeletonLoading/>
+                <SkeletonLoader/>
               </div>
             )
           })

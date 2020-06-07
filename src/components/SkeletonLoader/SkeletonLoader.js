@@ -1,20 +1,20 @@
 import React from "react"
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import styles from './SkeletonLoading.module.scss'
+import styles from './SkeletonLoader.module.scss'
 
-const SkeletonLoading = ({ className }) => {
+const SkeletonLoader = ({ className }) => {
   const classes = classNames(
-    styles.skeletonLoading,
+    styles.skeletonLoader,
     className
   )
 
   return <span className={ classes }/>
 }
 
-SkeletonLoading.propTypes = {
+SkeletonLoader.propTypes = {
   /** For css customization. */
   className: propTypes.string
 }
 
-export default SkeletonLoading
+export default SkeletonLoader
