@@ -3,13 +3,13 @@ import propTypes from 'prop-types'
 import classNames from 'classnames'
 import styles from './SkeletonLoader.module.scss'
 
-const SkeletonLoader = ({ className }) => {
+const SkeletonLoader = ({ className, ...otherProps }) => {
   const classes = classNames(
     styles.skeletonLoader,
     className
   )
 
-  return <span className={ classes }/>
+  return <div className={ classes } { ...otherProps } />
 }
 
 SkeletonLoader.propTypes = {
