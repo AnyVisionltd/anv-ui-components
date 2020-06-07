@@ -1,5 +1,5 @@
 import React from 'react'
-import SkeletonLoader from './SkeletonLoader'
+import { SkeletonLoader } from '../../index'
 import { centerDecorator } from "../../utils/storybook/decorators"
 import styles from '../../styles/storybook/index.module.scss'
 
