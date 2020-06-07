@@ -15,7 +15,7 @@ const circleLoaderStyle = {
 }
 
 export const Default = () => (
-  <div style={ { width: '50%' } }>
+  <div style={ { width: '500px' } }>
     <SkeletonLoader className={ styles.microMargin } style={ circleLoaderStyle }/>
     <SkeletonLoader className={ styles.microMargin }/>
     <SkeletonLoader className={ styles.microMargin }/>

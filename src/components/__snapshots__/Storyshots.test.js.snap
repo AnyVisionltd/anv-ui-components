@@ -1515,7 +1515,7 @@ exports[`Storyshots Components/SkeletonLoader Default 1`] = `
     <div
       style={
         Object {
-          "width": "50%",
+          "width": "500px",
         }
       }
     >
