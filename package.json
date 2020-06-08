@@ -12,13 +12,14 @@
     "url": "https://github.com/AnyVisionltd/anv-ui-components"
   },
   "dependencies": {
-    "@anyvision/style-guide": "1.0.1-beta.12",
+    "@anyvision/style-guide": "1.0.1-beta.13",
     "classnames": "^2.2.6",
     "jest-environment-jsdom-sixteen": "^1.0.3",
     "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
     "react-scripts": "3.4.1",
     "react-transition-group": "^4.3.0",
+    "react-virtualized-auto-sizer": "^1.0.2",
     "react-window": "^1.8.5",
     "react-window-infinite-loader": "^1.0.5"
   },

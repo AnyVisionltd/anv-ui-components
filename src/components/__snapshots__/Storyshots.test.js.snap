@@ -1507,7 +1507,7 @@ exports[`Storyshots Components/SSF Without Menu Fields 1`] = `
 </div>
 `;
 
-exports[`Storyshots Components/SkeletonLoader Default 1`] = `
+exports[`Storyshots Components/InfiniteList Default 1`] = `
 <div>
   <div
     className="center"
