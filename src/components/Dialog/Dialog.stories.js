@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import { boolean } from '@storybook/addon-knobs'
-import Dialog from './Dialog'
-import { Button } from '../Button'
+import { Dialog, Button } from '../../index'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import styles from '../../styles/storybook/dialog.module.scss'
 
