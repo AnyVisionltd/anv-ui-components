@@ -1,7 +1,7 @@
 import React from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import { IconButton } from '../../IconButton'
+import { IconButton } from '../../../index'
 import { ReactComponent as CancelIcon } from '../../../assets/svg/Cancel.svg'
 import styles from './DialogHeader.module.scss'
 

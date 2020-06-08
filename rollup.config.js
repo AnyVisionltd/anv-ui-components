@@ -9,7 +9,7 @@ import svgr from '@svgr/rollup'
 export default {
   input: 'src/index.js',
   output: {
-    file: 'dist/bundle.js',
+    file: 'dist/index.js',
     format: 'cjs'
   },
   // All the used libs needs to be here

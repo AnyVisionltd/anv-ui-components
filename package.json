@@ -23,8 +23,8 @@
     "react-window-infinite-loader": "^1.0.5"
   },
   "scripts": {
-    "build": "rm -rf dist && NODE_ENV=production babel src --out-dir dist --copy-files --no-copy-ignored --ignore src/**/*.test.js,src/**/*.stories.js,src/setupTests.js",
-    "buildR": "rollup -c",
+    "buildR": "rm -rf dist && NODE_ENV=production babel src --out-dir dist --copy-files --no-copy-ignored --ignore src/**/*.test.js,src/**/*.stories.js,src/setupTests.js",
+    "build": "rollup -c",
     "test": "react-scripts test",
     "lint": "eslint -c .eslintrc.js src",
     "lint:fix": "eslint -c .eslintrc.js src --fix",
