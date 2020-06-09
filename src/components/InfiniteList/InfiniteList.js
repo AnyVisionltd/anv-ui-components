@@ -12,6 +12,7 @@ const InfiniteList = ({
   itemsCount,
   items,
   loadMoreItems,
+  isLoading,
   className
 }) => {
 
@@ -19,6 +20,9 @@ const InfiniteList = ({
 
   const itemCount = hasNextPage ? items.length + 1 : items.length
 
+  const loadMore = isLoading ? () => {} : loadMoreItems
+
+  // Every row is loaded except for our loading indicator row.
   const isItemLoaded = index => !hasNextPage || index < items.length
 
   const Item = ({ index, style }) => {
@@ -41,7 +45,8 @@ const InfiniteList = ({
     <InfiniteLoader
       isItemLoaded={ isItemLoaded }
       itemCount={ itemCount }
-      loadMoreItems={ loadMoreItems }
+      loadMoreItems={ loadMore }
+      threshold={ 0 }
     >
       { ({ onItemsRendered, ref }) => (
         <AutoSizer>
@@ -77,7 +82,10 @@ InfiniteList.propTypes = {
   rowRender: propTypes.func.isRequired,
   /** Function for custom loader when reach bottom. */
   loaderRender: propTypes.func,
-  /** Callback fire when almost reach to the list bottom, use for fetch more data and update <code>items</code>. */
+  /**
+   *  Callback to be invoked when more rows must be loaded.
+   *  It should return a Promise that is resolved once all data has finished loading.
+   */
   loadMoreItems: propTypes.func,
   /** For css customization. */
   className: propTypes.string

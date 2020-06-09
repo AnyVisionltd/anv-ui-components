@@ -10,22 +10,22 @@ export default {
 
 export const Default = () => {
   const [items, setItems] = useState([])
-  const [isNextPageLoading, setIsNextPageLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const totalItems = 50
 
   const loadMoreItems = useCallback(() => {
-    setIsNextPageLoading(true)
+    setIsLoading(true)
     setTimeout(() => {
-      const newItems = [...items, ...Array(10).fill('item')]
+      const newItems = [...items, ...Array(10).keys()]
       setItems(newItems)
-      setIsNextPageLoading(false)
-    }, 2000)
+      setIsLoading(false)
+    }, 2500)
   }, [items])
 
 
   const rowRender = item => {
-    return <div style={ { height: '56px' } }> { item } 1 </div>
+    return <div style={ { height: '56px' } }> item { item }</div>
   }
 
   const loaderRender = () => 'Fetching data...'
@@ -38,7 +38,7 @@ export const Default = () => {
         rowRender={ rowRender }
         loaderRender={ loaderRender }
         loadMoreItems={ loadMoreItems }
-        isNextPageLoading={ isNextPageLoading }
+        isLoading={ isLoading }
       />
     </div>
   )
