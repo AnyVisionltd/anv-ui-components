@@ -35,7 +35,7 @@ const Dialog = ({ isOpen, className, onClose, disableBackdropClick, disableEscap
     }
   }
 
-  // UseKeyDownListener({ [keymap.ESCAPE]: onEscapeKeyDown })
+  UseKeyDownListener({ [keymap.ESCAPE]: onEscapeKeyDown })
 
   return (
     <Portal containerId="dialog-container">
