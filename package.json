@@ -12,7 +12,7 @@
     "url": "https://github.com/AnyVisionltd/anv-ui-components"
   },
   "dependencies": {
-    "@anyvision/style-guide": "1.0.1-beta.12",
+    "@anyvision/style-guide": "1.0.1-beta.14",
     "classnames": "^2.2.6",
     "jest-environment-jsdom-sixteen": "^1.0.3",
     "node-sass": "^4.14.1",
@@ -78,6 +78,7 @@
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-postcss": "^3.1.2",
     "rollup-plugin-sass": "^1.2.2",
     "rollup-plugin-svg": "^2.0.0",
     "url-loader": "^4.1.0"

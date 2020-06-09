@@ -1,9 +1,9 @@
 import resolve from 'rollup-plugin-node-resolve'
 import babel from 'rollup-plugin-babel'
-import sass from 'rollup-plugin-sass'
 import svg from 'rollup-plugin-svg'
 import commonjs from 'rollup-plugin-commonjs'
 import svgr from '@svgr/rollup'
+import postcss from 'rollup-plugin-postcss'
 
 
 export default {
@@ -19,11 +19,8 @@ export default {
   ],
   plugins: [
     resolve(),
+    postcss(),
     babel({
-      exclude: 'node_modules/**'
-    }),
-    sass({
-      insert: true
     }),
     svg(),
     svgr(),
