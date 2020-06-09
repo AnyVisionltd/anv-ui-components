@@ -38,12 +38,12 @@ describe('<Dialog />', () => {
     expect(onClose).not.toBeCalled()
   })
 
-  // it('should call onClose when escape button is clicked', () => {
-  //   const onClose = jest.fn()
-  //   const { container } = render(<Dialog isOpen onClose={ onClose } />)
-  //   fireEvent.keyDown(container, { keyCode: keymap.ESCAPE })
-  //   expect(onClose).toBeCalled()
-  // })
+  it('should call onClose when escape button is clicked', () => {
+    const onClose = jest.fn()
+    const { container } = render(<Dialog isOpen onClose={ onClose } />)
+    fireEvent.keyDown(container, { keyCode: keymap.ESCAPE })
+    expect(onClose).toBeCalled()
+  })
 
   it('should not call onClose when escape button is clicked and escape key down is disabled', () => {
     const onClose = jest.fn()
