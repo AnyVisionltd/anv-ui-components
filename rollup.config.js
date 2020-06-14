@@ -1,8 +1,8 @@
 import resolve from 'rollup-plugin-node-resolve'
 import babel from 'rollup-plugin-babel'
-import svg from 'rollup-plugin-svg'
 import commonjs from 'rollup-plugin-commonjs'
 import svgr from '@svgr/rollup'
+import url from 'rollup-plugin-url'
 import postcss from 'rollup-plugin-postcss'
 
 
@@ -22,8 +22,8 @@ export default {
     postcss(),
     babel({
     }),
-    svg(),
-    svgr(),
+    url(),
+    svgr({ svgo: false }),
     commonjs({
       namedExports: {
         "react-dom": ["createPortal", "findDOMNode"],
