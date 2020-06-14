@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  @extend %av-body2;
+  @extend %av-body1;
 
   .closeIcon {
     color: av-color(content);
