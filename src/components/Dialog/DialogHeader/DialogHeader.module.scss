@@ -5,6 +5,8 @@
   height: 56px;
   display: flex;
   align-items: center;
+  flex-shrink: 0;
+  @extend %av-body2;
 
   .closeIcon {
     color: av-color(content);
