@@ -34,7 +34,7 @@ export const Default = () => {
     <div style={ { width: '80%', height: '300px' } }>
       <InfiniteList
         items={ items }
-        itemsCount={ totalItems }
+        totalItems={ totalItems }
         rowRender={ rowRender }
         loaderRender={ loaderRender }
         loadMoreItems={ loadMoreItems }

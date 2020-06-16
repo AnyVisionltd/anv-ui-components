@@ -9,14 +9,15 @@ import styles from './InfiniteList.module.scss'
 const InfiniteList = ({
   rowRender,
   loaderRender,
-  itemsCount,
+  rowHeight,
+  totalItems,
   items,
   loadMoreItems,
   isLoading,
   className
 }) => {
 
-  const hasNextPage = items.length < itemsCount
+  const hasNextPage = items.length < totalItems
 
   const itemCount = hasNextPage ? items.length + 1 : items.length
 
@@ -49,16 +50,15 @@ const InfiniteList = ({
       threshold={ 0 }
     >
       { ({ onItemsRendered, ref }) => (
-        <AutoSizer>
+        <AutoSizer ref={ ref }>
           { ({ height, width }) => (
             <List
               className={ classes }
               height={ height }
               width={ width }
               itemCount={ itemCount }
-              itemSize={ 56 }
+              itemSize={ rowHeight }
               onItemsRendered={ onItemsRendered }
-              ref={ ref }
             >
               { Item }
             </List>
@@ -70,22 +70,23 @@ const InfiniteList = ({
 }
 
 InfiniteList.defaultProps = {
-  loaderRender: () => 'Loading...'
+  loadMoreItems: () => {},
+  loaderRender: () => 'Loading...',
+  rowHeight: 56
 }
 
 InfiniteList.propTypes = {
   /** The items to display. */
   items: propTypes.array.isRequired,
   /** The total items counts. */
-  itemsCount: propTypes.number.isRequired,
+  totalItems: propTypes.number.isRequired,
+  /** The row height in pixel. */
+  rowHeight: propTypes.number.isRequired,
   /** Render function for row. The function gets the current item as first param. */
   rowRender: propTypes.func.isRequired,
   /** Function for custom loader when reach bottom. */
   loaderRender: propTypes.func,
-  /**
-   *  Callback to be invoked when more rows must be loaded.
-   *  It should return a Promise that is resolved once all data has finished loading.
-   */
+  /** Callback to be invoked when more rows must be loaded. */
   loadMoreItems: propTypes.func,
   /** For css customization. */
   className: propTypes.string
