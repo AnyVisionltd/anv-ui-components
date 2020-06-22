@@ -1,7 +1,5 @@
 @import '~@anyvision/style-guide';
 
-$container-width: global value;
-
 .popperContainer{
   @include av-elevation(overlay);
   background-color: av-color(secondary);
