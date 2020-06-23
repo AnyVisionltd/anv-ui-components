@@ -88,12 +88,12 @@ const TableBody = ({
     )
   }
 
-  const isRowSelected = row => {
-    const { isActive, excludeMode } = selection
+  const isRowSelected = ({ id }) => {
+    const { isActive, excludeMode, items } = selection
     if (!isActive) {
 	  return null
     }
-    let isSelected = selection.items.some(row1 => row1 === row)
+    let isSelected = items.some(rowId => rowId === id)
     return excludeMode ? !isSelected : isSelected
   }
 
@@ -201,8 +201,9 @@ TableBody.defaultProps = {
 }
 
 TableBody.propTypes = {
-  /**
-   *  Each object represent row in the table. The rows rely on <code>headers</code>,
+  /**  Array of items, each item represent row in the table. <br/>
+   *  <b>id</b><span style="color: #FF4400">*</span> field is required for each item. <br/>
+   *  The rows rely on <code>headers</code>,
    *  <code>prop</code> from <code><Table.Header/></code> component.
    */
   data: propTypes.arrayOf(propTypes.object).isRequired,

@@ -8,7 +8,7 @@ import styles from './Selection.module.scss'
 
 const Selection = ({
   onChange,
-  value,
+  selected,
   bulkActions,
   className
 }) => {
@@ -33,8 +33,8 @@ const Selection = ({
   }, [setSelectionActivity])
 
   useEffect(() => {
-    value && setSelection(value)
-  }, [value, setSelection])
+    selected && setSelection(selected)
+  }, [selected, setSelection])
 
   const renderMoreActions = moreActions => {
     if(!moreActions.length) {
@@ -125,7 +125,7 @@ Selection.propTypes = {
   /** Callback fire when selection changed. */
   onChange: propTypes.func,
   /** The value from the on change. */
-  value: propTypes.arrayOf(
+  selected: propTypes.arrayOf(
     propTypes.shape({
       items: propTypes.array,
       excludeMode: propTypes.bool
