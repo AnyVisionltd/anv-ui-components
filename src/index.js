@@ -9,4 +9,7 @@ export { Table } from './components/Table'
 export { Switch } from './components/Switch'
 export { SSF } from './components/SSF'
 export { SkeletonLoader } from './components/SkeletonLoader'
+export { InfiniteList } from './components/InfiniteList'
 export { Dialog } from './components/Dialog'
+
+export { default as mockAutoSizer } from './testUtils/mockAutoSizer'
