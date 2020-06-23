@@ -105,7 +105,7 @@ export const RemoteDataTable = () => {
   ]
 
   const onTableChange = useCallback(({ filters, sort }) => {
-    console.log('table params changed add debounce')
+    // TODO add server mock for filters and sort
   }, [])
 
   const style = { width: '80%', height: '400px' }

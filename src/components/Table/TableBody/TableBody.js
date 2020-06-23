@@ -201,7 +201,8 @@ TableBody.defaultProps = {
 }
 
 TableBody.propTypes = {
-  /**  Array of items, each item represent row in the table. <br/>
+  /**
+   *  Array of items, each item represent row in the table. <br/>
    *  <b>id</b><span style="color: #FF4400">*</span> field is required for each item. <br/>
    *  The rows rely on <code>headers</code>,
    *  <code>prop</code> from <code><Table.Header/></code> component.
