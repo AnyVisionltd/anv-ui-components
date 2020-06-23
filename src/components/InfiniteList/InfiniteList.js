@@ -8,7 +8,7 @@ import styles from './InfiniteList.module.scss'
 
 const InfiniteList = ({
   rowRender,
-  loaderRender,
+  customLoader,
   rowHeight,
   totalItems,
   items,
@@ -29,7 +29,7 @@ const InfiniteList = ({
   const Item = ({ index, style }) => {
     let content
     if (!isItemLoaded(index)) {
-      content = loaderRender()
+      content = customLoader()
     } else {
       content = rowRender(items[index])
     }
@@ -43,16 +43,17 @@ const InfiniteList = ({
   )
 
   return (
-    <InfiniteLoader
-      isItemLoaded={ isItemLoaded }
-      itemCount={ itemCount }
-      loadMoreItems={ loadMore }
-      threshold={ 0 }
-    >
-      { ({ onItemsRendered, ref }) => (
-        <AutoSizer ref={ ref }>
-          { ({ height, width }) => (
+    <AutoSizer>
+      { ({ height, width }) => (
+        <InfiniteLoader
+          isItemLoaded={ isItemLoaded }
+          itemCount={ itemCount }
+          loadMoreItems={ loadMore }
+          threshold={ 0 }
+        >
+          { ({ onItemsRendered, ref }) => (
             <List
+              ref={ ref }
               className={ classes }
               height={ height }
               width={ width }
@@ -63,15 +64,15 @@ const InfiniteList = ({
               { Item }
             </List>
           ) }
-        </AutoSizer>
+        </InfiniteLoader>
       ) }
-    </InfiniteLoader>
+    </AutoSizer>
   )
 }
 
 InfiniteList.defaultProps = {
   loadMoreItems: () => {},
-  loaderRender: () => 'Loading...',
+  customLoader: () => 'Loading...',
   rowHeight: 56
 }
 
@@ -85,9 +86,11 @@ InfiniteList.propTypes = {
   /** Render function for row. The function gets the current item as first param. */
   rowRender: propTypes.func.isRequired,
   /** Function for custom loader when reach bottom. */
-  loaderRender: propTypes.func,
+  customLoader: propTypes.func,
   /** Callback to be invoked when more rows must be loaded. */
   loadMoreItems: propTypes.func,
+  /** True when fetching data. */
+  isLoading: propTypes.bool,
   /** For css customization. */
   className: propTypes.string
 }

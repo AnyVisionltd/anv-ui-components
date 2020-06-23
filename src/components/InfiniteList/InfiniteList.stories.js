@@ -36,7 +36,7 @@ export const Default = () => {
         items={ items }
         totalItems={ totalItems }
         rowRender={ rowRender }
-        loaderRender={ loaderRender }
+        customLoader={ loaderRender }
         loadMoreItems={ loadMoreItems }
         isLoading={ isLoading }
       />
