@@ -830,6 +830,33 @@ exports[`Storyshots Components/IconButton With Class Name 1`] = `
 </div>
 `;
 
+exports[`Storyshots Components/InfiniteList Default 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      style={
+        Object {
+          "height": "300px",
+          "width": "80%",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "height": 0,
+            "overflow": "visible",
+            "width": 0,
+          }
+        }
+      />
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Components/InputBase Default 1`] = `
 <div>
   <div
