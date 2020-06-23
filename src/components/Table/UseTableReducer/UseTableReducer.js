@@ -31,10 +31,10 @@ const toggleSelection = (selection, totalItems, payload) => {
     if(items.length + 1 === totalItems) {
       return { items: [] , excludeMode: !excludeMode }
     }
-    return { items: [...items, item] , excludeMode: excludeMode }
+    return { items: [...items, item.id] , excludeMode: excludeMode }
   }
   return {
-    items: items.filter(item => item !== payload.item),
+    items: items.filter(item => item !== payload.item.id),
     excludeMode: excludeMode
   }
 }
