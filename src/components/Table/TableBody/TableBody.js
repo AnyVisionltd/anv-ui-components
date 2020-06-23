@@ -10,6 +10,8 @@ import styles from './TableBody.module.scss'
 const TableBody = ({
   data,
   totalItems,
+  isLoading,
+  loadMoreData,
   rowHeight,
   rowActions,
   className,
@@ -21,8 +23,6 @@ const TableBody = ({
   const tableData = useTableData()
 
   const [actionsAnchorElement, setActionsAnchorElement] = useState(null)
-
-  const isLoading = false
 
   useEffect(() => {
     setData(data)
@@ -136,7 +136,7 @@ const TableBody = ({
     )
   }
 
-  const renderLoading = () => {
+  const loadingRender = () => {
     if(!isLoading) {
       return
     }
@@ -183,13 +183,15 @@ const TableBody = ({
       className={ classes }
 	    { ...otherProps }
     >
-	    { /*{ renderTableRows() }*/ }
 	    <InfiniteList
         totalItems={ +totalItems }
         rowRender={ row => renderRow(row) }
-        items={ tableData }>
+        items={ tableData }
+        customLoader={ loadingRender }
+        isLoading={ isLoading }
+        loadMoreItems={ loadMoreData }
+      >
       </InfiniteList>
-      { renderLoading() }
     </div>
   )
 }
@@ -199,12 +201,17 @@ TableBody.defaultProps = {
 }
 
 TableBody.propTypes = {
-  /**  Each object represent row in the table. The rows rely on <code>headers</code>,
+  /**
+   *  Each object represent row in the table. The rows rely on <code>headers</code>,
    *  <code>prop</code> from <code><Table.Header/></code> component.
-   *  */
+   */
   data: propTypes.arrayOf(propTypes.object).isRequired,
-  /** The number of items. required when not self controlled*/
+  /** The number of items. required when not self controlled */
   totalItems: propTypes.number,
+  /** Table loading status */
+  isLoading: propTypes.bool,
+  /** Callback fire when need to fetch more data */
+  loadMoreData: propTypes.func,
   /** The row height. <code>min-height: 48px</code>. */
   rowHeight: propTypes.string,
   /** If pass, render action menu at the end of each row. */
