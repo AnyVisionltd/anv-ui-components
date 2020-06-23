@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import { IconButton, Menu, Checkbox, SkeletonLoader } from '../../../index'
+import { IconButton, Menu, Checkbox, SkeletonLoader, InfiniteList } from '../../../index'
 import { ReactComponent as OptionsIcon } from '../../../assets/svg/Options.svg'
 import TableContext from '../TableContext'
 import { useTableData } from "../UseTableData"
@@ -107,43 +107,34 @@ const TableBody = ({
     </div>
   )
 
-  const renderRow = (row, isSelected) => (
-    <>
-      { renderSelection(row, isSelected) }
-      { headers.map(({
-        field, columnRender, hide, flexWidth,
-      }) => {
-        if (hide) {
-          return null
-        }
-        const style = flexWidth ? { flex: `0 0 ${flexWidth}` } : {}
-        return (
-          <div role="cell" style={ style } className={ styles.tableCell } key={ field }>
-            { columnRender ? columnRender(row[field], row) : row[field] }
-          </div>
-        )
-      }) }
-      { /* { renderDynamicColumnPlaceholder() } */ }
-      { renderActions(row) }
-    </>
-  )
-
-  const renderTableRows = () => (
-    tableData.map((row, index) => {
-	  const isSelected = isRowSelected(row)
-	  const tableRowClassNames = classNames(styles.tableRow, { [styles.selectedRow]: isSelected })
-	  return (
-        <div
-          role="row"
-		      style={ { height: rowHeight } }
-          className={ tableRowClassNames }
-          key={ index }
-        >
-          { renderRow(row, isSelected) }
-        </div>
-      )
-    })
-  )
+  const renderRow = row => {
+    const isSelected = isRowSelected(row)
+    const tableRowClassNames = classNames(styles.tableRow, { [styles.selectedRow]: isSelected })
+    return  (
+      <div
+        role="row"
+        style={ { height: rowHeight } }
+        className={ tableRowClassNames }
+      >
+        { renderSelection(row, isSelected) }
+        { headers.map(({
+          field, columnRender, hide, flexWidth,
+        }) => {
+          if (hide) {
+            return null
+          }
+          const style = flexWidth ? { flex: `0 0 ${flexWidth}` } : {}
+          return (
+            <div role="cell" style={ style } className={ styles.tableCell } key={ field }>
+              { columnRender ? columnRender(row[field], row) : row[field] }
+            </div>
+          )
+        }) }
+        { /* { renderDynamicColumnPlaceholder() } */ }
+        { renderActions(row) }
+      </div>
+    )
+  }
 
   const renderLoading = () => {
     if(!isLoading) {
@@ -172,7 +163,7 @@ const TableBody = ({
             const style = flexWidth ? { flex: `0 0 ${flexWidth}` } : {}
             return (
               <div role="cell" style={ style } className={ styles.tableCell } key={ field }>
-                <SkeletonLoader/>
+                <SkeletonLoader className={ styles.lineSkeleton }/>
               </div>
             )
           })
@@ -192,7 +183,12 @@ const TableBody = ({
       className={ classes }
 	    { ...otherProps }
     >
-	    { renderTableRows() }
+	    { /*{ renderTableRows() }*/ }
+	    <InfiniteList
+        totalItems={ +totalItems }
+        rowRender={ row => renderRow(row) }
+        items={ tableData }>
+      </InfiniteList>
       { renderLoading() }
     </div>
   )

@@ -4,12 +4,17 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   color: av-color(content);
 
   .circleSkeleton {
     width: av-size(sz-32);
     height: av-size(sz-32);
     border-radius: av-radius(circle);
+  }
+
+  .lineSkeleton {
+    width: 70%;
   }
 }
 
