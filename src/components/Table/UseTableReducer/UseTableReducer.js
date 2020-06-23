@@ -34,7 +34,7 @@ const toggleSelection = (selection, totalItems, payload) => {
     return { items: [...items, item.id] , excludeMode: excludeMode }
   }
   return {
-    items: items.filter(item => item !== payload.item.id),
+    items: items.filter(id => id !== payload.item.id),
     excludeMode: excludeMode
   }
 }
