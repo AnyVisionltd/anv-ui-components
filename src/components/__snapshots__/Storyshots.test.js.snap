@@ -1884,3 +1884,15 @@ exports[`Storyshots Components/Tooltip Default 1`] = `
   </div>
 </div>
 `;
+
+exports[`Storyshots Components/Tooltip Interactive 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <h6>
+      Hover over me!
+    </h6>
+  </div>
+</div>
+`;
