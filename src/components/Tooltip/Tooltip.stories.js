@@ -1,7 +1,7 @@
 import React, {  useRef } from 'react'
 import Tooltip from './Tooltip'
 import { centerDecorator } from "../../utils/storybook/decorators"
-import styles from '../../styles/storybook/index.module.scss'
+import { Button } from "../Button"
 
 export default {
     title: 'Components/Tooltip',
@@ -59,13 +59,30 @@ export const ArrowVariations = () => {
 export const Interactive = () => {
     const anchorRef = useRef()
 
+    const footerContainer = {
+        display: 'flex',
+        justifyContent:'space-between',
+        marginTop: '20px'
+    }
+
     return <>
         <h6 ref={ anchorRef }>
             Hover over me!
         </h6>
-        <Tooltip anchorRef={ anchorRef } placement={ 'right' }>
-            <Tooltip.Title>Onboarding</Tooltip.Title>
-            <Tooltip.Body>The action or process of integrating a new employee into an organization.</Tooltip.Body>
+        <Tooltip
+            anchorRef={ anchorRef }
+            placement={ 'right' }
+            offset={ 20 }
+            interactive>
+            <Tooltip.Header>Hover me!</Tooltip.Header>
+            <Tooltip.Body>Lorem ipsum dolor sit amet, consectetur adipiscing</Tooltip.Body>
+            <Tooltip.Footer >
+                <div style={ footerContainer }>
+                    <Button variant={ "ghost" } size="small">Skip</Button>
+                    <Button size='small'>Next</Button>
+                </div>
+
+            </Tooltip.Footer>
         </Tooltip>
     </>
 }
