@@ -55,3 +55,17 @@ export const ArrowVariations = () => {
         </Tooltip>
     </div>
 }
+
+export const Interactive = () => {
+    const anchorRef = useRef()
+
+    return <>
+        <h6 ref={ anchorRef }>
+            Hover over me!
+        </h6>
+        <Tooltip anchorRef={ anchorRef } placement={ 'right' }>
+            <Tooltip.Title>Onboarding</Tooltip.Title>
+            <Tooltip.Body>The action or process of integrating a new employee into an organization.</Tooltip.Body>
+        </Tooltip>
+    </>
+}

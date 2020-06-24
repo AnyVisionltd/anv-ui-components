@@ -3,7 +3,8 @@ import propTypes from 'prop-types'
 import classes from './Tooltip.module.scss'
 import { usePopper } from 'react-popper'
 import ScaleAnimation from "../Animations/ScaleAnimation/ScaleAnimation"
-
+import { TooltipTitle } from "./TooltipTitle"
+import { TooltipBody } from "./TooltipBody"
 const Tooltip = ({
      anchorRef,
      placement,
@@ -11,6 +12,7 @@ const Tooltip = ({
      leaveTimer,
      children,
      arrow,
+     width,
      offset }) => {
 
     const popperRef = useRef(null)
@@ -52,12 +54,19 @@ const Tooltip = ({
         }
     },[anchorRef, handleMouseEnter, handleMouseLeave])
 
+    console.log("styles: ", styles.popper)
+
+    const popperStyles = {
+        ...styles.popper,
+        width: width || 'auto'
+    }
+
     return (
         <ScaleAnimation isOpen={ isOpen }>
             <div
                 className={ classes.popperContainer }
                 ref={ popperRef }
-                style={ styles.popper }
+                style={ popperStyles }
                 { ...attributes.popper }>
                 { children }
                 { arrow && <div ref={ setArrowRef } style={ styles.arrow } className={ classes.popperArrow } /> }
@@ -73,7 +82,11 @@ Tooltip.defaultProps = {
     leaveTimer: 200,
     children: null,
     arrow: false,
-    offset: 5
+    offset: 5,
+    width: null
 }
+
+Tooltip.Title = TooltipTitle
+Tooltip.Body = TooltipBody
 
 export default Tooltip

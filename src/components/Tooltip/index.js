@@ -1,1 +1,1 @@
-export { default as Radio } from './Tooltip'
+export { default as Tooltip } from './Tooltip'
