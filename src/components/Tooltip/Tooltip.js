@@ -6,6 +6,7 @@ import ScaleAnimation from "../Animations/ScaleAnimation/ScaleAnimation"
 import { TooltipHeader } from "./TooltipHeader"
 import { TooltipBody } from "./TooltipBody"
 import { TooltipFooter } from "./TooltipFooter"
+import propTypes from "prop-types"
 
 const Tooltip = ({
      anchorRef,
@@ -100,6 +101,33 @@ Tooltip.defaultProps = {
     arrow: false,
     offset: 5,
     interactive: false
+}
+
+Tooltip.propTypes = {
+    /** Reference element used to \'anchor\' the tooltip*/
+    anchorRef: propTypes.oneOfType([
+        propTypes.func,
+        propTypes.shape({ current: propTypes.any }),
+    ]).isRequired,
+    /** Placement of the tooltip from the anchor element*/
+    placement: propTypes.oneOf(['top','bottom','left','right']),
+    /** After how much time the tooltip should appear after hovering
+     * the anchor element, or tooltip when in interactive mode*/
+    enterTimer: propTypes.number,
+    /** After how much time the tooltip should leave after the mouse
+     *  left the anchor element, or tooltip when in interactive mode*/
+    leaveTimer: propTypes.number,
+    /** Content inside the tooltip container*/
+    children: propTypes.node.isRequired,
+    /** Custom styles for the tooltip*/
+    className: propTypes.string,
+    /** Whether to use arrows or not*/
+    arrow: propTypes.bool,
+    /** The distance between the anchor element and the tooltip*/
+    offset: propTypes.number,
+    /** Whether the tooltip is interactive or not. This will add the ability to
+     * hover the tool tip and make it stay while being hovered.*/
+    interactive: propTypes.bool
 }
 
 Tooltip.Header = TooltipHeader
