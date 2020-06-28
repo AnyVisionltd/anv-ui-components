@@ -77,7 +77,6 @@ const Tooltip = ({
     },[anchorRef, handleAnchorMouseEnter, handleAnchorMouseLeave])
 
     return (
-        <ScaleAnimation isOpen={ true }>
             <div
                 hidden={ !isOpen }
                 className={ containerClasses }
@@ -89,7 +88,6 @@ const Tooltip = ({
                 { children }
                 { arrow && <div ref={ setArrowRef } style={ styles.arrow } className={ classes.popperArrow } /> }
             </div>
-         </ScaleAnimation>
     )
 }
 
