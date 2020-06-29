@@ -51,40 +51,40 @@ const TableBody = ({
 
   const renderActions = row => {
     if (!rowActions) {
-	  return
+      return
     }
     return (
-	  <>
+      <>
         <Menu
-		  anchorElement={ actionsAnchorElement }
-		  isOpen={ !!actionsAnchorElement }
-		  preferOpenDirection="down-start"
-		  onClose={ handleActionsClose }
+          anchorElement={ actionsAnchorElement }
+          isOpen={ !!actionsAnchorElement }
+          preferOpenDirection="down-start"
+          onClose={ handleActionsClose }
         >
-		  {
+          {
             rowActions.map(({ content, onClick }, index) => (
-			  <Menu.Item
+              <Menu.Item
                 key={ index }
                 onClick={ () => handleMenuItemClick(row, onClick) }
-			  >
+              >
                 { content }
-			  </Menu.Item>
+              </Menu.Item>
             ))
-		  }
+          }
         </Menu>
         <div
-		  role="cell"
-		  className={ styles.actionsCell }
+          role="cell"
+          className={ styles.actionsCell }
         >
-		  <IconButton
+          <IconButton
             className={ styles.actionButton }
             variant="ghost"
             onClick={ handleActionsClick }
-		  >
+          >
             <OptionsIcon/>
-		  </IconButton>
+          </IconButton>
         </div>
-	  </>
+      </>
     )
   }
 
