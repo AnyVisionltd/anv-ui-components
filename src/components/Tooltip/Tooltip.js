@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef, useCallback } from 'react'
 import classesNames from 'classnames'
 import classes from './Tooltip.module.scss'
 import { usePopper } from 'react-popper'
-import ScaleAnimation from "../Animations/ScaleAnimation/ScaleAnimation"
 import { TooltipHeader } from "./TooltipHeader"
 import { TooltipBody } from "./TooltipBody"
 import { TooltipFooter } from "./TooltipFooter"
@@ -24,10 +23,11 @@ const Tooltip = ({
         className
     )
 
+    const timerHide = useRef()
+    const timerShow = useRef()
     const popperRef = useRef(null)
     const [isOpen, setIsOpen ] = useState(false)
-    const [arrowRef, setArrowRef] = useState(null)
-    const [popperIsHovered, setPopperIsHovered] = useState(false)
+    const arrowRef = useRef(null)
     const { styles, attributes, update: updatePopper  } = usePopper(anchorRef.current, popperRef.current, {
         placement: placement,
         modifiers: [
@@ -35,30 +35,34 @@ const Tooltip = ({
                 name:'computeStyles',
                 options: { adaptive: false }
             },
-            { name: 'arrow', options: { element: arrowRef } },
+            { name: 'arrow', options: { element: arrowRef.current } },
             { name: 'offset', options: { offset: [0, offset] } }
         ]
     })
 
+    const setShowTimeout = useCallback(() => {
+        clearTimeout(timerShow.current)
+        timerShow.current = setTimeout(() => {
+            setIsOpen(true)
+        }, enterTimer)
+    }, [enterTimer, setIsOpen])
+
+    const setHideTimeout = useCallback(() => {
+        clearTimeout(timerHide.current)
+        timerHide.current = setTimeout(() => {
+            setIsOpen(false)
+        }, leaveTimer)
+    }, [leaveTimer, setIsOpen])
+
     const handleAnchorMouseEnter = useCallback(() => {
-        togglePopper(true, enterTimer)
-    },[enterTimer])
+        if(!isOpen) {
+            setShowTimeout()
+        }
+    },[isOpen, setShowTimeout])
 
     const handleAnchorMouseLeave = useCallback(() => {
-        if(!interactive || !popperIsHovered) {
-            togglePopper(false, leaveTimer)
-        }
-    }, [leaveTimer, interactive, popperIsHovered])
-
-    const handlePopperMouseEnter = () => setPopperIsHovered(true)
-    const handlePopperMouseLeave = () => {
-        setPopperIsHovered(false)
-        togglePopper(false, leaveTimer)
-    }
-
-    const togglePopper = (isPopperOpen, timer) => {
-        setTimeout(() => setIsOpen(isPopperOpen), timer)
-    }
+        setHideTimeout()
+    }, [setHideTimeout])
 
     useEffect(  () => {
         async function update() {
@@ -82,11 +86,11 @@ const Tooltip = ({
                 className={ containerClasses }
                 ref={ popperRef }
                 style={ styles.popper }
-                onMouseEnter={ interactive ? handlePopperMouseEnter : null }
-                onMouseLeave={ interactive ? handlePopperMouseLeave : null  }
+                onMouseEnter={ interactive ? () => clearTimeout(timerHide.current) : null }
+                onMouseLeave={ interactive ? setHideTimeout : null }
                 { ...attributes.popper }>
                 { children }
-                { arrow && <div ref={ setArrowRef } style={ styles.arrow } className={ classes.popperArrow } /> }
+                { arrow && <div ref={ arrowRef } style={ styles.arrow } className={ classes.popperArrow } /> }
             </div>
     )
 }
@@ -95,7 +99,7 @@ Tooltip.defaultProps = {
     anchorRef: null,
     placement: 'bottom',
     enterTimer: 100,
-    leaveTimer: 200,
+    leaveTimer: 500,
     children: null,
     arrow: false,
     offset: 5,
