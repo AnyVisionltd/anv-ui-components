@@ -81,7 +81,6 @@ export const Interactive = () => {
                     <Button variant={ "ghost" } size="small">Skip</Button>
                     <Button size='small'>Next</Button>
                 </div>
-
             </Tooltip.Footer>
         </Tooltip>
     </>
