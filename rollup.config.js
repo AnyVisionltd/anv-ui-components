@@ -19,7 +19,9 @@ export default {
   ],
   plugins: [
     resolve(),
-    postcss(),
+    postcss({
+      extract: true
+    }),
     babel({
     }),
     url(),
