@@ -20,7 +20,7 @@ export default {
   plugins: [
     resolve(),
     postcss({
-      extract: false,
+      extract: true,
       modules: true,
       use: ['sass'],
     }),
