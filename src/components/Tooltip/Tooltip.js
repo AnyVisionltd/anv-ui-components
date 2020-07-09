@@ -98,8 +98,8 @@ const Tooltip = ({
 Tooltip.defaultProps = {
     anchorRef: null,
     placement: 'bottom',
-    enterTimer: 100,
-    leaveTimer: 500,
+    enterTimer: 0,
+    leaveTimer: 0,
     children: null,
     arrow: false,
     offset: 5,
@@ -129,7 +129,8 @@ Tooltip.propTypes = {
     /** The distance between the anchor element and the tooltip*/
     offset: propTypes.number,
     /** Whether the tooltip is interactive or not. This will add the ability to
-     * hover the tool tip and make it stay while being hovered.*/
+     * hover the tool tip and make it stay while being hovered.
+     * This requires the <code>leaveTimer</code> to be greater than 0*/
     interactive: propTypes.bool
 }
 

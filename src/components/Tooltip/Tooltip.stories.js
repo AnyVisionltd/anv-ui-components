@@ -73,6 +73,7 @@ export const Interactive = () => {
             anchorRef={ anchorRef }
             placement={ 'right' }
             offset={ 20 }
+            leaveTimer={ 500 }
             interactive>
             <Tooltip.Header>Hover me!</Tooltip.Header>
             <Tooltip.Body>Lorem ipsum dolor sit amet, consectetur adipiscing</Tooltip.Body>
