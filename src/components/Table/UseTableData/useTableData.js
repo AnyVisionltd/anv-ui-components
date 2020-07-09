@@ -4,15 +4,15 @@ import TableContext from '../TableContext'
 
 const useTableData = () => {
   const { state } = useContext(TableContext)
-  const { data, controlled, filters, sort } = state
+  const { data, selfControlled, filters, sort } = state
 
   const filterData = useCallback(data => {
     return data.filter(row => {
       return filters.every(({ field, value }) => {
         if(field) {
-          return row[field].toString().toLowerCase().includes(value)
+          return row[field].toString().toLowerCase().includes(value.toString().toLowerCase())
         } else {
-          return Object.values(row).some(cellValue => cellValue.toString().toLowerCase().includes(value))
+          return Object.values(row).some(cellValue => cellValue.toString().toLowerCase().includes(value.toString().toLowerCase()))
         }
       })
     })
@@ -25,16 +25,18 @@ const useTableData = () => {
 
     const { field, order, type } = sort.sortBy
     switch(type) {
-      case 'text':
-        return stringSort(data, field, order)
-      default:
-        return numberSort(data, field, order)
+    case 'number':
+      return numberSort(data, field, order)
+    case 'date':
+      return numberSort(data, field, order)
+    default:
+      return stringSort(data, field, order)
     }
   }, [sort])
 
   return useMemo(() => {
     let tableData = data
-    if(controlled) {
+    if(!selfControlled) {
       return tableData
     }
 
@@ -42,7 +44,7 @@ const useTableData = () => {
     tableData = sortData(tableData)
 
     return tableData
-  }, [data, controlled, sortData, filterData])
+  }, [data, selfControlled, sortData, filterData])
 
 }
 

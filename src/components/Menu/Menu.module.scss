@@ -37,6 +37,7 @@
     width: av-size(sz-144);
 
     li {
+      @extend %av-body2;
       height: 32px;
     }
   }

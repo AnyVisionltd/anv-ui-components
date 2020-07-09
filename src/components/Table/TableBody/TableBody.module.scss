@@ -4,7 +4,13 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  color: av-color(content)
+  color: av-color(content);
+
+  .circleSkeleton {
+    width: av-size(sz-32);
+    height: av-size(sz-32);
+    border-radius: av-radius(circle);
+  }
 }
 
 .tableRow {
@@ -19,12 +25,6 @@
   }
 }
 
-.selectedRow {
-  color: av-color(purewhite);
-  fill: currentColor;
-  background-color: av-color(primary);
-}
-
 .tableCell {
   box-sizing: border-box;
   display: flex;
@@ -36,6 +36,10 @@
   padding-left: av-space();
 }
 
+.selectionCell {
+  margin-left: av-space(tiny);
+}
+
 .actionsCell {
   display: flex;
   align-items: center;
@@ -45,4 +49,8 @@
   .actionButton {
     color: av-color(content)
   }
+}
+
+.selectedRow {
+  background-color: av-color(primary, av-opacity(divider));
 }

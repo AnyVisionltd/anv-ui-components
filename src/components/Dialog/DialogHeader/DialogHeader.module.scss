@@ -1,0 +1,16 @@
+@import "~@anyvision/style-guide";
+
+.dialogHeader {
+  width: 100%;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  @extend %av-body1;
+
+  .closeIcon {
+    color: av-color(content);
+    margin-right: calc(#{av-space(tiny)} * -1);
+    margin-left: auto;
+  }
+}

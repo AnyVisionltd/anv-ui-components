@@ -1,29 +1,36 @@
 import React, { useState, useContext, useEffect } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import { IconButton, Menu } from '../../../index'
-import { ReactComponent as SunIcon } from '../../../assets/svg/Options.svg'
+import { IconButton, Menu, Checkbox, SkeletonLoader } from '../../../index'
+import { ReactComponent as OptionsIcon } from '../../../assets/svg/Options.svg'
 import TableContext from '../TableContext'
 import { useTableData } from "../UseTableData"
 import styles from './TableBody.module.scss'
 
 const TableBody = ({
   data,
+  totalItems,
   rowHeight,
   rowActions,
   className,
   ...otherProps
 }) => {
-  const { state, setData, setWithRowActions } = useContext(TableContext)
-  const { headers } = state
+  const { state, setData, setWithRowActions, toggleSelectedItem, setTotalItems } = useContext(TableContext)
+  const { headers, selection, selfControlled } = state
 
   const tableData = useTableData()
 
   const [actionsAnchorElement, setActionsAnchorElement] = useState(null)
 
+  const isLoading = false
+
   useEffect(() => {
     setData(data)
   }, [setData, data])
+
+  useEffect(() => {
+    setTotalItems(selfControlled ? data.length : totalItems)
+  }, [data, totalItems, selfControlled, setTotalItems])
 
   useEffect(() => {
     setWithRowActions(!!rowActions)
@@ -44,46 +51,65 @@ const TableBody = ({
 
   const renderActions = row => {
     if (!rowActions) {
-      return
+	  return
     }
     return (
-      <>
+	  <>
         <Menu
-          anchorElement={ actionsAnchorElement }
-          isOpen={ !!actionsAnchorElement }
-          preferOpenDirection="down-start"
-          onClose={ handleActionsClose }
+		  anchorElement={ actionsAnchorElement }
+		  isOpen={ !!actionsAnchorElement }
+		  preferOpenDirection="down-start"
+		  onClose={ handleActionsClose }
         >
-          {
+		  {
             rowActions.map(({ content, onClick }, index) => (
-              <Menu.Item
+			  <Menu.Item
                 key={ index }
                 onClick={ () => handleMenuItemClick(row, onClick) }
-              >
+			  >
                 { content }
-              </Menu.Item>
+			  </Menu.Item>
             ))
-          }
+		  }
         </Menu>
         <div
-          role="cell"
-          className={ styles.actionsCell }
+		  role="cell"
+		  className={ styles.actionsCell }
         >
-          <IconButton
+		  <IconButton
             className={ styles.actionButton }
             variant="ghost"
             onClick={ handleActionsClick }
-          >
-            <SunIcon />
-          </IconButton>
+		  >
+            <OptionsIcon/>
+		  </IconButton>
         </div>
-      </>
+	  </>
     )
   }
 
-  const renderRow = row => (
+  const isRowSelected = ({ id }) => {
+    const { isActive, excludeMode, items } = selection
+    if (!isActive) {
+	  return null
+    }
+    let isSelected = items.some(rowId => rowId === id)
+    return excludeMode ? !isSelected : isSelected
+  }
+
+  const renderSelection = (row, isSelected) => (
+    <div
+	  role="cell"
+	  className={ styles.selectionCell }
+    >
+	  <Checkbox onChange={ () => toggleSelectedItem(row, isSelected) }
+        checked={ isSelected }/>
+    </div>
+  )
+
+  const renderRow = (row, isSelected) => (
     <>
-      { /* { renderCheckbox(row) } */ }
+      { renderSelection(row, isSelected) }
       { headers.map(({
         field, columnRender, hide, flexWidth,
       }) => {
@@ -104,19 +130,57 @@ const TableBody = ({
 
   const renderTableRows = () => (
     tableData.map((row, index) => {
-      const tableRowClassNames = classNames(styles.tableRow, { [styles.selectedRow]: false })
-      return (
+	  const isSelected = isRowSelected(row)
+	  const tableRowClassNames = classNames(styles.tableRow, { [styles.selectedRow]: isSelected })
+	  return (
         <div
           role="row"
-          style={ { height: rowHeight } }
+		      style={ { height: rowHeight } }
           className={ tableRowClassNames }
           key={ index }
         >
-          { renderRow(row) }
+          { renderRow(row, isSelected) }
         </div>
       )
     })
   )
+
+  const renderLoading = () => {
+    if(!isLoading) {
+      return
+    }
+
+    return Array.from({ length: 5 }, (_, index) => (
+      <div
+        role={ 'row' }
+        className={ styles.tableRow }
+        key={ index }
+      >
+        <div
+          role="cell"
+          className={ styles.selectionCell }
+        >
+          <SkeletonLoader className={ styles.circleSkeleton }/>
+        </div>
+        {
+          headers.map(({
+            field, hide, flexWidth
+          }) => {
+            if (hide) {
+              return null
+            }
+            const style = flexWidth ? { flex: `0 0 ${flexWidth}` } : {}
+            return (
+              <div role="cell" style={ style } className={ styles.tableCell } key={ field }>
+                <SkeletonLoader/>
+              </div>
+            )
+          })
+        }
+        <div className={ styles.actionsCell }/>
+      </div>
+    ))
+  }
 
   const classes = classNames(
     styles.tableBody,
@@ -126,9 +190,10 @@ const TableBody = ({
   return (
     <div
       className={ classes }
-      { ...otherProps }
+	    { ...otherProps }
     >
-      { renderTableRows() }
+	    { renderTableRows() }
+      { renderLoading() }
     </div>
   )
 }
@@ -138,10 +203,14 @@ TableBody.defaultProps = {
 }
 
 TableBody.propTypes = {
-  /**  Each object represent row in the table. The rows rely on <code>headers</code>,
+  /**  Array of items, each item represent row in the table. <br/>
+   *  <b>id</b><span style="color: #FF4400">*</span> field is required for each item. <br/>
+   *  The rows rely on <code>headers</code>,
    *  <code>prop</code> from <code><Table.Header/></code> component.
    *  */
   data: propTypes.arrayOf(propTypes.object).isRequired,
+  /** The number of items. required when not self controlled*/
+  totalItems: propTypes.number,
   /** The row height. <code>min-height: 48px</code>. */
   rowHeight: propTypes.string,
   /** If pass, render action menu at the end of each row. */

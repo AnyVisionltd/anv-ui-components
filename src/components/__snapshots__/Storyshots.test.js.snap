@@ -655,6 +655,27 @@ exports[`Storyshots Components/Chip Variants 1`] = `
 </div>
 `;
 
+exports[`Storyshots Components/Dialog Basic 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div>
+      <button
+        aria-controls="menu-story-default"
+        aria-haspopup="true"
+        className="button large fill"
+        disabled={false}
+        onClick={[Function]}
+      >
+        Open Dialog
+      </button>
+      <portal-for-test />
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Components/IconButton Default 1`] = `
 <div>
   <div
@@ -804,6 +825,33 @@ exports[`Storyshots Components/IconButton With Class Name 1`] = `
       >
         <svg />
       </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/InfiniteList Default 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      style={
+        Object {
+          "height": "300px",
+          "width": "80%",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "height": 0,
+            "overflow": "visible",
+            "width": 0,
+          }
+        }
+      />
     </div>
   </div>
 </div>
@@ -1481,6 +1529,44 @@ exports[`Storyshots Components/SSF Without Menu Fields 1`] = `
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/SkeletonLoader Default 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      style={
+        Object {
+          "width": "500px",
+        }
+      }
+    >
+      <div
+        className="skeletonLoader microMargin"
+        style={
+          Object {
+            "height": "30px",
+            "width": "30px",
+          }
+        }
+      />
+      <div
+        className="skeletonLoader microMargin"
+      />
+      <div
+        className="skeletonLoader microMargin"
+      />
+      <div
+        className="skeletonLoader microMargin"
+      />
+      <div
+        className="skeletonLoader microMargin"
+      />
     </div>
   </div>
 </div>

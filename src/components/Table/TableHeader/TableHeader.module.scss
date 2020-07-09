@@ -13,7 +13,7 @@
   margin-bottom: 8px;
 }
 
-.tableHeaderCell {
+.headerCell {
   @extend %av-overline;
   box-sizing: border-box;
   display: flex;
@@ -29,9 +29,13 @@
     background-color: av-color(content, av-opacity(ghost));
 
     .sortingIcon:not(.activeSort) {
-       opacity: av-opacity(medium);
+      opacity: av-opacity(medium);
     }
   }
+}
+
+.selectionCell {
+  margin-left: av-space(tiny);
 }
 
 .sortableColumn {

@@ -42,7 +42,7 @@ Sortable.propTypes = {
     field: propTypes.string,
     order: propTypes.oneOf(['asc', 'desc']),
   }),
-  /** Set the default sort by. use for uncontrolled sort */
+  /** Set the default sort by. use for self controlled sort */
   defaultSortBy: propTypes.shape({
     field: propTypes.string,
     order: propTypes.oneOf(['asc', 'desc']),

@@ -11,7 +11,7 @@
 </p>
 
 <h4>
-  <a href="http://52.210.160.176/">Our Storybook</a> :tada:
+  <a href="http://52.20.238.38/">Our Storybook</a> :tada:
 </h4>
 
 ## Install
