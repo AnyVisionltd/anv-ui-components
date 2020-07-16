@@ -7,7 +7,6 @@ import { ReactComponent as ArrowSolidRight } from '../../assets/svg/ArrowSolidRi
 import { ReactComponent as Filter } from '../../assets/svg/Filter.svg'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import styles from '../../styles/storybook/index.module.scss'
-import Button from "../Button/Button"
 
 const mockInitialData = [
   { label: 'first' },

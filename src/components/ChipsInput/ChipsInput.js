@@ -21,7 +21,7 @@ const ChipsInput = ({
   const [focusedChipIndex, setFocusedChipIndex] = useState(null)
   const inputBaseRef = useRef()
 
-  useEffect(() => onChange(chipValues), [chipValues])
+  useEffect(() => onChange(chipValues), [chipValues, onChange])
 
   const isChipEditable = () => {
     const inputElement = inputBaseRef.current
