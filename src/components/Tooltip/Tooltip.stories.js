@@ -1,4 +1,4 @@
-import React, {  useRef } from 'react'
+import React, { useRef } from 'react'
 import Tooltip from './Tooltip'
 import { centerDecorator } from "../../utils/storybook/decorators"
 import { Button } from "../Button"
