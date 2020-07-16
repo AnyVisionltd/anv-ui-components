@@ -4,6 +4,8 @@
   position: relative;
   min-width: av-size(sz-640);
   border-radius: av-radius();
+  overflow-y: auto;
+  max-height: 168px;
   display: flex;
 
   .container {
