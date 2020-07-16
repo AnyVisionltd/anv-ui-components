@@ -65,10 +65,18 @@ export const getIconHandler = () => {
   )
 }
 
-export const playGround = () => (
-  <ChipsInput
-    onChange={ action('Result') }
-    values={ select('initial values', { noValues: [], withValues: mockInitialData }, []) }
-    placeholder={ text('text', 'Place holder') }
-  />
-)
+export const playGround = () => {
+  const selectOptions = {
+    noValues: 1,
+    withValues: 2
+  }
+  const valueSelection = select('initial values', selectOptions, selectOptions.noValues)
+  const values = selectOptions.withValues === valueSelection ? mockInitialData : []
+
+  return (
+    <ChipsInput
+      onChange={ action('Result') }
+      values={ values }
+      placeholder={ text('text', 'Place holder') }
+    />)
+}
