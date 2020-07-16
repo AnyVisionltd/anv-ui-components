@@ -12,11 +12,13 @@
     "url": "https://github.com/AnyVisionltd/anv-ui-components"
   },
   "dependencies": {
+    "@popperjs/core": "^2.4.0",
     "@anyvision/style-guide": "^1.0.1-beta.15",
     "classnames": "^2.2.6",
     "jest-environment-jsdom-sixteen": "^1.0.3",
     "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
+    "react-popper": "^2.2.3",
     "react-scripts": "3.4.1",
     "react-transition-group": "^4.3.0",
     "react-virtualized-auto-sizer": "^1.0.2",

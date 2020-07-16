@@ -1929,3 +1929,201 @@ exports[`Storyshots Components/Table Basic 1`] = `
   </div>
 </div>
 `;
+
+exports[`Storyshots Components/Tooltip Arrow Variations 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      style={
+        Object {
+          "textAlign": "center",
+        }
+      }
+    >
+      <h6>
+        Left
+      </h6>
+      <div
+        className="popperContainer"
+        hidden={true}
+        onMouseEnter={null}
+        onMouseLeave={null}
+        style={
+          Object {
+            "left": "0",
+            "position": "absolute",
+            "top": "0",
+          }
+        }
+      >
+        <p>
+          left
+        </p>
+        <div
+          className="popperArrow"
+        />
+      </div>
+      <h6>
+        Top
+      </h6>
+      <div
+        className="popperContainer"
+        hidden={true}
+        onMouseEnter={null}
+        onMouseLeave={null}
+        style={
+          Object {
+            "left": "0",
+            "position": "absolute",
+            "top": "0",
+          }
+        }
+      >
+        <p>
+          top
+        </p>
+        <div
+          className="popperArrow"
+        />
+      </div>
+      <h6>
+        Bottom
+      </h6>
+      <div
+        className="popperContainer"
+        hidden={true}
+        onMouseEnter={null}
+        onMouseLeave={null}
+        style={
+          Object {
+            "left": "0",
+            "position": "absolute",
+            "top": "0",
+          }
+        }
+      >
+        <p>
+          bottom
+        </p>
+        <div
+          className="popperArrow"
+        />
+      </div>
+      <h6>
+        Right
+      </h6>
+      <div
+        className="popperContainer"
+        hidden={true}
+        onMouseEnter={null}
+        onMouseLeave={null}
+        style={
+          Object {
+            "left": "0",
+            "position": "absolute",
+            "top": "0",
+          }
+        }
+      >
+        <p>
+          right
+        </p>
+        <div
+          className="popperArrow"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Tooltip Default 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <h6>
+      Hover over me!
+    </h6>
+    <div
+      className="popperContainer"
+      hidden={true}
+      onMouseEnter={null}
+      onMouseLeave={null}
+      style={
+        Object {
+          "left": "0",
+          "position": "absolute",
+          "top": "0",
+        }
+      }
+    >
+      <p>
+        I'm a tooltip!
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Tooltip Interactive 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <h6>
+      Hover over me!
+    </h6>
+    <div
+      className="popperContainer"
+      hidden={true}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      style={
+        Object {
+          "left": "0",
+          "position": "absolute",
+          "top": "0",
+        }
+      }
+    >
+      <p
+        className="tooltipTitle"
+      >
+        Hover me!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing
+      </p>
+      <div>
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "justifyContent": "space-between",
+              "marginTop": "20px",
+            }
+          }
+        >
+          <button
+            className="button small ghost"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Skip
+          </button>
+          <button
+            className="button small fill"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
