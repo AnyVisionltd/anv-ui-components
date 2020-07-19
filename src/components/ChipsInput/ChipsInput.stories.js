@@ -38,12 +38,6 @@ export const placeHolder = () => (
   />
 )
 
-export const customClass = () => (
-  <ChipsInput
-    className={ styles.microMargin }
-  />
-)
-
 export const getIconHandler = () => {
   const getChipIcon = chip => {
     const { label } = chip

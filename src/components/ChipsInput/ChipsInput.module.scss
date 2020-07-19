@@ -2,9 +2,9 @@
 
 .ChipsInput {
   position: relative;
-  min-width: av-size(sz-640);
   border-radius: av-radius();
   overflow-y: auto;
+  min-height: 48px;
   max-height: 168px;
   display: flex;
 
@@ -24,9 +24,7 @@
     }
 
     .inputBase {
-      min-width: av-size(sz-320);
       padding-left: av-space(tiny);
-      height: auto;
       border: none;
       flex-grow: 1;
     }
@@ -35,14 +33,4 @@
   .cancelIcon {
     fill: av-color(content);
   }
-}
-
-.elevationOverlay {
-  @include av-elevation(raised);
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-  border-radius: inherit;
 }

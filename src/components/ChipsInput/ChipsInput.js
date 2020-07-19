@@ -9,19 +9,19 @@ import IconButton from "../IconButton/IconButton"
 import { ReactComponent as CancelFilledIcon } from "../../assets/svg/CancelFilled.svg"
 
 const ChipsInput = ({
-  values,
+  defaultValues,
   className,
   onChange,
   placeholder,
-  getChipIcon,
+  renderChipIcon,
   ...otherProps
 }) => {
-  const [chipValues, setChipValues] = useState(values)
+  const [chipValues, setChipValues] = useState(defaultValues)
   const [inputValue, setInputValue] = useState('')
   const [focusedChipIndex, setFocusedChipIndex] = useState(null)
   const inputBaseRef = useRef()
 
-  useEffect(() => onChange(chipValues), [chipValues, onChange])
+  useEffect(() => onChange(chipValues.map(({ label }) => label)), [chipValues, onChange])
 
   const isChipEditable = () => {
     const inputElement = inputBaseRef.current
@@ -82,7 +82,7 @@ const ChipsInput = ({
   const onAddChip = () => {
     const chip = { label: inputValue }
     if (!inputValue.length || !validateChipDuplicate(chip)) return
-    chip.icon = getChipIcon(chip)
+    chip.icon = renderChipIcon(chip)
     setInputValue('')
     setChipValues([...chipValues, chip])
   }
@@ -90,9 +90,9 @@ const ChipsInput = ({
   const updateChipFocus = (index, event) => {
     const lastIndex = chipValues.length - 1
     const isRemovedByBackspace = event && event.keyCode === keymap.BACKSPACE
+    const isRemovedLast = index === lastIndex
     const isRemovedFirstByBackspace = index === 0 && isRemovedByBackspace
-    const isRemovedLastByDelete = index === lastIndex && event && event.keyCode === keymap.DELETE
-    if (isRemovedFirstByBackspace || isRemovedLastByDelete) {
+    if (isRemovedFirstByBackspace || isRemovedLast) {
       inputBaseRef.current.focus()
       setFocusedChipIndex(null)
     } else if (isRemovedByBackspace) {
@@ -130,6 +130,7 @@ const ChipsInput = ({
           key={ index }
           className={ styles.chipStyle }
           isFocused={ index === focusedChipIndex }
+          onClick={ () => setFocusedChipIndex(index) }
           label={ label }
           leadingIcon={ icon }
           onTrailingIconClick={ event => removeChip(index, event) }
@@ -139,17 +140,15 @@ const ChipsInput = ({
     </>
   )
 
-  const renderRemoveAllChipsIcon = chipValues.length
-    ? (
-      <IconButton
-        variant="ghost"
-        onClick={ removeAllChips }
-        aria-label="remove all"
-      >
-        <CancelFilledIcon className={ styles.cancelIcon } />
-      </IconButton>
-    )
-    : null
+  const renderRemoveAllChipsIcon = chipValues.length && (
+    <IconButton
+      variant="ghost"
+      onClick={ removeAllChips }
+      aria-label="remove all"
+    >
+      <CancelFilledIcon className={ styles.cancelIcon } />
+    </IconButton>
+  )
 
   const classes = classNames(
     styles.ChipsInput,
@@ -158,8 +157,7 @@ const ChipsInput = ({
 
   return (
     <div className={ classes }>
-      <div className={ styles.elevationOverlay }/>
-      <div  onKeyDown={ keyPress } className={ styles.container }>
+      <div onKeyDown={ keyPress } className={ styles.container }>
         { renderChips }
         <InputBase
           autoComplete="off"
@@ -179,21 +177,21 @@ const ChipsInput = ({
 
 ChipsInput.defaultProps = {
   onChange: () => {},
-  getChipIcon: () => {},
+  renderChipIcon: () => {},
   placeholder: 'Input text in here',
-  values: []
+  defaultValues: []
 }
 
 ChipsInput.propTypes = {
   /**
-   * Function to provide icon for added chip
+   * Function to render icon for chip
    */
-  getChipIcon: propTypes.func,
+  renderChipIcon: propTypes.func,
   /** Chips that are going to appear on the ChipInput:<br />
      *  <code>label</code>     - the label / content of the chip<br />
      *  <code>icon</code>      - the chip's leading icon
      **/
-  values: propTypes.arrayOf(propTypes.shape({
+  defaultValues: propTypes.arrayOf(propTypes.shape({
     label: propTypes.string.isRequired,
     icon: propTypes.element,
   })),
