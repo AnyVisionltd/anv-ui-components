@@ -27,6 +27,7 @@ export const Default = () => (
       onInputChange={ action('Input Changed Result') }
       onFocusChange={ action('Input Focus Changed Result') }
     />
+    <div className={ styles.microMargin } />
     <ChipsInput disabled
       onChange={ action('Chips Changed Result') }
       onInputChange={ action('Input Changed Result') }
