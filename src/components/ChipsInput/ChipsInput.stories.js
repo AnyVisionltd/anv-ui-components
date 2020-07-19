@@ -21,11 +21,20 @@ export default {
 }
 
 export const Default = () => (
-  <ChipsInput
-    onChange={ action('Chips Changed Result') }
-    onInputChange={ action('Input Changed Result') }
-    onFocusChange={ action('Input Focus Changed Result') }
-  />
+  <div className={ styles.flexColumn }>
+    <ChipsInput
+      onChange={ action('Chips Changed Result') }
+      onInputChange={ action('Input Changed Result') }
+      onFocusChange={ action('Input Focus Changed Result') }
+    />
+    <ChipsInput disabled
+      onChange={ action('Chips Changed Result') }
+      onInputChange={ action('Input Changed Result') }
+      onFocusChange={ action('Input Focus Changed Result') }
+      defaultInputValue={ 'Disabled Input' }
+      defaultChipValues={ mockInitialData }
+    />
+  </div>
 )
 
 export const initialValues = () => (

@@ -18,6 +18,7 @@ const ChipsInput = ({
   onFocusChange,
   placeholder,
   renderChipIcon,
+  disabled,
   ...otherProps
 }) => {
   const [chipValues, setChipValues] = useState(defaultChipValues)
@@ -146,6 +147,7 @@ const ChipsInput = ({
           label={ label }
           leadingIcon={ icon }
           onTrailingIconClick={ event => removeChip(index, event) }
+          disabled={ disabled }
           deletable
         />
       )) }
@@ -180,6 +182,7 @@ const ChipsInput = ({
           placeholder={ chipValues.length ? `+ ${placeholder}` : placeholder }
           onFocus={ onInputFocus }
           trailingComponent={ renderRemoveAllChipsIcon }
+          disabled={ disabled }
           { ...otherProps }
         />
       </div>
@@ -197,6 +200,9 @@ ChipsInput.defaultProps = {
   defaultInputValue: '',
 }
 
+/**
+ * Note: controlled mode was not implemented for this component!
+ */
 ChipsInput.propTypes = {
   /** Function to render icon for chip */
   renderChipIcon: propTypes.func,
