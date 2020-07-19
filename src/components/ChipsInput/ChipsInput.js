@@ -13,9 +13,9 @@ const ChipsInput = ({
   defaultChipValues,
   defaultInputValue,
   className,
-  onChanged,
-  onInputChanged,
-  onFocusChanged,
+  onChange,
+  onInputChange,
+  onFocusChange,
   placeholder,
   renderChipIcon,
   ...otherProps
@@ -26,14 +26,14 @@ const ChipsInput = ({
   const previousFocusedChipIndex = usePrevious(focusedChipIndex)
   const inputBaseRef = useRef()
 
-  useEffect(() => onChanged(chipValues.map(({ label }) => label)), [chipValues, onChanged])
+  useEffect(() => onChange(chipValues.map(({ label }) => label)), [chipValues, onChange])
 
-  useEffect(() => onInputChanged(inputValue), [inputValue, onInputChanged])
+  useEffect(() => onInputChange(inputValue), [inputValue, onInputChange])
 
   useEffect(() => {
     if (previousFocusedChipIndex !== null && focusedChipIndex !== null) return
-    return onFocusChanged(focusedChipIndex === null)
-  }, [focusedChipIndex, onFocusChanged, previousFocusedChipIndex])
+    return onFocusChange(focusedChipIndex === null)
+  }, [focusedChipIndex, onFocusChange, previousFocusedChipIndex])
 
   const isChipEditable = () => {
     const inputElement = inputBaseRef.current
@@ -188,10 +188,10 @@ const ChipsInput = ({
 }
 
 ChipsInput.defaultProps = {
-  onChanged: () => {},
-  onInputChanged: () => {},
+  onChange: () => {},
+  onInputChange: () => {},
   renderChipIcon: () => {},
-  onFocusChanged: () => {},
+  onFocusChange: () => {},
   placeholder: 'Input text in here',
   defaultChipValues: [],
   defaultInputValue: '',
@@ -211,11 +211,11 @@ ChipsInput.propTypes = {
   /** Default input value */
   defaultInputValue: propTypes.string,
   /** Callback when chips values changed. */
-  onChanged: propTypes.func,
+  onChange: propTypes.func,
   /** Callback when input value changed. */
-  onInputChanged: propTypes.func,
+  onInputChange: propTypes.func,
   /** Callback when input focus changed. */
-  onFocusChanged: propTypes.func,
+  onFocusChange: propTypes.func,
   /** Default input place holder. */
   placeholder: propTypes.string,
   /** For css customization. */
