@@ -28,7 +28,7 @@ export const Default = () => (
 
 export const initialValues = () => (
   <ChipsInput
-    values={ mockInitialData }
+    defaultValues={ mockInitialData }
   />
 )
 
@@ -39,7 +39,7 @@ export const placeHolder = () => (
 )
 
 export const getIconHandler = () => {
-  const getChipIcon = chip => {
+  const renderChipIcon = chip => {
     const { label } = chip
     if(label === 'first') return <EyeEnabled />
     if(label === 'second') return <ArrowSolidRight />
@@ -52,7 +52,7 @@ export const getIconHandler = () => {
         Insert <b>first</b> for <b>Eye</b> icon, <b>second</b> for <b>Arrow</b> icon and everything else for <b>Filter</b> icon
       </span>
       <ChipsInput
-        getChipIcon={ getChipIcon }
+        renderChipIcon={ renderChipIcon }
         onChange={ action('Result') }
       />
     </div>
@@ -70,7 +70,7 @@ export const playGround = () => {
   return (
     <ChipsInput
       onChange={ action('Result') }
-      values={ values }
+      defaultValues={ values }
       placeholder={ text('text', 'Place holder') }
     />)
 }
