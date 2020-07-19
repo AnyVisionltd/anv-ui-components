@@ -22,19 +22,28 @@ export default {
 
 export const Default = () => (
   <ChipsInput
-    onChange={ action('Result') }
+    onChanged={ action('Chips Changed Result') }
+    onInputChanged={ action('Input Changed Result') }
+    onFocusChanged={ action('Input Focus Changed Result') }
   />
 )
 
 export const initialValues = () => (
   <ChipsInput
-    defaultValues={ mockInitialData }
+    defaultChipValues={ mockInitialData }
+    defaultInputValue={ 'foo' }
+    onChanged={ action('Chips Changed Result') }
+    onInputChanged={ action('Input Changed Result') }
+    onFocusChanged={ action('Input Focus Changed Result') }
   />
 )
 
 export const placeHolder = () => (
   <ChipsInput
     placeholder={ 'Custom place holder' }
+    onChanged={ action('Chips Changed Result') }
+    onInputChanged={ action('Input Changed Result') }
+    onFocusChanged={ action('Input Focus Changed Result') }
   />
 )
 
@@ -53,7 +62,9 @@ export const getIconHandler = () => {
       </span>
       <ChipsInput
         renderChipIcon={ renderChipIcon }
-        onChange={ action('Result') }
+        onChanged={ action('Chips Changed Result') }
+        onInputChanged={ action('Input Changed Result') }
+        onFocusChanged={ action('Input Focus Changed Result') }
       />
     </div>
   )
@@ -69,8 +80,11 @@ export const playGround = () => {
 
   return (
     <ChipsInput
-      onChange={ action('Result') }
-      defaultValues={ values }
+      onChanged={ action('Chips Changed Result') }
+      onInputChanged={ action('Input Changed Result') }
+      onFocusChanged={ action('Input Focus Changed Result') }
+      defaultInputValue={ select('Initial input value', { initialInputValue: 'Initial Value', emptyValue: '' }, '') }
+      defaultChipValues={ values }
       placeholder={ text('text', 'Place holder') }
     />)
 }

@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
+import { usePrevious } from '../../hooks/UsePrevious'
 import InputBase from '../InputBase/InputBase'
 import Chip from '../Chip/Chip'
 import keymap from '../../utils/enums/keymap'
@@ -9,19 +10,30 @@ import IconButton from "../IconButton/IconButton"
 import { ReactComponent as CancelFilledIcon } from "../../assets/svg/CancelFilled.svg"
 
 const ChipsInput = ({
-  defaultValues,
+  defaultChipValues,
+  defaultInputValue,
   className,
-  onChange,
+  onChanged,
+  onInputChanged,
+  onFocusChanged,
   placeholder,
   renderChipIcon,
   ...otherProps
 }) => {
-  const [chipValues, setChipValues] = useState(defaultValues)
-  const [inputValue, setInputValue] = useState('')
+  const [chipValues, setChipValues] = useState(defaultChipValues)
+  const [inputValue, setInputValue] = useState(defaultInputValue)
   const [focusedChipIndex, setFocusedChipIndex] = useState(null)
+  const previousFocusedChipIndex = usePrevious(focusedChipIndex)
   const inputBaseRef = useRef()
 
-  useEffect(() => onChange(chipValues.map(({ label }) => label)), [chipValues, onChange])
+  useEffect(() => onChanged(chipValues.map(({ label }) => label)), [chipValues, onChanged])
+
+  useEffect(() => onInputChanged(inputValue), [inputValue, onInputChanged])
+
+  useEffect(() => {
+    if (previousFocusedChipIndex !== null && focusedChipIndex !== null) return
+    return onFocusChanged(focusedChipIndex === null)
+  }, [focusedChipIndex, onFocusChanged, previousFocusedChipIndex])
 
   const isChipEditable = () => {
     const inputElement = inputBaseRef.current
@@ -117,7 +129,7 @@ const ChipsInput = ({
 
   const keyPress = event => keyFunctionMapping[event.keyCode] && keyFunctionMapping[event.keyCode](event)
 
-  const onInputChange = ({ target }) => setInputValue(target.value)
+  const handleInputChange = ({ target }) => setInputValue(target.value)
 
   const onInputFocus = () => setFocusedChipIndex(null)
 
@@ -164,7 +176,7 @@ const ChipsInput = ({
           value={ inputValue }
           className={ styles.inputBase }
           ref={ inputBaseRef }
-          onChange={ onInputChange }
+          onChange={ handleInputChange }
           placeholder={ chipValues.length ? `+ ${placeholder}` : placeholder }
           onFocus={ onInputFocus }
           trailingComponent={ renderRemoveAllChipsIcon }
@@ -176,27 +188,34 @@ const ChipsInput = ({
 }
 
 ChipsInput.defaultProps = {
-  onChange: () => {},
+  onChanged: () => {},
+  onInputChanged: () => {},
   renderChipIcon: () => {},
+  onFocusChanged: () => {},
   placeholder: 'Input text in here',
-  defaultValues: []
+  defaultChipValues: [],
+  defaultInputValue: '',
 }
 
 ChipsInput.propTypes = {
-  /**
-   * Function to render icon for chip
-   */
+  /** Function to render icon for chip */
   renderChipIcon: propTypes.func,
   /** Chips that are going to appear on the ChipInput:<br />
      *  <code>label</code>     - the label / content of the chip<br />
      *  <code>icon</code>      - the chip's leading icon
      **/
-  defaultValues: propTypes.arrayOf(propTypes.shape({
+  defaultChipValues: propTypes.arrayOf(propTypes.shape({
     label: propTypes.string.isRequired,
     icon: propTypes.element,
   })),
-  /** Callback when changed. */
-  onChange: propTypes.func,
+  /** Default input value */
+  defaultInputValue: propTypes.string,
+  /** Callback when chips values changed. */
+  onChanged: propTypes.func,
+  /** Callback when input value changed. */
+  onInputChanged: propTypes.func,
+  /** Callback when input focus changed. */
+  onFocusChanged: propTypes.func,
   /** Default input place holder. */
   placeholder: propTypes.string,
   /** For css customization. */
@@ -204,3 +223,8 @@ ChipsInput.propTypes = {
 }
 
 export default ChipsInput
+
+/*
+* empty input with focus
+* filled input that can be auto-completed through the menu
+* */
