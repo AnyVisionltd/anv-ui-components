@@ -26,12 +26,14 @@ export const Default = () => (
       onChange={ action('Chips Changed Result') }
       onInputChange={ action('Input Changed Result') }
       onFocusChange={ action('Input Focus Changed Result') }
+      onSubmit={ action('Chip was submitted') }
     />
     <div className={ styles.microMargin } />
     <ChipsInput disabled
       onChange={ action('Chips Changed Result') }
       onInputChange={ action('Input Changed Result') }
       onFocusChange={ action('Input Focus Changed Result') }
+      onSubmit={ action('Chip was submitted') }
       defaultInputValue={ 'Disabled Input' }
       defaultChipValues={ mockInitialData }
     />
@@ -45,6 +47,7 @@ export const initialValues = () => (
     onChange={ action('Chips Changed Result') }
     onInputChange={ action('Input Changed Result') }
     onFocusChange={ action('Input Focus Changed Result') }
+    onSubmit={ action('Chip was submitted') }
   />
 )
 
@@ -54,6 +57,7 @@ export const placeHolder = () => (
     onChange={ action('Chips Changed Result') }
     onInputChange={ action('Input Changed Result') }
     onFocusChange={ action('Input Focus Changed Result') }
+    onSubmit={ action('Chip was submitted') }
   />
 )
 
@@ -75,6 +79,7 @@ export const getIconHandler = () => {
         onChange={ action('Chips Changed Result') }
         onInputChange={ action('Input Changed Result') }
         onFocusChange={ action('Input Focus Changed Result') }
+        onSubmit={ action('Chip was submitted') }
       />
     </div>
   )
@@ -93,6 +98,7 @@ export const playGround = () => {
       onChange={ action('Chips Changed Result') }
       onInputChange={ action('Input Changed Result') }
       onFocusChange={ action('Input Focus Changed Result') }
+      onSubmit={ action('Chip was submitted') }
       defaultInputValue={ select('Initial input value', { initialInputValue: 'Initial Value', emptyValue: '' }, '') }
       defaultChipValues={ values }
       placeholder={ text('text', 'Place holder') }

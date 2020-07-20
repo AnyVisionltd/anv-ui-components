@@ -1,6 +1,7 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect, forwardRef } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
+import { useCombinedRefs } from '../../hooks/UseCombinedRefs'
 import { usePrevious } from '../../hooks/UsePrevious'
 import InputBase from '../InputBase/InputBase'
 import Chip from '../Chip/Chip'
@@ -9,7 +10,7 @@ import styles from './ChipsInput.module.scss'
 import IconButton from "../IconButton/IconButton"
 import { ReactComponent as CancelFilledIcon } from "../../assets/svg/CancelFilled.svg"
 
-const ChipsInput = ({
+const ChipsInput = forwardRef(({
   defaultChipValues,
   defaultInputValue,
   className,
@@ -19,20 +20,22 @@ const ChipsInput = ({
   placeholder,
   renderChipIcon,
   disabled,
+  onSubmit,
   ...otherProps
-}) => {
+}, forwardRef) => {
   const [chipValues, setChipValues] = useState(defaultChipValues)
   const [inputValue, setInputValue] = useState(defaultInputValue)
   const [focusedChipIndex, setFocusedChipIndex] = useState(null)
   const previousFocusedChipIndex = usePrevious(focusedChipIndex)
-  const inputBaseRef = useRef()
+  const innerRef = useRef(null)
+  const inputBaseRef = useCombinedRefs(forwardRef, innerRef)
 
   useEffect(() => onChange(chipValues.map(({ label }) => label)), [chipValues, onChange])
 
   useEffect(() => onInputChange(inputValue), [inputValue, onInputChange])
 
   useEffect(() => {
-    if (previousFocusedChipIndex !== null && focusedChipIndex !== null) return
+    if (previousFocusedChipIndex !== null && focusedChipIndex !== null && previousFocusedChipIndex !== focusedChipIndex) return
     return onFocusChange(focusedChipIndex === null)
   }, [focusedChipIndex, onFocusChange, previousFocusedChipIndex])
 
@@ -97,7 +100,9 @@ const ChipsInput = ({
     if (!inputValue.length || !validateChipDuplicate(chip)) return
     chip.icon = renderChipIcon(chip)
     setInputValue('')
-    setChipValues([...chipValues, chip])
+    const newChips = [...chipValues, chip]
+    setChipValues(newChips)
+    onSubmit(newChips.map(({ label }) => label))
   }
 
   const updateChipFocus = (index, event) => {
@@ -188,13 +193,14 @@ const ChipsInput = ({
       </div>
     </div>
   )
-}
+})
 
 ChipsInput.defaultProps = {
   onChange: () => {},
   onInputChange: () => {},
   renderChipIcon: () => {},
   onFocusChange: () => {},
+  onSubmit: () => {},
   placeholder: 'Input text in here',
   defaultChipValues: [],
   defaultInputValue: '',
@@ -218,6 +224,8 @@ ChipsInput.propTypes = {
   defaultInputValue: propTypes.string,
   /** Callback when chips values changed. */
   onChange: propTypes.func,
+  /** Callback when chip is submitted. */
+  onSubmit: propTypes.func,
   /** Callback when input value changed. */
   onInputChange: propTypes.func,
   /** Callback when input focus changed. */
@@ -229,8 +237,3 @@ ChipsInput.propTypes = {
 }
 
 export default ChipsInput
-
-/*
-* empty input with focus
-* filled input that can be auto-completed through the menu
-* */
