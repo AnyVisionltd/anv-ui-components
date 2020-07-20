@@ -20,14 +20,31 @@ describe('<ChipsInput />', () => {
       expect(chips).toHaveLength(1)
     })
 
-    it('should fire onChange with data when chip created', () => {
+    it('should fire onChange, onInputChange and onSubmit with relevant data when chip created', () => {
       const onChange = jest.fn()
-      render(<ChipsInput onChange={ onChange } />)
+      const onInputChange = jest.fn()
+      const onSubmit = jest.fn()
+      render(<ChipsInput onChange={ onChange } onInputChange={ onInputChange } onSubmit={ onSubmit } />)
       addFreeTextChip('mockData')
       addFreeTextChip('mockData2')
       // 3 because onChange fire on first render
       expect(onChange).toBeCalledTimes(3)
+      // 5 because onInputChange fire on first render + add & clear for each submit
+      expect(onInputChange).toBeCalledTimes(5)
+      expect(onSubmit).toBeCalledTimes(2)
       expect(onChange.mock.calls[2][0]).toEqual( [ 'mockData', 'mockData2'] )
+      expect(onInputChange.mock.calls[3][0]).toEqual( 'mockData2' )
+      expect(onSubmit.mock.calls[1][0]).toEqual( [ 'mockData', 'mockData2'] )
+    })
+
+    it('should fire renderChipIcon when submitting a chip', () => {
+      const renderChipIcon = jest.fn()
+      render(<ChipsInput renderChipIcon={ renderChipIcon } />)
+      addFreeTextChip('mockData')
+      addFreeTextChip('mockData2')
+      expect(renderChipIcon).toBeCalledTimes(2)
+      expect(renderChipIcon.mock.calls[0][0]).toEqual( { "icon": undefined, "label": "mockData" })
+      expect(renderChipIcon.mock.calls[1][0]).toEqual( { "icon": undefined, "label": "mockData2" })
     })
   })
 
@@ -78,7 +95,8 @@ describe('<ChipsInput />', () => {
     })
 
     it('should arrow left/right should focus chips', () => {
-      const { getByRole, getAllByTestId } = render(<ChipsInput />)
+      const onFocusChange = jest.fn()
+      const { getByRole, getAllByTestId } = render(<ChipsInput onFocusChange={ onFocusChange }/>)
       const input = getByRole('textbox')
       addFreeTextChip('mockData')
       addFreeTextChip('mockData2')
@@ -94,6 +112,8 @@ describe('<ChipsInput />', () => {
       expect(document.activeElement).toBe(secondChip)
       fireEvent.keyDown(input, { keyCode: keymap.ARROW_RIGHT })
       expect(document.activeElement).toBe(input)
+      // Should be invoked once on mount and for each time focus entered and left the input
+      expect(onFocusChange).toBeCalledTimes(3)
     })
   })
 })
