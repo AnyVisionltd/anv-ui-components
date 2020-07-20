@@ -501,6 +501,7 @@ exports[`Storyshots Components/Chip Default 1`] = `
       </span>
       <button
         className="trailingIcon trailingIconClickable"
+        disabled={false}
         onClick={[Function]}
       >
         <svg />
@@ -530,6 +531,7 @@ exports[`Storyshots Components/Chip Playground 1`] = `
       </span>
       <button
         className="trailingIcon trailingIconClickable"
+        disabled={false}
         onClick={[Function]}
       >
         <svg />
@@ -622,6 +624,7 @@ exports[`Storyshots Components/Chip Variants 1`] = `
       </span>
       <button
         className="trailingIcon"
+        disabled={false}
         onClick={[Function]}
       >
         <svg />
@@ -646,10 +649,378 @@ exports[`Storyshots Components/Chip Variants 1`] = `
       </span>
       <button
         className="trailingIcon"
+        disabled={false}
         onClick={[Function]}
       >
         <svg />
       </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/ChipsInput Default 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexColumn"
+    >
+      <div
+        className="ChipsInput"
+      >
+        <div
+          className="container"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="inputBase text inputBase"
+          >
+            <input
+              autoComplete="off"
+              onChange={[Function]}
+              onFocus={[Function]}
+              placeholder="Input text in here"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="microMargin"
+      />
+      <div
+        className="ChipsInput"
+      >
+        <div
+          className="container"
+          onKeyDown={[Function]}
+        >
+          <div
+            aria-disabled={true}
+            className="chip focusable disabled chipStyle"
+            data-testid="chip"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={0}
+          >
+            <span
+              className="label"
+            >
+              first
+            </span>
+            <button
+              className="trailingIcon trailingIconClickable"
+              disabled={true}
+              onClick={[Function]}
+            >
+              <svg />
+            </button>
+          </div>
+          <div
+            aria-disabled={true}
+            className="chip focusable disabled chipStyle"
+            data-testid="chip"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={0}
+          >
+            <span
+              className="label"
+            >
+              second
+            </span>
+            <button
+              className="trailingIcon trailingIconClickable"
+              disabled={true}
+              onClick={[Function]}
+            >
+              <svg />
+            </button>
+          </div>
+          <div
+            aria-disabled={true}
+            className="chip focusable disabled chipStyle"
+            data-testid="chip"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={0}
+          >
+            <div
+              className="leadingIcon"
+            >
+              <svg />
+            </div>
+            <span
+              className="label"
+            >
+              third with icon
+            </span>
+            <button
+              className="trailingIcon trailingIconClickable"
+              disabled={true}
+              onClick={[Function]}
+            >
+              <svg />
+            </button>
+          </div>
+          <div
+            className="inputBase text disabled inputBase"
+          >
+            <input
+              autoComplete="off"
+              disabled={true}
+              onChange={[Function]}
+              onFocus={[Function]}
+              placeholder="+ Input text in here"
+              type="text"
+              value="Disabled Input"
+            />
+            <button
+              aria-label="remove all"
+              className="button large ghost iconButton small ghost"
+              disabled={false}
+              onClick={[Function]}
+            >
+              <svg
+                className="cancelIcon"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/ChipsInput Get Icon Handler 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexColumn"
+    >
+      <span
+        className="marginFlexContainer"
+      >
+        Insert 
+        <b>
+          first
+        </b>
+         for 
+        <b>
+          Eye
+        </b>
+         icon, 
+        <b>
+          second
+        </b>
+         for 
+        <b>
+          Arrow
+        </b>
+         icon and everything else for 
+        <b>
+          Filter
+        </b>
+         icon
+      </span>
+      <div
+        className="ChipsInput"
+      >
+        <div
+          className="container"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="inputBase text inputBase"
+          >
+            <input
+              autoComplete="off"
+              onChange={[Function]}
+              onFocus={[Function]}
+              placeholder="Input text in here"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/ChipsInput Initial Values 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="ChipsInput"
+    >
+      <div
+        className="container"
+        onKeyDown={[Function]}
+      >
+        <div
+          className="chip focusable clickable chipStyle"
+          data-testid="chip"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <span
+            className="label"
+          >
+            first
+          </span>
+          <button
+            className="trailingIcon trailingIconClickable"
+            disabled={false}
+            onClick={[Function]}
+          >
+            <svg />
+          </button>
+        </div>
+        <div
+          className="chip focusable clickable chipStyle"
+          data-testid="chip"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <span
+            className="label"
+          >
+            second
+          </span>
+          <button
+            className="trailingIcon trailingIconClickable"
+            disabled={false}
+            onClick={[Function]}
+          >
+            <svg />
+          </button>
+        </div>
+        <div
+          className="chip focusable clickable chipStyle"
+          data-testid="chip"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <div
+            className="leadingIcon"
+          >
+            <svg />
+          </div>
+          <span
+            className="label"
+          >
+            third with icon
+          </span>
+          <button
+            className="trailingIcon trailingIconClickable"
+            disabled={false}
+            onClick={[Function]}
+          >
+            <svg />
+          </button>
+        </div>
+        <div
+          className="inputBase text inputBase"
+        >
+          <input
+            autoComplete="off"
+            onChange={[Function]}
+            onFocus={[Function]}
+            placeholder="+ Input text in here"
+            type="text"
+            value="foo"
+          />
+          <button
+            aria-label="remove all"
+            className="button large ghost iconButton small ghost"
+            disabled={false}
+            onClick={[Function]}
+          >
+            <svg
+              className="cancelIcon"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/ChipsInput Place Holder 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="ChipsInput"
+    >
+      <div
+        className="container"
+        onKeyDown={[Function]}
+      >
+        <div
+          className="inputBase text inputBase"
+        >
+          <input
+            autoComplete="off"
+            onChange={[Function]}
+            onFocus={[Function]}
+            placeholder="Custom place holder"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/ChipsInput Play Ground 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="ChipsInput"
+    >
+      <div
+        className="container"
+        onKeyDown={[Function]}
+      >
+        <div
+          className="inputBase text inputBase"
+        >
+          <input
+            autoComplete="off"
+            onChange={[Function]}
+            onFocus={[Function]}
+            placeholder="Place holder"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
     </div>
   </div>
 </div>

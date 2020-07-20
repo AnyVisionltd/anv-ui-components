@@ -90,6 +90,7 @@ const Chip = ({
       <button
         className={ trailingIconClasses }
         onClick={ onTrailingIconClickHandler }
+        disabled={ disabled }
       >
         { displayedTrailingIcon }
       </button>

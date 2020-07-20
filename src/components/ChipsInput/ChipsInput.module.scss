@@ -1,0 +1,42 @@
+@import "~@anyvision/style-guide";
+
+.ChipsInput {
+  position: relative;
+  border-radius: av-radius();
+  border: solid 2px av-color(content, av-opacity(disabled));
+  transition: border-color 200ms;
+  overflow-y: auto;
+  min-height: 48px;
+  max-height: 168px;
+  display: flex;
+
+  &:focus-within {
+    border-color: av-color(primary);
+  }
+
+    .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+
+    &:focus {
+      opacity: av-opacity(ghost);
+    }
+
+    .chipStyle {
+      margin: av-space(micro) 0 av-space(micro) av-space(tiny);
+    }
+
+    .inputBase {
+      padding-left: av-space(tiny);
+      border: none;
+      flex-grow: 1;
+    }
+  }
+
+  .cancelIcon {
+    fill: av-color(content);
+  }
+}
