@@ -30,13 +30,18 @@ const ChipsInput = forwardRef(({
   const innerRef = useRef(null)
   const inputBaseRef = useCombinedRefs(forwardRef, innerRef)
 
-  useEffect(() => onChange(chipValues.map(({ label }) => label)), [chipValues, onChange])
-
-  useEffect(() => onInputChange(inputValue), [inputValue, onInputChange])
+  useEffect(() => {
+    onChange(chipValues.map(({ label }) => label))
+  }, [chipValues, onChange])
 
   useEffect(() => {
-    if (previousFocusedChipIndex !== null && focusedChipIndex !== null && previousFocusedChipIndex !== focusedChipIndex) return
-    return onFocusChange(focusedChipIndex === null)
+    onInputChange(inputValue)
+  }, [inputValue, onInputChange])
+
+  useEffect(() => {
+    if ((previousFocusedChipIndex === null || focusedChipIndex === null) && previousFocusedChipIndex !== focusedChipIndex) {
+      onFocusChange(focusedChipIndex === null)
+    }
   }, [focusedChipIndex, onFocusChange, previousFocusedChipIndex])
 
   const isChipEditable = () => {
