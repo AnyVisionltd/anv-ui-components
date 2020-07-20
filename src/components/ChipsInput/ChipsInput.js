@@ -13,6 +13,7 @@ import { ReactComponent as CancelFilledIcon } from "../../assets/svg/CancelFille
 const ChipsInput = forwardRef(({
   defaultChipValues,
   defaultInputValue,
+  inputValue: controlledInputValue,
   className,
   onChange,
   onInputChange,
@@ -178,14 +179,13 @@ const ChipsInput = forwardRef(({
     styles.ChipsInput,
     className,
   )
-
   return (
     <div className={ classes }>
       <div onKeyDown={ keyPress } className={ styles.container }>
         { renderChips }
         <InputBase
           autoComplete="off"
-          value={ inputValue }
+          value={ controlledInputValue || inputValue }
           className={ styles.inputBase }
           ref={ inputBaseRef }
           onChange={ handleInputChange }
@@ -239,6 +239,8 @@ ChipsInput.propTypes = {
   placeholder: propTypes.string,
   /** For css customization. */
   className: propTypes.string,
+  /** Controlled input value. */
+  inputValue: propTypes.string,
 }
 
 export default ChipsInput
