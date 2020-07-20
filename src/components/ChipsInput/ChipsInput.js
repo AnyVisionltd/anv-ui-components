@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, forwardRef } from 'react'
+import React, { useRef, useState, useEffect, forwardRef, useMemo } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 import { useCombinedRefs } from '../../hooks/UseCombinedRefs'
@@ -164,15 +164,18 @@ const ChipsInput = forwardRef(({
     </>
   )
 
-  const renderRemoveAllChipsIcon = chipValues.length && (
-    <IconButton
-      variant="ghost"
-      onClick={ removeAllChips }
-      aria-label="remove all"
-    >
-      <CancelFilledIcon className={ styles.cancelIcon } />
-    </IconButton>
-  )
+  const renderRemoveAllChipsIcon = useMemo(() => {
+    if (!chipValues.length) return
+    return (
+      <IconButton
+        variant="ghost"
+        onClick={ removeAllChips }
+        aria-label="remove all"
+      >
+        <CancelFilledIcon className={ styles.cancelIcon } />
+      </IconButton>
+    )
+  }, [chipValues])
 
   const classes = classNames(
     styles.ChipsInput,
