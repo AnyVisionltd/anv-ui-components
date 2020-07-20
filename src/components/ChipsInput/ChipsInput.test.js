@@ -1,12 +1,17 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
-import { screen } from '@testing-library/dom'
+import { findAllByTestId, queryAllByTestId, screen } from '@testing-library/dom'
 import keymap from '../../utils/enums/keymap'
 import ChipsInput from './ChipsInput'
 
-const addFreeTextChip = value => {
+const changeInput = value => {
   const input = screen.getByRole('textbox')
   fireEvent.change(input, { target: { value } })
+  return input
+}
+
+const addFreeTextChip = value => {
+  const input = changeInput(value)
   fireEvent.keyDown(input, { keyCode: keymap.ENTER })
 }
 
@@ -20,21 +25,28 @@ describe('<ChipsInput />', () => {
       expect(chips).toHaveLength(1)
     })
 
-    it('should fire onChange, onInputChange and onSubmit with relevant data when chip created', () => {
+    it('should fire onChange and onSubmit with relevant data when chip created', () => {
       const onChange = jest.fn()
-      const onInputChange = jest.fn()
       const onSubmit = jest.fn()
-      render(<ChipsInput onChange={ onChange } onInputChange={ onInputChange } onSubmit={ onSubmit } />)
+      render(<ChipsInput onChange={ onChange } onSubmit={ onSubmit } />)
       addFreeTextChip('mockData')
       addFreeTextChip('mockData2')
       // 3 because onChange fire on first render
       expect(onChange).toBeCalledTimes(3)
-      // 5 because onInputChange fire on first render + add & clear for each submit
-      expect(onInputChange).toBeCalledTimes(5)
       expect(onSubmit).toBeCalledTimes(2)
       expect(onChange.mock.calls[2][0]).toEqual( [ 'mockData', 'mockData2'] )
-      expect(onInputChange.mock.calls[3][0]).toEqual( 'mockData2' )
       expect(onSubmit.mock.calls[1][0]).toEqual( [ 'mockData', 'mockData2'] )
+    })
+
+    it('should fire onInputChange with relevant data when chip created', () => {
+      const onInputChange = jest.fn()
+      render(<ChipsInput onInputChange={ onInputChange } />)
+      changeInput('a')
+      changeInput('b')
+      // 3 because onInputChange fire on first render + add & clear for each submit
+      expect(onInputChange).toBeCalledTimes(3)
+      expect(onInputChange.mock.calls[1][0]).toEqual( 'a' )
+      expect(onInputChange.mock.calls[2][0]).toEqual( 'b' )
     })
 
     it('should fire renderChipIcon when submitting a chip', () => {
@@ -51,39 +63,45 @@ describe('<ChipsInput />', () => {
   describe('chips deletion', () => {
     it('should delete chip by leading icon', () => {
       const onChange = jest.fn()
-      const { getAllByRole } = render(<ChipsInput onChange={ onChange }/>)
+      const { getAllByRole, queryAllByTestId } = render(<ChipsInput onChange={ onChange }/>)
       addFreeTextChip('mockData')
       const buttons = getAllByRole('button')
       fireEvent.click(buttons[2])
       expect(onChange.mock.calls[2][0]).toEqual([])
+      const chips = queryAllByTestId('chip')
+      expect(chips.length).toEqual(0)
     })
 
     it('should delete all chips', () => {
       const onChange = jest.fn()
-      const { getByLabelText } = render(<ChipsInput onChange={ onChange }/>)
+      const { getByLabelText, queryAllByTestId } = render(<ChipsInput onChange={ onChange }/>)
       addFreeTextChip('mockData')
       addFreeTextChip('mockData1')
       const removeAllButton = getByLabelText('remove all')
       fireEvent.click(removeAllButton)
       expect(onChange.mock.calls[3][0]).toEqual([])
+      const chips = queryAllByTestId('chip')
+      expect(chips.length).toEqual(0)
     })
   })
 
   describe('keys navigation', () => {
     it('should remove chip when BACKSPACE', () => {
       const onChange = jest.fn()
-      const { getByRole } = render(<ChipsInput onChange={ onChange } />)
+      const { getByRole, queryAllByTestId } = render(<ChipsInput onChange={ onChange } />)
       const input = getByRole('textbox')
       addFreeTextChip('mockData')
       addFreeTextChip('mockData2')
       fireEvent.keyDown(input, { keyCode: keymap.BACKSPACE })
       fireEvent.keyDown(input, { keyCode: keymap.BACKSPACE })
       expect(onChange.mock.calls[4][0]).toEqual([])
+      const chips = queryAllByTestId('chip')
+      expect(chips.length).toEqual(0)
     })
 
     it('should remove chip when DELETE', () => {
       const onChange = jest.fn()
-      const { getAllByTestId } = render(<ChipsInput onChange={ onChange } />)
+      const { getAllByTestId, queryAllByTestId } = render(<ChipsInput onChange={ onChange } />)
       addFreeTextChip('mockData')
       addFreeTextChip('mockData2')
       const chips = getAllByTestId('chip')
@@ -92,6 +110,8 @@ describe('<ChipsInput />', () => {
       fireEvent.keyDown(firstChip, { keyCode: keymap.DELETE })
       fireEvent.keyDown(firstChip, { keyCode: keymap.DELETE })
       expect(onChange.mock.calls[4][0]).toEqual([])
+      const deletedChips = queryAllByTestId('chip')
+      expect(deletedChips.length).toEqual(0)
     })
 
     it('should arrow left/right should focus chips', () => {

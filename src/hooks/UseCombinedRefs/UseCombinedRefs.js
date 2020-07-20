@@ -1,3 +1,8 @@
+/**
+ * Article:
+ * https://itnext.io/reusing-the-ref-from-forwardref-with-react-hooks-4ce9df693dd
+ */
+
 import React from 'react'
 
 function useCombinedRefs(...refs) {
