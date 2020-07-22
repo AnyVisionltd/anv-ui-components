@@ -1,6 +1,6 @@
+import React, { useContext, useState } from "react"
 import classNames from "classnames"
 import styles from "../TableBody.module.scss"
-import React, { useContext, useState } from "react"
 import { Menu } from "../../../Menu"
 import { IconButton } from "../../../IconButton"
 import { ReactComponent as OptionsIcon } from "../../../../assets/svg/Options.svg"
@@ -13,6 +13,7 @@ const TableRow = ({ row, rowActions, rowHeight, isLoading }) => {
   const { selection, headers } = state
 
   const [actionsAnchorElement, setActionsAnchorElement] = useState(null)
+  const [isHover, setIsHover] = useState()
 
   const handleActionsClose = () => {
     setActionsAnchorElement(null)
@@ -83,6 +84,15 @@ const TableRow = ({ row, rowActions, rowHeight, isLoading }) => {
     </div>
   )
 
+  const renderCell = (row, field, columnRender, columnRenderHover) => {
+    if(isHover && columnRenderHover) {
+      return columnRenderHover(row[field], row)
+    } else if (columnRender) {
+      return columnRender(row[field], row)
+    }
+    return row[field]
+  }
+
   const renderDataRow = () => {
     const isSelected = isRowSelected(row)
     const tableRowClassNames = classNames(styles.tableRow, { [styles.selectedRow]: isSelected })
@@ -91,10 +101,12 @@ const TableRow = ({ row, rowActions, rowHeight, isLoading }) => {
         role="row"
         style={ { height: rowHeight } }
         className={ tableRowClassNames }
+        onMouseEnter={ () => setIsHover(true) }
+        onMouseLeave={ () => setIsHover(false) }
       >
         { renderSelection(row, isSelected) }
         { headers.map(({
-          field, columnRender, hide, flexWidth,
+          field, columnRender, columnRenderHover, hide, flexWidth,
         }) => {
           if (hide) {
             return null
@@ -102,7 +114,7 @@ const TableRow = ({ row, rowActions, rowHeight, isLoading }) => {
           const style = flexWidth ? { flex: `0 0 ${flexWidth}` } : {}
           return (
             <div role="cell" style={ style } className={ styles.tableCell } key={ field }>
-              { columnRender ? columnRender(row[field], row) : row[field] }
+              { renderCell(row, field, columnRender, columnRenderHover) }
             </div>
           )
         }) }
