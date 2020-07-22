@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
-import { findAllByTestId, queryAllByTestId, screen } from '@testing-library/dom'
+import { screen } from '@testing-library/dom'
 import keymap from '../../utils/enums/keymap'
 import ChipsInput from './ChipsInput'
 
@@ -58,6 +58,15 @@ describe('<ChipsInput />', () => {
       expect(renderChipIcon.mock.calls[0][0]).toEqual( { "icon": undefined, "label": "mockData" })
       expect(renderChipIcon.mock.calls[1][0]).toEqual( { "icon": undefined, "label": "mockData2" })
     })
+
+    it('should not create chip if input validation does not pass', () => {
+      const validateInput = () => false
+      const { queryAllByText } = render(<ChipsInput validateInput={ validateInput } />)
+      addFreeTextChip('mockData')
+      addFreeTextChip('mockData2')
+      const chips = queryAllByText('mockData')
+      expect(chips).toHaveLength(0)
+    })
   })
 
   describe('chips deletion', () => {
@@ -105,7 +114,7 @@ describe('<ChipsInput />', () => {
       addFreeTextChip('mockData')
       addFreeTextChip('mockData2')
       const chips = getAllByTestId('chip')
-      const [firstChip, secondChip] = chips
+      const [firstChip] = chips
       fireEvent.click(firstChip)
       fireEvent.keyDown(firstChip, { keyCode: keymap.DELETE })
       fireEvent.keyDown(firstChip, { keyCode: keymap.DELETE })
@@ -134,6 +143,15 @@ describe('<ChipsInput />', () => {
       expect(document.activeElement).toBe(input)
       // Should be invoked once on mount and for each time focus entered and left the input
       expect(onFocusChange).toBeCalledTimes(3)
+    })
+  })
+
+  describe('prop effects', () => {
+    it('should add error class if error prop was set', () => {
+      const { container } = render(<ChipsInput error/>)
+      expect(container.firstChild.classList.contains('error')).toBe(true)
+      const { container: containerNoError } = render(<ChipsInput/>)
+      expect(containerNoError.firstChild.classList.contains('error')).toBe(false)
     })
   })
 })

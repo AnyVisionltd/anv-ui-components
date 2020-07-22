@@ -3,7 +3,7 @@
 .ChipsInput {
   position: relative;
   border-radius: av-radius();
-  border: solid 2px av-color(content, av-opacity(disabled));
+  border: solid 1px av-color(content, av-opacity(disabled));
   transition: border-color 200ms;
   overflow-y: auto;
   min-height: 48px;
@@ -14,7 +14,12 @@
     border-color: av-color(primary);
   }
 
-    .container {
+
+  &.error, &.error:focus-within {
+    border-color: av-color(error);
+  }
+
+  .container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

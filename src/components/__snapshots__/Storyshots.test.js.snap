@@ -659,6 +659,53 @@ exports[`Storyshots Components/Chip Variants 1`] = `
 </div>
 `;
 
+exports[`Storyshots Components/ChipsInput Custom Input Validation 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexColumn"
+    >
+      <span
+        className="marginFlexContainer"
+      >
+        Only input that contains the text in the 
+        <b>
+          knob
+        </b>
+         can be submitted. The default is 
+        <b>
+          abc
+        </b>
+      </span>
+      <div
+        className="ChipsInput"
+      >
+        <div
+          className="container"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="inputBase text inputBase"
+          >
+            <input
+              autoComplete="off"
+              error={0}
+              onChange={[Function]}
+              onFocus={[Function]}
+              placeholder="Input text in here"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Components/ChipsInput Default 1`] = `
 <div>
   <div
@@ -679,6 +726,7 @@ exports[`Storyshots Components/ChipsInput Default 1`] = `
           >
             <input
               autoComplete="off"
+              error={0}
               onChange={[Function]}
               onFocus={[Function]}
               placeholder="Input text in here"
@@ -775,6 +823,7 @@ exports[`Storyshots Components/ChipsInput Default 1`] = `
             <input
               autoComplete="off"
               disabled={true}
+              error={0}
               onChange={[Function]}
               onFocus={[Function]}
               placeholder="+ Input text in here"
@@ -844,6 +893,7 @@ exports[`Storyshots Components/ChipsInput Get Icon Handler 1`] = `
           >
             <input
               autoComplete="off"
+              error={0}
               onChange={[Function]}
               onFocus={[Function]}
               placeholder="Input text in here"
@@ -943,6 +993,7 @@ exports[`Storyshots Components/ChipsInput Initial Values 1`] = `
         >
           <input
             autoComplete="off"
+            error={0}
             onChange={[Function]}
             onFocus={[Function]}
             placeholder="+ Input text in here"
@@ -983,6 +1034,7 @@ exports[`Storyshots Components/ChipsInput Place Holder 1`] = `
         >
           <input
             autoComplete="off"
+            error={0}
             onChange={[Function]}
             onFocus={[Function]}
             placeholder="Custom place holder"
@@ -1013,6 +1065,7 @@ exports[`Storyshots Components/ChipsInput Play Ground 1`] = `
         >
           <input
             autoComplete="off"
+            error={0}
             onChange={[Function]}
             onFocus={[Function]}
             placeholder="Place holder"

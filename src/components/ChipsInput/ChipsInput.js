@@ -21,6 +21,8 @@ const ChipsInput = forwardRef(({
   renderChipIcon,
   disabled,
   onSubmit,
+  validateInput,
+  error,
   ...otherProps
 }, forwardRef) => {
   const [chipValues, setChipValues] = useState(defaultChipValues)
@@ -102,7 +104,7 @@ const ChipsInput = forwardRef(({
 
   const onAddChip = () => {
     const chip = { label: inputValue }
-    if (!inputValue.length || !validateChipDuplicate(chip)) return
+    if (!inputValue.length || !validateChipDuplicate(chip) || !validateInput(inputValue)) return
     chip.icon = renderChipIcon(chip)
     setInputValue('')
     const newChips = [...chipValues, chip]
@@ -179,6 +181,7 @@ const ChipsInput = forwardRef(({
 
   const classes = classNames(
     styles.ChipsInput,
+    error ? styles.error : undefined,
     className,
   )
 
@@ -187,6 +190,7 @@ const ChipsInput = forwardRef(({
       <div onKeyDown={ keyPress } className={ styles.container }>
         { renderChips }
         <InputBase
+          error={error ? 1 : 0}
           autoComplete="off"
           value={ inputValue }
           className={ styles.inputBase }
@@ -209,9 +213,11 @@ ChipsInput.defaultProps = {
   renderChipIcon: () => {},
   onFocusChange: () => {},
   onSubmit: () => {},
+  validateInput: () => true,
   placeholder: 'Input text in here',
   defaultChipValues: [],
   defaultInputValue: '',
+  error: false,
 }
 
 /**
@@ -242,6 +248,10 @@ ChipsInput.propTypes = {
   placeholder: propTypes.string,
   /** For css customization. */
   className: propTypes.string,
+  /** Toggles the error state. */
+  error: propTypes.bool,
+  /** Validate input before submit*/
+  validateInput: propTypes.func
 }
 
 export default ChipsInput
