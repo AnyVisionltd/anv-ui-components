@@ -1,19 +1,20 @@
-import React, { useContext, useState } from "react"
-import classNames from "classnames"
+import React, { useContext, useState } from 'react'
+import classNames from 'classnames'
+import events from '../../../../utils/enums/events'
+import { Menu } from '../../../Menu'
+import { IconButton } from '../../../IconButton'
+import { ReactComponent as OptionsIcon } from '../../../../assets/svg/Options.svg'
+import { Checkbox } from '../../../Checkbox'
+import TableContext from '../../TableContext'
+import { SkeletonLoader } from '../../../SkeletonLoader'
 import styles from "../TableBody.module.scss"
-import { Menu } from "../../../Menu"
-import { IconButton } from "../../../IconButton"
-import { ReactComponent as OptionsIcon } from "../../../../assets/svg/Options.svg"
-import { Checkbox } from "../../../Checkbox"
-import TableContext from "../../TableContext"
-import { SkeletonLoader } from "../../../SkeletonLoader"
 
 const TableRow = ({ row, rowActions, rowHeight, isLoading }) => {
   const { state, toggleSelectedItem } = useContext(TableContext)
   const { selection, headers } = state
 
   const [actionsAnchorElement, setActionsAnchorElement] = useState(null)
-  const [isHover, setIsHover] = useState()
+  const [isHover, setIsHover] = useState(false)
 
   const handleActionsClose = () => {
     setActionsAnchorElement(null)
@@ -93,6 +94,11 @@ const TableRow = ({ row, rowActions, rowHeight, isLoading }) => {
     return row[field]
   }
 
+  const mouseHoverHandler = ({ type }) => {
+    const isHover = type === events.MOUSE_ENTER
+    setIsHover(isHover)
+  }
+
   const renderDataRow = () => {
     const isSelected = isRowSelected(row)
     const tableRowClassNames = classNames(styles.tableRow, { [styles.selectedRow]: isSelected })
@@ -101,8 +107,8 @@ const TableRow = ({ row, rowActions, rowHeight, isLoading }) => {
         role="row"
         style={ { height: rowHeight } }
         className={ tableRowClassNames }
-        onMouseEnter={ () => setIsHover(true) }
-        onMouseLeave={ () => setIsHover(false) }
+        onMouseEnter={ mouseHoverHandler }
+        onMouseLeave={ mouseHoverHandler }
       >
         { renderSelection(row, isSelected) }
         { headers.map(({
