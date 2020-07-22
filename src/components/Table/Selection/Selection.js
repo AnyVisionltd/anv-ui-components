@@ -124,7 +124,7 @@ Selection.defaultProps = {
 Selection.propTypes = {
   /** Callback fire when selection changed. */
   onChange: propTypes.func,
-  /** The value from the on change. */
+  /** Selected items object. (For controlled selection). */
   selected: propTypes.arrayOf(
     propTypes.shape({
       items: propTypes.array,

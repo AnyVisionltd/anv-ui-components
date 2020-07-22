@@ -1,0 +1,9 @@
+Dockerfile
+Jenkinsfile
+ci_scripts
+.vscode
+.idea
+.git
+.gitignore
+*.md
+.cache

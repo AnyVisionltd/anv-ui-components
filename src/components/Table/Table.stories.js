@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { action } from '@storybook/addon-actions'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import Table from './Table'
-import { Chip } from '../Chip'
+import { Chip, Switch } from '../../index'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
 import { ReactComponent as EyeEnabledIcon } from '../../assets/svg/EyeEnabled.svg'
 import { ReactComponent as EyeDisabledIcon } from '../../assets/svg/EyeDisabled.svg'
@@ -28,10 +28,6 @@ export const Local = () => {
 	  flexWidth: '200px',
     },
     {
-	  field: 'role',
-	  content: 'Role',
-    },
-    {
 	  field: 'location',
 	  content: 'Location',
 	  columnRender: data => <Chip label={ data }/>,
@@ -49,54 +45,48 @@ export const Local = () => {
 	  type: 'number'
     },
     {
-	  field: 'date',
-	  content: 'Date',
-	  type: 'date',
-	  columnRender: data => data.toISOString().slice(0, 10)
-    }
-
+	  field: 'active',
+	  content: 'Active',
+	  columnRender: data => data ? 'Yes' : 'No',
+	  columnRenderHover: data => <Switch checked={ data }/>
+    },
   ], [])
 
   const data = useMemo(() => [
     {
 	  id: '1',
-	  role: 'Admin',
+	  active: true,
 	  firstname: 'Donte',
 	  location: 'Tel Aviv',
 	  weather: 30,
-	  date: new Date(2020, 1),
     },
     {
 	  id: '2',
-	  role: 'User',
+	  active: false,
 	  firstname: 'Cleo',
 	  location: 'Jerusalem',
 	  weather: 15,
-	  date: new Date(2020, 2),
     },
     {
 	  id: '3',
-	  role: 'Admin',
+	  active: true,
 	  firstname: 'Rafael',
 	  location: 'Eilat',
 	  weather: 40,
-	  date: new Date(2020, 3),
     },
     {
 	  id: '4',
-	  role: 'Operator',
+	  active: false,
 	  firstname: 'Neelam',
 	  location: 'Haifa',
 	  weather: 25,
-	  date: new Date(2020, 4),
     },
     {
 	  id: '5',
-	  role: 'Superator',
+	  active: false,
 	  firstname: 'Carole',
 	  location: 'Tzfat',
 	  weather: 20,
-	  date: new Date(2020, 5),
     },
   ], [])
 
