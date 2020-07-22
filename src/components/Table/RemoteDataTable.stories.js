@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { action } from '@storybook/addon-actions'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import Table from './Table'
@@ -20,7 +20,31 @@ export default {
   decorators: [centerDecorator],
 }
 
-export const Local = () => {
+export const RemoteDataTable = () => {
+
+  const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+
+  const totalItems = 50
+
+  const loadMoreItems = useCallback(() => {
+    setIsLoading(true)
+    const a = Array.from({ length: 10 }, (_, index) => ({
+	  id: data.length + index,
+	  role: 'Admin',
+	  firstname: 'Donte',
+	  location: 'Tel Aviv',
+	  weather: 30,
+	  date: new Date(2020, 1),
+    }))
+
+    setTimeout(() => {
+	  const newItems = [...data, ...a]
+	  setData(newItems)
+	  setIsLoading(false)
+    }, 2500)
+  }, [data])
+
   const headers = useMemo(() => [
     {
 	  field: 'firstname',
@@ -57,49 +81,6 @@ export const Local = () => {
 
   ], [])
 
-  const data = useMemo(() => [
-    {
-	  id: '1',
-	  role: 'Admin',
-	  firstname: 'Donte',
-	  location: 'Tel Aviv',
-	  weather: 30,
-	  date: new Date(2020, 1),
-    },
-    {
-	  id: '2',
-	  role: 'User',
-	  firstname: 'Cleo',
-	  location: 'Jerusalem',
-	  weather: 15,
-	  date: new Date(2020, 2),
-    },
-    {
-	  id: '3',
-	  role: 'Admin',
-	  firstname: 'Rafael',
-	  location: 'Eilat',
-	  weather: 40,
-	  date: new Date(2020, 3),
-    },
-    {
-	  id: '4',
-	  role: 'Operator',
-	  firstname: 'Neelam',
-	  location: 'Haifa',
-	  weather: 25,
-	  date: new Date(2020, 4),
-    },
-    {
-	  id: '5',
-	  role: 'Superator',
-	  firstname: 'Carole',
-	  location: 'Tzfat',
-	  weather: 20,
-	  date: new Date(2020, 5),
-    },
-  ], [])
-
   const rowActions = useMemo(() => [
     { content: 'Delete', onClick: action('delete action clicked') },
     { content: 'Edit', onClick: action('edit action clicked') },
@@ -123,20 +104,25 @@ export const Local = () => {
     }
   ]
 
+  const onTableChange = useCallback(({ filters, sort }) => {
+    // TODO add server mock for filters and sort
+  }, [])
+
   const style = { width: '80%', height: '400px' }
+
   return (
-    <Table style={ style } selfControlled={ true }>
-	  <Table.SSF onChange={ action('SSF changed') }/>
-	  <Table.Header
-        headers={ headers }
-        onHeaderCellClick={ action('header cell clicked') }
-	  />
+    <Table style={ style } onChange={ onTableChange }>
+	  <Table.SSF/>
+	  <Table.Header headers={ headers }/>
 	  <Table.Body
+        totalItems={ totalItems }
         data={ data }
         rowActions={ rowActions }
+        isLoading={ isLoading }
+        loadMoreData={ loadMoreItems }
 	  />
-	  <Table.Sortable onSortChange={ action('sort changed') }/>
-	  <Table.Selection bulkActions={ bulkActions } onChange={ action('selection changed') }/>
+	  <Table.Sortable/>
+	  <Table.Selection bulkActions={ bulkActions }/>
     </Table>
   )
 }

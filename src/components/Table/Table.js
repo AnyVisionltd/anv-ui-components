@@ -12,6 +12,7 @@ import styles from './Table.module.scss'
 
 const Table = ({
   selfControlled,
+  onChange,
   children,
   className,
   ...otherProps
@@ -19,9 +20,20 @@ const Table = ({
   const [state, actions] = UseTableReducer()
   const { setSelfControlled } = actions
 
+  const { filters, sort } = state
+  const { sortBy } = sort
+
   useEffect(() => {
     setSelfControlled(selfControlled)
   }, [selfControlled, setSelfControlled])
+
+  useEffect(() => {
+    const params = {
+      filters,
+      sort: sortBy
+    }
+    onChange(params)
+  }, [filters, sortBy, onChange])
 
   const classes = classNames(
     styles.table,
@@ -38,12 +50,15 @@ const Table = ({
 }
 
 Table.defaultProps = {
-  selfControlled: false
+  selfControlled: false,
+  onChange: () => {}
 }
 
 Table.propTypes = {
   /** If true, SSF, Sort, etc.. controlled by the table component */
   selfControlled: propTypes.bool,
+  /** Fire on filters, sort changed */
+  onChange: propTypes.func,
   /** For css customization. */
   className: propTypes.string,
   /** Table components */

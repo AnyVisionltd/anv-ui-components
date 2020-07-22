@@ -2236,7 +2236,7 @@ exports[`Storyshots Components/Switch Playground 1`] = `
 </div>
 `;
 
-exports[`Storyshots Components/Table Basic 1`] = `
+exports[`Storyshots Components/Table Local 1`] = `
 <div>
   <div
     className="center"
@@ -2245,6 +2245,7 @@ exports[`Storyshots Components/Table Basic 1`] = `
       className="table"
       style={
         Object {
+          "height": "400px",
           "width": "80%",
         }
       }
@@ -2295,7 +2296,93 @@ exports[`Storyshots Components/Table Basic 1`] = `
       />
       <div
         className="tableBody"
+      >
+        <div
+          style={
+            Object {
+              "height": 0,
+              "overflow": "visible",
+              "width": 0,
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Table Remote Data Table 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="table"
+      style={
+        Object {
+          "height": "400px",
+          "width": "80%",
+        }
+      }
+    >
+      <div
+        className="SmartFilter TableSSF"
+      >
+        <div
+          className="elevationOverlay"
+        />
+        <button
+          className="button large fill searchFilter"
+          disabled={false}
+          onClick={[Function]}
+        >
+          <svg />
+        </button>
+        <portal-for-test>
+          <div
+            className="menuContainer"
+          />
+        </portal-for-test>
+        <div
+          className="searchInput"
+        >
+          <div
+            className="chipsAndInput"
+            onKeyDown={[Function]}
+          >
+            <div
+              className="inputBase text inputBase"
+            >
+              <input
+                autoComplete="off"
+                onChange={[Function]}
+                onFocus={[Function]}
+                placeholder="Add tag to filter or free type to search"
+                type="text"
+                value=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="tableHeader"
+        role="row"
       />
+      <div
+        className="tableBody"
+      >
+        <div
+          style={
+            Object {
+              "height": 0,
+              "overflow": "visible",
+              "width": 0,
+            }
+          }
+        />
+      </div>
     </div>
   </div>
 </div>
