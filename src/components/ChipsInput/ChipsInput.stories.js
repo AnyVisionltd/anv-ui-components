@@ -1,6 +1,6 @@
 import React from 'react'
 import { action } from '@storybook/addon-actions'
-import { select, text } from '@storybook/addon-knobs'
+import { select, text, boolean } from '@storybook/addon-knobs'
 import ChipsInput from './ChipsInput'
 import { ReactComponent as EyeEnabled } from '../../assets/svg/EyeEnabled.svg'
 import { ReactComponent as ArrowSolidRight } from '../../assets/svg/ArrowSolidRight.svg'
@@ -85,6 +85,26 @@ export const getIconHandler = () => {
   )
 }
 
+export const customChipValidation = () => {
+  const includedText = text('has to include', 'abc')
+  const validation = value => value.includes(includedText)
+
+  return (
+    <div className={ styles.flexColumn }>
+      <span className={ styles.marginFlexContainer }>
+        Only chips that contain the text in the <b>knob</b> can be submitted. The default is <b>abc</b>
+      </span>
+      <ChipsInput
+        validation={ validation }
+        onChange={ action('Chips Changed Result') }
+        onInputChange={ action('Input Changed Result') }
+        onFocusChange={ action('Input Focus Changed Result') }
+        onSubmit={ action('Chip was submitted') }
+      />
+    </div>
+  )
+}
+
 export const playGround = () => {
   const selectOptions = {
     noValues: 1,
@@ -102,5 +122,7 @@ export const playGround = () => {
       defaultInputValue={ select('Initial input value', { initialInputValue: 'Initial Value', emptyValue: '' }, '') }
       defaultChipValues={ values }
       placeholder={ text('text', 'Place holder') }
+      error={ boolean( 'error', false ) }
+      helperText={ text('helper text', 'This is the helper text') }
     />)
 }

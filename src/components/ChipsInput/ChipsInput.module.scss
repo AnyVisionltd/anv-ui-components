@@ -2,37 +2,61 @@
 
 .ChipsInput {
   position: relative;
-  border-radius: av-radius();
-  border: solid 2px av-color(content, av-opacity(disabled));
-  transition: border-color 200ms;
-  overflow-y: auto;
-  min-height: 48px;
-  max-height: 168px;
   display: flex;
+  flex-direction: column;
 
-  &:focus-within {
-    border-color: av-color(primary);
-  }
-
-    .container {
+  .container {
+    @extend %av-scrollbar;
+    border-radius: av-radius();
+    border: solid 1px av-color(content, av-opacity(disabled));
+    overflow-y: auto;
+    overflow-wrap: anywhere;
+    min-height: 48px;
+    max-height: 168px;
+    transition: border-color 200ms;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     align-items: center;
     flex-grow: 1;
 
-    &:focus {
-      opacity: av-opacity(ghost);
+    &:focus-within {
+      border-color: av-color(primary);
+    }
+
+    &.error, &.error:focus-within {
+      border-color: av-color(error);
     }
 
     .chipStyle {
       margin: av-space(micro) 0 av-space(micro) av-space(tiny);
+
+      &.chipError {
+        color: av-color(error);
+        background-color: av-color(error, av-opacity(divider));
+
+        &:focus {
+          background-color: av-color(error, av-opacity(disabled));
+        }
+      }
     }
 
     .inputBase {
       padding-left: av-space(tiny);
       border: none;
       flex-grow: 1;
+    }
+  }
+
+  .helperText {
+    font-family: Poppins;
+    font-size: av-font-size(tiny);
+    line-height: 1.33;
+    letter-spacing: 0.4px;
+    text-align: left;
+    color: av-color(content, av-opacity(medium));
+
+    &.helperError {
+      color: av-color(error);
     }
   }
 

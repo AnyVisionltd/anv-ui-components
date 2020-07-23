@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, forwardRef, useMemo } from 'react'
+import React, { useRef, useState, useEffect, forwardRef, useMemo, useCallback } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 import { useCombinedRefs } from '../../hooks/UseCombinedRefs'
@@ -22,6 +22,9 @@ const ChipsInput = forwardRef(({
   renderChipIcon,
   disabled,
   onSubmit,
+  validation,
+  helperText,
+  error,
   ...otherProps
 }, forwardRef) => {
   const [chipValues, setChipValues] = useState(defaultChipValues)
@@ -95,15 +98,9 @@ const ChipsInput = forwardRef(({
     removeChip(focusedChipIndex, event)
   }
 
-  const validateChipDuplicate = ({ label: newLabel }) => {
-    const compareChips = ({ label }) => label === newLabel
-    const chipsEqualToNewChip = chipValues.filter(compareChips)
-    return !chipsEqualToNewChip.length
-  }
-
   const onAddChip = () => {
     const chip = { label: inputValue }
-    if (!inputValue.length || !validateChipDuplicate(chip)) return
+    if (!inputValue.length) return
     chip.icon = renderChipIcon(chip)
     setInputValue('')
     const newChips = [...chipValues, chip]
@@ -111,7 +108,7 @@ const ChipsInput = forwardRef(({
     onSubmit(newChips.map(({ label }) => label))
   }
 
-  const updateChipFocus = (index, event) => {
+  const updateChipFocus = useCallback((index, event) => {
     const lastIndex = chipValues.length - 1
     const isRemovedByBackspace = event && event.keyCode === keymap.BACKSPACE
     const isRemovedLast = index === lastIndex
@@ -122,13 +119,14 @@ const ChipsInput = forwardRef(({
     } else if (isRemovedByBackspace) {
       setFocusedChipIndex(focusedChipIndex === null ? lastIndex - 1 : focusedChipIndex - 1)
     }
-  }
+  }, [chipValues, focusedChipIndex, inputBaseRef])
 
-  const removeChip = (chipIndex, event) => {
+  const removeChip = useCallback((chipIndex, event) => {
+    if (disabled) return
     const chips = chipValues.filter((chip, index) => chipIndex !== index)
     updateChipFocus(chipIndex, event)
     setChipValues(chips)
-  }
+  }, [chipValues, disabled, updateChipFocus])
 
   const keyFunctionMapping = Object.freeze({
     [keymap.ENTER]: onAddChip,
@@ -147,23 +145,41 @@ const ChipsInput = forwardRef(({
 
   const removeAllChips = () => setChipValues([])
 
-  const renderChips = (
+  const renderChips = useMemo(() => (
     <>
-      { chipValues.map(({ label, icon }, index) => (
-        <Chip
-          key={ index }
-          className={ styles.chipStyle }
-          isFocused={ index === focusedChipIndex }
-          onClick={ () => setFocusedChipIndex(index) }
-          label={ label }
-          leadingIcon={ icon }
-          onTrailingIconClick={ event => removeChip(index, event) }
-          disabled={ disabled }
-          deletable
-        />
-      )) }
+      { chipValues.map(({ label, icon }, index) => {
+        const isChipValid = validation(label)
+        const chipClasses = classNames(
+          styles.chipStyle,
+          isChipValid ? undefined : styles.chipError,
+        )
+        return (
+          <Chip
+            key={ index }
+            className={ chipClasses }
+            isFocused={ index === focusedChipIndex }
+            onClick={ () => setFocusedChipIndex(index) }
+            label={ label }
+            leadingIcon={ icon }
+            onTrailingIconClick={ event => removeChip(index, event) }
+            disabled={ disabled }
+            deletable={ !disabled }
+          />
+        )
+      }) }
     </>
-  )
+  ), [chipValues, focusedChipIndex, disabled, removeChip, validation])
+
+  const renderHelperText = useMemo(() => {
+    if (!helperText) return
+    const labelClasses = classNames(
+      styles.helperText,
+      error ? styles.helperError : undefined,
+    )
+    return (
+      <label className={ labelClasses }> { helperText } </label>
+    )
+  }, [error, helperText])
 
   const renderRemoveAllChipsIcon = useMemo(() => {
     if (!chipValues.length) return
@@ -172,19 +188,26 @@ const ChipsInput = forwardRef(({
         variant="ghost"
         onClick={ removeAllChips }
         aria-label="remove all"
+        disabled={ disabled }
       >
         <CancelFilledIcon className={ styles.cancelIcon } />
       </IconButton>
     )
-  }, [chipValues])
+  }, [chipValues, disabled])
 
   const classes = classNames(
     styles.ChipsInput,
     className,
   )
+
+  const containerClasses = classNames(
+    styles.container,
+    error ? styles.error : undefined,
+  )
+
   return (
     <div className={ classes }>
-      <div onKeyDown={ keyPress } className={ styles.container }>
+      <div onKeyDown={ keyPress } className={ containerClasses }>
         { renderChips }
         <InputBase
           autoComplete="off"
@@ -199,6 +222,7 @@ const ChipsInput = forwardRef(({
           { ...otherProps }
         />
       </div>
+      { renderHelperText }
     </div>
   )
 })
@@ -209,9 +233,11 @@ ChipsInput.defaultProps = {
   renderChipIcon: () => {},
   onFocusChange: () => {},
   onSubmit: () => {},
+  validation: () => true,
   placeholder: 'Input text in here',
   defaultChipValues: [],
   defaultInputValue: '',
+  error: false,
 }
 
 /**
@@ -244,6 +270,12 @@ ChipsInput.propTypes = {
   className: propTypes.string,
   /** Controlled input value. */
   inputValue: propTypes.string,
+  /** Determine if chip is valid. */
+  validation: propTypes.func,
+  /** Toggles the error state. */
+  error: propTypes.bool,
+  /** helper text value. */
+  helperText: propTypes.string,
 }
 
 export default ChipsInput
