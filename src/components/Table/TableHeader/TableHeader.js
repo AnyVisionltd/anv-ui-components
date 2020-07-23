@@ -125,14 +125,15 @@ TableHeader.defaultProps = {
 
 TableHeader.propTypes = {
   /** Table header fields. <br />
-   *  <code>field</code>        - match to the data properties. <br />
-   *  <code>content</code>      - what to render in the header cell.<br />
-   *  <code>label</code>        - display name to render on SSF and Column Management. <br />
-   *  <code>type</code>         - column type, use by SSF sort etc... <br />
-   *  <code>columnRender</code> - function for custom column render. <br />
-   *  <code>disableSort</code>  - disable sort for the column. <br />
-   *  <code>hide</code>         - hide the column. <br />
-   *  <code>flexWidth</code>    - set the column width by flex basis. <br />
+   *  <code>field</code>        		- match to the data properties. <br />
+   *  <code>content</code>      		- what to render in the header cell.<br />
+   *  <code>label</code>        		- display name to render on SSF and Column Management. <br />
+   *  <code>type</code>         		- column type, use by SSF sort etc... <br />
+   *  <code>columnRender</code> 		- custom column render. <code>(cellData, rowData) => {}</code>. <br />
+   *  <code>columnRenderHover</code> 	- custom column render on hover. <code>(cellData, rowData) => {}</code>.<br />
+   *  <code>disableSort</code>  		- disable sort for the column. <br />
+   *  <code>hide</code>         		- hide the column. <br />
+   *  <code>flexWidth</code>    		- set the column width by flex basis. <br />
    **/
   headers: propTypes.arrayOf(
     propTypes.shape({
@@ -144,6 +145,7 @@ TableHeader.propTypes = {
 	  label: propTypes.string,
 	  type: propTypes.oneOf(['string', 'number', 'date']),
 	  columnRender: propTypes.func,
+	  columnRenderHover: propTypes.func,
 	  disableSort: propTypes.bool,
 	  hide: propTypes.bool,
 	  flexWidth: propTypes.string,

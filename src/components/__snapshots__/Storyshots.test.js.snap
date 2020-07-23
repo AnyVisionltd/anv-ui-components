@@ -501,6 +501,7 @@ exports[`Storyshots Components/Chip Default 1`] = `
       </span>
       <button
         className="trailingIcon trailingIconClickable"
+        disabled={false}
         onClick={[Function]}
       >
         <svg />
@@ -530,6 +531,7 @@ exports[`Storyshots Components/Chip Playground 1`] = `
       </span>
       <button
         className="trailingIcon trailingIconClickable"
+        disabled={false}
         onClick={[Function]}
       >
         <svg />
@@ -622,6 +624,7 @@ exports[`Storyshots Components/Chip Variants 1`] = `
       </span>
       <button
         className="trailingIcon"
+        disabled={false}
         onClick={[Function]}
       >
         <svg />
@@ -646,10 +649,378 @@ exports[`Storyshots Components/Chip Variants 1`] = `
       </span>
       <button
         className="trailingIcon"
+        disabled={false}
         onClick={[Function]}
       >
         <svg />
       </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/ChipsInput Default 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexColumn"
+    >
+      <div
+        className="ChipsInput"
+      >
+        <div
+          className="container"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="inputBase text inputBase"
+          >
+            <input
+              autoComplete="off"
+              onChange={[Function]}
+              onFocus={[Function]}
+              placeholder="Input text in here"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="microMargin"
+      />
+      <div
+        className="ChipsInput"
+      >
+        <div
+          className="container"
+          onKeyDown={[Function]}
+        >
+          <div
+            aria-disabled={true}
+            className="chip focusable disabled chipStyle"
+            data-testid="chip"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={0}
+          >
+            <span
+              className="label"
+            >
+              first
+            </span>
+            <button
+              className="trailingIcon trailingIconClickable"
+              disabled={true}
+              onClick={[Function]}
+            >
+              <svg />
+            </button>
+          </div>
+          <div
+            aria-disabled={true}
+            className="chip focusable disabled chipStyle"
+            data-testid="chip"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={0}
+          >
+            <span
+              className="label"
+            >
+              second
+            </span>
+            <button
+              className="trailingIcon trailingIconClickable"
+              disabled={true}
+              onClick={[Function]}
+            >
+              <svg />
+            </button>
+          </div>
+          <div
+            aria-disabled={true}
+            className="chip focusable disabled chipStyle"
+            data-testid="chip"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={0}
+          >
+            <div
+              className="leadingIcon"
+            >
+              <svg />
+            </div>
+            <span
+              className="label"
+            >
+              third with icon
+            </span>
+            <button
+              className="trailingIcon trailingIconClickable"
+              disabled={true}
+              onClick={[Function]}
+            >
+              <svg />
+            </button>
+          </div>
+          <div
+            className="inputBase text disabled inputBase"
+          >
+            <input
+              autoComplete="off"
+              disabled={true}
+              onChange={[Function]}
+              onFocus={[Function]}
+              placeholder="+ Input text in here"
+              type="text"
+              value="Disabled Input"
+            />
+            <button
+              aria-label="remove all"
+              className="button large ghost iconButton small ghost"
+              disabled={false}
+              onClick={[Function]}
+            >
+              <svg
+                className="cancelIcon"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/ChipsInput Get Icon Handler 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexColumn"
+    >
+      <span
+        className="marginFlexContainer"
+      >
+        Insert 
+        <b>
+          first
+        </b>
+         for 
+        <b>
+          Eye
+        </b>
+         icon, 
+        <b>
+          second
+        </b>
+         for 
+        <b>
+          Arrow
+        </b>
+         icon and everything else for 
+        <b>
+          Filter
+        </b>
+         icon
+      </span>
+      <div
+        className="ChipsInput"
+      >
+        <div
+          className="container"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="inputBase text inputBase"
+          >
+            <input
+              autoComplete="off"
+              onChange={[Function]}
+              onFocus={[Function]}
+              placeholder="Input text in here"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/ChipsInput Initial Values 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="ChipsInput"
+    >
+      <div
+        className="container"
+        onKeyDown={[Function]}
+      >
+        <div
+          className="chip focusable clickable chipStyle"
+          data-testid="chip"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <span
+            className="label"
+          >
+            first
+          </span>
+          <button
+            className="trailingIcon trailingIconClickable"
+            disabled={false}
+            onClick={[Function]}
+          >
+            <svg />
+          </button>
+        </div>
+        <div
+          className="chip focusable clickable chipStyle"
+          data-testid="chip"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <span
+            className="label"
+          >
+            second
+          </span>
+          <button
+            className="trailingIcon trailingIconClickable"
+            disabled={false}
+            onClick={[Function]}
+          >
+            <svg />
+          </button>
+        </div>
+        <div
+          className="chip focusable clickable chipStyle"
+          data-testid="chip"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <div
+            className="leadingIcon"
+          >
+            <svg />
+          </div>
+          <span
+            className="label"
+          >
+            third with icon
+          </span>
+          <button
+            className="trailingIcon trailingIconClickable"
+            disabled={false}
+            onClick={[Function]}
+          >
+            <svg />
+          </button>
+        </div>
+        <div
+          className="inputBase text inputBase"
+        >
+          <input
+            autoComplete="off"
+            onChange={[Function]}
+            onFocus={[Function]}
+            placeholder="+ Input text in here"
+            type="text"
+            value="foo"
+          />
+          <button
+            aria-label="remove all"
+            className="button large ghost iconButton small ghost"
+            disabled={false}
+            onClick={[Function]}
+          >
+            <svg
+              className="cancelIcon"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/ChipsInput Place Holder 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="ChipsInput"
+    >
+      <div
+        className="container"
+        onKeyDown={[Function]}
+      >
+        <div
+          className="inputBase text inputBase"
+        >
+          <input
+            autoComplete="off"
+            onChange={[Function]}
+            onFocus={[Function]}
+            placeholder="Custom place holder"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/ChipsInput Play Ground 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="ChipsInput"
+    >
+      <div
+        className="container"
+        onKeyDown={[Function]}
+      >
+        <div
+          className="inputBase text inputBase"
+        >
+          <input
+            autoComplete="off"
+            onChange={[Function]}
+            onFocus={[Function]}
+            placeholder="Place holder"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -1865,7 +2236,7 @@ exports[`Storyshots Components/Switch Playground 1`] = `
 </div>
 `;
 
-exports[`Storyshots Components/Table Basic 1`] = `
+exports[`Storyshots Components/Table Local 1`] = `
 <div>
   <div
     className="center"
@@ -1874,6 +2245,7 @@ exports[`Storyshots Components/Table Basic 1`] = `
       className="table"
       style={
         Object {
+          "height": "400px",
           "width": "80%",
         }
       }
@@ -1924,7 +2296,291 @@ exports[`Storyshots Components/Table Basic 1`] = `
       />
       <div
         className="tableBody"
+      >
+        <div
+          style={
+            Object {
+              "height": 0,
+              "overflow": "visible",
+              "width": 0,
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Table Remote Data Table 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="table"
+      style={
+        Object {
+          "height": "400px",
+          "width": "80%",
+        }
+      }
+    >
+      <div
+        className="SmartFilter TableSSF"
+      >
+        <div
+          className="elevationOverlay"
+        />
+        <button
+          className="button large fill searchFilter"
+          disabled={false}
+          onClick={[Function]}
+        >
+          <svg />
+        </button>
+        <portal-for-test>
+          <div
+            className="menuContainer"
+          />
+        </portal-for-test>
+        <div
+          className="searchInput"
+        >
+          <div
+            className="chipsAndInput"
+            onKeyDown={[Function]}
+          >
+            <div
+              className="inputBase text inputBase"
+            >
+              <input
+                autoComplete="off"
+                onChange={[Function]}
+                onFocus={[Function]}
+                placeholder="Add tag to filter or free type to search"
+                type="text"
+                value=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="tableHeader"
+        role="row"
       />
+      <div
+        className="tableBody"
+      >
+        <div
+          style={
+            Object {
+              "height": 0,
+              "overflow": "visible",
+              "width": 0,
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Tooltip Arrow Variations 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      style={
+        Object {
+          "textAlign": "center",
+        }
+      }
+    >
+      <h6>
+        Left
+      </h6>
+      <div
+        className="popperContainer"
+        hidden={true}
+        onMouseEnter={null}
+        onMouseLeave={null}
+        style={
+          Object {
+            "left": "0",
+            "position": "absolute",
+            "top": "0",
+          }
+        }
+      >
+        <p>
+          left
+        </p>
+        <div
+          className="popperArrow"
+        />
+      </div>
+      <h6>
+        Top
+      </h6>
+      <div
+        className="popperContainer"
+        hidden={true}
+        onMouseEnter={null}
+        onMouseLeave={null}
+        style={
+          Object {
+            "left": "0",
+            "position": "absolute",
+            "top": "0",
+          }
+        }
+      >
+        <p>
+          top
+        </p>
+        <div
+          className="popperArrow"
+        />
+      </div>
+      <h6>
+        Bottom
+      </h6>
+      <div
+        className="popperContainer"
+        hidden={true}
+        onMouseEnter={null}
+        onMouseLeave={null}
+        style={
+          Object {
+            "left": "0",
+            "position": "absolute",
+            "top": "0",
+          }
+        }
+      >
+        <p>
+          bottom
+        </p>
+        <div
+          className="popperArrow"
+        />
+      </div>
+      <h6>
+        Right
+      </h6>
+      <div
+        className="popperContainer"
+        hidden={true}
+        onMouseEnter={null}
+        onMouseLeave={null}
+        style={
+          Object {
+            "left": "0",
+            "position": "absolute",
+            "top": "0",
+          }
+        }
+      >
+        <p>
+          right
+        </p>
+        <div
+          className="popperArrow"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Tooltip Default 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <h6>
+      Hover over me!
+    </h6>
+    <div
+      className="popperContainer"
+      hidden={true}
+      onMouseEnter={null}
+      onMouseLeave={null}
+      style={
+        Object {
+          "left": "0",
+          "position": "absolute",
+          "top": "0",
+        }
+      }
+    >
+      <p>
+        I'm a tooltip!
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Tooltip Interactive 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <h6>
+      Hover over me!
+    </h6>
+    <div
+      className="popperContainer"
+      hidden={true}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      style={
+        Object {
+          "left": "0",
+          "position": "absolute",
+          "top": "0",
+        }
+      }
+    >
+      <p
+        className="tooltipTitle"
+      >
+        Hover me!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing
+      </p>
+      <div>
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "justifyContent": "space-between",
+              "marginTop": "20px",
+            }
+          }
+        >
+          <button
+            className="button small ghost"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Skip
+          </button>
+          <button
+            className="button small fill"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Next
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

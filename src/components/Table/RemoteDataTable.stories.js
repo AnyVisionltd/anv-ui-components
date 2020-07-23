@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { action } from '@storybook/addon-actions'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import Table from './Table'
-import { Chip, Switch } from '../../index'
+import { Chip } from '../Chip'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
 import { ReactComponent as EyeEnabledIcon } from '../../assets/svg/EyeEnabled.svg'
 import { ReactComponent as EyeDisabledIcon } from '../../assets/svg/EyeDisabled.svg'
@@ -20,12 +20,40 @@ export default {
   decorators: [centerDecorator],
 }
 
-export const Local = () => {
+export const RemoteDataTable = () => {
+
+  const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+
+  const totalItems = 50
+
+  const loadMoreItems = useCallback(() => {
+    setIsLoading(true)
+    const a = Array.from({ length: 10 }, (_, index) => ({
+	  id: data.length + index,
+	  role: 'Admin',
+	  firstname: 'Donte',
+	  location: 'Tel Aviv',
+	  weather: 30,
+	  date: new Date(2020, 1),
+    }))
+
+    setTimeout(() => {
+	  const newItems = [...data, ...a]
+	  setData(newItems)
+	  setIsLoading(false)
+    }, 2500)
+  }, [data])
+
   const headers = useMemo(() => [
     {
 	  field: 'firstname',
 	  content: 'First Name',
 	  flexWidth: '200px',
+    },
+    {
+	  field: 'role',
+	  content: 'Role',
     },
     {
 	  field: 'location',
@@ -45,49 +73,12 @@ export const Local = () => {
 	  type: 'number'
     },
     {
-	  field: 'active',
-	  content: 'Active',
-	  columnRender: data => data ? 'Yes' : 'No',
-	  columnRenderHover: data => <Switch checked={ data }/>
-    },
-  ], [])
+	  field: 'date',
+	  content: 'Date',
+	  type: 'date',
+	  columnRender: data => data.toISOString().slice(0, 10)
+    }
 
-  const data = useMemo(() => [
-    {
-	  id: '1',
-	  active: true,
-	  firstname: 'Donte',
-	  location: 'Tel Aviv',
-	  weather: 30,
-    },
-    {
-	  id: '2',
-	  active: false,
-	  firstname: 'Cleo',
-	  location: 'Jerusalem',
-	  weather: 15,
-    },
-    {
-	  id: '3',
-	  active: true,
-	  firstname: 'Rafael',
-	  location: 'Eilat',
-	  weather: 40,
-    },
-    {
-	  id: '4',
-	  active: false,
-	  firstname: 'Neelam',
-	  location: 'Haifa',
-	  weather: 25,
-    },
-    {
-	  id: '5',
-	  active: false,
-	  firstname: 'Carole',
-	  location: 'Tzfat',
-	  weather: 20,
-    },
   ], [])
 
   const rowActions = useMemo(() => [
@@ -113,20 +104,25 @@ export const Local = () => {
     }
   ]
 
+  const onTableChange = useCallback(({ filters, sort }) => {
+    // TODO add server mock for filters and sort
+  }, [])
+
   const style = { width: '80%', height: '400px' }
+
   return (
-    <Table style={ style } selfControlled={ true }>
-	  <Table.SSF onChange={ action('SSF changed') }/>
-	  <Table.Header
-        headers={ headers }
-        onHeaderCellClick={ action('header cell clicked') }
-	  />
+    <Table style={ style } onChange={ onTableChange }>
+	  <Table.SSF/>
+	  <Table.Header headers={ headers }/>
 	  <Table.Body
+        totalItems={ totalItems }
         data={ data }
         rowActions={ rowActions }
+        isLoading={ isLoading }
+        loadMoreData={ loadMoreItems }
 	  />
-	  <Table.Sortable onSortChange={ action('sort changed') }/>
-	  <Table.Selection bulkActions={ bulkActions } onChange={ action('selection changed') }/>
+	  <Table.Sortable/>
+	  <Table.Selection bulkActions={ bulkActions }/>
     </Table>
   )
 }

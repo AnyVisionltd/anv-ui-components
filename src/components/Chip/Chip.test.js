@@ -89,4 +89,19 @@ describe('<Chip />', () => {
     fireEvent.click(node)
     expect(handleClick).toBeCalled()
   })
+
+  it('should not call \'on trailing icon click\' when set as disabled and trailing icon is clicked', () => {
+    const handleClick = jest.fn()
+    const { getAllByRole } = render(
+      <Chip
+        label={ chipText }
+        disabled
+        onTrailingIconClick={ handleClick }
+        trailingIcon={ <SvgIcon /> }
+      />,
+    )
+    const [, node] = getAllByRole('button')
+    fireEvent.click(node)
+    expect(handleClick).toBeCalledTimes(0)
+  })
 })
