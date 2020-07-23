@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useMemo } from 'react'
+import React, { useRef, useState, useEffect, useMemo, useCallback } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 import Button from '../Button/Button'
@@ -18,45 +18,44 @@ const SmartFilter = ({
   const [inputValue, setInputValue] = useState('')
   const inputBaseRef = useRef()
 
-  const getChipField = chipLabel => fields.find(({ label }) => chipLabel.indexOf(label) === 0)
+  const handleMenuOpen = useCallback(() => setMenuAnchor(inputBaseRef.current), [inputBaseRef])
+  const handleMenuClose = useCallback(() => setMenuAnchor(null), [])
 
-  const handleChipChange = chips => {
+  const getChipField = useCallback(chipLabel => {
+    const match = fields.find(({ label }) => chipLabel.indexOf(label) === 0)
+    return match && match.type
+  }, [fields])
+
+  const isValueContainedInField = useCallback(value => {
+    return fields.find(({ label }) => label.toLowerCase().indexOf(value.toLowerCase()) === 0)
+  }, [fields])
+
+  useEffect(() => {
+    if (inputValue && !isValueContainedInField(inputValue)) {
+      handleMenuClose()
+    }
+  }, [inputValue, isValueContainedInField, handleMenuClose])
+
+  const handleChipChange = useCallback(chips => {
     const searchQuery = chips.map(chipLabel => {
       const chipField = getChipField(chipLabel)
       return { ...chipField && { field: chipField.field }, value: chipLabel }
     })
     onChange(searchQuery)
-  }
-
-  useEffect(() => {
-    if (inputValue) {
-      handleMenuClose()
-    }
-  }, [inputValue])  // eslint-disable-line react-hooks/exhaustive-deps
-
-  const handleMenuOpen = () => setMenuAnchor(inputBaseRef.current)
-  const handleMenuClose = () => setMenuAnchor(null)
+  }, [onChange, getChipField])
 
   const renderChipIcon = ({ label }) => {
     const menuItem = getChipField(label)
     return menuItem && menuItem.icon
   }
 
-  const getInputType = () => {
-    const menuItem = getChipField(inputValue)
-    return menuItem && menuItem.type ? menuItem.type : 'text'
-  }
+  const getInputType = useCallback(value => {
+    const menuItem = getChipField(value)
+    return menuItem ? menuItem : 'text'
+  }, [getChipField])
 
-  const onItemClick = label => {
-    setInputValue(`${label}: `)
-    handleMenuClose()
-    inputBaseRef.current.focus()
-  }
-
-  const onInputChange = value => {
-    if (!value.includes(inputValue)) {
-      setInputValue('')
-    } else if (getInputType() === 'number') {
+  const onInputChange = useCallback(value => {
+    if (getInputType(value) === 'number') {
       const inputValueOnly = value.slice(value.indexOf(':') + 2)
       if (!Number.isNaN(Number(inputValueOnly))) {
         setInputValue(value)
@@ -64,7 +63,7 @@ const SmartFilter = ({
     } else {
       setInputValue(value)
     }
-  }
+  }, [setInputValue, getInputType])
 
   const menuItems = useMemo(() => {
     const menuItems = fields.filter(({ label }) => label.toLowerCase().indexOf(inputValue.toLowerCase()) === 0)
@@ -74,13 +73,19 @@ const SmartFilter = ({
       handleMenuClose()
     }
     return menuItems
-  }, [inputValue, fields])
+  }, [inputValue, fields, handleMenuClose, handleMenuOpen, inputBaseRef])
 
-  const handleButtonClick = () => menuAnchor || menuItems.length === 0
+  const handleButtonClick = useCallback(() => menuAnchor || menuItems.length === 0
     ? setMenuAnchor(null)
-    : setMenuAnchor(inputBaseRef.current)
+    : setMenuAnchor(inputBaseRef.current), [menuAnchor, menuItems.length, inputBaseRef])
 
-  const renderAutoComplete = () => {
+  const renderAutoComplete = useMemo(() => {
+    const onItemClick = label => {
+      setInputValue(`${label}: `)
+      handleMenuClose()
+      inputBaseRef.current.focus()
+    }
+
     return (
       <Menu
         variant={ 'dense' }
@@ -94,7 +99,7 @@ const SmartFilter = ({
         )) }
       </Menu>
     )
-  }
+  },[handleMenuClose, menuAnchor, menuItems, inputBaseRef])
 
   const onInputFocus = isFocused => isFocused && menuItems.length && handleMenuOpen()
 
@@ -109,8 +114,9 @@ const SmartFilter = ({
       <Button className={ classNames(styles.searchFilter, menuAnchor && styles.openedMenu) } onClick={ handleButtonClick }>
         <FilterIcon />
       </Button>
-      { renderAutoComplete() }
+      { renderAutoComplete }
       <ChipsInput
+        className={ styles.chipInput }
         renderChipIcon={ renderChipIcon }
         placeholder={ placeholder }
         onFocusChange={ onInputFocus }
