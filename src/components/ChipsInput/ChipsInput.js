@@ -141,7 +141,10 @@ const ChipsInput = forwardRef(({
 
   const handleInputChange = ({ target }) => setInputValue(target.value)
 
-  const onInputFocus = () => setFocusedChipIndex(null)
+  const onInputFocus = () => {
+    setFocusedChipIndex(null)
+    onFocusChange(true)
+  }
 
   const removeAllChips = () => setChipValues([])
 

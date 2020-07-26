@@ -34,7 +34,7 @@ const SmartFilter = ({
     if (inputValue && !isValueContainedInField(inputValue)) {
       handleMenuClose()
     }
-  }, [inputValue, isValueContainedInField, handleMenuClose])
+  }, [inputValue, isValueContainedInField, handleMenuClose, inputBaseRef])
 
   const handleChipChange = useCallback(chips => {
     const searchQuery = chips.map(chipLabel => {
@@ -101,7 +101,7 @@ const SmartFilter = ({
     )
   },[handleMenuClose, menuAnchor, menuItems, inputBaseRef])
 
-  const onInputFocus = isFocused => isFocused && menuItems.length && handleMenuOpen()
+  const onInputFocus = useCallback(isFocused => isFocused && menuItems.length ? handleMenuOpen() : handleMenuClose(), [menuItems, handleMenuClose, handleMenuOpen])
 
   const classes = classNames(
     styles.SmartFilter,
