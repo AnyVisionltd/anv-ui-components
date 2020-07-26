@@ -17,8 +17,11 @@
     }
   }
 
-  .chipInput div{
-    border: none;
+  .chipInput{
+    flex-grow: 1;
+    div{
+      border: none;
+    }
   }
 }
 
