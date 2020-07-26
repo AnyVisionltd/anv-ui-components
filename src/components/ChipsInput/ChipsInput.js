@@ -29,7 +29,7 @@ const ChipsInput = forwardRef(({
 }, forwardRef) => {
   const [chipValues, setChipValues] = useState(defaultChipValues)
   const [inputValue, setInputValue] = useState(defaultInputValue)
-  const [focusedChipIndex, setFocusedChipIndex] = useState(null)
+  const [focusedChipIndex, setFocusedChipIndex] = useState()
   const previousFocusedChipIndex = usePrevious(focusedChipIndex)
   const innerRef = useRef(null)
   const inputBaseRef = useCombinedRefs(forwardRef, innerRef)
@@ -205,9 +205,11 @@ const ChipsInput = forwardRef(({
     className,
   )
 
+  const isChipWithError = useMemo(() => chipValues.some(({ label }) => !validation(label)), [chipValues, validation])
+
   const containerClasses = classNames(
     styles.container,
-    error ? styles.error : undefined,
+    isChipWithError || error ? styles.error : undefined,
   )
 
   return (

@@ -16,6 +16,7 @@ const SmartFilter = ({
 }) => {
   const [menuAnchor, setMenuAnchor] = useState(null)
   const [inputValue, setInputValue] = useState('')
+  const [chips, setChips] = useState()
   const inputBaseRef = useRef()
 
   const handleMenuOpen = useCallback(() => setMenuAnchor(inputBaseRef.current), [inputBaseRef])
@@ -43,6 +44,7 @@ const SmartFilter = ({
       const chipField = getChipField(chipLabel)
       return { ...chipField && { field: chipField.field }, value: chipLabel }
     })
+    setChips(chips)
     onChange(searchQuery)
   }, [onChange, getChipField])
 
@@ -78,8 +80,8 @@ const SmartFilter = ({
   }, [inputValue, fields, handleMenuClose, handleMenuOpen, inputBaseRef])
 
   const handleButtonClick = useCallback(() => menuAnchor || menuItems.length === 0
-    ? setMenuAnchor(null)
-    : setMenuAnchor(inputBaseRef.current), [menuAnchor, menuItems.length, inputBaseRef])
+    ? handleMenuClose()
+    : handleMenuOpen(), [menuAnchor, menuItems.length, handleMenuOpen, handleMenuClose])
 
   const renderAutoComplete = useMemo(() => {
     const onItemClick = label => {
@@ -101,7 +103,8 @@ const SmartFilter = ({
         )) }
       </Menu>
     )
-  },[handleMenuClose, menuAnchor, menuItems, inputBaseRef, getLabelTextForInput])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[handleMenuClose, menuAnchor, menuItems, inputBaseRef, getLabelTextForInput, chips])
 
   const onInputFocus = useCallback(isFocused => isFocused && menuItems.length ? handleMenuOpen() : handleMenuClose(), [menuItems, handleMenuClose, handleMenuOpen])
 

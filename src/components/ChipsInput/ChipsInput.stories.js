@@ -86,13 +86,12 @@ export const getIconHandler = () => {
 }
 
 export const customChipValidation = () => {
-  const includedText = text('has to include', 'abc')
-  const validation = value => value.includes(includedText)
+  const validation = value => value.includes('abc')
 
   return (
     <div className={ styles.flexColumn }>
       <span className={ styles.marginFlexContainer }>
-        Only chips that contain the text in the <b>knob</b> can be submitted. The default is <b>abc</b>
+        Only chips that contain <b>abc</b> can be submitted.
       </span>
       <ChipsInput
         validation={ validation }

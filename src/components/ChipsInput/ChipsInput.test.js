@@ -60,6 +60,7 @@ describe('<ChipsInput />', () => {
       expect(chipWithError).not.toBe(null)
       // delete created chip
       const input = getByRole('textbox')
+      input.focus()
       fireEvent.keyDown(input, { keyCode: keymap.BACKSPACE })
       // create chip with valid data
       addFreeTextChip('1')
@@ -98,6 +99,7 @@ describe('<ChipsInput />', () => {
       const onChange = jest.fn()
       const { getByRole, queryAllByTestId } = render(<ChipsInput onChange={ onChange } />)
       const input = getByRole('textbox')
+      input.focus()
       addFreeTextChip('mockData')
       addFreeTextChip('mockData2')
       fireEvent.keyDown(input, { keyCode: keymap.BACKSPACE })
@@ -126,6 +128,7 @@ describe('<ChipsInput />', () => {
       const onFocusChange = jest.fn()
       const { getByRole, getAllByTestId } = render(<ChipsInput onFocusChange={ onFocusChange }/>)
       const input = getByRole('textbox')
+      input.focus()
       addFreeTextChip('mockData')
       addFreeTextChip('mockData2')
       fireEvent.keyDown(input, { keyCode: keymap.ARROW_LEFT })
@@ -141,7 +144,7 @@ describe('<ChipsInput />', () => {
       fireEvent.keyDown(input, { keyCode: keymap.ARROW_RIGHT })
       expect(document.activeElement).toBe(input)
       // Should be invoked once on mount and for each time focus entered and left the input
-      expect(onFocusChange).toBeCalledTimes(4)
+      expect(onFocusChange).toBeCalledTimes(5)
     })
   })
 

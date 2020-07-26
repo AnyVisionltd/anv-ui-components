@@ -48,10 +48,8 @@
   }
 
   .helperText {
+    @extend %av-caption;
     font-family: Poppins;
-    font-size: av-font-size(tiny);
-    line-height: 1.33;
-    letter-spacing: 0.4px;
     text-align: left;
     color: av-color(content, av-opacity(medium));
 
