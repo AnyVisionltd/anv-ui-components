@@ -21,10 +21,12 @@ const SmartFilter = ({
   const handleMenuOpen = useCallback(() => setMenuAnchor(inputBaseRef.current), [inputBaseRef])
   const handleMenuClose = useCallback(() => setMenuAnchor(null), [])
 
+  const getLabelTextForInput = useCallback(label => `${label}: `, [])
+
   const getChipField = useCallback(chipLabel => {
-    const match = fields.find(({ label }) => chipLabel.indexOf(label) === 0)
+    const match = fields.find(({ label }) => chipLabel.indexOf(getLabelTextForInput(label)) === 0)
     return match && match.type
-  }, [fields])
+  }, [fields, getLabelTextForInput])
 
   const isValueContainedInField = useCallback(value => {
     return fields.find(({ label }) => label.toLowerCase().indexOf(value.toLowerCase()) === 0)
@@ -81,7 +83,7 @@ const SmartFilter = ({
 
   const renderAutoComplete = useMemo(() => {
     const onItemClick = label => {
-      setInputValue(`${label}: `)
+      setInputValue(getLabelTextForInput(label))
       handleMenuClose()
       inputBaseRef.current.focus()
     }
@@ -99,7 +101,7 @@ const SmartFilter = ({
         )) }
       </Menu>
     )
-  },[handleMenuClose, menuAnchor, menuItems, inputBaseRef])
+  },[handleMenuClose, menuAnchor, menuItems, inputBaseRef, getLabelTextForInput])
 
   const onInputFocus = useCallback(isFocused => isFocused && menuItems.length ? handleMenuOpen() : handleMenuClose(), [menuItems, handleMenuClose, handleMenuOpen])
 

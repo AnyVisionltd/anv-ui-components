@@ -93,6 +93,7 @@ const ChipsInput = forwardRef(({
   }
 
   const removeChipAfterFocusedChip = event => {
+    event.preventDefault()
     const chipsLength = chipValues.length
     if (!isChipEditable() || focusedChipIndex === chipsLength - 1) return
     removeChip(focusedChipIndex, event)
