@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react'
+import React, { useContext, useMemo, useCallback } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import TableContext from '../TableContext'
@@ -17,10 +17,10 @@ const TableSSF = ({ onChange, className }) => {
   )
   , [headers])
 
-  const handleOnChange = filters => {
+  const handleOnChange = useCallback(filters => {
     onChange(filters)
     setFilters(filters)
-  }
+  }, [onChange, setFilters])
 
   const classes = classNames(
     styles.TableSSF,
