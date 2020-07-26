@@ -659,6 +659,49 @@ exports[`Storyshots Components/Chip Variants 1`] = `
 </div>
 `;
 
+exports[`Storyshots Components/ChipsInput Custom Chip Validation 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexColumn"
+    >
+      <span
+        className="marginFlexContainer"
+      >
+        Only chips that contain 
+        <b>
+          abc
+        </b>
+         can be submitted.
+      </span>
+      <div
+        className="ChipsInput"
+      >
+        <div
+          className="container"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="inputBase text inputBase"
+          >
+            <input
+              autoComplete="off"
+              onChange={[Function]}
+              onFocus={[Function]}
+              placeholder="Input text in here"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Components/ChipsInput Default 1`] = `
 <div>
   <div
@@ -700,56 +743,39 @@ exports[`Storyshots Components/ChipsInput Default 1`] = `
         >
           <div
             aria-disabled={true}
-            className="chip focusable disabled chipStyle"
+            className="chip disabled chipStyle"
             data-testid="chip"
             onClick={[Function]}
             onKeyDown={[Function]}
             role="button"
-            tabIndex={0}
           >
             <span
               className="label"
             >
               first
             </span>
-            <button
-              className="trailingIcon trailingIconClickable"
-              disabled={true}
-              onClick={[Function]}
-            >
-              <svg />
-            </button>
           </div>
           <div
             aria-disabled={true}
-            className="chip focusable disabled chipStyle"
+            className="chip disabled chipStyle"
             data-testid="chip"
             onClick={[Function]}
             onKeyDown={[Function]}
             role="button"
-            tabIndex={0}
           >
             <span
               className="label"
             >
               second
             </span>
-            <button
-              className="trailingIcon trailingIconClickable"
-              disabled={true}
-              onClick={[Function]}
-            >
-              <svg />
-            </button>
           </div>
           <div
             aria-disabled={true}
-            className="chip focusable disabled chipStyle"
+            className="chip disabled chipStyle"
             data-testid="chip"
             onClick={[Function]}
             onKeyDown={[Function]}
             role="button"
-            tabIndex={0}
           >
             <div
               className="leadingIcon"
@@ -761,13 +787,6 @@ exports[`Storyshots Components/ChipsInput Default 1`] = `
             >
               third with icon
             </span>
-            <button
-              className="trailingIcon trailingIconClickable"
-              disabled={true}
-              onClick={[Function]}
-            >
-              <svg />
-            </button>
           </div>
           <div
             className="inputBase text disabled inputBase"
@@ -784,7 +803,7 @@ exports[`Storyshots Components/ChipsInput Default 1`] = `
             <button
               aria-label="remove all"
               className="button large ghost iconButton small ghost"
-              disabled={false}
+              disabled={true}
               onClick={[Function]}
             >
               <svg
@@ -1021,6 +1040,13 @@ exports[`Storyshots Components/ChipsInput Play Ground 1`] = `
           />
         </div>
       </div>
+      <label
+        className="helperText"
+      >
+         
+        This is the helper text
+         
+      </label>
     </div>
   </div>
 </div>
@@ -1443,6 +1469,721 @@ exports[`Storyshots Components/InputBase With Trailing Component 1`] = `
 </div>
 `;
 
+exports[`Storyshots Components/List Basic 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="list"
+      style={
+        Object {
+          "width": "400px",
+        }
+      }
+    >
+      <div
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 1
+           
+        </div>
+        <div />
+        <div
+          className="draggable"
+        >
+           
+           
+        </div>
+      </div>
+      <div
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 2
+           
+        </div>
+        <div />
+        <div
+          className="draggable"
+        >
+           
+           
+        </div>
+      </div>
+      <div
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 3
+           
+        </div>
+        <div />
+        <div
+          className="draggable"
+        >
+           
+           
+        </div>
+      </div>
+      <div
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 4
+           
+        </div>
+        <div />
+        <div
+          className="draggable"
+        >
+           
+           
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/List Draggable 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="list"
+      style={
+        Object {
+          "width": "400px",
+        }
+      }
+    >
+      <div
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 1
+           
+        </div>
+        <div />
+        <div
+          className="draggable"
+        >
+           
+          <svg />
+           
+        </div>
+      </div>
+      <div
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 2
+           
+        </div>
+        <div />
+        <div
+          className="draggable"
+        >
+           
+          <svg />
+           
+        </div>
+      </div>
+      <div
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 3
+           
+        </div>
+        <div />
+        <div
+          className="draggable"
+        >
+           
+          <svg />
+           
+        </div>
+      </div>
+      <div
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 4
+           
+        </div>
+        <div />
+        <div
+          className="draggable"
+        >
+           
+          <svg />
+           
+        </div>
+      </div>
+      <div
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 5
+           
+        </div>
+        <div />
+        <div
+          className="draggable"
+        >
+           
+          <svg />
+           
+        </div>
+      </div>
+      <div
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 6
+           
+        </div>
+        <div />
+        <div
+          className="draggable"
+        >
+           
+          <svg />
+           
+        </div>
+      </div>
+      <div
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 7
+           
+        </div>
+        <div />
+        <div
+          className="draggable"
+        >
+           
+          <svg />
+           
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/List With Leading 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="list"
+      style={
+        Object {
+          "width": "400px",
+        }
+      }
+    >
+      <div
+        className="listItem"
+      >
+        <div>
+          <label
+            className="checkbox enabled"
+          >
+            <input
+              checked={false}
+              className="parent"
+              disabled={false}
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <span
+              className="iconContainer"
+            />
+          </label>
+        </div>
+        <div
+          className="content"
+        >
+           
+          Item 1
+           
+        </div>
+        <div />
+        <div
+          className="draggable"
+        >
+           
+           
+        </div>
+      </div>
+      <div
+        className="listItem"
+      >
+        <div>
+          <label
+            className="checkbox enabled"
+          >
+            <input
+              checked={false}
+              className="parent"
+              disabled={false}
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <span
+              className="iconContainer"
+            />
+          </label>
+        </div>
+        <div
+          className="content"
+        >
+           
+          Item 2
+           
+        </div>
+        <div />
+        <div
+          className="draggable"
+        >
+           
+           
+        </div>
+      </div>
+      <div
+        className="listItem"
+      >
+        <div>
+          <label
+            className="checkbox enabled"
+          >
+            <input
+              checked={false}
+              className="parent"
+              disabled={false}
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <span
+              className="iconContainer"
+            />
+          </label>
+        </div>
+        <div
+          className="content"
+        >
+           
+          Item 3
+           
+        </div>
+        <div />
+        <div
+          className="draggable"
+        >
+           
+           
+        </div>
+      </div>
+      <div
+        className="listItem"
+      >
+        <div>
+          <label
+            className="checkbox enabled"
+          >
+            <input
+              checked={false}
+              className="parent"
+              disabled={false}
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <span
+              className="iconContainer"
+            />
+          </label>
+        </div>
+        <div
+          className="content"
+        >
+           
+          Item 4
+           
+        </div>
+        <div />
+        <div
+          className="draggable"
+        >
+           
+           
+        </div>
+      </div>
+      <div
+        className="listItem"
+      >
+        <div>
+          <label
+            className="checkbox enabled"
+          >
+            <input
+              checked={false}
+              className="parent"
+              disabled={false}
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <span
+              className="iconContainer"
+            />
+          </label>
+        </div>
+        <div
+          className="content"
+        >
+           
+          Item 5
+           
+        </div>
+        <div />
+        <div
+          className="draggable"
+        >
+           
+           
+        </div>
+      </div>
+      <div
+        className="listItem"
+      >
+        <div>
+          <label
+            className="checkbox enabled"
+          >
+            <input
+              checked={false}
+              className="parent"
+              disabled={false}
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <span
+              className="iconContainer"
+            />
+          </label>
+        </div>
+        <div
+          className="content"
+        >
+           
+          Item 6
+           
+        </div>
+        <div />
+        <div
+          className="draggable"
+        >
+           
+           
+        </div>
+      </div>
+      <div
+        className="listItem"
+      >
+        <div>
+          <label
+            className="checkbox enabled"
+          >
+            <input
+              checked={false}
+              className="parent"
+              disabled={false}
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <span
+              className="iconContainer"
+            />
+          </label>
+        </div>
+        <div
+          className="content"
+        >
+           
+          Item 7
+           
+        </div>
+        <div />
+        <div
+          className="draggable"
+        >
+           
+           
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/List With Trailing 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="list"
+      style={
+        Object {
+          "width": "400px",
+        }
+      }
+    >
+      <div
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 1
+           
+        </div>
+        <div>
+          <button
+            className="button small fill"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Edit
+          </button>
+        </div>
+        <div
+          className="draggable"
+        >
+           
+           
+        </div>
+      </div>
+      <div
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 2
+           
+        </div>
+        <div>
+          <button
+            className="button small fill"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Edit
+          </button>
+        </div>
+        <div
+          className="draggable"
+        >
+           
+           
+        </div>
+      </div>
+      <div
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 3
+           
+        </div>
+        <div>
+          <button
+            className="button small fill"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Edit
+          </button>
+        </div>
+        <div
+          className="draggable"
+        >
+           
+           
+        </div>
+      </div>
+      <div
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 4
+           
+        </div>
+        <div>
+          <button
+            className="button small fill"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Edit
+          </button>
+        </div>
+        <div
+          className="draggable"
+        >
+           
+           
+        </div>
+      </div>
+      <div
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 5
+           
+        </div>
+        <div>
+          <button
+            className="button small fill"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Edit
+          </button>
+        </div>
+        <div
+          className="draggable"
+        >
+           
+           
+        </div>
+      </div>
+      <div
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 6
+           
+        </div>
+        <div>
+          <button
+            className="button small fill"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Edit
+          </button>
+        </div>
+        <div
+          className="draggable"
+        >
+           
+           
+        </div>
+      </div>
+      <div
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 7
+           
+        </div>
+        <div>
+          <button
+            className="button small fill"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Edit
+          </button>
+        </div>
+        <div
+          className="draggable"
+        >
+           
+           
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Components/Menu Default 1`] = `
 <div>
   <div
@@ -1826,10 +2567,10 @@ exports[`Storyshots Components/SSF Default 1`] = `
           />
         </portal-for-test>
         <div
-          className="searchInput"
+          className="ChipsInput chipInput"
         >
           <div
-            className="chipsAndInput"
+            className="container"
             onKeyDown={[Function]}
           >
             <div
@@ -1879,10 +2620,10 @@ exports[`Storyshots Components/SSF Without Menu Fields 1`] = `
           />
         </portal-for-test>
         <div
-          className="searchInput"
+          className="ChipsInput chipInput"
         >
           <div
-            className="chipsAndInput"
+            className="container"
             onKeyDown={[Function]}
           >
             <div
@@ -2269,10 +3010,10 @@ exports[`Storyshots Components/Table Local 1`] = `
           />
         </portal-for-test>
         <div
-          className="searchInput"
+          className="ChipsInput chipInput"
         >
           <div
-            className="chipsAndInput"
+            className="container"
             onKeyDown={[Function]}
           >
             <div
@@ -2345,10 +3086,10 @@ exports[`Storyshots Components/Table Remote Data Table 1`] = `
           />
         </portal-for-test>
         <div
-          className="searchInput"
+          className="ChipsInput chipInput"
         >
           <div
-            className="chipsAndInput"
+            className="container"
             onKeyDown={[Function]}
           >
             <div

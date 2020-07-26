@@ -13,5 +13,6 @@ export { InfiniteList } from './components/InfiniteList'
 export { Dialog } from './components/Dialog'
 export { Tooltip } from './components/Tooltip'
 export { ChipsInput } from './components/ChipsInput'
+export { List } from './components/List'
 
 export { default as mockAutoSizer } from './testUtils/mockAutoSizer'
