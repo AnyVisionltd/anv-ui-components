@@ -111,10 +111,11 @@ const ChipsInput = forwardRef(({
 
   const updateChipFocus = useCallback((index, event) => {
     const lastIndex = chipValues.length - 1
-    const isRemovedByBackspace = event && event.keyCode === keymap.BACKSPACE
-    const isRemovedLast = index === lastIndex
+    const isRemovedByBackspace = event.keyCode === keymap.BACKSPACE
+    const isRemovedLastWithInputFocus = index === lastIndex && focusedChipIndex === null
+    const isRemovedLastByDelete = index === lastIndex && event.keyCode === keymap.DELETE
     const isRemovedFirstByBackspace = index === 0 && isRemovedByBackspace
-    if (isRemovedFirstByBackspace || isRemovedLast) {
+    if (isRemovedFirstByBackspace || isRemovedLastByDelete || isRemovedLastWithInputFocus) {
       inputBaseRef.current.focus()
       setFocusedChipIndex(null)
     } else if (isRemovedByBackspace) {

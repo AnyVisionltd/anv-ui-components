@@ -141,7 +141,7 @@ describe('<ChipsInput />', () => {
       fireEvent.keyDown(input, { keyCode: keymap.ARROW_RIGHT })
       expect(document.activeElement).toBe(input)
       // Should be invoked once on mount and for each time focus entered and left the input
-      expect(onFocusChange).toBeCalledTimes(3)
+      expect(onFocusChange).toBeCalledTimes(4)
     })
   })
 
