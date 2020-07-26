@@ -17,36 +17,10 @@
     }
   }
 
-  .searchInput {
-    display: flex;
-    justify-content: space-between;
+  .chipInput {
     flex-grow: 1;
-
-    .chipsAndInput {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      flex-grow: 1;
-
-      &:focus {
-        opacity: av-opacity(ghost);
-      }
-
-      .chipStyle {
-        margin: av-space(micro) 0 av-space(micro) av-space(tiny);
-      }
-
-      .inputBase {
-        min-width: av-size(sz-320);
-        padding-left: av-space(tiny);
-        height: auto;
-        border: none;
-        flex-grow: 1;
-      }
-    }
-
-    .cancelIcon {
-      fill: av-color(content);
+    div {
+      border: none;
     }
   }
 }

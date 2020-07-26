@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
-import { findAllByTestId, queryAllByTestId, screen } from '@testing-library/dom'
+import { screen } from '@testing-library/dom'
 import keymap from '../../utils/enums/keymap'
 import ChipsInput from './ChipsInput'
 
@@ -17,14 +17,6 @@ const addFreeTextChip = value => {
 
 describe('<ChipsInput />', () => {
   describe('chips creation', () => {
-    it('should create unique free text chip', () => {
-      const { getAllByText } = render(<ChipsInput />)
-      addFreeTextChip('mockData')
-      addFreeTextChip('mockData')
-      const chips = getAllByText('mockData')
-      expect(chips).toHaveLength(1)
-    })
-
     it('should fire onChange and onSubmit with relevant data when chip created', () => {
       const onChange = jest.fn()
       const onSubmit = jest.fn()
@@ -58,6 +50,23 @@ describe('<ChipsInput />', () => {
       expect(renderChipIcon.mock.calls[0][0]).toEqual( { "icon": undefined, "label": "mockData" })
       expect(renderChipIcon.mock.calls[1][0]).toEqual( { "icon": undefined, "label": "mockData2" })
     })
+
+    it('should create chip with error design if validation does not pass', () => {
+      const validation = value => value.includes('1')
+      const { container, getByRole } = render(<ChipsInput validation={ validation } />)
+      // create chip with invalid data
+      addFreeTextChip('mockData')
+      const chipWithError = container.querySelector('.chipError')
+      expect(chipWithError).not.toBe(null)
+      // delete created chip
+      const input = getByRole('textbox')
+      input.focus()
+      fireEvent.keyDown(input, { keyCode: keymap.BACKSPACE })
+      // create chip with valid data
+      addFreeTextChip('1')
+      const chipWithoutError = container.querySelector('.chipError')
+      expect(chipWithoutError).toBe(null)
+    })
   })
 
   describe('chips deletion', () => {
@@ -90,6 +99,7 @@ describe('<ChipsInput />', () => {
       const onChange = jest.fn()
       const { getByRole, queryAllByTestId } = render(<ChipsInput onChange={ onChange } />)
       const input = getByRole('textbox')
+      input.focus()
       addFreeTextChip('mockData')
       addFreeTextChip('mockData2')
       fireEvent.keyDown(input, { keyCode: keymap.BACKSPACE })
@@ -105,7 +115,7 @@ describe('<ChipsInput />', () => {
       addFreeTextChip('mockData')
       addFreeTextChip('mockData2')
       const chips = getAllByTestId('chip')
-      const [firstChip, secondChip] = chips
+      const [firstChip] = chips
       fireEvent.click(firstChip)
       fireEvent.keyDown(firstChip, { keyCode: keymap.DELETE })
       fireEvent.keyDown(firstChip, { keyCode: keymap.DELETE })
@@ -118,6 +128,7 @@ describe('<ChipsInput />', () => {
       const onFocusChange = jest.fn()
       const { getByRole, getAllByTestId } = render(<ChipsInput onFocusChange={ onFocusChange }/>)
       const input = getByRole('textbox')
+      input.focus()
       addFreeTextChip('mockData')
       addFreeTextChip('mockData2')
       fireEvent.keyDown(input, { keyCode: keymap.ARROW_LEFT })
@@ -133,7 +144,35 @@ describe('<ChipsInput />', () => {
       fireEvent.keyDown(input, { keyCode: keymap.ARROW_RIGHT })
       expect(document.activeElement).toBe(input)
       // Should be invoked once on mount and for each time focus entered and left the input
-      expect(onFocusChange).toBeCalledTimes(3)
+      expect(onFocusChange).toBeCalledTimes(5)
+    })
+  })
+
+  describe('helper text', () => {
+    it('should render helper text if prop was initialized', () => {
+      const { container } = render(<ChipsInput/>)
+      const noHelperText = container.querySelector('.helperText')
+      expect(noHelperText).toEqual(null)
+      const { container: containerWithHelper } = render(<ChipsInput helperText={ 'check' }/>)
+      const helperText = containerWithHelper.querySelector('.helperText')
+      expect(helperText).not.toEqual(null)
+    })
+  })
+
+  describe('error', () => {
+    it('should add error class if error prop was set', () => {
+      const { container } = render(<ChipsInput error/>)
+      const errorExists = container.querySelector('.error')
+      expect(errorExists).not.toEqual(null)
+      const { container: containerNoError } = render(<ChipsInput/>)
+      const noError = containerNoError.querySelector('.error')
+      expect(noError).toEqual(null)
+    })
+
+    it('should add error class to helper', () => {
+      const { container } = render(<ChipsInput error helperText={ 'check' }/>)
+      const errorExists = container.querySelector('.helperError')
+      expect(errorExists).not.toEqual(null)
     })
   })
 })

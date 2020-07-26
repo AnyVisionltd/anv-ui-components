@@ -19,6 +19,7 @@
 
   &:disabled {
     opacity: av-opacity(disabled);
+    cursor: default;
   }
 }
 
