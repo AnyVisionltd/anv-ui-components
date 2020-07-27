@@ -11,10 +11,12 @@ const ColumnManagement = ({ onChange }) => {
   const { headers } = state
   const { isOpen } = state.columnManagement
 
-  const [columns, setColumn] = useState([])
+  const [columns, setColumns] = useState([])
 
   useEffect(() => {
-    setColumn(headers.map(header => ({ ...header })))
+    if(isOpen) {
+      setColumns([...headers])
+    }
   }, [isOpen, headers])
 
   useEffect(() => {
@@ -38,7 +40,7 @@ const ColumnManagement = ({ onChange }) => {
       return column
     })
     if(!hasVisibleColumn) return
-    setColumn(newColumns)
+    setColumns(newColumns)
   }
 
   const renderColumnList = () => (
