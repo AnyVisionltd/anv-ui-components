@@ -13,6 +13,7 @@ $ripple-transition-duration: 0.3s;
       bottom: 0;
       opacity: 0;
       border-radius: inherit;
+      pointer-events: none;
 
       @if $toBackground {
         z-index: -1;
