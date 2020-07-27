@@ -49,7 +49,7 @@ export const RemoteDataTable = () => {
     {
 	  field: 'firstname',
 	  content: 'First Name',
-	  flexWidth: '200px',
+	  width: '200px',
     },
     {
 	  field: 'role',
