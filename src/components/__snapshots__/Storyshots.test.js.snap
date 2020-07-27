@@ -1474,7 +1474,7 @@ exports[`Storyshots Components/List Basic 1`] = `
   <div
     className="center"
   >
-    <div
+    <ul
       className="list"
       style={
         Object {
@@ -1482,7 +1482,7 @@ exports[`Storyshots Components/List Basic 1`] = `
         }
       }
     >
-      <div
+      <li
         className="listItem"
       >
         <div />
@@ -1494,14 +1494,8 @@ exports[`Storyshots Components/List Basic 1`] = `
            
         </div>
         <div />
-        <div
-          className="draggable"
-        >
-           
-           
-        </div>
-      </div>
-      <div
+      </li>
+      <li
         className="listItem"
       >
         <div />
@@ -1513,14 +1507,8 @@ exports[`Storyshots Components/List Basic 1`] = `
            
         </div>
         <div />
-        <div
-          className="draggable"
-        >
-           
-           
-        </div>
-      </div>
-      <div
+      </li>
+      <li
         className="listItem"
       >
         <div />
@@ -1532,14 +1520,8 @@ exports[`Storyshots Components/List Basic 1`] = `
            
         </div>
         <div />
-        <div
-          className="draggable"
-        >
-           
-           
-        </div>
-      </div>
-      <div
+      </li>
+      <li
         className="listItem"
       >
         <div />
@@ -1551,172 +1533,8 @@ exports[`Storyshots Components/List Basic 1`] = `
            
         </div>
         <div />
-        <div
-          className="draggable"
-        >
-           
-           
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components/List Draggable 1`] = `
-<div>
-  <div
-    className="center"
-  >
-    <div
-      className="list"
-      style={
-        Object {
-          "width": "400px",
-        }
-      }
-    >
-      <div
-        className="listItem"
-      >
-        <div />
-        <div
-          className="content"
-        >
-           
-          Item 1
-           
-        </div>
-        <div />
-        <div
-          className="draggable"
-        >
-           
-          <svg />
-           
-        </div>
-      </div>
-      <div
-        className="listItem"
-      >
-        <div />
-        <div
-          className="content"
-        >
-           
-          Item 2
-           
-        </div>
-        <div />
-        <div
-          className="draggable"
-        >
-           
-          <svg />
-           
-        </div>
-      </div>
-      <div
-        className="listItem"
-      >
-        <div />
-        <div
-          className="content"
-        >
-           
-          Item 3
-           
-        </div>
-        <div />
-        <div
-          className="draggable"
-        >
-           
-          <svg />
-           
-        </div>
-      </div>
-      <div
-        className="listItem"
-      >
-        <div />
-        <div
-          className="content"
-        >
-           
-          Item 4
-           
-        </div>
-        <div />
-        <div
-          className="draggable"
-        >
-           
-          <svg />
-           
-        </div>
-      </div>
-      <div
-        className="listItem"
-      >
-        <div />
-        <div
-          className="content"
-        >
-           
-          Item 5
-           
-        </div>
-        <div />
-        <div
-          className="draggable"
-        >
-           
-          <svg />
-           
-        </div>
-      </div>
-      <div
-        className="listItem"
-      >
-        <div />
-        <div
-          className="content"
-        >
-           
-          Item 6
-           
-        </div>
-        <div />
-        <div
-          className="draggable"
-        >
-           
-          <svg />
-           
-        </div>
-      </div>
-      <div
-        className="listItem"
-      >
-        <div />
-        <div
-          className="content"
-        >
-           
-          Item 7
-           
-        </div>
-        <div />
-        <div
-          className="draggable"
-        >
-           
-          <svg />
-           
-        </div>
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </div>
 `;
@@ -1726,7 +1544,7 @@ exports[`Storyshots Components/List With Leading 1`] = `
   <div
     className="center"
   >
-    <div
+    <ul
       className="list"
       style={
         Object {
@@ -1734,7 +1552,7 @@ exports[`Storyshots Components/List With Leading 1`] = `
         }
       }
     >
-      <div
+      <li
         className="listItem"
       >
         <div>
@@ -1761,14 +1579,8 @@ exports[`Storyshots Components/List With Leading 1`] = `
            
         </div>
         <div />
-        <div
-          className="draggable"
-        >
-           
-           
-        </div>
-      </div>
-      <div
+      </li>
+      <li
         className="listItem"
       >
         <div>
@@ -1795,14 +1607,8 @@ exports[`Storyshots Components/List With Leading 1`] = `
            
         </div>
         <div />
-        <div
-          className="draggable"
-        >
-           
-           
-        </div>
-      </div>
-      <div
+      </li>
+      <li
         className="listItem"
       >
         <div>
@@ -1829,14 +1635,8 @@ exports[`Storyshots Components/List With Leading 1`] = `
            
         </div>
         <div />
-        <div
-          className="draggable"
-        >
-           
-           
-        </div>
-      </div>
-      <div
+      </li>
+      <li
         className="listItem"
       >
         <div>
@@ -1863,14 +1663,8 @@ exports[`Storyshots Components/List With Leading 1`] = `
            
         </div>
         <div />
-        <div
-          className="draggable"
-        >
-           
-           
-        </div>
-      </div>
-      <div
+      </li>
+      <li
         className="listItem"
       >
         <div>
@@ -1897,14 +1691,8 @@ exports[`Storyshots Components/List With Leading 1`] = `
            
         </div>
         <div />
-        <div
-          className="draggable"
-        >
-           
-           
-        </div>
-      </div>
-      <div
+      </li>
+      <li
         className="listItem"
       >
         <div>
@@ -1931,14 +1719,8 @@ exports[`Storyshots Components/List With Leading 1`] = `
            
         </div>
         <div />
-        <div
-          className="draggable"
-        >
-           
-           
-        </div>
-      </div>
-      <div
+      </li>
+      <li
         className="listItem"
       >
         <div>
@@ -1965,14 +1747,8 @@ exports[`Storyshots Components/List With Leading 1`] = `
            
         </div>
         <div />
-        <div
-          className="draggable"
-        >
-           
-           
-        </div>
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </div>
 `;
@@ -1982,7 +1758,7 @@ exports[`Storyshots Components/List With Trailing 1`] = `
   <div
     className="center"
   >
-    <div
+    <ul
       className="list"
       style={
         Object {
@@ -1990,7 +1766,7 @@ exports[`Storyshots Components/List With Trailing 1`] = `
         }
       }
     >
-      <div
+      <li
         className="listItem"
       >
         <div />
@@ -2010,14 +1786,8 @@ exports[`Storyshots Components/List With Trailing 1`] = `
             Edit
           </button>
         </div>
-        <div
-          className="draggable"
-        >
-           
-           
-        </div>
-      </div>
-      <div
+      </li>
+      <li
         className="listItem"
       >
         <div />
@@ -2037,14 +1807,8 @@ exports[`Storyshots Components/List With Trailing 1`] = `
             Edit
           </button>
         </div>
-        <div
-          className="draggable"
-        >
-           
-           
-        </div>
-      </div>
-      <div
+      </li>
+      <li
         className="listItem"
       >
         <div />
@@ -2064,14 +1828,8 @@ exports[`Storyshots Components/List With Trailing 1`] = `
             Edit
           </button>
         </div>
-        <div
-          className="draggable"
-        >
-           
-           
-        </div>
-      </div>
-      <div
+      </li>
+      <li
         className="listItem"
       >
         <div />
@@ -2091,14 +1849,8 @@ exports[`Storyshots Components/List With Trailing 1`] = `
             Edit
           </button>
         </div>
-        <div
-          className="draggable"
-        >
-           
-           
-        </div>
-      </div>
-      <div
+      </li>
+      <li
         className="listItem"
       >
         <div />
@@ -2118,14 +1870,8 @@ exports[`Storyshots Components/List With Trailing 1`] = `
             Edit
           </button>
         </div>
-        <div
-          className="draggable"
-        >
-           
-           
-        </div>
-      </div>
-      <div
+      </li>
+      <li
         className="listItem"
       >
         <div />
@@ -2145,14 +1891,8 @@ exports[`Storyshots Components/List With Trailing 1`] = `
             Edit
           </button>
         </div>
-        <div
-          className="draggable"
-        >
-           
-           
-        </div>
-      </div>
-      <div
+      </li>
+      <li
         className="listItem"
       >
         <div />
@@ -2172,14 +1912,8 @@ exports[`Storyshots Components/List With Trailing 1`] = `
             Edit
           </button>
         </div>
-        <div
-          className="draggable"
-        >
-           
-           
-        </div>
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </div>
 `;
