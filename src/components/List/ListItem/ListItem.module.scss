@@ -20,11 +20,11 @@
   }
 
   .draggable {
-    fill: av-color(content)
+    fill: av-color(content);
   }
 
   .draggable:hover {
     cursor: pointer;
-    fill: av-color(primary)
+    fill: av-color(primary);
   }
 }
