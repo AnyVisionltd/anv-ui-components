@@ -27,12 +27,17 @@ const ColumnManagement = ({ onChange }) => {
   }
 
   const handleCheckboxChange = field => {
+    let hasVisibleColumn = 0
     const newColumns = columns.map(({ ...column }) => {
       if(column.field === field) {
         column.hide = !column.hide
       }
+      if(!column.hide) {
+        hasVisibleColumn = true
+      }
       return column
     })
+    if(!hasVisibleColumn) return
     setColumn(newColumns)
   }
 
@@ -44,8 +49,13 @@ const ColumnManagement = ({ onChange }) => {
           return (
             <List.Item
               key={ index }
-              onChange={ () => handleCheckboxChange(field) }
-              leadingComponent={ <Checkbox id={ field } checked={ !hide } /> }
+              leadingComponent={ (
+                <Checkbox
+                  onChange={ () => handleCheckboxChange(field) }
+                  id={ field }
+                  checked={ !hide }
+                />
+              ) }
               trailingComponent={ <DragIcon className={ styles.drag }/> }>
               <label className={ styles.columnName } htmlFor={ field }>{ columnName }</label>
             </List.Item>
