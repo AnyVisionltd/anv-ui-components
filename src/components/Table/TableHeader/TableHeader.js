@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import { orderTypes } from "../../../utils/enums/common"
 import { ReactComponent as LongArrow } from '../../../assets/svg/LongArrow.svg'
 import TableContext from '../TableContext'
-import { Checkbox } from '../../../index'
+import { Checkbox, IconButton } from '../../../index'
 import styles from './TableHeader.module.scss'
 
 const TableHeader = ({
@@ -13,9 +13,10 @@ const TableHeader = ({
   className,
   ...otherProps
 }) => {
-  const { state, setSortBy, setHeaders, toggleSelectAll } = useContext(TableContext)
-  const { headers: contextHeaders, sort, withRowActions, selection } = state
+  const { state, setSortBy, setHeaders, toggleSelectAll, setColumnManagementIsOpen } = useContext(TableContext)
+  const { headers: contextHeaders, sort, withRowActions, selection, columnManagement } = state
   const { sortBy, sortable } = sort
+  const { isActive: columnManagementIsActive } = columnManagement
 
   useEffect(() => {
     setHeaders(headers)
@@ -97,7 +98,21 @@ const TableHeader = ({
   }
 
   const renderActionsPlaceholder = () => (
-    withRowActions && <div className={ styles.actionsPlaceholder }/>
+    (withRowActions && !columnManagementIsActive ) && <div className={ styles.columnManagementCell }/>
+  )
+
+  const renderColumnManagement = () => (
+    columnManagementIsActive && (
+      <div className={ styles.columnManagementCell }>
+        <IconButton
+		  onClick={ () => setColumnManagementIsOpen(true) }
+		  size={ 'small' }
+		  variant={ 'ghost' }
+        >
+		  <LongArrow/>
+        </IconButton>
+	  </div>
+    )
   )
 
   const classes = classNames(
@@ -114,6 +129,7 @@ const TableHeader = ({
 	  { renderSelection() }
 	  { contextHeaders.map(renderCell) }
 	  { renderActionsPlaceholder() }
+	  { renderColumnManagement() }
     </div>
   )
 }

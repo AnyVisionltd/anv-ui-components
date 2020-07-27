@@ -31,7 +31,7 @@ const InfiniteList = ({
     if (!isItemLoaded(index)) {
       content = customLoader()
     } else {
-      content = rowRender(items[index])
+      content = rowRender(items[index], index)
     }
 
     return <div style={ style }>{ content }</div>

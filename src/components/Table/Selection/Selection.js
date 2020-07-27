@@ -143,7 +143,7 @@ Selection.propTypes = {
       onClick: propTypes.func
     })
   ).isRequired,
-  /** Selection bar css customization. */
+  /** ColumnManagement bar css customization. */
   className: propTypes.string,
 }
 

@@ -42,8 +42,16 @@
   cursor: pointer;
 }
 
-.actionsPlaceholder {
-  width: av-size(sz-64)
+.columnManagementCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: av-size(sz-64);
+  margin-left: auto;
+
+  > button {
+    color: av-color(content);
+  }
 }
 
 .sortingIcon {

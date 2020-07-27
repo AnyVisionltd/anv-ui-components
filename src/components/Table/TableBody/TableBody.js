@@ -35,8 +35,9 @@ const TableBody = ({
   }, [setWithRowActions, rowActions])
 
 
-  const renderRow = row => (
+  const renderRow = (row, index) => (
     <TableRow
+      key={ index }
       rowActions={ rowActions }
       row={ row }
       rowHeight={ rowHeight }
@@ -65,7 +66,7 @@ const TableBody = ({
     >
 	    <InfiniteList
         totalItems={ +totalItems }
-        rowRender={ row => renderRow(row) }
+        rowRender={ renderRow }
         items={ tableData }
         customLoader={ loadingRender }
         isLoading={ isLoading }

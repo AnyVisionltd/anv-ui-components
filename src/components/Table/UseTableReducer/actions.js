@@ -11,6 +11,8 @@ export const actionTypes = Object.freeze({
   TOGGLE_SELECT_ALL: 'TOGGLE_SELECT_ALL',
   SET_FILTERS: 'SET_FILTERS',
   SET_SORT_BY: 'SET_SORT_BY',
+  SET_COLUMN_MANAGEMENT_ACTIVITY: 'SET_COLUMN_MANAGEMENT_ACTIVITY',
+  SET_COLUMN_MANAGEMENT_IS_OPEN: 'SET_COLUMN_MANAGEMENT_IS_OPEN'
 })
 
 export const actions = dispatch => ({
@@ -83,6 +85,18 @@ export const actions = dispatch => ({
     dispatch({
       type: actionTypes.SET_SORT_BY,
       payload: sortBy,
+    })
+  },
+  setColumnManagementActivity: isActive => {
+    dispatch({
+      type: actionTypes.SET_COLUMN_MANAGEMENT_ACTIVITY,
+      payload: isActive,
+    })
+  },
+  setColumnManagementIsOpen: isOpen => {
+    dispatch({
+      type: actionTypes.SET_COLUMN_MANAGEMENT_IS_OPEN,
+      payload: isOpen,
     })
   },
 })

@@ -13,6 +13,10 @@ const initialState = {
     items: [],
     excludeMode: false,
   },
+  columnManagement: {
+    isActive: false,
+    isOpen: false,
+  },
   sort: {
     sortable: false,
     sortBy: {
@@ -67,6 +71,10 @@ const reducer = (state, action) => {
     return { ...state, filters: action.payload }
   case actionTypes.SET_SORT_BY:
     return { ...state, sort: { ...state.sort, sortBy: action.payload } }
+  case actionTypes.SET_COLUMN_MANAGEMENT_ACTIVITY:
+    return { ...state, columnManagement: { ...state.columnManagement, isActive: action.payload } }
+  case actionTypes.SET_COLUMN_MANAGEMENT_IS_OPEN:
+    return { ...state, columnManagement: { ...state.columnManagement, isOpen: action.payload } }
   default:
     return state
   }

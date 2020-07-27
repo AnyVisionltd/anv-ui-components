@@ -15,7 +15,8 @@ export default {
     TableBody: Table.Body,
     TableSSF: Table.SSF,
     Sortable: Table.Sortable,
-    Selection: Table.Selection
+    Selection: Table.Selection,
+    ColumnManagement: Table.ColumnManagement
   },
   decorators: [centerDecorator],
 }
@@ -50,6 +51,11 @@ export const Local = () => {
 	  columnRender: data => data ? 'Yes' : 'No',
 	  columnRenderHover: data => <Switch checked={ data }/>
     },
+    {
+	  field: 'hidden',
+	  content: 'Hidden',
+	  hide: true
+    }
   ], [])
 
   const data = useMemo(() => [
@@ -127,6 +133,7 @@ export const Local = () => {
 	  />
 	  <Table.Sortable onSortChange={ action('sort changed') }/>
 	  <Table.Selection bulkActions={ bulkActions } onChange={ action('selection changed') }/>
+	  <Table.ColumnManagement onChange={ action('headers changed') }/>
     </Table>
   )
 }

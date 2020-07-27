@@ -6,6 +6,7 @@
   display: flex;
   align-items: center;
   position: relative;
+  flex-shrink: 0;
   height: 48px;
   color: av-color(content);
   padding: 0 av-space(tiny);

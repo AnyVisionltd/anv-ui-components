@@ -1,11 +1,12 @@
 @import "~@anyvision/style-guide";
 
 .dialogHeader {
-  width: 100%;
+  box-sizing: border-box;
   height: 56px;
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  margin: 0 av-space(medium);
   @extend %av-body1;
 
   .closeIcon {
