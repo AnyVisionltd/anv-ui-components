@@ -1,13 +1,14 @@
 import React, { useContext, useState } from 'react'
 import classNames from 'classnames'
 import events from '../../../../utils/enums/events'
+import { getCellWidth } from '../../utlis'
 import { Menu } from '../../../Menu'
 import { IconButton } from '../../../IconButton'
 import { ReactComponent as OptionsIcon } from '../../../../assets/svg/Options.svg'
 import { Checkbox } from '../../../Checkbox'
 import TableContext from '../../TableContext'
 import { SkeletonLoader } from '../../../SkeletonLoader'
-import styles from "../TableBody.module.scss"
+import styles from './TableRow.module.scss'
 
 const TableRow = ({ row, rowActions, rowHeight, isLoading }) => {
   const { state, toggleSelectedItem } = useContext(TableContext)
@@ -112,12 +113,12 @@ const TableRow = ({ row, rowActions, rowHeight, isLoading }) => {
       >
         { renderSelection(row, isSelected) }
         { headers.map(({
-          field, columnRender, columnRenderHover, hide, flexWidth,
+          field, columnRender, columnRenderHover, hide, width,
         }) => {
           if (hide) {
             return null
           }
-          const style = flexWidth ? { flex: `0 0 ${flexWidth}` } : {}
+          const style = getCellWidth(width)
           return (
             <div role="cell" style={ style } className={ styles.tableCell } key={ field }>
               { renderCell(row, field, columnRender, columnRenderHover) }
@@ -143,12 +144,12 @@ const TableRow = ({ row, rowActions, rowHeight, isLoading }) => {
       </div>
       {
         headers.map(({
-          field, hide, flexWidth
+          field, hide, width
         }) => {
           if (hide) {
             return null
           }
-          const style = flexWidth ? { flex: `0 0 ${flexWidth}` } : {}
+          const style = getCellWidth(width)
           return (
             <div role="cell" style={ style } className={ styles.tableCell } key={ field }>
               <SkeletonLoader className={ styles.lineSkeleton }/>

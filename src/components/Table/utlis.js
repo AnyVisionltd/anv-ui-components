@@ -1,0 +1,1 @@
+export const getCellWidth = width => width ? { flex: `0 0 ${width}` } : {}

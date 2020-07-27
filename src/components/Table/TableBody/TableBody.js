@@ -3,7 +3,7 @@ import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { InfiniteList } from '../../../index'
 import TableContext from '../TableContext'
-import TableRow from "./TableRow/TableRow"
+import { TableRow } from './TableRow'
 import { useTableData } from "../UseTableData"
 import styles from './TableBody.module.scss'
 
