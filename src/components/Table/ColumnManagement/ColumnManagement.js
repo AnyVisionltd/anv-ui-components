@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import propTypes from 'prop-types'
+import LanguageService from '../../../services/language'
 import { Button, Checkbox, Dialog, List } from '../../../index'
 import { ReactComponent as DragIcon } from '../../../assets/svg/Drag.svg'
 import TableContext from '../TableContext'
@@ -67,7 +68,7 @@ const ColumnManagement = ({ onChange }) => {
       onClose={ handleDialogClose }
     >
       <Dialog.Header>
-        Column Management
+        { LanguageService.getTranslation('columnManagement') }
       </Dialog.Header>
       <Dialog.Body>
         { renderColumnList() }
@@ -77,7 +78,7 @@ const ColumnManagement = ({ onChange }) => {
           size={ 'small' }
           onClick={ handleSave }
         >
-          save
+          { LanguageService.getTranslation('save') }
         </Button>
       </Dialog.Footer>
     </Dialog>
