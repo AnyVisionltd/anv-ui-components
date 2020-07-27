@@ -1,0 +1,30 @@
+@import "~@anyvision/style-guide";
+@import "../../../styles/mixin/ripple";
+
+.listItem {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 48px;
+  color: av-color(content);
+  padding: 0 av-space(tiny);
+
+  &:hover{
+    background-color: av-color(primary, av-opacity(divider));
+  }
+
+  .content {
+    @extend %av-body2;
+    flex-grow: 1;
+  }
+
+  .draggable {
+    fill: av-color(content);
+  }
+
+  .draggable:hover {
+    cursor: pointer;
+    fill: av-color(primary);
+  }
+}

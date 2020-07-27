@@ -1469,6 +1469,455 @@ exports[`Storyshots Components/InputBase With Trailing Component 1`] = `
 </div>
 `;
 
+exports[`Storyshots Components/List Basic 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <ul
+      className="list"
+      style={
+        Object {
+          "width": "400px",
+        }
+      }
+    >
+      <li
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 1
+           
+        </div>
+        <div />
+      </li>
+      <li
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 2
+           
+        </div>
+        <div />
+      </li>
+      <li
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 3
+           
+        </div>
+        <div />
+      </li>
+      <li
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 4
+           
+        </div>
+        <div />
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/List With Leading 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <ul
+      className="list"
+      style={
+        Object {
+          "width": "400px",
+        }
+      }
+    >
+      <li
+        className="listItem"
+      >
+        <div>
+          <label
+            className="checkbox enabled"
+          >
+            <input
+              checked={false}
+              className="parent"
+              disabled={false}
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <span
+              className="iconContainer"
+            />
+          </label>
+        </div>
+        <div
+          className="content"
+        >
+           
+          Item 1
+           
+        </div>
+        <div />
+      </li>
+      <li
+        className="listItem"
+      >
+        <div>
+          <label
+            className="checkbox enabled"
+          >
+            <input
+              checked={false}
+              className="parent"
+              disabled={false}
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <span
+              className="iconContainer"
+            />
+          </label>
+        </div>
+        <div
+          className="content"
+        >
+           
+          Item 2
+           
+        </div>
+        <div />
+      </li>
+      <li
+        className="listItem"
+      >
+        <div>
+          <label
+            className="checkbox enabled"
+          >
+            <input
+              checked={false}
+              className="parent"
+              disabled={false}
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <span
+              className="iconContainer"
+            />
+          </label>
+        </div>
+        <div
+          className="content"
+        >
+           
+          Item 3
+           
+        </div>
+        <div />
+      </li>
+      <li
+        className="listItem"
+      >
+        <div>
+          <label
+            className="checkbox enabled"
+          >
+            <input
+              checked={false}
+              className="parent"
+              disabled={false}
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <span
+              className="iconContainer"
+            />
+          </label>
+        </div>
+        <div
+          className="content"
+        >
+           
+          Item 4
+           
+        </div>
+        <div />
+      </li>
+      <li
+        className="listItem"
+      >
+        <div>
+          <label
+            className="checkbox enabled"
+          >
+            <input
+              checked={false}
+              className="parent"
+              disabled={false}
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <span
+              className="iconContainer"
+            />
+          </label>
+        </div>
+        <div
+          className="content"
+        >
+           
+          Item 5
+           
+        </div>
+        <div />
+      </li>
+      <li
+        className="listItem"
+      >
+        <div>
+          <label
+            className="checkbox enabled"
+          >
+            <input
+              checked={false}
+              className="parent"
+              disabled={false}
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <span
+              className="iconContainer"
+            />
+          </label>
+        </div>
+        <div
+          className="content"
+        >
+           
+          Item 6
+           
+        </div>
+        <div />
+      </li>
+      <li
+        className="listItem"
+      >
+        <div>
+          <label
+            className="checkbox enabled"
+          >
+            <input
+              checked={false}
+              className="parent"
+              disabled={false}
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <span
+              className="iconContainer"
+            />
+          </label>
+        </div>
+        <div
+          className="content"
+        >
+           
+          Item 7
+           
+        </div>
+        <div />
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/List With Trailing 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <ul
+      className="list"
+      style={
+        Object {
+          "width": "400px",
+        }
+      }
+    >
+      <li
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 1
+           
+        </div>
+        <div>
+          <button
+            className="button small fill"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Edit
+          </button>
+        </div>
+      </li>
+      <li
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 2
+           
+        </div>
+        <div>
+          <button
+            className="button small fill"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Edit
+          </button>
+        </div>
+      </li>
+      <li
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 3
+           
+        </div>
+        <div>
+          <button
+            className="button small fill"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Edit
+          </button>
+        </div>
+      </li>
+      <li
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 4
+           
+        </div>
+        <div>
+          <button
+            className="button small fill"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Edit
+          </button>
+        </div>
+      </li>
+      <li
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 5
+           
+        </div>
+        <div>
+          <button
+            className="button small fill"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Edit
+          </button>
+        </div>
+      </li>
+      <li
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 6
+           
+        </div>
+        <div>
+          <button
+            className="button small fill"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Edit
+          </button>
+        </div>
+      </li>
+      <li
+        className="listItem"
+      >
+        <div />
+        <div
+          className="content"
+        >
+           
+          Item 7
+           
+        </div>
+        <div>
+          <button
+            className="button small fill"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Edit
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Components/Menu Default 1`] = `
 <div>
   <div

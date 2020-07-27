@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <defs>
+        <style>
+
+        </style>
+    </defs>
+    <g id="prefix__Drag">
+        <path id="prefix__Shape" d="M0 0H24V24H0z" style="opacity:0;"/>
+        <g id="prefix__dots" transform="translate(7.5 4.5)">
+            <circle id="prefix__Ellipse_357" cx="1.5" cy="1.5" r="1.5" class="prefix__cls-3" />
+            <circle id="prefix__Ellipse_362" cx="1.5" cy="1.5" r="1.5" class="prefix__cls-3" transform="translate(6)"/>
+            <circle id="prefix__Ellipse_358" cx="1.5" cy="1.5" r="1.5" class="prefix__cls-3" transform="translate(0 6)"/>
+            <circle id="prefix__Ellipse_361" cx="1.5" cy="1.5" r="1.5" class="prefix__cls-3"  transform="translate(6 6)"/>
+            <circle id="prefix__Ellipse_359" cx="1.5" cy="1.5" r="1.5" class="prefix__cls-3" transform="translate(0 12)"/>
+            <circle id="prefix__Ellipse_360" cx="1.5" cy="1.5" r="1.5" class="prefix__cls-3" transform="translate(6 12)"/>
+        </g>
+    </g>
+</svg>
