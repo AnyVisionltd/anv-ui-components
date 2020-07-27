@@ -1,5 +1,8 @@
+@import "~@anyvision/style-guide";
+
 .dialogFooter {
-  width: 100%;
+  box-sizing: border-box;
   height: 48px;
   flex-shrink: 0;
+  margin: 0 av-space(medium) av-space(medium) av-space(medium)
 }

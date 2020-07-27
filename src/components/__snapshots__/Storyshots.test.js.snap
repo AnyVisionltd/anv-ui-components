@@ -2782,6 +2782,7 @@ exports[`Storyshots Components/Table Local 1`] = `
           }
         />
       </div>
+      <portal-for-test />
     </div>
   </div>
 </div>

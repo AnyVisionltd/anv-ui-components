@@ -1,0 +1,29 @@
+@import "~@anyvision/style-guide";
+
+.columnManagement {
+  width: av-size(sz-480);
+
+  .dialogFooter {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  .columnList {
+    max-height: 640px;
+  }
+
+  .columnName {
+    cursor: pointer;
+    padding: av-space(tiny);
+  }
+
+  .drag {
+    cursor: pointer;
+    fill: av-color(content);
+
+    &:hover {
+      fill: av-color(primary)
+    }
+  }
+}

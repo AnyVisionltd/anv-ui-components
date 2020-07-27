@@ -18,7 +18,6 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  flex: 1 1 0;
   padding-left: av-space();
   text-overflow: ellipsis;
   overflow: hidden;
@@ -42,8 +41,16 @@
   cursor: pointer;
 }
 
-.actionsPlaceholder {
-  width: av-size(sz-64)
+.columnManagementCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: av-size(sz-64);
+  margin-left: auto;
+
+  > button {
+    color: av-color(content);
+  }
 }
 
 .sortingIcon {

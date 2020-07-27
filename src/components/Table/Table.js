@@ -2,11 +2,12 @@ import React, { useEffect } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 import TableContext from './TableContext'
-import { TableBody } from "./TableBody"
-import { TableHeader } from "./TableHeader"
-import { Sortable } from "./Sortable"
-import { TableSSF } from "./TableSSF"
-import { Selection } from "./Selection"
+import { TableBody } from './TableBody'
+import { TableHeader } from './TableHeader'
+import { Sortable } from './Sortable'
+import { TableSSF } from './TableSSF'
+import { Selection } from './Selection'
+import { ColumnManagement } from './ColumnManagement'
 import UseTableReducer from './UseTableReducer'
 import styles from './Table.module.scss'
 
@@ -70,5 +71,6 @@ Table.Header = TableHeader
 Table.Sortable = Sortable
 Table.SSF = TableSSF
 Table.Selection = Selection
+Table.ColumnManagement = ColumnManagement
 
 export default Table

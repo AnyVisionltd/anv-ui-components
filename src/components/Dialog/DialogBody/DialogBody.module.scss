@@ -1,3 +1,7 @@
+@import "~@anyvision/style-guide";
+
 .dialogBody {
+  box-sizing: border-box;
   flex-grow: 1;
+  margin: 0 av-space(medium);
 }
