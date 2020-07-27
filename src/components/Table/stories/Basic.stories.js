@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react'
 import { action } from '@storybook/addon-actions'
-import { centerDecorator } from '../../utils/storybook/decorators'
-import Table from './Table'
-import { Chip, Switch } from '../../index'
-import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
-import { ReactComponent as EyeEnabledIcon } from '../../assets/svg/EyeEnabled.svg'
-import { ReactComponent as EyeDisabledIcon } from '../../assets/svg/EyeDisabled.svg'
+import { centerDecorator } from '../../../utils/storybook/decorators'
+import Table from '../Table'
+import { Chip, Switch } from '../../../index'
+import { ReactComponent as SunIcon } from '../../../assets/svg/Sun.svg'
+import { ReactComponent as EyeEnabledIcon } from '../../../assets/svg/EyeEnabled.svg'
+import { ReactComponent as EyeDisabledIcon } from '../../../assets/svg/EyeDisabled.svg'
 
 export default {
   title: 'Components/Table',
@@ -21,7 +21,7 @@ export default {
   decorators: [centerDecorator],
 }
 
-export const Local = () => {
+export const Basic = () => {
   const headers = useMemo(() => [
     {
 	  field: 'firstname',
