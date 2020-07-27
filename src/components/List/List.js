@@ -32,8 +32,6 @@ List.defaultProps = {
 }
 
 List.propTypes = {
-  /** If true, list items are draggable. */
-  draggable: propTypes.bool,
   /** For css customization. */
   className: propTypes.string
 }
