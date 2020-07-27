@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
+import { getCellWidth } from '../utlis'
 import { orderTypes } from "../../../utils/enums/common"
 import { ReactComponent as LongArrow } from '../../../assets/svg/LongArrow.svg'
 import TableContext from '../TableContext'
@@ -47,12 +48,12 @@ const TableHeader = ({
 
   const renderCell = headerCell => {
     const {
-	  field, content, disableSort, hide, flexWidth,
+	  field, content, disableSort, hide, width,
     } = headerCell
     if (hide) {
 	  return null
     }
-    const style = flexWidth ? { flex: `0 0 ${flexWidth}` } : {}
+    const style = getCellWidth(width)
 
     const sortableColumn = sortable && !disableSort
     const tableCellClass = classNames(
@@ -149,7 +150,7 @@ TableHeader.propTypes = {
    *  <code>columnRenderHover</code> 	- custom column render on hover. <code>(cellData, rowData) => {}</code>.<br />
    *  <code>disableSort</code>  		- disable sort for the column. <br />
    *  <code>hide</code>         		- hide the column. <br />
-   *  <code>flexWidth</code>    		- set the column width by flex basis. <br />
+   *  <code>width</code>    		- set the column width by flex basis. <br />
    **/
   headers: propTypes.arrayOf(
     propTypes.shape({
@@ -164,7 +165,7 @@ TableHeader.propTypes = {
 	  columnRenderHover: propTypes.func,
 	  disableSort: propTypes.bool,
 	  hide: propTypes.bool,
-	  flexWidth: propTypes.string,
+	  width: propTypes.string,
     }),
   ).isRequired,
   /** Callback fire when header cell click with cell field. */
