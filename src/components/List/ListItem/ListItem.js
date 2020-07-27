@@ -1,13 +1,11 @@
 import React from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import { ReactComponent as DragIcon } from '../../../assets/svg/Drag.svg'
 import styles from './ListItem.module.scss'
 
 const ListItem = ({
   leadingComponent,
   trailingComponent,
-  draggable,
   children,
   className,
   ...otherProps
@@ -18,15 +16,14 @@ const ListItem = ({
   )
 
   return (
-    <div
+    <li
 	  className={ classes }
 	  { ...otherProps }
     >
 	  <div>{ leadingComponent }</div>
 	  <div className={ styles.content }> { children } </div>
 	  <div>{ trailingComponent }</div>
-	  <div className={ styles.draggable }> { draggable && <DragIcon /> } </div>
-    </div>
+    </li>
   )
 }
 

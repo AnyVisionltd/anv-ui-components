@@ -15,6 +15,7 @@
   }
 
   .content {
+    @extend %av-body2;
     flex-grow: 1;
   }
 

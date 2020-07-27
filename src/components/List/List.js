@@ -1,4 +1,4 @@
-import React, { Children, cloneElement, isValidElement } from 'react'
+import React from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { ListItem } from './ListItem'
@@ -16,20 +16,14 @@ const List = ({
   )
 
   return (
-    <div
+    <ul
 	  className={ classes }
 	  { ...otherProps }
     >
 	  {
-        Children.map(children, child => {
-		  // Checking isValidElement is the safe way and avoids a TS error too.
-		  if (isValidElement(child) && child.type === ListItem) {
-            return cloneElement(child, { draggable })
-		  }
-		  return child
-        })
+	    children
 	  }
-    </div>
+    </ul>
   )
 }
 

@@ -46,13 +46,3 @@ export const WithTrailing= () => {
     </List>
   )
 }
-
-export const Draggable = () => {
-  return (
-    <List style={ { width: '400px' } } draggable={ true }>
-	  {
-        list.map((item, index) => <List.Item key={ index }>{ item }</List.Item>)
-	  }
-    </List>
-  )
-}
