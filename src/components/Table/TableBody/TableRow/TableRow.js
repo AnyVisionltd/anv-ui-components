@@ -76,16 +76,19 @@ const TableRow = ({ row, rowActions, rowHeight, isLoading }) => {
     return excludeMode ? !isSelected : isSelected
   }
 
-  const renderSelection = (row, isSelected) => (
-    <div
-      role="cell"
-      className={ styles.selectionCell }
-    >
-      <Checkbox
-        onChange={ () => toggleSelectedItem(row, isSelected) }
-        checked={ isSelected }/>
-    </div>
-  )
+  const renderSelection = (row, isSelected) => {
+    if(!selection.isActive) return
+    return (
+      <div
+        role="cell"
+        className={ styles.selectionCell }
+      >
+        <Checkbox
+          onChange={ () => toggleSelectedItem(row, isSelected) }
+          checked={ isSelected }/>
+      </div>
+    )
+  }
 
   const renderCell = (row, field, columnRender, columnRenderHover) => {
     if(isHover && columnRenderHover) {
