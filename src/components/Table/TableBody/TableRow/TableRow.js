@@ -12,7 +12,7 @@ import styles from './TableRow.module.scss'
 
 const TableRow = ({ row, rowActions, rowHeight, isLoading }) => {
   const { state, toggleSelectedItem } = useContext(TableContext)
-  const { selection, headers } = state
+  const { selection, headers, columnManagement } = state
 
   const [actionsAnchorElement, setActionsAnchorElement] = useState(null)
   const [isHover, setIsHover] = useState(false)
@@ -31,6 +31,7 @@ const TableRow = ({ row, rowActions, rowHeight, isLoading }) => {
   }
 
   const renderActions = row => {
+    if(!rowActions) return
     return (
       <>
         <Menu
@@ -100,6 +101,12 @@ const TableRow = ({ row, rowActions, rowHeight, isLoading }) => {
     setIsHover(isHover)
   }
 
+  const renderPlaceholder = () => {
+    return (columnManagement.isActive && !rowActions) && (
+      <div role={ 'cell' } className={ styles.actionsCell }/>
+    )
+  }
+
   const renderDataRow = () => {
     const isSelected = isRowSelected(row)
     const tableRowClassNames = classNames(styles.tableRow, { [styles.selectedRow]: isSelected })
@@ -125,7 +132,7 @@ const TableRow = ({ row, rowActions, rowHeight, isLoading }) => {
             </div>
           )
         }) }
-        { /* { renderDynamicColumnPlaceholder() } */ }
+        { renderPlaceholder() }
         { renderActions(row) }
       </div>
     )
