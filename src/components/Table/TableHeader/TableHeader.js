@@ -160,7 +160,7 @@ TableHeader.propTypes = {
         propTypes.func,
 	  ]).isRequired,
 	  label: propTypes.string,
-	  type: propTypes.oneOf(['string', 'number', 'date']),
+	  type: propTypes.oneOf(['string', 'number', 'date', 'bool']),
 	  columnRender: propTypes.func,
 	  columnRenderHover: propTypes.func,
 	  disableSort: propTypes.bool,
