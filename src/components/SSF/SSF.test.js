@@ -2,6 +2,8 @@ import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
 import SmartFilter from "./SSF"
 import { ReactComponent as ArrowSolidRight } from "../../assets/svg/ArrowSolidRight.svg"
+import { screen } from "@testing-library/dom"
+import keymap from "../../utils/enums/keymap"
 
 const fields = [
   {
@@ -14,6 +16,18 @@ const fields = [
     field: 'menuItemNumber', label: 'Menu Item Number', type: 'number',
   }
 ]
+
+const changeInput = value => {
+  const input = screen.getByRole('textbox')
+  input.focus()
+  fireEvent.change(input, { target: { value } })
+  return input
+}
+
+const addFreeTextChip = value => {
+  const input = changeInput(value)
+  fireEvent.keyDown(input, { keyCode: keymap.ENTER })
+}
 
 describe('<SSF />', () => {
   describe('auto complete menu', () => {
@@ -58,6 +72,31 @@ describe('<SSF />', () => {
       expect(input.value).toEqual(`${fields[2].label}: `)
       fireEvent.change(input, { target: { value: `${input.value}123` } })
       expect(input.value).toEqual(`${fields[2].label}: 123`)
+    })
+  })
+
+  describe('events', () => {
+    it('onChange should return an array with chip objects containing chip field and value', () => {
+      const mockRegularChip  = 'Normal Chip'
+      const mockFieldChip = 'Example Field'
+      const onChange = chipsArr => {
+        chipsArr.forEach((chip, index) => {
+          expect(typeof chip).toEqual('object')
+          if (index === 0) {
+            expect(chip.field).toBeUndefined()
+            expect(chip.value).toEqual(mockRegularChip)
+          } else if (index === 1) {
+            expect(chip.value).toEqual(mockFieldChip)
+            expect(chip.field).toEqual(fields[2].field)
+          }
+        })
+      }
+      const { getAllByRole, getByRole } = render(<SmartFilter fields={ fields } onChange={ onChange } />)
+      addFreeTextChip(mockRegularChip)
+      const input = getByRole('textbox')
+      let menuItems = getAllByRole('menuitem')
+      fireEvent.click(menuItems[2])
+      addFreeTextChip(`${input.value}${mockFieldChip}`)
     })
   })
 })
