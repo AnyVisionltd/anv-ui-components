@@ -25,8 +25,7 @@ const SmartFilter = ({
   const getLabelTextForInput = useCallback(label => `${label}: `, [])
 
   const getChipField = useCallback(chipLabel => {
-    const match = fields.find(({ label }) => chipLabel.indexOf(getLabelTextForInput(label)) === 0)
-    return match && match.type
+    return fields.find(({ label }) => chipLabel.indexOf(getLabelTextForInput(label)) === 0)
   }, [fields, getLabelTextForInput])
 
   const isValueContainedInField = useCallback(value => {
@@ -42,7 +41,9 @@ const SmartFilter = ({
   const handleChipChange = useCallback(chips => {
     const searchQuery = chips.map(chipLabel => {
       const chipField = getChipField(chipLabel)
-      return { ...chipField && { field: chipField.field }, value: chipLabel }
+      return chipField
+        ? { field: chipField.field, value: chipLabel.substr(chipLabel.indexOf(':') + 2) }
+        : { value: chipLabel }
     })
     setChips(chips)
     onChange(searchQuery)
@@ -55,7 +56,7 @@ const SmartFilter = ({
 
   const getInputType = useCallback(value => {
     const menuItem = getChipField(value)
-    return menuItem ? menuItem : 'text'
+    return menuItem ? menuItem.type : 'text'
   }, [getChipField])
 
   const onInputChange = useCallback(value => {
