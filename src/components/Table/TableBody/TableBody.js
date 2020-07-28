@@ -14,6 +14,7 @@ const TableBody = ({
   loadMoreData,
   rowHeight,
   rowActions,
+  onRowClick,
   className,
   ...otherProps
 }) => {
@@ -41,6 +42,7 @@ const TableBody = ({
       rowActions={ rowActions }
       row={ row }
       rowHeight={ rowHeight }
+      onRowClick={ onRowClick }
     />
   )
 
@@ -104,6 +106,8 @@ TableBody.propTypes = {
     /** The callback when click the <Menu.Items/> */
     onClick: propTypes.func,
   })),
+  /** Callback fire when row click. */
+  onRowClick: propTypes.func,
   /** For css customization. */
   className: propTypes.string,
 }

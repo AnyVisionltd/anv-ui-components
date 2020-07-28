@@ -48,8 +48,9 @@ export const Basic = () => {
     {
 	  field: 'active',
 	  content: 'Active',
+      type: 'bool',
 	  columnRender: data => data ? 'Yes' : 'No',
-	  columnRenderHover: data => <Switch checked={ data }/>
+	  columnRenderHover: data => <Switch checked={ data } onClick={ e => e.stopPropagation() }/>
     },
     {
 	  field: 'hidden',
@@ -119,21 +120,22 @@ export const Basic = () => {
     }
   ]
 
-  const style = { width: '80%', height: '400px' }
+  const style = { width: '100%', height: '400px' }
   return (
     <Table style={ style } selfControlled={ true }>
-	  <Table.SSF onChange={ action('SSF changed') }/>
-	  <Table.Header
+      <Table.SSF onChange={ action('SSF changed') }/>
+      <Table.Header
         headers={ headers }
         onHeaderCellClick={ action('header cell clicked') }
-	  />
-	  <Table.Body
+      />
+      <Table.Body
         data={ data }
         rowActions={ rowActions }
-	  />
-	  <Table.Sortable onSortChange={ action('sort changed') }/>
-	  <Table.Selection bulkActions={ bulkActions } onChange={ action('selection changed') }/>
-	  <Table.ColumnManagement onChange={ action('headers changed') }/>
+        onRowClick={ action('row clicked') }
+      />
+      <Table.Sortable onSortChange={ action('sort changed') }/>
+      <Table.Selection bulkActions={ bulkActions } onChange={ action('selection changed') }/>
+      <Table.ColumnManagement onChange={ action('headers changed') }/>
     </Table>
   )
 }

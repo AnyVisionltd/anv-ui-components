@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { ListItem } from './ListItem'
 import styles from './List.module.scss'
 
-const List = ({
+const List = forwardRef(({
   draggable,
   children,
   className,
   ...otherProps
-}) => {
+}, ref) => {
   const classes = classNames(
     styles.list,
     className
@@ -17,15 +17,16 @@ const List = ({
 
   return (
     <ul
-	  className={ classes }
-	  { ...otherProps }
+      { ...otherProps }
+      ref={ ref }
+	    className={ classes }
     >
 	  {
 	    children
 	  }
     </ul>
   )
-}
+})
 
 List.defaultProps = {
 

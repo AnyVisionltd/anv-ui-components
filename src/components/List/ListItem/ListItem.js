@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import styles from './ListItem.module.scss'
 
-const ListItem = ({
+const ListItem = forwardRef(({
   leadingComponent,
   trailingComponent,
   children,
   className,
   ...otherProps
-}) => {
+}, ref) => {
   const classes = classNames(
     styles.listItem,
     className
@@ -17,19 +17,18 @@ const ListItem = ({
 
   return (
     <li
-	  className={ classes }
-	  { ...otherProps }
+      { ...otherProps }
+      ref={ ref }
+	    className={ classes }
     >
 	  <div>{ leadingComponent }</div>
 	  <div className={ styles.content }> { children } </div>
 	  <div>{ trailingComponent }</div>
     </li>
   )
-}
+})
 
-ListItem.defaultProps = {
-
-}
+ListItem.defaultProps = {}
 
 ListItem.propTypes = {
   /** Component before the children. */

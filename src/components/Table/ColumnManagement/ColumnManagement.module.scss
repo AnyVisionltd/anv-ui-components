@@ -13,12 +13,17 @@
     max-height: 640px;
   }
 
+  .listItem {
+    padding: av-space();
+  }
+
   .columnName {
     cursor: pointer;
     padding: av-space(tiny);
   }
 
   .drag {
+    display: flex;
     cursor: pointer;
     fill: av-color(content);
 

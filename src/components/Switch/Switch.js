@@ -9,6 +9,7 @@ const Switch = ({
   checked,
   disabled,
   onChange,
+  onClick,
   ...otherProps
 }) => {
   const classes = classNames(
@@ -19,7 +20,7 @@ const Switch = ({
   )
 
   return (
-    <div className={ classes }>
+    <div className={ classes } onClick={ onClick }>
       <input
         id={ id }
         type="checkbox"
