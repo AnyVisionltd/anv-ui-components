@@ -119,6 +119,7 @@ const Selection = ({
 
 Selection.defaultProps = {
   onChange: () => {},
+  bulkActions: []
 }
 
 Selection.propTypes = {

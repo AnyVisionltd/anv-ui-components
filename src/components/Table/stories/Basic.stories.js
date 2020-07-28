@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react'
 import { action } from '@storybook/addon-actions'
-import { centerDecorator } from '../../../utils/storybook/decorators'
 import Table from '../Table'
 import { Chip, Switch } from '../../../index'
 import { ReactComponent as SunIcon } from '../../../assets/svg/Sun.svg'
@@ -18,7 +17,6 @@ export default {
     Selection: Table.Selection,
     ColumnManagement: Table.ColumnManagement
   },
-  decorators: [centerDecorator],
 }
 
 export const Basic = () => {

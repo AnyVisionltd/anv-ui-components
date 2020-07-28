@@ -52,7 +52,7 @@ const TableBody = ({
     }
 
     return Array.from({ length: 5 }, (_, index) => (
-      <TableRow isLoading={ true }/>
+      <TableRow isLoading={ true } key={ index }/>
     ))
   }
 

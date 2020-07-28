@@ -1,5 +1,4 @@
 import React, { useCallback, useMemo, useState } from 'react'
-import { centerDecorator } from '../../../utils/storybook/decorators'
 import Table from '../Table'
 import { Chip } from '../../Chip'
 
@@ -13,11 +12,9 @@ export default {
     Sortable: Table.Sortable,
     Selection: Table.Selection
   },
-  decorators: [centerDecorator],
 }
 
 export const InfiniteScroll = () => {
-
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
@@ -68,7 +65,7 @@ export const InfiniteScroll = () => {
     // TODO add server mock for filters and sort
   }, [])
 
-  const style = { width: '80%', height: '400px' }
+  const style = { width: '100%', height: '400px' }
 
   return (
     <Table style={ style } onChange={ onTableChange }>
