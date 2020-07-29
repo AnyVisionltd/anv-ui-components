@@ -18,7 +18,7 @@ const TableRow = ({
   onRowClick,
 }) => {
   const { state, toggleSelectedItem } = useContext(TableContext)
-  const { selection, headers, columnManagement } = state
+  const { selection, columns, columnManagement } = state
 
   const [actionsAnchorElement, setActionsAnchorElement] = useState(null)
   const [isHover, setIsHover] = useState(false)
@@ -131,7 +131,7 @@ const TableRow = ({
         onClick={ () => onRowClick(row) }
       >
         { renderSelection(row, isSelected) }
-        { headers.map(({
+        { columns.map(({
           field, columnRender, columnRenderHover, hide, width,
         }) => {
           if (hide) {
@@ -162,7 +162,7 @@ const TableRow = ({
         <SkeletonLoader className={ styles.circleSkeleton }/>
       </div>
       {
-        headers.map(({
+        columns.map(({
           field, hide, width
         }) => {
           if (hide) {

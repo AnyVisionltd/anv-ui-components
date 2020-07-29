@@ -1,6 +1,6 @@
 export const actionTypes = Object.freeze({
   SET_SELF_CONTROLLED: 'SET_SELF_CONTROLLED',
-  SET_HEADERS: 'SET_HEADERS',
+  SET_COLUMNS: 'SET_COLUMNS',
   SET_DATA: 'SET_DATA',
   SET_TOTAL_ITEMS: 'SET_TOTAL_ITEMS',
   SET_WITH_ROW_ACTIONS: 'SET_WITH_ROW_ACTIONS',
@@ -16,10 +16,10 @@ export const actionTypes = Object.freeze({
 })
 
 export const actions = dispatch => ({
-  setHeaders: headers => {
+  setColumns: columns => {
     dispatch({
-      type: actionTypes.SET_HEADERS,
-      payload: headers,
+      type: actionTypes.SET_COLUMNS,
+      payload: columns,
     })
   },
   setData: data => {

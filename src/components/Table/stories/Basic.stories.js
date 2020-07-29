@@ -20,7 +20,7 @@ export default {
 }
 
 export const Basic = () => {
-  const headers = useMemo(() => [
+  const columns = useMemo(() => [
     {
       field: 'firstname',
       content: 'First Name',
@@ -123,7 +123,7 @@ export const Basic = () => {
     <Table style={ style } selfControlled={ true }>
       <Table.SSF onChange={ action('SSF changed') }/>
       <Table.Header
-        headers={ headers }
+        columns={ columns }
         onHeaderCellClick={ action('header cell clicked') }
       />
       <Table.Body
@@ -133,7 +133,7 @@ export const Basic = () => {
       />
       <Table.Sortable onSortChange={ action('sort changed') }/>
       <Table.Selection bulkActions={ bulkActions } onChange={ action('selection changed') }/>
-      <Table.ColumnManagement onChange={ action('headers changed') }/>
+      <Table.ColumnManagement onChange={ action('columns changed') }/>
     </Table>
   )
 }

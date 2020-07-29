@@ -8,17 +8,17 @@ import TableContext from '../TableContext'
 import styles from './ColumnManagement.module.scss'
 
 const ColumnManagement = ({ onChange }) => {
-  const { state, setColumnManagementActivity, setColumnManagementIsOpen, setHeaders } = useContext(TableContext)
-  const { headers } = state
+  const { state, setColumnManagementActivity, setColumnManagementIsOpen, setColumns: setContextColumn } = useContext(TableContext)
+  const { columns: columnsContext } = state
   const { isOpen } = state.columnManagement
 
   const [columns, setColumns] = useState([])
 
   useEffect(() => {
     if(isOpen) {
-      setColumns([...headers])
+      setColumns([...columnsContext])
     }
-  }, [isOpen, headers])
+  }, [isOpen, columnsContext])
 
   useEffect(() => {
     setColumnManagementActivity(true)
@@ -102,9 +102,9 @@ const ColumnManagement = ({ onChange }) => {
   )
 
   const handleSave = () => {
-    setHeaders(columns)
+    setContextColumn(columns)
     setColumnManagementIsOpen(false)
-    onChange(headers)
+    onChange(columns)
   }
 
   return (
@@ -134,7 +134,7 @@ ColumnManagement.defaultProps = {
 }
 
 ColumnManagement.propTypes = {
-  /** Callback fire when headers changed */
+  /** Callback fire when columns changed */
   onChange: propTypes.func
 }
 

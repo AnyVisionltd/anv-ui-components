@@ -7,9 +7,9 @@ import styles from './TableSSF.module.scss'
 
 const TableSSF = ({ onChange, className }) => {
   const { state, setFilters } = useContext(TableContext)
-  const { headers } = state
+  const { columns } = state
 
-  const fields = useMemo(() => headers.reduce((acc, header) => {
+  const fields = useMemo(() => columns.reduce((acc, header) => {
     if(!header.hide) {
       acc.push({
         field: header.field,
@@ -20,7 +20,7 @@ const TableSSF = ({ onChange, className }) => {
     return acc
   }
   , [])
-  , [headers])
+  , [columns])
 
   const handleOnChange = useCallback(filters => {
     onChange(filters)
