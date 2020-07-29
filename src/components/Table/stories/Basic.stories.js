@@ -47,7 +47,7 @@ export const Basic = () => {
       field: 'active',
       content: 'Active',
       type: 'bool',
-      columnRender: data => data ? 'Yes' : 'No',
+      columnRender: data => data ? 'True' : 'False',
       columnRenderHover: data => <Switch checked={ data } onClick={ e => e.stopPropagation() }/>
     },
     {
