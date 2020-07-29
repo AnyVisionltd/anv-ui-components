@@ -22,76 +22,76 @@ export default {
 export const Basic = () => {
   const headers = useMemo(() => [
     {
-	  field: 'firstname',
-	  content: 'First Name',
-	  width: '200px',
+      field: 'firstname',
+      content: 'First Name',
+      width: '200px',
     },
     {
-	  field: 'location',
-	  content: 'Location',
-	  columnRender: data => <Chip label={ data }/>,
+      field: 'location',
+      content: 'Location',
+      columnRender: data => <Chip label={ data }/>,
     },
     {
-	  field: 'weather',
-	  content: () => <span
+      field: 'weather',
+      content: () => <span
         style={ { display: 'flex', alignItems: 'center' } }
-	  >
+      >
         Weather
         <SunIcon style={ { marginLeft: '5px' } }/>
       </span>,
-	  columnRender: data => `${data}°`,
-	  label: 'Weather',
-	  type: 'number'
+      columnRender: data => `${data}°`,
+      label: 'Weather',
+      type: 'number'
     },
     {
-	  field: 'active',
-	  content: 'Active',
+      field: 'active',
+      content: 'Active',
       type: 'bool',
-	  columnRender: data => data ? 'Yes' : 'No',
-	  columnRenderHover: data => <Switch checked={ data } onClick={ e => e.stopPropagation() }/>
+      columnRender: data => data ? 'Yes' : 'No',
+      columnRenderHover: data => <Switch checked={ data } onClick={ e => e.stopPropagation() }/>
     },
     {
-	  field: 'hidden',
-	  content: 'Hidden',
-	  hide: true
+      field: 'hidden',
+      content: 'Hidden',
+      hide: true
     }
   ], [])
 
   const data = useMemo(() => [
     {
-	  id: '1',
-	  active: true,
-	  firstname: 'Donte',
-	  location: 'Tel Aviv',
-	  weather: 30,
+      id: '1',
+      active: true,
+      firstname: 'Donte',
+      location: 'Tel Aviv',
+      weather: 30,
     },
     {
-	  id: '2',
-	  active: false,
-	  firstname: 'Cleo',
-	  location: 'Jerusalem',
-	  weather: 15,
+      id: '2',
+      active: false,
+      firstname: 'Cleo',
+      location: 'Jerusalem',
+      weather: 15,
     },
     {
-	  id: '3',
-	  active: true,
-	  firstname: 'Rafael',
-	  location: 'Eilat',
-	  weather: 40,
+      id: '3',
+      active: true,
+      firstname: 'Rafael',
+      location: 'Eilat',
+      weather: 40,
     },
     {
-	  id: '4',
-	  active: false,
-	  firstname: 'Neelam',
-	  location: 'Haifa',
-	  weather: 25,
+      id: '4',
+      active: false,
+      firstname: 'Neelam',
+      location: 'Haifa',
+      weather: 25,
     },
     {
-	  id: '5',
-	  active: false,
-	  firstname: 'Carole',
-	  location: 'Tzfat',
-	  weather: 20,
+      id: '5',
+      active: false,
+      firstname: 'Carole',
+      location: 'Tzfat',
+      weather: 20,
     },
   ], [])
 

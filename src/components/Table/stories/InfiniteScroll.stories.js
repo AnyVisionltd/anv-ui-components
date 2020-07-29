@@ -23,40 +23,40 @@ export const InfiniteScroll = () => {
   const loadMoreItems = useCallback(() => {
     setIsLoading(true)
     const a = Array.from({ length: 10 }, (_, index) => ({
-	  id: data.length + index,
-	  role: 'Admin',
-	  firstname: 'Donte',
-	  location: 'Tel Aviv',
-	  date: new Date(2020, 1),
+      id: data.length + index,
+      role: 'Admin',
+      firstname: 'Donte',
+      location: 'Tel Aviv',
+      date: new Date(2020, 1),
     }))
 
     setTimeout(() => {
-	  const newItems = [...data, ...a]
-	  setData(newItems)
-	  setIsLoading(false)
+      const newItems = [...data, ...a]
+      setData(newItems)
+      setIsLoading(false)
     }, 2500)
   }, [data])
 
   const headers = useMemo(() => [
     {
-	  field: 'firstname',
-	  content: 'First Name',
-	  width: '200px',
+      field: 'firstname',
+      content: 'First Name',
+      width: '200px',
     },
     {
-	  field: 'role',
-	  content: 'Role',
+      field: 'role',
+      content: 'Role',
     },
     {
-	  field: 'location',
-	  content: 'Location',
-	  columnRender: data => <Chip label={ data }/>,
+      field: 'location',
+      content: 'Location',
+      columnRender: data => <Chip label={ data }/>,
     },
     {
-	  field: 'date',
-	  content: 'Date',
-	  type: 'date',
-	  columnRender: data => data.toISOString().slice(0, 10)
+      field: 'date',
+      content: 'Date',
+      type: 'date',
+      columnRender: data => data.toISOString().slice(0, 10)
     }
 
   ], [])
@@ -69,13 +69,13 @@ export const InfiniteScroll = () => {
 
   return (
     <Table style={ style } onChange={ onTableChange }>
-	  <Table.Header headers={ headers }/>
-	  <Table.Body
+      <Table.Header headers={ headers }/>
+      <Table.Body
         totalItems={ totalItems }
         data={ data }
         isLoading={ isLoading }
         loadMoreData={ loadMoreItems }
-	  />
+      />
     </Table>
   )
 }
