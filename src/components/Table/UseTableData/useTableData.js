@@ -29,6 +29,8 @@ const useTableData = () => {
       return numberSort(data, field, order)
     case 'number':
       return numberSort(data, field, order)
+    case 'date':
+      return numberSort(data, field, order)
     default:
       return stringSort(data, field, order)
     }
