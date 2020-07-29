@@ -1,6 +1,8 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import Table from '../Table'
 import { Chip } from '../../Chip'
+import { ReactComponent as SunIcon } from "../../../assets/svg/Sun.svg"
+import { action } from "@storybook/addon-actions"
 
 export default {
   title: 'Components/Table',
@@ -65,6 +67,14 @@ export const InfiniteScroll = () => {
     // TODO add server mock for filters and sort
   }, [])
 
+  const bulkActions = [
+    {
+      icon: <SunIcon/>,
+      label: 'action 1',
+      onClick: action('bulk action 1'),
+    },
+  ]
+
   const style = { width: '100%', height: '400px' }
 
   return (
@@ -76,6 +86,7 @@ export const InfiniteScroll = () => {
         isLoading={ isLoading }
         loadMoreData={ loadMoreItems }
       />
+      <Table.Selection bulkActions={ bulkActions }/>
     </Table>
   )
 }
