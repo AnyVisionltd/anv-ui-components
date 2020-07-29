@@ -3,7 +3,8 @@ import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { getCellWidth } from '../utlis'
 import { orderTypes } from "../../../utils/enums/common"
-import { ReactComponent as LongArrow } from '../../../assets/svg/LongArrow.svg'
+import { ReactComponent as LongArrowIcon } from '../../../assets/svg/LongArrow.svg'
+import { ReactComponent as ManageColumnIcon } from '../../../assets/svg/ManageColumn.svg'
 import TableContext from '../TableContext'
 import { Checkbox, IconButton } from '../../../index'
 import styles from './TableHeader.module.scss'
@@ -31,7 +32,7 @@ const TableHeader = ({
 	  activeSort && styles.activeSort,
 	  activeSortOrder && styles.sortingIconDesc,
     )
-    return <LongArrow className={ classes }/>
+    return <LongArrowIcon className={ classes }/>
   }
 
   const sortColumn = headerCell => {
@@ -106,11 +107,11 @@ const TableHeader = ({
     columnManagementIsActive && (
       <div className={ styles.columnManagementCell }>
         <IconButton
-		  onClick={ () => setColumnManagementIsOpen(true) }
-		  size={ 'small' }
-		  variant={ 'ghost' }
+          onClick={ () => setColumnManagementIsOpen(true) }
+          size={ 'small' }
+          variant={ 'ghost' }
         >
-		  <LongArrow/>
+		      <ManageColumnIcon/>
         </IconButton>
 	  </div>
     )
@@ -160,7 +161,7 @@ TableHeader.propTypes = {
         propTypes.func,
 	  ]).isRequired,
 	  label: propTypes.string,
-	  type: propTypes.oneOf(['string', 'number', 'date']),
+	  type: propTypes.oneOf(['string', 'number', 'date', 'bool']),
 	  columnRender: propTypes.func,
 	  columnRenderHover: propTypes.func,
 	  disableSort: propTypes.bool,

@@ -37,10 +37,6 @@
     }
   }
 
-  .selectedRow {
-    background-color: av-color(primary, av-opacity(divider));
-  }
-
   .circleSkeleton {
     width: av-size(sz-32);
     height: av-size(sz-32);
@@ -50,4 +46,12 @@
   .lineSkeleton {
     width: 70%;
   }
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.selectedRow {
+  background-color: av-color(primary, av-opacity(divider));
 }

@@ -25,6 +25,8 @@ const useTableData = () => {
 
     const { field, order, type } = sort.sortBy
     switch(type) {
+    case 'bool':
+      return numberSort(data, field, order)
     case 'number':
       return numberSort(data, field, order)
     case 'date':

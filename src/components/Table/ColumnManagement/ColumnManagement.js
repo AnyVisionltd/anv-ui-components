@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import propTypes from 'prop-types'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import LanguageService from '../../../services/language'
 import { Button, Checkbox, Dialog, List } from '../../../index'
 import { ReactComponent as DragIcon } from '../../../assets/svg/Drag.svg'
@@ -43,28 +44,61 @@ const ColumnManagement = ({ onChange }) => {
     setColumns(newColumns)
   }
 
+  const onDragEnd = ({ destination, source }) => {
+    if(!destination || (destination.droppableId === source.droppableId && destination.index === source.index)) {
+      return
+    }
+    const newColumns = [...columns]
+    newColumns.splice(source.index, 1)
+    newColumns.splice(destination.index, 0, columns[source.index])
+    setColumns(newColumns)
+  }
+
+  const renderListItem = ({ field, content, label, hide }, index) => {
+    const columnName = label ? label : content
+    return (
+      <Draggable draggableId={ field } index={ index } key={ field }>
+        { provided => (
+          <List.Item
+            className={ styles.listItem }
+            key={ index }
+            ref={ provided.innerRef }
+            { ...provided.draggableProps }
+            leadingComponent={ (
+              <Checkbox
+                onChange={ () => handleCheckboxChange(field) }
+                id={ field }
+                checked={ !hide }
+              />
+            ) }
+            trailingComponent={ (
+              <div className={ styles.drag } { ...provided.dragHandleProps }>
+                <DragIcon />
+              </div>
+            ) }
+          >
+            <label className={ styles.columnName } htmlFor={ field }>{ columnName }</label>
+          </List.Item>
+        ) }
+      </Draggable>
+    )
+  }
+
   const renderColumnList = () => (
-    <List className={ styles.columnList }>
-      {
-        columns.map(({ field, content, label, hide }, index) => {
-          const columnName = label ? label : content
-          return (
-            <List.Item
-              key={ index }
-              leadingComponent={ (
-                <Checkbox
-                  onChange={ () => handleCheckboxChange(field) }
-                  id={ field }
-                  checked={ !hide }
-                />
-              ) }
-              trailingComponent={ <DragIcon className={ styles.drag }/> }>
-              <label className={ styles.columnName } htmlFor={ field }>{ columnName }</label>
-            </List.Item>
-          )}
-        )
-      }
-    </List>
+    <DragDropContext onDragEnd={ onDragEnd }>
+      <Droppable droppableId={ 'column-management' }>
+        { provided => (
+          <List
+            className={ styles.columnList }
+            ref={ provided.innerRef }
+            { ...provided.droppableProps }
+          >
+            { columns.map(renderListItem) }
+            { provided.placeholder }
+          </List>
+        ) }
+      </Droppable>
+    </DragDropContext>
   )
 
   const handleSave = () => {
@@ -82,9 +116,7 @@ const ColumnManagement = ({ onChange }) => {
       <Dialog.Header>
         { LanguageService.getTranslation('columnManagement') }
       </Dialog.Header>
-      <Dialog.Body>
-        { renderColumnList() }
-      </Dialog.Body>
+      { renderColumnList() }
       <Dialog.Footer className={ styles.dialogFooter }>
         <Button
           size={ 'small' }

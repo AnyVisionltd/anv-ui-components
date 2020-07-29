@@ -3,10 +3,13 @@
 .dialog {
   @include av-elevation(pop-out);
   position: fixed;
-  left: 50%;
-  top: 50%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  height: fit-content;
   box-sizing: border-box;
-  transform: translate(-50%, -50%);
   border-radius: av-radius(base);
   background-color: av-color(surface);
   color: av-color(content);

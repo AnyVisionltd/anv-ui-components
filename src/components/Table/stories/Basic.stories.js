@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react'
 import { action } from '@storybook/addon-actions'
-import { centerDecorator } from '../../../utils/storybook/decorators'
 import Table from '../Table'
 import { Chip, Switch } from '../../../index'
 import { ReactComponent as SunIcon } from '../../../assets/svg/Sun.svg'
@@ -18,81 +17,81 @@ export default {
     Selection: Table.Selection,
     ColumnManagement: Table.ColumnManagement
   },
-  decorators: [centerDecorator],
 }
 
 export const Basic = () => {
   const headers = useMemo(() => [
     {
-	  field: 'firstname',
-	  content: 'First Name',
-	  width: '200px',
+      field: 'firstname',
+      content: 'First Name',
+      width: '200px',
     },
     {
-	  field: 'location',
-	  content: 'Location',
-	  columnRender: data => <Chip label={ data }/>,
+      field: 'location',
+      content: 'Location',
+      columnRender: data => <Chip label={ data }/>,
     },
     {
-	  field: 'weather',
-	  content: () => <span
+      field: 'weather',
+      content: () => <span
         style={ { display: 'flex', alignItems: 'center' } }
-	  >
+      >
         Weather
         <SunIcon style={ { marginLeft: '5px' } }/>
       </span>,
-	  columnRender: data => `${data}°`,
-	  label: 'Weather',
-	  type: 'number'
+      columnRender: data => `${data}°`,
+      label: 'Weather',
+      type: 'number'
     },
     {
-	  field: 'active',
-	  content: 'Active',
-	  columnRender: data => data ? 'Yes' : 'No',
-	  columnRenderHover: data => <Switch checked={ data }/>
+      field: 'active',
+      content: 'Active',
+      type: 'bool',
+      columnRender: data => data ? 'Yes' : 'No',
+      columnRenderHover: data => <Switch checked={ data } onClick={ e => e.stopPropagation() }/>
     },
     {
-	  field: 'hidden',
-	  content: 'Hidden',
-	  hide: true
+      field: 'hidden',
+      content: 'Hidden',
+      hide: true
     }
   ], [])
 
   const data = useMemo(() => [
     {
-	  id: '1',
-	  active: true,
-	  firstname: 'Donte',
-	  location: 'Tel Aviv',
-	  weather: 30,
+      id: '1',
+      active: true,
+      firstname: 'Donte',
+      location: 'Tel Aviv',
+      weather: 30,
     },
     {
-	  id: '2',
-	  active: false,
-	  firstname: 'Cleo',
-	  location: 'Jerusalem',
-	  weather: 15,
+      id: '2',
+      active: false,
+      firstname: 'Cleo',
+      location: 'Jerusalem',
+      weather: 15,
     },
     {
-	  id: '3',
-	  active: true,
-	  firstname: 'Rafael',
-	  location: 'Eilat',
-	  weather: 40,
+      id: '3',
+      active: true,
+      firstname: 'Rafael',
+      location: 'Eilat',
+      weather: 40,
     },
     {
-	  id: '4',
-	  active: false,
-	  firstname: 'Neelam',
-	  location: 'Haifa',
-	  weather: 25,
+      id: '4',
+      active: false,
+      firstname: 'Neelam',
+      location: 'Haifa',
+      weather: 25,
     },
     {
-	  id: '5',
-	  active: false,
-	  firstname: 'Carole',
-	  location: 'Tzfat',
-	  weather: 20,
+      id: '5',
+      active: false,
+      firstname: 'Carole',
+      location: 'Tzfat',
+      weather: 20,
     },
   ], [])
 
@@ -119,21 +118,22 @@ export const Basic = () => {
     }
   ]
 
-  const style = { width: '80%', height: '400px' }
+  const style = { width: '100%', height: '400px' }
   return (
     <Table style={ style } selfControlled={ true }>
-	  <Table.SSF onChange={ action('SSF changed') }/>
-	  <Table.Header
+      <Table.SSF onChange={ action('SSF changed') }/>
+      <Table.Header
         headers={ headers }
         onHeaderCellClick={ action('header cell clicked') }
-	  />
-	  <Table.Body
+      />
+      <Table.Body
         data={ data }
         rowActions={ rowActions }
-	  />
-	  <Table.Sortable onSortChange={ action('sort changed') }/>
-	  <Table.Selection bulkActions={ bulkActions } onChange={ action('selection changed') }/>
-	  <Table.ColumnManagement onChange={ action('headers changed') }/>
+        onRowClick={ action('row clicked') }
+      />
+      <Table.Sortable onSortChange={ action('sort changed') }/>
+      <Table.Selection bulkActions={ bulkActions } onChange={ action('selection changed') }/>
+      <Table.ColumnManagement onChange={ action('headers changed') }/>
     </Table>
   )
 }

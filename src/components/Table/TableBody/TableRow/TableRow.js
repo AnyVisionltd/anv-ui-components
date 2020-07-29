@@ -10,7 +10,13 @@ import TableContext from '../../TableContext'
 import { SkeletonLoader } from '../../../SkeletonLoader'
 import styles from './TableRow.module.scss'
 
-const TableRow = ({ row, rowActions, rowHeight, isLoading }) => {
+const TableRow = ({
+  row,
+  rowActions,
+  rowHeight,
+  isLoading,
+  onRowClick,
+}) => {
   const { state, toggleSelectedItem } = useContext(TableContext)
   const { selection, headers, columnManagement } = state
 
@@ -54,6 +60,7 @@ const TableRow = ({ row, rowActions, rowHeight, isLoading }) => {
         <div
           role="cell"
           className={ styles.actionsCell }
+          onClick={ e => e.stopPropagation() }
         >
           <IconButton
             className={ styles.actionButton }
@@ -84,6 +91,7 @@ const TableRow = ({ row, rowActions, rowHeight, isLoading }) => {
         className={ styles.selectionCell }
       >
         <Checkbox
+          onClick={ e => e.stopPropagation() }
           onChange={ () => toggleSelectedItem(row, isSelected) }
           checked={ isSelected }/>
       </div>
@@ -112,7 +120,7 @@ const TableRow = ({ row, rowActions, rowHeight, isLoading }) => {
 
   const renderDataRow = () => {
     const isSelected = isRowSelected(row)
-    const tableRowClassNames = classNames(styles.tableRow, { [styles.selectedRow]: isSelected })
+    const tableRowClassNames = classNames(styles.tableRow, { [styles.clickable]: onRowClick }, { [styles.selectedRow]: isSelected })
     return (
       <div
         role="row"
@@ -120,6 +128,7 @@ const TableRow = ({ row, rowActions, rowHeight, isLoading }) => {
         className={ tableRowClassNames }
         onMouseEnter={ mouseHoverHandler }
         onMouseLeave={ mouseHoverHandler }
+        onClick={ () => onRowClick(row) }
       >
         { renderSelection(row, isSelected) }
         { headers.map(({

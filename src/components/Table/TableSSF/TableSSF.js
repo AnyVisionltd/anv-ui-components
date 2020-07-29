@@ -9,12 +9,17 @@ const TableSSF = ({ onChange, className }) => {
   const { state, setFilters } = useContext(TableContext)
   const { headers } = state
 
-  const fields = useMemo(() => headers.map(headers => ({
-    field: headers.field,
-    label: headers.label || headers.content,
-    ...(headers.type  && { type: headers.type })
-  })
-  )
+  const fields = useMemo(() => headers.reduce((acc, header) => {
+    if(!header.hide) {
+      acc.push({
+        field: header.field,
+        label: header.label || header.content,
+        ...(header.type && { type: header.type })
+      })
+    }
+    return acc
+  }
+  , [])
   , [headers])
 
   const handleOnChange = useCallback(filters => {
