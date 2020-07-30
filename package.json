@@ -1,6 +1,6 @@
 {
   "name": "@anyvision/anv-ui-components",
-  "version": "0.1.1-beta.30",
+  "version": "0.1.1-beta.32",
   "main": "dist/index.js",
   "private": false,
   "files": [
@@ -80,7 +80,9 @@
     "rollup": "^2.15.0",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.3",
     "rollup-plugin-postcss": "^3.1.2",
     "rollup-plugin-sass": "^1.2.2",
     "rollup-plugin-url": "^3.0.1",
