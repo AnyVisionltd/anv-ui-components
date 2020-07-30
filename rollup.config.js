@@ -4,6 +4,7 @@ import commonjs from 'rollup-plugin-commonjs'
 import svgr from '@svgr/rollup'
 import url from 'rollup-plugin-url'
 import postcss from 'rollup-plugin-postcss'
+import json from 'rollup-plugin-json'
 
 
 export default {
@@ -18,6 +19,7 @@ export default {
     'react-proptypes'
   ],
   plugins: [
+    json(),
     resolve(),
     postcss({
       extract: true,
@@ -29,8 +31,10 @@ export default {
     url(),
     svgr({ svgo: false }),
     commonjs({
+      include: 'node_modules/**',
       namedExports: {
-        "react-dom": ["createPortal", "findDOMNode"],
+        "react-dom": ["createPortal", "findDOMNode", 'unstable_batchedUpdates'],
+        'node_modules/react-is/index.js': ['isValidElementType', 'isContextConsumer']
       },
     }),
   ]
