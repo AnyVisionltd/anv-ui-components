@@ -14,13 +14,17 @@ pipeline {
     }
     environment {
         SHORT_COMMIT = "${GIT_COMMIT[0..6]}"
-        SKIP_HELM = 'true'
+        DOCKER_BUILDKIT='1'
+        DOCKER_EXTRA_ARGS = "--build-arg RUN_TYPE=ci"
     }
     stages {
-        stage('Initialize') {     
+        stage('Initialize') {
+            when { 
+                not { changelog '.*Committed by Jenkins.*' }
+            }
             steps {
                 script {
-                    genericPipelineNodejs()
+                    genericAnvComponents()
                 }
             }
         }
