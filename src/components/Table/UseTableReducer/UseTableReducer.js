@@ -3,7 +3,7 @@ import { actionTypes, actions } from './actions'
 
 const initialState = {
   selfControlled: false,
-  headers: [],
+  columns: [],
   data: [],
   totalItems: 0,
   withRowActions: false,
@@ -45,8 +45,8 @@ const toggleSelection = (selection, totalItems, payload) => {
 
 const reducer = (state, action) => {
   switch (action.type) {
-  case actionTypes.SET_HEADERS:
-    return { ...state, headers: action.payload }
+  case actionTypes.SET_COLUMNS:
+    return { ...state, columns: action.payload }
   case actionTypes.SET_DATA:
     return { ...state, data: [...action.payload] }
   case actionTypes.SET_TOTAL_ITEMS:

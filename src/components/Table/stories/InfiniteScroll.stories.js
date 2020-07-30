@@ -39,7 +39,7 @@ export const InfiniteScroll = () => {
     }, 2500)
   }, [data])
 
-  const headers = useMemo(() => [
+  const columns = useMemo(() => [
     {
       field: 'firstname',
       content: 'First Name',
@@ -63,7 +63,7 @@ export const InfiniteScroll = () => {
 
   ], [])
 
-  const onTableChange = useCallback(({ filters, sort }) => {
+  const onTableChange = useCallback(() => {
     // TODO add server mock for filters and sort
   }, [])
 
@@ -79,7 +79,7 @@ export const InfiniteScroll = () => {
 
   return (
     <Table style={ style } onChange={ onTableChange }>
-      <Table.Header headers={ headers }/>
+      <Table.Header columns={ columns }/>
       <Table.Body
         totalItems={ totalItems }
         data={ data }

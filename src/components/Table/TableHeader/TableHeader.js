@@ -10,19 +10,19 @@ import { Checkbox, IconButton } from '../../../index'
 import styles from './TableHeader.module.scss'
 
 const TableHeader = ({
-  headers,
+  columns,
   onHeaderCellClick,
   className,
   ...otherProps
 }) => {
-  const { state, setSortBy, setHeaders, toggleSelectAll, setColumnManagementIsOpen } = useContext(TableContext)
-  const { headers: contextHeaders, sort, withRowActions, selection, columnManagement } = state
+  const { state, setSortBy, setColumns, toggleSelectAll, setColumnManagementIsOpen } = useContext(TableContext)
+  const { columns: contextColumns, sort, withRowActions, selection, columnManagement } = state
   const { sortBy, sortable } = sort
   const { isActive: columnManagementIsActive } = columnManagement
 
   useEffect(() => {
-    setHeaders(headers)
-  }, [setHeaders, headers])
+    setColumns(columns)
+  }, [setColumns, columns])
 
   const renderSortingIcon = field => {
     const activeSort = sortBy && sortBy.field === field
@@ -129,7 +129,7 @@ const TableHeader = ({
 	  { ...otherProps }
     >
 	  { renderSelection() }
-	  { contextHeaders.map(renderCell) }
+	  { contextColumns.map(renderCell) }
 	  { renderActionsPlaceholder() }
 	  { renderColumnManagement() }
     </div>
@@ -153,7 +153,7 @@ TableHeader.propTypes = {
    *  <code>hide</code>         		- hide the column. <br />
    *  <code>width</code>    		- set the column width by flex basis. <br />
    **/
-  headers: propTypes.arrayOf(
+  columns: propTypes.arrayOf(
     propTypes.shape({
 	  field: propTypes.string.isRequired,
 	  content: propTypes.oneOfType([
