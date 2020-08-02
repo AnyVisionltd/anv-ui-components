@@ -6,7 +6,7 @@ const FileUpload = ({ onChange, accept, multiple, children, ...other }) => {
   const fileRef = useRef()
 
   const uploadClick = (childrenOnClick, childrenOnClickArgs) => {
-    childrenOnClick(...childrenOnClickArgs)
+    childrenOnClick && childrenOnClick(...childrenOnClickArgs)
     fileRef.current.click()
   }
 
@@ -27,6 +27,7 @@ const FileUpload = ({ onChange, accept, multiple, children, ...other }) => {
         { ...other }
       />
       {
+        // extend children onClick
         React.Children.map(children, (
           child => cloneElement(child, {
             onClick: (...args) => uploadClick(child.props.onClick, args)
@@ -47,9 +48,9 @@ FileUpload.propTypes = {
   /** Defines the file types. */
   accept: propTypes.string,
   /** When true allows the user to select more than one file. */
-  multiple: propTypes.string,
-  /** Component to render. */
-  children: propTypes.node,
+  multiple: propTypes.bool,
+  /** HTML element or Component to render. */
+  children: propTypes.element,
 }
 
 export default FileUpload
