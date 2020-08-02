@@ -1,5 +1,6 @@
-Dockerfile
-Jenkinsfile
+Dockerfile*
+docker-compose*
+Jenkinsfile*
 ci_scripts
 .vscode
 .idea
