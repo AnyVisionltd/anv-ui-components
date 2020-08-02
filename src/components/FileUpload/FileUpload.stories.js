@@ -25,6 +25,6 @@ export const Multiple = () => (
 
 export const JustImage = () => (
   <FileUpload onChange={ action('Upload Image') } accept={ 'image/*' }>
-    <Button>Upload Files</Button>
+    <Button>Upload Images</Button>
   </FileUpload>
 )

@@ -3041,7 +3041,7 @@ exports[`Storyshots Utils/FileUpload Just Image 1`] = `
       disabled={false}
       onClick={[Function]}
     >
-      Upload Files
+      Upload Images
     </button>
   </div>
 </div>
