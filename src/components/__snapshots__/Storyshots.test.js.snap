@@ -2135,16 +2135,6 @@ exports[`Storyshots Components/Menu With Sub Menus 1`] = `
 </div>
 `;
 
-exports[`Storyshots Components/Portal Default 1`] = `
-<div>
-  <portal-for-test>
-    <h3>
-      Inspect Me. Im on the body
-    </h3>
-  </portal-for-test>
-</div>
-`;
-
 exports[`Storyshots Components/Radio Default 1`] = `
 <div>
   <div
@@ -3011,5 +3001,80 @@ exports[`Storyshots Components/Tooltip Interactive 1`] = `
       </div>
     </div>
   </div>
+</div>
+`;
+
+exports[`Storyshots Utils/FileUpload Basic 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <input
+      className="hide"
+      onChange={[Function]}
+      type="file"
+    />
+    <button
+      className="button large fill"
+      disabled={false}
+      onClick={[Function]}
+    >
+      Upload File
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Utils/FileUpload Just Image 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <input
+      accept="image/*"
+      className="hide"
+      onChange={[Function]}
+      type="file"
+    />
+    <button
+      className="button large fill"
+      disabled={false}
+      onClick={[Function]}
+    >
+      Upload Images
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Utils/FileUpload Multiple 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <input
+      className="hide"
+      multiple={true}
+      onChange={[Function]}
+      type="file"
+    />
+    <button
+      className="button large fill"
+      disabled={false}
+      onClick={[Function]}
+    >
+      Upload Files
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Utils/Portal Default 1`] = `
+<div>
+  <portal-for-test>
+    <h3>
+      Inspect Me. Im on the body
+    </h3>
+  </portal-for-test>
 </div>
 `;

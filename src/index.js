@@ -14,5 +14,6 @@ export { Dialog } from './components/Dialog'
 export { Tooltip } from './components/Tooltip'
 export { ChipsInput } from './components/ChipsInput'
 export { List } from './components/List'
+export { FileUpload } from './components/FileUpload'
 
 export { default as mockAutoSizer } from './testUtils/mockAutoSizer'

@@ -2,7 +2,7 @@ import React from 'react'
 import Portal from './Portal'
 
 export default {
-  title: 'Components/Portal',
+  title: 'Utils/Portal',
   component: Portal,
 }
 
