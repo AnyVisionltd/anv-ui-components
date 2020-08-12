@@ -49,14 +49,14 @@ const TableHeader = ({
 
   const renderCell = headerCell => {
     const {
-	  field, content, sortable, hide, width,
+	  field, content, sortable = true, hide, width,
     } = headerCell
     if (hide) {
 	  return null
     }
     const style = getCellWidth(width)
 
-    const sortableColumn = contextSortable && sortable !== false
+    const sortableColumn = contextSortable && sortable
     const tableCellClass = classNames(
 	  styles.headerCell,
 	  { [styles.sortableColumn]: sortableColumn },
