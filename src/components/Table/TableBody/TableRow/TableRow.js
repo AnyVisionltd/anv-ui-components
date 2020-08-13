@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { memo, useContext, useEffect, useState } from 'react'
 import classNames from 'classnames'
 import events from '../../../../utils/enums/events'
 import { getCellWidth } from '../../utlis'
@@ -11,18 +11,20 @@ import { SkeletonLoader } from '../../../SkeletonLoader'
 import styles from './TableRow.module.scss'
 
 const TableRow = ({
+  id,
   row,
   rowActions,
   rowHeight,
   isLoading,
   onRowClick,
+  isSelected,
+  isActive,
+  columns,
+  toggleSelectedItem,
+  columnManagement
 }) => {
-  const { state, toggleSelectedItem } = useContext(TableContext)
-  const { selection, columns, columnManagement } = state
-
   const [actionsAnchorElement, setActionsAnchorElement] = useState(null)
   const [isHover, setIsHover] = useState(false)
-
   const handleActionsClose = () => {
     setActionsAnchorElement(null)
   }
@@ -74,17 +76,10 @@ const TableRow = ({
     )
   }
 
-  const isRowSelected = ({ id }) => {
-    const { isActive, excludeMode, items } = selection
-    if (!isActive) {
-      return null
-    }
-    let isSelected = items.some(rowId => rowId === id)
-    return excludeMode ? !isSelected : isSelected
-  }
+
 
   const renderSelection = (row, isSelected) => {
-    if(!selection.isActive) return
+    if(!isActive) return
     return (
       <div
         role="cell"
@@ -113,13 +108,12 @@ const TableRow = ({
   }
 
   const renderPlaceholder = () => {
-    return (columnManagement.isActive && !rowActions) && (
+    return (columnManagement && !rowActions) && (
       <div role={ 'cell' } className={ styles.actionsCell }/>
     )
   }
 
   const renderDataRow = () => {
-    const isSelected = isRowSelected(row)
     const tableRowClassNames = classNames(styles.tableRow, { [styles.clickable]: onRowClick }, { [styles.selectedRow]: isSelected })
     return (
       <div
@@ -187,4 +181,4 @@ const TableRow = ({
   )
 }
 
-export default TableRow
+export default memo(TableRow)

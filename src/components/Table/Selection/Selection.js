@@ -5,6 +5,8 @@ import { Portal, Animations, Checkbox, IconButton, Menu } from '../../../index'
 import TableContext from '../TableContext'
 import { ReactComponent as OptionsIcon } from '../../../assets/svg/Options.svg'
 import styles from './Selection.module.scss'
+import { useTableData } from "../UseTableData"
+import { getFilteredData } from "../UseTableData/useTableData"
 
 const Selection = ({
   onChange,
@@ -15,6 +17,7 @@ const Selection = ({
   const { state, setSelectionActivity, setSelection, toggleSelectAll } = useContext(TableContext)
   const { totalItems } = state
   const { items, excludeMode } = state.selection
+  const tableData = useTableData()
 
   const moreActionsRef = useRef()
   const [anchorElement, setAnchorElement] = useState(null)
@@ -25,16 +28,26 @@ const Selection = ({
     : setAnchorElement(moreActionsRef.current))
 
   useEffect(() => {
-    onChange({ items, excludeMode })
+    const itemsSelected = !excludeMode ? items.filter(itemId => !!tableData.find(item => item.id === itemId)) : items
+    onChange({ items: itemsSelected, excludeMode })
   }, [onChange, items, excludeMode])
+  useEffect(() => {
+    const selection = { items: [], excludeMode: false }
+    onChange(selection)
+    setSelection(selection)
+  }, [state.filters])
 
   useEffect(() => {
     setSelectionActivity(true)
   }, [setSelectionActivity])
 
+
   useEffect(() => {
     selected && setSelection(selected)
   }, [selected, setSelection])
+  useEffect(() => {
+    setSelection({ excludeMode, items: items.filter(itemId => !!state.data.find(item2 => itemId === item2.id)) })
+  }, [state.data, setSelection])
 
   const renderMoreActions = moreActions => {
     if(!moreActions.length) {
@@ -90,8 +103,12 @@ const Selection = ({
     )
   }
 
-  const renderBar = excludeMode || !!items.length
-  const selectedCount = renderBar && (excludeMode ? totalItems - items.length : items.length)
+  const excludedItems = state.data.filter(item => !items.includes(item)).map(item => item.id)
+  const realItemsSelected = excludeMode ? excludedItems : items
+  const selectedItemsFiltered = realItemsSelected.filter(itemId => !!tableData.find(item => item.id === itemId))
+  const renderBar = !!selectedItemsFiltered.length
+  const selectedCount = renderBar && selectedItemsFiltered.length
+
 
   const classes = classNames(
     styles.selectionBar,

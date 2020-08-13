@@ -34,7 +34,7 @@ const InfiniteList = ({
       content = rowRender(items[index], index)
     }
 
-    return <div style={ style }>{ content }</div>
+    return <div style={ style } >{ content }</div>
   }
 
   const classes = classNames(
