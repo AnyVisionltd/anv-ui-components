@@ -2504,7 +2504,6 @@ exports[`Storyshots Components/Switch Default 1`] = `
         <input
           defaultChecked={true}
           disabled={false}
-          hidden="hidden"
           id="switch-example"
           onChange={[Function]}
           type="checkbox"
@@ -2549,7 +2548,6 @@ exports[`Storyshots Components/Switch Multiple Switches 1`] = `
         <input
           defaultChecked={false}
           disabled={false}
-          hidden="hidden"
           id="switch-example1"
           onChange={[Function]}
           type="checkbox"
@@ -2576,7 +2574,6 @@ exports[`Storyshots Components/Switch Multiple Switches 1`] = `
         <input
           defaultChecked={true}
           disabled={false}
-          hidden="hidden"
           id="switch-example2"
           onChange={[Function]}
           type="checkbox"
@@ -2603,7 +2600,6 @@ exports[`Storyshots Components/Switch Multiple Switches 1`] = `
         <input
           defaultChecked={false}
           disabled={true}
-          hidden="hidden"
           id="switch-example3"
           onChange={[Function]}
           type="checkbox"
@@ -2630,7 +2626,6 @@ exports[`Storyshots Components/Switch Multiple Switches 1`] = `
         <input
           defaultChecked={true}
           disabled={true}
-          hidden="hidden"
           id="switch-example4"
           onChange={[Function]}
           type="checkbox"
@@ -2670,7 +2665,6 @@ exports[`Storyshots Components/Switch Playground 1`] = `
         <input
           defaultChecked={false}
           disabled={false}
-          hidden="hidden"
           id="switch-playground"
           onChange={[Function]}
           type="checkbox"
