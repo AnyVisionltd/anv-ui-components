@@ -44,7 +44,6 @@ const Switch = ({
 }
 
 Switch.defaultProps = {
-  checked: true,
   disabled: false,
   onChange: () => {},
 }
