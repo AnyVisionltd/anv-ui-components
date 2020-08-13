@@ -25,7 +25,6 @@ const Switch = ({
         id={ id }
         type="checkbox"
         disabled={ disabled }
-        hidden="hidden"
         defaultChecked={ checked }
         onChange={ onChange }
         { ...otherProps }

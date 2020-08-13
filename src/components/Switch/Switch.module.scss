@@ -3,6 +3,17 @@
 
 .switch {
   color: av-color(primary);
+  position: relative;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+  }
 
   .switchLabel {
     cursor: pointer;
