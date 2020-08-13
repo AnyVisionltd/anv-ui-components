@@ -2,24 +2,20 @@ import { useMemo, useContext, useCallback } from 'react'
 import { numberSort, stringSort } from '../../../utils/sort'
 import TableContext from '../TableContext'
 
-export const getFilteredData = (data, filters) => {
-  return data.filter(row => {
-    return filters.every(({ field, value }) => {
-      if(field) {
-        return row[field].toString().toLowerCase().includes(value.toString().toLowerCase())
-      } else {
-        return Object.values(row).some(cellValue => cellValue && cellValue.toString().toLowerCase().includes(value.toString().toLowerCase()))
-      }
-    })
-  })
-}
-
 const useTableData = () => {
   const { state } = useContext(TableContext)
   const { data, selfControlled, filters, sort } = state
 
   const filterData = useCallback(data => {
-    return getFilteredData(data,filters)
+    return data.filter(row => {
+      return filters.every(({ field, value }) => {
+        if(field) {
+          return row[field].toString().toLowerCase().includes(value.toString().toLowerCase())
+        } else {
+          return Object.values(row).some(cellValue => cellValue && cellValue.toString().toLowerCase().includes(value.toString().toLowerCase()))
+        }
+      })
+    })
   }, [filters])
 
   const sortData = useCallback(data => {
