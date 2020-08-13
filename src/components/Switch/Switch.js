@@ -21,14 +21,6 @@ const Switch = ({
 
   return (
     <div className={ classes } onClick={ onClick }>
-      <input
-        id={ id }
-        type="checkbox"
-        disabled={ disabled }
-        defaultChecked={ checked }
-        onChange={ onChange }
-        { ...otherProps }
-      />
       <label
         className={ styles.switchLabel }
         htmlFor={ id }
@@ -36,6 +28,14 @@ const Switch = ({
         <div className={ styles.switchLine } />
         <div className={ styles.switchToggle }>
           <span className={ styles.switchToggleInner } />
+          <input
+            id={ id }
+            type="checkbox"
+            disabled={ disabled }
+            defaultChecked={ checked }
+            onChange={ onChange }
+            { ...otherProps }
+          />
         </div>
       </label>
     </div>
