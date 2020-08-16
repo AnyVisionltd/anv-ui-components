@@ -1,4 +1,4 @@
-import React, { memo, useContext, useEffect, useState } from 'react'
+import React, { memo, useState } from 'react'
 import classNames from 'classnames'
 import events from '../../../../utils/enums/events'
 import { getCellWidth } from '../../utlis'
@@ -6,12 +6,10 @@ import { Menu } from '../../../Menu'
 import { IconButton } from '../../../IconButton'
 import { ReactComponent as OptionsIcon } from '../../../../assets/svg/Options.svg'
 import { Checkbox } from '../../../Checkbox'
-import TableContext from '../../TableContext'
 import { SkeletonLoader } from '../../../SkeletonLoader'
 import styles from './TableRow.module.scss'
 
 const TableRow = ({
-  id,
   row,
   rowActions,
   rowHeight,

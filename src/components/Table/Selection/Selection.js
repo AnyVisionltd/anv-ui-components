@@ -25,21 +25,20 @@ const Selection = ({
   const handleButtonClick = () => (anchorElement
     ? setAnchorElement(null)
     : setAnchorElement(moreActionsRef.current))
-
   useEffect(() => {
-    onChange({ items, excludeMode })
-  }, [onChange, items, excludeMode])
+    onChange && onChange({ excludeMode, items })
 
+  },[onChange, selected,excludeMode,items])
+  useEffect(() => {
+    const newItems = items.filter(item => !!tableData.find(item2 => item.id === item2.id))
+    selected && setSelection({ excludeMode, items: newItems })
+  }, [selected, setSelection, tableData, items, excludeMode])
+  useEffect(() => {
+    setSelection({ excludeMode: false, items: [] })
+  }, [setSelection, state.filters])
   useEffect(() => {
     setSelectionActivity(true)
   }, [setSelectionActivity])
-
-  useEffect(() => {
-    selected && setSelection(selected)
-  }, [selected, tableData, setSelection])
-  useEffect(() => {
-    setSelection({ excludeMode, items: items.filter(item => !!tableData.find(item2 => item.id === item2.id)) })
-  }, [tableData, setSelection])
 
   const renderMoreActions = moreActions => {
     if(!moreActions.length) {
