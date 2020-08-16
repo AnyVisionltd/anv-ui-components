@@ -123,7 +123,7 @@ const TableRow = ({
         onClick={ () => onRowClick(row) }
       >
         { renderSelection(row, isSelected) }
-        { columns && columns.map(({
+        { columns.map(({
           field, columnRender, columnRenderHover, hide, width,
         }) => {
           if (hide) {
@@ -154,7 +154,7 @@ const TableRow = ({
         <SkeletonLoader className={ styles.circleSkeleton }/>
       </div>
       {
-        columns && columns.map(({
+        columns.map(({
           field, hide, width
         }) => {
           if (hide) {
