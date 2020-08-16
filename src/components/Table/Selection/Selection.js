@@ -13,7 +13,7 @@ const Selection = ({
   bulkActions,
   className
 }) => {
-  const { state, setSelectionActivity, setSelection, toggleSelectAll } = useContext(TableContext)
+  const { state, setSelectionActivity, setSelection, deselectAll } = useContext(TableContext)
   const { totalItems } = state
   const { items, excludeMode } = state.selection
   const tableData = useTableData()
@@ -93,7 +93,9 @@ const Selection = ({
       </div>
     )
   }
-
+  const handleDeselectAll = () => {
+    deselectAll()
+  }
   const renderBar = excludeMode || !!items.length
   const selectedCount = renderBar && (excludeMode ? totalItems - items.length : items.length)
 
@@ -108,7 +110,7 @@ const Selection = ({
         <div className={ classes }>
           <Checkbox
             indeterminate
-            onChange={ toggleSelectAll }
+            onChange={ handleDeselectAll }
           />
           <div className={ styles.countContainer }>
             <span className={ styles.counter }>{ selectedCount }</span>

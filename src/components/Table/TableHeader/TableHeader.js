@@ -8,6 +8,7 @@ import { ReactComponent as ManageColumnIcon } from '../../../assets/svg/ManageCo
 import TableContext from '../TableContext'
 import { Checkbox, IconButton } from '../../../index'
 import styles from './TableHeader.module.scss'
+import { useTableData } from "../UseTableData"
 
 const TableHeader = ({
   columns,
@@ -19,6 +20,7 @@ const TableHeader = ({
   const { columns: contextColumns, sort, withRowActions, selection, columnManagement } = state
   const { sortBy, sortable } = sort
   const { isActive: columnManagementIsActive } = columnManagement
+  const tableData = useTableData()
 
   useEffect(() => {
     setColumns(columns)
@@ -80,7 +82,9 @@ const TableHeader = ({
 	  </div>
     )
   }
-
+  const handleSelectAll = () => {
+    toggleSelectAll(tableData)
+  }
   const renderSelection = () => {
     const { isActive, excludeMode, items } = selection
     if (!isActive) {
@@ -91,9 +95,9 @@ const TableHeader = ({
         role={ 'cell' }
         className={ styles.selectionCell }>
         <Checkbox
-		  checked={ excludeMode && !items.length }
+		  checked={ excludeMode  ? !items.length : tableData.length === selection.items.length }
 		  indeterminate={ !!items.length }
-		  onChange={ toggleSelectAll }
+		  onChange={ handleSelectAll }
         />
 	  </div>
     )
