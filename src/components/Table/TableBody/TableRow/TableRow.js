@@ -198,7 +198,7 @@ TableRow.defaultProps = {
 TableRow.propTypes = {
   row: propTypes.object,
   rowActions: propTypes.array,
-  rowHeight: propTypes.number,
+  rowHeight: propTypes.string,
   isLoading: propTypes.bool,
   onRowClick: propTypes.func,
 }
