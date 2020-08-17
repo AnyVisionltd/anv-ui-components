@@ -64,7 +64,7 @@ const reducer = (state, action) => {
     return { ...state, selection: { ...state.selection, items: selection.items, excludeMode: selection.excludeMode } }
   case actionTypes.TOGGLE_SELECT_ALL:
     const nextItemsData = !state.selection.items.length  ? action.payload.map(item => item.id) : []
-    const excludeMode = !state.selfControlled ? !(state.selection.excludeMode || state.selection.items.length) : false
+    const excludeMode = !state.selfControlled && !state.selection.excludeMode
     return { ...state, selection: { ...state.selection, excludeMode, items: !excludeMode ? nextItemsData : [] } }
   case actionTypes.DESELECT_ALL:
     return { ...state, selection: { ...state.selection, excludeMode: false, items: [] } }

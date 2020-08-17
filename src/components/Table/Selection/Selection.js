@@ -30,6 +30,10 @@ const Selection = ({
   },[onChange,excludeMode,items])
 
   useEffect(() => {
+    /*
+    For data changes we need to make sure that the selected items are
+    still in the new data
+     */
     const selectedItems = selected ? selected : state.selection
     const newItems = selectedItems.items.filter(item => !!tableData.find(item2 => item === item2.id))
     setSelection({ ...selectedItems,items: newItems })
