@@ -149,9 +149,10 @@ TableHeader.propTypes = {
    *  <code>type</code>         		- column type, use by SSF sort etc... <br />
    *  <code>columnRender</code> 		- custom column render. <code>(cellData, rowData) => {}</code>. <br />
    *  <code>columnRenderHover</code> 	- custom column render on hover. <code>(cellData, rowData) => {}</code>.<br />
-   *  <code>sortable</code>  		- disable sort for the column. <br />
+   *  <code>sortable</code>  			- set column is sortable. <br />
+   *  <code>filterable</code>			- set column is filterable. <br />
    *  <code>hide</code>         		- hide the column. <br />
-   *  <code>width</code>    		- set the column width by flex basis. <br />
+   *  <code>width</code>    			- set the column width by flex basis. <br />
    **/
   columns: propTypes.arrayOf(
     propTypes.shape({
@@ -165,6 +166,7 @@ TableHeader.propTypes = {
 	  columnRender: propTypes.func,
 	  columnRenderHover: propTypes.func,
 	  sortable: propTypes.bool,
+	  filterable: propTypes.bool,
 	  hide: propTypes.bool,
 	  width: propTypes.string,
     }),

@@ -56,9 +56,9 @@ const Selection = ({
           anchorElement={ anchorElement }
           preferOpenDirection={ 'up-start' }
         >
-          { moreActions.map(({ icon, label }) => {
+          { moreActions.map(({ icon, label, onClick }) => {
             return (
-              <Menu.Item key={ label } leadingComponent={ icon }>
+              <Menu.Item key={ label } leadingComponent={ icon } onClick={ () => onClick({ items, excludeMode }) }>
                 { label }
               </Menu.Item>
             )
