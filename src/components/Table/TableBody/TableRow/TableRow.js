@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import classNames from 'classnames'
-import events from '../../../../utils/enums/events'
+import { formatDateTime } from '../../../../services/date'
+import { events, types } from '../../../../utils/enums'
 import { getCellWidth } from '../../utlis'
 import { Menu } from '../../../Menu'
 import { IconButton } from '../../../IconButton'
@@ -98,11 +99,13 @@ const TableRow = ({
     )
   }
 
-  const renderCell = (row, field, columnRender, columnRenderHover) => {
+  const renderCell = (row, field, columnRender, columnRenderHover, type) => {
     if(isHover && columnRenderHover) {
       return columnRenderHover(row[field], row)
     } else if (columnRender) {
       return columnRender(row[field], row)
+    } else if(type === types.DATE) {
+      return formatDateTime(row[field])
     }
     return row[field]
   }
@@ -132,7 +135,7 @@ const TableRow = ({
       >
         { renderSelection(row, isSelected) }
         { columns.map(({
-          field, columnRender, columnRenderHover, hide, width,
+          field, columnRender, columnRenderHover, hide, width, type
         }) => {
           if (hide) {
             return null
@@ -140,7 +143,7 @@ const TableRow = ({
           const style = getCellWidth(width)
           return (
             <div role="cell" style={ style } className={ styles.tableCell } key={ field }>
-              { renderCell(row, field, columnRender, columnRenderHover) }
+              { renderCell(row, field, columnRender, columnRenderHover, type) }
             </div>
           )
         }) }
