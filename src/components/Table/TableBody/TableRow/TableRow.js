@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { formatDateTime } from '../../../../services/date'
 import { events, types } from '../../../../utils/enums'
@@ -188,6 +189,18 @@ const TableRow = ({
       { isLoading ? renderLoadingRow(): renderDataRow() }
     </>
   )
+}
+
+TableRow.defaultProps = {
+  onRowClick: () => {}
+}
+
+TableRow.propTypes = {
+  row: propTypes.object,
+  rowActions: propTypes.array,
+  rowHeight: propTypes.number,
+  isLoading: propTypes.bool,
+  onRowClick: propTypes.func,
 }
 
 export default TableRow
