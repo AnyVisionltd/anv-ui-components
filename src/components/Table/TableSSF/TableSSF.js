@@ -15,7 +15,7 @@ const TableSSF = ({ onChange, className }) => {
         acc.push({
           field: field,
           label: label || content,
-          ...(type && { type: type })
+          ...(type && { type })
         })
       }
       return acc
