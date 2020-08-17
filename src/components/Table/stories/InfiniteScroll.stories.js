@@ -30,7 +30,7 @@ export const InfiniteScroll = () => {
       role: 'Admin',
       firstname: 'Donte',
       location: 'Tel Aviv',
-      date: new Date(2020, 1),
+      date: new Date(),
     }))
 
     setTimeout(() => {
@@ -59,7 +59,6 @@ export const InfiniteScroll = () => {
       field: 'date',
       content: 'Date',
       type: 'date',
-      columnRender: data => data.toISOString().slice(0, 10)
     }
 
   ], [])

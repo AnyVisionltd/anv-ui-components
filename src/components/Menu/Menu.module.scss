@@ -25,16 +25,12 @@
   padding: av-space(tiny) 0;
 
   &.regular {
-    width: av-size(sz-240);
-
     li {
       height: 48px;
     }
   }
 
   &.dense {
-    width: av-size(sz-144);
-
     li {
       @extend %av-body2;
       height: 32px;

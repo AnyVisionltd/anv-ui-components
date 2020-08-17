@@ -2501,14 +2501,6 @@ exports[`Storyshots Components/Switch Default 1`] = `
       <div
         className="switch enabled"
       >
-        <input
-          defaultChecked={true}
-          disabled={false}
-          hidden="hidden"
-          id="switch-example"
-          onChange={[Function]}
-          type="checkbox"
-        />
         <label
           className="switchLabel"
           htmlFor="switch-example"
@@ -2521,6 +2513,13 @@ exports[`Storyshots Components/Switch Default 1`] = `
           >
             <span
               className="switchToggleInner"
+            />
+            <input
+              defaultChecked={true}
+              disabled={false}
+              id="switch-example"
+              onChange={[Function]}
+              type="checkbox"
             />
           </div>
         </label>
@@ -2546,14 +2545,6 @@ exports[`Storyshots Components/Switch Multiple Switches 1`] = `
       <div
         className="switch unchecked enabled"
       >
-        <input
-          defaultChecked={false}
-          disabled={false}
-          hidden="hidden"
-          id="switch-example1"
-          onChange={[Function]}
-          type="checkbox"
-        />
         <label
           className="switchLabel"
           htmlFor="switch-example1"
@@ -2567,20 +2558,19 @@ exports[`Storyshots Components/Switch Multiple Switches 1`] = `
             <span
               className="switchToggleInner"
             />
+            <input
+              defaultChecked={false}
+              disabled={false}
+              id="switch-example1"
+              onChange={[Function]}
+              type="checkbox"
+            />
           </div>
         </label>
       </div>
       <div
         className="switch enabled"
       >
-        <input
-          defaultChecked={true}
-          disabled={false}
-          hidden="hidden"
-          id="switch-example2"
-          onChange={[Function]}
-          type="checkbox"
-        />
         <label
           className="switchLabel"
           htmlFor="switch-example2"
@@ -2594,20 +2584,19 @@ exports[`Storyshots Components/Switch Multiple Switches 1`] = `
             <span
               className="switchToggleInner"
             />
+            <input
+              defaultChecked={true}
+              disabled={false}
+              id="switch-example2"
+              onChange={[Function]}
+              type="checkbox"
+            />
           </div>
         </label>
       </div>
       <div
         className="switch unchecked disabled"
       >
-        <input
-          defaultChecked={false}
-          disabled={true}
-          hidden="hidden"
-          id="switch-example3"
-          onChange={[Function]}
-          type="checkbox"
-        />
         <label
           className="switchLabel"
           htmlFor="switch-example3"
@@ -2621,20 +2610,19 @@ exports[`Storyshots Components/Switch Multiple Switches 1`] = `
             <span
               className="switchToggleInner"
             />
+            <input
+              defaultChecked={false}
+              disabled={true}
+              id="switch-example3"
+              onChange={[Function]}
+              type="checkbox"
+            />
           </div>
         </label>
       </div>
       <div
         className="switch disabled"
       >
-        <input
-          defaultChecked={true}
-          disabled={true}
-          hidden="hidden"
-          id="switch-example4"
-          onChange={[Function]}
-          type="checkbox"
-        />
         <label
           className="switchLabel"
           htmlFor="switch-example4"
@@ -2647,6 +2635,13 @@ exports[`Storyshots Components/Switch Multiple Switches 1`] = `
           >
             <span
               className="switchToggleInner"
+            />
+            <input
+              defaultChecked={true}
+              disabled={true}
+              id="switch-example4"
+              onChange={[Function]}
+              type="checkbox"
             />
           </div>
         </label>
@@ -2667,14 +2662,6 @@ exports[`Storyshots Components/Switch Playground 1`] = `
       <div
         className="switch unchecked enabled"
       >
-        <input
-          defaultChecked={false}
-          disabled={false}
-          hidden="hidden"
-          id="switch-playground"
-          onChange={[Function]}
-          type="checkbox"
-        />
         <label
           className="switchLabel"
           htmlFor="switch-playground"
@@ -2687,6 +2674,13 @@ exports[`Storyshots Components/Switch Playground 1`] = `
           >
             <span
               className="switchToggleInner"
+            />
+            <input
+              defaultChecked={false}
+              disabled={false}
+              id="switch-playground"
+              onChange={[Function]}
+              type="checkbox"
             />
           </div>
         </label>

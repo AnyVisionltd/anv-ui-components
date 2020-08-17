@@ -18,7 +18,7 @@ const TableHeader = ({
 }) => {
   const { state, setSortBy, setColumns, toggleSelectAll, setColumnManagementIsOpen } = useContext(TableContext)
   const { columns: contextColumns, sort, withRowActions, selection, columnManagement } = state
-  const { sortBy, sortable } = sort
+  const { sortBy, sortable: contextSortable } = sort
   const { isActive: columnManagementIsActive } = columnManagement
   const tableData = useTableData()
 
@@ -51,14 +51,14 @@ const TableHeader = ({
 
   const renderCell = headerCell => {
     const {
-	  field, content, disableSort, hide, width,
+	  field, content, sortable = true, hide, width,
     } = headerCell
     if (hide) {
 	  return null
     }
     const style = getCellWidth(width)
 
-    const sortableColumn = sortable && !disableSort
+    const sortableColumn = contextSortable && sortable
     const tableCellClass = classNames(
 	  styles.headerCell,
 	  { [styles.sortableColumn]: sortableColumn },
@@ -154,9 +154,10 @@ TableHeader.propTypes = {
    *  <code>type</code>         		- column type, use by SSF sort etc... <br />
    *  <code>columnRender</code> 		- custom column render. <code>(cellData, rowData) => {}</code>. <br />
    *  <code>columnRenderHover</code> 	- custom column render on hover. <code>(cellData, rowData) => {}</code>.<br />
-   *  <code>disableSort</code>  		- disable sort for the column. <br />
+   *  <code>sortable</code>  			- set column is sortable. <br />
+   *  <code>filterable</code>			- set column is filterable. <br />
    *  <code>hide</code>         		- hide the column. <br />
-   *  <code>width</code>    		- set the column width by flex basis. <br />
+   *  <code>width</code>    			- set the column width by flex basis. <br />
    **/
   columns: propTypes.arrayOf(
     propTypes.shape({
@@ -169,7 +170,8 @@ TableHeader.propTypes = {
 	  type: propTypes.oneOf(['string', 'number', 'date', 'bool']),
 	  columnRender: propTypes.func,
 	  columnRenderHover: propTypes.func,
-	  disableSort: propTypes.bool,
+	  sortable: propTypes.bool,
+	  filterable: propTypes.bool,
 	  hide: propTypes.bool,
 	  width: propTypes.string,
     }),
