@@ -32,7 +32,7 @@ const toggleSelection = (selection, totalItems, payload) => {
   const { item, isSelected } = payload
   const addItem = excludeMode === isSelected
   if(addItem) {
-    if(items.length + 1 === totalItems) {
+    if(items.length + 1 === totalItems && excludeMode) {
       return { items: [] , excludeMode: !excludeMode }
     }
     return { items: [...items, item.id] , excludeMode: excludeMode }

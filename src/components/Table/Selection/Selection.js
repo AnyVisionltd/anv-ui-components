@@ -27,11 +27,13 @@ const Selection = ({
     : setAnchorElement(moreActionsRef.current))
   useEffect(() => {
     onChange && onChange({ excludeMode, items })
+  },[onChange,excludeMode,items])
 
-  },[onChange, selected,excludeMode,items])
   useEffect(() => {
-    selected && setSelection({ excludeMode, items })
-  }, [selected, setSelection, tableData, items, excludeMode])
+    const selectedItems = selected ? selected : state.selection
+    const newItems = selectedItems.items.filter(item => !!tableData.find(item2 => item === item2.id))
+    setSelection({ ...selectedItems,items: newItems })
+  }, [selected, tableData, setSelection])
   useEffect(() => {
     setSelection({ excludeMode: false, items: [] })
   }, [setSelection, state.filters])
@@ -97,7 +99,6 @@ const Selection = ({
   }
   const renderBar = excludeMode || !!items.length
   const selectedCount = renderBar && (excludeMode ? totalItems - items.length : items.length)
-
   const classes = classNames(
     styles.selectionBar,
     className,

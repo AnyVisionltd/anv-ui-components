@@ -6,11 +6,7 @@ import TableContext from '../TableContext'
 import { TableRow } from './TableRow'
 import { useTableData } from "../UseTableData"
 import styles from './TableBody.module.scss'
-// const TestItem = () => {
-//   const [isShowing, setIsShowing ] = useState(false)
-//   console.log("test",isShowing)
-//   return <button onClick={ () => setIsShowing(!isShowing) }>{ isShowing && <p>rendering</p> }</button>
-// }
+
 const TableBody = ({
   data,
   totalItems,
@@ -65,13 +61,10 @@ const TableBody = ({
     return excludeMode ? !isSelected : isSelected
   }
   const loadingRender = () => {
-    console.log(isLoading)
     if(!isLoading) {
       return
     }
-    console.log(Array.from({ length: 5 }, (_, index) => (
-      <TableRow columns={ columns } isLoading={ true } key={ index }/>
-    )))
+
     return Array.from({ length: 5 }, (_, index) => (
       <TableRow columns={ columns } isLoading={ true } key={ index }/>
     ))
