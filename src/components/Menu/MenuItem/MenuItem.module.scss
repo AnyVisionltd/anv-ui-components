@@ -2,6 +2,9 @@
 @import "../../../styles/mixin/ripple";
 
 .menuItem {
+  box-sizing: border-box;
+  min-width: av-size(sz-144);
+  max-width: av-size(sz-320);
   outline: none;
   position: relative;
   display: flex;
