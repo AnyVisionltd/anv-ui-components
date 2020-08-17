@@ -38,7 +38,7 @@ const Selection = ({
       return
     }
     setSelection({ excludeMode,items:newItems })
-  },[onChange, tableData, excludeMode, items])
+  },[setSelection, onChange, tableData, excludeMode, items])
 
   useEffect(() => {
     selected && setSelection(selected)
