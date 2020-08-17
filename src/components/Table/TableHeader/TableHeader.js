@@ -87,6 +87,7 @@ const TableHeader = ({
   }
   const renderSelection = () => {
     const { isActive, excludeMode, items } = selection
+    const isAllSelected = excludeMode  ? !items.length : tableData.length && tableData.length === selection.items.length
     if (!isActive) {
 	  return null
     }
@@ -95,7 +96,7 @@ const TableHeader = ({
         role={ 'cell' }
         className={ styles.selectionCell }>
         <Checkbox
-		  checked={ excludeMode  ? !items.length : tableData.length === selection.items.length }
+		  checked={ isAllSelected }
 		  indeterminate={ !!items.length }
 		  onChange={ handleSelectAll }
         />
