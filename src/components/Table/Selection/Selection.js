@@ -30,8 +30,7 @@ const Selection = ({
 
   },[onChange, selected,excludeMode,items])
   useEffect(() => {
-    const newItems = items.filter(item => !!tableData.find(item2 => item.id === item2.id))
-    selected && setSelection({ excludeMode, items: newItems })
+    selected && setSelection({ excludeMode, items })
   }, [selected, setSelection, tableData, items, excludeMode])
   useEffect(() => {
     setSelection({ excludeMode: false, items: [] })
@@ -60,9 +59,9 @@ const Selection = ({
           anchorElement={ anchorElement }
           preferOpenDirection={ 'up-start' }
         >
-          { moreActions.map(({ icon, label }) => {
+          { moreActions.map(({ onClick, icon, label }) => {
             return (
-              <Menu.Item key={ label } leadingComponent={ icon }>
+              <Menu.Item onClick={ onClick } key={ label } leadingComponent={ icon }>
                 { label }
               </Menu.Item>
             )

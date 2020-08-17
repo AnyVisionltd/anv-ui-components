@@ -104,21 +104,22 @@ export const Basic = () => {
     {
       icon: <SunIcon/>,
       label: 'action 1',
-      onClick: action('bulk action 1'),
+      onClick: () => console.log("action 1"),
     },
     {
       icon: <EyeEnabledIcon/>,
       label: 'action 2',
-      onClick: action('bulk action 2'),
+      onClick: () => console.log("action 2"),
     },
     {
       icon: <EyeDisabledIcon/>,
       label: 'action 3',
-      onClick: action('bulk action 3')
+      onClick: () =>console.log("action 3")
     }
   ]
 
   const style = { width: '100%', height: '400px' }
+
   return (
     <Table style={ style } selfControlled={ true }>
       <Table.SSF onChange={ action('SSF changed') }/>

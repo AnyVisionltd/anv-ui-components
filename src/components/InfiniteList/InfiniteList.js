@@ -5,6 +5,17 @@ import { FixedSizeList as List } from 'react-window'
 import InfiniteLoader from 'react-window-infinite-loader'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import styles from './InfiniteList.module.scss'
+const Item = ({ data, index, key, style }) => {
+  const { items, rowRender, isItemLoaded, customLoader } = data
+  let content
+  if (!isItemLoaded(index)) {
+    content = customLoader() ? customLoader() : null
+  } else {
+    content = rowRender(items[index], index)
+  }
+
+  return <div style={ style }>{ content }</div>
+}
 
 const InfiniteList = ({
   rowRender,
@@ -26,16 +37,6 @@ const InfiniteList = ({
   // Every row is loaded except for our loading indicator row.
   const isItemLoaded = index => !hasNextPage || index < items.length
 
-  const Item = ({ index, style }) => {
-    let content
-    if (!isItemLoaded(index)) {
-      content = customLoader()
-    } else {
-      content = rowRender(items[index], index)
-    }
-
-    return <div style={ style }>{ content }</div>
-  }
 
   const classes = classNames(
     styles.infiniteList,
@@ -57,6 +58,7 @@ const InfiniteList = ({
               className={ classes }
               height={ height }
               width={ width }
+              itemData={ { items, rowRender, isItemLoaded, customLoader, rowHeight } }
               itemCount={ itemCount }
               itemSize={ rowHeight }
               onItemsRendered={ onItemsRendered }

@@ -23,6 +23,7 @@ export const InfiniteScroll = () => {
   const totalItems = 50
 
   const loadMoreItems = useCallback(() => {
+    console.log("...")
     setIsLoading(true)
     const a = Array.from({ length: 10 }, (_, index) => ({
       id: data.length + index,
