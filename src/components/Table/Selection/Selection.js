@@ -6,6 +6,8 @@ import TableContext from '../TableContext'
 import { ReactComponent as OptionsIcon } from '../../../assets/svg/Options.svg'
 import styles from './Selection.module.scss'
 import { useTableData } from "../UseTableData"
+import { isEqual } from "../../../utils"
+
 
 const Selection = ({
   onChange,
@@ -25,19 +27,22 @@ const Selection = ({
   const handleButtonClick = () => (anchorElement
     ? setAnchorElement(null)
     : setAnchorElement(moreActionsRef.current))
-  useEffect(() => {
-    onChange && onChange({ excludeMode, items })
-  },[onChange,excludeMode,items])
 
   useEffect(() => {
     /*
-    For data changes we need to make sure that the selected items are
-    still in the new data
+       For data changes we need to make sure that the selected itels are
      */
-    const selectedItems = selected ? selected : state.selection
-    const newItems = selectedItems.items.filter(item => !!tableData.find(item2 => item === item2.id))
-    setSelection({ ...selectedItems,items: newItems })
-  }, [selected, tableData, setSelection])
+    const newItems = items.filter(item => !!tableData.find(item2 => item === item2.id))
+    onChange && onChange({ excludeMode, items: newItems })
+    if(isEqual(newItems,items)) {
+      return
+    }
+    setSelection({ excludeMode,items:newItems })
+  },[onChange, tableData, excludeMode, items])
+
+  useEffect(() => {
+    selected && setSelection(selected)
+  }, [selected, setSelection])
   useEffect(() => {
     setSelection({ excludeMode: false, items: [] })
   }, [setSelection, state.filters])
