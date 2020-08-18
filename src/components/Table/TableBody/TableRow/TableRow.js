@@ -49,12 +49,13 @@ const TableRow = ({
           onClose={ handleActionsClose }
         >
           {
-            rowActions.map(({ content, onClick }, index) => (
+            rowActions.map(({ label, icon, onClick }, index) => (
               <Menu.Item
+                leadingComponent={ icon }
                 key={ index }
                 onClick={ () => handleMenuItemClick(row, onClick) }
               >
-                { content }
+                { label }
               </Menu.Item>
             ))
           }

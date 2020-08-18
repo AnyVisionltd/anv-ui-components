@@ -98,8 +98,16 @@ export const Basic = () => {
   ], [])
 
   const rowActions = useMemo(() => [
-    { content: 'Delete', onClick: action('delete action clicked') },
-    { content: 'Edit', onClick: action('edit action clicked') },
+    {
+      icon: <SunIcon/>,
+      label: 'Delete',
+      onClick: action('delete action clicked')
+    },
+    {
+      icon: <EyeEnabledIcon/>,
+      label: 'Edit',
+      onClick: action('edit action clicked')
+    },
   ], [])
 
   const bulkActions = [
