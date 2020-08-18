@@ -6,8 +6,6 @@ import TableContext from '../TableContext'
 import { ReactComponent as OptionsIcon } from '../../../assets/svg/Options.svg'
 import styles from './Selection.module.scss'
 import { useTableData } from "../UseTableData"
-import { isEqual } from "../../../utils"
-
 
 const Selection = ({
   onChange,
@@ -28,17 +26,16 @@ const Selection = ({
     ? setAnchorElement(null)
     : setAnchorElement(moreActionsRef.current))
 
+  //For data changes we need to make sure that the selected items are
+  // contained within the new data
   useEffect(() => {
-    /*
-       For data changes we need to make sure that the selected itels are
-     */
+
     const newItems = items.filter(item => !!tableData.find(item2 => item === item2.id))
     onChange && onChange({ excludeMode, items: newItems })
-    if(isEqual(newItems,items)) {
-      return
-    }
     setSelection({ excludeMode,items:newItems })
-  },[setSelection, onChange, tableData, excludeMode, items])
+    // the logic don't need items in deps array
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[setSelection, onChange, tableData, excludeMode])
 
   useEffect(() => {
     selected && setSelection(selected)
