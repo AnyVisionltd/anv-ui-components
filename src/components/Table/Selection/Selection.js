@@ -5,6 +5,7 @@ import { Portal, Animations, Checkbox, IconButton, Menu } from '../../../index'
 import TableContext from '../TableContext'
 import { ReactComponent as OptionsIcon } from '../../../assets/svg/Options.svg'
 import styles from './Selection.module.scss'
+import { useTableData } from "../UseTableData"
 
 const Selection = ({
   onChange,
@@ -12,9 +13,10 @@ const Selection = ({
   bulkActions,
   className
 }) => {
-  const { state, setSelectionActivity, setSelection, toggleSelectAll } = useContext(TableContext)
+  const { state, setSelectionActivity, setSelection, deselectAll } = useContext(TableContext)
   const { totalItems } = state
   const { items, excludeMode } = state.selection
+  const tableData = useTableData()
 
   const moreActionsRef = useRef()
   const [anchorElement, setAnchorElement] = useState(null)
@@ -24,17 +26,26 @@ const Selection = ({
     ? setAnchorElement(null)
     : setAnchorElement(moreActionsRef.current))
 
+  //For data changes we need to make sure that the selected items are
+  // contained within the new data
   useEffect(() => {
-    onChange({ items, excludeMode })
-  }, [onChange, items, excludeMode])
 
-  useEffect(() => {
-    setSelectionActivity(true)
-  }, [setSelectionActivity])
+    const newItems = items.filter(item => !!tableData.find(item2 => item === item2.id))
+    onChange && onChange({ excludeMode, items: newItems })
+    setSelection({ excludeMode,items:newItems })
+    // the logic don't need items in deps array
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[setSelection, onChange, tableData, excludeMode])
 
   useEffect(() => {
     selected && setSelection(selected)
   }, [selected, setSelection])
+  useEffect(() => {
+    setSelection({ excludeMode: false, items: [] })
+  }, [setSelection, state.filters])
+  useEffect(() => {
+    setSelectionActivity(true)
+  }, [setSelectionActivity])
 
   const renderMoreActions = moreActions => {
     if(!moreActions.length) {
@@ -56,9 +67,9 @@ const Selection = ({
           anchorElement={ anchorElement }
           preferOpenDirection={ 'up-start' }
         >
-          { moreActions.map(({ icon, label, onClick }) => {
+          { moreActions.map(({ onClick, icon, label }) => {
             return (
-              <Menu.Item key={ label } leadingComponent={ icon } onClick={ () => onClick({ items, excludeMode }) }>
+              <Menu.Item onClick={ onClick } key={ label } leadingComponent={ icon }>
                 { label }
               </Menu.Item>
             )
@@ -89,10 +100,11 @@ const Selection = ({
       </div>
     )
   }
-
+  const handleDeselectAll = () => {
+    deselectAll()
+  }
   const renderBar = excludeMode || !!items.length
   const selectedCount = renderBar && (excludeMode ? totalItems - items.length : items.length)
-
   const classes = classNames(
     styles.selectionBar,
     className,
@@ -104,7 +116,7 @@ const Selection = ({
         <div className={ classes }>
           <Checkbox
             indeterminate
-            onChange={ toggleSelectAll }
+            onChange={ handleDeselectAll }
           />
           <div className={ styles.countContainer }>
             <span className={ styles.counter }>{ selectedCount }</span>

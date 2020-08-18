@@ -1,5 +1,6 @@
 export const actionTypes = Object.freeze({
   SET_SELF_CONTROLLED: 'SET_SELF_CONTROLLED',
+  DESELECT_ALL: 'DESELECT_ALL',
   SET_COLUMNS: 'SET_COLUMNS',
   SET_DATA: 'SET_DATA',
   SET_TOTAL_ITEMS: 'SET_TOTAL_ITEMS',
@@ -70,9 +71,15 @@ export const actions = dispatch => ({
       payload: { item, isSelected },
     })
   },
-  toggleSelectAll: () => {
+  toggleSelectAll: currentData => {
     dispatch({
       type: actionTypes.TOGGLE_SELECT_ALL,
+      payload: currentData
+    })
+  },
+  deselectAll: () => {
+    dispatch({
+      type: actionTypes.DESELECT_ALL,
     })
   },
   setFilters: filters => {

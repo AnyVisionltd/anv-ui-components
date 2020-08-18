@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, memo } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { InfiniteList } from '../../../index'
@@ -18,9 +18,9 @@ const TableBody = ({
   className,
   ...otherProps
 }) => {
-  const { state, setData, setWithRowActions, setTotalItems } = useContext(TableContext)
-  const { selfControlled } = state
 
+  const { state, setData, setWithRowActions, setTotalItems,toggleSelectedItem } = useContext(TableContext)
+  const { columns, columnManagement, selection, selfControlled } = state
   const tableData = useTableData()
 
   useEffect(() => {
@@ -36,23 +36,35 @@ const TableBody = ({
   }, [setWithRowActions, rowActions])
 
 
-  const renderRow = (row, index) => (
-    <TableRow
-      key={ index }
-      rowActions={ rowActions }
-      row={ row }
-      rowHeight={ rowHeight }
-      onRowClick={ onRowClick }
-    />
-  )
-
+  const renderRow = ((row, index) => {
+    return(
+      <TableRow
+        isActive={ !!selection.isActive }
+        isSelected={ isRowSelected(row.id) }
+        toggleSelectedItem={ toggleSelectedItem }
+        columns={ columns }
+        columnManagement={ columnManagement.isActive }
+        rowActions={ rowActions }
+        row={ row }
+        rowHeight={ rowHeight }
+        onRowClick={ onRowClick }
+      />
+    ) })
+  const isRowSelected = id => {
+    const { isActive, excludeMode, items } = selection
+    if (!isActive) {
+      return null
+    }
+    let isSelected = items.some(rowId => rowId === id)
+    return excludeMode ? !isSelected : isSelected
+  }
   const loadingRender = () => {
     if(!isLoading) {
       return
     }
 
     return Array.from({ length: 5 }, (_, index) => (
-      <TableRow isLoading={ true } key={ index }/>
+      <TableRow columns={ columns } isLoading={ true } key={ index }/>
     ))
   }
 
@@ -112,4 +124,4 @@ TableBody.propTypes = {
   className: propTypes.string,
 }
 
-export default TableBody
+export default memo(TableBody)

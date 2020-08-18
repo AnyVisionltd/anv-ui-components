@@ -116,11 +116,12 @@ export const Basic = () => {
     {
       icon: <EyeDisabledIcon/>,
       label: 'action 3',
-      onClick: action('bulk action 3')
+      onClick: action('bulk action 3'),
     }
   ]
 
   const style = { width: '100%', height: '400px' }
+
   return (
     <Table style={ style } selfControlled={ true }>
       <Table.SSF onChange={ action('SSF changed') }/>

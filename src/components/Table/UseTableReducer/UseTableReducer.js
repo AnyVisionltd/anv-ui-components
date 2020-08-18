@@ -32,7 +32,7 @@ const toggleSelection = (selection, totalItems, payload) => {
   const { item, isSelected } = payload
   const addItem = excludeMode === isSelected
   if(addItem) {
-    if(items.length + 1 === totalItems) {
+    if(items.length + 1 === totalItems && excludeMode) {
       return { items: [] , excludeMode: !excludeMode }
     }
     return { items: [...items, item.id] , excludeMode: excludeMode }
@@ -40,6 +40,17 @@ const toggleSelection = (selection, totalItems, payload) => {
   return {
     items: items.filter(id => id !== payload.item.id),
     excludeMode: excludeMode
+  }
+}
+const toggleSelectAll = (selection, selfControlled,payload) => {
+  const excludeMode = !selfControlled && !selection.excludeMode
+  let items = []
+  if(!excludeMode) {
+    items = !selection.items.length  ? payload.map(item => item.id) : []
+  }
+  return {
+    excludeMode,
+    items
   }
 }
 
@@ -63,8 +74,10 @@ const reducer = (state, action) => {
     const selection = toggleSelection(state.selection, state.totalItems, action.payload)
     return { ...state, selection: { ...state.selection, items: selection.items, excludeMode: selection.excludeMode } }
   case actionTypes.TOGGLE_SELECT_ALL:
-    const excludeMode = !(state.selection.excludeMode || state.selection.items.length)
-    return { ...state, selection: { ...state.selection, excludeMode, items: [] } }
+    const newSelection = toggleSelectAll(state.selection,state.selfControlled,action.payload)
+    return { ...state, selection: { ...state.selection, ...newSelection } }
+  case actionTypes.DESELECT_ALL:
+    return { ...state, selection: { ...state.selection, excludeMode: false, items: [] } }
   case actionTypes.SET_SORTABLE:
     return { ...state, sort: { ...state.sort, sortable: action.payload } }
   case actionTypes.SET_FILTERS:

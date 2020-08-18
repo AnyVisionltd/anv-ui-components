@@ -12,7 +12,7 @@ const useTableData = () => {
         if(field) {
           return row[field].toString().toLowerCase().includes(value.toString().toLowerCase())
         } else {
-          return Object.values(row).some(cellValue => cellValue.toString().toLowerCase().includes(value.toString().toLowerCase()))
+          return Object.values(row).some(cellValue => cellValue && cellValue.toString().toLowerCase().includes(value.toString().toLowerCase()))
         }
       })
     })

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { memo, useState } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { formatDateTime } from '../../../../services/date'
@@ -8,7 +8,6 @@ import { Menu } from '../../../Menu'
 import { IconButton } from '../../../IconButton'
 import { ReactComponent as OptionsIcon } from '../../../../assets/svg/Options.svg'
 import { Checkbox } from '../../../Checkbox'
-import TableContext from '../../TableContext'
 import { SkeletonLoader } from '../../../SkeletonLoader'
 import styles from './TableRow.module.scss'
 
@@ -18,13 +17,14 @@ const TableRow = ({
   rowHeight,
   isLoading,
   onRowClick,
+  isSelected,
+  isActive,
+  columns,
+  toggleSelectedItem,
+  columnManagement
 }) => {
-  const { state, toggleSelectedItem } = useContext(TableContext)
-  const { selection, columns, columnManagement } = state
-
   const [actionsAnchorElement, setActionsAnchorElement] = useState(null)
   const [isHover, setIsHover] = useState(false)
-
   const handleActionsClose = () => {
     setActionsAnchorElement(null)
   }
@@ -76,17 +76,10 @@ const TableRow = ({
     )
   }
 
-  const isRowSelected = ({ id }) => {
-    const { isActive, excludeMode, items } = selection
-    if (!isActive) {
-      return null
-    }
-    let isSelected = items.some(rowId => rowId === id)
-    return excludeMode ? !isSelected : isSelected
-  }
+
 
   const renderSelection = (row, isSelected) => {
-    if(!selection.isActive) return
+    if(!isActive) return
     return (
       <div
         role="cell"
@@ -117,13 +110,12 @@ const TableRow = ({
   }
 
   const renderPlaceholder = () => {
-    return (columnManagement.isActive && !rowActions) && (
+    return (columnManagement && !rowActions) && (
       <div role={ 'cell' } className={ styles.actionsCell }/>
     )
   }
 
   const renderDataRow = () => {
-    const isSelected = isRowSelected(row)
     const tableRowClassNames = classNames(styles.tableRow, { [styles.clickable]: onRowClick }, { [styles.selectedRow]: isSelected })
     return (
       <div
@@ -203,4 +195,4 @@ TableRow.propTypes = {
   onRowClick: propTypes.func,
 }
 
-export default TableRow
+export default memo(TableRow)
