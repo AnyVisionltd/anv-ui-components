@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, memo } from 'react'
+import React, { useContext, useEffect } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { InfiniteList } from '../../../index'
@@ -113,8 +113,10 @@ TableBody.propTypes = {
   rowHeight: propTypes.string,
   /** If pass, render action menu at the end of each row. */
   rowActions: propTypes.arrayOf(propTypes.shape({
-    /** The content to render inside the <Menu.Items/>. */
-    content: propTypes.node,
+    /** The label to render inside the <Menu.Items/>. */
+    label: propTypes.string,
+    /** The icon to render before the label. */
+    icon: propTypes.node,
     /** The callback when click the <Menu.Items/> */
     onClick: propTypes.func,
   })),
@@ -124,4 +126,4 @@ TableBody.propTypes = {
   className: propTypes.string,
 }
 
-export default memo(TableBody)
+export default TableBody
