@@ -116,6 +116,11 @@ const TableRow = ({
     )
   }
 
+  const onMenuItemClick = (e, row) => {
+    e.stopImmediatePropagation()
+    onRowClick(row)
+  }
+
   const renderDataRow = () => {
     const tableRowClassNames = classNames(styles.tableRow, { [styles.clickable]: onRowClick }, { [styles.selectedRow]: isSelected })
     return (
@@ -125,7 +130,7 @@ const TableRow = ({
         className={ tableRowClassNames }
         onMouseEnter={ mouseHoverHandler }
         onMouseLeave={ mouseHoverHandler }
-        onClick={ () => onRowClick(row) }
+        onClick={ e => onMenuItemClick(e, row) }
       >
         { renderSelection(row, isSelected) }
         { columns.map(({

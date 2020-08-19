@@ -156,6 +156,7 @@ TableHeader.propTypes = {
    *  <code>columnRenderHover</code> 	- custom column render on hover. <code>(cellData, rowData) => {}</code>.<br />
    *  <code>sortable</code>  			- set column is sortable. <br />
    *  <code>filterable</code>			- set column is filterable. <br />
+   *  <code>manageable</code>			- set column is manageable. <br />
    *  <code>hide</code>         		- hide the column. <br />
    *  <code>width</code>    			- set the column width by flex basis. <br />
    **/
@@ -172,6 +173,7 @@ TableHeader.propTypes = {
 	  columnRenderHover: propTypes.func,
 	  sortable: propTypes.bool,
 	  filterable: propTypes.bool,
+	  manageable: propTypes.bool,
 	  hide: propTypes.bool,
 	  width: propTypes.string,
     }),
