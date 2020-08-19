@@ -7,6 +7,45 @@ import { ReactComponent as OptionsIcon } from '../../../assets/svg/Options.svg'
 import styles from './Selection.module.scss'
 import { useTableData } from "../UseTableData"
 
+const BulkAction = ({ icon, onClick, subMenu }) =>
+{
+  const moreActionsRef = useRef()
+  const [anchorElement, setAnchorElement] = useState(null)
+
+  const handleMenuClose = () => setAnchorElement(null)
+  const handleButtonClick = () => (anchorElement
+    ? setAnchorElement(null)
+    : setAnchorElement(moreActionsRef.current))
+  return (
+    <>
+      <IconButton
+        onClick={ !subMenu ?  onClick : handleButtonClick }
+        variant={ 'ghost' }
+        ref={ moreActionsRef }
+        className={ styles.actionButton}
+      >
+        { icon }
+      </IconButton>
+      {
+        subMenu &&
+          <Menu
+            isOpen={ !!anchorElement }
+            onClose={ handleMenuClose }
+            anchorElement={ anchorElement }
+            preferOpenDirection={ 'up-start' }
+          >
+            { subMenu.map(({ onClick, icon, label }) => {
+              return (
+                <Menu.Item onClick={ onClick } key={ label } leadingComponent={ icon }>
+                  { label }
+                </Menu.Item>
+              )
+            } ) }
+          </Menu>
+      }
+
+    </>
+  ) }
 const Selection = ({
   onChange,
   selected,
@@ -18,13 +57,7 @@ const Selection = ({
   const { items, excludeMode } = state.selection
   const tableData = useTableData()
 
-  const moreActionsRef = useRef()
-  const [anchorElement, setAnchorElement] = useState(null)
 
-  const handleMenuClose = () => setAnchorElement(null)
-  const handleButtonClick = () => (anchorElement
-    ? setAnchorElement(null)
-    : setAnchorElement(moreActionsRef.current))
 
   //For data changes we need to make sure that the selected items are
   // contained within the new data
@@ -47,56 +80,17 @@ const Selection = ({
     setSelectionActivity(true)
   }, [setSelectionActivity])
 
-  const renderMoreActions = moreActions => {
-    if(!moreActions.length) {
-      return
-    }
-    return (
-      <>
-        <IconButton
-          onClick={ handleButtonClick }
-          variant={ 'ghost' }
-          ref={ moreActionsRef }
-          className={ classNames(styles.actionButton, styles.moreActionsButton) }
-        >
-          <OptionsIcon/>
-        </IconButton>
-        <Menu
-          isOpen={ !!anchorElement }
-          onClose={ handleMenuClose }
-          anchorElement={ anchorElement }
-          preferOpenDirection={ 'up-start' }
-        >
-          { moreActions.map(({ onClick, icon, label }) => {
-            return (
-              <Menu.Item onClick={ onClick } key={ label } leadingComponent={ icon }>
-                { label }
-              </Menu.Item>
-            )
-          } ) }
-        </Menu>
-      </>
-    )
-  }
+
 
   const renderActions = () => {
-    const mainActions = bulkActions.slice(0,2)
-    const moreActions = bulkActions.slice(2)
+
     return (
       <div className={ styles.actionsContainer }>
         {
-          mainActions.map(({ icon, onClick }, index) => (
-            <IconButton
-              key={ index }
-              variant={ 'ghost' }
-              onClick={ () => onClick({ items, excludeMode }) }
-              className={ styles.actionButton }
-            >
-              { icon }
-            </IconButton>
+          bulkActions.map(({ icon, onClick, subMenu }, index)=> (
+            <BulkAction icon={ icon } onClick={ () => onClick({items,excludeMode}) } subMenu={ subMenu } key={ index } />
           ))
         }
-        { renderMoreActions(moreActions) }
       </div>
     )
   }

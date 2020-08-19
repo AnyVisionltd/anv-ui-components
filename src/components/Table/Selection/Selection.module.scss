@@ -41,13 +41,9 @@
     margin-left: auto;
     align-items: center;
 
-    .actionButton {
-      margin-left: av-space(tiny);
-      color: av-color(purewhite);
-    }
-
-    .moreActionsButton {
-      transform: rotate(90deg);
-    }
   }
+}
+.actionButton {
+  margin-left: av-space(tiny);
+  color: av-color(purewhite);
 }
