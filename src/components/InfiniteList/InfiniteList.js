@@ -28,7 +28,7 @@ const InfiniteList = ({
   className
 }) => {
 
-  const hasNextPage = items.length < totalItems
+  const hasNextPage = items.length < totalItems || isLoading
 
   const itemCount = hasNextPage ? items.length + 1 : items.length
 
