@@ -1,6 +1,6 @@
 {
   "name": "@anyvision/anv-ui-components",
-  "version": "0.1.1-beta.53",
+  "version": "0.1.1-beta.54",
   "main": "dist/index.js",
   "private": false,
   "files": [
