@@ -5,7 +5,7 @@ import { FixedSizeList as List } from 'react-window'
 import InfiniteLoader from 'react-window-infinite-loader'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import styles from './InfiniteList.module.scss'
-const Item = ({ data, index, key, style }) => {
+const Item = ({ data, index, style }) => {
   const { items, rowRender, isItemLoaded, customLoader } = data
   let content
   if (!isItemLoaded(index)) {
