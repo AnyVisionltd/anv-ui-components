@@ -29,7 +29,8 @@ const TableRow = ({
     setActionsAnchorElement(null)
   }
 
-  const handleMenuItemClick = (row, onClick) => {
+  const handleMenuItemClick = (e, row, onClick) => {
+    e.stopPropagation()
     handleActionsClose()
     onClick(row)
   }
@@ -53,7 +54,7 @@ const TableRow = ({
               <Menu.Item
                 leadingComponent={ icon }
                 key={ index }
-                onClick={ () => handleMenuItemClick(row, onClick) }
+                onClick={ e => handleMenuItemClick(e, row, onClick) }
               >
                 { label }
               </Menu.Item>
@@ -116,8 +117,7 @@ const TableRow = ({
     )
   }
 
-  const onMenuItemClick = (e, row) => {
-    e.stopImmediatePropagation()
+  const handleRowClick = row => {
     onRowClick(row)
   }
 
@@ -130,7 +130,7 @@ const TableRow = ({
         className={ tableRowClassNames }
         onMouseEnter={ mouseHoverHandler }
         onMouseLeave={ mouseHoverHandler }
-        onClick={ e => onMenuItemClick(e, row) }
+        onClick={ () => handleRowClick(row) }
       >
         { renderSelection(row, isSelected) }
         { columns.map(({
