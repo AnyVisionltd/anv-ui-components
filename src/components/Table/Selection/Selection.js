@@ -103,11 +103,17 @@ Selection.propTypes = {
   /** Table bulk actions. <br />
    *  <code>icon</code>      - icon for the action. <br />
    *  <code>label</code>     - label for the action icon.<br />
+   *  <code>submenu</code>     - submenu for the action icon.<br />
    *  <code>onClick</code>   - callback fire when action click. <br />
    **/
   bulkActions: propTypes.arrayOf(
     propTypes.shape({
       icon: propTypes.node,
+      subMenu: propTypes.shape({
+        icon: propTypes.node,
+        label: propTypes.string,
+        onClick: propTypes.func.isRequired
+      }),
       label: propTypes.string,
       onClick: propTypes.func
     })

@@ -124,13 +124,13 @@ export const Basic = () => {
       subMenu: [
         {
           icon: <SunIcon/>,
-          label: 'action 4',
-          onClick: action('bulk action 1'),
+          label: 'action 3',
+          onClick: action('bulk action 3'),
         },
         {
           icon: <EyeEnabledIcon/>,
-          label: 'action 5',
-          onClick: action('bulk action 2'),
+          label: 'action 4',
+          onClick: action('bulk action 4'),
         }
       ]
     }
