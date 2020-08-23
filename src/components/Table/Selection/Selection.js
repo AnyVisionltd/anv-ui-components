@@ -5,7 +5,7 @@ import { Portal, Animations, Checkbox, } from '../../../index'
 import TableContext from '../TableContext'
 import styles from './Selection.module.scss'
 import { useTableData } from "../UseTableData"
-import BulkAction from "./BulkAction/BulkAction"
+import { BulkAction } from "./BulkAction"
 
 const Selection = ({
   onChange,
@@ -45,11 +45,11 @@ const Selection = ({
       <div className={ styles.actionsContainer }>
         {
           bulkActions.map(({ icon, onClick, subMenu }, index)=> (
-            <BulkAction 
-              icon={ icon } 
-              onClick={ () => onClick({ items,excludeMode }) } 
-              subMenu={ subMenu } 
-              key={ index } 
+            <BulkAction
+              icon={ icon }
+              onClick={ () => onClick({ items,excludeMode }) }
+              subMenu={ subMenu }
+              key={ index }
             />
           ))
         }
@@ -109,11 +109,12 @@ Selection.propTypes = {
   bulkActions: propTypes.arrayOf(
     propTypes.shape({
       icon: propTypes.node,
-      subMenu: propTypes.shape({
-        icon: propTypes.node,
-        label: propTypes.string,
-        onClick: propTypes.func.isRequired
-      }),
+      subMenu: propTypes.arrayOf(
+        propTypes.shape({
+          icon: propTypes.node,
+          label: propTypes.string,
+          onClick: propTypes.func.isRequired
+        })),
       label: propTypes.string,
       onClick: propTypes.func
     })
