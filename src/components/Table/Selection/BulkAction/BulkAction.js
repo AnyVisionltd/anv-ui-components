@@ -31,13 +31,12 @@ const BulkAction = ({ icon, onClick, subMenu }) =>
                   anchorElement={ anchorElement }
                   preferOpenDirection={ 'up-start' }
                 >
-                  { subMenu.map(({ onClick, icon, label }) => {
-                    return (
-                      <Menu.Item onClick={ onClick } key={ label } leadingComponent={ icon }>
-                        { label }
-                      </Menu.Item>
-                    )
-                  } ) }
+                  { subMenu.map(({ onClick, icon, label }) => (
+                    <Menu.Item onClick={ onClick } key={ label } leadingComponent={ icon }>
+                      { label }
+                    </Menu.Item>
+                  )
+                  ) }
                 </Menu>
       }
 
