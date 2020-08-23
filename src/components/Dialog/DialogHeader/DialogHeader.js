@@ -6,7 +6,7 @@ import { ReactComponent as CancelIcon } from '../../../assets/svg/Cancel.svg'
 import styles from './DialogHeader.module.scss'
 
 
-const DialogHeader = ({ className, onClose,  disableCloseIcon, children, ...otherProps }) => {
+const DialogHeader = ({ className, onClose,  closeIcon, children, ...otherProps }) => {
 
   const classes = classNames(
     styles.dialogHeader,
@@ -16,7 +16,7 @@ const DialogHeader = ({ className, onClose,  disableCloseIcon, children, ...othe
   return (
     <div className={ classes } { ...otherProps } data-testid={ 'dialog-header' }>
       { children }
-      { !disableCloseIcon && (
+      { closeIcon && (
         <IconButton
           variant={ 'ghost' }
           className={ styles.closeIcon }
@@ -32,7 +32,7 @@ const DialogHeader = ({ className, onClose,  disableCloseIcon, children, ...othe
 
 DialogHeader.defaultProps = {
   onClose: () => {},
-  disableCloseIcon: false
+  closeIcon: true
 }
 
 DialogHeader.propTypes = {
@@ -43,7 +43,7 @@ DialogHeader.propTypes = {
   /** A callback triggered whenever the menu is closed */
   onClose: propTypes.func,
   /** Disable the close icon */
-  disableCloseIcon: propTypes.bool
+  closeIcon: propTypes.bool
 }
 
 export default DialogHeader

@@ -15,7 +15,7 @@ describe('<DialogHeader />', () => {
   })
 
   it('should not render close icon when close icon is disabled', () => {
-    const { queryByTestId } = render(<DialogHeader disableCloseIcon/>)
+    const { queryByTestId } = render(<DialogHeader closeIcon={ false }/>)
     expect(queryByTestId('dialog-header-close-icon')).toEqual(null)
   })
 })
