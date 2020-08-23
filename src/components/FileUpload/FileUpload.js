@@ -12,7 +12,11 @@ const FileUpload = ({ onChange, accept, multiple, children, ...other }) => {
 
   const onChangeHandler = e => {
     const { files } = e.target
-    return onChange( files, e )
+    onChange( files, e )
+  }
+
+  const clearInput = e => {
+    e.target.value = null
   }
 
   return (
@@ -24,6 +28,7 @@ const FileUpload = ({ onChange, accept, multiple, children, ...other }) => {
         accept={ accept }
         multiple={ multiple }
         onChange={ onChangeHandler }
+        onClick={ clearInput }
         { ...other }
       />
       {
