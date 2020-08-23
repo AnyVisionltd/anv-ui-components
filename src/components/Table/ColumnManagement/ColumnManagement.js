@@ -54,7 +54,10 @@ const ColumnManagement = ({ onChange }) => {
     setColumns(newColumns)
   }
 
-  const renderListItem = ({ field, content, label, hide }, index) => {
+  const renderListItem = ({ field, content, label, hide, manageable = true }, index) => {
+    if(!manageable) {
+      return
+    }
     const columnName = label ? label : content
     return (
       <Draggable draggableId={ field } index={ index } key={ field }>

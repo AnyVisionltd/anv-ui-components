@@ -25,7 +25,8 @@ export const Basic = () => {
       field: 'firstname',
       content: 'First Name',
       width: '200px',
-      sortable: false
+      sortable: false,
+      manageable: false
     },
     {
       field: 'location',

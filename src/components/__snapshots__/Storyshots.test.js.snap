@@ -3006,6 +3006,7 @@ exports[`Storyshots Utils/FileUpload Basic 1`] = `
     <input
       className="hide"
       onChange={[Function]}
+      onClick={[Function]}
       type="file"
     />
     <button
@@ -3028,6 +3029,7 @@ exports[`Storyshots Utils/FileUpload Just Image 1`] = `
       accept="image/*"
       className="hide"
       onChange={[Function]}
+      onClick={[Function]}
       type="file"
     />
     <button
@@ -3050,6 +3052,7 @@ exports[`Storyshots Utils/FileUpload Multiple 1`] = `
       className="hide"
       multiple={true}
       onChange={[Function]}
+      onClick={[Function]}
       type="file"
     />
     <button
