@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import { Portal, Animations, Checkbox, IconButton, Menu } from '../../../index'
+import { Portal, Animations, Checkbox, } from '../../../index'
 import TableContext from '../TableContext'
-import { ReactComponent as OptionsIcon } from '../../../assets/svg/Options.svg'
 import styles from './Selection.module.scss'
 import { useTableData } from "../UseTableData"
+import { BulkAction } from "./BulkAction"
 
 const Selection = ({
   onChange,
@@ -17,14 +17,6 @@ const Selection = ({
   const { totalItems } = state
   const { items, excludeMode } = state.selection
   const tableData = useTableData()
-
-  const moreActionsRef = useRef()
-  const [anchorElement, setAnchorElement] = useState(null)
-
-  const handleMenuClose = () => setAnchorElement(null)
-  const handleButtonClick = () => (anchorElement
-    ? setAnchorElement(null)
-    : setAnchorElement(moreActionsRef.current))
 
   //For data changes we need to make sure that the selected items are
   // contained within the new data
@@ -47,56 +39,20 @@ const Selection = ({
     setSelectionActivity(true)
   }, [setSelectionActivity])
 
-  const renderMoreActions = moreActions => {
-    if(!moreActions.length) {
-      return
-    }
-    return (
-      <>
-        <IconButton
-          onClick={ handleButtonClick }
-          variant={ 'ghost' }
-          ref={ moreActionsRef }
-          className={ classNames(styles.actionButton, styles.moreActionsButton) }
-        >
-          <OptionsIcon/>
-        </IconButton>
-        <Menu
-          isOpen={ !!anchorElement }
-          onClose={ handleMenuClose }
-          anchorElement={ anchorElement }
-          preferOpenDirection={ 'up-start' }
-        >
-          { moreActions.map(({ onClick, icon, label }) => {
-            return (
-              <Menu.Item onClick={ onClick } key={ label } leadingComponent={ icon }>
-                { label }
-              </Menu.Item>
-            )
-          } ) }
-        </Menu>
-      </>
-    )
-  }
-
   const renderActions = () => {
-    const mainActions = bulkActions.slice(0,2)
-    const moreActions = bulkActions.slice(2)
+
     return (
       <div className={ styles.actionsContainer }>
         {
-          mainActions.map(({ icon, onClick }, index) => (
-            <IconButton
+          bulkActions.map(({ icon, onClick, subMenu }, index)=> (
+            <BulkAction
+              icon={ icon }
+              onClick={ () => onClick({ items,excludeMode }) }
+              subMenu={ subMenu }
               key={ index }
-              variant={ 'ghost' }
-              onClick={ () => onClick({ items, excludeMode }) }
-              className={ styles.actionButton }
-            >
-              { icon }
-            </IconButton>
+            />
           ))
         }
-        { renderMoreActions(moreActions) }
       </div>
     )
   }
@@ -147,11 +103,18 @@ Selection.propTypes = {
   /** Table bulk actions. <br />
    *  <code>icon</code>      - icon for the action. <br />
    *  <code>label</code>     - label for the action icon.<br />
+   *  <code>submenu</code>     - submenu for the action icon.<br />
    *  <code>onClick</code>   - callback fire when action click. <br />
    **/
   bulkActions: propTypes.arrayOf(
     propTypes.shape({
       icon: propTypes.node,
+      subMenu: propTypes.arrayOf(
+        propTypes.shape({
+          icon: propTypes.node,
+          label: propTypes.string,
+          onClick: propTypes.func.isRequired
+        })),
       label: propTypes.string,
       onClick: propTypes.func
     })

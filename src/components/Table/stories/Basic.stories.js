@@ -100,12 +100,10 @@ export const Basic = () => {
 
   const rowActions = useMemo(() => [
     {
-      icon: <SunIcon/>,
       label: 'Delete',
       onClick: action('delete action clicked')
     },
     {
-      icon: <EyeEnabledIcon/>,
       label: 'Edit',
       onClick: action('edit action clicked')
     },
@@ -124,13 +122,22 @@ export const Basic = () => {
     },
     {
       icon: <EyeDisabledIcon/>,
-      label: 'action 3',
-      onClick: action('bulk action 3'),
+      subMenu: [
+        {
+          icon: <SunIcon/>,
+          label: 'action 3',
+          onClick: action('bulk action 3'),
+        },
+        {
+          icon: <EyeEnabledIcon/>,
+          label: 'action 4',
+          onClick: action('bulk action 4'),
+        }
+      ]
     }
   ]
 
   const style = { width: '100%', height: '400px' }
-
   return (
     <Table style={ style } selfControlled={ true }>
       <Table.SSF onChange={ action('SSF changed') }/>
