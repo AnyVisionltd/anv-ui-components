@@ -51,7 +51,6 @@ const toggleSelectAll = (selection, selfControlled, payload, totalItems) => {
   } else {
     excludeMode = !isAllSelected && !selection.items.length
   }
-
   return {
     excludeMode,
     items
