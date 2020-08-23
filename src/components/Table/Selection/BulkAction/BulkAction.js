@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react"
 import { IconButton } from "../../../IconButton"
 import styles from "./BulkAction.module.scss"
 import { Menu } from "../../../Menu"
+import propTypes from "prop-types"
 
 const BulkAction = ({ icon, onClick, subMenu }) =>
 {
@@ -42,5 +43,26 @@ const BulkAction = ({ icon, onClick, subMenu }) =>
 
     </>
   ) }
-    
+BulkAction.defaultProps = {
+  icon: null
+}
+
+BulkAction.propTypes = {
+  icon: propTypes.node,
+  onClick: propTypes.func.isRequired,
+  /** Table bulk actions. <br />
+     *  <code>icon</code>      - icon for the action. <br />
+     *  <code>label</code>     - label for the action icon.<br />
+     *  <code>onClick</code>   - callback fire when action click. <br />
+     **/
+  subMenu: propTypes.arrayOf(
+    propTypes.shape({
+      icon: propTypes.node,
+      label: propTypes.string,
+      onClick: propTypes.func.isRequired
+    })
+  ),
+  /** Selection bar css customization. */
+  className: propTypes.string,
+}
 export default  BulkAction
