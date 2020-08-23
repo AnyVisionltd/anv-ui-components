@@ -1,51 +1,12 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import { Portal, Animations, Checkbox, IconButton, Menu } from '../../../index'
+import { Portal, Animations, Checkbox, } from '../../../index'
 import TableContext from '../TableContext'
-import { ReactComponent as OptionsIcon } from '../../../assets/svg/Options.svg'
 import styles from './Selection.module.scss'
 import { useTableData } from "../UseTableData"
+import BulkAction from "./BulkAction/BulkAction"
 
-const BulkAction = ({ icon, onClick, subMenu }) =>
-{
-  const moreActionsRef = useRef()
-  const [anchorElement, setAnchorElement] = useState(null)
-
-  const handleMenuClose = () => setAnchorElement(null)
-  const handleButtonClick = () => (anchorElement
-    ? setAnchorElement(null)
-    : setAnchorElement(moreActionsRef.current))
-  return (
-    <>
-      <IconButton
-        onClick={ !subMenu ?  onClick : handleButtonClick }
-        variant={ 'ghost' }
-        ref={ moreActionsRef }
-        className={ styles.actionButton}
-      >
-        { icon }
-      </IconButton>
-      {
-        subMenu &&
-          <Menu
-            isOpen={ !!anchorElement }
-            onClose={ handleMenuClose }
-            anchorElement={ anchorElement }
-            preferOpenDirection={ 'up-start' }
-          >
-            { subMenu.map(({ onClick, icon, label }) => {
-              return (
-                <Menu.Item onClick={ onClick } key={ label } leadingComponent={ icon }>
-                  { label }
-                </Menu.Item>
-              )
-            } ) }
-          </Menu>
-      }
-
-    </>
-  ) }
 const Selection = ({
   onChange,
   selected,
@@ -56,8 +17,6 @@ const Selection = ({
   const { totalItems } = state
   const { items, excludeMode } = state.selection
   const tableData = useTableData()
-
-
 
   //For data changes we need to make sure that the selected items are
   // contained within the new data
@@ -80,15 +39,18 @@ const Selection = ({
     setSelectionActivity(true)
   }, [setSelectionActivity])
 
-
-
   const renderActions = () => {
 
     return (
       <div className={ styles.actionsContainer }>
         {
           bulkActions.map(({ icon, onClick, subMenu }, index)=> (
-            <BulkAction icon={ icon } onClick={ () => onClick({items,excludeMode}) } subMenu={ subMenu } key={ index } />
+            <BulkAction 
+              icon={ icon } 
+              onClick={ () => onClick({ items,excludeMode }) } 
+              subMenu={ subMenu } 
+              key={ index } 
+            />
           ))
         }
       </div>
