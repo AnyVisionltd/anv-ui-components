@@ -87,7 +87,7 @@ const TableHeader = ({
   }
   const renderSelection = () => {
     const { isActive, excludeMode, items } = selection
-    const isAllSelected = excludeMode  ? !items.length : tableData.length === selection.items.length
+    const isAllSelected = excludeMode  ? !items.length : tableData.length && tableData.length === selection.items.length
     if (!isActive) {
 	  return null
     }
