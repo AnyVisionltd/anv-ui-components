@@ -13,7 +13,6 @@ const BulkAction = ({ icon, onClick, subMenu }) =>
   const handleButtonClick = () => (anchorElement
     ? setAnchorElement(null)
     : setAnchorElement(moreActionsRef.current))
-
   return (
     <>
       <IconButton
