@@ -1,0 +1,60 @@
+@import "~@anyvision/style-guide";
+
+.colors {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+
+  * {
+    border-radius: av-radius();
+    color: av-color(purewhite);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: av-space(tiny);
+    width: av-size(sz-320);
+    height: 200px;
+  }
+
+  .primary {
+    background-color: av-color(primary);
+  }
+  .secondary {
+    background-color: av-color(secondary);
+  }
+  .accent {
+    background-color: av-color(accent);
+  }
+  .decorative {
+    background-color: av-color(decorative);
+  }
+  .content {
+    background-color: av-color(content);
+  }
+  .primary {
+    background-color: av-color(primary);
+  }
+  .surface {
+    border: solid 1px av-color(content);
+    color: av-color(content);
+    background-color: av-color(surface);
+  }
+  .purewhite {
+    border: solid 1px av-color(content);
+    color: av-color(content);
+    background-color: av-color(purewhite);
+  }
+  .trueblack {
+    background-color: av-color(trueblack);
+  }
+  .success {
+    background-color: av-color(success);
+  }
+  .alert {
+    background-color: av-color(alert);
+  }
+  .error {
+    background-color: av-color(error);
+  }
+}

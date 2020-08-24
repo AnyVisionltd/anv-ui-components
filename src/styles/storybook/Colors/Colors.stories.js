@@ -1,5 +1,6 @@
 import React from 'react'
 import { centerDecorator } from '../../../utils/storybook/decorators'
+import styles from './Colors.module.scss'
 
 export default {
   title: 'Style/Colors',
@@ -7,18 +8,18 @@ export default {
 }
 
 export const Base = () => (
-  <div>
-    <div>Primary</div>
-    <div>Secondary</div>
-    <div>Accent</div>
-    <div>Decorative</div>
-    <div>Content</div>
-    <div>Surface</div>
-    <div>Pure White</div>
-    <div>True Black</div>
-    <div>Success</div>
-    <div>Alert</div>
-    <div>Error</div>
+  <div className={ styles.colors }>
+    <div className={ styles.primary }>Primary</div>
+    <div className={ styles.secondary }>Secondary</div>
+    <div className={ styles.accent }>Accent</div>
+    <div className={ styles.decorative }>Decorative</div>
+    <div className={ styles.content }>Content</div>
+    <div className={ styles.surface }>Surface</div>
+    <div className={ styles.purewhite }>Pure White</div>
+    <div className={ styles.trueblack }>True Black</div>
+    <div className={ styles.success }>Success</div>
+    <div className={ styles.alert }>Alert</div>
+    <div className={ styles.error }>Error</div>
   </div>
 )
 
