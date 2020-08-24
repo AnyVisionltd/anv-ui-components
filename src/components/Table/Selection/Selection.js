@@ -38,9 +38,7 @@ const Selection = ({
   useEffect(() => {
     setSelectionActivity(true)
   }, [setSelectionActivity])
-  const handleClick = onClick => {
-    onClick({ items,excludeMode })
-  }
+
   const renderActions = () => {
 
     return (
@@ -49,7 +47,7 @@ const Selection = ({
           bulkActions.map(({ icon, onClick, subMenu }, index)=> (
             <BulkAction
               icon={ icon }
-              onClick={ submenuIndex => handleClick(subMenu && subMenu[submenuIndex] ? subMenu[submenuIndex].onClick : onClick) }
+              onClick={ onClick }
               subMenu={ subMenu }
               key={ index }
             />

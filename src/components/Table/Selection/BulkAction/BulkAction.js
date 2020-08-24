@@ -1,11 +1,14 @@
-import React, { useRef, useState } from "react"
+import React, { useContext, useRef, useState } from "react"
 import { IconButton } from "../../../IconButton"
 import styles from "./BulkAction.module.scss"
 import { Menu } from "../../../Menu"
 import propTypes from "prop-types"
+import TableContext from "../../TableContext"
 
 const BulkAction = ({ icon, onClick, subMenu }) =>
 {
+  const { state } = useContext(TableContext)
+  const { items, excludeMode } = state.selection
   const moreActionsRef = useRef()
   const [anchorElement, setAnchorElement] = useState(null)
 
@@ -13,10 +16,13 @@ const BulkAction = ({ icon, onClick, subMenu }) =>
   const handleButtonClick = () => (anchorElement
     ? setAnchorElement(null)
     : setAnchorElement(moreActionsRef.current))
+  const handleClick = onClick => {
+    onClick({ items,excludeMode })
+  }
   return (
     <>
       <IconButton
-        onClick={ !subMenu ?  onClick : handleButtonClick }
+        onClick={ !subMenu ? () => handleClick(onClick) : handleButtonClick }
         variant={ 'ghost' }
         ref={ moreActionsRef }
         className={ styles.actionButton }
@@ -31,8 +37,8 @@ const BulkAction = ({ icon, onClick, subMenu }) =>
                   anchorElement={ anchorElement }
                   preferOpenDirection={ 'up-start' }
                 >
-                  { subMenu.map(({ icon, label }, index) => (
-                    <Menu.Item onClick={ () => onClick(index) } key={ label } leadingComponent={ icon }>
+                  { subMenu.map(({ onClick, icon, label }, index) => (
+                    <Menu.Item onClick={ () => handleClick(onClick) } key={ label } leadingComponent={ icon }>
                       { label }
                     </Menu.Item>
                   )
