@@ -37,7 +37,7 @@ const BulkAction = ({ icon, onClick, subMenu }) =>
                   anchorElement={ anchorElement }
                   preferOpenDirection={ 'up-start' }
                 >
-                  { subMenu.map(({ onClick, icon, label }, index) => (
+                  { subMenu.map(({ onClick, icon, label }) => (
                     <Menu.Item onClick={ () => handleClick(onClick) } key={ label } leadingComponent={ icon }>
                       { label }
                     </Menu.Item>
@@ -54,7 +54,7 @@ BulkAction.defaultProps = {
 
 BulkAction.propTypes = {
   icon: propTypes.node,
-  onClick: propTypes.func.isRequired,
+  onClick: propTypes.func,
   /** Table bulk actions. <br />
      *  <code>icon</code>      - icon for the action. <br />
      *  <code>label</code>     - label for the action icon.<br />
