@@ -2998,6 +2998,42 @@ exports[`Storyshots Components/Tooltip Interactive 1`] = `
 </div>
 `;
 
+exports[`Storyshots Style/Colors Additional 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      placeholder="Placeholder"
+    />
+  </div>
+</div>
+`;
+
+exports[`Storyshots Style/Colors Base 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      placeholder="Placeholder"
+    />
+  </div>
+</div>
+`;
+
+exports[`Storyshots Style/Colors Elevation 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      placeholder="Placeholder"
+    />
+  </div>
+</div>
+`;
+
 exports[`Storyshots Utils/FileUpload Basic 1`] = `
 <div>
   <div
