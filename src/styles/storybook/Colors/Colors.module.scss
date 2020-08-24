@@ -57,4 +57,76 @@
   .error {
     background-color: av-color(error);
   }
+
+  // Additional Colors
+  .sirius {
+    background-color: av-color(ac-sirius);
+  }
+  .earth {
+    background-color: av-color(ac-earth);
+  }
+  .procyon {
+    background-color: av-color(ac-procyon);
+  }
+  .sun {
+    background-color: av-color(ac-sun);
+  }
+  .canopus {
+    background-color: av-color(ac-canopus);
+  }
+  .achernar {
+    background-color: av-color(ac-achernar);
+  }
+  .altair {
+    background-color: av-color(ac-altair);
+  }
+  .antares {
+    background-color: av-color(ac-antares);
+  }
+  .vega {
+    background-color: av-color(ac-vega);
+  }
+  .betelgeuse {
+    background-color: av-color(ac-betelgeuse);
+  }
+  .aldebaran {
+    background-color: av-color(ac-aldebaran);
+  }
+  .pollux {
+    background-color: av-color(ac-pollux);
+  }
+  .rigel {
+    background-color: av-color(ac-rigel);
+  }
+  .agena {
+    background-color: av-color(ac-agena);
+  }
+  .spica {
+    background-color: av-color(ac-spica);
+  }
+  .mimosa {
+    background-color: av-color(ac-mimosa);
+  }
+}
+
+.elevation {
+  * {
+    color: av-color(content);
+  }
+
+  .raised {
+    @include av-elevation(raised);
+  }
+  .overlay {
+    @include av-elevation(overlay);
+  }
+  .sticky {
+    @include av-elevation(sticky);
+  }
+  .temporary {
+    @include av-elevation(temporary);
+  }
+  .popOut {
+    @include av-elevation(pop-out);
+  }
 }
