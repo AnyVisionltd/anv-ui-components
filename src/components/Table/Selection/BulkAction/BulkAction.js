@@ -13,6 +13,7 @@ const BulkAction = ({ icon, onClick, subMenu }) =>
   const handleButtonClick = () => (anchorElement
     ? setAnchorElement(null)
     : setAnchorElement(moreActionsRef.current))
+
   return (
     <>
       <IconButton
@@ -31,8 +32,8 @@ const BulkAction = ({ icon, onClick, subMenu }) =>
                   anchorElement={ anchorElement }
                   preferOpenDirection={ 'up-start' }
                 >
-                  { subMenu.map(({ onClick, icon, label }) => (
-                    <Menu.Item onClick={ onClick } key={ label } leadingComponent={ icon }>
+                  { subMenu.map(({ icon, label }, index) => (
+                    <Menu.Item onClick={ () => onClick(index) } key={ label } leadingComponent={ icon }>
                       { label }
                     </Menu.Item>
                   )
