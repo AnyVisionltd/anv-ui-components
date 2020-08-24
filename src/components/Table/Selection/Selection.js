@@ -47,7 +47,7 @@ const Selection = ({
           bulkActions.map(({ icon, onClick, subMenu }, index)=> (
             <BulkAction
               icon={ icon }
-              onClick={ () => onClick({ items,excludeMode }) }
+              onClick={ onClick }
               subMenu={ subMenu }
               key={ index }
             />
