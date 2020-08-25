@@ -23,7 +23,6 @@ export default {
     resolve(),
     postcss({
       extract: true,
-      modules: true,
       use: ['sass'],
     }),
     babel({
