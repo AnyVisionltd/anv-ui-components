@@ -3004,8 +3004,89 @@ exports[`Storyshots Style/Colors Additional 1`] = `
     className="center"
   >
     <div
-      placeholder="Placeholder"
-    />
+      className="colors"
+    >
+      <div
+        className="sirius"
+      >
+        Sirius
+      </div>
+      <div
+        className="earth"
+      >
+        Earth
+      </div>
+      <div
+        className="procyon"
+      >
+        Procyon
+      </div>
+      <div
+        className="sun"
+      >
+        Sun
+      </div>
+      <div
+        className="canopus"
+      >
+        Canopus
+      </div>
+      <div
+        className="achernar"
+      >
+        Achernar
+      </div>
+      <div
+        className="altair"
+      >
+        Altair
+      </div>
+      <div
+        className="antares"
+      >
+        Antares
+      </div>
+      <div
+        className="vega"
+      >
+        Vega
+      </div>
+      <div
+        className="betelgeuse"
+      >
+        Betelgeuse
+      </div>
+      <div
+        className="aldebaran"
+      >
+        Aldebaran
+      </div>
+      <div
+        className="pollux"
+      >
+        Pollux
+      </div>
+      <div
+        className="rigel"
+      >
+        Rigel
+      </div>
+      <div
+        className="agena"
+      >
+        Agena
+      </div>
+      <div
+        className="spica"
+      >
+        Spica
+      </div>
+      <div
+        className="mimosa"
+      >
+        Mimosa
+      </div>
+    </div>
   </div>
 </div>
 `;
@@ -3016,8 +3097,64 @@ exports[`Storyshots Style/Colors Base 1`] = `
     className="center"
   >
     <div
-      placeholder="Placeholder"
-    />
+      className="colors"
+    >
+      <div
+        className="primary"
+      >
+        Primary
+      </div>
+      <div
+        className="secondary"
+      >
+        Secondary
+      </div>
+      <div
+        className="accent"
+      >
+        Accent
+      </div>
+      <div
+        className="decorative"
+      >
+        Decorative
+      </div>
+      <div
+        className="content"
+      >
+        Content
+      </div>
+      <div
+        className="surface"
+      >
+        Surface
+      </div>
+      <div
+        className="purewhite"
+      >
+        Pure White
+      </div>
+      <div
+        className="trueblack"
+      >
+        True Black
+      </div>
+      <div
+        className="success"
+      >
+        Success
+      </div>
+      <div
+        className="alert"
+      >
+        Alert
+      </div>
+      <div
+        className="error"
+      >
+        Error
+      </div>
+    </div>
   </div>
 </div>
 `;
@@ -3027,9 +3164,42 @@ exports[`Storyshots Style/Colors Elevation 1`] = `
   <div
     className="center"
   >
-    <div
-      placeholder="Placeholder"
-    />
+    <div>
+      <div
+        className="colors elevation"
+      >
+        <div
+          className="raised"
+        >
+          raised
+        </div>
+        <div
+          className="overlay"
+        >
+          overlay
+        </div>
+        <div
+          className="sticky"
+        >
+          sticky
+        </div>
+        <div
+          className="temporary"
+        >
+          temporary
+        </div>
+        <div
+          className="popOut"
+        >
+          pop-out
+        </div>
+      </div>
+      <center>
+        <h6>
+          Try to use the theme toggle :)
+        </h6>
+      </center>
+    </div>
   </div>
 </div>
 `;
