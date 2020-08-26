@@ -30,11 +30,13 @@ const TextField = React.forwardRef((props, ref) => {
     size,
     placeholder,
     menuClassName,
+    id,
     ...inputProps
   } = props
 
   const [value, setValue] = useState(inputProps.value || defaultValue)
   const [active, setActive] = useState(false)
+  const [inputId, setInputId] = useState(id)
   const textFieldRef = useRef(ref)
   const inputRef = useRef({})
 
@@ -50,7 +52,11 @@ const TextField = React.forwardRef((props, ref) => {
     setValue(defaultValue)
   }, [defaultValue])
 
-  const { id, leadingIcon, onChange, readOnly, multiline } = inputProps
+  useEffect(() => {
+    setInputId(id || uuid())
+  }, [id])
+
+  const { leadingIcon, onChange, readOnly, multiline } = inputProps
 
   const onInputChange = e => {
     const { target: { value } } = e
@@ -78,8 +84,6 @@ const TextField = React.forwardRef((props, ref) => {
     setAnchorElement(anchorElement ? null : textFieldRef.current)
     onClick(e)
   }
-
-  const inputId = id || uuid()
 
   const renderMenu = () => {
     return (
