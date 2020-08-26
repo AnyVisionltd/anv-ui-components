@@ -43,7 +43,7 @@ const TextField = React.forwardRef((props, ref) => {
   const [anchorElement, setAnchorElement] = useState(null)
 
   useClickOutsideListener(() => {
-    if(type !== types.options) {
+    if (type !== types.options) {
       setActive(false)
     }
   }, textFieldRef)
@@ -85,6 +85,12 @@ const TextField = React.forwardRef((props, ref) => {
     onClick(e)
   }
 
+  const onItemClick = item => {
+    setValue(item.label)
+    onMenuItemClick(item)
+    handleMenuClose()
+  }
+
   const renderMenu = () => {
     return (
       <Menu
@@ -95,15 +101,14 @@ const TextField = React.forwardRef((props, ref) => {
         className={ classNames(styles.textFieldMenu, menuClassName) }
       >
         {
-          items.map(item => {
-            return renderItem
-              ?
-              renderItem(item)
-              :
-              (<Menu.Item key={ item.value } onClick={ onMenuItemClick }>
-                { item.label }
-              </Menu.Item>)
-          })
+          items.map(item => renderItem
+            ?
+            renderItem(item)
+            :
+            (<Menu.Item key={ item.value } onClick={ () => onItemClick(item) }>
+              { item.label }
+            </Menu.Item>)
+          )
         }
       </Menu>
     )
@@ -156,6 +161,7 @@ TextField.defaultProps = {
   size: 'basic',
   onClick: () => { },
   onChange: () => { },
+  onMenuItemClick: () => { },
   items: [],
 }
 
@@ -176,7 +182,7 @@ TextField.propTypes = {
   /** Will change the input read-only */
   readOnly: propTypes.bool,
   /** For css customization. */
-  className: propTypes.string, 
+  className: propTypes.string,
   /** For css customization. */
   menuClassName: propTypes.string,
   /** For icon css customization. */
@@ -194,7 +200,7 @@ TextField.propTypes = {
   /** Array of items if type is options. */
   items: propTypes.arrayOf(propTypes.shape({ value: propTypes.string, label: propTypes.oneOfType([propTypes.string, propTypes.number]) })),
   /** Callback to render items of type options */
-  renderItem: propTypes.func,  
+  renderItem: propTypes.func,
   /** Callback to handle item of type options click  */
   onMenuItemClick: propTypes.func,
 }

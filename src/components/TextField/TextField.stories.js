@@ -193,7 +193,7 @@ export const typeOptions = () => {
         trailingComponent={ <SunIcon /> }
         type={ 'options' }
         onClick={ action('click') }
-        value={ 'Pizza Toppings' }
+        defaultValue={ 'Pizza Toppings' }
         id={ 'textField-21' }
         items={ items }
       />
@@ -202,7 +202,7 @@ export const typeOptions = () => {
         type={ 'options' }
         variant={ 'fill' }
         onClick={ action('click') }
-        value={ 'Pizza Toppings' }
+        defaultValue={ 'Pizza Toppings' }
         id={ 'textField-22' }
         items={ items }
       />
