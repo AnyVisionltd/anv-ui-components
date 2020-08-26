@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect, useMemo, useCallback } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
+import { types } from '../../utils/enums'
 import Button from '../Button/Button'
 import ChipsInput from '../ChipsInput/ChipsInput'
 import Menu from '../Menu/Menu'
@@ -56,11 +57,11 @@ const SmartFilter = ({
 
   const getInputType = useCallback(value => {
     const menuItem = getChipField(value)
-    return menuItem ? menuItem.type : 'text'
+    return menuItem ? menuItem.type : types.STRING
   }, [getChipField])
 
   const onInputChange = useCallback(value => {
-    if (getInputType(value) === 'number') {
+    if (getInputType(value) === types.NUMBER) {
       const inputValueOnly = value.slice(value.indexOf(':') + 2)
       if (!Number.isNaN(Number(inputValueOnly))) {
         setInputValue(value)
@@ -148,7 +149,7 @@ SmartFilter.propTypes = {
    *  <code>field</code>     - name of the value of field key that would be returned
    *                           if the user choose this line in the menu.<br />
    *  <code>label</code>     - the name of the menu item that appears.<br />
-   *  <code>type</code>      - number or text as the possible input types.<br />
+   *  <code>type</code>      - number or string as the possible input types.<br />
    *  <code>icon</code>      - the icon on the chip that will appear
    *                           if the user choose this line in the menu.
    **/

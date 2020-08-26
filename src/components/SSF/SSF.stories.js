@@ -15,13 +15,13 @@ export default {
 export const Default = () => {
   const fields = [
     {
-      field: 'subjectName', label: 'Subject Name', type: 'text',
+      field: 'subjectName', label: 'Subject Name', type: 'string',
     },
     {
       field: 'age', type: 'number', label: 'Age', icon: <ArrowSolidRight />,
     },
     {
-      field: 'subjectDescription', label: 'Description', type: 'text', icon: <EyeEnabled />,
+      field: 'subjectDescription', label: 'Description', type: 'string', icon: <EyeEnabled />,
     },
   ]
   return (
