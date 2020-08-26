@@ -7,10 +7,10 @@ import keymap from "../../utils/enums/keymap"
 
 const fields = [
   {
-    field: 'menuItemText', label: 'Menu Item Text', type: 'text',
+    field: 'menuItemText', label: 'Menu Item Text', type: 'string',
   },
   {
-    field: 'menuItemIcon', label: 'Menu Item Icon', type: 'text', icon: <ArrowSolidRight />,
+    field: 'menuItemIcon', label: 'Menu Item Icon', type: 'string', icon: <ArrowSolidRight />,
   },
   {
     field: 'menuItemNumber', label: 'Menu Item Number', type: 'number',

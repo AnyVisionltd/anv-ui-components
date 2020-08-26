@@ -157,7 +157,8 @@ TableHeader.propTypes = {
    *  <code>field</code>        		- match to the data properties. <br />
    *  <code>content</code>      		- what to render in the header cell.<br />
    *  <code>label</code>        		- display name to render on SSF and Column Management. <br />
-   *  <code>type</code>         		- column type, use by SSF sort etc... <br />
+   *  <code>type</code>         		- column type, use by SSF sort etc...
+   *  									  <i style="background-color:#ffc40026;">NOTE: selfControlled free type SSF only work for string/number</i> <br />
    *  <code>columnRender</code> 		- custom column render. <code>(cellData, rowData) => {}</code>. <br />
    *  <code>columnRenderHover</code> 	- custom column render on hover. <code>(cellData, rowData) => {}</code>.<br />
    *  <code>sortable</code>  			- set column is sortable. <br />
