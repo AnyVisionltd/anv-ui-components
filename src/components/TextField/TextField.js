@@ -219,7 +219,7 @@ TextField.propTypes = {
   /** Callback when focus. */
   onFocus: propTypes.func,
   /** autoFocus on input. */
-  autoFocus: propTypes.func,
+  autoFocus: propTypes.bool,
   /** Array of items if type is options. */
   items: propTypes.arrayOf(propTypes.shape({ value: propTypes.string, label: propTypes.oneOfType([propTypes.string, propTypes.number]) })),
   /** Callback to render items of type options */
