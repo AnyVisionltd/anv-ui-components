@@ -5,5 +5,5 @@ export const formatDate = date => {
 }
 
 export const formatDateTime = date => {
-  return `${moment(date).format('L')} ${moment(date).format('HH:MM')}`
+  return `${moment(date).format('L')} ${moment(date).format('HH:mm')}`
 }
