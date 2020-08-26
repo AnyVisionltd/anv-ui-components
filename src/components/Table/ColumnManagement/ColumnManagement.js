@@ -30,12 +30,12 @@ const ColumnManagement = ({ onChange }) => {
   }
 
   const handleCheckboxChange = field => {
-    let hasVisibleColumn = 0
+    let hasVisibleColumn = false
     const newColumns = columns.map(({ ...column }) => {
       if(column.field === field) {
         column.hide = !column.hide
       }
-      if(!column.hide) {
+      if(!column.hide && column.manageable !== false) {
         hasVisibleColumn = true
       }
       return column
