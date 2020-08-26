@@ -63,7 +63,7 @@ const TextField = React.forwardRef((props, ref) => {
   }, [autoFocus])
 
   useEffect(() => {
-    if(otherProps.value!== undefined && otherProps.value !== value) {
+    if(otherProps.value !== undefined && otherProps.value !== value) {
       setValue(otherProps.value)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
