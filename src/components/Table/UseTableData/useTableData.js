@@ -21,7 +21,6 @@ const useTableData = () => {
           return row[field].toString().toLowerCase().includes(value.toString().toLowerCase())
         } else {
           return Object.entries(row).some(([cellField, cellValue]) => {
-            // free type filter work just for filterable and string/number columns
             if(columnsMap[cellField] && columnsMap[cellField].filterable !== false &&
               (columnsMap[cellField].type === types.NUMBER || columnsMap[cellField].type === types.STRING)) {
               return cellValue && cellValue.toString().toLowerCase().includes(value.toString().toLowerCase())
