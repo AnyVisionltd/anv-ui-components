@@ -25,6 +25,7 @@ const InputBase = React.forwardRef((props, ref) => {
     multiline,
     leadingIcon,
     trailingComponent,
+    leadingIconClassName,
     ...otherProps
   } = props
   const [inputType, setInputType] = useState(type)
@@ -73,7 +74,7 @@ const InputBase = React.forwardRef((props, ref) => {
 
   return (
     <div className={ inputClasses }>
-      { leadingIcon && <span className={ styles.leadingIcon }>{ leadingIcon }</span> }
+      { leadingIcon && <span className={ classNames(styles.leadingIcon, leadingIconClassName) }>{ leadingIcon }</span> }
       <Input
         ref={ inputRef }
         disabled={ disabled }
@@ -105,6 +106,8 @@ InputBase.propTypes = {
   readOnly: propTypes.bool,
   /** For css customization. */
   className: propTypes.string,
+  /** For icon css customization. */
+  leadingIconClassName: propTypes.string,
   /** Icon before the children. */
   leadingIcon: propTypes.element,
   /** Icon after the children. */

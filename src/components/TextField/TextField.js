@@ -35,7 +35,7 @@ const TextField = React.forwardRef((props, ref) => {
 
   const [value, setValue] = useState(inputProps.value || defaultValue)
   const [active, setActive] = useState(false)
-  const textFieldRef = ref || useRef({})
+  const textFieldRef = useRef(ref)
   const inputRef = useRef({})
 
   const [anchorElement, setAnchorElement] = useState(null)
@@ -52,8 +52,8 @@ const TextField = React.forwardRef((props, ref) => {
   }, textFieldRef)
 
   useEffect(() => {
-    setValue(inputProps.value || defaultValue)
-  }, [])
+    setValue(defaultValue)
+  }, [defaultValue])
 
   const { id, leadingIcon, onChange, readOnly, multiline } = inputProps
 
@@ -84,11 +84,11 @@ const TextField = React.forwardRef((props, ref) => {
   const renderMenu = () => {
     return (
       <Menu
-        aria-labelledby={'menu-element'}
-        anchorElement={anchorElement}
-        isOpen={!!anchorElement}
-        onClose={handleMenuClose}
-        className={classNames(styles.textFieldMenu, menuClassName)}
+        aria-labelledby={ 'menu-element' }
+        anchorElement={ anchorElement }
+        isOpen={ !!anchorElement }
+        onClose={ handleMenuClose }
+        className={ classNames(styles.textFieldMenu, menuClassName) }
       >
         {
           items.map(item => {
@@ -96,8 +96,8 @@ const TextField = React.forwardRef((props, ref) => {
               ?
               renderItem(item)
               :
-              (<Menu.Item key={item.value} onClick={onMenuItemClick}>
-                {item.label}
+              (<Menu.Item key={ item.value } onClick={ onMenuItemClick }>
+                { item.label }
               </Menu.Item>)
           })
         }
@@ -123,24 +123,24 @@ const TextField = React.forwardRef((props, ref) => {
   )
 
   return (
-    <div className={styles.container}>
-      <div ref={textFieldRef} onClick={handleClick} className={classes}>
-        <label htmlFor={inputId} className={classNames(styles.label, { [styles.left]: !!leadingIcon })}>{placeholder}</label>
+    <div className={ styles.container }>
+      <div ref={ textFieldRef } onClick={ handleClick } className={ classes }>
+        <label htmlFor={ inputId } className={ classNames(styles.label, { [styles.left]: !!leadingIcon }) }>{ placeholder }</label>
         <InputBase
-          {...inputProps}
-          disabled={disabled}
-          className={classNames(styles.inputBase, { [styles.bottom]: !!placeholder })}
-          id={inputId}
-          value={value}
-          onChange={onInputChange}
-          leadingIconClassName={classNames(styles.leadingIcon)}
-          readOnly={readOnly || type === types.options}
-          trailingComponent={generateTrailingIcon()}
-          ref={inputRef}
+          { ...inputProps }
+          disabled={ disabled }
+          className={ classNames(styles.inputBase, { [styles.bottom]: !!placeholder }) }
+          id={ inputId }
+          value={ value }
+          onChange={ onInputChange }
+          leadingIconClassName={ classNames(styles.leadingIcon) }
+          readOnly={ readOnly || type === types.options }
+          trailingComponent={ generateTrailingIcon() }
+          ref={ inputRef }
         />
       </div>
-      {type === types.options && renderMenu()}
-      {message && <span className={classNames(styles.message, { [styles.error]: error })}>{message}</span>}
+      { type === types.options && renderMenu() }
+      { message && <span className={ classNames(styles.message, { [styles.error]: error }) }>{ message }</span> }
     </div>
   )
 })
@@ -173,7 +173,7 @@ TextField.propTypes = {
   readOnly: propTypes.bool,
   /** For css customization. */
   className: propTypes.string, 
-   /** For css customization. */
+  /** For css customization. */
   menuClassName: propTypes.string,
   /** For icon css customization. */
   leadingIconClassName: propTypes.string,

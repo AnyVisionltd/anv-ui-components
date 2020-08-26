@@ -6,13 +6,13 @@ import TextField from './TextField'
 describe('<TextField />', () => {
 
   it('should render leadingIcon', () => {
-    const { container } = render(<TextField leadingIcon={<SvgIcon />} />)
+    const { container } = render(<TextField leadingIcon={ <SvgIcon /> } />)
     const node = container.querySelector('svg')
     expect(node).toBeTruthy()
   })
 
   it('should render trailingComponent', () => {
-    const { container } = render(<TextField trailingComponent={<SvgIcon />} />)
+    const { container } = render(<TextField trailingComponent={ <SvgIcon /> } />)
     const node = container.querySelector('svg')
     expect(node).toBeTruthy()
   })
@@ -32,13 +32,13 @@ describe('<TextField />', () => {
   })
 
   it('should have message', () => {
-    const { getByText } = render(<TextField message={'message'} />)
+    const { getByText } = render(<TextField message={ 'message' } />)
     const node = getByText('message')
     expect(node).toBeTruthy()
   })
 
   it('should have placeholder', () => {
-    const { getByText } = render(<TextField placeholder={'my placeholder'} />)
+    const { getByText } = render(<TextField placeholder={ 'my placeholder' } />)
     const node = getByText('my placeholder')
     expect(node).toBeTruthy()
   })
@@ -46,7 +46,7 @@ describe('<TextField />', () => {
   it('should call onClick', () => {
     const handleClick = jest.fn()
     const { getByRole } = render(
-      <TextField onClick={handleClick} />,
+      <TextField onClick={ handleClick } />,
     )
     const node = getByRole('textbox')
     fireEvent.click(node)
@@ -56,7 +56,7 @@ describe('<TextField />', () => {
   it('should call onChange', () => {
     const handleOnChange = jest.fn()
     const { getByRole } = render(
-      <TextField onChange={handleOnChange} />,
+      <TextField onChange={ handleOnChange } />,
     )
     const input = getByRole('textbox')
     fireEvent.change(input, { target: { value: 'I love dogs' } })

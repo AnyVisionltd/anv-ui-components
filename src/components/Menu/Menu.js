@@ -38,7 +38,7 @@ const Menu = ({
   )
 
   useClickOutsideListener(event => {
-    if (!isOpen || event.target === anchorElement) {
+    if (!isOpen || (anchorElement && anchorElement.contains(event.target))) {
       return
     }
     onClose(event)
