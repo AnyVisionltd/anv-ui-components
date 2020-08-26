@@ -1,0 +1,225 @@
+@import "~@anyvision/style-guide";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+
+  .TextField {
+    cursor: default;
+    outline: none;
+    position: relative;
+    text-decoration: none;
+    border-radius: av-radius(tidy);
+    padding: 0 av-space();
+    display: flex;
+    flex-direction: column;
+    height: av-size(sz-56);
+    width: av-size(sz-240);
+    box-sizing: border-box;
+
+    &.multiline {
+      height: unset;
+    }
+
+    &.dense {
+      height: av-size(sz-40);
+
+      &:focus-within, &.notEmpty {
+          
+          label {
+            display: none;
+          }
+      }
+    }
+
+    &.basic {
+      
+      .bottom {
+
+        input, textarea {
+          margin-top: av-space(base);
+        }
+      }
+    }
+
+    &.readOnly {
+
+      input, .label {
+        cursor: default;
+      }
+    }
+
+    &:focus-within, &.notEmpty {
+
+      label {
+        top: av-space(micro);
+        font-size: av-font-size(tiny);
+        transform: translateY(0);
+      }
+    }
+
+    &.disabled {
+      cursor: default;
+
+      .label {
+        color: av-color(content, av-opacity(disabled));
+      }
+    }
+
+    &.active {
+
+      &.fill {
+        border-bottom: solid 2px av-color(primary);
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+        fill: av-color(primary);
+
+        .label {
+          color: av-color(primary);
+        }
+
+        .leadingIcon {
+          fill: av-color(primary);
+        }
+
+        &.options {
+          fill: av-color(content);
+        }
+      }
+
+      &.outline {
+        border: solid 2px av-color(primary);
+        fill: av-color(primary);
+
+        .label {
+          color: av-color(primary);
+        }
+
+        .leadingIcon {
+          fill: av-color(primary);
+        }
+
+        &.options {
+          fill: av-color(content);
+          border: solid 2px av-color(primary);
+        }
+      }
+    }
+  }
+
+  .fill {
+    color: av-color(purewhite);
+    background-color: av-color(content, av-opacity(ghost));
+    border-bottom: solid 2px av-color(content, av-opacity(divider));
+    fill: av-color(content);
+
+    &:hover:not(.active):not(.error)  {
+      border-bottom: solid 2px av-color(content, av-opacity(disabled));
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    &.error {
+      border: none;
+      border-bottom: solid 2px av-color(error);
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+      fill: av-color(error);
+
+      &:focus-within {
+        border: none;
+        border-bottom: solid 2px av-color(error);
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      .label {
+        color: av-color(error);
+      }
+
+      .leadingIcon {
+        fill: av-color(error);
+      }
+    }
+  }
+
+  .outline {
+    background: center;
+    color: av-color(primary);
+    border: solid 2px av-color(content, av-opacity(divider));
+    fill: av-color(content);
+
+    &:hover:not(.active):not(.error) {
+      border: solid 2px av-color(content, av-opacity(disabled));
+    }
+
+    &.error {
+      border: solid 2px av-color(error);
+      fill: av-color(error);
+
+      &:focus-within {
+        border: solid 2px av-color(error);
+      }
+
+      .label {
+        color: av-color(error);
+      }
+
+      .leadingIcon {
+        fill: av-color(error);
+      }
+    }
+  }
+
+  .options {
+    cursor: pointer;
+
+    input {
+      cursor: pointer;
+    }
+  }
+
+  .label {
+    position: absolute;
+    bottom: 50%;
+    transform: translateY(50%);
+    font-size: av-font-size(base);
+    color: av-color(content, av-opacity(medium));
+    transition: 0.2s ease;
+    cursor: text;
+
+    &.left {
+      margin-left: av-space(loose);
+    }
+  }
+
+  .inputBase {
+    border: none;
+    flex: 1;
+    padding: 0;
+    width: unset;
+
+    input {
+      flex: 1;
+      height: 100%;
+      font-size: av-size(sz-16);
+      color: av-color(content);
+      padding: 0;
+    }
+  }
+
+  .message {
+    font-size: av-font-size(tiny);
+    color: av-color(content);
+    margin-top: av-space(micro);
+
+    &.error {
+      color: av-color(error)
+    }
+  }
+}
+
+.textFieldMenu {
+  width: av-size(sz-240);
+}

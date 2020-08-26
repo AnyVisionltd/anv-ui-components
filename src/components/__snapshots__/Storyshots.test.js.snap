@@ -2800,6 +2800,878 @@ exports[`Storyshots Components/Table Infinite Scroll 1`] = `
 </div>
 `;
 
+exports[`Storyshots Components/TextField Disabled 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexMultipleRows"
+    >
+      <div
+        className="container"
+      >
+        <div
+          className="TextField outline text basic disabled"
+          onClick={[Function]}
+        >
+          <label
+            className="label left"
+            htmlFor="textField-9"
+          >
+            disabled
+          </label>
+          <div
+            className="inputBase text disabled inputBase bottom"
+          >
+            <span
+              className="leadingIcon"
+            >
+              <svg />
+            </span>
+            <input
+              disabled={true}
+              id="textField-9"
+              leadingIconClassName="leadingIcon"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="container"
+      >
+        <div
+          className="TextField fill text basic disabled"
+          onClick={[Function]}
+        >
+          <label
+            className="label left"
+            htmlFor="textField-10"
+          >
+            disabled
+          </label>
+          <div
+            className="inputBase text disabled inputBase bottom"
+          >
+            <span
+              className="leadingIcon"
+            >
+              <svg />
+            </span>
+            <input
+              disabled={true}
+              id="textField-10"
+              leadingIconClassName="leadingIcon"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/TextField Play Ground 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexMultipleRows"
+    >
+      <div
+        className="container"
+      >
+        <div
+          className="TextField outline text basic notEmpty"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+            htmlFor="textField-23"
+          >
+            placeholder
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <input
+              id="textField-23"
+              leadingIconClassName="leadingIcon"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+              value="select something"
+            />
+            <svg />
+          </div>
+        </div>
+        <span
+          className="message"
+        >
+          message
+        </span>
+      </div>
+      <div
+        className="container"
+      >
+        <div
+          className="TextField fill text basic notEmpty"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+            htmlFor="textField-24"
+          >
+            placeholder
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <input
+              id="textField-24"
+              leadingIconClassName="leadingIcon"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+              value="select something"
+            />
+            <svg />
+          </div>
+        </div>
+        <span
+          className="message"
+        >
+          message
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/TextField Sizes 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexMultipleRows"
+    >
+      <div
+        className="container"
+      >
+        <div
+          className="TextField outline text basic notEmpty"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+            htmlFor="textField-3"
+          >
+            placeholder
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <input
+              id="textField-3"
+              leadingIconClassName="leadingIcon"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+              value="default value"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="container"
+      >
+        <div
+          className="TextField fill text dense notEmpty"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+            htmlFor="textField-4"
+          >
+            placeholder
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <input
+              id="textField-4"
+              leadingIconClassName="leadingIcon"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+              value="default value"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/TextField Type Options 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexMultipleRows"
+    >
+      <div
+        className="container"
+      >
+        <div
+          className="TextField outline options basic notEmpty"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+            htmlFor="textField-21"
+          />
+          <div
+            className="inputBase text inputBase"
+          >
+            <input
+              id="textField-21"
+              leadingIconClassName="leadingIcon"
+              onChange={[Function]}
+              readOnly={true}
+              type="text"
+              value="Pizza Toppings"
+            />
+            <svg />
+          </div>
+        </div>
+        <portal-for-test>
+          <div
+            className="menuContainer"
+          />
+        </portal-for-test>
+      </div>
+      <div
+        className="container"
+      >
+        <div
+          className="TextField fill options basic notEmpty"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+            htmlFor="textField-22"
+          />
+          <div
+            className="inputBase text inputBase"
+          >
+            <input
+              id="textField-22"
+              leadingIconClassName="leadingIcon"
+              onChange={[Function]}
+              readOnly={true}
+              type="text"
+              value="Pizza Toppings"
+            />
+            <svg />
+          </div>
+        </div>
+        <portal-for-test>
+          <div
+            className="menuContainer"
+          />
+        </portal-for-test>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/TextField With Default Value 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexMultipleRows"
+    >
+      <div
+        className="container"
+      >
+        <div
+          className="TextField outline text basic notEmpty"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+            htmlFor="textField-1"
+          >
+            placeholder
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <input
+              id="textField-1"
+              leadingIconClassName="leadingIcon"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+              value="default value"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="container"
+      >
+        <div
+          className="TextField fill text basic notEmpty"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+            htmlFor="textField-2"
+          >
+            placeholder
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <input
+              id="textField-2"
+              leadingIconClassName="leadingIcon"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+              value="default value"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/TextField With Error 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexMultipleRows"
+    >
+      <div
+        className="container"
+      >
+        <div
+          className="TextField outline text basic error"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+            htmlFor="textField-15"
+          >
+            This is a wrong value
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <input
+              id="textField-15"
+              leadingIconClassName="leadingIcon"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+              value=""
+            />
+            <svg />
+          </div>
+        </div>
+        <span
+          className="message error"
+        >
+          This is an error
+        </span>
+      </div>
+      <div
+        className="container"
+      >
+        <div
+          className="TextField fill text basic error"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+            htmlFor="textField-16"
+          >
+            This is a wrong value
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <input
+              id="textField-16"
+              leadingIconClassName="leadingIcon"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+              value=""
+            />
+            <svg />
+          </div>
+        </div>
+        <span
+          className="message error"
+        >
+          This is an error
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/TextField With Leading Icon 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexMultipleRows"
+    >
+      <div
+        className="container"
+      >
+        <div
+          className="TextField outline text basic"
+          onClick={[Function]}
+        >
+          <label
+            className="label left"
+            htmlFor="textField-7"
+          >
+            With leading Icon
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <span
+              className="leadingIcon"
+            >
+              <svg />
+            </span>
+            <input
+              id="textField-7"
+              leadingIconClassName="leadingIcon"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="container"
+      >
+        <div
+          className="TextField fill text basic"
+          onClick={[Function]}
+        >
+          <label
+            className="label left"
+            htmlFor="textField-8"
+          >
+            With leading Icon
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <span
+              className="leadingIcon"
+            >
+              <svg />
+            </span>
+            <input
+              id="textField-8"
+              leadingIconClassName="leadingIcon"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/TextField With Message 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexMultipleRows"
+    >
+      <div
+        className="container"
+      >
+        <div
+          className="TextField outline text basic"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+            htmlFor="textField-13"
+          >
+            placeholder
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <input
+              id="textField-13"
+              leadingIconClassName="leadingIcon"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+              value=""
+            />
+            <svg />
+          </div>
+        </div>
+        <span
+          className="message"
+        >
+          Optional helper text goes here
+        </span>
+      </div>
+      <div
+        className="container"
+      >
+        <div
+          className="TextField fill text basic"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+            htmlFor="textField-14"
+          >
+            placeholder
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <input
+              id="textField-14"
+              leadingIconClassName="leadingIcon"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+              value=""
+            />
+            <svg />
+          </div>
+        </div>
+        <span
+          className="message"
+        >
+          Optional helper text goes here
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/TextField With Multiline 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexMultipleRows"
+    >
+      <div
+        className="container"
+      >
+        <div
+          className="TextField outline text basic multiline"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+            htmlFor="textField-17"
+          >
+            This is a wrong value
+          </label>
+          <div
+            className="inputBase text multiline inputBase bottom"
+          >
+            <textarea
+              id="textField-17"
+              leadingIconClassName="leadingIcon"
+              onChange={[Function]}
+              readOnly={false}
+              rows={5}
+              value=""
+            />
+            <svg />
+          </div>
+        </div>
+      </div>
+      <div
+        className="container"
+      >
+        <div
+          className="TextField fill text basic multiline"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+            htmlFor="textField-18"
+          >
+            This is a wrong value
+          </label>
+          <div
+            className="inputBase text multiline inputBase bottom"
+          >
+            <textarea
+              id="textField-18"
+              leadingIconClassName="leadingIcon"
+              onChange={[Function]}
+              readOnly={false}
+              rows={5}
+              value=""
+            />
+            <svg />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/TextField With Read Only 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexMultipleRows"
+    >
+      <div
+        className="container"
+      >
+        <div
+          className="TextField outline text basic readOnly notEmpty"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+            htmlFor="textField-19"
+          >
+            This is read only text
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <input
+              id="textField-19"
+              leadingIconClassName="leadingIcon"
+              onChange={[Function]}
+              readOnly={true}
+              type="text"
+              value="text"
+            />
+            <svg />
+          </div>
+        </div>
+      </div>
+      <div
+        className="container"
+      >
+        <div
+          className="TextField fill text basic readOnly notEmpty"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+            htmlFor="textField-20"
+          >
+            This is read only text
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <input
+              id="textField-20"
+              leadingIconClassName="leadingIcon"
+              onChange={[Function]}
+              readOnly={true}
+              type="text"
+              value="text"
+            />
+            <svg />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/TextField With Trailing Component 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexMultipleRows"
+    >
+      <div
+        className="container"
+      >
+        <div
+          className="TextField outline text basic"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+            htmlFor="textField-11"
+          />
+          <div
+            className="inputBase text inputBase"
+          >
+            <input
+              id="textField-11"
+              leadingIconClassName="leadingIcon"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+              value=""
+            />
+            <svg />
+          </div>
+        </div>
+      </div>
+      <div
+        className="container"
+      >
+        <div
+          className="TextField fill text basic"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+            htmlFor="textField-12"
+          />
+          <div
+            className="inputBase text inputBase"
+          >
+            <input
+              id="textField-12"
+              leadingIconClassName="leadingIcon"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+              value=""
+            />
+            <svg />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/TextField With Value 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexMultipleRows"
+    >
+      <div
+        className="container"
+      >
+        <div
+          className="TextField outline text basic notEmpty"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+            htmlFor="textField-5"
+          >
+            placeholder
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <input
+              id="textField-5"
+              leadingIconClassName="leadingIcon"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+              value="I love dogs"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="container"
+      >
+        <div
+          className="TextField fill text basic notEmpty"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+            htmlFor="textField-6"
+          >
+            placeholder
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <input
+              id="textField-6"
+              leadingIconClassName="leadingIcon"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+              value="I love dogs"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Components/Tooltip Arrow Variations 1`] = `
 <div>
   <div
