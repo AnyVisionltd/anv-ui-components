@@ -1,10 +1,18 @@
 import { useMemo, useContext, useCallback } from 'react'
 import { numberSort, stringSort } from '../../../utils/sort'
+import { types } from '../../../utils/enums'
 import TableContext from '../TableContext'
 
 const useTableData = () => {
   const { state } = useContext(TableContext)
-  const { data, selfControlled, filters, sort } = state
+  const { data, selfControlled, filters, sort, columns } = state
+
+  const columnsMap = useMemo(() => (
+    columns.reduce((acc, column) => {
+      acc[column.field] = column
+      return acc
+    }, {})
+  ), [columns])
 
   const filterData = useCallback(data => {
     return data.filter(row => {
@@ -12,11 +20,18 @@ const useTableData = () => {
         if(field) {
           return row[field].toString().toLowerCase().includes(value.toString().toLowerCase())
         } else {
-          return Object.values(row).some(cellValue => cellValue && cellValue.toString().toLowerCase().includes(value.toString().toLowerCase()))
+          return Object.entries(row).some(([cellField, cellValue]) => {
+            // free type filter work just for filterable and string/number columns
+            if(columnsMap[cellField] && columnsMap[cellField].filterable !== false &&
+              (columnsMap[cellField].type === types.NUMBER || columnsMap[cellField].type === types.STRING)) {
+              return cellValue && cellValue.toString().toLowerCase().includes(value.toString().toLowerCase())
+            }
+            return false
+          })
         }
       })
     })
-  }, [filters])
+  }, [filters, columnsMap])
 
   const sortData = useCallback(data => {
     if(!sort.sortBy.field) {

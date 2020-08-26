@@ -23,6 +23,7 @@ export const Basic = () => {
   const columns = useMemo(() => [
     {
       field: 'firstname',
+      type: 'string',
       content: 'First Name',
       width: '200px',
       sortable: false,
@@ -30,6 +31,7 @@ export const Basic = () => {
     },
     {
       field: 'location',
+      type: 'string',
       content: 'Location',
       columnRender: data => <Chip label={ data }/>,
     },
