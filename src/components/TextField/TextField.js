@@ -40,11 +40,6 @@ const TextField = React.forwardRef((props, ref) => {
 
   const [anchorElement, setAnchorElement] = useState(null)
 
-  const handleMenuClose = () => {
-    setAnchorElement(null)
-    setActive(false)
-  }
-
   useClickOutsideListener(() => {
     if(type !== types.options) {
       setActive(false)
@@ -68,6 +63,11 @@ const TextField = React.forwardRef((props, ref) => {
       return <ArrowSolidDown />
     }
     return error ? <ErrorCircleIcon /> : inputProps.trailingComponent
+  }
+
+  const handleMenuClose = () => {
+    setAnchorElement(null)
+    setActive(false)
   }
 
   const handleClick = e => {
