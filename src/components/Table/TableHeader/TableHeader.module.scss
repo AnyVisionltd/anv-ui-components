@@ -1,5 +1,13 @@
 @import "~@anyvision/style-guide";
 
+.results {
+  @extend %av-overline;
+  font-weight: av-font-weight(bold);
+  margin-bottom: av-space(tiny);
+  margin-left: av-space();
+  color: av-color(content, av-opacity(medium));
+}
+
 .tableHeader {
   box-sizing: border-box;
   display: flex;

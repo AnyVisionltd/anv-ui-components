@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { getCellWidth } from '../utlis'
+import languageService from '../../../services/language'
 import { orderTypes } from "../../../utils/enums/common"
 import { ReactComponent as LongArrowIcon } from '../../../assets/svg/LongArrow.svg'
 import { ReactComponent as ManageColumnIcon } from '../../../assets/svg/ManageColumn.svg'
@@ -10,6 +11,8 @@ import { Checkbox, IconButton } from '../../../index'
 import styles from './TableHeader.module.scss'
 import { useTableData } from "../UseTableData"
 
+const getTranslation = path => languageService.getTranslation(`${path}`)
+
 const TableHeader = ({
   columns,
   onHeaderCellClick,
@@ -17,7 +20,7 @@ const TableHeader = ({
   ...otherProps
 }) => {
   const { state, setSortBy, setColumns, toggleSelectAll, setColumnManagementIsOpen } = useContext(TableContext)
-  const { columns: contextColumns, sort, withRowActions, selection, columnManagement } = state
+  const { columns: contextColumns, sort, withRowActions, selection, columnManagement, totalItems } = state
   const { sortBy, sortable: contextSortable } = sort
   const { isActive: columnManagementIsActive } = columnManagement
   const tableData = useTableData()
@@ -128,15 +131,18 @@ const TableHeader = ({
   )
 
   return (
-    <div
-	  role="row"
-	  className={ classes }
-	  { ...otherProps }
-    >
-	  { renderSelection() }
-	  { contextColumns.map(renderCell) }
-	  { renderActionsPlaceholder() }
-	  { renderColumnManagement() }
+    <div>
+	  <div className={ styles.results }>{ totalItems } { getTranslation('results') }</div>
+	  <div
+        role="row"
+        className={ classes }
+        { ...otherProps }
+	  >
+        { renderSelection() }
+        { contextColumns.map(renderCell) }
+        { renderActionsPlaceholder() }
+        { renderColumnManagement() }
+	  </div>
     </div>
   )
 }

@@ -28,8 +28,8 @@ const TableBody = ({
   }, [setData, data])
 
   useEffect(() => {
-    setTotalItems(selfControlled ? data.length : totalItems)
-  }, [data, totalItems, selfControlled, setTotalItems])
+    setTotalItems(selfControlled ? tableData.length : totalItems)
+  }, [tableData, totalItems, selfControlled, setTotalItems])
 
   useEffect(() => {
     setWithRowActions(!!rowActions)
