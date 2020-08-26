@@ -2746,10 +2746,19 @@ exports[`Storyshots Components/Table Basic 1`] = `
         </div>
       </div>
     </div>
-    <div
-      className="tableHeader"
-      role="row"
-    />
+    <div>
+      <div
+        className="results"
+      >
+        0
+         
+        Results
+      </div>
+      <div
+        className="tableHeader"
+        role="row"
+      />
+    </div>
     <div
       className="tableBody"
     >
@@ -2779,10 +2788,19 @@ exports[`Storyshots Components/Table Infinite Scroll 1`] = `
       }
     }
   >
-    <div
-      className="tableHeader"
-      role="row"
-    />
+    <div>
+      <div
+        className="results"
+      >
+        0
+         
+        Results
+      </div>
+      <div
+        className="tableHeader"
+        role="row"
+      />
+    </div>
     <div
       className="tableBody"
     >
