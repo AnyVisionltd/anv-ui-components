@@ -10,7 +10,7 @@ import styles from '../../styles/storybook/index.module.scss'
 
 export default {
   title: 'Components/InputBase',
-  component: InputBase,
+  component: InputBase.type,
   decorators: [centerDecorator],
 }
 
@@ -30,15 +30,15 @@ export const withIcon = () => (
   </div>
 )
 
-export const withTrailingComponent = () => (
+export const withtrailingIcon = () => (
   <div className={ styles.flexMultipleRows }>
     <InputBase
-      trailingComponent={ <IconButton variant="ghost"><SunIcon /></IconButton> }
+      trailingIcon={ <IconButton variant="ghost"><SunIcon /></IconButton> }
       placeholder="With Last Icon"
     />
     <InputBase
       multiline
-      trailingComponent={ <IconButton variant="ghost"><SunIcon /></IconButton> }
+      trailingIcon={ <IconButton variant="ghost"><SunIcon /></IconButton> }
       placeholder="With Last Icon"
     />
   </div>

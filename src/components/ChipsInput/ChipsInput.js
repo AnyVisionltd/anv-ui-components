@@ -224,7 +224,7 @@ const ChipsInput = forwardRef(({
           onChange={ handleInputChange }
           placeholder={ chipValues.length ? `+ ${placeholder}` : placeholder }
           onFocus={ onInputFocus }
-          trailingComponent={ renderRemoveAllChipsIcon }
+          trailingIcon={ renderRemoveAllChipsIcon }
           disabled={ disabled }
           { ...otherProps }
         />
