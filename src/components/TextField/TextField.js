@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, memo } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import uuid from 'uuid'
@@ -26,21 +26,24 @@ const TextField = React.forwardRef((props, ref) => {
     onClick,
     items,
     renderItem,
-    onMenuItemClick,
     size,
     placeholder,
     menuClassName,
     id,
-    ...inputProps
+    leadingIcon, 
+    onChange, 
+    readOnly, 
+    multiline,
+    autoFocus,
+    ...otherProps
   } = props
 
-  const [value, setValue] = useState(inputProps.value || defaultValue)
+  const [value, setValue] = useState(defaultValue)
   const [active, setActive] = useState(false)
   const [inputId, setInputId] = useState(id)
+  const [anchorElement, setAnchorElement] = useState(null)
   const textFieldRef = useRef(ref)
   const inputRef = useRef({})
-
-  const [anchorElement, setAnchorElement] = useState(null)
 
   useClickOutsideListener(() => {
     if (type !== types.options) {
@@ -53,10 +56,22 @@ const TextField = React.forwardRef((props, ref) => {
   }, [defaultValue])
 
   useEffect(() => {
+    if(autoFocus) {
+      inputRef.current.focus()
+      setActive(true)
+    }
+  }, [autoFocus])
+
+  useEffect(() => {
+    if(otherProps.value!== undefined && otherProps.value !== value) {
+      setValue(otherProps.value)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [otherProps.value])
+
+  useEffect(() => {
     setInputId(id || uuid())
   }, [id])
-
-  const { leadingIcon, onChange, readOnly, multiline } = inputProps
 
   const onInputChange = e => {
     const { target: { value } } = e
@@ -64,11 +79,11 @@ const TextField = React.forwardRef((props, ref) => {
     onChange(e)
   }
 
-  const generateTrailingIcon = () => {
+  const renderTrailingIcon = () => {
     if (type === types.options) {
       return <ArrowSolidDown />
     }
-    return error ? <ErrorCircleIcon /> : inputProps.trailingComponent
+    return error ? <ErrorCircleIcon /> : otherProps.trailingIcon
   }
 
   const handleMenuClose = () => {
@@ -82,12 +97,14 @@ const TextField = React.forwardRef((props, ref) => {
       setActive(true)
     }
     setAnchorElement(anchorElement ? null : textFieldRef.current)
-    onClick(e)
+    if(!disabled) {
+      onClick(e)
+    }
   }
 
   const onItemClick = item => {
     setValue(item.label)
-    onMenuItemClick(item)
+    onChange(item)
     handleMenuClose()
   }
 
@@ -103,7 +120,9 @@ const TextField = React.forwardRef((props, ref) => {
         {
           items.map(item => renderItem
             ?
-            renderItem(item)
+            <div key={ item.value } onClick={ () => handleMenuClose() }>
+              { renderItem(item) }
+            </div>
             :
             (<Menu.Item key={ item.value } onClick={ () => onItemClick(item) }>
               { item.label }
@@ -136,7 +155,7 @@ const TextField = React.forwardRef((props, ref) => {
       <div ref={ textFieldRef } onClick={ handleClick } className={ classes }>
         <label htmlFor={ inputId } className={ classNames(styles.label, { [styles.left]: !!leadingIcon }) }>{ placeholder }</label>
         <InputBase
-          { ...inputProps }
+          { ...otherProps }
           disabled={ disabled }
           className={ classNames(styles.inputBase, { [styles.bottom]: !!placeholder }) }
           id={ inputId }
@@ -144,8 +163,11 @@ const TextField = React.forwardRef((props, ref) => {
           onChange={ onInputChange }
           leadingIconClassName={ classNames(styles.leadingIcon) }
           readOnly={ readOnly || type === types.options }
-          trailingComponent={ generateTrailingIcon() }
+          trailingIcon={ renderTrailingIcon() }
           ref={ inputRef }
+          leadingIcon={ leadingIcon }
+          multiline={ multiline }
+          type={ type }
         />
       </div>
       { type === types.options && renderMenu() }
@@ -158,10 +180,9 @@ TextField.defaultProps = {
   type: 'text',
   variant: 'outline',
   defaultValue: '',
-  size: 'basic',
+  size: 'medium',
   onClick: () => { },
   onChange: () => { },
-  onMenuItemClick: () => { },
   items: [],
 }
 
@@ -174,7 +195,7 @@ TextField.propTypes = {
   /** Number of rows to display when multiline option is set to true. */
   rows: propTypes.oneOfType([propTypes.string, propTypes.number]),
   /** size (height )of the textField */
-  size: propTypes.oneOf(['basic', 'dense']),
+  size: propTypes.oneOf(['small', 'medium']),
   /** If true, the input will be disabled. */
   disabled: propTypes.bool,
   /** Will change the input to text field */
@@ -190,19 +211,19 @@ TextField.propTypes = {
   /** Icon before the children. */
   leadingIcon: propTypes.element,
   /** Icon after the children. */
-  trailingComponent: propTypes.element,
+  trailingIcon: propTypes.element,
   /** Callback when text change. */
   onChange: propTypes.func,
   /** Callback when click. */
   onClick: propTypes.func,
   /** Callback when focus. */
   onFocus: propTypes.func,
+  /** autoFocus on input. */
+  autoFocus: propTypes.func,
   /** Array of items if type is options. */
   items: propTypes.arrayOf(propTypes.shape({ value: propTypes.string, label: propTypes.oneOfType([propTypes.string, propTypes.number]) })),
   /** Callback to render items of type options */
   renderItem: propTypes.func,
-  /** Callback to handle item of type options click  */
-  onMenuItemClick: propTypes.func,
 }
 
 export default memo(TextField)

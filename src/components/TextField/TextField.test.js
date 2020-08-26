@@ -11,8 +11,8 @@ describe('<TextField />', () => {
     expect(node).toBeTruthy()
   })
 
-  it('should render trailingComponent', () => {
-    const { container } = render(<TextField trailingComponent={ <SvgIcon /> } />)
+  it('should render trailingIcon', () => {
+    const { container } = render(<TextField trailingIcon={ <SvgIcon /> } />)
     const node = container.querySelector('svg')
     expect(node).toBeTruthy()
   })
@@ -62,5 +62,20 @@ describe('<TextField />', () => {
     fireEvent.change(input, { target: { value: 'I love dogs' } })
     expect(handleOnChange).toBeCalled()
     expect(input.value).toBe('I love dogs')
+  })
+
+  describe('type options', () => {
+    const items = [{ value: 'Olives', label: 'Olives' }, { value: 'Tomatoes', label: 'Tomatoes' }]
+   
+    it('should call onMenuItemClick', () => {
+      const handleClick = jest.fn()
+      const { getByDisplayValue, getByText } = render(<TextField defaultValue={ 'Tomatoes' } onChange={ handleClick } items={ items } type={ 'options' }/>)
+      const input = getByDisplayValue('Tomatoes')
+      fireEvent.click(input)
+      const node = getByText('Olives')
+      expect(node).toBeTruthy()
+      fireEvent.click(node)
+      expect(handleClick).toBeCalled()
+    })
   })
 })

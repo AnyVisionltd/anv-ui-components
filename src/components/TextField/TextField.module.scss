@@ -22,7 +22,7 @@
       height: unset;
     }
 
-    &.dense {
+    &.small {
       height: av-size(sz-40);
 
       &:focus-within, &.notEmpty {
@@ -33,7 +33,7 @@
       }
     }
 
-    &.basic {
+    &.medium {
       
       .bottom {
 
@@ -114,7 +114,7 @@
     border-bottom: solid 2px av-color(content, av-opacity(divider));
     fill: av-color(content);
 
-    &:hover:not(.active):not(.error)  {
+    &:hover:not(.active):not(.error):not(.disabled)  {
       border-bottom: solid 2px av-color(content, av-opacity(disabled));
       border-bottom-right-radius: 0;
       border-bottom-left-radius: 0;
@@ -150,7 +150,7 @@
     border: solid 2px av-color(content, av-opacity(divider));
     fill: av-color(content);
 
-    &:hover:not(.active):not(.error) {
+    &:hover:not(.active):not(.error):not(.disabled)  {
       border: solid 2px av-color(content, av-opacity(disabled));
     }
 
@@ -206,6 +206,18 @@
       font-size: av-size(sz-16);
       color: av-color(content);
       padding: 0;
+      background-color: transparent;
+      
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover,
+      &:-webkit-autofill:focus,
+      &:-webkit-autofill:active {
+        transition: background-color 5000s ease-in-out 0s;
+      }
+    }
+
+    textarea {
+      @extend %av-scrollbar;
     }
   }
 

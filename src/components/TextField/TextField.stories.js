@@ -1,15 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { action } from '@storybook/addon-actions'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import styles from '../../styles/storybook/index.module.scss'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
 import TextField from './TextField'
 import { boolean, select } from '@storybook/addon-knobs'
+import { Menu } from '../Menu'
 
 export default {
   title: 'Components/TextField',
-  component: TextField,
-  decorators: [centerDecorator]
+  component: TextField.type,
+  decorators: [centerDecorator],
 }
 
 export const withDefaultValue = () =>
@@ -43,7 +44,7 @@ export const sizes = () =>
       defaultValue={ 'default value' }
       variant={ 'fill' }
       id={ 'textField-4' }
-      size={ 'dense' }
+      size={ 'small' }
     />
   </div>
 
@@ -72,6 +73,7 @@ export const disabled = () => (
       placeholder={ 'disabled' }
       disabled
       id={ 'textField-9' }
+      onClick={ action('click') }
     />
     <TextField
       leadingIcon={ <SunIcon /> }
@@ -79,19 +81,20 @@ export const disabled = () => (
       disabled
       variant={ 'fill' }
       id={ 'textField-10' }
+      onClick={ action('click') }
     />
   </div>
 )
 
-export const withTrailingComponent = () => (
+export const withTrailingIcon = () => (
   <div className={ styles.flexMultipleRows }>
     <TextField
-      trailingComponent={ <SunIcon /> }
+      trailingIcon={ <SunIcon /> }
       onChange={ action('Typing') }
       id={ 'textField-11' }
     />
     <TextField
-      trailingComponent={ <SunIcon /> }
+      trailingIcon={ <SunIcon /> }
       onChange={ action('Typing') }
       variant={ 'fill' }
       id={ 'textField-12' }
@@ -102,14 +105,14 @@ export const withTrailingComponent = () => (
 export const withMessage = () => (
   <div className={ styles.flexMultipleRows }>
     <TextField
-      trailingComponent={ <SunIcon /> }
+      trailingIcon={ <SunIcon /> }
       placeholder={ 'placeholder' }
       onChange={ action('Typing') }
       message={ 'Optional helper text goes here' }
       id={ 'textField-13' }
     />
     <TextField
-      trailingComponent={ <SunIcon /> }
+      trailingIcon={ <SunIcon /> }
       placeholder={ 'placeholder' }
       onChange={ action('Typing') }
       message={ 'Optional helper text goes here' }
@@ -122,7 +125,7 @@ export const withMessage = () => (
 export const withError = () => (
   <div className={ styles.flexMultipleRows }>
     <TextField
-      trailingComponent={ <SunIcon /> }
+      trailingIcon={ <SunIcon /> }
       placeholder={ 'This is a wrong value' }
       onChange={ action('Typing') }
       message={ 'This is an error' }
@@ -130,7 +133,7 @@ export const withError = () => (
       id={ 'textField-15' }
     />
     <TextField
-      trailingComponent={ <SunIcon /> }
+      trailingIcon={ <SunIcon /> }
       placeholder={ 'This is a wrong value' }
       onChange={ action('Typing') }
       message={ 'This is an error' }
@@ -144,16 +147,14 @@ export const withError = () => (
 export const withMultiline = () => (
   <div className={ styles.flexMultipleRows }>
     <TextField
-      trailingComponent={ <SunIcon /> }
-      placeholder={ 'This is a wrong value' }
+      placeholder={ 'placeholder' }
       onChange={ action('Typing') }
       id={ 'textField-17' }
       multiline
       rows={ 5 }
     />
     <TextField
-      trailingComponent={ <SunIcon /> }
-      placeholder={ 'This is a wrong value' }
+      placeholder={ 'placeholder' }
       onChange={ action('Typing') }
       multiline
       rows={ 5 }
@@ -166,19 +167,19 @@ export const withMultiline = () => (
 export const withReadOnly = () => (
   <div className={ styles.flexMultipleRows }>
     <TextField
-      trailingComponent={ <SunIcon /> }
+      trailingIcon={ <SunIcon /> }
       placeholder={ 'This is read only text' }
       onChange={ action('Typing') }
-      value={ 'text' }
+      defaultValue={ 'text' }
       readOnly
       id={ 'textField-19' }
     />
     <TextField
-      trailingComponent={ <SunIcon /> }
+      trailingIcon={ <SunIcon /> }
       placeholder={ 'This is read only text' }
       onChange={ action('Typing') }
       readOnly
-      value={ 'text' }
+      defaultValue={ 'text' }
       variant={ 'fill' }
       id={ 'textField-20' }
     />
@@ -190,47 +191,97 @@ export const typeOptions = () => {
   return (
     <div className={ styles.flexMultipleRows }>
       <TextField
-        trailingComponent={ <SunIcon /> }
+        trailingIcon={ <SunIcon /> }
         type={ 'options' }
         onClick={ action('click') }
-        defaultValue={ 'Pizza Toppings' }
+        onChange={ action('change') }
+        defaultValue={ 'Olives' }
         id={ 'textField-21' }
         items={ items }
       />
       <TextField
-        trailingComponent={ <SunIcon /> }
+        trailingIcon={ <SunIcon /> }
         type={ 'options' }
         variant={ 'fill' }
         onClick={ action('click') }
-        defaultValue={ 'Pizza Toppings' }
+        onChange={ action('change') }
+        defaultValue={ 'Olives' }
         id={ 'textField-22' }
         items={ items }
       />
     </div>
   )
 }
-export const playGround = () => {
-  const items = [{ value: 'Olives', label: 'Olives' }, { value: 'Tomatoes', label: 'Tomatoes' }]
 
+export const WithValue = () => {
+  const [value, setValue] = useState('')
   return (
     <div className={ styles.flexMultipleRows }>
       <TextField
-        trailingComponent={ <SunIcon /> }
+        trailingIcon={ <SunIcon /> }
+        onChange={ ({ target : { value: text } }) => setValue(text) }
+        defaultValue={ 'Olives' }
+        value={ value }
+        id={ 'textField-23' }
+      />
+    </div>
+  )
+}
+
+export const typePassword = () => (
+  <div className={ styles.flexMultipleRows }>
+    <TextField
+      defaultValue={ 'secret' }
+      type={ 'password' }
+      id={ 'textField-24' }
+    />
+  </div>
+)
+
+export const WithRenderItem = () => {
+  const items = [{ value: 'Olives', label: 'Olives' }, { value: 'Tomatoes', label: 'Tomatoes' }]
+  const [value, setValue] = useState({})
+  const onClick = item => {
+    setValue(item)
+  }
+  return (
+    <div className={ styles.flexMultipleRows }>
+      <TextField
+        trailingIcon={ <SunIcon /> }
+        onChange={ item => setValue(item) }
+        defaultValue={ 'Olives' }
+        value={ value.label }
+        id={ 'textField-25' }
+        items={ items }
+        renderItem={ item => <Menu.Item onClick={ () => onClick(item) } key={ item.value }>{ item.label }</Menu.Item> }
+        type={ 'options' }
+      />
+    </div>
+  )
+}
+
+export const playGround = () => {
+  const items = [{ value: 'Olives', label: 'Olives' }, { value: 'Tomatoes', label: 'Tomatoes' }]
+  return (
+    <div className={ styles.flexMultipleRows }>
+      <TextField
+        trailingIcon={ <SunIcon /> }
         type={ select('type', ['text', 'options'], 'text') }
-        size={ select('size', ['basic', 'dense'], 'basic') }
+        size={ select('size', ['medium', 'small'], 'medium') }
         placeholder={ select('placeholder', ['placeholder', ''], 'placeholder') }
         message={ select('message', ['message', ''], 'message') }
         onClick={ action('click') }
         readOnly={ boolean('readOnly', false) }
         error={ boolean('error', false) }
         value={ 'select something' }
-        id={ 'textField-23' }
+        id={ 'textField-26' }
         items={ items }
+        autoFocus={ boolean('autoFocus', false) }
       />
       <TextField
-        trailingComponent={ <SunIcon /> }
+        trailingIcon={ <SunIcon /> }
         type={ select('type', ['text', 'options'], 'text') }
-        size={ select('size', ['basic', 'dense'], 'basic') }
+        size={ select('size', ['medium', 'small'], 'medium') }
         placeholder={ select('placeholder', ['placeholder', ''], 'placeholder') }
         message={ select('message', ['message', ''], 'message') }
         variant={ 'fill' }
@@ -238,8 +289,9 @@ export const playGround = () => {
         readOnly={ boolean('readOnly', false) }
         error={ boolean('error', false) }
         value={ 'select something' }
-        id={ 'textField-24' }
+        id={ 'textField-27' }
         items={ items }
+        autoFocus={ boolean('autoFocus', false) }
       />
     </div>
   )

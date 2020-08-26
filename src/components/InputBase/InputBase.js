@@ -24,7 +24,7 @@ const InputBase = React.forwardRef((props, ref) => {
     className,
     multiline,
     leadingIcon,
-    trailingComponent,
+    trailingIcon,
     leadingIconClassName,
     ...otherProps
   } = props
@@ -53,11 +53,11 @@ const InputBase = React.forwardRef((props, ref) => {
   }
 
   const renderTrailingIcon = () => {
-    if (!trailingComponent && type !== inputTypes.PASSWORD) {
+    if (!trailingIcon && type !== inputTypes.PASSWORD) {
       return null
     }
-    if (trailingComponent) {
-      return <>{ trailingComponent }</>
+    if (trailingIcon) {
+      return <>{ trailingIcon }</>
     }
 
     return (
@@ -79,6 +79,7 @@ const InputBase = React.forwardRef((props, ref) => {
         ref={ inputRef }
         disabled={ disabled }
         { ...elementProps }
+        type={ inputType }
       />
       { renderTrailingIcon() }
     </div>
@@ -111,7 +112,7 @@ InputBase.propTypes = {
   /** Icon before the children. */
   leadingIcon: propTypes.element,
   /** Icon after the children. */
-  trailingComponent: propTypes.element,
+  trailingIcon: propTypes.element,
   /** Event fires when a change appeared in the input element. */
   onChange: propTypes.func,
   /** @ignore */
