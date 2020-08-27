@@ -34,6 +34,7 @@ export const variants = () => (
 export const sizes = () => (
   <div className={ styles.marginFlexContainer }>
     <IconButton><SunIcon /></IconButton>
+    <IconButton size="medium"><SunIcon /></IconButton>
     <IconButton size="large"><SunIcon /></IconButton>
   </div>
 )
@@ -65,7 +66,7 @@ export const withClassName = () => (
 
 export const playGround = () => (
   <IconButton
-    size={ select('size', ['small', 'large'], 'small') }
+    size={ select('size', ['small', 'medium', 'large'], 'small') }
     variant={ select('variant', ['fill', 'outline', 'ghost'], 'fill') }
     disabled={ boolean('disabled', false) }
   >

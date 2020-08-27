@@ -39,7 +39,7 @@ IconButton.defaultProps = {
 
 IconButton.propTypes = {
   /** The size of the button. */
-  size: propTypes.oneOf(['small', 'large']),
+  size: propTypes.oneOf(['small', 'medium', 'large']),
   /** The variant of the button. */
   variant: propTypes.oneOf(['fill', 'outline', 'ghost']),
   /** If true, the button will be disabled. */

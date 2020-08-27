@@ -34,6 +34,7 @@ export const variants = () => (
 export const sizes = () => (
   <div className={ styles.marginFlexContainer }>
     <Button>Large</Button>
+    <Button size="medium">medium</Button>
     <Button size="small">small</Button>
   </div>
 )
@@ -71,7 +72,7 @@ export const withClassName = () => (
 
 export const playGround = () => (
   <Button
-    size={ select('size', ['small', 'large'], 'large') }
+    size={ select('size', ['small', 'medium', 'large'], 'large') }
     variant={ select('variant', ['fill', 'outline', 'ghost'], 'fill') }
     disabled={ boolean('disabled', false) }
   >

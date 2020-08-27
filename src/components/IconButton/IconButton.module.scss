@@ -14,13 +14,23 @@
   }
 }
 
+.medium {
+  height: av-size(sz-40);
+  width: av-size(sz-40);
+
+  svg {
+    height: av-size(sz-32);
+    width: av-size(sz-32);
+  }
+}
+
 .large {
   height: av-size(sz-48);
   width: av-size(sz-48);
 
   svg {
-    height: av-size(sz-32);
-    width: av-size(sz-32);
+    height: av-size(sz-40);
+    width: av-size(sz-40);
   }
 }
 
