@@ -30,9 +30,9 @@ const TextField = React.forwardRef((props, ref) => {
     placeholder,
     menuClassName,
     id,
-    leadingIcon, 
-    onChange, 
-    readOnly, 
+    leadingIcon,
+    onChange,
+    readOnly,
     multiline,
     autoFocus,
     ...otherProps
@@ -139,7 +139,6 @@ const TextField = React.forwardRef((props, ref) => {
     styles[variant],
     styles[type],
     styles[size],
-    className,
     {
       [styles.error]: error,
       [styles.disabled]: disabled,
@@ -151,7 +150,7 @@ const TextField = React.forwardRef((props, ref) => {
   )
 
   return (
-    <div className={ styles.container }>
+    <div className={ classNames(styles.container, className) }>
       <div ref={ textFieldRef } onClick={ handleClick } className={ classes }>
         <label htmlFor={ inputId } className={ classNames(styles.label, { [styles.left]: !!leadingIcon }) }>{ placeholder }</label>
         <InputBase
