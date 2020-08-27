@@ -5,6 +5,9 @@ addParameters({
   options: {
     showRoots: true,
     enableShortcuts: false,
+    storySort: {
+      order: ['Style', 'Components'],
+    },
   },
 })
 
