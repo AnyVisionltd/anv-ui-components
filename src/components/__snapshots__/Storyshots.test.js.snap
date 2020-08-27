@@ -22,6 +22,7 @@ exports[`Storyshots Animations/Scale Basic 1`] = `
           className="button large fill"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           start from top, left to right
         </button>
@@ -29,6 +30,7 @@ exports[`Storyshots Animations/Scale Basic 1`] = `
           className="button large fill"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           start from top, center
         </button>
@@ -36,6 +38,7 @@ exports[`Storyshots Animations/Scale Basic 1`] = `
           className="button large fill"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           start from top, right to left
         </button>
@@ -47,6 +50,7 @@ exports[`Storyshots Animations/Scale Basic 1`] = `
           className="button large fill"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           start from the middle, left to right
         </button>
@@ -54,6 +58,7 @@ exports[`Storyshots Animations/Scale Basic 1`] = `
           className="button large fill"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           pop from center
         </button>
@@ -61,6 +66,7 @@ exports[`Storyshots Animations/Scale Basic 1`] = `
           className="button large fill"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           start from middle, right to left
         </button>
@@ -72,6 +78,7 @@ exports[`Storyshots Animations/Scale Basic 1`] = `
           className="button large fill"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           start from bottom, left to right
         </button>
@@ -79,6 +86,7 @@ exports[`Storyshots Animations/Scale Basic 1`] = `
           className="button large fill"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           start from bottom, center
         </button>
@@ -86,6 +94,7 @@ exports[`Storyshots Animations/Scale Basic 1`] = `
           className="button large fill"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           start from bottom, right to left
         </button>
@@ -117,6 +126,7 @@ exports[`Storyshots Animations/Slide Basic 1`] = `
           className="button large fill"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           up
         </button>
@@ -124,6 +134,7 @@ exports[`Storyshots Animations/Slide Basic 1`] = `
           className="button large fill"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           right
         </button>
@@ -131,6 +142,7 @@ exports[`Storyshots Animations/Slide Basic 1`] = `
           className="button large fill"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           down
         </button>
@@ -138,6 +150,7 @@ exports[`Storyshots Animations/Slide Basic 1`] = `
           className="button large fill"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           left
         </button>
@@ -163,6 +176,7 @@ exports[`Storyshots Components/Button Default 1`] = `
       className="button large fill"
       disabled={false}
       onClick={[Function]}
+      type="button"
     >
       Text
     </button>
@@ -182,6 +196,7 @@ exports[`Storyshots Components/Button Disable 1`] = `
         className="button large fill"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         Enable
       </button>
@@ -189,6 +204,7 @@ exports[`Storyshots Components/Button Disable 1`] = `
         className="button large fill"
         disabled={true}
         onClick={[Function]}
+        type="button"
       >
         Disabled
       </button>
@@ -206,6 +222,7 @@ exports[`Storyshots Components/Button Play Ground 1`] = `
       className="button large fill"
       disabled={false}
       onClick={[Function]}
+      type="button"
     >
       Button Text
     </button>
@@ -225,6 +242,7 @@ exports[`Storyshots Components/Button Sizes 1`] = `
         className="button large fill"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         Large
       </button>
@@ -232,6 +250,7 @@ exports[`Storyshots Components/Button Sizes 1`] = `
         className="button medium fill"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         medium
       </button>
@@ -239,6 +258,7 @@ exports[`Storyshots Components/Button Sizes 1`] = `
         className="button small fill"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         small
       </button>
@@ -259,6 +279,7 @@ exports[`Storyshots Components/Button Variants 1`] = `
         className="button large fill"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         fill
       </button>
@@ -266,6 +287,7 @@ exports[`Storyshots Components/Button Variants 1`] = `
         className="button large outline"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         outline
       </button>
@@ -273,6 +295,7 @@ exports[`Storyshots Components/Button Variants 1`] = `
         className="button large ghost"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         ghost
       </button>
@@ -293,6 +316,7 @@ exports[`Storyshots Components/Button With Class Name 1`] = `
         className="button large fill successBackgroundColor"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         Text
       </button>
@@ -300,6 +324,7 @@ exports[`Storyshots Components/Button With Class Name 1`] = `
         className="button large outline alertColor"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         Text
       </button>
@@ -307,6 +332,7 @@ exports[`Storyshots Components/Button With Class Name 1`] = `
         className="button large ghost errorColor"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         Text
       </button>
@@ -324,6 +350,7 @@ exports[`Storyshots Components/Button With Icon 1`] = `
       className="button large fill"
       disabled={false}
       onClick={[Function]}
+      type="button"
     >
       <span
         className="leadingIcon"
@@ -812,6 +839,7 @@ exports[`Storyshots Components/ChipsInput Default 1`] = `
               className="button large ghost iconButton small ghost"
               disabled={true}
               onClick={[Function]}
+              type="button"
             >
               <svg
                 className="cancelIcon"
@@ -980,6 +1008,7 @@ exports[`Storyshots Components/ChipsInput Initial Values 1`] = `
             className="button large ghost iconButton small ghost"
             disabled={false}
             onClick={[Function]}
+            type="button"
           >
             <svg
               className="cancelIcon"
@@ -1071,6 +1100,7 @@ exports[`Storyshots Components/Dialog Basic 1`] = `
         className="button large fill"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         Open Dialog
       </button>
@@ -1089,6 +1119,7 @@ exports[`Storyshots Components/IconButton Default 1`] = `
       className="button large fill iconButton small fill"
       disabled={false}
       onClick={[Function]}
+      type="button"
     >
       <svg />
     </button>
@@ -1108,6 +1139,7 @@ exports[`Storyshots Components/IconButton Disable 1`] = `
         className="button large fill iconButton small fill"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         <svg />
       </button>
@@ -1115,6 +1147,7 @@ exports[`Storyshots Components/IconButton Disable 1`] = `
         className="button large fill iconButton small fill"
         disabled={true}
         onClick={[Function]}
+        type="button"
       >
         <svg />
       </button>
@@ -1132,6 +1165,7 @@ exports[`Storyshots Components/IconButton Play Ground 1`] = `
       className="button large fill iconButton small fill"
       disabled={false}
       onClick={[Function]}
+      type="button"
     >
       <svg />
     </button>
@@ -1151,6 +1185,7 @@ exports[`Storyshots Components/IconButton Sizes 1`] = `
         className="button large fill iconButton small fill"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         <svg />
       </button>
@@ -1158,6 +1193,7 @@ exports[`Storyshots Components/IconButton Sizes 1`] = `
         className="button large fill iconButton medium fill"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         <svg />
       </button>
@@ -1165,6 +1201,7 @@ exports[`Storyshots Components/IconButton Sizes 1`] = `
         className="button large fill iconButton large fill"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         <svg />
       </button>
@@ -1185,6 +1222,7 @@ exports[`Storyshots Components/IconButton Variants 1`] = `
         className="button large fill iconButton small fill"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         <svg />
       </button>
@@ -1192,6 +1230,7 @@ exports[`Storyshots Components/IconButton Variants 1`] = `
         className="button large outline iconButton small outline"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         <svg />
       </button>
@@ -1199,6 +1238,7 @@ exports[`Storyshots Components/IconButton Variants 1`] = `
         className="button large ghost iconButton small ghost"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         <svg />
       </button>
@@ -1219,6 +1259,7 @@ exports[`Storyshots Components/IconButton With Class Name 1`] = `
         className="button large fill iconButton small fill successBackgroundColor"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         <svg />
       </button>
@@ -1226,6 +1267,7 @@ exports[`Storyshots Components/IconButton With Class Name 1`] = `
         className="button large outline iconButton small outline alertColor"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         <svg />
       </button>
@@ -1233,6 +1275,7 @@ exports[`Storyshots Components/IconButton With Class Name 1`] = `
         className="button large ghost iconButton small ghost errorColor"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         <svg />
       </button>
@@ -1371,6 +1414,7 @@ exports[`Storyshots Components/InputBase States 1`] = `
           className="button large ghost iconButton small ghost trailingIcon"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <svg />
         </button>
@@ -1463,6 +1507,7 @@ exports[`Storyshots Components/InputBase Withtrailing Icon 1`] = `
           className="button large ghost iconButton small ghost"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <svg />
         </button>
@@ -1478,6 +1523,7 @@ exports[`Storyshots Components/InputBase Withtrailing Icon 1`] = `
           className="button large ghost iconButton small ghost"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <svg />
         </button>
@@ -1800,6 +1846,7 @@ exports[`Storyshots Components/List With Trailing 1`] = `
             className="button small fill"
             disabled={false}
             onClick={[Function]}
+            type="button"
           >
             Edit
           </button>
@@ -1821,6 +1868,7 @@ exports[`Storyshots Components/List With Trailing 1`] = `
             className="button small fill"
             disabled={false}
             onClick={[Function]}
+            type="button"
           >
             Edit
           </button>
@@ -1842,6 +1890,7 @@ exports[`Storyshots Components/List With Trailing 1`] = `
             className="button small fill"
             disabled={false}
             onClick={[Function]}
+            type="button"
           >
             Edit
           </button>
@@ -1863,6 +1912,7 @@ exports[`Storyshots Components/List With Trailing 1`] = `
             className="button small fill"
             disabled={false}
             onClick={[Function]}
+            type="button"
           >
             Edit
           </button>
@@ -1884,6 +1934,7 @@ exports[`Storyshots Components/List With Trailing 1`] = `
             className="button small fill"
             disabled={false}
             onClick={[Function]}
+            type="button"
           >
             Edit
           </button>
@@ -1905,6 +1956,7 @@ exports[`Storyshots Components/List With Trailing 1`] = `
             className="button small fill"
             disabled={false}
             onClick={[Function]}
+            type="button"
           >
             Edit
           </button>
@@ -1926,6 +1978,7 @@ exports[`Storyshots Components/List With Trailing 1`] = `
             className="button small fill"
             disabled={false}
             onClick={[Function]}
+            type="button"
           >
             Edit
           </button>
@@ -1950,6 +2003,7 @@ exports[`Storyshots Components/Menu Default 1`] = `
         className="button large fill"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         Pizza Toppings
       </button>
@@ -1984,6 +2038,7 @@ exports[`Storyshots Components/Menu Different Positions 1`] = `
             "top": 10,
           }
         }
+        type="button"
       >
         Top, Left
       </button>
@@ -2000,6 +2055,7 @@ exports[`Storyshots Components/Menu Different Positions 1`] = `
             "top": 10,
           }
         }
+        type="button"
       >
         Top, Right
       </button>
@@ -2016,6 +2072,7 @@ exports[`Storyshots Components/Menu Different Positions 1`] = `
             "position": "absolute",
           }
         }
+        type="button"
       >
         Bottom, Left
       </button>
@@ -2032,6 +2089,7 @@ exports[`Storyshots Components/Menu Different Positions 1`] = `
             "right": 10,
           }
         }
+        type="button"
       >
         Bottom, Right
       </button>
@@ -2064,6 +2122,7 @@ exports[`Storyshots Components/Menu Prefer Open To Direction 1`] = `
         className="button large fill"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         Open Menu
       </button>
@@ -2094,6 +2153,7 @@ exports[`Storyshots Components/Menu Variants 1`] = `
           className="button large fill"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           Regular
         </button>
@@ -2112,6 +2172,7 @@ exports[`Storyshots Components/Menu Variants 1`] = `
           className="button large fill"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           Dense
         </button>
@@ -2140,6 +2201,7 @@ exports[`Storyshots Components/Menu With Sub Menus 1`] = `
         className="button large fill"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         Open Menu
       </button>
@@ -2300,6 +2362,7 @@ exports[`Storyshots Components/SSF Default 1`] = `
           className="button large fill searchFilter"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <svg />
         </button>
@@ -2353,6 +2416,7 @@ exports[`Storyshots Components/SSF Without Menu Fields 1`] = `
           className="button large fill searchFilter"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <svg />
         </button>
@@ -2435,6 +2499,7 @@ exports[`Storyshots Components/Snackbar Action 1`] = `
       className="button large fill"
       disabled={false}
       onClick={[Function]}
+      type="button"
     >
       With Action
     </button>
@@ -2454,6 +2519,7 @@ exports[`Storyshots Components/Snackbar Close Icon 1`] = `
         className="button large fill"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         Default Icon
       </button>
@@ -2461,6 +2527,7 @@ exports[`Storyshots Components/Snackbar Close Icon 1`] = `
         className="button large fill"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         Custom Icon
       </button>
@@ -2468,6 +2535,7 @@ exports[`Storyshots Components/Snackbar Close Icon 1`] = `
         className="button large fill"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         Without Icon
       </button>
@@ -2485,6 +2553,7 @@ exports[`Storyshots Components/Snackbar Default 1`] = `
       className="button large fill"
       disabled={false}
       onClick={[Function]}
+      type="button"
     >
       Open
     </button>
@@ -2501,6 +2570,7 @@ exports[`Storyshots Components/Snackbar Leading Icon 1`] = `
       className="button large fill"
       disabled={false}
       onClick={[Function]}
+      type="button"
     >
       With Leading Icon
     </button>
@@ -2734,6 +2804,7 @@ exports[`Storyshots Components/Table Basic 1`] = `
         className="button large fill searchFilter"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         <svg />
       </button>
@@ -3179,6 +3250,7 @@ exports[`Storyshots Components/TextField Type Password 1`] = `
               className="button large ghost iconButton small ghost trailingIcon"
               disabled={false}
               onClick={[Function]}
+              type="button"
             >
               <svg />
             </button>
@@ -3984,6 +4056,7 @@ exports[`Storyshots Components/Tooltip Interactive 1`] = `
             className="button small ghost"
             disabled={false}
             onClick={[Function]}
+            type="button"
           >
             Skip
           </button>
@@ -3991,6 +4064,7 @@ exports[`Storyshots Components/Tooltip Interactive 1`] = `
             className="button small fill"
             disabled={false}
             onClick={[Function]}
+            type="button"
           >
             Next
           </button>
@@ -4222,6 +4296,7 @@ exports[`Storyshots Utils/FileUpload Basic 1`] = `
       className="button large fill"
       disabled={false}
       onClick={[Function]}
+      type="button"
     >
       Upload File
     </button>
@@ -4245,6 +4320,7 @@ exports[`Storyshots Utils/FileUpload Just Image 1`] = `
       className="button large fill"
       disabled={false}
       onClick={[Function]}
+      type="button"
     >
       Upload Images
     </button>
@@ -4268,6 +4344,7 @@ exports[`Storyshots Utils/FileUpload Multiple 1`] = `
       className="button large fill"
       disabled={false}
       onClick={[Function]}
+      type="button"
     >
       Upload Files
     </button>

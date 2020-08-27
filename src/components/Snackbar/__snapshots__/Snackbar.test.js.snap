@@ -42,6 +42,7 @@ exports[`<Snackbar /> Render Snapshots should render action 1`] = `
         action
         <button
           class="button large ghost iconButton small ghost closeIcon"
+          type="button"
         >
           <svg />
         </button>
@@ -69,6 +70,7 @@ exports[`<Snackbar /> Render Snapshots should render custom closeIcon 1`] = `
       >
         <button
           class="button large ghost iconButton small ghost closeIcon"
+          type="button"
         >
           <svg />
         </button>
@@ -101,6 +103,7 @@ exports[`<Snackbar /> Render Snapshots should render leadingIcon 1`] = `
       >
         <button
           class="button large ghost iconButton small ghost closeIcon"
+          type="button"
         >
           <svg />
         </button>
@@ -128,6 +131,7 @@ exports[`<Snackbar /> Render Snapshots should render snackbar when isOpen true 1
       >
         <button
           class="button large ghost iconButton small ghost closeIcon"
+          type="button"
         >
           <svg />
         </button>
