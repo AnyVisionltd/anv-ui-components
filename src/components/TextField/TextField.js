@@ -171,7 +171,7 @@ const TextField = React.forwardRef((props, ref) => {
         />
       </div>
       { type === types.options && renderMenu() }
-      { message && <span className={ classNames(styles.message, { [styles.error]: error }) }>{ message }</span> }
+      { <span className={ classNames(styles.message, { [styles.error]: error, [styles.invisible]: !message, }) }>{ message }</span> }
     </div>
   )
 })
