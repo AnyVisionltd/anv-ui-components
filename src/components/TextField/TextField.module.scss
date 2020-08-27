@@ -225,9 +225,14 @@
     font-size: av-font-size(tiny);
     color: av-color(content);
     margin-top: av-space(micro);
+    height: av-size(sz-16);
 
     &.error {
       color: av-color(error)
+    }
+
+    &.invisible {
+      visibility: hidden;
     }
   }
 }

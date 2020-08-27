@@ -2946,6 +2946,9 @@ exports[`Storyshots Components/TextField Disabled 1`] = `
             />
           </div>
         </div>
+        <span
+          className="message invisible"
+        />
       </div>
       <div
         className="container"
@@ -2978,6 +2981,9 @@ exports[`Storyshots Components/TextField Disabled 1`] = `
             />
           </div>
         </div>
+        <span
+          className="message invisible"
+        />
       </div>
     </div>
   </div>
@@ -3094,6 +3100,9 @@ exports[`Storyshots Components/TextField Sizes 1`] = `
             />
           </div>
         </div>
+        <span
+          className="message invisible"
+        />
       </div>
       <div
         className="container"
@@ -3120,6 +3129,9 @@ exports[`Storyshots Components/TextField Sizes 1`] = `
             />
           </div>
         </div>
+        <span
+          className="message invisible"
+        />
       </div>
     </div>
   </div>
@@ -3163,6 +3175,9 @@ exports[`Storyshots Components/TextField Type Options 1`] = `
             className="menuContainer"
           />
         </portal-for-test>
+        <span
+          className="message invisible"
+        />
       </div>
       <div
         className="container"
@@ -3193,6 +3208,9 @@ exports[`Storyshots Components/TextField Type Options 1`] = `
             className="menuContainer"
           />
         </portal-for-test>
+        <span
+          className="message invisible"
+        />
       </div>
     </div>
   </div>
@@ -3238,6 +3256,9 @@ exports[`Storyshots Components/TextField Type Password 1`] = `
             </button>
           </div>
         </div>
+        <span
+          className="message invisible"
+        />
       </div>
     </div>
   </div>
@@ -3277,6 +3298,9 @@ exports[`Storyshots Components/TextField With Default Value 1`] = `
             />
           </div>
         </div>
+        <span
+          className="message invisible"
+        />
       </div>
       <div
         className="container"
@@ -3303,6 +3327,9 @@ exports[`Storyshots Components/TextField With Default Value 1`] = `
             />
           </div>
         </div>
+        <span
+          className="message invisible"
+        />
       </div>
     </div>
   </div>
@@ -3424,6 +3451,9 @@ exports[`Storyshots Components/TextField With Leading Icon 1`] = `
             />
           </div>
         </div>
+        <span
+          className="message invisible"
+        />
       </div>
       <div
         className="container"
@@ -3455,6 +3485,9 @@ exports[`Storyshots Components/TextField With Leading Icon 1`] = `
             />
           </div>
         </div>
+        <span
+          className="message invisible"
+        />
       </div>
     </div>
   </div>
@@ -3572,6 +3605,9 @@ exports[`Storyshots Components/TextField With Multiline 1`] = `
             />
           </div>
         </div>
+        <span
+          className="message invisible"
+        />
       </div>
       <div
         className="container"
@@ -3599,6 +3635,9 @@ exports[`Storyshots Components/TextField With Multiline 1`] = `
             />
           </div>
         </div>
+        <span
+          className="message invisible"
+        />
       </div>
     </div>
   </div>
@@ -3639,6 +3678,9 @@ exports[`Storyshots Components/TextField With Read Only 1`] = `
             <svg />
           </div>
         </div>
+        <span
+          className="message invisible"
+        />
       </div>
       <div
         className="container"
@@ -3666,6 +3708,9 @@ exports[`Storyshots Components/TextField With Read Only 1`] = `
             <svg />
           </div>
         </div>
+        <span
+          className="message invisible"
+        />
       </div>
     </div>
   </div>
@@ -3709,6 +3754,9 @@ exports[`Storyshots Components/TextField With Render Item 1`] = `
             className="menuContainer"
           />
         </portal-for-test>
+        <span
+          className="message invisible"
+        />
       </div>
     </div>
   </div>
@@ -3747,6 +3795,9 @@ exports[`Storyshots Components/TextField With Trailing Icon 1`] = `
             <svg />
           </div>
         </div>
+        <span
+          className="message invisible"
+        />
       </div>
       <div
         className="container"
@@ -3772,6 +3823,9 @@ exports[`Storyshots Components/TextField With Trailing Icon 1`] = `
             <svg />
           </div>
         </div>
+        <span
+          className="message invisible"
+        />
       </div>
     </div>
   </div>
@@ -3812,6 +3866,9 @@ exports[`Storyshots Components/TextField With Value 1`] = `
             <svg />
           </div>
         </div>
+        <span
+          className="message invisible"
+        />
       </div>
     </div>
   </div>
