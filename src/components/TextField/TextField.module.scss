@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  width: av-size(sz-240);
 
   .TextField {
     cursor: default;
@@ -15,7 +16,7 @@
     display: flex;
     flex-direction: column;
     height: av-size(sz-56);
-    width: av-size(sz-240);
+    width: 100%;
     box-sizing: border-box;
 
     &.multiline {
@@ -26,7 +27,7 @@
       height: av-size(sz-40);
 
       &:focus-within, &.notEmpty {
-          
+
           label {
             display: none;
           }
@@ -34,7 +35,7 @@
     }
 
     &.medium {
-      
+
       .bottom {
 
         input, textarea {
@@ -150,7 +151,7 @@
     color: av-color(primary);
     border: solid 1px av-color(content, av-opacity(divider));
     fill: av-color(content);
-    
+
     &:hover:not(.active):not(.error):not(.disabled)  {
       box-shadow: inset 0 0 0 2px av-color(content, av-opacity(disabled));
       border: solid 1px transparent;
@@ -206,7 +207,7 @@
       color: av-color(content);
       padding: 0;
       background-color: transparent;
-      
+
       &:-webkit-autofill,
       &:-webkit-autofill:hover,
       &:-webkit-autofill:focus,

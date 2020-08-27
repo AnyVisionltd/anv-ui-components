@@ -30,11 +30,12 @@ const TextField = React.forwardRef((props, ref) => {
     placeholder,
     menuClassName,
     id,
-    leadingIcon, 
-    onChange, 
-    readOnly, 
+    leadingIcon,
+    onChange,
+    readOnly,
     multiline,
     autoFocus,
+    leadingIconClassName,
     ...otherProps
   } = props
 
@@ -94,7 +95,7 @@ const TextField = React.forwardRef((props, ref) => {
   const handleClick = e => {
     if (!disabled && !error && !readOnly) {
       inputRef.current.focus()
-      setActive(type == types.options ? !active : true)
+      setActive(type === types.options ? !active : true)
     }
     setAnchorElement(anchorElement ? null : textFieldRef.current)
     if(!disabled) {
@@ -139,7 +140,6 @@ const TextField = React.forwardRef((props, ref) => {
     styles[variant],
     styles[type],
     styles[size],
-    className,
     {
       [styles.error]: error,
       [styles.disabled]: disabled,
@@ -151,7 +151,7 @@ const TextField = React.forwardRef((props, ref) => {
   )
 
   return (
-    <div className={ styles.container }>
+    <div className={ classNames(styles.container, className) }>
       <div ref={ textFieldRef } onClick={ handleClick } className={ classes }>
         <label htmlFor={ inputId } className={ classNames(styles.label, { [styles.left]: !!leadingIcon }) }>{ placeholder }</label>
         <InputBase
@@ -161,7 +161,7 @@ const TextField = React.forwardRef((props, ref) => {
           id={ inputId }
           value={ value }
           onChange={ onInputChange }
-          leadingIconClassName={ classNames(styles.leadingIcon) }
+          leadingIconClassName={ classNames(styles.leadingIcon, leadingIconClassName) }
           readOnly={ readOnly || type === types.options }
           trailingIcon={ renderTrailingIcon() }
           ref={ inputRef }

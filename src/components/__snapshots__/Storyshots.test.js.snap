@@ -3242,7 +3242,7 @@ exports[`Storyshots Components/TextField With Error 1`] = `
             className="label"
             htmlFor="textField-15"
           >
-            This is a wrong value
+            placeholder
           </label>
           <div
             className="inputBase text inputBase bottom"
@@ -3274,7 +3274,7 @@ exports[`Storyshots Components/TextField With Error 1`] = `
             className="label"
             htmlFor="textField-16"
           >
-            This is a wrong value
+            placeholder
           </label>
           <div
             className="inputBase text inputBase bottom"
@@ -3710,9 +3710,11 @@ exports[`Storyshots Components/TextField With Value 1`] = `
           <label
             className="label"
             htmlFor="textField-23"
-          />
+          >
+            placeholder
+          </label>
           <div
-            className="inputBase text inputBase"
+            className="inputBase text inputBase bottom"
           >
             <input
               id="textField-23"

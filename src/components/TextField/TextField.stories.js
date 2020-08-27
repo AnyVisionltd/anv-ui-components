@@ -126,7 +126,7 @@ export const withError = () => (
   <div className={ styles.flexMultipleRows }>
     <TextField
       trailingIcon={ <SunIcon /> }
-      placeholder={ 'This is a wrong value' }
+      placeholder={ 'placeholder' }
       onChange={ action('Typing') }
       message={ 'This is an error' }
       error
@@ -134,7 +134,7 @@ export const withError = () => (
     />
     <TextField
       trailingIcon={ <SunIcon /> }
-      placeholder={ 'This is a wrong value' }
+      placeholder={ 'placeholder' }
       onChange={ action('Typing') }
       message={ 'This is an error' }
       error
@@ -223,6 +223,7 @@ export const WithValue = () => {
         defaultValue={ 'Olives' }
         value={ value }
         id={ 'textField-23' }
+        placeholder={ 'placeholder' }
       />
     </div>
   )
