@@ -1,40 +1,42 @@
 @import "~@anyvision/style-guide";
 
-.iconButton {
-  padding: 0;
-}
-
-.small {
-  height: av-size(sz-32);
-  width: av-size(sz-32);
-
-  svg {
-    height: av-size(sz-24);
-    width: av-size(sz-24);
+button {
+  &.iconButton {
+    padding: 0;
   }
-}
 
-.medium {
-  height: av-size(sz-40);
-  width: av-size(sz-40);
-
-  svg {
+  &.small {
     height: av-size(sz-32);
     width: av-size(sz-32);
+
+    svg {
+      height: av-size(sz-24);
+      width: av-size(sz-24);
+    }
   }
-}
 
-.large {
-  height: av-size(sz-48);
-  width: av-size(sz-48);
-
-  svg {
+  &.medium {
     height: av-size(sz-40);
     width: av-size(sz-40);
-  }
-}
 
-.ghost {
-  border-radius: av-radius(circle);
+    svg {
+      height: av-size(sz-32);
+      width: av-size(sz-32);
+    }
+  }
+
+  &.large {
+    height: av-size(sz-48);
+    width: av-size(sz-48);
+
+    svg {
+      height: av-size(sz-40);
+      width: av-size(sz-40);
+    }
+  }
+
+  &.ghost {
+    border-radius: av-radius(circle);
+  }
 }
 
