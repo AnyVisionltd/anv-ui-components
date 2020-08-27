@@ -9,6 +9,7 @@ const Button = forwardRef(({
   leadingIcon,
   disabled,
   onClick,
+  type,
   className,
   children,
   ...otherProps
@@ -26,6 +27,7 @@ const Button = forwardRef(({
       onClick={ onClick }
       disabled={ disabled }
       ref={ ref }
+      type={ type || 'button' }
       { ...otherProps }
     >
       { leadingIcon && <span className={ styles.leadingIcon }>{ leadingIcon }</span> }
@@ -52,6 +54,8 @@ Button.propTypes = {
   disabled: propTypes.bool,
   /** Callback when click. */
   onClick: propTypes.func,
+  /** Button type. */
+  type: propTypes.string,
   /** For css customization. */
   className: propTypes.string,
   /** The component content. */

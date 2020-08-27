@@ -1,6 +1,6 @@
 {
   "name": "@anyvision/anv-ui-components",
-  "version": "0.1.1-beta.75",
+  "version": "0.1.1-beta.77",
   "main": "dist/index.js",
   "private": false,
   "files": [
@@ -75,7 +75,7 @@
     "eslint-plugin-react-hooks": "^4.0.2",
     "husky": "^4.2.5",
     "lint-staged": "^10.1.1",
-    "react-scripts": "^3.4.2",
+    "react-scripts": "^3.4.3",
     "react-test-renderer": "^16.13.1",
     "rollup": "^2.15.0",
     "rollup-plugin-babel": "^4.4.0",
