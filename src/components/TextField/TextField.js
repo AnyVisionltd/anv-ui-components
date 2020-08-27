@@ -35,6 +35,7 @@ const TextField = React.forwardRef((props, ref) => {
     readOnly,
     multiline,
     autoFocus,
+    leadingIconClassName,
     ...otherProps
   } = props
 
@@ -94,7 +95,7 @@ const TextField = React.forwardRef((props, ref) => {
   const handleClick = e => {
     if (!disabled && !error && !readOnly) {
       inputRef.current.focus()
-      setActive(type == types.options ? !active : true)
+      setActive(type === types.options ? !active : true)
     }
     setAnchorElement(anchorElement ? null : textFieldRef.current)
     if(!disabled) {
@@ -160,7 +161,7 @@ const TextField = React.forwardRef((props, ref) => {
           id={ inputId }
           value={ value }
           onChange={ onInputChange }
-          leadingIconClassName={ classNames(styles.leadingIcon) }
+          leadingIconClassName={ classNames(styles.leadingIcon, leadingIconClassName) }
           readOnly={ readOnly || type === types.options }
           trailingIcon={ renderTrailingIcon() }
           ref={ inputRef }
