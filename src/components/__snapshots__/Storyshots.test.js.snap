@@ -229,6 +229,13 @@ exports[`Storyshots Components/Button Sizes 1`] = `
         Large
       </button>
       <button
+        className="button medium fill"
+        disabled={false}
+        onClick={[Function]}
+      >
+        medium
+      </button>
+      <button
         className="button small fill"
         disabled={false}
         onClick={[Function]}
@@ -1142,6 +1149,13 @@ exports[`Storyshots Components/IconButton Sizes 1`] = `
     >
       <button
         className="button large fill iconButton small fill"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <svg />
+      </button>
+      <button
+        className="button large fill iconButton medium fill"
         disabled={false}
         onClick={[Function]}
       >
