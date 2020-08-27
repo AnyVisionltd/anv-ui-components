@@ -7,6 +7,7 @@
   flex-wrap: wrap;
 
   * {
+    @include av-elevation(raised);
     border-radius: av-radius();
     color: av-color(purewhite);
     display: flex;
@@ -14,7 +15,7 @@
     justify-content: center;
     margin: av-space(tiny);
     width: av-size(sz-320);
-    height: 200px;
+    height: 150px;
   }
 
   .primary {
@@ -31,18 +32,17 @@
   }
   .content {
     background-color: av-color(content);
+    color: av-color(surface)
   }
   .primary {
     background-color: av-color(primary);
   }
   .surface {
-    border: solid 1px av-color(content);
     color: av-color(content);
     background-color: av-color(surface);
   }
   .purewhite {
-    border: solid 1px av-color(content);
-    color: av-color(content);
+    color: av-color(trueblack);
     background-color: av-color(purewhite);
   }
   .trueblack {

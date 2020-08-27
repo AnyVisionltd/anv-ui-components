@@ -1,0 +1,57 @@
+@import "~@anyvision/style-guide";
+
+.typography {
+  color: av-color(content);
+
+  .body1 {
+    @extend %av-body1;
+  }
+
+  .body2 {
+    @extend %av-body2;
+  }
+
+  .headline1 {
+    @extend %av-headline1;
+  }
+
+  .headline2 {
+    @extend %av-headline2;
+  }
+
+  .headline3 {
+    @extend %av-headline3;
+  }
+
+  .headline4 {
+    @extend %av-headline4;
+  }
+
+  .headline5 {
+    @extend %av-headline5;
+  }
+
+  .headline6 {
+    @extend %av-headline6;
+  }
+
+  .subtitle1 {
+    @extend %av-subtitle1;
+  }
+
+  .subtitle2 {
+    @extend %av-subtitle2;
+  }
+
+  .caption {
+    @extend %av-caption;
+  }
+
+  .overline {
+    @extend %av-overline;
+  }
+
+  .button {
+    @extend %av-button;
+  }
+}
