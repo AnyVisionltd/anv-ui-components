@@ -70,7 +70,7 @@
 
     &.active {
 
-      &.fill {
+      &.fill:not(.error) {
         border-bottom: solid 2px av-color(primary);
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
@@ -89,7 +89,7 @@
         }
       }
 
-      &.outline {
+      &.outline:not(.error) {
         box-shadow: inset 0 0 0 2px av-color(primary);
         fill: av-color(primary);
         border: solid 1px transparent;
@@ -140,7 +140,7 @@
         color: av-color(error);
       }
 
-      .leadingIcon {
+      .leadingIcon,.trailingIcon {
         fill: av-color(error);
       }
     }
@@ -166,7 +166,7 @@
         color: av-color(error);
       }
 
-      .leadingIcon {
+      .leadingIcon, .trailingIcon {
         fill: av-color(error);
       }
     }
@@ -226,7 +226,6 @@
     font-size: av-font-size(tiny);
     color: av-color(content);
     margin-top: av-space(micro);
-    height: av-size(sz-16);
 
     &.error {
       color: av-color(error)

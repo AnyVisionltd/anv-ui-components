@@ -3021,7 +3021,6 @@ exports[`Storyshots Components/TextField Play Ground 1`] = `
               type="text"
               value=""
             />
-            <svg />
           </div>
         </div>
         <span
@@ -3055,7 +3054,6 @@ exports[`Storyshots Components/TextField Play Ground 1`] = `
               type="text"
               value=""
             />
-            <svg />
           </div>
         </div>
         <span
@@ -3247,7 +3245,7 @@ exports[`Storyshots Components/TextField Type Password 1`] = `
               value="secret"
             />
             <button
-              className="button large ghost iconButton small ghost trailingIcon"
+              className="button large ghost iconButton small ghost trailingIcon trailingIcon"
               disabled={false}
               onClick={[Function]}
               type="button"
