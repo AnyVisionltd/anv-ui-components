@@ -2920,11 +2920,13 @@ exports[`Storyshots Components/TextField Disabled 1`] = `
       >
         <div
           className="TextField outline text medium disabled"
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
         >
           <label
             className="label left"
-            htmlFor="textField-9"
           >
             disabled
           </label>
@@ -2946,20 +2948,19 @@ exports[`Storyshots Components/TextField Disabled 1`] = `
             />
           </div>
         </div>
-        <span
-          className="message invisible"
-        />
       </div>
       <div
         className="container"
       >
         <div
           className="TextField fill text medium disabled"
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
         >
           <label
             className="label left"
-            htmlFor="textField-10"
           >
             disabled
           </label>
@@ -2981,9 +2982,6 @@ exports[`Storyshots Components/TextField Disabled 1`] = `
             />
           </div>
         </div>
-        <span
-          className="message invisible"
-        />
       </div>
     </div>
   </div>
@@ -3003,11 +3001,13 @@ exports[`Storyshots Components/TextField Play Ground 1`] = `
       >
         <div
           className="TextField outline text medium"
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
         >
           <label
             className="label"
-            htmlFor="textField-26"
           >
             placeholder
           </label>
@@ -3035,11 +3035,13 @@ exports[`Storyshots Components/TextField Play Ground 1`] = `
       >
         <div
           className="TextField fill text medium"
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
         >
           <label
             className="label"
-            htmlFor="textField-27"
           >
             placeholder
           </label>
@@ -3080,11 +3082,13 @@ exports[`Storyshots Components/TextField Sizes 1`] = `
       >
         <div
           className="TextField outline text medium notEmpty"
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
         >
           <label
             className="label"
-            htmlFor="textField-3"
           >
             placeholder
           </label>
@@ -3096,24 +3100,23 @@ exports[`Storyshots Components/TextField Sizes 1`] = `
               onChange={[Function]}
               readOnly={false}
               type="text"
-              value="default value"
+              value="medium"
             />
           </div>
         </div>
-        <span
-          className="message invisible"
-        />
       </div>
       <div
         className="container"
       >
         <div
           className="TextField fill text small notEmpty"
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
         >
           <label
             className="label"
-            htmlFor="textField-4"
           >
             placeholder
           </label>
@@ -3125,13 +3128,10 @@ exports[`Storyshots Components/TextField Sizes 1`] = `
               onChange={[Function]}
               readOnly={false}
               type="text"
-              value="default value"
+              value="small"
             />
           </div>
         </div>
-        <span
-          className="message invisible"
-        />
       </div>
     </div>
   </div>
@@ -3151,11 +3151,13 @@ exports[`Storyshots Components/TextField Type Options 1`] = `
       >
         <div
           className="TextField outline options medium notEmpty"
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
         >
           <label
             className="label"
-            htmlFor="textField-21"
           />
           <div
             className="inputBase options inputBase"
@@ -3175,20 +3177,19 @@ exports[`Storyshots Components/TextField Type Options 1`] = `
             className="menuContainer"
           />
         </portal-for-test>
-        <span
-          className="message invisible"
-        />
       </div>
       <div
         className="container"
       >
         <div
           className="TextField fill options medium notEmpty"
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
         >
           <label
             className="label"
-            htmlFor="textField-22"
           />
           <div
             className="inputBase options inputBase"
@@ -3208,9 +3209,6 @@ exports[`Storyshots Components/TextField Type Options 1`] = `
             className="menuContainer"
           />
         </portal-for-test>
-        <span
-          className="message invisible"
-        />
       </div>
     </div>
   </div>
@@ -3230,11 +3228,13 @@ exports[`Storyshots Components/TextField Type Password 1`] = `
       >
         <div
           className="TextField outline password medium notEmpty"
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
         >
           <label
             className="label"
-            htmlFor="textField-24"
           />
           <div
             className="inputBase password inputBase"
@@ -3256,9 +3256,6 @@ exports[`Storyshots Components/TextField Type Password 1`] = `
             </button>
           </div>
         </div>
-        <span
-          className="message invisible"
-        />
       </div>
     </div>
   </div>
@@ -3278,11 +3275,13 @@ exports[`Storyshots Components/TextField With Default Value 1`] = `
       >
         <div
           className="TextField outline text medium notEmpty"
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
         >
           <label
             className="label"
-            htmlFor="textField-1"
           >
             placeholder
           </label>
@@ -3298,20 +3297,19 @@ exports[`Storyshots Components/TextField With Default Value 1`] = `
             />
           </div>
         </div>
-        <span
-          className="message invisible"
-        />
       </div>
       <div
         className="container"
       >
         <div
           className="TextField fill text medium notEmpty"
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
         >
           <label
             className="label"
-            htmlFor="textField-2"
           >
             placeholder
           </label>
@@ -3327,9 +3325,6 @@ exports[`Storyshots Components/TextField With Default Value 1`] = `
             />
           </div>
         </div>
-        <span
-          className="message invisible"
-        />
       </div>
     </div>
   </div>
@@ -3349,11 +3344,13 @@ exports[`Storyshots Components/TextField With Error 1`] = `
       >
         <div
           className="TextField outline text medium error"
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
         >
           <label
             className="label"
-            htmlFor="textField-15"
           >
             placeholder
           </label>
@@ -3381,11 +3378,13 @@ exports[`Storyshots Components/TextField With Error 1`] = `
       >
         <div
           className="TextField fill text medium error"
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
         >
           <label
             className="label"
-            htmlFor="textField-16"
           >
             placeholder
           </label>
@@ -3426,11 +3425,13 @@ exports[`Storyshots Components/TextField With Leading Icon 1`] = `
       >
         <div
           className="TextField outline text medium"
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
         >
           <label
             className="label left"
-            htmlFor="textField-7"
           >
             With leading Icon
           </label>
@@ -3451,20 +3452,19 @@ exports[`Storyshots Components/TextField With Leading Icon 1`] = `
             />
           </div>
         </div>
-        <span
-          className="message invisible"
-        />
       </div>
       <div
         className="container"
       >
         <div
           className="TextField fill text medium"
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
         >
           <label
             className="label left"
-            htmlFor="textField-8"
           >
             With leading Icon
           </label>
@@ -3485,9 +3485,6 @@ exports[`Storyshots Components/TextField With Leading Icon 1`] = `
             />
           </div>
         </div>
-        <span
-          className="message invisible"
-        />
       </div>
     </div>
   </div>
@@ -3507,11 +3504,13 @@ exports[`Storyshots Components/TextField With Message 1`] = `
       >
         <div
           className="TextField outline text medium"
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
         >
           <label
             className="label"
-            htmlFor="textField-13"
           >
             placeholder
           </label>
@@ -3539,11 +3538,13 @@ exports[`Storyshots Components/TextField With Message 1`] = `
       >
         <div
           className="TextField fill text medium"
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
         >
           <label
             className="label"
-            htmlFor="textField-14"
           >
             placeholder
           </label>
@@ -3584,11 +3585,13 @@ exports[`Storyshots Components/TextField With Multiline 1`] = `
       >
         <div
           className="TextField outline text medium multiline"
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
         >
           <label
             className="label"
-            htmlFor="textField-17"
           >
             placeholder
           </label>
@@ -3605,20 +3608,19 @@ exports[`Storyshots Components/TextField With Multiline 1`] = `
             />
           </div>
         </div>
-        <span
-          className="message invisible"
-        />
       </div>
       <div
         className="container"
       >
         <div
           className="TextField fill text medium multiline"
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
         >
           <label
             className="label"
-            htmlFor="textField-18"
           >
             placeholder
           </label>
@@ -3635,9 +3637,6 @@ exports[`Storyshots Components/TextField With Multiline 1`] = `
             />
           </div>
         </div>
-        <span
-          className="message invisible"
-        />
       </div>
     </div>
   </div>
@@ -3657,11 +3656,13 @@ exports[`Storyshots Components/TextField With Read Only 1`] = `
       >
         <div
           className="TextField outline text medium readOnly notEmpty"
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
         >
           <label
             className="label"
-            htmlFor="textField-19"
           >
             This is read only text
           </label>
@@ -3678,20 +3679,19 @@ exports[`Storyshots Components/TextField With Read Only 1`] = `
             <svg />
           </div>
         </div>
-        <span
-          className="message invisible"
-        />
       </div>
       <div
         className="container"
       >
         <div
           className="TextField fill text medium readOnly notEmpty"
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
         >
           <label
             className="label"
-            htmlFor="textField-20"
           >
             This is read only text
           </label>
@@ -3708,9 +3708,6 @@ exports[`Storyshots Components/TextField With Read Only 1`] = `
             <svg />
           </div>
         </div>
-        <span
-          className="message invisible"
-        />
       </div>
     </div>
   </div>
@@ -3730,11 +3727,13 @@ exports[`Storyshots Components/TextField With Render Item 1`] = `
       >
         <div
           className="TextField outline options medium notEmpty"
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
         >
           <label
             className="label"
-            htmlFor="textField-25"
           />
           <div
             className="inputBase options inputBase"
@@ -3754,9 +3753,6 @@ exports[`Storyshots Components/TextField With Render Item 1`] = `
             className="menuContainer"
           />
         </portal-for-test>
-        <span
-          className="message invisible"
-        />
       </div>
     </div>
   </div>
@@ -3776,11 +3772,13 @@ exports[`Storyshots Components/TextField With Trailing Icon 1`] = `
       >
         <div
           className="TextField outline text medium"
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
         >
           <label
             className="label"
-            htmlFor="textField-11"
           />
           <div
             className="inputBase text inputBase"
@@ -3795,20 +3793,19 @@ exports[`Storyshots Components/TextField With Trailing Icon 1`] = `
             <svg />
           </div>
         </div>
-        <span
-          className="message invisible"
-        />
       </div>
       <div
         className="container"
       >
         <div
           className="TextField fill text medium"
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
         >
           <label
             className="label"
-            htmlFor="textField-12"
           />
           <div
             className="inputBase text inputBase"
@@ -3823,9 +3820,6 @@ exports[`Storyshots Components/TextField With Trailing Icon 1`] = `
             <svg />
           </div>
         </div>
-        <span
-          className="message invisible"
-        />
       </div>
     </div>
   </div>
@@ -3845,11 +3839,13 @@ exports[`Storyshots Components/TextField With Value 1`] = `
       >
         <div
           className="TextField outline text medium notEmpty"
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
         >
           <label
             className="label"
-            htmlFor="textField-23"
           >
             placeholder
           </label>
@@ -3866,9 +3862,6 @@ exports[`Storyshots Components/TextField With Value 1`] = `
             <svg />
           </div>
         </div>
-        <span
-          className="message invisible"
-        />
       </div>
     </div>
   </div>

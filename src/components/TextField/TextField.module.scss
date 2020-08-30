@@ -201,13 +201,14 @@
     width: unset;
 
     input {
+      @extend %av-body1;
       flex: 1;
       height: 100%;
       font-size: av-size(sz-16);
       color: av-color(content);
       padding: 0;
       background-color: transparent;
-
+  
       &:-webkit-autofill,
       &:-webkit-autofill:hover,
       &:-webkit-autofill:focus,
@@ -229,10 +230,6 @@
 
     &.error {
       color: av-color(error)
-    }
-
-    &.invisible {
-      visibility: hidden;
     }
   }
 }

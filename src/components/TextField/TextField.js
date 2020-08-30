@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, memo } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import uuid from 'uuid'
 import { ReactComponent as ArrowSolidDown } from '../../assets/svg/ArrowSolidDown.svg'
 import { ReactComponent as ErrorCircleIcon } from '../../assets/svg/ErrorCircleOutlined.svg'
 import { useClickOutsideListener } from '../../hooks'
@@ -29,7 +28,6 @@ const TextField = React.forwardRef((props, ref) => {
     size,
     placeholder,
     menuClassName,
-    id,
     leadingIcon,
     onChange,
     readOnly,
@@ -41,15 +39,12 @@ const TextField = React.forwardRef((props, ref) => {
 
   const [value, setValue] = useState(defaultValue)
   const [active, setActive] = useState(false)
-  const [inputId, setInputId] = useState(id)
   const [anchorElement, setAnchorElement] = useState(null)
   const textFieldRef = useRef(ref)
   const inputRef = useRef({})
 
   useClickOutsideListener(() => {
-    if (type !== types.options) {
-      setActive(false)
-    }
+    setActive(false)
   }, textFieldRef)
 
   useEffect(() => {
@@ -70,10 +65,6 @@ const TextField = React.forwardRef((props, ref) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [otherProps.value])
 
-  useEffect(() => {
-    setInputId(id || uuid())
-  }, [id])
-
   const onInputChange = e => {
     const { target: { value } } = e
     setValue(value)
@@ -89,18 +80,21 @@ const TextField = React.forwardRef((props, ref) => {
 
   const handleMenuClose = () => {
     setAnchorElement(null)
-    setActive(false)
   }
 
   const handleClick = e => {
     if (!disabled && !error && !readOnly) {
-      inputRef.current.focus()
-      setActive(type === types.options ? !active : true)
+      setActive(true)
     }
     setAnchorElement(anchorElement ? null : textFieldRef.current)
     if(!disabled) {
       onClick(e)
     }
+  }
+
+  const onMouseDown = e => {
+    e.preventDefault()
+    inputRef.current.focus()
   }
 
   const onItemClick = item => {
@@ -134,6 +128,13 @@ const TextField = React.forwardRef((props, ref) => {
     )
   }
 
+  const onFocus = () => {
+    setActive(true)
+  }
+
+  const onBlur = () => {
+    setActive(false)
+  }
 
   const classes = classNames(
     styles.TextField,
@@ -152,13 +153,12 @@ const TextField = React.forwardRef((props, ref) => {
 
   return (
     <div className={ classNames(styles.container, className) }>
-      <div ref={ textFieldRef } onClick={ handleClick } className={ classes }>
-        <label htmlFor={ inputId } className={ classNames(styles.label, { [styles.left]: !!leadingIcon }) }>{ placeholder }</label>
+      <div ref={ textFieldRef } onMouseDown={ onMouseDown } onClick={ handleClick } className={ classes } onFocus={ onFocus } onBlur={ onBlur }>
+        <label className={ classNames(styles.label, { [styles.left]: !!leadingIcon }) }>{ placeholder }</label>
         <InputBase
           { ...otherProps }
           disabled={ disabled }
           className={ classNames(styles.inputBase, { [styles.bottom]: !!placeholder }) }
-          id={ inputId }
           value={ value }
           onChange={ onInputChange }
           leadingIconClassName={ classNames(styles.leadingIcon, leadingIconClassName) }
@@ -171,7 +171,7 @@ const TextField = React.forwardRef((props, ref) => {
         />
       </div>
       { type === types.options && renderMenu() }
-      { <span className={ classNames(styles.message, { [styles.error]: error, [styles.invisible]: !message, }) }>{ message }</span> }
+      { !!message && <span className={ classNames(styles.message, { [styles.error]: error }) }>{ message }</span> }
     </div>
   )
 })
