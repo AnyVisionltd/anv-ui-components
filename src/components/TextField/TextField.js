@@ -55,10 +55,8 @@ const TextField = React.forwardRef((props, ref) => {
 
   useEffect(() => {
     window.addEventListener('focusin', setActiveFocus)
-    window.addEventListener('click', setActiveFocus)
     return () => {
       window.removeEventListener('focusin', setActiveFocus)
-      window.removeEventListener('click', setActiveFocus)
     }
   }, [])
 
