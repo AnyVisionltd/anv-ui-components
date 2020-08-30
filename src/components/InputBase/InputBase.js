@@ -26,6 +26,7 @@ const InputBase = React.forwardRef((props, ref) => {
     leadingIcon,
     trailingIcon,
     leadingIconClassName,
+    trailingIconClassName,
     ...otherProps
   } = props
   const [inputType, setInputType] = useState(type)
@@ -57,15 +58,16 @@ const InputBase = React.forwardRef((props, ref) => {
       return null
     }
     if (trailingIcon) {
-      return <>{ trailingIcon }</>
+      return <div className={ classNames(styles.trailingIcon, trailingIconClassName) }>
+        { trailingIcon }
+      </div>
     }
-
     return (
       <IconButton
         variant="ghost"
         onClick={ onPasswordIconClick }
         disabled={ disabled }
-        className={ styles.trailingIcon }
+        className={ classNames(styles.trailingIcon, trailingIconClassName) }
       >
         { inputType === inputTypes.PASSWORD ? <EyeDisabledIcon /> : <EyeEnabledIcon /> }
       </IconButton>
@@ -108,7 +110,9 @@ InputBase.propTypes = {
   /** For css customization. */
   className: propTypes.string,
   /** For icon css customization. */
-  leadingIconClassName: propTypes.string,
+  leadingIconClassName: propTypes.string, 
+  /** For icon css customization. */
+  trailingIconClassName: propTypes.string,
   /** Icon before the children. */
   leadingIcon: propTypes.element,
   /** Icon after the children. */

@@ -266,8 +266,7 @@ export const playGround = () => {
   return (
     <div className={ styles.flexMultipleRows }>
       <TextField
-        trailingIcon={ <SunIcon /> }
-        type={ select('type', ['text', 'options'], 'text') }
+        type={ select('type', ['text', 'options', 'password'], 'text') }
         size={ select('size', ['medium', 'small'], 'medium') }
         placeholder={ select('placeholder', ['placeholder', ''], 'placeholder') }
         message={ select('message', ['message', ''], 'message') }
@@ -280,8 +279,7 @@ export const playGround = () => {
         autoFocus={ boolean('autoFocus', false) }
       />
       <TextField
-        trailingIcon={ <SunIcon /> }
-        type={ select('type', ['text', 'options'], 'text') }
+        type={ select('type', ['text', 'options', 'password'], 'text') }
         size={ select('size', ['medium', 'small'], 'medium') }
         placeholder={ select('placeholder', ['placeholder', ''], 'placeholder') }
         message={ select('message', ['message', ''], 'message') }

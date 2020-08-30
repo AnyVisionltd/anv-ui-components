@@ -834,17 +834,21 @@ exports[`Storyshots Components/ChipsInput Default 1`] = `
               type="text"
               value="Disabled Input"
             />
-            <button
-              aria-label="remove all"
-              className="button large ghost iconButton small ghost"
-              disabled={true}
-              onClick={[Function]}
-              type="button"
+            <div
+              className="trailingIcon"
             >
-              <svg
-                className="cancelIcon"
-              />
-            </button>
+              <button
+                aria-label="remove all"
+                className="button large ghost iconButton small ghost"
+                disabled={true}
+                onClick={[Function]}
+                type="button"
+              >
+                <svg
+                  className="cancelIcon"
+                />
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -1003,17 +1007,21 @@ exports[`Storyshots Components/ChipsInput Initial Values 1`] = `
             type="text"
             value="foo"
           />
-          <button
-            aria-label="remove all"
-            className="button large ghost iconButton small ghost"
-            disabled={false}
-            onClick={[Function]}
-            type="button"
+          <div
+            className="trailingIcon"
           >
-            <svg
-              className="cancelIcon"
-            />
-          </button>
+            <button
+              aria-label="remove all"
+              className="button large ghost iconButton small ghost"
+              disabled={false}
+              onClick={[Function]}
+              type="button"
+            >
+              <svg
+                className="cancelIcon"
+              />
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -1503,14 +1511,18 @@ exports[`Storyshots Components/InputBase Withtrailing Icon 1`] = `
           placeholder="With Last Icon"
           type="text"
         />
-        <button
-          className="button large ghost iconButton small ghost"
-          disabled={false}
-          onClick={[Function]}
-          type="button"
+        <div
+          className="trailingIcon"
         >
-          <svg />
-        </button>
+          <button
+            className="button large ghost iconButton small ghost"
+            disabled={false}
+            onClick={[Function]}
+            type="button"
+          >
+            <svg />
+          </button>
+        </div>
       </div>
       <div
         className="inputBase text multiline"
@@ -1519,14 +1531,18 @@ exports[`Storyshots Components/InputBase Withtrailing Icon 1`] = `
           placeholder="With Last Icon"
           type="text"
         />
-        <button
-          className="button large ghost iconButton small ghost"
-          disabled={false}
-          onClick={[Function]}
-          type="button"
+        <div
+          className="trailingIcon"
         >
-          <svg />
-        </button>
+          <button
+            className="button large ghost iconButton small ghost"
+            disabled={false}
+            onClick={[Function]}
+            type="button"
+          >
+            <svg />
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -3021,7 +3037,6 @@ exports[`Storyshots Components/TextField Play Ground 1`] = `
               type="text"
               value=""
             />
-            <svg />
           </div>
         </div>
         <span
@@ -3055,7 +3070,6 @@ exports[`Storyshots Components/TextField Play Ground 1`] = `
               type="text"
               value=""
             />
-            <svg />
           </div>
         </div>
         <span
@@ -3169,7 +3183,11 @@ exports[`Storyshots Components/TextField Type Options 1`] = `
               type="options"
               value="Olives"
             />
-            <svg />
+            <div
+              className="trailingIcon trailingIcon"
+            >
+              <svg />
+            </div>
           </div>
         </div>
         <portal-for-test>
@@ -3201,7 +3219,11 @@ exports[`Storyshots Components/TextField Type Options 1`] = `
               type="options"
               value="Olives"
             />
-            <svg />
+            <div
+              className="trailingIcon trailingIcon"
+            >
+              <svg />
+            </div>
           </div>
         </div>
         <portal-for-test>
@@ -3247,7 +3269,7 @@ exports[`Storyshots Components/TextField Type Password 1`] = `
               value="secret"
             />
             <button
-              className="button large ghost iconButton small ghost trailingIcon"
+              className="button large ghost iconButton small ghost trailingIcon trailingIcon"
               disabled={false}
               onClick={[Function]}
               type="button"
@@ -3364,7 +3386,11 @@ exports[`Storyshots Components/TextField With Error 1`] = `
               type="text"
               value=""
             />
-            <svg />
+            <div
+              className="trailingIcon trailingIcon"
+            >
+              <svg />
+            </div>
           </div>
         </div>
         <span
@@ -3398,7 +3424,11 @@ exports[`Storyshots Components/TextField With Error 1`] = `
               type="text"
               value=""
             />
-            <svg />
+            <div
+              className="trailingIcon trailingIcon"
+            >
+              <svg />
+            </div>
           </div>
         </div>
         <span
@@ -3524,7 +3554,11 @@ exports[`Storyshots Components/TextField With Message 1`] = `
               type="text"
               value=""
             />
-            <svg />
+            <div
+              className="trailingIcon trailingIcon"
+            >
+              <svg />
+            </div>
           </div>
         </div>
         <span
@@ -3558,7 +3592,11 @@ exports[`Storyshots Components/TextField With Message 1`] = `
               type="text"
               value=""
             />
-            <svg />
+            <div
+              className="trailingIcon trailingIcon"
+            >
+              <svg />
+            </div>
           </div>
         </div>
         <span
@@ -3676,7 +3714,11 @@ exports[`Storyshots Components/TextField With Read Only 1`] = `
               type="text"
               value="text"
             />
-            <svg />
+            <div
+              className="trailingIcon trailingIcon"
+            >
+              <svg />
+            </div>
           </div>
         </div>
       </div>
@@ -3705,7 +3747,11 @@ exports[`Storyshots Components/TextField With Read Only 1`] = `
               type="text"
               value="text"
             />
-            <svg />
+            <div
+              className="trailingIcon trailingIcon"
+            >
+              <svg />
+            </div>
           </div>
         </div>
       </div>
@@ -3745,7 +3791,11 @@ exports[`Storyshots Components/TextField With Render Item 1`] = `
               type="options"
               value="Olives"
             />
-            <svg />
+            <div
+              className="trailingIcon trailingIcon"
+            >
+              <svg />
+            </div>
           </div>
         </div>
         <portal-for-test>
@@ -3790,7 +3840,11 @@ exports[`Storyshots Components/TextField With Trailing Icon 1`] = `
               type="text"
               value=""
             />
-            <svg />
+            <div
+              className="trailingIcon trailingIcon"
+            >
+              <svg />
+            </div>
           </div>
         </div>
       </div>
@@ -3817,7 +3871,11 @@ exports[`Storyshots Components/TextField With Trailing Icon 1`] = `
               type="text"
               value=""
             />
-            <svg />
+            <div
+              className="trailingIcon trailingIcon"
+            >
+              <svg />
+            </div>
           </div>
         </div>
       </div>
@@ -3859,7 +3917,11 @@ exports[`Storyshots Components/TextField With Value 1`] = `
               type="text"
               value="Olives"
             />
-            <svg />
+            <div
+              className="trailingIcon trailingIcon"
+            >
+              <svg />
+            </div>
           </div>
         </div>
       </div>

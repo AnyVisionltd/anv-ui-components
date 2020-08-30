@@ -11,6 +11,7 @@ import styles from './TextField.module.scss'
 const types = {
   options: 'options',
   text: 'text',
+  password: 'password',
 }
 
 const TextField = React.forwardRef((props, ref) => {
@@ -34,6 +35,7 @@ const TextField = React.forwardRef((props, ref) => {
     multiline,
     autoFocus,
     leadingIconClassName,
+    trailingIconClassName,
     ...otherProps
   } = props
 
@@ -75,7 +77,7 @@ const TextField = React.forwardRef((props, ref) => {
     if (type === types.options) {
       return <ArrowSolidDown />
     }
-    return error ? <ErrorCircleIcon /> : otherProps.trailingIcon
+    return error && type !== types.password ? <ErrorCircleIcon /> : otherProps.trailingIcon
   }
 
   const handleMenuClose = () => {
@@ -162,6 +164,7 @@ const TextField = React.forwardRef((props, ref) => {
           value={ value }
           onChange={ onInputChange }
           leadingIconClassName={ classNames(styles.leadingIcon, leadingIconClassName) }
+          trailingIconClassName={ classNames(styles.trailingIcon, trailingIconClassName) }
           readOnly={ readOnly || type === types.options }
           trailingIcon={ renderTrailingIcon() }
           ref={ inputRef }
@@ -207,7 +210,9 @@ TextField.propTypes = {
   /** For css customization. */
   menuClassName: propTypes.string,
   /** For icon css customization. */
-  leadingIconClassName: propTypes.string,
+  leadingIconClassName: propTypes.string, 
+  /** For icon css customization. */
+  trailingIconClassName: propTypes.string,
   /** Icon before the children. */
   leadingIcon: propTypes.element,
   /** Icon after the children. */
