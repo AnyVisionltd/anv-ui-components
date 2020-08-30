@@ -36,6 +36,7 @@ const TextField = React.forwardRef((props, ref) => {
     autoFocus,
     leadingIconClassName,
     trailingIconClassName,
+    menuItemClassName,
     ...otherProps
   } = props
 
@@ -117,12 +118,12 @@ const TextField = React.forwardRef((props, ref) => {
         {
           items.map(item => renderItem
             ?
-            <div className={ styles.menuItem } key={ item.value } onClick={ handleMenuClose }>
+            <div className={ menuItemClassName } key={ item.value } onClick={ handleMenuClose }>
               { renderItem(item) }
             </div>
             :
             (<Menu.Item key={ item.value } onClick={ () => onItemClick(item) }>
-              <div className={ styles.menuItem } >
+              <div className={ menuItemClassName } >
                 { item.label }
               </div>
             </Menu.Item>)
@@ -214,7 +215,9 @@ TextField.propTypes = {
   /** For icon css customization. */
   leadingIconClassName: propTypes.string, 
   /** For icon css customization. */
-  trailingIconClassName: propTypes.string,
+  trailingIconClassName: propTypes.string,  
+  /** For icon css customization. */
+  menuItemClassName: propTypes.string,
   /** Icon before the children. */
   leadingIcon: propTypes.element,
   /** Icon after the children. */
