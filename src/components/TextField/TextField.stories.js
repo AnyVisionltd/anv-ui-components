@@ -35,13 +35,13 @@ export const sizes = () =>
     <TextField
       placeholder={ 'placeholder' }
       onChange={ action('Typing') }
-      defaultValue={ 'default value' }
+      defaultValue={ 'medium' }
       id={ 'textField-3' }
     />
     <TextField
       placeholder={ 'placeholder' }
       onChange={ action('Typing') }
-      defaultValue={ 'default value' }
+      defaultValue={ 'small' }
       variant={ 'fill' }
       id={ 'textField-4' }
       size={ 'small' }
