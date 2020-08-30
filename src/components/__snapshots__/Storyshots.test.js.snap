@@ -2939,7 +2939,6 @@ exports[`Storyshots Components/TextField Disabled 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onMouseDown={[Function]}
         >
           <label
             className="label left"
@@ -2973,7 +2972,6 @@ exports[`Storyshots Components/TextField Disabled 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onMouseDown={[Function]}
         >
           <label
             className="label left"
@@ -3020,7 +3018,6 @@ exports[`Storyshots Components/TextField Play Ground 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onMouseDown={[Function]}
         >
           <label
             className="label"
@@ -3053,7 +3050,6 @@ exports[`Storyshots Components/TextField Play Ground 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onMouseDown={[Function]}
         >
           <label
             className="label"
@@ -3099,7 +3095,6 @@ exports[`Storyshots Components/TextField Sizes 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onMouseDown={[Function]}
         >
           <label
             className="label"
@@ -3127,7 +3122,6 @@ exports[`Storyshots Components/TextField Sizes 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onMouseDown={[Function]}
         >
           <label
             className="label"
@@ -3168,7 +3162,6 @@ exports[`Storyshots Components/TextField Type Options 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onMouseDown={[Function]}
         >
           <label
             className="label"
@@ -3204,7 +3197,6 @@ exports[`Storyshots Components/TextField Type Options 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onMouseDown={[Function]}
         >
           <label
             className="label"
@@ -3253,7 +3245,6 @@ exports[`Storyshots Components/TextField Type Password 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onMouseDown={[Function]}
         >
           <label
             className="label"
@@ -3300,7 +3291,6 @@ exports[`Storyshots Components/TextField With Default Value 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onMouseDown={[Function]}
         >
           <label
             className="label"
@@ -3328,7 +3318,6 @@ exports[`Storyshots Components/TextField With Default Value 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onMouseDown={[Function]}
         >
           <label
             className="label"
@@ -3369,7 +3358,6 @@ exports[`Storyshots Components/TextField With Error 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onMouseDown={[Function]}
         >
           <label
             className="label"
@@ -3407,7 +3395,6 @@ exports[`Storyshots Components/TextField With Error 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onMouseDown={[Function]}
         >
           <label
             className="label"
@@ -3458,7 +3445,6 @@ exports[`Storyshots Components/TextField With Leading Icon 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onMouseDown={[Function]}
         >
           <label
             className="label left"
@@ -3491,7 +3477,6 @@ exports[`Storyshots Components/TextField With Leading Icon 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onMouseDown={[Function]}
         >
           <label
             className="label left"
@@ -3537,7 +3522,6 @@ exports[`Storyshots Components/TextField With Message 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onMouseDown={[Function]}
         >
           <label
             className="label"
@@ -3575,7 +3559,6 @@ exports[`Storyshots Components/TextField With Message 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onMouseDown={[Function]}
         >
           <label
             className="label"
@@ -3626,7 +3609,6 @@ exports[`Storyshots Components/TextField With Multiline 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onMouseDown={[Function]}
         >
           <label
             className="label"
@@ -3655,7 +3637,6 @@ exports[`Storyshots Components/TextField With Multiline 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onMouseDown={[Function]}
         >
           <label
             className="label"
@@ -3697,7 +3678,6 @@ exports[`Storyshots Components/TextField With Read Only 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onMouseDown={[Function]}
         >
           <label
             className="label"
@@ -3730,7 +3710,6 @@ exports[`Storyshots Components/TextField With Read Only 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onMouseDown={[Function]}
         >
           <label
             className="label"
@@ -3776,7 +3755,6 @@ exports[`Storyshots Components/TextField With Render Item 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onMouseDown={[Function]}
         >
           <label
             className="label"
@@ -3825,7 +3803,6 @@ exports[`Storyshots Components/TextField With Trailing Icon 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onMouseDown={[Function]}
         >
           <label
             className="label"
@@ -3856,7 +3833,6 @@ exports[`Storyshots Components/TextField With Trailing Icon 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onMouseDown={[Function]}
         >
           <label
             className="label"
@@ -3900,7 +3876,6 @@ exports[`Storyshots Components/TextField With Value 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onMouseDown={[Function]}
         >
           <label
             className="label"
