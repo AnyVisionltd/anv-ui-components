@@ -44,6 +44,10 @@
       padding-left: av-space(tiny);
       border: none;
       flex-grow: 1;
+
+      > input {
+        @extend %av-body2;
+      }
     }
   }
 
