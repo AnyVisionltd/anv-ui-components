@@ -236,3 +236,9 @@
 .textFieldMenu {
   width: av-size(sz-240);
 }
+
+.menuItem {
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

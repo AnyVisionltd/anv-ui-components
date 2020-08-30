@@ -20,7 +20,6 @@
   @include av-elevation(temporary);
   @extend %av-scrollbar;
   overflow-y: auto;
-  overflow-x: hidden;
   max-height: 240px;
   background-color: av-color(surface);
   color: av-color(content);

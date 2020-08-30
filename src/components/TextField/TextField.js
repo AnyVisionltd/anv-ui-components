@@ -117,12 +117,14 @@ const TextField = React.forwardRef((props, ref) => {
         {
           items.map(item => renderItem
             ?
-            <div key={ item.value } onClick={ handleMenuClose }>
+            <div className={ styles.menuItem } key={ item.value } onClick={ handleMenuClose }>
               { renderItem(item) }
             </div>
             :
             (<Menu.Item key={ item.value } onClick={ () => onItemClick(item) }>
-              { item.label }
+              <div className={ styles.menuItem } >
+                { item.label }
+              </div>
             </Menu.Item>)
           )
         }
