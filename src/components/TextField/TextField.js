@@ -60,7 +60,7 @@ const TextField = React.forwardRef((props, ref) => {
       window.removeEventListener('focusin', setActiveFocus)
       window.removeEventListener('click', setActiveFocus)
     }
-  }, [textFieldRef.current])
+  }, [])
 
   useEffect(() => {
     setValue(defaultValue)
