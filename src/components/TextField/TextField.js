@@ -101,6 +101,7 @@ const TextField = React.forwardRef((props, ref) => {
   const handleClick = e => {
     if (!disabled && !error && !readOnly) {
       setActive(true)
+      inputRef.current.focus()
     }
     setAnchorElement(anchorElement ? null : textFieldRef.current)
     if(!disabled) {
