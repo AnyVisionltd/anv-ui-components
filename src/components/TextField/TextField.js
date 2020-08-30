@@ -68,6 +68,7 @@ const TextField = React.forwardRef((props, ref) => {
   }, [otherProps.value])
 
   const onInputChange = e => {
+    e.persist()
     const { target: { value } } = e
     setValue(value)
     onChange(e)
@@ -87,16 +88,12 @@ const TextField = React.forwardRef((props, ref) => {
   const handleClick = e => {
     if (!disabled && !error && !readOnly) {
       setActive(true)
+      inputRef.current.focus()
     }
     setAnchorElement(anchorElement ? null : textFieldRef.current)
     if(!disabled) {
       onClick(e)
     }
-  }
-
-  const onMouseDown = e => {
-    e.preventDefault()
-    inputRef.current.focus()
   }
 
   const onItemClick = item => {
@@ -155,7 +152,7 @@ const TextField = React.forwardRef((props, ref) => {
 
   return (
     <div className={ classNames(styles.container, className) }>
-      <div ref={ textFieldRef } onMouseDown={ onMouseDown } onClick={ handleClick } className={ classes } onFocus={ onFocus } onBlur={ onBlur }>
+      <div ref={ textFieldRef } onClick={ handleClick } className={ classes } onFocus={ onFocus } onBlur={ onBlur }>
         <label className={ classNames(styles.label, { [styles.left]: !!leadingIcon }) }>{ placeholder }</label>
         <InputBase
           { ...otherProps }
