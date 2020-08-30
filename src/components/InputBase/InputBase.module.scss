@@ -49,5 +49,7 @@
 }
 
 .trailingIcon {
+  display: flex;
+  align-items: center;
   color: av-color(content);
 }

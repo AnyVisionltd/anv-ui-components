@@ -58,7 +58,9 @@ const InputBase = React.forwardRef((props, ref) => {
       return null
     }
     if (trailingIcon) {
-      return <>{ trailingIcon }</>
+      return <div className={ classNames(styles.trailingIcon, trailingIconClassName) }>
+        { trailingIcon }
+      </div>
     }
     return (
       <IconButton
