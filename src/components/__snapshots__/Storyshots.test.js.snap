@@ -2936,9 +2936,7 @@ exports[`Storyshots Components/TextField Disabled 1`] = `
       >
         <div
           className="TextField outline text medium disabled"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <label
             className="label left"
@@ -2969,9 +2967,7 @@ exports[`Storyshots Components/TextField Disabled 1`] = `
       >
         <div
           className="TextField fill text medium disabled"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <label
             className="label left"
@@ -3015,9 +3011,7 @@ exports[`Storyshots Components/TextField Play Ground 1`] = `
       >
         <div
           className="TextField outline text medium"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <label
             className="label"
@@ -3047,9 +3041,7 @@ exports[`Storyshots Components/TextField Play Ground 1`] = `
       >
         <div
           className="TextField fill text medium"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <label
             className="label"
@@ -3092,9 +3084,7 @@ exports[`Storyshots Components/TextField Sizes 1`] = `
       >
         <div
           className="TextField outline text medium notEmpty"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <label
             className="label"
@@ -3119,9 +3109,7 @@ exports[`Storyshots Components/TextField Sizes 1`] = `
       >
         <div
           className="TextField fill text small notEmpty"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <label
             className="label"
@@ -3159,9 +3147,7 @@ exports[`Storyshots Components/TextField Type Options 1`] = `
       >
         <div
           className="TextField outline options medium notEmpty"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <label
             className="label"
@@ -3194,9 +3180,7 @@ exports[`Storyshots Components/TextField Type Options 1`] = `
       >
         <div
           className="TextField fill options medium notEmpty"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <label
             className="label"
@@ -3242,9 +3226,7 @@ exports[`Storyshots Components/TextField Type Password 1`] = `
       >
         <div
           className="TextField outline password medium notEmpty"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <label
             className="label"
@@ -3288,9 +3270,7 @@ exports[`Storyshots Components/TextField With Default Value 1`] = `
       >
         <div
           className="TextField outline text medium notEmpty"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <label
             className="label"
@@ -3315,9 +3295,7 @@ exports[`Storyshots Components/TextField With Default Value 1`] = `
       >
         <div
           className="TextField fill text medium notEmpty"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <label
             className="label"
@@ -3355,9 +3333,7 @@ exports[`Storyshots Components/TextField With Error 1`] = `
       >
         <div
           className="TextField outline text medium error"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <label
             className="label"
@@ -3392,9 +3368,7 @@ exports[`Storyshots Components/TextField With Error 1`] = `
       >
         <div
           className="TextField fill text medium error"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <label
             className="label"
@@ -3442,9 +3416,7 @@ exports[`Storyshots Components/TextField With Leading Icon 1`] = `
       >
         <div
           className="TextField outline text medium"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <label
             className="label left"
@@ -3474,9 +3446,7 @@ exports[`Storyshots Components/TextField With Leading Icon 1`] = `
       >
         <div
           className="TextField fill text medium"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <label
             className="label left"
@@ -3519,9 +3489,7 @@ exports[`Storyshots Components/TextField With Message 1`] = `
       >
         <div
           className="TextField outline text medium"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <label
             className="label"
@@ -3556,9 +3524,7 @@ exports[`Storyshots Components/TextField With Message 1`] = `
       >
         <div
           className="TextField fill text medium"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <label
             className="label"
@@ -3606,9 +3572,7 @@ exports[`Storyshots Components/TextField With Multiline 1`] = `
       >
         <div
           className="TextField outline text medium multiline"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <label
             className="label"
@@ -3634,9 +3598,7 @@ exports[`Storyshots Components/TextField With Multiline 1`] = `
       >
         <div
           className="TextField fill text medium multiline"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <label
             className="label"
@@ -3675,9 +3637,7 @@ exports[`Storyshots Components/TextField With Read Only 1`] = `
       >
         <div
           className="TextField outline text medium readOnly notEmpty"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <label
             className="label"
@@ -3707,9 +3667,7 @@ exports[`Storyshots Components/TextField With Read Only 1`] = `
       >
         <div
           className="TextField fill text medium readOnly notEmpty"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <label
             className="label"
@@ -3752,9 +3710,7 @@ exports[`Storyshots Components/TextField With Render Item 1`] = `
       >
         <div
           className="TextField outline options medium notEmpty"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <label
             className="label"
@@ -3800,9 +3756,7 @@ exports[`Storyshots Components/TextField With Trailing Icon 1`] = `
       >
         <div
           className="TextField outline text medium"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <label
             className="label"
@@ -3830,9 +3784,7 @@ exports[`Storyshots Components/TextField With Trailing Icon 1`] = `
       >
         <div
           className="TextField fill text medium"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <label
             className="label"
@@ -3873,9 +3825,7 @@ exports[`Storyshots Components/TextField With Value 1`] = `
       >
         <div
           className="TextField outline text medium notEmpty"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <label
             className="label"

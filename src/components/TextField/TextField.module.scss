@@ -51,7 +51,7 @@
       }
     }
 
-    &:focus-within, &.notEmpty {
+    &:focus-within, &.notEmpty, &.active {
 
       label {
         top: av-space(micro);
