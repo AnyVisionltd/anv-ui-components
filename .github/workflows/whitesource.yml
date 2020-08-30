@@ -1,0 +1,41 @@
+name: Whitesource Scan anv-ui-components
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 23 * * *'
+ #push:
+   # branches: [ development ]
+  #pull_request:
+    #branches: [ development ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  WS_Scan:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access itt
+    - uses: actions/checkout@v2
+      with:
+        ref: development
+    - name: download config from s3
+      run: curl -O ${{secrets.WS_CONFIG_URL}}
+    - name: download the whitesource agent
+      run: curl -LJO https://github.com/whitesource/unified-agent-distribution/raw/master/standAlone/wss_agent.sh && chmod +x wss_agent.sh
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        always-auth: true
+        node-version: '12.x'
+        registry-url: ${{secrets.JFROG_REGISTERY_URL}}
+        scope: '@anyvision'
+    - name: Install dependencies
+      run: rm /home/runner/work/_temp/.npmrc && touch /home/runner/work/_temp/.npmrc && echo '_auth = ${{secrets.NPM_TOKEN}}' >> /home/runner/work/_temp/.npmrc && echo 'always-auth = true' >> /home/runner/work/_temp/.npmrc && echo 'email=${{secrets.JFROG_USER_EMAIL}}' >> /home/runner/work/_temp/.npmrc && echo '${{secrets.JFROG_REPO_PATH_1}}' >> /home/runner/work/_temp/.npmrc && echo '${{secrets.JFROG_REPO_PATH_2}}' >> /home/runner/work/_temp/.npmrc && npm install
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+    - name: run the whitesource agent
+      run: ./wss_agent.sh -apiKey ${{secrets.WS_API_KEY}} -userKey ${{secrets.WS_USER_TOKEN}} -product ${{secrets.WS_PROD_NAME}} -productToken ${{secrets.WS_PROD_TOKEN}} -project anv-ui-components -c wss-unified-agent-cloud-v2.config -d .
