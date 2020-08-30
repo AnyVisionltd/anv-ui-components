@@ -37,7 +37,7 @@ const Button = forwardRef(({
 })
 
 Button.defaultProps = {
-  size: 'large',
+  size: 'medium',
   variant: 'fill',
   disabled: false,
   onClick: () => {},
