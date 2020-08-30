@@ -216,7 +216,7 @@ TextField.propTypes = {
   leadingIconClassName: propTypes.string, 
   /** For icon css customization. */
   trailingIconClassName: propTypes.string,  
-  /** For icon css customization. */
+  /** For menu item css customization. */
   menuItemClassName: propTypes.string,
   /** Icon before the children. */
   leadingIcon: propTypes.element,
