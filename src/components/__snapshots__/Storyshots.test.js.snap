@@ -19,7 +19,7 @@ exports[`Storyshots Animations/Scale Basic 1`] = `
         className="marginFlexContainer"
       >
         <button
-          className="button large fill"
+          className="button medium fill"
           disabled={false}
           onClick={[Function]}
           type="button"
@@ -27,7 +27,7 @@ exports[`Storyshots Animations/Scale Basic 1`] = `
           start from top, left to right
         </button>
         <button
-          className="button large fill"
+          className="button medium fill"
           disabled={false}
           onClick={[Function]}
           type="button"
@@ -35,7 +35,7 @@ exports[`Storyshots Animations/Scale Basic 1`] = `
           start from top, center
         </button>
         <button
-          className="button large fill"
+          className="button medium fill"
           disabled={false}
           onClick={[Function]}
           type="button"
@@ -47,7 +47,7 @@ exports[`Storyshots Animations/Scale Basic 1`] = `
         className="marginFlexContainer"
       >
         <button
-          className="button large fill"
+          className="button medium fill"
           disabled={false}
           onClick={[Function]}
           type="button"
@@ -55,7 +55,7 @@ exports[`Storyshots Animations/Scale Basic 1`] = `
           start from the middle, left to right
         </button>
         <button
-          className="button large fill"
+          className="button medium fill"
           disabled={false}
           onClick={[Function]}
           type="button"
@@ -63,7 +63,7 @@ exports[`Storyshots Animations/Scale Basic 1`] = `
           pop from center
         </button>
         <button
-          className="button large fill"
+          className="button medium fill"
           disabled={false}
           onClick={[Function]}
           type="button"
@@ -75,7 +75,7 @@ exports[`Storyshots Animations/Scale Basic 1`] = `
         className="marginFlexContainer"
       >
         <button
-          className="button large fill"
+          className="button medium fill"
           disabled={false}
           onClick={[Function]}
           type="button"
@@ -83,7 +83,7 @@ exports[`Storyshots Animations/Scale Basic 1`] = `
           start from bottom, left to right
         </button>
         <button
-          className="button large fill"
+          className="button medium fill"
           disabled={false}
           onClick={[Function]}
           type="button"
@@ -91,7 +91,7 @@ exports[`Storyshots Animations/Scale Basic 1`] = `
           start from bottom, center
         </button>
         <button
-          className="button large fill"
+          className="button medium fill"
           disabled={false}
           onClick={[Function]}
           type="button"
@@ -123,7 +123,7 @@ exports[`Storyshots Animations/Slide Basic 1`] = `
         className="marginFlexContainer"
       >
         <button
-          className="button large fill"
+          className="button medium fill"
           disabled={false}
           onClick={[Function]}
           type="button"
@@ -131,7 +131,7 @@ exports[`Storyshots Animations/Slide Basic 1`] = `
           up
         </button>
         <button
-          className="button large fill"
+          className="button medium fill"
           disabled={false}
           onClick={[Function]}
           type="button"
@@ -139,7 +139,7 @@ exports[`Storyshots Animations/Slide Basic 1`] = `
           right
         </button>
         <button
-          className="button large fill"
+          className="button medium fill"
           disabled={false}
           onClick={[Function]}
           type="button"
@@ -147,7 +147,7 @@ exports[`Storyshots Animations/Slide Basic 1`] = `
           down
         </button>
         <button
-          className="button large fill"
+          className="button medium fill"
           disabled={false}
           onClick={[Function]}
           type="button"
@@ -173,7 +173,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     className="center"
   >
     <button
-      className="button large fill"
+      className="button medium fill"
       disabled={false}
       onClick={[Function]}
       type="button"
@@ -193,7 +193,7 @@ exports[`Storyshots Components/Button Disable 1`] = `
       className="marginFlexContainer"
     >
       <button
-        className="button large fill"
+        className="button medium fill"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -201,7 +201,7 @@ exports[`Storyshots Components/Button Disable 1`] = `
         Enable
       </button>
       <button
-        className="button large fill"
+        className="button medium fill"
         disabled={true}
         onClick={[Function]}
         type="button"
@@ -239,7 +239,7 @@ exports[`Storyshots Components/Button Sizes 1`] = `
       className="marginFlexContainer"
     >
       <button
-        className="button large fill"
+        className="button medium fill"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -276,7 +276,7 @@ exports[`Storyshots Components/Button Variants 1`] = `
       className="marginFlexContainer"
     >
       <button
-        className="button large fill"
+        className="button medium fill"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -284,7 +284,7 @@ exports[`Storyshots Components/Button Variants 1`] = `
         fill
       </button>
       <button
-        className="button large outline"
+        className="button medium outline"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -292,7 +292,7 @@ exports[`Storyshots Components/Button Variants 1`] = `
         outline
       </button>
       <button
-        className="button large ghost"
+        className="button medium ghost"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -313,7 +313,7 @@ exports[`Storyshots Components/Button With Class Name 1`] = `
       className="marginFlexContainer"
     >
       <button
-        className="button large fill successBackgroundColor"
+        className="button medium fill successBackgroundColor"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -321,7 +321,7 @@ exports[`Storyshots Components/Button With Class Name 1`] = `
         Text
       </button>
       <button
-        className="button large outline alertColor"
+        className="button medium outline alertColor"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -329,7 +329,7 @@ exports[`Storyshots Components/Button With Class Name 1`] = `
         Text
       </button>
       <button
-        className="button large ghost errorColor"
+        className="button medium ghost errorColor"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -347,7 +347,7 @@ exports[`Storyshots Components/Button With Icon 1`] = `
     className="center"
   >
     <button
-      className="button large fill"
+      className="button medium fill"
       disabled={false}
       onClick={[Function]}
       type="button"
@@ -839,7 +839,7 @@ exports[`Storyshots Components/ChipsInput Default 1`] = `
             >
               <button
                 aria-label="remove all"
-                className="button large ghost iconButton small ghost"
+                className="button medium ghost iconButton small ghost"
                 disabled={true}
                 onClick={[Function]}
                 type="button"
@@ -1012,7 +1012,7 @@ exports[`Storyshots Components/ChipsInput Initial Values 1`] = `
           >
             <button
               aria-label="remove all"
-              className="button large ghost iconButton small ghost"
+              className="button medium ghost iconButton small ghost"
               disabled={false}
               onClick={[Function]}
               type="button"
@@ -1105,7 +1105,7 @@ exports[`Storyshots Components/Dialog Basic 1`] = `
       <button
         aria-controls="menu-story-default"
         aria-haspopup="true"
-        className="button large fill"
+        className="button medium fill"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -1124,7 +1124,7 @@ exports[`Storyshots Components/IconButton Default 1`] = `
     className="center"
   >
     <button
-      className="button large fill iconButton small fill"
+      className="button medium fill iconButton small fill"
       disabled={false}
       onClick={[Function]}
       type="button"
@@ -1144,7 +1144,7 @@ exports[`Storyshots Components/IconButton Disable 1`] = `
       className="marginFlexContainer"
     >
       <button
-        className="button large fill iconButton small fill"
+        className="button medium fill iconButton small fill"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -1152,7 +1152,7 @@ exports[`Storyshots Components/IconButton Disable 1`] = `
         <svg />
       </button>
       <button
-        className="button large fill iconButton small fill"
+        className="button medium fill iconButton small fill"
         disabled={true}
         onClick={[Function]}
         type="button"
@@ -1170,7 +1170,7 @@ exports[`Storyshots Components/IconButton Play Ground 1`] = `
     className="center"
   >
     <button
-      className="button large fill iconButton small fill"
+      className="button medium fill iconButton small fill"
       disabled={false}
       onClick={[Function]}
       type="button"
@@ -1190,7 +1190,7 @@ exports[`Storyshots Components/IconButton Sizes 1`] = `
       className="marginFlexContainer"
     >
       <button
-        className="button large fill iconButton small fill"
+        className="button medium fill iconButton small fill"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -1198,7 +1198,7 @@ exports[`Storyshots Components/IconButton Sizes 1`] = `
         <svg />
       </button>
       <button
-        className="button large fill iconButton medium fill"
+        className="button medium fill iconButton medium fill"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -1206,7 +1206,7 @@ exports[`Storyshots Components/IconButton Sizes 1`] = `
         <svg />
       </button>
       <button
-        className="button large fill iconButton large fill"
+        className="button medium fill iconButton large fill"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -1227,7 +1227,7 @@ exports[`Storyshots Components/IconButton Variants 1`] = `
       className="marginFlexContainer"
     >
       <button
-        className="button large fill iconButton small fill"
+        className="button medium fill iconButton small fill"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -1235,7 +1235,7 @@ exports[`Storyshots Components/IconButton Variants 1`] = `
         <svg />
       </button>
       <button
-        className="button large outline iconButton small outline"
+        className="button medium outline iconButton small outline"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -1243,7 +1243,7 @@ exports[`Storyshots Components/IconButton Variants 1`] = `
         <svg />
       </button>
       <button
-        className="button large ghost iconButton small ghost"
+        className="button medium ghost iconButton small ghost"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -1264,7 +1264,7 @@ exports[`Storyshots Components/IconButton With Class Name 1`] = `
       className="marginFlexContainer"
     >
       <button
-        className="button large fill iconButton small fill successBackgroundColor"
+        className="button medium fill iconButton small fill successBackgroundColor"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -1272,7 +1272,7 @@ exports[`Storyshots Components/IconButton With Class Name 1`] = `
         <svg />
       </button>
       <button
-        className="button large outline iconButton small outline alertColor"
+        className="button medium outline iconButton small outline alertColor"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -1280,7 +1280,7 @@ exports[`Storyshots Components/IconButton With Class Name 1`] = `
         <svg />
       </button>
       <button
-        className="button large ghost iconButton small ghost errorColor"
+        className="button medium ghost iconButton small ghost errorColor"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -1419,7 +1419,7 @@ exports[`Storyshots Components/InputBase States 1`] = `
           type="password"
         />
         <button
-          className="button large ghost iconButton small ghost trailingIcon"
+          className="button medium ghost iconButton small ghost trailingIcon"
           disabled={false}
           onClick={[Function]}
           type="button"
@@ -1515,7 +1515,7 @@ exports[`Storyshots Components/InputBase Withtrailing Icon 1`] = `
           className="trailingIcon"
         >
           <button
-            className="button large ghost iconButton small ghost"
+            className="button medium ghost iconButton small ghost"
             disabled={false}
             onClick={[Function]}
             type="button"
@@ -1535,7 +1535,7 @@ exports[`Storyshots Components/InputBase Withtrailing Icon 1`] = `
           className="trailingIcon"
         >
           <button
-            className="button large ghost iconButton small ghost"
+            className="button medium ghost iconButton small ghost"
             disabled={false}
             onClick={[Function]}
             type="button"
@@ -2016,7 +2016,7 @@ exports[`Storyshots Components/Menu Default 1`] = `
       <button
         aria-controls="menu-story-default"
         aria-haspopup="true"
-        className="button large fill"
+        className="button medium fill"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -2044,7 +2044,7 @@ exports[`Storyshots Components/Menu Different Positions 1`] = `
       <button
         aria-controls="menu-story"
         aria-haspopup="true"
-        className="button large fill"
+        className="button medium fill"
         disabled={false}
         onClick={[Function]}
         style={
@@ -2061,7 +2061,7 @@ exports[`Storyshots Components/Menu Different Positions 1`] = `
       <button
         aria-controls="menu-story"
         aria-haspopup="true"
-        className="button large fill"
+        className="button medium fill"
         disabled={false}
         onClick={[Function]}
         style={
@@ -2078,7 +2078,7 @@ exports[`Storyshots Components/Menu Different Positions 1`] = `
       <button
         aria-controls="menu-story"
         aria-haspopup="true"
-        className="button large fill"
+        className="button medium fill"
         disabled={false}
         onClick={[Function]}
         style={
@@ -2095,7 +2095,7 @@ exports[`Storyshots Components/Menu Different Positions 1`] = `
       <button
         aria-controls="menu-story"
         aria-haspopup="true"
-        className="button large fill"
+        className="button medium fill"
         disabled={false}
         onClick={[Function]}
         style={
@@ -2135,7 +2135,7 @@ exports[`Storyshots Components/Menu Prefer Open To Direction 1`] = `
       <button
         aria-controls="menu-story"
         aria-haspopup="true"
-        className="button large fill"
+        className="button medium fill"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -2166,7 +2166,7 @@ exports[`Storyshots Components/Menu Variants 1`] = `
         <button
           aria-controls="menu-story-regular"
           aria-haspopup="true"
-          className="button large fill"
+          className="button medium fill"
           disabled={false}
           onClick={[Function]}
           type="button"
@@ -2185,7 +2185,7 @@ exports[`Storyshots Components/Menu Variants 1`] = `
         <button
           aria-controls="menu-story-dense"
           aria-haspopup="true"
-          className="button large fill"
+          className="button medium fill"
           disabled={false}
           onClick={[Function]}
           type="button"
@@ -2214,7 +2214,7 @@ exports[`Storyshots Components/Menu With Sub Menus 1`] = `
       <button
         aria-controls="menu-story-submenu"
         aria-haspopup="true"
-        className="button large fill"
+        className="button medium fill"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -2375,7 +2375,7 @@ exports[`Storyshots Components/SSF Default 1`] = `
           className="elevationOverlay"
         />
         <button
-          className="button large fill searchFilter"
+          className="button medium fill searchFilter"
           disabled={false}
           onClick={[Function]}
           type="button"
@@ -2429,7 +2429,7 @@ exports[`Storyshots Components/SSF Without Menu Fields 1`] = `
           className="elevationOverlay"
         />
         <button
-          className="button large fill searchFilter"
+          className="button medium fill searchFilter"
           disabled={false}
           onClick={[Function]}
           type="button"
@@ -2512,7 +2512,7 @@ exports[`Storyshots Components/Snackbar Action 1`] = `
     className="center"
   >
     <button
-      className="button large fill"
+      className="button medium fill"
       disabled={false}
       onClick={[Function]}
       type="button"
@@ -2532,7 +2532,7 @@ exports[`Storyshots Components/Snackbar Close Icon 1`] = `
       className="marginFlexContainer"
     >
       <button
-        className="button large fill"
+        className="button medium fill"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -2540,7 +2540,7 @@ exports[`Storyshots Components/Snackbar Close Icon 1`] = `
         Default Icon
       </button>
       <button
-        className="button large fill"
+        className="button medium fill"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -2548,7 +2548,7 @@ exports[`Storyshots Components/Snackbar Close Icon 1`] = `
         Custom Icon
       </button>
       <button
-        className="button large fill"
+        className="button medium fill"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -2566,7 +2566,7 @@ exports[`Storyshots Components/Snackbar Default 1`] = `
     className="center"
   >
     <button
-      className="button large fill"
+      className="button medium fill"
       disabled={false}
       onClick={[Function]}
       type="button"
@@ -2583,7 +2583,7 @@ exports[`Storyshots Components/Snackbar Leading Icon 1`] = `
     className="center"
   >
     <button
-      className="button large fill"
+      className="button medium fill"
       disabled={false}
       onClick={[Function]}
       type="button"
@@ -2817,7 +2817,7 @@ exports[`Storyshots Components/Table Basic 1`] = `
         className="elevationOverlay"
       />
       <button
-        className="button large fill searchFilter"
+        className="button medium fill searchFilter"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -3269,7 +3269,7 @@ exports[`Storyshots Components/TextField Type Password 1`] = `
               value="secret"
             />
             <button
-              className="button large ghost iconButton small ghost trailingIcon trailingIcon"
+              className="button medium ghost iconButton small ghost trailingIcon trailingIcon"
               disabled={false}
               onClick={[Function]}
               type="button"
@@ -4348,7 +4348,7 @@ exports[`Storyshots Utils/FileUpload Basic 1`] = `
       type="file"
     />
     <button
-      className="button large fill"
+      className="button medium fill"
       disabled={false}
       onClick={[Function]}
       type="button"
@@ -4372,7 +4372,7 @@ exports[`Storyshots Utils/FileUpload Just Image 1`] = `
       type="file"
     />
     <button
-      className="button large fill"
+      className="button medium fill"
       disabled={false}
       onClick={[Function]}
       type="button"
@@ -4396,7 +4396,7 @@ exports[`Storyshots Utils/FileUpload Multiple 1`] = `
       type="file"
     />
     <button
-      className="button large fill"
+      className="button medium fill"
       disabled={false}
       onClick={[Function]}
       type="button"
