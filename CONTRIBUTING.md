@@ -73,4 +73,4 @@ If you run into trouble here, make sure your node, npm, are on the latest versio
 2.  `git clone https://github.com/AnyVisionltd/anv-ui-components.git`
 3.  `cd anv-ui-components`
 4.  `npm i`
-5.  `yarn run storybook`
+5.  `npm run storybook`
