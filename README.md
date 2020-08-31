@@ -25,12 +25,12 @@ You can customize your theme by change the colors, the typography and much more.
 </br>
 For additional information and usage guide - [click here](https://github.com/AnyVisionltd/anv-ui-style-guide)
 
-## 🤝 Contributing [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+## 🤝 Contributing [![PRs Welcome]
 
-We welcome contributions to Wix-Style-React!
+We welcome contributions to AnyVisionUI!
 
-Read our [contributing guide](https://github.com/wix/wix-style-react/blob/master/CONTRIBUTING.md) and help us build or improve our components.
+Read our [contributing guide](https://github.com/AnyVisionltd/anv-ui-components/blob/development/CONTRIBUTING.md) and help us build or improve our components.
 
 ## 📝 License
 
-This project is offered under [MIT License](https://github.com/wix/wix-style-react/blob/master/LICENSE).
+This project is offered under [MIT License](https://github.com/AnyVisionltd/anv-ui-components/blob/development/LICENSE).
