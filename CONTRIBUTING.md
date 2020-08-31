@@ -41,17 +41,20 @@ When creating new unit test files, the tests should adhere to a particular folde
 +-- parentFolder
 |   +-- [filename].js
 |   +-- [filename].test.js
+|   +-- [filename].stories.js
 ```
 
 ## Pull Requests (PRs)
 
 We welcome all contributions. There are many ways you can help us. This is few of those ways:
 
-Before you submit a new PR, make sure you run `npm run test`. Do not submit a PR if tests are failing.
+Before you submit a new PR, make sure you run `npm run test` and check storybook `npm run storybook`. Do not submit a PR if tests are failing.
 
 ### Reviewing PRs
 
 **As a PR submitter**, you should reference the issue if there is one, include a short description of what you contributed and, if it is a code change, instructions for how to manually test out the change. This is informally enforced by our [PR template](https://github.com/storybookjs/storybook/blob/master/.github/PULL_REQUEST_TEMPLATE.md). If your PR is reviewed as only needing trivial changes (e.g. small typos etc), and you have commit access then you can merge the PR after making those changes.
+
+> NOTE: Although the latest stable version is `master` branch, all development happens in the `development` branch. Please Submit PR's, to `development` branch.
 
 All issues should have a `type` label. `bug`/`feature`/`question`/etc...`.
 
