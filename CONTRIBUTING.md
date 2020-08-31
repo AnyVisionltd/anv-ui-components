@@ -52,7 +52,7 @@ Before you submit a new PR, make sure you run `npm run test` and check storybook
 
 ### Reviewing PRs
 
-**As a PR submitter**, you should reference the issue if there is one, include a short description of what you contributed and, if it is a code change, instructions for how to manually test out the change. This is informally enforced by our [PR template](https://github.com/storybookjs/storybook/blob/master/.github/PULL_REQUEST_TEMPLATE.md). If your PR is reviewed as only needing trivial changes (e.g. small typos etc), and you have commit access then you can merge the PR after making those changes.
+**As a PR submitter**, you should reference the issue if there is one, include a short description of what you contributed and, if it is a code change, instructions for how to manually test out the change. This is informally enforced by our [PR template](https://github.com/AnyVisionltd/anv-ui-components/blob/development/.github/PULL_REQUEST_TEMPLATE.md).
 
 > NOTE: Although the latest stable version is `master` branch, all development happens in the `development` branch. Please Submit PR's, to `development` branch.
 
