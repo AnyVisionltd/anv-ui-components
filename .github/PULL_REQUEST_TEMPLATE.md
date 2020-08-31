@@ -13,4 +13,4 @@
 
 If your answer is yes to any of these, please make sure to include it in your PR.
 
-Please submit all PRs to the `development` branch.
+> NOTE: Please submit all PRs to the `development` branch.
