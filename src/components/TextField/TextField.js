@@ -41,6 +41,7 @@ const TextField = React.forwardRef((props, ref) => {
 
   const [value, setValue] = useState(defaultValue)
   const [active, setActive] = useState(false)
+  const [inputType, toggleType] = useState(type)
   const [anchorElement, setAnchorElement] = useState(null)
   const textFieldRef = useRef(ref)
   const inputRef = useRef({})
@@ -74,6 +75,12 @@ const TextField = React.forwardRef((props, ref) => {
       setActive(true)
     }
   }, [autoFocus])
+
+  useEffect(() => {
+    if(type === types.password && inputRef.current) {
+      inputRef.current.setSelectionRange(value.length, value.length)
+    }
+  }, [inputType, value, type])
 
   useEffect(() => {
     if(otherProps.value !== undefined && otherProps.value !== value) {
@@ -142,6 +149,13 @@ const TextField = React.forwardRef((props, ref) => {
     )
   }
 
+  const onTrailingIconClick = () => {
+    if(type === types.password) {
+      toggleType(inputType === types.password ? types.text : types.password)
+      inputRef.current.focus()
+    }
+  }
+
   const classes = classNames(
     styles.TextField,
     styles[variant],
@@ -175,6 +189,7 @@ const TextField = React.forwardRef((props, ref) => {
           leadingIcon={ leadingIcon }
           multiline={ multiline }
           type={ type }
+          onTrailingIconClick={ onTrailingIconClick }
         />
       </div>
       { type === types.options && renderMenu() }

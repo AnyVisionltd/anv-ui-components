@@ -836,6 +836,7 @@ exports[`Storyshots Components/ChipsInput Default 1`] = `
             />
             <div
               className="trailingIcon"
+              onClick={[Function]}
             >
               <button
                 aria-label="remove all"
@@ -1009,6 +1010,7 @@ exports[`Storyshots Components/ChipsInput Initial Values 1`] = `
           />
           <div
             className="trailingIcon"
+            onClick={[Function]}
           >
             <button
               aria-label="remove all"
@@ -1513,6 +1515,7 @@ exports[`Storyshots Components/InputBase Withtrailing Icon 1`] = `
         />
         <div
           className="trailingIcon"
+          onClick={[Function]}
         >
           <button
             className="button medium ghost iconButton small ghost"
@@ -1533,6 +1536,7 @@ exports[`Storyshots Components/InputBase Withtrailing Icon 1`] = `
         />
         <div
           className="trailingIcon"
+          onClick={[Function]}
         >
           <button
             className="button medium ghost iconButton small ghost"
@@ -3164,6 +3168,7 @@ exports[`Storyshots Components/TextField Type Options 1`] = `
             />
             <div
               className="trailingIcon trailingIcon"
+              onClick={[Function]}
             >
               <svg />
             </div>
@@ -3197,6 +3202,7 @@ exports[`Storyshots Components/TextField Type Options 1`] = `
             />
             <div
               className="trailingIcon trailingIcon"
+              onClick={[Function]}
             >
               <svg />
             </div>
@@ -3352,6 +3358,7 @@ exports[`Storyshots Components/TextField With Error 1`] = `
             />
             <div
               className="trailingIcon trailingIcon"
+              onClick={[Function]}
             >
               <svg />
             </div>
@@ -3387,6 +3394,7 @@ exports[`Storyshots Components/TextField With Error 1`] = `
             />
             <div
               className="trailingIcon trailingIcon"
+              onClick={[Function]}
             >
               <svg />
             </div>
@@ -3508,6 +3516,7 @@ exports[`Storyshots Components/TextField With Message 1`] = `
             />
             <div
               className="trailingIcon trailingIcon"
+              onClick={[Function]}
             >
               <svg />
             </div>
@@ -3543,6 +3552,7 @@ exports[`Storyshots Components/TextField With Message 1`] = `
             />
             <div
               className="trailingIcon trailingIcon"
+              onClick={[Function]}
             >
               <svg />
             </div>
@@ -3656,6 +3666,7 @@ exports[`Storyshots Components/TextField With Read Only 1`] = `
             />
             <div
               className="trailingIcon trailingIcon"
+              onClick={[Function]}
             >
               <svg />
             </div>
@@ -3686,6 +3697,7 @@ exports[`Storyshots Components/TextField With Read Only 1`] = `
             />
             <div
               className="trailingIcon trailingIcon"
+              onClick={[Function]}
             >
               <svg />
             </div>
@@ -3727,6 +3739,7 @@ exports[`Storyshots Components/TextField With Render Item 1`] = `
             />
             <div
               className="trailingIcon trailingIcon"
+              onClick={[Function]}
             >
               <svg />
             </div>
@@ -3773,6 +3786,7 @@ exports[`Storyshots Components/TextField With Trailing Icon 1`] = `
             />
             <div
               className="trailingIcon trailingIcon"
+              onClick={[Function]}
             >
               <svg />
             </div>
@@ -3801,6 +3815,7 @@ exports[`Storyshots Components/TextField With Trailing Icon 1`] = `
             />
             <div
               className="trailingIcon trailingIcon"
+              onClick={[Function]}
             >
               <svg />
             </div>
@@ -3844,6 +3859,7 @@ exports[`Storyshots Components/TextField With Value 1`] = `
             />
             <div
               className="trailingIcon trailingIcon"
+              onClick={[Function]}
             >
               <svg />
             </div>

@@ -27,6 +27,7 @@ const InputBase = React.forwardRef((props, ref) => {
     trailingIcon,
     leadingIconClassName,
     trailingIconClassName,
+    onTrailingIconClick,
     ...otherProps
   } = props
   const [inputType, setInputType] = useState(type)
@@ -50,6 +51,7 @@ const InputBase = React.forwardRef((props, ref) => {
 
   const onPasswordIconClick = e => {
     setInputType(inputType === inputTypes.PASSWORD ? inputTypes.TEXT : inputTypes.PASSWORD)
+    onTrailingIconClick()
     e.stopPropagation()
   }
 
@@ -58,7 +60,7 @@ const InputBase = React.forwardRef((props, ref) => {
       return null
     }
     if (trailingIcon) {
-      return <div className={ classNames(styles.trailingIcon, trailingIconClassName) }>
+      return <div onClick={ onTrailingIconClick } className={ classNames(styles.trailingIcon, trailingIconClassName) }>
         { trailingIcon }
       </div>
     }
@@ -90,6 +92,7 @@ const InputBase = React.forwardRef((props, ref) => {
 
 InputBase.defaultProps = {
   type: 'text',
+  onTrailingIconClick: () => {},
 }
 
 InputBase.propTypes = {
@@ -119,6 +122,8 @@ InputBase.propTypes = {
   trailingIcon: propTypes.element,
   /** Event fires when a change appeared in the input element. */
   onChange: propTypes.func,
+  /** Event fires when a trailingIcon is clicked. */
+  onTrailingIconClick: propTypes.func,
   /** @ignore */
   onClick: propTypes.func,
   /** @ignore */
