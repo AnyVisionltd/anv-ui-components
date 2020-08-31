@@ -29,11 +29,16 @@ const Table = ({
   }, [selfControlled, setSelfControlled])
 
   useEffect(() => {
-    const params = {
-      filters,
-      sort: sortBy
+    const timer = setTimeout(() => {
+      const params = {
+        filters,
+        sort: sortBy
+      }
+      onChange(params)
+    }, 100)
+    return () => {
+      clearTimeout(timer)
     }
-    onChange(params)
   }, [filters, sortBy, onChange])
 
   const classes = classNames(
