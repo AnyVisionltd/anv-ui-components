@@ -49,6 +49,21 @@ const TextField = React.forwardRef((props, ref) => {
     setActive(false)
   }, textFieldRef)
 
+  const setActiveFocus = e => {
+    if(!disabled && !readOnly) {
+      setActive(textFieldRef.current.contains(e.target))
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('focusin', setActiveFocus)
+    window.addEventListener('click', setActiveFocus)
+    return () => {
+      window.removeEventListener('focusin', setActiveFocus)
+      window.removeEventListener('click', setActiveFocus)
+    }
+  }, [])
+
   useEffect(() => {
     setValue(defaultValue)
   }, [defaultValue])
@@ -68,6 +83,7 @@ const TextField = React.forwardRef((props, ref) => {
   }, [otherProps.value])
 
   const onInputChange = e => {
+    e.persist()
     const { target: { value } } = e
     setValue(value)
     onChange(e)
@@ -87,16 +103,12 @@ const TextField = React.forwardRef((props, ref) => {
   const handleClick = e => {
     if (!disabled && !error && !readOnly) {
       setActive(true)
+      inputRef.current.focus()
     }
     setAnchorElement(anchorElement ? null : textFieldRef.current)
     if(!disabled) {
       onClick(e)
     }
-  }
-
-  const onMouseDown = e => {
-    e.preventDefault()
-    inputRef.current.focus()
   }
 
   const onItemClick = item => {
@@ -130,14 +142,6 @@ const TextField = React.forwardRef((props, ref) => {
     )
   }
 
-  const onFocus = () => {
-    setActive(true)
-  }
-
-  const onBlur = () => {
-    setActive(false)
-  }
-
   const classes = classNames(
     styles.TextField,
     styles[variant],
@@ -155,7 +159,7 @@ const TextField = React.forwardRef((props, ref) => {
 
   return (
     <div className={ classNames(styles.container, className) }>
-      <div ref={ textFieldRef } onMouseDown={ onMouseDown } onClick={ handleClick } className={ classes } onFocus={ onFocus } onBlur={ onBlur }>
+      <div ref={ textFieldRef } onClick={ handleClick } className={ classes }>
         <label className={ classNames(styles.label, { [styles.left]: !!leadingIcon }) }>{ placeholder }</label>
         <InputBase
           { ...otherProps }
