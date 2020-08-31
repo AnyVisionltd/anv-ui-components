@@ -1305,6 +1305,19 @@ exports[`Storyshots Components/InfiniteList Default 1`] = `
         }
       }
     >
+      <button
+        className="button small ghost"
+        disabled={false}
+        onClick={[Function]}
+        style={
+          Object {
+            "marginLeft": "auto",
+          }
+        }
+        type="button"
+      >
+        scroll to top
+      </button>
       <div
         style={
           Object {

@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { FixedSizeList as List } from 'react-window'
 import InfiniteLoader from 'react-window-infinite-loader'
 import AutoSizer from 'react-virtualized-auto-sizer'
+import mergeRefs from '../../utils/mergeRef'
 import styles from './InfiniteList.module.scss'
+
 const Item = ({ data, index, style }) => {
   const { items, rowRender, isItemLoaded, customLoader } = data
   let content
@@ -17,7 +19,7 @@ const Item = ({ data, index, style }) => {
   return <div style={ style }>{ content }</div>
 }
 
-const InfiniteList = ({
+const InfiniteList = forwardRef(({
   rowRender,
   customLoader,
   rowHeight,
@@ -26,17 +28,14 @@ const InfiniteList = ({
   loadMoreItems,
   isLoading,
   className
-}) => {
+}, forwardRef) => {
 
   const hasNextPage = items.length < totalItems || isLoading
-
   const itemCount = hasNextPage ? items.length + 1 : items.length
-
   const loadMore = isLoading ? () => {} : loadMoreItems
 
   // Every row is loaded except for our loading indicator row.
   const isItemLoaded = index => !hasNextPage || index < items.length
-
 
   const classes = classNames(
     styles.infiniteList,
@@ -54,7 +53,7 @@ const InfiniteList = ({
         >
           { ({ onItemsRendered, ref }) => (
             <List
-              ref={ ref }
+              ref={ mergeRefs(ref, forwardRef) }
               className={ classes }
               height={ height }
               width={ width }
@@ -70,7 +69,7 @@ const InfiniteList = ({
       ) }
     </AutoSizer>
   )
-}
+})
 
 InfiniteList.defaultProps = {
   loadMoreItems: () => {},

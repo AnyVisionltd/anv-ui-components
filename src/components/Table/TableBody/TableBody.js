@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { InfiniteList } from '../../../index'
@@ -19,13 +19,19 @@ const TableBody = ({
   ...otherProps
 }) => {
 
+  const listRef = useRef()
+
   const { state, setData, setWithRowActions, setTotalItems,toggleSelectedItem } = useContext(TableContext)
-  const { columns, columnManagement, selection, selfControlled } = state
+  const { columns, columnManagement, selection, selfControlled, filters, sort } = state
   const tableData = useTableData()
 
   useEffect(() => {
     setData(data)
   }, [setData, data])
+
+  useEffect(() => {
+    listRef.current && listRef.current.scrollToItem(0)
+  }, [filters, sort])
 
   useEffect(() => {
     setTotalItems(selfControlled ? tableData.length : totalItems)
@@ -78,13 +84,14 @@ const TableBody = ({
       className={ classes }
 	    { ...otherProps }
     >
-	    <InfiniteList
+      <InfiniteList
         totalItems={ +totalItems }
         rowRender={ renderRow }
         items={ tableData }
         customLoader={ loadingRender }
         isLoading={ isLoading }
         loadMoreItems={ loadMoreData }
+        ref={ listRef }
       >
       </InfiniteList>
     </div>
