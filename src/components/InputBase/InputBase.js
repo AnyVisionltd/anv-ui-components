@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react'
+import React, { memo, useState } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { IconButton } from '../IconButton'
@@ -29,8 +29,8 @@ const InputBase = React.forwardRef((props, ref) => {
     trailingIconClassName,
     ...otherProps
   } = props
-  const [inputType, setInputType] = useState(type)
   const inputRef = ref || React.createRef()
+  const [inputType, setInputType] = useState(type)
   const inputClasses = classNames(
     styles.inputBase,
     styles[type],
@@ -49,8 +49,11 @@ const InputBase = React.forwardRef((props, ref) => {
   }
 
   const onPasswordIconClick = e => {
-    setInputType(inputType === inputTypes.PASSWORD ? inputTypes.TEXT : inputTypes.PASSWORD)
     e.stopPropagation()
+    const type = inputType === inputTypes.PASSWORD ? inputTypes.TEXT : inputTypes.PASSWORD
+    setInputType(type)
+    inputRef.current.type = type
+    inputRef.current.focus()
   }
 
   const renderTrailingIcon = () => {
@@ -62,6 +65,7 @@ const InputBase = React.forwardRef((props, ref) => {
         { trailingIcon }
       </div>
     }
+
     return (
       <IconButton
         variant="ghost"
@@ -81,7 +85,6 @@ const InputBase = React.forwardRef((props, ref) => {
         ref={ inputRef }
         disabled={ disabled }
         { ...elementProps }
-        type={ inputType }
       />
       { renderTrailingIcon() }
     </div>
