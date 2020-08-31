@@ -3,7 +3,7 @@
 ## How to test
 
 
-## Checklist
+### Checklist
 - [ ] Does this need a new/update storybook example?
 - [ ] Does this need new/update tests?
 
