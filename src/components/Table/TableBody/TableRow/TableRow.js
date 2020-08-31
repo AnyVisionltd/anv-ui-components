@@ -100,8 +100,10 @@ const TableRow = ({
       return columnRenderHover(row[field], row)
     } else if (columnRender) {
       return columnRender(row[field], row)
+    } else if(type === types.STRING || type === types.STRING) {
+      return <div className={ styles.ellipsis }>{ row[field] }</div>
     } else if(type === types.DATE) {
-      return formatDateTime(row[field])
+      return <div className={ styles.ellipsis }>{ formatDateTime(row[field]) }</div>
     }
     return row[field]
   }
