@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, memo } from 'react'
+import React, { useState, useEffect, useRef, memo, useCallback } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { ReactComponent as ArrowSolidDown } from '../../assets/svg/ArrowSolidDown.svg'
@@ -49,11 +49,11 @@ const TextField = React.forwardRef((props, ref) => {
     setActive(false)
   }, textFieldRef)
 
-  const setActiveFocus = e => {
+  const setActiveFocus = useCallback(e => {
     if(!disabled && !readOnly) {
       setActive(textFieldRef.current.contains(e.target))
     }
-  }
+  }, [disabled, readOnly])
 
   useEffect(() => {
     window.addEventListener('focusin', setActiveFocus)
@@ -62,7 +62,7 @@ const TextField = React.forwardRef((props, ref) => {
       window.removeEventListener('focusin', setActiveFocus)
       window.removeEventListener('click', setActiveFocus)
     }
-  }, [])
+  }, [setActiveFocus])
 
   useEffect(() => {
     setValue(defaultValue)
