@@ -1440,6 +1440,7 @@ exports[`Storyshots Components/InputBase States 1`] = `
       >
         <textarea
           placeholder="Multiline"
+          type="text"
         />
       </div>
       <div
@@ -1448,6 +1449,7 @@ exports[`Storyshots Components/InputBase States 1`] = `
         <textarea
           placeholder="Multiline 10 Rows"
           rows={10}
+          type="text"
         />
       </div>
     </div>
@@ -1486,6 +1488,7 @@ exports[`Storyshots Components/InputBase With Icon 1`] = `
         </span>
         <textarea
           placeholder="With Icon"
+          type="text"
         />
       </div>
     </div>
@@ -1526,6 +1529,7 @@ exports[`Storyshots Components/InputBase Withtrailing Icon 1`] = `
       >
         <textarea
           placeholder="With Last Icon"
+          type="text"
         />
         <div
           className="trailingIcon"
@@ -3583,6 +3587,7 @@ exports[`Storyshots Components/TextField With Multiline 1`] = `
               onChange={[Function]}
               readOnly={false}
               rows={5}
+              type="text"
               value=""
             />
           </div>
@@ -3608,6 +3613,7 @@ exports[`Storyshots Components/TextField With Multiline 1`] = `
               onChange={[Function]}
               readOnly={false}
               rows={5}
+              type="text"
               value=""
             />
           </div>
