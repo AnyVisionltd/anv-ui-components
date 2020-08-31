@@ -11,6 +11,7 @@ const Selection = ({
   onChange,
   selected,
   bulkActions,
+  byField,
   className
 }) => {
   const { state, setSelectionActivity, setSelection, deselectAll } = useContext(TableContext)
@@ -22,7 +23,7 @@ const Selection = ({
   // contained within the new data
   useEffect(() => {
 
-    const newItems = items.filter(item => !!tableData.find(item2 => item === item2.id))
+    const newItems = items.filter(item => !!tableData.find(item2 => item === item2[byField]))
     onChange && onChange({ excludeMode, items: newItems })
     setSelection({ excludeMode,items:newItems })
     // the logic don't need items in deps array
@@ -87,7 +88,8 @@ const Selection = ({
 
 Selection.defaultProps = {
   onChange: () => {},
-  bulkActions: []
+  bulkActions: [],
+  byField: 'id',
 }
 
 Selection.propTypes = {
@@ -119,6 +121,8 @@ Selection.propTypes = {
       onClick: propTypes.func
     })
   ).isRequired,
+  /** Set this prop to the id field. */
+  byField: propTypes.string,
   /** Selection bar css customization. */
   className: propTypes.string,
 }
