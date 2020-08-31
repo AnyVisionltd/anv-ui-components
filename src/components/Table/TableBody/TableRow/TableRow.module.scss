@@ -17,6 +17,12 @@
     padding-left: av-space();
   }
 
+  .ellipsis {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
   &:hover:not(.selectedRow) {
     background-color: av-color(primary, av-opacity(ghost));
   }
