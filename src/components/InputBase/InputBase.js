@@ -84,6 +84,7 @@ const InputBase = React.forwardRef((props, ref) => {
       <Input
         ref={ inputRef }
         disabled={ disabled }
+        type={ type }
         { ...elementProps }
       />
       { renderTrailingIcon() }
