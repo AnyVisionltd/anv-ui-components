@@ -37,5 +37,9 @@ jobs:
       run: rm /home/runner/work/_temp/.npmrc && touch /home/runner/work/_temp/.npmrc && echo '_auth = ${{secrets.NPM_TOKEN}}' >> /home/runner/work/_temp/.npmrc && echo 'always-auth = true' >> /home/runner/work/_temp/.npmrc && echo 'email=${{secrets.JFROG_USER_EMAIL}}' >> /home/runner/work/_temp/.npmrc && echo '${{secrets.JFROG_REPO_PATH_1}}' >> /home/runner/work/_temp/.npmrc && echo '${{secrets.JFROG_REPO_PATH_2}}' >> /home/runner/work/_temp/.npmrc && npm install
       env:
         NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+    - run: echo ::set-env name=REPOSITORY_NAME::$(echo "$GITHUB_REPOSITORY" | awk -F / '{print $2}' | sed -e "s/:refs//")
+      shell: bash
+
     - name: run the whitesource agent
-      run: ./wss_agent.sh -apiKey ${{secrets.WS_API_KEY}} -userKey ${{secrets.WS_USER_TOKEN}} -product ${{secrets.WS_PROD_NAME}} -productToken ${{secrets.WS_PROD_TOKEN}} -project anv-ui-components -c wss-unified-agent-cloud-v2.config -d .
+      run: ./wss_agent.sh -apiKey ${{secrets.WS_API_KEY}} -userKey ${{secrets.WS_USER_TOKEN}} -product ${{secrets.WS_PROD_NAME}} -productToken ${{secrets.WS_PROD_TOKEN}} -project $REPOSITORY_NAME -c wss-unified-agent-cloud-v2.config -d .
