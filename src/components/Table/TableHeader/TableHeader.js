@@ -77,7 +77,7 @@ const TableHeader = ({
         {
 		  typeof content === 'function'
             ? content()
-            : content
+            : <div className={ styles.ellipsis }>{ content }</div>
         }
         {
 		  sortableColumn && renderSortingIcon(field)
