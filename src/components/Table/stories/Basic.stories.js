@@ -27,12 +27,13 @@ export const Basic = () => {
       content: 'First Name',
       width: '200px',
       sortable: false,
-      manageable: false
+      permanent: true,
     },
     {
       field: 'location',
       type: 'string',
       content: 'Location',
+      manageable: false,
       columnRender: data => <Chip label={ data }/>,
     },
     {

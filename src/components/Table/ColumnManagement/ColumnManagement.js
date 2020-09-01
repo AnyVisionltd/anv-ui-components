@@ -54,7 +54,7 @@ const ColumnManagement = ({ onChange }) => {
     setColumns(newColumns)
   }
 
-  const renderListItem = ({ field, content, label, hide, manageable = true }, index) => {
+  const renderListItem = ({ field, content, label, hide, manageable = true, permanent }, index) => {
     if(!manageable) {
       return
     }
@@ -72,6 +72,7 @@ const ColumnManagement = ({ onChange }) => {
                 onChange={ () => handleCheckboxChange(field) }
                 id={ field }
                 checked={ !hide }
+                disabled={ permanent }
               />
             ) }
             trailingComponent={ (
