@@ -161,28 +161,30 @@ TableHeader.propTypes = {
    *  									  <i style="background-color:#ffc40026;">NOTE: selfControlled free type SSF only work for string/number</i> <br />
    *  <code>columnRender</code> 		- custom column render. <code>(cellData, rowData) => {}</code>. <br />
    *  <code>columnRenderHover</code> 	- custom column render on hover. <code>(cellData, rowData) => {}</code>.<br />
-   *  <code>sortable</code>  			- set column is sortable. <br />
-   *  <code>filterable</code>			- set column is filterable. <br />
-   *  <code>manageable</code>			- set column is manageable. <br />
+   *  <code>sortable</code>  			  - set column is sortable. <br />
+   *  <code>filterable</code>			  - set column is filterable. <br />
+   *  <code>manageable</code>			  - set column is manageable. <br />
+   *  <code>permanent</code>        - if true, disable uncheck column from column management
    *  <code>hide</code>         		- hide the column. <br />
-   *  <code>width</code>    			- set the column width by flex basis. <br />
+   *  <code>width</code>    			  - set the column width by flex basis. <br />
    **/
   columns: propTypes.arrayOf(
     propTypes.shape({
-	  field: propTypes.string.isRequired,
-	  content: propTypes.oneOfType([
+      field: propTypes.string.isRequired,
+      content: propTypes.oneOfType([
         propTypes.string,
         propTypes.func,
-	  ]).isRequired,
-	  label: propTypes.string,
-	  type: propTypes.oneOf(['string', 'number', 'date', 'bool']),
-	  columnRender: propTypes.func,
-	  columnRenderHover: propTypes.func,
-	  sortable: propTypes.bool,
-	  filterable: propTypes.bool,
-	  manageable: propTypes.bool,
-	  hide: propTypes.bool,
-	  width: propTypes.string,
+      ]).isRequired,
+      label: propTypes.string,
+      type: propTypes.oneOf(['string', 'number', 'date', 'bool']),
+      columnRender: propTypes.func,
+      columnRenderHover: propTypes.func,
+      sortable: propTypes.bool,
+      filterable: propTypes.bool,
+      manageable: propTypes.bool,
+      permanent: propTypes.bool,
+      hide: propTypes.bool,
+      width: propTypes.string,
     }),
   ).isRequired,
   /** Callback fire when header cell click with cell field. */

@@ -59,10 +59,10 @@ export const actions = dispatch => ({
       payload: selection,
     })
   },
-  setSelectionActivity: selectable => {
+  setSelectionActivity: (selectable, selectBy) => {
     dispatch({
       type: actionTypes.SET_SELECTION_ACTIVITY,
-      payload: selectable,
+      payload: { selectable, selectBy },
     })
   },
   toggleSelectedItem: (item, isSelected) => {
