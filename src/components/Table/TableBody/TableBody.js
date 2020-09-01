@@ -85,6 +85,7 @@ const TableBody = ({
 	    { ...otherProps }
     >
       <InfiniteList
+        rowHeight={ rowHeight }
         totalItems={ +totalItems }
         rowRender={ renderRow }
         items={ tableData }
@@ -99,7 +100,7 @@ const TableBody = ({
 }
 
 TableBody.defaultProps = {
-  rowHeight: '56px',
+  rowHeight: 56,
 }
 
 TableBody.propTypes = {
@@ -116,8 +117,8 @@ TableBody.propTypes = {
   isLoading: propTypes.bool,
   /** Callback fire when need to fetch more data */
   loadMoreData: propTypes.func,
-  /** The row height. <code>min-height: 48px</code>. */
-  rowHeight: propTypes.string,
+  /** The row height. <code>min-height: 48</code>. */
+  rowHeight: propTypes.number,
   /** If pass, render action menu at the end of each row. */
   rowActions: propTypes.arrayOf(propTypes.shape({
     /** The label to render inside the <Menu.Items/>. */

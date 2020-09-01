@@ -128,7 +128,7 @@ const TableRow = ({
     return (
       <div
         role="row"
-        style={ { height: rowHeight } }
+        style={ { height: `${ rowHeight }px` } }
         className={ tableRowClassNames }
         onMouseEnter={ mouseHoverHandler }
         onMouseLeave={ mouseHoverHandler }
@@ -198,7 +198,7 @@ TableRow.defaultProps = {
 TableRow.propTypes = {
   row: propTypes.object,
   rowActions: propTypes.array,
-  rowHeight: propTypes.string,
+  rowHeight: propTypes.number,
   isLoading: propTypes.bool,
   onRowClick: propTypes.func,
 }
