@@ -11,7 +11,7 @@ const Selection = ({
   onChange,
   selected,
   bulkActions,
-  byField,
+  selectBy,
   className
 }) => {
   const { state, setSelectionActivity, setSelection, deselectAll } = useContext(TableContext)
@@ -22,8 +22,7 @@ const Selection = ({
   //For data changes we need to make sure that the selected items are
   // contained within the new data
   useEffect(() => {
-
-    const newItems = items.filter(item => !!tableData.find(item2 => item === item2[byField]))
+    const newItems = items.filter(item => !!tableData.find(item2 => item === item2[selectBy]))
     onChange && onChange({ excludeMode, items: newItems })
     setSelection({ excludeMode,items:newItems })
     // the logic don't need items in deps array
@@ -33,12 +32,14 @@ const Selection = ({
   useEffect(() => {
     selected && setSelection(selected)
   }, [selected, setSelection])
+
   useEffect(() => {
     setSelection({ excludeMode: false, items: [] })
   }, [setSelection, state.filters])
+
   useEffect(() => {
-    setSelectionActivity(true)
-  }, [setSelectionActivity])
+    setSelectionActivity(true, selectBy)
+  }, [setSelectionActivity, selectBy])
 
   const renderActions = () => {
 
@@ -89,7 +90,7 @@ const Selection = ({
 Selection.defaultProps = {
   onChange: () => {},
   bulkActions: [],
-  byField: 'id',
+  selectBy: 'id',
 }
 
 Selection.propTypes = {
@@ -121,8 +122,8 @@ Selection.propTypes = {
       onClick: propTypes.func
     })
   ).isRequired,
-  /** Set this prop to the id field. */
-  byField: propTypes.string,
+  /** The selection evaluate by this prop. Set to the id field. */
+  selectBy: propTypes.string,
   /** Selection bar css customization. */
   className: propTypes.string,
 }
