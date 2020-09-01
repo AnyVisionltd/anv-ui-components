@@ -10,6 +10,7 @@ const initialState = {
   filters: [],
   selection: {
     isActive: false,
+    selectBy: 'id',
     items: [],
     excludeMode: false,
   },
@@ -28,17 +29,17 @@ const initialState = {
 }
 
 const toggleSelection = (selection, totalItems, payload) => {
-  const { excludeMode, items } = selection
+  const { excludeMode, items, selectBy } = selection
   const { item, isSelected } = payload
   const addItem = excludeMode === isSelected
   if(addItem) {
     if(items.length + 1 === totalItems && excludeMode) {
       return { items: [] , excludeMode: !excludeMode }
     }
-    return { items: [...items, item.id] , excludeMode: excludeMode }
+    return { items: [...items, item[selectBy]] , excludeMode: excludeMode }
   }
   return {
-    items: items.filter(id => id !== payload.item.id),
+    items: items.filter(selectByField => selectByField !== payload.item[selectBy]),
     excludeMode: excludeMode
   }
 }
@@ -47,7 +48,7 @@ const toggleSelectAll = (selection, selfControlled, payload, totalItems) => {
   let excludeMode = selection.excludeMode
   let items = []
   if(selfControlled) {
-    items = !selection.items.length ? payload.map(item => item.id) : []
+    items = !selection.items.length ? payload.map(item => item[selection.selectBy]) : []
   } else {
     excludeMode = !isAllSelected && !selection.items.length
   }
@@ -70,7 +71,7 @@ const reducer = (state, action) => {
   case actionTypes.SET_WITH_ROW_ACTIONS:
     return { ...state, withRowActions: action.payload }
   case actionTypes.SET_SELECTION_ACTIVITY:
-    return { ...state, selection: { ...state.selection, isActive: action.payload } }
+    return { ...state, selection: { ...state.selection, isActive: action.payload.selectable, selectBy: action.payload.selectBy } }
   case actionTypes.SET_SELECTION:
     return { ...state, selection: { ...state.selection, items: action.payload.items, excludeMode: action.payload.excludeMode } }
   case actionTypes.TOGGLE_SELECTED_ITEM:
