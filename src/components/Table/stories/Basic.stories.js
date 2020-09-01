@@ -140,7 +140,7 @@ export const Basic = () => {
     }
   ]
 
-  const style = { width: '100%', height: '400px' }
+  const style = { width: '100%', height: '450px' }
   return (
     <Table style={ style } selfControlled={ true }>
       <Table.SSF onChange={ action('SSF changed') }/>

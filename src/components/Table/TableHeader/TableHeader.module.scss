@@ -39,6 +39,12 @@
       opacity: av-opacity(medium);
     }
   }
+
+  .ellipsis {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
 }
 
 .selectionCell {
