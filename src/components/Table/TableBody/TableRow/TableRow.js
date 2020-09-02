@@ -8,10 +8,9 @@ import { Menu } from '../../../Menu'
 import { IconButton } from '../../../IconButton'
 import { ReactComponent as OptionsIcon } from '../../../../assets/svg/Options.svg'
 import { Checkbox } from '../../../Checkbox'
-import { ToolTip } from '../../../Tooltip'
 import { SkeletonLoader } from '../../../SkeletonLoader'
 import styles from './TableRow.module.scss'
-import Tooltip from "../../../Tooltip/Tooltip"
+import { ToolTip } from '../../../Tooltip'
 
 const TableRow = ({
   row,
@@ -101,14 +100,13 @@ const TableRow = ({
   const renderCellWithTooltip = (cell, tooltipContent) => {
     return <div>
       { cell }
-      <Tooltip
+      <ToolTip
         className={ styles.toolTip }
         anchorRef={ overflowAnchor }
         placement={ 'top' }
-        skidding={ -30 }
       >
         <p>{ tooltipContent }</p>
-      </Tooltip>
+      </ToolTip>
     </div>
   }
 
