@@ -6,6 +6,8 @@ Please review this document to help to streamline the process and save everyone'
 
 This repo uses npm workspaces, so you should install `npm` as the package manager. See [installation guide](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
+the latest stable version is the lastes `tag`.
+
 ## Issues
 
 No software is bug-free. So, if you got an issue, follow these steps:
@@ -54,7 +56,7 @@ Before you submit a new PR, make sure you run `npm run test` and check storybook
 
 **As a PR submitter**, you should reference the issue if there is one, include a short description of what you contributed and, if it is a code change, instructions for how to manually test out the change. This is informally enforced by our [PR template](https://github.com/AnyVisionltd/anv-ui-components/blob/development/.github/PULL_REQUEST_TEMPLATE.md).
 
-> NOTE: Although the latest stable version is `master` branch, all development happens in the `development` branch. Please Submit PR's, to `development` branch.
+> NOTE: All development happens in the `development` branch. Please Submit PR's, to `development` branch.
 
 All issues should have a `type` label. `bug`/`feature`/`question`/etc...`.
 
