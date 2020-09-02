@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import classNames from 'classnames'
 import propTypes from 'prop-types'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import LanguageService from '../../../services/language'
@@ -81,7 +82,11 @@ const ColumnManagement = ({ onChange }) => {
               </div>
             ) }
           >
-            <label className={ styles.columnName } htmlFor={ field }>{ columnName }</label>
+            <label
+              className={ classNames(styles.columnName, { [styles.permanent]: permanent }) }
+              htmlFor={ field }>
+              { columnName }
+            </label>
           </List.Item>
         ) }
       </Draggable>
