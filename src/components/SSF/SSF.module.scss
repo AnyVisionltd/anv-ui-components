@@ -5,9 +5,10 @@
   min-width: av-size(sz-640);
   border-radius: av-radius();
   display: flex;
+  align-items: stretch;
 
   .searchFilter {
-    height: 100%;
+    height: unset;
     padding: av-space(tiny);
     background-color: av-color(surface);
     fill: av-color(content);

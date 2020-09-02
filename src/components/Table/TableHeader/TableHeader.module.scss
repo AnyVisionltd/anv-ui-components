@@ -18,7 +18,9 @@
   fill: av-color(content, av-opacity(medium));
   background-color: av-color(content, av-opacity(ghost));
   border: 1px av-color(content, av-opacity(divider)) solid;
-  margin-bottom: 8px;
+  margin-bottom: av-space(tiny);
+  // temporary, because of scrollbar
+  padding-right: av-space();
 }
 
 .headerCell {
