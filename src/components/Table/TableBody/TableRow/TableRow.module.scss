@@ -23,6 +23,12 @@
     white-space: nowrap;
   }
 
+  .toolTip {
+    max-width: av-size(sz-320);
+    white-space: pre-wrap;
+    overflow: visible;
+  }
+
   &:hover:not(.selectedRow) {
     background-color: av-color(primary, av-opacity(ghost));
   }

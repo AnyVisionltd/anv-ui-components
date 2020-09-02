@@ -15,6 +15,7 @@ const Tooltip = ({
   children,
   arrow,
   offset,
+  skidding,
   className,
   interactive }) => {
 
@@ -36,7 +37,7 @@ const Tooltip = ({
         options: { adaptive: false }
       },
       { name: 'arrow', options: { element: arrowRef.current } },
-      { name: 'offset', options: { offset: [0, offset] } }
+      { name: 'offset', options: { offset: [skidding, offset] } }
     ]
   })
 
@@ -103,6 +104,7 @@ Tooltip.defaultProps = {
   children: null,
   arrow: false,
   offset: 5,
+  skidding: 0,
   interactive: false
 }
 
@@ -128,6 +130,8 @@ Tooltip.propTypes = {
   arrow: propTypes.bool,
   /** The distance between the anchor element and the tooltip*/
   offset: propTypes.number,
+  /** The displacement of the tooltip along the main-axis (x-axis) of the anchor*/
+  skidding: propTypes.number,
   /** Whether the tooltip is interactive or not. This will add the ability to
      * hover the tool tip and make it stay while being hovered.
      * This requires the <code>leaveTimer</code> to be greater than 0*/

@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useState, useRef } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { formatDateTime } from '../../../../services/date'
@@ -8,8 +8,10 @@ import { Menu } from '../../../Menu'
 import { IconButton } from '../../../IconButton'
 import { ReactComponent as OptionsIcon } from '../../../../assets/svg/Options.svg'
 import { Checkbox } from '../../../Checkbox'
+import { ToolTip } from '../../../Tooltip'
 import { SkeletonLoader } from '../../../SkeletonLoader'
 import styles from './TableRow.module.scss'
+import Tooltip from "../../../Tooltip/Tooltip"
 
 const TableRow = ({
   row,
@@ -25,6 +27,7 @@ const TableRow = ({
 }) => {
   const [actionsAnchorElement, setActionsAnchorElement] = useState(null)
   const [isHover, setIsHover] = useState(false)
+  const overflowAnchor = useRef()
   const handleActionsClose = () => {
     setActionsAnchorElement(null)
   }
@@ -95,13 +98,39 @@ const TableRow = ({
     )
   }
 
+  const renderCellWithTooltip = (cell, tooltipContent) => {
+    return <div>
+      { cell }
+      <Tooltip
+        className={ styles.toolTip }
+        anchorRef={ overflowAnchor }
+        placement={ 'top' }
+        skidding={ -30 }
+      >
+        <p>{ tooltipContent }</p>
+      </Tooltip>
+    </div>
+  }
+
+  const shouldRenderWithToolTip = elementRef =>
+    elementRef.clientWidth < elementRef.scrollWidth ||
+    elementRef.clientHeight < elementRef.scrollHeight
+
   const renderCell = (row, field, columnRender, columnRenderHover, type) => {
     if(isHover && columnRenderHover) {
       return columnRenderHover(row[field], row)
     } else if (columnRender) {
       return columnRender(row[field], row)
     } else if(type === types.STRING || type === types.STRING) {
-      return <div className={ styles.ellipsis }>{ row[field] }</div>
+      const cell = <div ref={ overflowAnchor } className={ styles.ellipsis }>{ row[field] }</div>
+
+      if(overflowAnchor.current) {
+        const { current } = overflowAnchor
+        if(shouldRenderWithToolTip(current)){
+          return renderCellWithTooltip(cell, row[field])
+        }
+      }
+      return cell
     } else if(type === types.DATE) {
       return <div className={ styles.ellipsis }>{ formatDateTime(row[field]) }</div>
     }

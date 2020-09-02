@@ -99,6 +99,13 @@ export const Basic = () => {
       location: 'Tzfat',
       weather: 20,
     },
+    {
+      id: '6',
+      active: false,
+      firstname: 'Cruz de la Santa Rosalina Agnelia Rodriguez Cuellar Rene Reyes Vásquez Vega Castillo',
+      location: 'Spain',
+      weather: 41,
+    },
   ], [])
 
   const rowActions = useMemo(() => [
