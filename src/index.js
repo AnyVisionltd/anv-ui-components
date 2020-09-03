@@ -11,10 +11,11 @@ export { SSF } from './components/SSF'
 export { SkeletonLoader } from './components/SkeletonLoader'
 export { InfiniteList } from './components/InfiniteList'
 export { Dialog } from './components/Dialog'
-export { Tooltip } from './components/Tooltip'
 export { ChipsInput } from './components/ChipsInput'
 export { List } from './components/List'
 export { FileUpload } from './components/FileUpload'
 export { TextField } from './components/TextField'
+// Dont use before refactor
+// export { Tooltip } from './components/Tooltip'
 
 export { default as mockAutoSizer } from './testUtils/mockAutoSizer'
