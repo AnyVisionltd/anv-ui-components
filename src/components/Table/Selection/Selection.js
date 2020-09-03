@@ -23,7 +23,7 @@ const Selection = ({
   // contained within the new data
   useEffect(() => {
     const newItems = items.filter(item => !!tableData.find(item2 => item === item2[selectBy]))
-    const newExcludeMode = newItems.length ? excludeMode : false
+    const newExcludeMode = tableData.length ? excludeMode : false
     onChange && onChange({ excludeMode, items: newItems })
     setSelection({ excludeMode: newExcludeMode, items: newItems })
     // the logic don't need items in deps array

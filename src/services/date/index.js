@@ -1,9 +1,15 @@
 import moment from 'moment'
 
 export const formatDate = date => {
-  return moment(date).format('L')
+  if(moment(date).isValid()){
+    return moment(date).format('L')
+  }
+  return ''
 }
 
 export const formatDateTime = date => {
-  return `${moment(date).format('L')} ${moment(date).format('HH:mm')}`
+  if(moment(date).isValid()) {
+    return `${moment(date).format('L')} ${moment(date).format('HH:mm')}`
+  }
+  return ''
 }
