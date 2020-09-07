@@ -141,7 +141,7 @@ Wizard.defaultProps = {
   onNextClick: () => { },
   disableBackdropClick: false,
   disableEscapeKeyDown: false,
-  steps: [<div>Default Step</div>],
+  steps: [],
   cancelText: languageService.getTranslation('cancel'),
   nextText: languageService.getTranslation('next'),
   finishText: languageService.getTranslation('finish'),
