@@ -9,6 +9,7 @@ import { IconButton } from '../../../IconButton'
 import { ReactComponent as OptionsIcon } from '../../../../assets/svg/Options.svg'
 import { Checkbox } from '../../../Checkbox'
 import { SkeletonLoader } from '../../../SkeletonLoader'
+import { ConfirmationDialog } from '../../ConfirmationDialog'
 import styles from './TableRow.module.scss'
 
 const TableRow = ({
@@ -25,14 +26,30 @@ const TableRow = ({
 }) => {
   const [actionsAnchorElement, setActionsAnchorElement] = useState(null)
   const [isHover, setIsHover] = useState(false)
+  const [confirmationDialog, setConfirmationDialog] = useState({
+    confirmMessage: '',
+    onConfirm: () => {},
+  })
+
   const handleActionsClose = () => {
     setActionsAnchorElement(null)
   }
 
-  const handleMenuItemClick = (e, row, onClick) => {
+  const dismissConfirmationDialog = () => {
+    setConfirmationDialog({ confirmMessage: '' })
+  }
+
+  const handleMenuItemClick = (e, row, onClick, confirmMessage) => {
     e.stopPropagation()
+    if(confirmMessage) {
+      setConfirmationDialog({ confirmMessage, onConfirm: () => {
+        onClick(row)
+        dismissConfirmationDialog()
+      } })
+    } else {
+      onClick(row)
+    }
     handleActionsClose()
-    onClick(row)
   }
 
   const handleActionsClick = event => {
@@ -50,11 +67,11 @@ const TableRow = ({
           onClose={ handleActionsClose }
         >
           {
-            rowActions.map(({ label, icon, onClick }, index) => (
+            rowActions.map(({ label, icon, onClick, confirmMessage }, index) => (
               <Menu.Item
                 leadingComponent={ icon }
                 key={ index }
-                onClick={ e => handleMenuItemClick(e, row, onClick) }
+                onClick={ e => handleMenuItemClick(e, row, onClick, confirmMessage) }
               >
                 { label }
               </Menu.Item>
@@ -186,6 +203,12 @@ const TableRow = ({
 
   return (
     <>
+      <ConfirmationDialog
+        isOpen={ !!confirmationDialog.confirmMessage }
+        onConfirm={ confirmationDialog.onConfirm }
+        onDismiss={ dismissConfirmationDialog }
+        confirmMessage={ confirmationDialog.confirmMessage }
+      />
       { isLoading ? renderLoadingRow(): renderDataRow() }
     </>
   )

@@ -1,0 +1,15 @@
+@import "~@anyvision/style-guide";
+
+.confirmationDialog {
+  width: av-size(sz-480);
+
+  .footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    > button {
+      margin-left: av-space(tiny);
+    }
+  }
+}

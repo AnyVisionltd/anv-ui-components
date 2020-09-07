@@ -2,6 +2,9 @@
  "en": {
    "save": "Save",
    "columnManagement": "Column Management",
-   "results": "Results"
+   "results": "Results",
+   "yes": "Yes",
+   "no": "No",
+   "areYouSure": "Are You Sure?"
   }
 }
