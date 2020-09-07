@@ -4,11 +4,11 @@ import { action } from '@storybook/addon-actions'
 import { Button } from '../../index'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import styles from '../../styles/storybook/wizard.module.scss'
-import Wizard from "./Wizard"
+import DialogWizard from "./DialogWizard"
 
 export default {
-  title: 'Components/Wizard',
-  component: Wizard,
+  title: 'Components/DialogWizard',
+  component: DialogWizard,
   decorators: [centerDecorator],
 }
 
@@ -35,7 +35,7 @@ export const Basic = () => {
       >
           Open Wizard
       </Button>
-      <Wizard
+      <DialogWizard
         className={ styles.wizardExample }
         isOpen={ isDialogOpen }
         onClose={ handleCloseDialog }
@@ -45,8 +45,7 @@ export const Basic = () => {
         headerTitle={ 'Header title' }
         footerMessage={ 'Opps! Connection failed, Please re-check your details and try again' }
         steps={ steps }
-      >
-      </Wizard>
+      />
     </div>
   )
 }
@@ -84,7 +83,7 @@ export const WithOverlay = () => {
       >
           Open Wizard
       </Button>
-      <Wizard
+      <DialogWizard
         className={ styles.wizardExample }
         isOpen={ isDialogOpen }
         onClose={ handleCloseDialog }
@@ -95,8 +94,7 @@ export const WithOverlay = () => {
         steps={ steps }
         onNextClick={ action('next') }
         overlayContent={ renderOverlayContent() }
-      >
-      </Wizard>
+      />
     </div>
   )
 }
@@ -132,7 +130,7 @@ export const Uncontrolled = () => {
       >
           Open Wizard
       </Button>
-      <Wizard
+      <DialogWizard
         className={ styles.wizardExample }
         isOpen={ isDialogOpen }
         onClose={ handleCloseDialog }
@@ -143,8 +141,7 @@ export const Uncontrolled = () => {
         footerMessage={ 'Opps! Connection failed, Please re-check your details and try again' }
         steps={ steps }
         currentStep={ currentStep }
-      >
-      </Wizard>
+      />
     </div>
   )
 }

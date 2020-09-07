@@ -5,10 +5,9 @@ import { Dialog, Button } from '../../index'
 import { IconButton } from '../../index'
 import { ReactComponent as BackIcon } from '../../assets/svg/LongArrow.svg'
 import languageService from '../../services/language'
-import styles from './Wizard.module.scss'
+import styles from './DialogWizard.module.scss'
 
-
-const Wizard = ({
+const DialogWizard = ({
   className,
   onClose,
   onNextClick,
@@ -134,7 +133,7 @@ const Wizard = ({
   )
 }
 
-Wizard.defaultProps = {
+DialogWizard.defaultProps = {
   isOpen: false,
   onClose: () => { },
   onNextClick: () => { },
@@ -146,7 +145,7 @@ Wizard.defaultProps = {
   finishText: languageService.getTranslation('finish'),
 }
 
-Wizard.propTypes = {
+DialogWizard.propTypes = {
   /** For css customization */
   className: propTypes.string,
   /** Should the dialog appear on screen or not */
@@ -177,4 +176,4 @@ Wizard.propTypes = {
   cancelText: propTypes.string,
 }
 
-export default Wizard
+export default DialogWizard
