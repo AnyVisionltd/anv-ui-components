@@ -15,6 +15,7 @@ export { ChipsInput } from './components/ChipsInput'
 export { List } from './components/List'
 export { FileUpload } from './components/FileUpload'
 export { TextField } from './components/TextField'
+export { Wizard } from './components/Wizard'
 // Dont use before refactor
 // export { Tooltip } from './components/Tooltip'
 
