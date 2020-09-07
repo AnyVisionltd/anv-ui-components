@@ -1,6 +1,9 @@
 {
  "en": {
    "save": "Save",
+   "finish": "Finish",
+   "next": "Next",
+   "cancel": "Cancel",
    "columnManagement": "Column Management",
    "results": "Results"
   }

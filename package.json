@@ -28,6 +28,7 @@
   },
   "scripts": {
     "build": "rollup -c",
+    "start": "npm run storybook",
     "test": "react-scripts test",
     "lint": "eslint -c .eslintrc.js src",
     "lint:fix": "eslint -c .eslintrc.js src --fix",

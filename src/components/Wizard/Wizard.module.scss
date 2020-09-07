@@ -1,0 +1,89 @@
+@import "~@anyvision/style-guide";
+@import '../../styles/constants';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: centers;
+  flex: 1;
+  margin-right: av-space(tiny);
+
+  .headerLeftSide {
+    display: flex;
+    align-items: center;
+  }
+
+  .steps {
+    display: flex;
+    align-items: center;
+    
+    small {
+      @extend %av-overline;
+      margin-left: av-space(micro);
+      cursor: default;
+    }
+
+    .stepsNumbers {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      width: av-size(sz-32);
+    }
+  }
+
+  .backButton {
+    color: av-color(content);
+    margin-right: av-space(tiny);
+    transform: rotate(90deg);
+  }
+}
+
+.footer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  cursor: default;
+
+  .buttons {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+
+    > * {
+      margin-left: av-space(tiny);
+    }
+  }
+}
+
+.progress {
+  height: 4px;
+  background-color: av-color(primary, av-opacity(divider));
+
+  .innerProgress {
+    background-color: av-color(primary);
+    height: 100%;
+    transition: width 0.3s ease-in;
+  }
+}
+
+.overlay {
+  top: 0;
+  right: 0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: av-color(overlay);
+  opacity: 0.9;
+  
+  > * {
+    height: calc(100% - #{$dialog-footer-height});
+  }
+}
+
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex:1;
+  position: relative;
+}
