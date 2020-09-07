@@ -70,6 +70,7 @@
 }
 
 .sortingIcon {
+  transform: rotate(-180deg);
   opacity: 0;
   width: av-size(sz-16);
   transition: transform 200ms ease-in-out, opacity 200ms ease-in-out;
@@ -80,5 +81,5 @@
 }
 
 .sortingIconDesc {
-  transform: rotate(-180deg);
+  transform: rotate(0);
 }
