@@ -1,8 +1,9 @@
 @import "~@anyvision/style-guide";
+@import '../../../styles/constants';
 
 .dialogFooter {
   box-sizing: border-box;
-  height: 48px;
+  height: $dialog-footer-height;
   flex-shrink: 0;
   margin: 0 av-space(medium) av-space(medium) av-space(medium)
 }

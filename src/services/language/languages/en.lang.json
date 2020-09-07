@@ -1,6 +1,10 @@
 {
  "en": {
    "save": "Save",
+   "finish": "Finish",
+   "next": "Next",
+   "cancel": "Cancel",
+   "step": "step",
    "columnManagement": "Column Management",
    "results": "Results",
    "yes": "Yes",
