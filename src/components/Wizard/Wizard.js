@@ -110,7 +110,7 @@ const Wizard = ({
         </div>
         <div className={ styles.content }>
           <Dialog.Body >
-            { steps[step - 1] }
+            { steps.length && steps[step - 1] }
           </Dialog.Body>
           <Dialog.Footer>
             <div className={ styles.footer }>
