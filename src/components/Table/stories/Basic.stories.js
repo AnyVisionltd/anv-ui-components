@@ -104,7 +104,8 @@ export const Basic = () => {
   const rowActions = useMemo(() => [
     {
       label: 'Delete',
-      onClick: action('delete action clicked')
+      onClick: action('delete action clicked'),
+      confirmMessage: 'Are you sure you want to delete this item?'
     },
     {
       label: 'Edit',
@@ -117,6 +118,7 @@ export const Basic = () => {
       icon: <SunIcon/>,
       label: 'action 1',
       onClick: action('bulk action 1'),
+      confirmMessage: 'Are you sure you want to sun all the items?'
     },
     {
       icon: <EyeEnabledIcon/>,
@@ -135,6 +137,7 @@ export const Basic = () => {
           icon: <EyeEnabledIcon/>,
           label: 'action 4',
           onClick: action('bulk action 4'),
+          confirmMessage: 'Are you sure you want to eye all the items?'
         }
       ]
     }

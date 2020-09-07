@@ -47,11 +47,12 @@ const Selection = ({
     return (
       <div className={ styles.actionsContainer }>
         {
-          bulkActions.map(({ icon, onClick, subMenu }, index)=> (
+          bulkActions.map(({ icon, onClick, subMenu, confirmMessage }, index)=> (
             <BulkAction
               icon={ icon }
               onClick={ onClick }
               subMenu={ subMenu }
+              confirmMessage={ confirmMessage }
               key={ index }
             />
           ))
@@ -105,10 +106,11 @@ Selection.propTypes = {
     })
   ),
   /** Table bulk actions. <br />
-   *  <code>icon</code>      - icon for the action. <br />
-   *  <code>label</code>     - label for the action icon.<br />
-   *  <code>submenu</code>     - submenu for the action icon.<br />
-   *  <code>onClick</code>   - callback fire when action click. <br />
+   *  <code>icon</code>             - icon for the action. <br />
+   *  <code>label</code>            - label for the action icon.<br />
+   *  <code>submenu</code>          - submenu for the action icon.<br />
+   *  <code>confirmMessage</code>   - if pass confirmation dialog will show after click the action. <br />
+   *  <code>onClick</code>          - callback fire when action click. <br />
    **/
   bulkActions: propTypes.arrayOf(
     propTypes.shape({
@@ -117,10 +119,12 @@ Selection.propTypes = {
         propTypes.shape({
           icon: propTypes.node,
           label: propTypes.string,
-          onClick: propTypes.func.isRequired
+          onClick: propTypes.func.isRequired,
+          confirmMessage: propTypes.string
         })),
       label: propTypes.string,
-      onClick: propTypes.func
+      onClick: propTypes.func,
+      confirmMessage: propTypes.string
     })
   ).isRequired,
   /** The selection evaluate by this prop. Set to the id field. */

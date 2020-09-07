@@ -125,6 +125,8 @@ TableBody.propTypes = {
     label: propTypes.string,
     /** The icon to render before the label. */
     icon: propTypes.node,
+    /** if pass confirmation dialog will show after click the action. */
+    confirmMessage: propTypes.string,
     /** The callback when click the <Menu.Items/> */
     onClick: propTypes.func,
   })),
