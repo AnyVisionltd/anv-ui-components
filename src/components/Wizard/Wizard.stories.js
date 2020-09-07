@@ -94,8 +94,7 @@ export const WithOverlay = () => {
         footerMessage={ 'Opps! Connection failed, Please re-check your details and try again' }
         steps={ steps }
         onNextClick={ action('next') }
-        withOverlay
-        renderOverlayContent={ renderOverlayContent }
+        overlayContent={ renderOverlayContent() }
       >
       </Wizard>
     </div>

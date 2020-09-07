@@ -18,18 +18,13 @@ const Wizard = ({
   footerMessage,
   steps,
   currentStep,
-  withOverlay,
-  renderOverlayContent,
+  overlayContent,
   overlayClassName,
   finishText,
   nextText,
   cancelText,
   ...otherProps
 }) => {
-
-  const classes = classNames(
-    styles.wizard,
-  )
 
   const [step, setStep] = useState(currentStep || 1)
 
@@ -42,7 +37,7 @@ const Wizard = ({
   const handleNextClick = () => {
     let nextStep = Math.min(step + 1, steps.length)
     if (!currentStep) {
-      setStep(nextStep)
+      setStep(step === steps.length ? 1 : nextStep)
     }
     if (step === steps.length) {
       return onClose()
@@ -88,56 +83,60 @@ const Wizard = ({
     )
   }
 
+  const handleClose = () => {
+    if(!currentStep) {
+      setStep(1)
+    }
+    onClose()
+  }
+
   return (
-    <div className={ classes }>
-      <Dialog
-        className={ className }
-        isOpen={ isDialogOpen }
-        onClose={ onClose }
-        { ...otherProps }
-      >
-        <Dialog.Header >
-          <div className={ styles.header }>
-            <div className={ styles.headerLeftSide }>
-              { renderBackIcon() }
-              { headerTitle }
-            </div>
-            { renderSteps() }
+    <Dialog
+      className={ className }
+      isOpen={ isDialogOpen }
+      onClose={ handleClose }
+      { ...otherProps }
+    >
+      <Dialog.Header >
+        <div className={ styles.header }>
+          <div className={ styles.headerLeftSide }>
+            { renderBackIcon() }
+            { headerTitle }
           </div>
-        </Dialog.Header>
-        <div className={ styles.progress }>
-          <div className={ styles.innerProgress } style={ { width: `${(step / steps.length) * 100}%` } } />
+          { renderSteps() }
         </div>
-        <div className={ styles.content }>
-          <Dialog.Body >
-            { steps.length && steps[step - 1] }
-          </Dialog.Body>
-          <Dialog.Footer>
-            <div className={ styles.footer }>
-              { footerMessage }
-              <div className={ styles.buttons }>
-                <Button variant={ 'ghost' } onClick={ onClose }>
-                  { cancelText }
-                </Button>
-                <Button onClick={ handleNextClick }>
-                  { step === steps.length ? finishText : nextText }
-                </Button>
-              </div>
+      </Dialog.Header>
+      <div className={ styles.progress }>
+        <div className={ styles.innerProgress } style={ { width: `${(step / steps.length) * 100}%` } } />
+      </div>
+      <div className={ styles.content }>
+        <Dialog.Body >
+          { steps.length && steps[step - 1] }
+        </Dialog.Body>
+        <Dialog.Footer>
+          <div className={ styles.footer }>
+            { footerMessage }
+            <div className={ styles.buttons }>
+              <Button variant={ 'ghost' } onClick={ handleClose }>
+                { cancelText }
+              </Button>
+              <Button onClick={ handleNextClick }>
+                { step === steps.length ? finishText : nextText }
+              </Button>
             </div>
-          </Dialog.Footer>
-          { withOverlay && <div className={ classNames(styles.overlay, overlayClassName) }>
-            { renderOverlayContent() }
-          </div> }
-        </div>
-      </Dialog>
-    </div>
+          </div>
+        </Dialog.Footer>
+        { overlayContent && <div className={ classNames(styles.overlay, overlayClassName) }>
+          { overlayContent }
+        </div> }
+      </div>
+    </Dialog>
   )
 }
 
 Wizard.defaultProps = {
   isOpen: false,
   onClose: () => { },
-  renderOverlayContent: () => { },
   onNextClick: () => { },
   disableBackdropClick: false,
   disableEscapeKeyDown: false,
@@ -152,7 +151,7 @@ Wizard.propTypes = {
   className: propTypes.string,
   /** Should the dialog appear on screen or not */
   isOpen: propTypes.bool.isRequired,
-  /** A callback triggered whenever the menu is closed */
+  /** A callback triggered whenever the wizard is closed */
   onClose: propTypes.func,
   /** Disable onClose firing when backdrop is clicked */
   disableBackdropClick: propTypes.bool,
@@ -166,10 +165,8 @@ Wizard.propTypes = {
   steps: propTypes.arrayOf(propTypes.element),
   /** current step, default is 1, if step is not provided the wizard is self controlled*/
   currentStep: propTypes.number,
-  /** boolean wheather overlay currently should be rendered*/
-  withOverlay: propTypes.bool,
-  /** callback to render overlay content*/
-  renderOverlayContent: propTypes.func,
+  /** overlay content element*/
+  overlayContent: propTypes.element,
   /** css costumization for ovarlay */
   overlayClassName: propTypes.string,
   /** text for done button */

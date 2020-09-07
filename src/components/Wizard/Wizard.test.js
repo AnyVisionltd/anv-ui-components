@@ -52,4 +52,26 @@ describe('<Wizard />', () => {
     fireEvent.click(nextButton)
     expect(getByText('Finish')).not.toEqual(null)
   })
+
+  it('should render custom finish, next, cancel texts', () => {
+    const steps = [
+      <div data-testid={ 'test-child-1' } />,
+      <div data-testid={ 'test-child-2' } />,
+    ]
+    const { getByText } = render(<Wizard isOpen steps={ steps } nextText={ 'customNext' } finishText={ 'customFinish' } cancelText={ 'customCancel' }/>)
+    const nextButton = getByText('customNext')
+    fireEvent.click(nextButton)
+    expect(getByText('customFinish')).not.toEqual(null)
+    expect(getByText('customCancel')).not.toEqual(null)
+  })
+
+  it('should render overaly content', () => {
+    const steps = [
+      <div data-testid={ 'test-child-1' } />,
+    ]
+    const overlayText = 'Overlay content'
+    const overlayContent = <div>{ overlayText }</div>
+    const { getByText } = render(<Wizard isOpen steps={ steps } overlayContent={ overlayContent } />)
+    expect(getByText(overlayText)).not.toEqual(null)
+  })
 })

@@ -43,7 +43,8 @@
   align-items: baseline;
   justify-content: space-between;
   cursor: default;
-
+  @extend %av-body2;
+  
   .buttons {
     display: flex;
     flex: 1;

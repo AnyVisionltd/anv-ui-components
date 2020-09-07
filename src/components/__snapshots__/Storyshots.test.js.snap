@@ -4084,11 +4084,7 @@ exports[`Storyshots Components/Wizard Basic 1`] = `
       >
         Open Wizard
       </button>
-      <div
-        className="wizard"
-      >
-        <portal-for-test />
-      </div>
+      <portal-for-test />
     </div>
   </div>
 </div>
@@ -4110,11 +4106,7 @@ exports[`Storyshots Components/Wizard Uncontrolled 1`] = `
       >
         Open Wizard
       </button>
-      <div
-        className="wizard"
-      >
-        <portal-for-test />
-      </div>
+      <portal-for-test />
     </div>
   </div>
 </div>
@@ -4136,11 +4128,7 @@ exports[`Storyshots Components/Wizard With Overlay 1`] = `
       >
         Open Wizard
       </button>
-      <div
-        className="wizard"
-      >
-        <portal-for-test />
-      </div>
+      <portal-for-test />
     </div>
   </div>
 </div>
