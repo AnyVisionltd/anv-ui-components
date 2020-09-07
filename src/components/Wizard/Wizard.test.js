@@ -11,15 +11,15 @@ describe('<Wizard />', () => {
   })
 
   it('should render steps into Wizard', () => {
-    const steps = [{ component: <div data-testid={ 'test-child' }/> }]
+    const steps = [<div data-testid={ 'test-child' }/>]
     const { queryByTestId } = render(<Wizard isOpen steps={ steps }/>)
     expect(queryByTestId('test-child')).not.toEqual(null)
   })
 
   it('should change step when clicking next', () => {
     const steps = [
-      { component: <div data-testid={ 'test-child-1' }/> },
-      { component: <div data-testid={ 'test-child-2' }/> }
+      <div data-testid={ 'test-child-1' } />,
+      <div data-testid={ 'test-child-2' } />,
     ]
     const { getByText, queryByTestId } = render(<Wizard isOpen steps={ steps }/>)
     const nextButton = getByText('Next')
@@ -29,9 +29,9 @@ describe('<Wizard />', () => {
 
   it('should change step when clicking back', () => {
     const steps = [
-      { component: <div data-testid={ 'test-child-1' }/> },
-      { component: <div data-testid={ 'test-child-2' }/> },
-      { component: <div data-testid={ 'test-child-3' }/> },
+      <div data-testid={ 'test-child-1' } />,
+      <div data-testid={ 'test-child-2' } />,
+      <div data-testid={ 'test-child-3' } />,
     ]
     const { getByText, getByTestId, queryByTestId } = render(<Wizard isOpen steps={ steps }/>)
     const nextButton = getByText('Next')
@@ -44,8 +44,8 @@ describe('<Wizard />', () => {
 
   it('should render finish button when step is last', () => {
     const steps = [
-      { component: <div data-testid={ 'test-child-1' }/> },
-      { component: <div data-testid={ 'test-child-2' }/> },
+      <div data-testid={ 'test-child-1' } />,
+      <div data-testid={ 'test-child-2' } />,
     ]
     const { getByText } = render(<Wizard isOpen steps={ steps }/>)
     const nextButton = getByText('Next')

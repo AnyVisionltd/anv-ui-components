@@ -8,7 +8,24 @@ import languageService from '../../services/language'
 import styles from './Wizard.module.scss'
 
 
-const Wizard = ({ className, onClose, onNextClick, isDialogOpen, clickNext, headerTitle, footerMessage, steps, currentStep, withOverlay, renderOverlayContent, overlayClassName, finishText, nextText, cancelText, ...otherProps }) => {
+const Wizard = ({
+  className,
+  onClose,
+  onNextClick,
+  isDialogOpen,
+  clickNext,
+  headerTitle,
+  footerMessage,
+  steps,
+  currentStep,
+  withOverlay,
+  renderOverlayContent,
+  overlayClassName,
+  finishText,
+  nextText,
+  cancelText,
+  ...otherProps
+}) => {
 
   const classes = classNames(
     styles.wizard,
@@ -36,7 +53,7 @@ const Wizard = ({ className, onClose, onNextClick, isDialogOpen, clickNext, head
   const renderSteps = () => {
     return (
       <div className={ styles.steps }>
-        <small>step</small>
+        <small>{ languageService.getTranslation('step') }</small>
         <div className={ styles.stepsNumbers }>
           <small>{ step }</small>
           <small>-</small>
@@ -93,7 +110,7 @@ const Wizard = ({ className, onClose, onNextClick, isDialogOpen, clickNext, head
         </div>
         <div className={ styles.content }>
           <Dialog.Body >
-            { steps[step - 1] && steps[step - 1].component }
+            { steps[step - 1] }
           </Dialog.Body>
           <Dialog.Footer>
             <div className={ styles.footer }>
@@ -124,7 +141,7 @@ Wizard.defaultProps = {
   onNextClick: () => { },
   disableBackdropClick: false,
   disableEscapeKeyDown: false,
-  steps: [{ component: <div>Default Step</div> }],
+  steps: [<div>Default Step</div>],
   cancelText: languageService.getTranslation('cancel'),
   nextText: languageService.getTranslation('next'),
   finishText: languageService.getTranslation('finish'),
@@ -146,9 +163,7 @@ Wizard.propTypes = {
   /** header title can be a string or an element */
   headerTitle: propTypes.oneOfType([propTypes.string, propTypes.element]),
   /** array of steps*/
-  steps: propTypes.arrayOf(propTypes.shape({
-    component: propTypes.element,
-  })),
+  steps: propTypes.arrayOf(propTypes.element),
   /** current step, default is 1, if step is not provided the wizard is self controlled*/
   currentStep: propTypes.number,
   /** boolean wheather overlay currently should be rendered*/

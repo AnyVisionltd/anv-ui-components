@@ -13,7 +13,11 @@ export default {
 }
 
 export const Basic = () => {
-
+  const steps = [
+    <div>Step 1</div>, 
+    <div>Step 2</div>, 
+    <div>Step 3</div>,
+  ]
   const [isDialogOpen, setDialogOpen] = useState(false)
 
   const handleOpenDialog = () => setDialogOpen(true)
@@ -40,7 +44,7 @@ export const Basic = () => {
         disableEscapeKeyDown={ disableEscapeKeyDown }
         headerTitle={ 'Header title' }
         footerMessage={ 'Opps! Connection failed, Please re-check your details and try again' }
-        steps={ [{ component: <div>Step 1</div> }, { component: <div>Step 2</div> }] }
+        steps={ steps }
       >
       </Wizard>
     </div>
@@ -50,9 +54,9 @@ export const Basic = () => {
 export const WithOverlay = () => {
 
   const steps = [
-    { component: <div>Step 1</div> }, 
-    { component: <div>Step 2</div> }, 
-    { component: <div>Step 3</div> },
+    <div>Step 1</div>, 
+    <div>Step 2</div>, 
+    <div>Step 3</div>,
   ]
 
   const [isDialogOpen, setDialogOpen] = useState(false)
@@ -102,9 +106,9 @@ export const WithOverlay = () => {
 export const Uncontrolled = () => {
 
   const steps = [
-    { component: <div>Step 1</div> }, 
-    { component: <div>Step 2</div> }, 
-    { component: <div>Step 3</div> },
+    <div>Step 1</div>, 
+    <div>Step 2</div>, 
+    <div>Step 3</div>,
   ]
 
   const [isDialogOpen, setDialogOpen] = useState(false)
