@@ -28,7 +28,7 @@ const TableRow = ({
   const [isHover, setIsHover] = useState(false)
   const [confirmationDialog, setConfirmationDialog] = useState({
     confirmMessage: '',
-    onClick: () => {},
+    onConfirm: () => {},
   })
 
   const handleActionsClose = () => {
@@ -42,7 +42,7 @@ const TableRow = ({
   const handleMenuItemClick = (e, row, onClick, confirmMessage) => {
     e.stopPropagation()
     if(confirmMessage) {
-      setConfirmationDialog({ confirmMessage, onClick: () => {
+      setConfirmationDialog({ confirmMessage, onConfirm: () => {
         onClick(row)
         dismissConfirmationDialog()
       } })
@@ -205,8 +205,9 @@ const TableRow = ({
     <>
       <ConfirmationDialog
         isOpen={ !!confirmationDialog.confirmMessage }
-        onConfirm={ confirmationDialog.onClick }
+        onConfirm={ confirmationDialog.onConfirm }
         onDismiss={ dismissConfirmationDialog }
+        confirmMessage={ confirmationDialog.confirmMessage }
       />
       { isLoading ? renderLoadingRow(): renderDataRow() }
     </>

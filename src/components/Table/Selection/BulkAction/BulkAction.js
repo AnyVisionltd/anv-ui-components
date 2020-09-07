@@ -12,8 +12,8 @@ const BulkAction = ({ icon, onClick, subMenu, confirmMessage }) =>
   const moreActionsRef = useRef()
   const [anchorElement, setAnchorElement] = useState(null)
   const [confirmationDialog, setConfirmationDialog] = useState({
-    isOpen: false,
-    onClick: () => {}
+    confirmMessage: '',
+    onConfirm: () => {},
   })
 
   const handleMenuClose = () => setAnchorElement(null)
@@ -26,30 +26,31 @@ const BulkAction = ({ icon, onClick, subMenu, confirmMessage }) =>
   }
 
   const handleDismissConfirmationDialog = () => {
-    setConfirmationDialog({ isOpen: false, onClick })
+    setConfirmationDialog({ confirmMessage: '' })
   }
 
   const handleActionClick = (onClick, confirmMessage, subMenu) => {
     if(subMenu) {
       handleButtonClick()
     } else if (confirmMessage) {
-      setConfirmationDialog({ isOpen: true, onClick: () => handleClick(onClick) })
+      setConfirmationDialog({ confirmMessage, onConfirm: () => handleClick(onClick) })
     } else {
       handleClick(onClick)
     }
   }
 
   const handleConfirmDialog = () => {
-    confirmationDialog.onClick()
-    setConfirmationDialog({ isOpen: false, onClick })
+    confirmationDialog.onConfirm()
+    setConfirmationDialog({ confirmMessage: '' })
   }
 
   return (
     <>
       <ConfirmationDialog
-        isOpen={ confirmationDialog.isOpen }
+        isOpen={ !!confirmationDialog.confirmMessage }
         onConfirm={ handleConfirmDialog }
         onDismiss={ handleDismissConfirmationDialog }
+        confirmMessage={ confirmationDialog.confirmMessage }
       />
       <IconButton
         onClick={ () => handleActionClick(onClick, confirmMessage, subMenu) }
