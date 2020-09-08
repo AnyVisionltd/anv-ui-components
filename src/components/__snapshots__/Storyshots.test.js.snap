@@ -1096,7 +1096,7 @@ exports[`Storyshots Components/ChipsInput Play Ground 1`] = `
 </div>
 `;
 
-exports[`Storyshots Components/Dialog Basic 1`] = `
+exports[`Storyshots Components/Dialogs/Dialog Basic 1`] = `
 <div>
   <div
     className="center"
@@ -1118,7 +1118,7 @@ exports[`Storyshots Components/Dialog Basic 1`] = `
 </div>
 `;
 
-exports[`Storyshots Components/DialogWizard Basic 1`] = `
+exports[`Storyshots Components/Dialogs/DialogWizard Basic 1`] = `
 <div>
   <div
     className="center"
@@ -1140,7 +1140,7 @@ exports[`Storyshots Components/DialogWizard Basic 1`] = `
 </div>
 `;
 
-exports[`Storyshots Components/DialogWizard Uncontrolled 1`] = `
+exports[`Storyshots Components/Dialogs/DialogWizard Uncontrolled 1`] = `
 <div>
   <div
     className="center"
@@ -1162,7 +1162,7 @@ exports[`Storyshots Components/DialogWizard Uncontrolled 1`] = `
 </div>
 `;
 
-exports[`Storyshots Components/DialogWizard With Overlay 1`] = `
+exports[`Storyshots Components/Dialogs/DialogWizard With Overlay 1`] = `
 <div>
   <div
     className="center"

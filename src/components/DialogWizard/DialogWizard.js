@@ -12,7 +12,6 @@ const DialogWizard = ({
   onClose,
   onNextClick,
   isDialogOpen,
-  clickNext,
   headerTitle,
   footerMessage,
   steps,
@@ -171,7 +170,7 @@ DialogWizard.propTypes = {
   /** text for done button */
   finishText: propTypes.string,
   /** text for next button */
-  nextText: propTypes.string, 
+  nextText: propTypes.string,
   /** text for cancel button */
   cancelText: propTypes.string,
 }

@@ -5,7 +5,7 @@ import { centerDecorator } from '../../utils/storybook/decorators'
 import styles from '../../styles/storybook/dialog.module.scss'
 
 export default {
-  title: 'Components/Dialog',
+  title: 'Components/Dialogs/Dialog',
   component: Dialog,
   subcomponents: { Header: Dialog.Header, Body: Dialog.Body, Footer: Dialog.Footer },
   decorators: [centerDecorator],
