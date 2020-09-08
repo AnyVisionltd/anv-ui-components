@@ -7,7 +7,7 @@ import styles from '../../styles/storybook/wizard.module.scss'
 import DialogWizard from "./DialogWizard"
 
 export default {
-  title: 'Components/Dialog/DialogWizard',
+  title: 'Components/Dialogs/DialogWizard',
   component: DialogWizard,
   decorators: [centerDecorator],
 }
