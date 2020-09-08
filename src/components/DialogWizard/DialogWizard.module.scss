@@ -4,7 +4,7 @@
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: centers;
+  align-items: center;
   flex: 1;
   margin-right: av-space(tiny);
 
@@ -16,7 +16,7 @@
   .steps {
     display: flex;
     align-items: center;
-    
+
     small {
       @extend %av-overline;
       margin-left: av-space(micro);
@@ -40,11 +40,11 @@
 
 .footer {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   cursor: default;
   @extend %av-body2;
-  
+
   .buttons {
     display: flex;
     flex: 1;
@@ -75,7 +75,7 @@
   width: 100%;
   background-color: av-color(overlay);
   opacity: 0.9;
-  
+
   > * {
     height: calc(100% - #{$dialog-footer-height});
   }
