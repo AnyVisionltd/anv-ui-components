@@ -7,15 +7,15 @@ import styles from '../../styles/storybook/wizard.module.scss'
 import DialogWizard from "./DialogWizard"
 
 export default {
-  title: 'Components/DialogWizard',
+  title: 'Components/Dialog/DialogWizard',
   component: DialogWizard,
   decorators: [centerDecorator],
 }
 
 export const Basic = () => {
   const steps = [
-    <div>Step 1</div>, 
-    <div>Step 2</div>, 
+    <div>Step 1</div>,
+    <div>Step 2</div>,
     <div>Step 3</div>,
   ]
   const [isDialogOpen, setDialogOpen] = useState(false)
@@ -53,8 +53,8 @@ export const Basic = () => {
 export const WithOverlay = () => {
 
   const steps = [
-    <div>Step 1</div>, 
-    <div>Step 2</div>, 
+    <div>Step 1</div>,
+    <div>Step 2</div>,
     <div>Step 3</div>,
   ]
 
@@ -103,8 +103,8 @@ export const WithOverlay = () => {
 export const Uncontrolled = () => {
 
   const steps = [
-    <div>Step 1</div>, 
-    <div>Step 2</div>, 
+    <div>Step 1</div>,
+    <div>Step 2</div>,
     <div>Step 3</div>,
   ]
 
