@@ -42,8 +42,8 @@ const TextField = React.forwardRef((props, ref) => {
   const [value, setValue] = useState(defaultValue)
   const [active, setActive] = useState(false)
   const [anchorElement, setAnchorElement] = useState(null)
-  const textFieldRef = useRef(ref)
-  const inputRef = useRef({})
+  const textFieldRef = useRef({})
+  const inputRef = useRef(ref)
 
   useClickOutsideListener(() => {
     setActive(false)
@@ -214,7 +214,7 @@ TextField.propTypes = {
   /** For css customization. */
   menuClassName: propTypes.string,
   /** For icon css customization. */
-  leadingIconClassName: propTypes.string, 
+  leadingIconClassName: propTypes.string,
   /** For icon css customization. */
   trailingIconClassName: propTypes.string,
   /** Icon before the children. */
