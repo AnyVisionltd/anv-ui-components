@@ -21,6 +21,7 @@ const DialogWizard = ({
   finishText,
   nextText,
   cancelText,
+  disabled,
   ...otherProps
 }) => {
 
@@ -118,7 +119,7 @@ const DialogWizard = ({
               <Button variant={ 'ghost' } onClick={ handleClose }>
                 { cancelText }
               </Button>
-              <Button onClick={ handleNextClick }>
+              <Button onClick={ handleNextClick } disabled={ disabled }>
                 { step === steps.length ? finishText : nextText }
               </Button>
             </div>
@@ -142,6 +143,7 @@ DialogWizard.defaultProps = {
   cancelText: languageService.getTranslation('cancel'),
   nextText: languageService.getTranslation('next'),
   finishText: languageService.getTranslation('finish'),
+  disabled: false, 
 }
 
 DialogWizard.propTypes = {
@@ -172,7 +174,9 @@ DialogWizard.propTypes = {
   /** text for next button */
   nextText: propTypes.string,
   /** text for cancel button */
-  cancelText: propTypes.string,
+  cancelText: propTypes.string, 
+  /** boolean to disable next/finish button */
+  disabled: propTypes.bool,
 }
 
 export default DialogWizard

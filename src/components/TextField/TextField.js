@@ -101,7 +101,7 @@ const TextField = React.forwardRef((props, ref) => {
   }
 
   const handleClick = e => {
-    if (!disabled && !error && !readOnly) {
+    if (!disabled && !readOnly) {
       setActive(true)
       inputRef.current.focus()
     }
