@@ -12,7 +12,8 @@ const Selection = ({
   selected,
   bulkActions,
   selectBy,
-  className
+  className,
+  withSelectionBar,
 }) => {
   const { state, setSelectionActivity, setSelection, deselectAll } = useContext(TableContext)
   const { totalItems } = state
@@ -26,13 +27,17 @@ const Selection = ({
     const newExcludeMode = tableData.length ? excludeMode : false
     onChange && onChange({ excludeMode, items: newItems })
     setSelection({ excludeMode: newExcludeMode, items: newItems })
-    // the logic don't need items in deps array
+    // the logic don't need items and excludeMode in deps array
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[setSelection, onChange, tableData, excludeMode])
+  },[setSelection, onChange, tableData])
 
   useEffect(() => {
     selected && setSelection(selected)
   }, [selected, setSelection])
+
+  useEffect(() => {
+    onChange && onChange({ excludeMode, items })
+  }, [items, onChange, excludeMode])
 
   useEffect(() => {
     setSelection({ excludeMode: false, items: [] })
@@ -63,7 +68,7 @@ const Selection = ({
   const handleDeselectAll = () => {
     deselectAll()
   }
-  const renderBar = excludeMode || !!items.length
+  const renderBar = withSelectionBar && (excludeMode || !!items.length)
   const selectedCount = renderBar && (excludeMode ? totalItems - items.length : items.length)
   const classes = classNames(
     styles.selectionBar,
@@ -93,6 +98,7 @@ Selection.defaultProps = {
   onChange: () => {},
   bulkActions: [],
   selectBy: 'id',
+  withSelectionBar: true,
 }
 
 Selection.propTypes = {
@@ -131,6 +137,8 @@ Selection.propTypes = {
   selectBy: propTypes.string,
   /** Selection bar css customization. */
   className: propTypes.string,
+  /** Boolean to show Selection bar. */
+  withSelectionBar: propTypes.bool,
 }
 
 export default Selection
