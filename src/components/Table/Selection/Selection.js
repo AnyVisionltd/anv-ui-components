@@ -36,7 +36,7 @@ const Selection = ({
 
   useEffect(() => {
     onChange && onChange(state.selection)
-  }, [state.selection, excludeMode])
+  }, [state.selection, onChange])
 
   useEffect(() => {
     setSelection({ excludeMode: false, items: [] })
