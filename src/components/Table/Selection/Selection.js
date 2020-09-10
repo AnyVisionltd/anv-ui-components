@@ -109,6 +109,7 @@ Selection.propTypes = {
     })
   ),
   /** Table bulk actions. <br />
+   *  Selection-Bar will be present when there are bulkActions. <br />
    *  <code>icon</code>             - icon for the action. <br />
    *  <code>label</code>            - label for the action icon.<br />
    *  <code>submenu</code>          - submenu for the action icon.<br />
