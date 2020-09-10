@@ -13,7 +13,6 @@ const Selection = ({
   bulkActions,
   selectBy,
   className,
-  withSelectionBar,
 }) => {
   const { state, setSelectionActivity, setSelection, deselectAll } = useContext(TableContext)
   const { totalItems } = state
@@ -36,8 +35,8 @@ const Selection = ({
   }, [selected, setSelection])
 
   useEffect(() => {
-    onChange && onChange({ excludeMode, items })
-  }, [items, onChange, excludeMode])
+    onChange && onChange(state.selection)
+  }, [state.selection, onChange])
 
   useEffect(() => {
     setSelection({ excludeMode: false, items: [] })
@@ -68,7 +67,7 @@ const Selection = ({
   const handleDeselectAll = () => {
     deselectAll()
   }
-  const renderBar = withSelectionBar && (excludeMode || !!items.length)
+  const renderBar = !!bulkActions && (excludeMode || !!items.length)
   const selectedCount = renderBar && (excludeMode ? totalItems - items.length : items.length)
   const classes = classNames(
     styles.selectionBar,
@@ -87,7 +86,7 @@ const Selection = ({
             <span className={ styles.counter }>{ selectedCount }</span>
             <span className={ styles.counterLabel }>Items Selected</span>
           </div>
-          { renderActions() }
+          { !!bulkActions  && renderActions() }
         </div>
       </Portal>
     </Animations.Scale>
@@ -96,9 +95,7 @@ const Selection = ({
 
 Selection.defaultProps = {
   onChange: () => {},
-  bulkActions: [],
   selectBy: 'id',
-  withSelectionBar: true,
 }
 
 Selection.propTypes = {
@@ -112,6 +109,7 @@ Selection.propTypes = {
     })
   ),
   /** Table bulk actions. <br />
+   *  Selection-Bar will be present when there are bulkActions. <br />
    *  <code>icon</code>             - icon for the action. <br />
    *  <code>label</code>            - label for the action icon.<br />
    *  <code>submenu</code>          - submenu for the action icon.<br />
@@ -132,13 +130,11 @@ Selection.propTypes = {
       onClick: propTypes.func,
       confirmMessage: propTypes.string
     })
-  ).isRequired,
+  ),
   /** The selection evaluate by this prop. Set to the id field. */
   selectBy: propTypes.string,
   /** Selection bar css customization. */
   className: propTypes.string,
-  /** Boolean to show Selection bar. */
-  withSelectionBar: propTypes.bool,
 }
 
 export default Selection
