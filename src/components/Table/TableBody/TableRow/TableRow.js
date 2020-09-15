@@ -117,8 +117,8 @@ const TableRow = ({
       return columnRenderHover(row[field], row)
     } else if (columnRender) {
       return columnRender(row[field], row)
-    } else if(type === types.STRING || type === types.STRING) {
-      return <div className={ styles.ellipsis }>{ row[field] }</div>
+    } else if(type === types.STRING || type === types.NUMBER) {
+      return <div title={ row[field] } className={ styles.ellipsis }>{ row[field] }</div>
     } else if(type === types.DATE) {
       return <div className={ styles.ellipsis }>{ formatDateTime(row[field]) }</div>
     }
