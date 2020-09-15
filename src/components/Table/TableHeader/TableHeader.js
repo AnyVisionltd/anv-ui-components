@@ -99,9 +99,10 @@ const TableHeader = ({
         role={ 'cell' }
         className={ styles.selectionCell }>
         <Checkbox
-		  checked={ isAllSelected }
-		  indeterminate={ !!items.length }
-		  onChange={ handleSelectAll }
+          checked={ isAllSelected }
+          indeterminate={ !!items.length }
+          onChange={ handleSelectAll }
+          disabled={ !tableData.length }
         />
 	  </div>
     )
