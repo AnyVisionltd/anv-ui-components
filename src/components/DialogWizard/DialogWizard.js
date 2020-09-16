@@ -116,9 +116,13 @@ const DialogWizard = ({
           <div className={ styles.footer }>
             { footerMessage }
             <div className={ styles.buttons }>
-              <Button variant={ 'ghost' } onClick={ handleClose }>
-                { cancelText }
-              </Button>
+              {
+                cancelText
+                &&
+                <Button variant={ 'ghost' } onClick={ handleClose }>
+                  { cancelText }
+                </Button>
+              }
               <Button onClick={ handleNextClick } disabled={ disabled }>
                 { step === steps.length ? finishText : nextText }
               </Button>
