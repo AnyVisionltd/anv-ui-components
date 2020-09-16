@@ -53,7 +53,7 @@ describe('<DialogWizard />', () => {
     expect(getByText('Finish')).not.toEqual(null)
   })
 
-  it('should render custom finish and next buttons', () => {
+  it('should render custom finish, next and cancel buttons', () => {
     const steps = [
       <div data-testid={ 'test-child-1' } />,
       <div data-testid={ 'test-child-2' } />,
