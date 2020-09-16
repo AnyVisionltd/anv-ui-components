@@ -177,7 +177,7 @@ DialogWizard.propTypes = {
   finishText: propTypes.string,
   /** text for next button */
   nextText: propTypes.string,
-  /** text for cancel button */
+  /** text for cancel button, if text is null button will be hidden */
   cancelText: propTypes.string, 
   /** boolean to disable next/finish button */
   disabled: propTypes.bool,
