@@ -65,7 +65,7 @@ describe('<DialogWizard />', () => {
     expect(getByText('Cancel')).not.toEqual(null)
   })
 
-  it('should not render cancel on last step', () => {
+  it('should not render cancel when cancel text is null', () => {
     const steps = [
       <div data-testid={ 'test-child-1' } />,
       <div data-testid={ 'test-child-2' } />,
