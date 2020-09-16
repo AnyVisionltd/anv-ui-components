@@ -117,7 +117,7 @@ const DialogWizard = ({
             { footerMessage }
             <div className={ styles.buttons }>
               {
-                step !== steps.length
+                cancelText
                 &&
                 <Button variant={ 'ghost' } onClick={ handleClose }>
                   { cancelText }

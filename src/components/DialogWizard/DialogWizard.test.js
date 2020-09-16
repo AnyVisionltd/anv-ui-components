@@ -62,6 +62,7 @@ describe('<DialogWizard />', () => {
     const nextButton = getByText('customNext')
     fireEvent.click(nextButton)
     expect(getByText('customFinish')).not.toEqual(null)
+    expect(getByText('Cancel')).not.toEqual(null)
   })
 
   it('should not render cancel on last step', () => {
@@ -69,8 +70,7 @@ describe('<DialogWizard />', () => {
       <div data-testid={ 'test-child-1' } />,
       <div data-testid={ 'test-child-2' } />,
     ]
-    const { queryByText } = render(<DialogWizard isOpen steps={ steps } cancelText={ 'customCancel' }/>)
-    expect(queryByText('customCancel')).not.toEqual(null)
+    const { queryByText } = render(<DialogWizard isOpen steps={ steps } cancelText={ null }/>)
     const nextButton = queryByText('Next')
     fireEvent.click(nextButton)
     expect(queryByText('customCancel')).toEqual(null)
