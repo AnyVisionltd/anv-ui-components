@@ -3946,98 +3946,30 @@ exports[`Storyshots Components/Tooltip Arrow Variations 1`] = `
         }
       }
     >
-      <h6>
-        Left
-      </h6>
-      <div
-        className="popperContainer"
-        hidden={true}
-        onMouseEnter={null}
-        onMouseLeave={null}
-        style={
-          Object {
-            "left": "0",
-            "position": "absolute",
-            "top": "0",
-          }
-        }
+      <h6
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
       >
-        <p>
-          left
-        </p>
-        <div
-          className="popperArrow"
-        />
-      </div>
-      <h6>
-        Top
-      </h6>
-      <div
-        className="popperContainer"
-        hidden={true}
-        onMouseEnter={null}
-        onMouseLeave={null}
-        style={
-          Object {
-            "left": "0",
-            "position": "absolute",
-            "top": "0",
-          }
-        }
-      >
-        <p>
-          top
-        </p>
-        <div
-          className="popperArrow"
-        />
-      </div>
-      <h6>
-        Bottom
-      </h6>
-      <div
-        className="popperContainer"
-        hidden={true}
-        onMouseEnter={null}
-        onMouseLeave={null}
-        style={
-          Object {
-            "left": "0",
-            "position": "absolute",
-            "top": "0",
-          }
-        }
-      >
-        <p>
-          bottom
-        </p>
-        <div
-          className="popperArrow"
-        />
-      </div>
-      <h6>
         Right
       </h6>
-      <div
-        className="popperContainer"
-        hidden={true}
-        onMouseEnter={null}
-        onMouseLeave={null}
-        style={
-          Object {
-            "left": "0",
-            "position": "absolute",
-            "top": "0",
-          }
-        }
+      <h6
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
       >
-        <p>
-          right
-        </p>
-        <div
-          className="popperArrow"
-        />
-      </div>
+        Left
+      </h6>
+      <h6
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+      >
+        Top
+      </h6>
+      <h6
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+      >
+        Bottom
+      </h6>
     </div>
   </div>
 </div>
@@ -4048,26 +3980,12 @@ exports[`Storyshots Components/Tooltip Default 1`] = `
   <div
     className="center"
   >
-    <h6>
+    <h6
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
       Hover over me!
     </h6>
-    <div
-      className="popperContainer"
-      hidden={true}
-      onMouseEnter={null}
-      onMouseLeave={null}
-      style={
-        Object {
-          "left": "0",
-          "position": "absolute",
-          "top": "0",
-        }
-      }
-    >
-      <p>
-        I'm a tooltip!
-      </p>
-    </div>
   </div>
 </div>
 `;
@@ -4077,58 +3995,49 @@ exports[`Storyshots Components/Tooltip Interactive 1`] = `
   <div
     className="center"
   >
-    <h6>
-      Hover over me!
-    </h6>
-    <div
-      className="popperContainer"
-      hidden={true}
+    <h6
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
-      style={
-        Object {
-          "left": "0",
-          "position": "absolute",
-          "top": "0",
-        }
-      }
     >
-      <p
-        className="tooltipTitle"
-      >
-        Hover me!
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing
-      </p>
-      <div>
-        <div
-          style={
-            Object {
-              "display": "flex",
-              "justifyContent": "space-between",
-              "marginTop": "20px",
-            }
+      Hover over me!
+    </h6>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Tooltip Overflow Only 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div>
+      <h6
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "overflow": "hidden",
+            "whiteSpace": "nowrap",
+            "width": "50px",
           }
-        >
-          <button
-            className="button small ghost"
-            disabled={false}
-            onClick={[Function]}
-            type="button"
-          >
-            Skip
-          </button>
-          <button
-            className="button small fill"
-            disabled={false}
-            onClick={[Function]}
-            type="button"
-          >
-            Next
-          </button>
-        </div>
-      </div>
+        }
+      >
+        shot text
+      </h6>
+      <h6
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "overflow": "hidden",
+            "textOverflow": "ellipsis",
+            "whiteSpace": "nowrap",
+            "width": "50px",
+          }
+        }
+      >
+        long long long long long long text
+      </h6>
     </div>
   </div>
 </div>
