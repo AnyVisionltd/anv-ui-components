@@ -33,8 +33,8 @@ export const variants = () => (
 
 export const sizes = () => (
   <div className={ styles.marginFlexContainer }>
-    <Button>Large</Button>
-    <Button size="medium">medium</Button>
+    <Button size="large">Large</Button>
+    <Button>medium</Button>
     <Button size="small">small</Button>
   </div>
 )
