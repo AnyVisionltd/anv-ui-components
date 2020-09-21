@@ -239,7 +239,7 @@ exports[`Storyshots Components/Button Sizes 1`] = `
       className="marginFlexContainer"
     >
       <button
-        className="button medium fill"
+        className="button large fill"
         disabled={false}
         onClick={[Function]}
         type="button"
