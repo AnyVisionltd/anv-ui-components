@@ -81,7 +81,7 @@ export const Basic = () => {
     {
       id: '3',
       active: true,
-      firstname: 'Rafael',
+      firstname: 'Hubert Blaine Wolfeschle Gelsteinhau Senber Gerdorff Sr',
       location: 'Eilat',
       weather: 40,
     },
