@@ -7,39 +7,46 @@
   border-radius: av-radius(tidy);
   color: av-color(purewhite);
   font-size: av-font-size(small);
-  * {
-    margin: 0;
+  max-width: av-size(sz-320);
+
+  .popperArrow {
+    height: 12px;
+    width: 12px;
+    div {
+      clip-path: polygon(0% 0%, 100% 100%, 0% 100%);
+      background-color: av-color(secondary);
+      height: 100%;
+      width: 100%;
+      border-radius: 0 0 0 0.5em;
+      @include av-elevation(overlay);
+    }
   }
 
-  &[data-popper-placement*="bottom"] .popperArrow{
-    @include av-elevation(overlay);
-    top: -0.55em;
-    border-left: av-size(sz-8) solid transparent;
-    border-right: av-size(sz-8) solid transparent;
-    border-bottom: av-size(sz-8) solid av-color(secondary);
+  &[data-popper-placement*="bottom"] .popperArrow {
+    top: -0.4em;
+    div {
+      transform: rotate(135deg);
+    }
   }
 
   &[data-popper-placement*="top"] .popperArrow {
-    @include av-elevation(overlay);
-    bottom: -0.55em;
-    border-left: av-size(sz-8) solid transparent;
-    border-right: av-size(sz-8) solid transparent;
-    border-top: av-size(sz-8) solid av-color(secondary);
+    bottom: -0.4em;
+    div {
+      transform: rotate(-45deg);
+    }
   }
 
-  &[data-popper-placement*="right"] .popperArrow{
-    @include av-elevation(overlay);
-    left: -0.55em;
-    border-bottom: av-size(sz-8) solid transparent;
-    border-top: av-size(sz-8) solid transparent;
-    border-right: av-size(sz-8) solid av-color(secondary);
+  &[data-popper-placement*="right"] .popperArrow {
+    left: -0.4em;
+    div {
+      transform: rotate(45deg);
+    }
   }
 
-  &[data-popper-placement*="left"] .popperArrow{
-    @include av-elevation(overlay);
-    right: -0.55em;
-    border-bottom: av-size(sz-8) solid transparent;
-    border-top: av-size(sz-8) solid transparent;
-    border-left: av-size(sz-8) solid av-color(secondary);
+  &[data-popper-placement*="left"] .popperArrow {
+    right: -0.4em;
+    div {
+      transform: rotate(-135deg);
+    }
   }
 }

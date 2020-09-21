@@ -16,7 +16,6 @@ export { List } from './components/List'
 export { FileUpload } from './components/FileUpload'
 export { TextField } from './components/TextField'
 export { DialogWizard } from './components/DialogWizard'
-// Dont use before refactor
-// export { Tooltip } from './components/Tooltip'
+export { Tooltip } from './components/Tooltip'
 
 export { default as mockAutoSizer } from './testUtils/mockAutoSizer'

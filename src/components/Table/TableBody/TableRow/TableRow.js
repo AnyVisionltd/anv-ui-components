@@ -11,6 +11,7 @@ import { Checkbox } from '../../../Checkbox'
 import { SkeletonLoader } from '../../../SkeletonLoader'
 import { ConfirmationDialog } from '../../ConfirmationDialog'
 import styles from './TableRow.module.scss'
+import { Tooltip } from "../../../Tooltip"
 
 const TableRow = ({
   row,
@@ -118,7 +119,11 @@ const TableRow = ({
     } else if (columnRender) {
       return columnRender(row[field], row)
     } else if(type === types.STRING || type === types.NUMBER) {
-      return <div title={ row[field] } className={ styles.ellipsis }>{ row[field] }</div>
+      return (
+        <Tooltip overflowOnly={ true } content={ row[field] } >
+          <div className={ styles.ellipsis }>{ row[field] }</div>
+        </Tooltip>
+      )
     } else if(type === types.DATE) {
       return <div className={ styles.ellipsis }>{ formatDateTime(row[field]) }</div>
     }

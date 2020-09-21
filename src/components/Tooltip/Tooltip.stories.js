@@ -10,48 +10,38 @@ export default {
 }
 
 export const Default = () => {
-  const anchorRef = useRef()
+  const renderTooltipContent = () => <p>I'm a tooltip!</p>
 
-  return <>
-    <h6 ref={ anchorRef }>
-            Hover over me!
-    </h6>
-    <Tooltip anchorRef={ anchorRef }>
-      <p>I'm a tooltip!</p>
+  return (
+    <Tooltip content={ renderTooltipContent() }>
+      <h6>
+        Hover over me!
+      </h6>
     </Tooltip>
-  </>
+  )
 }
 
 export const ArrowVariations = () => {
-  const anchorRefLeft = useRef()
-  const anchorRefTop = useRef()
-  const anchorRefBottom = useRef()
-  const anchorRefRight = useRef()
-
   return <div style={ { textAlign: 'center' } }>
-    <h6 ref={ anchorRefLeft }>
-            Left
-    </h6>
-    <Tooltip anchorRef={ anchorRefLeft } placement={ 'left' } arrow={ true }>
-      <p>left</p>
+    <Tooltip content={ 'Right' } placement={ 'right' } arrow={ true }>
+      <h6>
+        Right
+      </h6>
     </Tooltip>
-    <h6 ref={ anchorRefTop }>
-            Top
-    </h6>
-    <Tooltip anchorRef={ anchorRefTop } placement={ 'top' } arrow={ true }>
-      <p>top</p>
+    <Tooltip content={ 'Left' } placement={ 'left' } arrow={ true }>
+      <h6>
+        Left
+      </h6>
     </Tooltip>
-    <h6 ref={ anchorRefBottom }>
-            Bottom
-    </h6>
-    <Tooltip anchorRef={ anchorRefBottom } arrow={ true }>
-      <p>bottom</p>
+    <Tooltip content={ 'Top' } placement={ 'top' } arrow={ true }>
+      <h6>
+        Top
+      </h6>
     </Tooltip>
-    <h6 ref={ anchorRefRight }>
-            Right
-    </h6>
-    <Tooltip anchorRef={ anchorRefRight } placement={ 'right' } arrow={ true }>
-      <p>right</p>
+    <Tooltip content={ 'Bottom' } placement={ 'bottom' } arrow={ true }>
+      <h6>
+        Bottom
+      </h6>
     </Tooltip>
   </div>
 }
@@ -65,24 +55,49 @@ export const Interactive = () => {
     marginTop: '20px'
   }
 
-  return <>
-    <h6 ref={ anchorRef }>
-            Hover over me!
-    </h6>
-    <Tooltip
-      anchorRef={ anchorRef }
-      placement={ 'right' }
-      offset={ 20 }
-      leaveTimer={ 500 }
-      interactive>
-      <Tooltip.Header>Hover me!</Tooltip.Header>
-      <Tooltip.Body>Lorem ipsum dolor sit amet, consectetur adipiscing</Tooltip.Body>
-      <Tooltip.Footer >
+  const renderContent = () => (
+    <div>
+      <div>Hover me!</div>
+      <div>Lorem ipsum dolor sit amet, consectetur adipiscing</div>
+      <div >
         <div style={ footerContainer }>
           <Button variant={ "ghost" } size="small">Skip</Button>
           <Button size='small'>Next</Button>
         </div>
-      </Tooltip.Footer>
+      </div>
+    </div>
+  )
+
+  return <>
+    <Tooltip
+      anchorRef={ anchorRef }
+      placement={ 'right' }
+      offset={ 20 }
+      leaveDelay={ 500 }
+      content={ renderContent() }
+    >
+      <h6>
+        Hover over me!
+      </h6>
     </Tooltip>
   </>
+}
+
+export const OverflowOnly = () => {
+  const longText = 'long long long long long long text'
+
+  return (
+    <div>
+      <Tooltip overflowOnly={ true } content={ 'shot text' }>
+        <h6 style={ { width: '50px', overflow: "hidden", whiteSpace: "nowrap" } }>
+          shot text
+        </h6>
+      </Tooltip>
+      <Tooltip overflowOnly={ true } content={ longText }>
+        <h6 style={ { width: '50px', overflow: "hidden", whiteSpace: "nowrap", "textOverflow": "ellipsis" } }>
+          { longText }
+        </h6>
+      </Tooltip>
+    </div>
+  )
 }
