@@ -8,6 +8,7 @@
   color: av-color(purewhite);
   font-size: av-font-size(small);
   max-width: av-size(sz-320);
+  overflow-wrap: anywhere;
 
   .popperArrow {
     height: 12px;
