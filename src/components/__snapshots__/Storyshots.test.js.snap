@@ -3482,6 +3482,48 @@ exports[`Storyshots Components/TextField With Error 1`] = `
 </div>
 `;
 
+exports[`Storyshots Components/TextField With Label 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexMultipleRows"
+    >
+      <div
+        className="container"
+      >
+        <div
+          className="TextField outline text medium notEmpty withLabel"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+          >
+            label
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <input
+              defaultValue="Olives"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+            />
+            <div
+              className="trailingIcon trailingIcon"
+            >
+              <svg />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Components/TextField With Leading Icon 1`] = `
 <div>
   <div
@@ -3695,6 +3737,46 @@ exports[`Storyshots Components/TextField With Multiline 1`] = `
               type="text"
               value=""
             />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/TextField With Placeholder 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexMultipleRows"
+    >
+      <div
+        className="container"
+      >
+        <div
+          className="TextField outline text medium"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+          />
+          <div
+            className="inputBase text inputBase"
+          >
+            <input
+              onChange={[Function]}
+              placeholder="placeholder"
+              readOnly={false}
+              type="text"
+            />
+            <div
+              className="trailingIcon trailingIcon"
+            >
+              <svg />
+            </div>
           </div>
         </div>
       </div>
