@@ -38,8 +38,14 @@ describe('<TextField />', () => {
   })
 
   it('should have placeholder', () => {
-    const { getByText } = render(<TextField placeholder={ 'my placeholder' } />)
-    const node = getByText('my placeholder')
+    const { getByPlaceholderText } = render(<TextField placeholder={ 'my placeholder' } />)
+    const node = getByPlaceholderText('my placeholder')
+    expect(node).toBeTruthy()
+  })
+
+  it('should have label', () => {
+    const { getByText } = render(<TextField label={ 'my label' } />)
+    const node = getByText('my label')
     expect(node).toBeTruthy()
   })
 
@@ -66,7 +72,7 @@ describe('<TextField />', () => {
 
   describe('type options', () => {
     const items = [{ value: 'Olives', label: 'Olives' }, { value: 'Tomatoes', label: 'Tomatoes' }]
-   
+
     it('should call onMenuItemClick', () => {
       const handleClick = jest.fn()
       const { getByDisplayValue, getByText } = render(<TextField defaultValue={ 'Tomatoes' } onChange={ handleClick } items={ items } type={ 'options' }/>)
