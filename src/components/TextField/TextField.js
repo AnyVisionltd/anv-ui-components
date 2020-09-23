@@ -27,7 +27,6 @@ const TextField = React.forwardRef((props, ref) => {
     items,
     renderItem,
     size,
-    placeholder,
     menuClassName,
     leadingIcon,
     onChange,
@@ -36,10 +35,12 @@ const TextField = React.forwardRef((props, ref) => {
     autoFocus,
     leadingIconClassName,
     trailingIconClassName,
+    label,
     ...otherProps
   } = props
 
-  const [value, setValue] = useState(defaultValue)
+  const [isEmpty, setEmpty] = useState(!defaultValue)
+  const [value, setValue] = useState(otherProps.value)
   const [active, setActive] = useState(false)
   const [anchorElement, setAnchorElement] = useState(null)
   const textFieldRef = useRef({})
@@ -65,7 +66,7 @@ const TextField = React.forwardRef((props, ref) => {
   }, [setActiveFocus])
 
   useEffect(() => {
-    setValue(defaultValue)
+    setEmpty(!defaultValue)
   }, [defaultValue])
 
   useEffect(() => {
@@ -77,6 +78,7 @@ const TextField = React.forwardRef((props, ref) => {
 
   useEffect(() => {
     if(otherProps.value !== undefined && otherProps.value !== value) {
+      setEmpty(!otherProps.value)
       setValue(otherProps.value)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -85,7 +87,7 @@ const TextField = React.forwardRef((props, ref) => {
   const onInputChange = e => {
     e.persist()
     const { target: { value } } = e
-    setValue(value)
+    setEmpty(!value)
     onChange(e)
   }
 
@@ -152,19 +154,20 @@ const TextField = React.forwardRef((props, ref) => {
       [styles.disabled]: disabled,
       [styles.active]: active,
       [styles.readOnly]: readOnly,
-      [styles.notEmpty]: !!value,
+      [styles.notEmpty]: !isEmpty,
       [styles.multiline]: multiline,
+      [styles.withLabel]: !!label,
     }
   )
 
   return (
     <div className={ classNames(styles.container, className) }>
       <div ref={ textFieldRef } onClick={ handleClick } className={ classes }>
-        <label className={ classNames(styles.label, { [styles.left]: !!leadingIcon }) }>{ placeholder }</label>
+        <label className={ classNames(styles.label, { [styles.left]: !!leadingIcon }) }>{ label }</label>
         <InputBase
           { ...otherProps }
           disabled={ disabled }
-          className={ classNames(styles.inputBase, { [styles.bottom]: !!placeholder }) }
+          className={ classNames(styles.inputBase, { [styles.bottom]: !!label }) }
           value={ value }
           onChange={ onInputChange }
           leadingIconClassName={ classNames(styles.leadingIcon, leadingIconClassName) }
@@ -175,6 +178,7 @@ const TextField = React.forwardRef((props, ref) => {
           leadingIcon={ leadingIcon }
           multiline={ multiline }
           type={ type }
+          defaultValue={ defaultValue }
         />
       </div>
       { type === types.options && renderMenu() }
@@ -186,7 +190,6 @@ const TextField = React.forwardRef((props, ref) => {
 TextField.defaultProps = {
   type: 'text',
   variant: 'outline',
-  defaultValue: '',
   size: 'medium',
   onClick: () => { },
   onChange: () => { },
@@ -233,6 +236,8 @@ TextField.propTypes = {
   items: propTypes.arrayOf(propTypes.shape({ value: propTypes.string, label: propTypes.oneOfType([propTypes.string, propTypes.number]) })),
   /** Callback to render items of type options */
   renderItem: propTypes.func,
+  /** label text to be present in the top of the textField*/
+  label: propTypes.string,
 }
 
 export default memo(TextField)

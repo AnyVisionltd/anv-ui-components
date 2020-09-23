@@ -56,7 +56,19 @@
       label {
         top: av-space(micro);
         font-size: av-font-size(tiny);
-        transform: translateY(0);
+        transform: translateY(2px);
+        color: av-color(content, av-opacity(medium));
+      }
+
+      ::placeholder {
+        visibility: unset;
+      }
+    }
+
+    &:not(.withLabel) {
+
+      ::placeholder {
+        visibility: unset;
       }
     }
 
@@ -185,13 +197,17 @@
     bottom: 50%;
     transform: translateY(50%);
     font-size: av-font-size(base);
-    color: av-color(content, av-opacity(medium));
     transition: 0.2s ease;
+    color: av-color(content, av-opacity(medium));
     cursor: text;
 
     &.left {
       margin-left: av-space(loose);
     }
+  }
+
+  ::placeholder {
+    visibility: hidden;
   }
 
   .inputBase {
@@ -208,7 +224,7 @@
       color: av-color(content);
       padding: 0;
       background-color: transparent;
-  
+
       &:-webkit-autofill,
       &:-webkit-autofill:hover,
       &:-webkit-autofill:focus,
