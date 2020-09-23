@@ -75,7 +75,7 @@ const TextField = React.forwardRef((props, ref) => {
       inputRef.current.focus()
       setActive(true)
     }
-  }, [autoFocus])
+  }, [autoFocus, inputRef])
 
   useEffect(() => {
     if(otherProps.value !== undefined && otherProps.value !== value) {
