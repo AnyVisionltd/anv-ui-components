@@ -6,6 +6,7 @@ import { ReactComponent as ErrorCircleIcon } from '../../assets/svg/ErrorCircleO
 import { useClickOutsideListener } from '../../hooks'
 import InputBase from '../InputBase'
 import { Menu } from '../Menu/index'
+import { useCombinedRefs } from '../../hooks/UseCombinedRefs'
 import styles from './TextField.module.scss'
 
 const types = {
@@ -44,7 +45,7 @@ const TextField = React.forwardRef((props, ref) => {
   const [active, setActive] = useState(false)
   const [anchorElement, setAnchorElement] = useState(null)
   const textFieldRef = useRef({})
-  const inputRef = useRef(ref)
+  const inputRef = useCombinedRefs(useRef({}), ref)
 
   useClickOutsideListener(() => {
     setActive(false)
@@ -74,7 +75,7 @@ const TextField = React.forwardRef((props, ref) => {
       inputRef.current.focus()
       setActive(true)
     }
-  }, [autoFocus])
+  }, [autoFocus, inputRef])
 
   useEffect(() => {
     if(otherProps.value !== undefined && otherProps.value !== value) {
