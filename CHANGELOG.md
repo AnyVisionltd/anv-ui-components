@@ -5,6 +5,8 @@
 ### Changed
 - Changed textfield to be uncontrolled
 
+### Added
+- Added onCellClick prop to table rows
 ## 0.1.3 - 01-09-2020
 ### Added
 - New Table.

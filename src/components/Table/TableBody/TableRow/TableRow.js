@@ -19,6 +19,7 @@ const TableRow = ({
   rowHeight,
   isLoading,
   onRowClick,
+  onCellClick,
   isSelected,
   isActive,
   columns,
@@ -158,14 +159,14 @@ const TableRow = ({
       >
         { renderSelection(row, isSelected) }
         { columns.map(({
-          field, columnRender, columnRenderHover, hide, width, type
+          field, columnRender, columnRenderHover, hide, width, type, clickable = true
         }) => {
           if (hide) {
             return null
           }
           const style = getCellWidth(width)
           return (
-            <div role="cell" style={ style } className={ styles.tableCell } key={ field }>
+            <div role="cell" style={ style } className={ styles.tableCell } key={ field } onClick={ () => clickable && onCellClick(row, field) } >
               { renderCell(row, field, columnRender, columnRenderHover, type) }
             </div>
           )
@@ -220,7 +221,8 @@ const TableRow = ({
 }
 
 TableRow.defaultProps = {
-  onRowClick: () => {}
+  onRowClick: () => {},
+  onCellClick: () => {}
 }
 
 TableRow.propTypes = {
@@ -229,6 +231,7 @@ TableRow.propTypes = {
   rowHeight: propTypes.number,
   isLoading: propTypes.bool,
   onRowClick: propTypes.func,
+  onCellClick: propTypes.func,
 }
 
 export default memo(TableRow)
