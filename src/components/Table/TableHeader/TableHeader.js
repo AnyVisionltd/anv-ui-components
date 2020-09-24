@@ -168,7 +168,7 @@ TableHeader.propTypes = {
    *  <code>permanent</code>        - if true, disable uncheck column from column management. <br />
    *  <code>hide</code>         		- hide the column. <br />
    *  <code>width</code>    			  - set the column width by flex basis. <br />
-   *  <code>triggerRowClick</code>  - set if row is clickable, default true. <br />
+   *  <code>triggerRowClick</code>  - set if cell is clickable, default true. <br />
    **/
   columns: propTypes.arrayOf(
     propTypes.shape({
