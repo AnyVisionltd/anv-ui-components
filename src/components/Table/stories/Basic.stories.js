@@ -28,7 +28,7 @@ export const Basic = () => {
       width: '200px',
       sortable: false,
       permanent: true,
-      clickable: false
+      triggerRowClick: false
     },
     {
       field: 'location',
@@ -156,7 +156,6 @@ export const Basic = () => {
         data={ data }
         rowActions={ rowActions }
         onRowClick={ action('row clicked') }
-        onCellClick={ action('cell clicked') }
       />
       <Table.Sortable onSortChange={ action('sort changed') }/>
       <Table.Selection bulkActions={ bulkActions } onChange={ action('selection changed') }/>
