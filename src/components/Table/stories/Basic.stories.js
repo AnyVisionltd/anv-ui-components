@@ -28,6 +28,7 @@ export const Basic = () => {
       width: '200px',
       sortable: false,
       permanent: true,
+      triggerRowClick: false
     },
     {
       field: 'location',

@@ -5,6 +5,9 @@
 ### Changed
 - Changed textfield to be uncontrolled
 
+### Added
+- Added triggerRowClick to table cell
+
 ## 0.1.3 - 01-09-2020
 ### Added
 - New Table.
