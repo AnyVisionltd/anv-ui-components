@@ -104,6 +104,7 @@ const TableRow = ({
       <div
         role="cell"
         className={ styles.selectionCell }
+        onClick={ e => handleCellClick({ e, row, triggerRowClick: false }) }
       >
         <Checkbox
           onClick={ e => e.stopPropagation() }
