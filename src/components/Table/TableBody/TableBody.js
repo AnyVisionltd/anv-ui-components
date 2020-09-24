@@ -15,7 +15,6 @@ const TableBody = ({
   rowHeight,
   rowActions,
   onRowClick,
-  onCellClick,
   className,
   ...otherProps
 }) => {
@@ -55,7 +54,6 @@ const TableBody = ({
         row={ row }
         rowHeight={ rowHeight }
         onRowClick={ onRowClick }
-        onCellClick={ onCellClick }
       />
     ) })
   const isRowSelected = selectField => {
@@ -133,9 +131,7 @@ TableBody.propTypes = {
     onClick: propTypes.func,
   })),
   /** Callback fire when row click. */
-  onRowClick: propTypes.func, 
-  /** Callback fire when cell click. */
-  onCellClick: propTypes.func,
+  onRowClick: propTypes.func,
   /** For css customization. */
   className: propTypes.string,
 }
