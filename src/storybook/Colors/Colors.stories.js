@@ -1,15 +1,17 @@
 import React from 'react'
 import classNames from 'classnames'
-import { centerDecorator } from '../../../utils/storybook/decorators'
+import { centerDecorator } from '../../utils/storybook/decorators'
 import styles from './Colors.module.scss'
 
 export default {
   title: 'Style/Colors',
   decorators: [centerDecorator],
   parameters: {
-    docs: {
-      page: null
-    }
+    previewTabs: {
+      'storybook/docs/panel': {
+        hidden: true,
+      },
+    },
   },
 }
 

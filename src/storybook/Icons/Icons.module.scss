@@ -1,0 +1,63 @@
+@import "~@anyvision/style-guide";
+
+.container {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  align-items: center;
+
+  .comment {
+    color: av-color(content);
+    @extend %av-caption;
+    a {
+      color: av-color(primary);
+    }
+  }
+
+  .searchAndCodeContainer {
+    display: flex;
+    align-items: center;
+
+    .search {
+      width: av-size(sz-480);
+      margin-right: av-space(loose);
+    }
+  }
+
+  .icons {
+    display: flex;
+    flex-wrap: wrap;
+
+    .iconCard {
+      background-color: av-color(primary, av-opacity(ghost));
+      width: av-size(sz-144);
+      max-width: av-size(sz-144);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      margin: av-space(tiny);
+      padding: av-space(tiny);
+      border-radius: av-radius(tidy);
+      justify-content: space-around;
+      align-items: center;
+      fill: av-color(content);
+      color: av-color(content);
+
+      &:hover {
+        @include av-elevation(raised)
+      }
+
+      .icon {
+        width: 24px;
+        height: 24px;
+      }
+
+      .name {
+        max-width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+    }
+  }
+}

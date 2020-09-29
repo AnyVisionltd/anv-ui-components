@@ -17,5 +17,6 @@ export { FileUpload } from './components/FileUpload'
 export { TextField } from './components/TextField'
 export { DialogWizard } from './components/DialogWizard'
 export { Tooltip } from './components/Tooltip'
+export { Snackbar } from './components/Snackbar'
 
 export { default as mockAutoSizer } from './testUtils/mockAutoSizer'

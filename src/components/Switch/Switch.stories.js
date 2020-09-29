@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { boolean, text } from '@storybook/addon-knobs'
 import Switch from './Switch'
-import styles from '../../styles/storybook/index.module.scss'
+import styles from '../../storybook/index.module.scss'
 import { centerDecorator } from '../../utils/storybook/decorators'
 
 export default {

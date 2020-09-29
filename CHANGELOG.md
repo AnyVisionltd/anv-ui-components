@@ -6,6 +6,7 @@
 - Changed textfield to be uncontrolled
 
 ### Added
+- New @anyvision/anv-icon section.
 - Added triggerRowClick to table cell
 
 ## 0.1.3 - 01-09-2020

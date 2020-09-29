@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { boolean } from '@storybook/addon-knobs'
 import { Dialog, Button } from '../../index'
 import { centerDecorator } from '../../utils/storybook/decorators'
-import styles from '../../styles/storybook/dialog.module.scss'
+import styles from '../../storybook/dialog.module.scss'
 
 export default {
   title: 'Components/Dialogs/Dialog',

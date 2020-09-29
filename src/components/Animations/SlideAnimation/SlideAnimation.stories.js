@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import SlideAnimation from './SlideAnimation'
 import { Button } from '../../Button'
 import { centerDecorator } from '../../../utils/storybook/decorators'
-import styles from '../../../styles/storybook/index.module.scss'
+import styles from '../../../storybook/index.module.scss'
 
 export default {
   title: 'Animations/Slide',

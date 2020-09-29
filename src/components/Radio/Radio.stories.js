@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Radio from './Radio'
-import styles from '../../styles/storybook/index.module.scss'
+import styles from '../../storybook/index.module.scss'
 import { centerDecorator } from "../../utils/storybook/decorators"
 import { boolean, text } from "@storybook/addon-knobs"
 
