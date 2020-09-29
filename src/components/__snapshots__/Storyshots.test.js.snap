@@ -3019,11 +3019,9 @@ exports[`Storyshots Components/TextField Disabled 1`] = `
         >
           <label
             className="label left"
-          >
-            disabled
-          </label>
+          />
           <div
-            className="inputBase text disabled inputBase bottom"
+            className="inputBase text disabled inputBase"
           >
             <span
               className="leadingIcon leadingIcon"
@@ -3034,9 +3032,9 @@ exports[`Storyshots Components/TextField Disabled 1`] = `
               disabled={true}
               id="textField-9"
               onChange={[Function]}
+              placeholder="disabled"
               readOnly={false}
               type="text"
-              value=""
             />
           </div>
         </div>
@@ -3050,11 +3048,9 @@ exports[`Storyshots Components/TextField Disabled 1`] = `
         >
           <label
             className="label left"
-          >
-            disabled
-          </label>
+          />
           <div
-            className="inputBase text disabled inputBase bottom"
+            className="inputBase text disabled inputBase"
           >
             <span
               className="leadingIcon leadingIcon"
@@ -3065,9 +3061,9 @@ exports[`Storyshots Components/TextField Disabled 1`] = `
               disabled={true}
               id="textField-10"
               onChange={[Function]}
+              placeholder="disabled"
               readOnly={false}
               type="text"
-              value=""
             />
           </div>
         </div>
@@ -3094,18 +3090,17 @@ exports[`Storyshots Components/TextField Play Ground 1`] = `
         >
           <label
             className="label"
-          >
-            placeholder
-          </label>
+          />
           <div
-            className="inputBase text inputBase bottom"
+            className="inputBase text inputBase"
           >
             <input
               id="textField-26"
               onChange={[Function]}
+              placeholder="placeholder"
               readOnly={false}
               type="text"
-              value=""
+              value="select something"
             />
           </div>
         </div>
@@ -3124,18 +3119,17 @@ exports[`Storyshots Components/TextField Play Ground 1`] = `
         >
           <label
             className="label"
-          >
-            placeholder
-          </label>
+          />
           <div
-            className="inputBase text inputBase bottom"
+            className="inputBase text inputBase"
           >
             <input
               id="textField-27"
               onChange={[Function]}
+              placeholder="placeholder"
               readOnly={false}
               type="text"
-              value=""
+              value="select something"
             />
           </div>
         </div>
@@ -3167,18 +3161,17 @@ exports[`Storyshots Components/TextField Sizes 1`] = `
         >
           <label
             className="label"
-          >
-            placeholder
-          </label>
+          />
           <div
-            className="inputBase text inputBase bottom"
+            className="inputBase text inputBase"
           >
             <input
+              defaultValue="medium"
               id="textField-3"
               onChange={[Function]}
+              placeholder="placeholder"
               readOnly={false}
               type="text"
-              value="medium"
             />
           </div>
         </div>
@@ -3192,18 +3185,17 @@ exports[`Storyshots Components/TextField Sizes 1`] = `
         >
           <label
             className="label"
-          >
-            placeholder
-          </label>
+          />
           <div
-            className="inputBase text inputBase bottom"
+            className="inputBase text inputBase"
           >
             <input
+              defaultValue="small"
               id="textField-4"
               onChange={[Function]}
+              placeholder="placeholder"
               readOnly={false}
               type="text"
-              value="small"
             />
           </div>
         </div>
@@ -3235,11 +3227,11 @@ exports[`Storyshots Components/TextField Type Options 1`] = `
             className="inputBase options inputBase"
           >
             <input
+              defaultValue="Olives"
               id="textField-21"
               onChange={[Function]}
               readOnly={true}
               type="options"
-              value="Olives"
             />
             <div
               className="trailingIcon trailingIcon"
@@ -3268,11 +3260,11 @@ exports[`Storyshots Components/TextField Type Options 1`] = `
             className="inputBase options inputBase"
           >
             <input
+              defaultValue="Olives"
               id="textField-22"
               onChange={[Function]}
               readOnly={true}
               type="options"
-              value="Olives"
             />
             <div
               className="trailingIcon trailingIcon"
@@ -3314,11 +3306,11 @@ exports[`Storyshots Components/TextField Type Password 1`] = `
             className="inputBase password inputBase"
           >
             <input
+              defaultValue="secret"
               id="textField-24"
               onChange={[Function]}
               readOnly={false}
               type="password"
-              value="secret"
             />
             <button
               className="button medium ghost iconButton small ghost trailingIcon trailingIcon"
@@ -3348,23 +3340,24 @@ exports[`Storyshots Components/TextField With Default Value 1`] = `
         className="container"
       >
         <div
-          className="TextField outline text medium notEmpty"
+          className="TextField outline text medium notEmpty withLabel"
           onClick={[Function]}
         >
           <label
             className="label"
           >
-            placeholder
+            label
           </label>
           <div
             className="inputBase text inputBase bottom"
           >
             <input
+              defaultValue="default value"
               id="textField-1"
               onChange={[Function]}
+              placeholder="placeholder"
               readOnly={false}
               type="text"
-              value="default value"
             />
           </div>
         </div>
@@ -3373,23 +3366,24 @@ exports[`Storyshots Components/TextField With Default Value 1`] = `
         className="container"
       >
         <div
-          className="TextField fill text medium notEmpty"
+          className="TextField fill text medium notEmpty withLabel"
           onClick={[Function]}
         >
           <label
             className="label"
           >
-            placeholder
+            label
           </label>
           <div
             className="inputBase text inputBase bottom"
           >
             <input
+              defaultValue="default value"
               id="textField-2"
               onChange={[Function]}
+              placeholder="placeholder"
               readOnly={false}
               type="text"
-              value="default value"
             />
           </div>
         </div>
@@ -3416,18 +3410,16 @@ exports[`Storyshots Components/TextField With Error 1`] = `
         >
           <label
             className="label"
-          >
-            placeholder
-          </label>
+          />
           <div
-            className="inputBase text inputBase bottom"
+            className="inputBase text inputBase"
           >
             <input
               id="textField-15"
               onChange={[Function]}
+              placeholder="placeholder"
               readOnly={false}
               type="text"
-              value=""
             />
             <div
               className="trailingIcon trailingIcon"
@@ -3451,18 +3443,16 @@ exports[`Storyshots Components/TextField With Error 1`] = `
         >
           <label
             className="label"
-          >
-            placeholder
-          </label>
+          />
           <div
-            className="inputBase text inputBase bottom"
+            className="inputBase text inputBase"
           >
             <input
               id="textField-16"
               onChange={[Function]}
+              placeholder="placeholder"
               readOnly={false}
               type="text"
-              value=""
             />
             <div
               className="trailingIcon trailingIcon"
@@ -3476,6 +3466,48 @@ exports[`Storyshots Components/TextField With Error 1`] = `
         >
           This is an error
         </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/TextField With Label 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexMultipleRows"
+    >
+      <div
+        className="container"
+      >
+        <div
+          className="TextField outline text medium notEmpty withLabel"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+          >
+            label
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <input
+              defaultValue="Olives"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+            />
+            <div
+              className="trailingIcon trailingIcon"
+            >
+              <svg />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -3499,11 +3531,9 @@ exports[`Storyshots Components/TextField With Leading Icon 1`] = `
         >
           <label
             className="label left"
-          >
-            With leading Icon
-          </label>
+          />
           <div
-            className="inputBase text inputBase bottom"
+            className="inputBase text inputBase"
           >
             <span
               className="leadingIcon leadingIcon"
@@ -3513,9 +3543,9 @@ exports[`Storyshots Components/TextField With Leading Icon 1`] = `
             <input
               id="textField-7"
               onChange={[Function]}
+              placeholder="With leading Icon"
               readOnly={false}
               type="text"
-              value=""
             />
           </div>
         </div>
@@ -3529,11 +3559,9 @@ exports[`Storyshots Components/TextField With Leading Icon 1`] = `
         >
           <label
             className="label left"
-          >
-            With leading Icon
-          </label>
+          />
           <div
-            className="inputBase text inputBase bottom"
+            className="inputBase text inputBase"
           >
             <span
               className="leadingIcon leadingIcon"
@@ -3543,9 +3571,9 @@ exports[`Storyshots Components/TextField With Leading Icon 1`] = `
             <input
               id="textField-8"
               onChange={[Function]}
+              placeholder="With leading Icon"
               readOnly={false}
               type="text"
-              value=""
             />
           </div>
         </div>
@@ -3572,18 +3600,16 @@ exports[`Storyshots Components/TextField With Message 1`] = `
         >
           <label
             className="label"
-          >
-            placeholder
-          </label>
+          />
           <div
-            className="inputBase text inputBase bottom"
+            className="inputBase text inputBase"
           >
             <input
               id="textField-13"
               onChange={[Function]}
+              placeholder="placeholder"
               readOnly={false}
               type="text"
-              value=""
             />
             <div
               className="trailingIcon trailingIcon"
@@ -3607,18 +3633,16 @@ exports[`Storyshots Components/TextField With Message 1`] = `
         >
           <label
             className="label"
-          >
-            placeholder
-          </label>
+          />
           <div
-            className="inputBase text inputBase bottom"
+            className="inputBase text inputBase"
           >
             <input
               id="textField-14"
               onChange={[Function]}
+              placeholder="placeholder"
               readOnly={false}
               type="text"
-              value=""
             />
             <div
               className="trailingIcon trailingIcon"
@@ -3655,19 +3679,17 @@ exports[`Storyshots Components/TextField With Multiline 1`] = `
         >
           <label
             className="label"
-          >
-            placeholder
-          </label>
+          />
           <div
-            className="inputBase text multiline inputBase bottom"
+            className="inputBase text multiline inputBase"
           >
             <textarea
               id="textField-17"
               onChange={[Function]}
+              placeholder="placeholder"
               readOnly={false}
               rows={5}
               type="text"
-              value=""
             />
           </div>
         </div>
@@ -3681,20 +3703,58 @@ exports[`Storyshots Components/TextField With Multiline 1`] = `
         >
           <label
             className="label"
-          >
-            placeholder
-          </label>
+          />
           <div
-            className="inputBase text multiline inputBase bottom"
+            className="inputBase text multiline inputBase"
           >
             <textarea
               id="textField-18"
               onChange={[Function]}
+              placeholder="placeholder"
               readOnly={false}
               rows={5}
               type="text"
-              value=""
             />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/TextField With Placeholder 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexMultipleRows"
+    >
+      <div
+        className="container"
+      >
+        <div
+          className="TextField outline text medium"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+          />
+          <div
+            className="inputBase text inputBase"
+          >
+            <input
+              onChange={[Function]}
+              placeholder="placeholder"
+              readOnly={false}
+              type="text"
+            />
+            <div
+              className="trailingIcon trailingIcon"
+            >
+              <svg />
+            </div>
           </div>
         </div>
       </div>
@@ -3720,18 +3780,17 @@ exports[`Storyshots Components/TextField With Read Only 1`] = `
         >
           <label
             className="label"
-          >
-            This is read only text
-          </label>
+          />
           <div
-            className="inputBase text inputBase bottom"
+            className="inputBase text inputBase"
           >
             <input
+              defaultValue="text"
               id="textField-19"
               onChange={[Function]}
+              placeholder="This is read only text"
               readOnly={true}
               type="text"
-              value="text"
             />
             <div
               className="trailingIcon trailingIcon"
@@ -3750,18 +3809,17 @@ exports[`Storyshots Components/TextField With Read Only 1`] = `
         >
           <label
             className="label"
-          >
-            This is read only text
-          </label>
+          />
           <div
-            className="inputBase text inputBase bottom"
+            className="inputBase text inputBase"
           >
             <input
+              defaultValue="text"
               id="textField-20"
               onChange={[Function]}
+              placeholder="This is read only text"
               readOnly={true}
               type="text"
-              value="text"
             />
             <div
               className="trailingIcon trailingIcon"
@@ -3798,11 +3856,11 @@ exports[`Storyshots Components/TextField With Render Item 1`] = `
             className="inputBase options inputBase"
           >
             <input
+              defaultValue="Olives"
               id="textField-25"
               onChange={[Function]}
               readOnly={true}
               type="options"
-              value="Olives"
             />
             <div
               className="trailingIcon trailingIcon"
@@ -3848,7 +3906,6 @@ exports[`Storyshots Components/TextField With Trailing Icon 1`] = `
               onChange={[Function]}
               readOnly={false}
               type="text"
-              value=""
             />
             <div
               className="trailingIcon trailingIcon"
@@ -3876,7 +3933,6 @@ exports[`Storyshots Components/TextField With Trailing Icon 1`] = `
               onChange={[Function]}
               readOnly={false}
               type="text"
-              value=""
             />
             <div
               className="trailingIcon trailingIcon"
@@ -3903,20 +3959,19 @@ exports[`Storyshots Components/TextField With Value 1`] = `
         className="container"
       >
         <div
-          className="TextField outline text medium notEmpty"
+          className="TextField outline text medium"
           onClick={[Function]}
         >
           <label
             className="label"
-          >
-            placeholder
-          </label>
+          />
           <div
-            className="inputBase text inputBase bottom"
+            className="inputBase text inputBase"
           >
             <input
               id="textField-23"
               onChange={[Function]}
+              placeholder="placeholder"
               readOnly={false}
               type="text"
               value="Olives"

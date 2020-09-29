@@ -17,12 +17,14 @@ export const withDefaultValue = () =>
   <div className={ styles.flexMultipleRows }>
     <TextField
       placeholder={ 'placeholder' }
+      label={ 'label' }
       onChange={ action('Typing') }
       defaultValue={ 'default value' }
       id={ 'textField-1' }
     />
     <TextField
       placeholder={ 'placeholder' }
+      label={ 'label' }
       onChange={ action('Typing') }
       defaultValue={ 'default value' }
       variant={ 'fill' }
@@ -214,13 +216,12 @@ export const typeOptions = () => {
 }
 
 export const WithValue = () => {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState('Olives')
   return (
     <div className={ styles.flexMultipleRows }>
       <TextField
         trailingIcon={ <SunIcon /> }
         onChange={ ({ target : { value: text } }) => setValue(text) }
-        defaultValue={ 'Olives' }
         value={ value }
         id={ 'textField-23' }
         placeholder={ 'placeholder' }
@@ -256,6 +257,29 @@ export const WithRenderItem = () => {
         items={ items }
         renderItem={ item => <Menu.Item onClick={ () => onClick(item) } key={ item.value }>{ item.label }</Menu.Item> }
         type={ 'options' }
+      />
+    </div>
+  )
+}
+
+export const WithLabel = () => {
+  return (
+    <div className={ styles.flexMultipleRows }>
+      <TextField
+        trailingIcon={ <SunIcon /> }
+        defaultValue={ 'Olives' }
+        label={ 'label' }
+      />
+    </div>
+  )
+}
+
+export const WithPlaceholder = () => {
+  return (
+    <div className={ styles.flexMultipleRows }>
+      <TextField
+        trailingIcon={ <SunIcon /> }
+        placeholder={ 'placeholder' }
       />
     </div>
   )

@@ -104,6 +104,7 @@ const TableRow = ({
       <div
         role="cell"
         className={ styles.selectionCell }
+        onClick={ e => handleCellClick({ e, row, triggerRowClick: false }) }
       >
         <Checkbox
           onClick={ e => e.stopPropagation() }
@@ -145,8 +146,15 @@ const TableRow = ({
     onRowClick(row)
   }
 
+  const handleCellClick = ({ e, row, triggerRowClick }) => {
+    e.stopPropagation()
+    if (triggerRowClick) {
+      handleRowClick(row)
+    }
+  }
+
   const renderDataRow = () => {
-    const tableRowClassNames = classNames(styles.tableRow, { [styles.clickable]: onRowClick }, { [styles.selectedRow]: isSelected })
+    const tableRowClassNames = classNames(styles.tableRow, { [styles.triggerRowClick]: onRowClick }, { [styles.selectedRow]: isSelected })
     return (
       <div
         role="row"
@@ -158,14 +166,14 @@ const TableRow = ({
       >
         { renderSelection(row, isSelected) }
         { columns.map(({
-          field, columnRender, columnRenderHover, hide, width, type
+          field, columnRender, columnRenderHover, hide, width, type, triggerRowClick = true
         }) => {
           if (hide) {
             return null
           }
           const style = getCellWidth(width)
           return (
-            <div role="cell" style={ style } className={ styles.tableCell } key={ field }>
+            <div role="cell" style={ style } className={ styles.tableCell } key={ field } onClick={ e => handleCellClick({ e, row, triggerRowClick }) } >
               { renderCell(row, field, columnRender, columnRenderHover, type) }
             </div>
           )
@@ -220,7 +228,7 @@ const TableRow = ({
 }
 
 TableRow.defaultProps = {
-  onRowClick: () => {}
+  onRowClick: () => {},
 }
 
 TableRow.propTypes = {

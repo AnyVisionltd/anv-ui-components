@@ -5,7 +5,6 @@
   min-height: 48px;
   display: flex;
   border-bottom: 1px av-color(content, av-opacity(divider)) solid;
-  padding: av-space(tiny) 0;
 
   .tableCell {
     box-sizing: border-box;
@@ -31,7 +30,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: av-space(tiny);
+    padding-left: av-space(tiny);
   }
 
   .actionsCell {
