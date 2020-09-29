@@ -165,9 +165,10 @@ TableHeader.propTypes = {
    *  <code>sortable</code>  			  - set column is sortable. <br />
    *  <code>filterable</code>			  - set column is filterable. <br />
    *  <code>manageable</code>			  - set column is manageable. <br />
-   *  <code>permanent</code>        - if true, disable uncheck column from column management
+   *  <code>permanent</code>        - if true, disable uncheck column from column management. <br />
    *  <code>hide</code>         		- hide the column. <br />
    *  <code>width</code>    			  - set the column width by flex basis. <br />
+   *  <code>triggerRowClick</code>  - set if cell is clickable, default true. <br />
    **/
   columns: propTypes.arrayOf(
     propTypes.shape({
@@ -184,6 +185,7 @@ TableHeader.propTypes = {
       filterable: propTypes.bool,
       manageable: propTypes.bool,
       permanent: propTypes.bool,
+      triggerRowClick: propTypes.bool,
       hide: propTypes.bool,
       width: propTypes.string,
     }),

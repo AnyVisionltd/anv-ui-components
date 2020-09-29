@@ -1,11 +1,18 @@
 ## Unreleased
+### Breaking Changes :boom:
+- Added label prop to textField
+
+### Changed
+- Changed textfield to be uncontrolled
+
+### Added
+- New @anyvision/anv-icon section.
 
 ## 0.1.3 - 01-09-2020
 ### Added
 - New Table.
 - New Text Field.
 - New Wizard Dialog.
-- New @anyvision/anv-icon section.
 
 <!-- 
 Sections: 
