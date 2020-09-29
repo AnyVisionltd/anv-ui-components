@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { action } from '@storybook/addon-actions'
 import { centerDecorator } from '../../utils/storybook/decorators'
-import styles from '../../styles/storybook/index.module.scss'
+import styles from '../../storybook/index.module.scss'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
 import TextField from './TextField'
 import { boolean, select } from '@storybook/addon-knobs'

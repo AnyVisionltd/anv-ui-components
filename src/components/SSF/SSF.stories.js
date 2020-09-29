@@ -4,7 +4,7 @@ import SmartFilter from './SSF'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import { ReactComponent as EyeEnabled } from '../../assets/svg/EyeEnabled.svg'
 import { ReactComponent as ArrowSolidRight } from '../../assets/svg/ArrowSolidRight.svg'
-import styles from '../../styles/storybook/index.module.scss'
+import styles from '../../storybook/index.module.scss'
 
 export default {
   title: 'Components/SSF',

@@ -1,8 +1,8 @@
 import React from 'react'
 import { select, boolean } from '@storybook/addon-knobs'
-import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
+import { Sun } from '@anyvision/anv-icons'
 import IconButton from './IconButton'
-import styles from '../../styles/storybook/index.module.scss'
+import styles from '../../storybook/index.module.scss'
 import { centerDecorator } from '../../utils/storybook/decorators'
 
 export default {
@@ -13,37 +13,37 @@ export default {
 
 export const Default = () => (
   <IconButton>
-    <SunIcon />
+    <Sun />
   </IconButton>
 )
 
 export const variants = () => (
   <div className={ styles.marginFlexContainer }>
     <IconButton>
-      <SunIcon />
+      <Sun />
     </IconButton>
     <IconButton variant="outline">
-      <SunIcon />
+      <Sun />
     </IconButton>
     <IconButton variant="ghost">
-      <SunIcon />
+      <Sun />
     </IconButton>
   </div>
 )
 
 export const sizes = () => (
   <div className={ styles.marginFlexContainer }>
-    <IconButton><SunIcon /></IconButton>
-    <IconButton size="medium"><SunIcon /></IconButton>
-    <IconButton size="large"><SunIcon /></IconButton>
+    <IconButton><Sun /></IconButton>
+    <IconButton size="medium"><Sun /></IconButton>
+    <IconButton size="large"><Sun /></IconButton>
   </div>
 )
 
 
 export const disable = () => (
   <div className={ styles.marginFlexContainer }>
-    <IconButton><SunIcon /></IconButton>
-    <IconButton disabled><SunIcon /></IconButton>
+    <IconButton><Sun /></IconButton>
+    <IconButton disabled><Sun /></IconButton>
   </div>
 )
 
@@ -51,15 +51,15 @@ export const withClassName = () => (
   <div className={ styles.marginFlexContainer }>
     { /* background-color: av-color(success); */ }
     <IconButton className={ styles.successBackgroundColor }>
-      <SunIcon />
+      <Sun />
     </IconButton>
     { /* color: av-color(alert); */ }
     <IconButton className={ styles.alertColor } variant="outline">
-      <SunIcon />
+      <Sun />
     </IconButton>
     { /* color: av-color(error); */ }
     <IconButton className={ styles.errorColor } variant="ghost">
-      <SunIcon />
+      <Sun />
     </IconButton>
   </div>
 )
@@ -70,6 +70,6 @@ export const playGround = () => (
     variant={ select('variant', ['fill', 'outline', 'ghost'], 'fill') }
     disabled={ boolean('disabled', false) }
   >
-    <SunIcon />
+    <Sun />
   </IconButton>
 )

@@ -6,7 +6,7 @@ import { ReactComponent as EyeEnabled } from '../../assets/svg/EyeEnabled.svg'
 import { ReactComponent as ArrowSolidRight } from '../../assets/svg/ArrowSolidRight.svg'
 import { ReactComponent as Filter } from '../../assets/svg/Filter.svg'
 import { centerDecorator } from '../../utils/storybook/decorators'
-import styles from '../../styles/storybook/index.module.scss'
+import styles from '../../storybook/index.module.scss'
 
 const mockInitialData = [
   { label: 'first' },
