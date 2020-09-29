@@ -3,7 +3,7 @@ import Snackbar from './Snackbar'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
 import { ReactComponent as CheckIcon } from '../../assets/svg/Check.svg'
 import { centerDecorator } from '../../utils/storybook/decorators'
-import styles from '../../styles/storybook/index.module.scss'
+import styles from '../../storybook/index.module.scss'
 import { Button } from '../Button'
 
 export default {

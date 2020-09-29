@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { select } from '@storybook/addon-knobs'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import { Menu, Button } from '../../index'
-import styles from '../../styles/storybook/index.module.scss'
+import styles from '../../storybook/index.module.scss'
 
 export default {
   title: 'Components/Menu',

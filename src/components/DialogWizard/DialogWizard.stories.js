@@ -3,7 +3,7 @@ import { boolean } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 import { Button } from '../../index'
 import { centerDecorator } from '../../utils/storybook/decorators'
-import styles from '../../styles/storybook/wizard.module.scss'
+import styles from '../../storybook/wizard.module.scss'
 import DialogWizard from "./DialogWizard"
 
 export default {

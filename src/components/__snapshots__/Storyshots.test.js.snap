@@ -1195,7 +1195,16 @@ exports[`Storyshots Components/IconButton Default 1`] = `
       onClick={[Function]}
       type="button"
     >
-      <svg />
+      <svg
+        height="1em"
+        viewBox="0 0 24 24"
+        width="1em"
+      >
+        <path
+          d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
+          data-name="Sun"
+        />
+      </svg>
     </button>
   </div>
 </div>
@@ -1215,7 +1224,16 @@ exports[`Storyshots Components/IconButton Disable 1`] = `
         onClick={[Function]}
         type="button"
       >
-        <svg />
+        <svg
+          height="1em"
+          viewBox="0 0 24 24"
+          width="1em"
+        >
+          <path
+            d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
+            data-name="Sun"
+          />
+        </svg>
       </button>
       <button
         className="button medium fill iconButton small fill"
@@ -1223,7 +1241,16 @@ exports[`Storyshots Components/IconButton Disable 1`] = `
         onClick={[Function]}
         type="button"
       >
-        <svg />
+        <svg
+          height="1em"
+          viewBox="0 0 24 24"
+          width="1em"
+        >
+          <path
+            d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
+            data-name="Sun"
+          />
+        </svg>
       </button>
     </div>
   </div>
@@ -1241,7 +1268,16 @@ exports[`Storyshots Components/IconButton Play Ground 1`] = `
       onClick={[Function]}
       type="button"
     >
-      <svg />
+      <svg
+        height="1em"
+        viewBox="0 0 24 24"
+        width="1em"
+      >
+        <path
+          d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
+          data-name="Sun"
+        />
+      </svg>
     </button>
   </div>
 </div>
@@ -1261,7 +1297,16 @@ exports[`Storyshots Components/IconButton Sizes 1`] = `
         onClick={[Function]}
         type="button"
       >
-        <svg />
+        <svg
+          height="1em"
+          viewBox="0 0 24 24"
+          width="1em"
+        >
+          <path
+            d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
+            data-name="Sun"
+          />
+        </svg>
       </button>
       <button
         className="button medium fill iconButton medium fill"
@@ -1269,7 +1314,16 @@ exports[`Storyshots Components/IconButton Sizes 1`] = `
         onClick={[Function]}
         type="button"
       >
-        <svg />
+        <svg
+          height="1em"
+          viewBox="0 0 24 24"
+          width="1em"
+        >
+          <path
+            d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
+            data-name="Sun"
+          />
+        </svg>
       </button>
       <button
         className="button medium fill iconButton large fill"
@@ -1277,7 +1331,16 @@ exports[`Storyshots Components/IconButton Sizes 1`] = `
         onClick={[Function]}
         type="button"
       >
-        <svg />
+        <svg
+          height="1em"
+          viewBox="0 0 24 24"
+          width="1em"
+        >
+          <path
+            d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
+            data-name="Sun"
+          />
+        </svg>
       </button>
     </div>
   </div>
@@ -1298,7 +1361,16 @@ exports[`Storyshots Components/IconButton Variants 1`] = `
         onClick={[Function]}
         type="button"
       >
-        <svg />
+        <svg
+          height="1em"
+          viewBox="0 0 24 24"
+          width="1em"
+        >
+          <path
+            d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
+            data-name="Sun"
+          />
+        </svg>
       </button>
       <button
         className="button medium outline iconButton small outline"
@@ -1306,7 +1378,16 @@ exports[`Storyshots Components/IconButton Variants 1`] = `
         onClick={[Function]}
         type="button"
       >
-        <svg />
+        <svg
+          height="1em"
+          viewBox="0 0 24 24"
+          width="1em"
+        >
+          <path
+            d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
+            data-name="Sun"
+          />
+        </svg>
       </button>
       <button
         className="button medium ghost iconButton small ghost"
@@ -1314,7 +1395,16 @@ exports[`Storyshots Components/IconButton Variants 1`] = `
         onClick={[Function]}
         type="button"
       >
-        <svg />
+        <svg
+          height="1em"
+          viewBox="0 0 24 24"
+          width="1em"
+        >
+          <path
+            d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
+            data-name="Sun"
+          />
+        </svg>
       </button>
     </div>
   </div>
@@ -1335,7 +1425,16 @@ exports[`Storyshots Components/IconButton With Class Name 1`] = `
         onClick={[Function]}
         type="button"
       >
-        <svg />
+        <svg
+          height="1em"
+          viewBox="0 0 24 24"
+          width="1em"
+        >
+          <path
+            d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
+            data-name="Sun"
+          />
+        </svg>
       </button>
       <button
         className="button medium outline iconButton small outline alertColor"
@@ -1343,7 +1442,16 @@ exports[`Storyshots Components/IconButton With Class Name 1`] = `
         onClick={[Function]}
         type="button"
       >
-        <svg />
+        <svg
+          height="1em"
+          viewBox="0 0 24 24"
+          width="1em"
+        >
+          <path
+            d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
+            data-name="Sun"
+          />
+        </svg>
       </button>
       <button
         className="button medium ghost iconButton small ghost errorColor"
@@ -1351,7 +1459,16 @@ exports[`Storyshots Components/IconButton With Class Name 1`] = `
         onClick={[Function]}
         type="button"
       >
-        <svg />
+        <svg
+          height="1em"
+          viewBox="0 0 24 24"
+          width="1em"
+        >
+          <path
+            d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
+            data-name="Sun"
+          />
+        </svg>
       </button>
     </div>
   </div>
@@ -4093,6 +4210,697 @@ exports[`Storyshots Components/Tooltip Overflow Only 1`] = `
       >
         long long long long long long text
       </h6>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Icons/Icons All 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="container"
+    >
+      <div
+        className="comment"
+      >
+        * The following icons import from
+        <a
+          href="https://github.com/AnyVisionltd/anv-icons"
+        >
+          @anyvision/anv-icons
+        </a>
+        .
+      </div>
+      <div
+        className="searchAndCodeContainer"
+      >
+        <div
+          className="container search"
+        >
+          <div
+            className="TextField outline text medium"
+            onClick={[Function]}
+          >
+            <label
+              className="label"
+            />
+            <div
+              className="inputBase text inputBase"
+            >
+              <input
+                onChange={[Function]}
+                placeholder="Search"
+                readOnly={false}
+                type="text"
+                value=""
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          className="docblock-source css-q35ldn"
+        >
+          <div
+            className="os-host"
+          >
+            <div
+              className="os-resize-observer-host"
+            />
+            <div
+              className="os-padding"
+            >
+              <div
+                className="os-viewport"
+              >
+                <div
+                  className="os-content"
+                >
+                  <pre
+                    className="prismjs css-4zr3vl"
+                    style={Object {}}
+                  >
+                    <code
+                      className="language-js css-1maezg8"
+                    >
+                      <span
+                        className="token comment"
+                      >
+                        //import
+                      </span>
+                      <span
+                        className=""
+                      >
+                        
+
+                      </span>
+                      <span
+                        className=""
+                      >
+                        
+                      </span>
+                      <span
+                        className="token keyword module"
+                      >
+                        import
+                      </span>
+                      <span
+                        className=""
+                      >
+                         
+                      </span>
+                      <span
+                        className="token punctuation"
+                      >
+                        {
+                      </span>
+                      <span
+                        className=""
+                      >
+                         
+                      </span>
+                      <span
+                        className="token maybe-class-name"
+                      >
+                        IconName
+                      </span>
+                      <span
+                        className=""
+                      >
+                         
+                      </span>
+                      <span
+                        className="token punctuation"
+                      >
+                        }
+                      </span>
+                      <span
+                        className=""
+                      >
+                         
+                      </span>
+                      <span
+                        className="token keyword module"
+                      >
+                        from
+                      </span>
+                      <span
+                        className=""
+                      >
+                         
+                      </span>
+                      <span
+                        className="token string"
+                      >
+                        '@anyvision/icons'
+                      </span>
+                      <span
+                        className=""
+                      >
+                        
+
+                      </span>
+                      <span
+                        className=""
+                      >
+                        
+                      </span>
+                      <span
+                        className="token comment"
+                      >
+                        // use        
+                      </span>
+                      <span
+                        className=""
+                      >
+                        
+
+                      </span>
+                      <span
+                        className=""
+                      >
+                        
+                      </span>
+                      <span
+                        className="token operator"
+                      >
+                        &lt;
+                      </span>
+                      <span
+                        className="token maybe-class-name"
+                      >
+                        IconName
+                      </span>
+                      <span
+                        className="token operator"
+                      >
+                        /
+                      </span>
+                      <span
+                        className="token operator"
+                      >
+                        &gt;
+                      </span>
+                    </code>
+                  </pre>
+                </div>
+              </div>
+            </div>
+            <div
+              className="os-scrollbar os-scrollbar-horizontal "
+            >
+              <div
+                className="os-scrollbar-track"
+              >
+                <div
+                  className="os-scrollbar-handle"
+                />
+              </div>
+            </div>
+            <div
+              className="os-scrollbar os-scrollbar-vertical"
+            >
+              <div
+                className="os-scrollbar-track"
+              >
+                <div
+                  className="os-scrollbar-handle"
+                />
+              </div>
+            </div>
+            <div
+              className="os-scrollbar-corner"
+            />
+          </div>
+          <div
+            className="css-1xxxe71"
+          >
+            <button
+              className="css-wn6lpt"
+              onClick={[Function]}
+            >
+              Copy
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        className="icons"
+      >
+        <div
+          className="iconCard"
+          onClick={[Function]}
+        >
+          <svg
+            className="icon"
+            data-name="Arrow solid down"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+          >
+            <path
+              d="M12.753 15.372a1 1 0 01-1.505 0l-3.8-4.339A1 1 0 018.2 9.375h7.6a1 1 0 01.749 1.657z"
+              data-name="Arrow solid down"
+            />
+          </svg>
+          <span
+            className="name"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            ArrowSolidDown
+          </span>
+        </div>
+        <div
+          className="iconCard"
+          onClick={[Function]}
+        >
+          <svg
+            className="icon"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+          >
+            <path
+              d="M15.318 11.249a1 1 0 010 1.505l-4.339 3.8a1 1 0 01-1.658-.752v-7.6a1 1 0 011.657-.749z"
+            />
+          </svg>
+          <span
+            className="name"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            ArrowSolidRight
+          </span>
+        </div>
+        <div
+          className="iconCard"
+          onClick={[Function]}
+        >
+          <svg
+            className="icon"
+            height="1em"
+            viewBox="0 0 16 16"
+            width="1em"
+          >
+            <path
+              d="M9.131 8.001l2.634-2.634a.8.8 0 10-1.131-1.131L8.001 6.869 5.366 4.235a.8.8 0 10-1.131 1.131l2.634 2.635-2.634 2.633a.8.8 0 101.131 1.131l2.635-2.634 2.634 2.634a.8.8 0 101.131-1.131z"
+              data-name="Path 2223"
+            />
+          </svg>
+          <span
+            className="name"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            Cancel
+          </span>
+        </div>
+        <div
+          className="iconCard"
+          onClick={[Function]}
+        >
+          <svg
+            className="icon"
+            data-name="Cancel X"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+          >
+            <path
+              d="M12 20A8 8 0 016.344 6.343a8 8 0 1111.312 11.31A7.941 7.941 0 0112 20zm0-6.871l2.633 2.634a.841.841 0 00.316.2.806.806 0 00.251.037.791.791 0 00.564-.234A.8.8 0 0016 15.2a.793.793 0 00-.234-.564L13.131 12l2.633-2.634a.8.8 0 000-1.131.8.8 0 00-1.131 0L12 10.87 9.365 8.236a.8.8 0 00-1.131 0 .8.8 0 000 1.131L10.869 12l-2.635 2.635A.792.792 0 008 15.2a.8.8 0 00.8.8.791.791 0 00.564-.234L12 13.131z"
+              data-name="Subtraction 5"
+            />
+          </svg>
+          <span
+            className="name"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            CancelFilled
+          </span>
+        </div>
+        <div
+          className="iconCard"
+          onClick={[Function]}
+        >
+          <svg
+            className="icon"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+          >
+            <path
+              d="M18.441 7.037a.961.961 0 00-1.364 0L9.92 14.201l-3.006-3.016a.982.982 0 10-1.364 1.412l3.689 3.689a.961.961 0 001.364 0l7.838-7.839a.961.961 0 000-1.412z"
+              data-name="check"
+            />
+          </svg>
+          <span
+            className="name"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            Check
+          </span>
+        </div>
+        <div
+          className="iconCard"
+          onClick={[Function]}
+        >
+          <svg
+            className="icon"
+            height="1em"
+            viewBox="0 0 8 2"
+            width="1em"
+          >
+            <rect
+              data-name="Rectangle 2782"
+              height={2}
+              rx={1}
+              width={8}
+            />
+          </svg>
+          <span
+            className="name"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            CheckboxIndeterminate
+          </span>
+        </div>
+        <div
+          className="iconCard"
+          onClick={[Function]}
+        >
+          <svg
+            className="icon"
+            height="1em"
+            viewBox="0 0 8 5.955"
+            width="1em"
+          >
+            <path
+              className="Checked_svg__cls-1"
+              d="M6.549.247L2.9 3.901l-1.4-1.4a.851.851 0 10-1.2 1.2l2 2.007a.852.852 0 001.2 0l4.253-4.253a.851.851 0 00-1.2-1.208z"
+            />
+          </svg>
+          <span
+            className="name"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            Checked
+          </span>
+        </div>
+        <div
+          className="iconCard"
+          onClick={[Function]}
+        >
+          <svg
+            className="icon"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+          >
+            <path
+              d="M13.406 11.998l4.3-4.286a1.003 1.003 0 10-1.42-1.418L12 10.594l-4.286-4.3a1.003 1.003 0 00-1.418 1.418l4.3 4.286-4.3 4.286a1.003 1.003 0 101.418 1.42l4.286-4.3 4.286 4.3a1.004 1.004 0 101.42-1.42z"
+              data-name="Close"
+            />
+          </svg>
+          <span
+            className="name"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            Close
+          </span>
+        </div>
+        <div
+          className="iconCard"
+          onClick={[Function]}
+        >
+          <svg
+            className="icon"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+          >
+            <defs>
+              <style />
+            </defs>
+            <g
+              id="Drag_svg__prefix__Drag"
+            >
+              <g
+                id="Drag_svg__prefix__dots"
+                transform="translate(7.5 4.5)"
+              >
+                <circle
+                  className="Drag_svg__prefix__cls-3"
+                  cx={1.5}
+                  cy={1.5}
+                  id="Drag_svg__prefix__Ellipse_357"
+                  r={1.5}
+                />
+                <circle
+                  className="Drag_svg__prefix__cls-3"
+                  cx={1.5}
+                  cy={1.5}
+                  id="Drag_svg__prefix__Ellipse_362"
+                  r={1.5}
+                  transform="translate(6)"
+                />
+                <circle
+                  className="Drag_svg__prefix__cls-3"
+                  cx={1.5}
+                  cy={1.5}
+                  id="Drag_svg__prefix__Ellipse_358"
+                  r={1.5}
+                  transform="translate(0 6)"
+                />
+                <circle
+                  className="Drag_svg__prefix__cls-3"
+                  cx={1.5}
+                  cy={1.5}
+                  id="Drag_svg__prefix__Ellipse_361"
+                  r={1.5}
+                  transform="translate(6 6)"
+                />
+                <circle
+                  className="Drag_svg__prefix__cls-3"
+                  cx={1.5}
+                  cy={1.5}
+                  id="Drag_svg__prefix__Ellipse_359"
+                  r={1.5}
+                  transform="translate(0 12)"
+                />
+                <circle
+                  className="Drag_svg__prefix__cls-3"
+                  cx={1.5}
+                  cy={1.5}
+                  id="Drag_svg__prefix__Ellipse_360"
+                  r={1.5}
+                  transform="translate(6 12)"
+                />
+              </g>
+            </g>
+          </svg>
+          <span
+            className="name"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            Drag
+          </span>
+        </div>
+        <div
+          className="iconCard"
+          onClick={[Function]}
+        >
+          <svg
+            className="icon"
+            data-name="Error Circle - Outlined"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+          >
+            <path
+              d="M12 12.75a.75.75 0 00.75-.75V9a.75.75 0 00-1.5 0v3a.75.75 0 00.75.75zm-.285 2.94a.775.775 0 00.818-.158.863.863 0 00.158-.248.63.63 0 00.06-.285.75.75 0 00-.218-.532.862.862 0 00-.248-.158.75.75 0 00-1.035.691.788.788 0 00.217.532.75.75 0 00.248.158zM12 19.5A7.5 7.5 0 104.5 12a7.5 7.5 0 007.5 7.5zM12 6a6 6 0 11-6 6 6 6 0 016-6z"
+            />
+          </svg>
+          <span
+            className="name"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            ErrorCircleOutlined
+          </span>
+        </div>
+        <div
+          className="iconCard"
+          onClick={[Function]}
+        >
+          <svg
+            className="icon"
+            data-name="Eye disabled"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+          >
+            <path
+              d="M11.204 7.561a5.2 5.2 0 01.8-.057c2.384 0 4.625 1.717 5.93 4.5a11.417 11.417 0 01-.675 1.229.749.749 0 101.274.787 11.822 11.822 0 00.907-1.724.75.75 0 000-.592c-1.519-3.52-4.367-5.7-7.436-5.7a5.825 5.825 0 00-1.049.09.76.76 0 10.255 1.5zM5.785 4.72A.753.753 0 004.72 5.785l2.324 2.319a10.96 10.96 0 00-2.481 3.6.75.75 0 000 .6c1.514 3.516 4.363 5.7 7.436 5.7a6.942 6.942 0 003.786-1.154l2.429 2.436a.753.753 0 101.064-1.064zm4.767 6.889l1.837 1.837a1.357 1.357 0 01-.39.052 1.5 1.5 0 01-1.495-1.494 1.357 1.357 0 01.048-.395zm1.452 4.888c-2.384 0-4.625-1.717-5.922-4.5a9.063 9.063 0 012.022-2.839l1.324 1.346a3 3 0 004.07 4.07l1.192 1.177a5.427 5.427 0 01-2.691.75z"
+            />
+          </svg>
+          <span
+            className="name"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            EyeDisabled
+          </span>
+        </div>
+        <div
+          className="iconCard"
+          onClick={[Function]}
+        >
+          <svg
+            className="icon"
+            data-name="Eye enabled"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+          >
+            <path
+              d="M19.438 11.701c-1.515-3.518-4.364-5.7-7.434-5.7s-5.926 2.182-7.441 5.7a.75.75 0 000 .6c1.515 3.514 4.364 5.7 7.441 5.7s5.923-2.182 7.437-5.7a.75.75 0 00-.003-.6zm-7.434 4.8c-2.377 0-4.626-1.717-5.923-4.5 1.294-2.784 3.543-4.5 5.923-4.5s4.626 1.717 5.923 4.5c-1.301 2.779-3.55 4.5-5.923 4.5zm0-7.5a3 3 0 103 3 3 3 0 00-3-3zm0 4.5a1.5 1.5 0 111.5-1.5 1.5 1.5 0 01-1.5 1.5z"
+            />
+          </svg>
+          <span
+            className="name"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            EyeEnabled
+          </span>
+        </div>
+        <div
+          className="iconCard"
+          onClick={[Function]}
+        >
+          <svg
+            className="icon"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+          >
+            <path
+              d="M5.25 9h13.5a.75.75 0 100-1.5H5.25a.75.75 0 100 1.5zM15 15H9a.75.75 0 000 1.5h6a.75.75 0 000-1.5zm1.875-3.75h-9.75a.75.75 0 000 1.5h9.75a.75.75 0 000-1.5z"
+              data-name="Filter"
+            />
+          </svg>
+          <span
+            className="name"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            Filter
+          </span>
+        </div>
+        <div
+          className="iconCard"
+          onClick={[Function]}
+        >
+          <svg
+            className="icon"
+            data-name="Long Arrow"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+          >
+            <path
+              d="M12.71 19.71a1.034 1.034 0 01-1.42 0l-4-4a1.004 1.004 0 011.42-1.42l2.29 2.3V4.995a1 1 0 012 0v11.59l2.29-2.3a1.004 1.004 0 111.42 1.42z"
+            />
+          </svg>
+          <span
+            className="name"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            LongArrow
+          </span>
+        </div>
+        <div
+          className="iconCard"
+          onClick={[Function]}
+        >
+          <svg
+            className="icon"
+            data-name="Manage cols"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+          >
+            <path
+              d="M14.997 16.999a2 2 0 01-2-2v-6a2 2 0 012-2h4a2 2 0 012 2v6a2 2 0 01-2 2zm1.623-4.674v1.624a.523.523 0 00.142.355.5.5 0 00.711 0 .484.484 0 00.148-.355l-.005-1.624 1.623.006a.486.486 0 00.356-.149.5.5 0 000-.706.491.491 0 00-.356-.146h-1.623l.005-1.619a.5.5 0 10-1 0v1.62h-1.618a.481.481 0 00-.356.146.486.486 0 00-.149.355.507.507 0 00.5.5l1.615-.006zM4.583 16.217a.83.83 0 110-1.66h5.81a.83.83 0 110 1.66zm0-3.32a.83.83 0 010-1.661h5.81a.83.83 0 010 1.661zm0-3.32a.83.83 0 010-1.66h5.81a.83.83 0 110 1.66z"
+              data-name="Manage cols"
+            />
+          </svg>
+          <span
+            className="name"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            ManageColumn
+          </span>
+        </div>
+        <div
+          className="iconCard"
+          onClick={[Function]}
+        >
+          <svg
+            className="icon"
+            data-name="more vertical"
+            height="1em"
+            viewBox="0 0 12 24"
+            width="1em"
+          >
+            <path
+              d="M6.001 16.5a1.5 1.5 0 11-1.5 1.5 1.5 1.5 0 011.5-1.5zm0-6a1.5 1.5 0 11-1.5 1.5 1.5 1.5 0 011.5-1.5zm0-6a1.5 1.5 0 11-1.5 1.5 1.5 1.5 0 011.5-1.5z"
+              data-name="Union 48"
+            />
+          </svg>
+          <span
+            className="name"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            Options
+          </span>
+        </div>
+        <div
+          className="iconCard"
+          onClick={[Function]}
+        >
+          <svg
+            className="icon"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+          >
+            <path
+              d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
+              data-name="Sun"
+            />
+          </svg>
+          <span
+            className="name"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            Sun
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 </div>

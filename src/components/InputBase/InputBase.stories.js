@@ -6,7 +6,7 @@ import InputBase from './InputBase'
 import { IconButton } from '../IconButton'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
 import { centerDecorator } from '../../utils/storybook/decorators'
-import styles from '../../styles/storybook/index.module.scss'
+import styles from '../../storybook/index.module.scss'
 
 export default {
   title: 'Components/InputBase',
