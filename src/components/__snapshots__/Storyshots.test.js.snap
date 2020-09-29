@@ -3227,11 +3227,11 @@ exports[`Storyshots Components/TextField Type Options 1`] = `
             className="inputBase options inputBase"
           >
             <input
-              defaultValue="Olives"
               id="textField-21"
               onChange={[Function]}
               readOnly={true}
               type="options"
+              value="Olives"
             />
             <div
               className="trailingIcon trailingIcon"
@@ -3260,11 +3260,11 @@ exports[`Storyshots Components/TextField Type Options 1`] = `
             className="inputBase options inputBase"
           >
             <input
-              defaultValue="Olives"
               id="textField-22"
               onChange={[Function]}
               readOnly={true}
               type="options"
+              value="Olives"
             />
             <div
               className="trailingIcon trailingIcon"
@@ -3856,11 +3856,11 @@ exports[`Storyshots Components/TextField With Render Item 1`] = `
             className="inputBase options inputBase"
           >
             <input
-              defaultValue="Olives"
               id="textField-25"
               onChange={[Function]}
               readOnly={true}
               type="options"
+              value="Olives"
             />
             <div
               className="trailingIcon trailingIcon"

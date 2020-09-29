@@ -161,6 +161,10 @@ const TextField = React.forwardRef((props, ref) => {
     }
   )
 
+  const inputValue = type === types.options ? (value || defaultValue) : value
+
+  const inputDefaultValue = type === types.options ? undefined : defaultValue
+
   return (
     <div className={ classNames(styles.container, className) }>
       <div ref={ textFieldRef } onClick={ handleClick } className={ classes }>
@@ -169,7 +173,7 @@ const TextField = React.forwardRef((props, ref) => {
           { ...otherProps }
           disabled={ disabled }
           className={ classNames(styles.inputBase, { [styles.bottom]: !!label }) }
-          value={ value }
+          value={ inputValue }
           onChange={ onInputChange }
           leadingIconClassName={ classNames(styles.leadingIcon, leadingIconClassName) }
           trailingIconClassName={ classNames(styles.trailingIcon, trailingIconClassName) }
@@ -179,7 +183,7 @@ const TextField = React.forwardRef((props, ref) => {
           leadingIcon={ leadingIcon }
           multiline={ multiline }
           type={ type }
-          defaultValue={ defaultValue }
+          defaultValue={ inputDefaultValue }
         />
       </div>
       { type === types.options && renderMenu() }
