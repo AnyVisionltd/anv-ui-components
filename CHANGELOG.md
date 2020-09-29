@@ -5,6 +5,7 @@
 - New Table.
 - New Text Field.
 - New Wizard Dialog.
+- New @anyvision/anv-icon section.
 
 <!-- 
 Sections: 
