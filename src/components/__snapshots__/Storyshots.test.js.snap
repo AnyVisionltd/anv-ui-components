@@ -11074,33 +11074,46 @@ exports[`Storyshots Icons/Icons All 1`] = `
                 />
               </clipPath>
             </defs>
-            <path
-              d="M7.5 17.5h9"
-              data-name="Line 201"
-            />
-            <path
-              d="M16.7 17.336l3.536-3.536"
-              data-name="Line 202"
-            />
-            <path
-              d="M9.5 17.5l-1.437 2.438"
-              data-name="Path 2234"
-            />
-            <path
-              d="M16.063 17.5l1.437 2.438"
-              data-name="Path 2235"
-            />
+            <g
+              strokeLinecap="round"
+              strokeWidth={1.5}
+            >
+              <path
+                d="M7.5 17.5h9"
+                data-name="Line 201"
+                fill="none"
+                stroke="#021d3d"
+              />
+              <path
+                d="M16.7 17.336l3.536-3.536"
+                data-name="Line 202"
+                fill="none"
+                stroke="#021d3d"
+              />
+              <path
+                d="M9.5 17.5l-1.437 2.438"
+                data-name="Path 2234"
+                stroke="#05051a"
+              />
+              <path
+                d="M16.063 17.5l1.437 2.438"
+                data-name="Path 2235"
+                stroke="#05051a"
+              />
+            </g>
             <g
               clipPath="url(#Vacation_svg__a)"
               transform="translate(-1 -1.11)"
             >
               <g
                 data-name="umbrella"
+                fill="none"
+                strokeWidth={1.5}
               >
                 <g
                   clipPath="url(#Vacation_svg__b)"
                   data-name="Mask Group 6"
-                  strokeWidth={1.5}
+                  stroke="#05051a"
                   transform="rotate(-14.98 16.707 11.792)"
                 >
                   <g
@@ -11112,11 +11125,11 @@ exports[`Storyshots Icons/Icons All 1`] = `
                       cy={7}
                       rx={8}
                       ry={7}
+                      stroke="none"
                     />
                     <ellipse
                       cx={8}
                       cy={7}
-                      fill="none"
                       rx={7.25}
                       ry={6.25}
                     />
@@ -11130,11 +11143,11 @@ exports[`Storyshots Icons/Icons All 1`] = `
                       cy={7}
                       rx={4}
                       ry={7}
+                      stroke="none"
                     />
                     <ellipse
                       cx={4}
                       cy={7}
-                      fill="none"
                       rx={3.25}
                       ry={6.25}
                     />
@@ -11143,14 +11156,23 @@ exports[`Storyshots Icons/Icons All 1`] = `
                 <path
                   d="M4.678 13.68l14.297-3.834"
                   data-name="Line 203"
+                  stroke="#021d3d"
+                  strokeLinecap="round"
+                  strokeWidth={1.5001799999999998}
                 />
                 <path
                   d="M9.91 4.614l.362 1.353"
                   data-name="Line 204"
+                  stroke="#021d3d"
+                  strokeLinecap="round"
+                  strokeWidth={1.5001799999999998}
                 />
                 <path
                   d="M11.982 12.342l2.693 10.047"
                   data-name="Line 205"
+                  stroke="#021d3d"
+                  strokeLinecap="round"
+                  strokeWidth={1.5001799999999998}
                 />
               </g>
             </g>
