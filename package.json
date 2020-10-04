@@ -12,7 +12,7 @@
     "url": "https://github.com/AnyVisionltd/anv-ui-components"
   },
   "dependencies": {
-    "@anyvision/anv-icons": "0.0.4-beta.15",
+    "@anyvision/anv-icons": "0.0.4-beta.16",
     "@anyvision/style-guide": "1.0.2",
     "@popperjs/core": "^2.4.4",
     "classnames": "^2.2.6",
