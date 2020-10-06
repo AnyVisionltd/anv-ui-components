@@ -1,4 +1,8 @@
 ## Unreleased
+
+
+## 0.1.4 - 06-09-2020
+
 ### Breaking Changes :boom:
 - Added label prop to textField
 
