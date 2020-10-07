@@ -78,7 +78,7 @@ const TextField = React.forwardRef((props, ref) => {
   }, [autoFocus, inputRef])
 
   useEffect(() => {
-    if(otherProps.value !== undefined && otherProps.value !== value) {
+    if(otherProps.value !== undefined) {
       setEmpty(!otherProps.value)
       setValue(otherProps.value)
     }
