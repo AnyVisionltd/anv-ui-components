@@ -1,7 +1,8 @@
 ## Unreleased
+### Fixed
+- TextField empty state bug
 
-
-## 0.1.4 - 06-09-2020
+## 1.0.0 - 06-09-2020
 
 ### Breaking Changes :boom:
 - Added label prop to textField
