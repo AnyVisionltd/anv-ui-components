@@ -41,6 +41,7 @@ Button.defaultProps = {
   variant: 'fill',
   disabled: false,
   onClick: () => {},
+  type: 'button'
 }
 
 Button.propTypes = {
