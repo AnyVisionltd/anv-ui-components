@@ -27,7 +27,7 @@ const Button = forwardRef(({
       onClick={ onClick }
       disabled={ disabled }
       ref={ ref }
-      type={ type || 'button' }
+      type={ type }
       { ...otherProps }
     >
       { leadingIcon && <span className={ styles.leadingIcon }>{ leadingIcon }</span> }
