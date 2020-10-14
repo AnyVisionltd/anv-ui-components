@@ -38,7 +38,7 @@ export const All = () => {
         />
         <Source language={ 'js' } code={ `
           //import
-import { ${iconName} } from '@anyvision/icons'
+import { ${iconName} } from '@anyvision/anv-icons'
 // use        
 <${iconName}/> 
         ` } dark/>
