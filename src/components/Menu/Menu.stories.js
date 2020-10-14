@@ -35,7 +35,7 @@ export const Default = () => {
       <Menu
         aria-labelledby="menu-story-default"
         anchorElement={ anchorElement }
-        isOpen={ !!anchorElement }
+        isOpen
         onClose={ handleMenuClose }
       >
         <Menu.Item>Extra cheese</Menu.Item>
@@ -124,9 +124,8 @@ export const PreferOpenToDirection = () => {
     ? setAnchorElement(null)
     : setAnchorElement(ref.current))
 
-  const vertical = select('Vertical axis', ['up', 'down'], 'down')
-  const horizontal = select('Horizontal axis', ['start', 'end'], 'end')
-  const attachAxis = select('Attach axis', ['vertical', 'horizontal'], 'vertical')
+  const vertical = select('Vertical axis', ['top', 'right','bottom','left'], 'bottom')
+  const horizontal = select('Horizontal axis', ['start', 'end'], 'start')
 
   return (
     <div className={ styles.menuExample }>
@@ -145,7 +144,6 @@ export const PreferOpenToDirection = () => {
         isOpen={ !!anchorElement }
         onClose={ handleClose }
         preferOpenDirection={ `${vertical}-${horizontal}` }
-        attachAxis={ attachAxis }
       >
         <Menu.Item>List Item #1</Menu.Item>
         <Menu.Item>List Item #2</Menu.Item>

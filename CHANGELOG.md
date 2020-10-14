@@ -1,6 +1,7 @@
 ## Unreleased
 ### Fixed
 - TextField empty state bug
+- Positioning of the menu dropdown by using popper JS
 
 ## 1.0.0 - 06-09-2020
 
@@ -9,6 +10,7 @@
 
 ### Changed
 - Changed textfield to be uncontrolled
+- Removed AttachedAxis and changed preferOpenDirection to match the directions PopperJS uses
 
 ### Added
 - New @anyvision/anv-icon section.

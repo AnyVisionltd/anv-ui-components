@@ -4,17 +4,17 @@ import classNames from 'classnames'
 import { MenuItem } from './MenuItem'
 import { SubMenu } from './SubMenu'
 import keymap from "../../utils/enums/keymap"
-import { useClickOutsideListener, usePopoverPositioning } from '../../hooks'
+import { useClickOutsideListener } from '../../hooks'
 import { Animations } from '../Animations'
 import { Portal } from '../Portal'
 import styles from './Menu.module.scss'
+import { usePopper } from "react-popper"
 
 const Menu = ({
   isOpen,
   variant,
   className,
   anchorElement,
-  attachAxis,
   children,
   preferOpenDirection,
   isSubMenu,
@@ -23,18 +23,18 @@ const Menu = ({
   onOpened,
   ...otherProps
 }) => {
-  const [menuAnchor, setMenuAnchor] = useState(false)
   const [currentFocus, setCurrentFocus] = useState(false)
-
-  const menuWrapperRef = useRef()
-
-  const popoverDirection = usePopoverPositioning(
+  const [popperRef, setPopperRef] = useState(null)
+  const { styles: popperStyles, attributes } = usePopper(
     anchorElement,
-    menuWrapperRef && menuWrapperRef.current,
-    attachAxis,
-    menuAnchor,
-    preferOpenDirection,
-    !isSubMenu,
+    popperRef,
+    {
+      placement: preferOpenDirection,
+      modifiers: [
+        { name: 'offset', options: [0, 4] }
+      ]
+    }
+
   )
 
   useClickOutsideListener(event => {
@@ -42,12 +42,12 @@ const Menu = ({
       return
     }
     onClose(event)
-  }, menuWrapperRef)
+  }, { current: popperRef })
 
-  const handleKeyDown = useCallback(event => {
+  const handleKeyDown = useCallback( event => {
     const nextFocus = (nextFocusDirection, firstFocus) => {
       if(!currentFocus) {
-        const focusItem = menuWrapperRef.current.firstChild[firstFocus]
+        const focusItem = popperRef.firstChild[firstFocus]
         focusItem.focus()
         setCurrentFocus(focusItem)
       }
@@ -87,27 +87,6 @@ const Menu = ({
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [isOpen, handleKeyDown])
 
-  const handleMenuOpen = () => {
-    setMenuAnchor(true)
-    onOpened()
-  }
-
-  const handleMenuClose = () => {
-    setMenuAnchor(false)
-    onClosed()
-  }
-
-  // Scale animations direction props represent the start point,
-  // whilst open direction means the opposite.
-  // Therefore, we need to switch the directions
-  const animationVerticalStartingPoint = popoverDirection && popoverDirection.vertical === 'up'
-    ? 'bottom'
-    : 'top'
-
-  const animationHorizontalStartingPoint = popoverDirection && popoverDirection.horizontal === 'start'
-    ? 'end'
-    : 'start'
-
   const renderMenuList = () => (
     <ul
       role="menu"
@@ -120,8 +99,6 @@ const Menu = ({
 
   const containerClasses = classNames(
     styles.menuContainer,
-    popoverDirection && styles[popoverDirection.vertical],
-    popoverDirection && styles[popoverDirection.horizontal],
     isSubMenu && styles.subMenu,
   )
   const menuClasses = classNames(
@@ -132,15 +109,16 @@ const Menu = ({
 
   const renderMenu = () => (
     <div
-      ref={ menuWrapperRef }
+      ref={ setPopperRef }
       className={ containerClasses }
+      style={ popperStyles.popper }
+      { ...attributes.popper }
     >
       <Animations.Scale
         isOpen={ isOpen }
-        onEnter={ () => handleMenuOpen() }
-        onExited={ () => handleMenuClose() }
-        verticalStart={ animationVerticalStartingPoint }
-        horizontalStart={ animationHorizontalStartingPoint }
+        onEnter={ () => onOpened() }
+        onExited={ () => onClosed() }
+        horizontalStart={ 'start' }
       >
         { renderMenuList() }
       </Animations.Scale>
@@ -165,8 +143,7 @@ Menu.defaultProps = {
   onClosed: () => {},
   onOpened: () => {},
   isSubMenu: false,
-  preferOpenDirection: 'down-end',
-  attachAxis: 'vertical',
+  preferOpenDirection: 'bottom-start'
 }
 
 Menu.propTypes = {
@@ -202,8 +179,18 @@ Menu.propTypes = {
    * <u>towards the inline-end</u> of the document
    * */
   preferOpenDirection: propTypes.oneOf([
-    'up-start', 'up-end',
-    'down-start', 'down-end',
+    'top-start',
+    'top',
+    'top-end',
+    'right-start',
+    'right',
+    'right-end',
+    'bottom-start',
+    'bottom',
+    'bottom-end',
+    'left-start',
+    'left',
+    'left-end',
   ]),
   /** <code>INTERNAL</code> Is the menu is in-fact a sub menu.
    * Is set internally by <code>Menu.SubMenu</code> */
