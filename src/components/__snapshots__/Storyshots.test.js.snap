@@ -2229,50 +2229,7 @@ exports[`Storyshots Components/Menu Default 1`] = `
               "top": "0",
             }
           }
-        >
-          <ul
-            aria-labelledby="menu-story-default"
-            className="menu regular"
-            role="menu"
-          >
-            <li
-              className="menuItem"
-              onClick={[Function]}
-              onKeyDown={[Function]}
-              role="menuitem"
-              tabIndex="0"
-            >
-              Extra cheese
-            </li>
-            <li
-              className="menuItem"
-              onClick={[Function]}
-              onKeyDown={[Function]}
-              role="menuitem"
-              tabIndex="0"
-            >
-              Tomatoes
-            </li>
-            <li
-              className="menuItem"
-              onClick={[Function]}
-              onKeyDown={[Function]}
-              role="menuitem"
-              tabIndex="0"
-            >
-              Onions
-            </li>
-            <li
-              className="menuItem"
-              onClick={[Function]}
-              onKeyDown={[Function]}
-              role="menuitem"
-              tabIndex="0"
-            >
-              NOT pineapple.
-            </li>
-          </ul>
-        </div>
+        />
       </portal-for-test>
     </div>
   </div>

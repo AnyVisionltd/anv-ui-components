@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { MenuItem } from './MenuItem'
@@ -25,6 +25,19 @@ const Menu = ({
 }) => {
   const [currentFocus, setCurrentFocus] = useState(false)
   const [popperRef, setPopperRef] = useState(null)
+  const [isMenuOpen, setIsMenuOpen] = useState(isOpen || false)
+
+  useEffect(() => {
+    setIsMenuOpen(isOpen)
+  },[isOpen, isMenuOpen])
+
+  useEffect(() => {
+    if (anchorElement)
+      anchorElement.onclick = handleOnAnchorClick
+  }, [anchorElement])
+
+  const handleOnAnchorClick = () => setIsMenuOpen(true)
+
   const { styles: popperStyles, attributes } = usePopper(
     anchorElement,
     popperRef,
@@ -34,12 +47,16 @@ const Menu = ({
         { name: 'offset', options: [0, 4] }
       ]
     }
-
   )
 
+
+
   useClickOutsideListener(event => {
-    if (!isOpen || (anchorElement && anchorElement.contains(event.target))) {
+    if (!isMenuOpen || (anchorElement && anchorElement.contains(event.target))) {
       return
+    }
+    if(isOpen === undefined) {
+      setIsMenuOpen(false)
     }
     onClose(event)
   }, { current: popperRef })
@@ -75,17 +92,17 @@ const Menu = ({
     default:
       break
     }
-  }, [currentFocus, anchorElement, onClose])
+  }, [popperRef, currentFocus, anchorElement, onClose])
 
   useEffect(() => {
-    if(isOpen) {
+    if(isMenuOpen) {
       document.addEventListener('keydown', handleKeyDown)
     } else {
       setCurrentFocus(null)
       document.removeEventListener('keydown', handleKeyDown)
     }
     return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [isOpen, handleKeyDown])
+  }, [isMenuOpen, handleKeyDown])
 
   const renderMenuList = () => (
     <ul
@@ -115,7 +132,7 @@ const Menu = ({
       { ...attributes.popper }
     >
       <Animations.Scale
-        isOpen={ isOpen }
+        isOpen={ isMenuOpen }
         onEnter={ () => onOpened() }
         onExited={ () => onClosed() }
         horizontalStart={ 'start' }
@@ -137,7 +154,6 @@ const Menu = ({
 }
 
 Menu.defaultProps = {
-  isOpen: false,
   variant: 'regular',
   onClose: () => {},
   onClosed: () => {},
@@ -148,7 +164,7 @@ Menu.defaultProps = {
 
 Menu.propTypes = {
   /** Should the menu appear on screen or not. */
-  isOpen: propTypes.bool.isRequired,
+  isOpen: propTypes.bool,
   /** Determine the size of the menu's items. */
   variant: propTypes.oneOf(['regular', 'dense']),
   /** Reference to the controlling element,
@@ -171,12 +187,19 @@ Menu.propTypes = {
   /** A callback triggered after the menu is closed. */
   onClosed: propTypes.func,
   /** Force the menu to open <b>to</b> a certain side.<br />
-   * <code>up</code> - means that the menu will open <u>upwards</u><br />
-   * <code>down</code> - means that the menu will open <u>downwards</u><br />
-   * <code>start</code> - means that the menu will open
-   * <u>towards the inline-start</u> of the document<br />
-   * <code>end</code> - means that the menu will open
-   * <u>towards the inline-end</u> of the document
+   * <code>top-start</code> - means that the menu will open on the top-side-left<br />
+   * <code>top</code> - means that the menu will open in the top-side-center<br />
+   * <code>top-end</code> - means that the menu will open in the top-side-right<br />
+   * <code>right-start</code> - means that the menu will open in the right-side-top<br />
+   * <code>right',</code> - means that the menu will open in the right-side-center<br />
+   * <code>right-end</code> - means that the menu will open in the right-side-bottom<br />
+   * <code>bottom-start</code> - means that the menu will open in the bottom-side-left<br />
+   * <code>bottom',</code> - means that the menu will open in the bottom-side-center<br />
+   * <code>bottom-end</code> - means that the menu will open in the bottom-side-right<br />
+   * <code>left-start</code> - means that the menu will open in the left-side-top<br />
+   * <code>left',</code> - means that the menu will open in the left-side-center <br />
+   * <code>left-end</code> - means that the menu will open in the left-side-bottom<br />
+  
    * */
   preferOpenDirection: propTypes.oneOf([
     'top-start',

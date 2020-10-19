@@ -12,13 +12,7 @@ export default {
 }
 
 export const Default = () => {
-  const ref = useRef()
   const [anchorElement, setAnchorElement] = useState(null)
-
-  const handleMenuClose = () => setAnchorElement(null)
-  const handleButtonClick = () => (anchorElement
-    ? setAnchorElement(null)
-    : setAnchorElement(ref.current))
 
   return (
     <div className={ styles.menuExample }>
@@ -26,8 +20,8 @@ export const Default = () => {
       <Button
         aria-controls="menu-story-default"
         aria-haspopup="true"
-        onClick={ handleButtonClick }
-        ref={ ref }
+        onClick={ () => console.log('clicked 2') }
+        ref={ setAnchorElement }
       >
         Pizza Toppings
       </Button>
@@ -35,8 +29,6 @@ export const Default = () => {
       <Menu
         aria-labelledby="menu-story-default"
         anchorElement={ anchorElement }
-        isOpen
-        onClose={ handleMenuClose }
       >
         <Menu.Item>Extra cheese</Menu.Item>
         <Menu.Item>Tomatoes</Menu.Item>
