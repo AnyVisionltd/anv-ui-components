@@ -29,14 +29,15 @@ const Menu = ({
 
   useEffect(() => {
     setIsMenuOpen(isOpen)
-  },[isOpen, isMenuOpen])
+  },[isOpen])
+
+  const handleOnAnchorClick = useCallback(() => setIsMenuOpen(true), [])
 
   useEffect(() => {
     if (anchorElement)
       anchorElement.onclick = handleOnAnchorClick
-  }, [anchorElement])
+  }, [anchorElement, handleOnAnchorClick])
 
-  const handleOnAnchorClick = () => setIsMenuOpen(true)
 
   const { styles: popperStyles, attributes } = usePopper(
     anchorElement,
