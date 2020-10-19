@@ -2434,6 +2434,74 @@ exports[`Storyshots Components/Menu Variants 1`] = `
 </div>
 `;
 
+exports[`Storyshots Components/Menu With Is Open 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="menuExample"
+    >
+      <div
+        className="microMargin"
+      >
+        <div
+          className="switch unchecked enabled"
+          onClick={[Function]}
+        >
+          <label
+            className="switchLabel"
+          >
+            <div
+              className="switchLine"
+            />
+            <div
+              className="switchToggle"
+            >
+              <span
+                className="switchToggleInner"
+              />
+              <input
+                defaultChecked={false}
+                disabled={false}
+                onChange={[Function]}
+                type="checkbox"
+              />
+            </div>
+          </label>
+        </div>
+      </div>
+      <div
+        className="microMargin"
+      >
+        <button
+          aria-controls="menu-story-submenu"
+          aria-haspopup="true"
+          className="button medium fill"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Menu Anchor
+        </button>
+        <portal-for-test>
+          <div
+            className="menuContainer"
+            style={
+              Object {
+                "left": "0",
+                "position": "absolute",
+                "top": "0",
+              }
+            }
+          />
+        </portal-for-test>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Components/Menu With Sub Menus 1`] = `
 <div>
   <div
