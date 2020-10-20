@@ -23,32 +23,36 @@ const Menu = ({
   onOpened,
   ...otherProps
 }) => {
-  const [currentFocus, setCurrentFocus] = useState(false)
-  const [popperRef, setPopperRef] = useState(null)
-  const [isMenuOpen, setIsMenuOpen] = useState(isOpen || false)
+  const [ currentFocus, setCurrentFocus ] = useState(false)
+  const [ popperRef, setPopperRef ] = useState(null)
+  const [ isMenuOpen, setIsMenuOpen ] = useState(isOpen || false)
 
-  useEffect(() => {
-    setIsMenuOpen(isOpen)
-  },[isOpen])
-
-  const handleOnAnchorClick = useCallback(() => setIsMenuOpen(true), [])
-
-  useEffect(() => {
-    if (anchorElement)
-      anchorElement.onclick = handleOnAnchorClick
-  }, [anchorElement, handleOnAnchorClick])
-
-
-  const { styles: popperStyles, attributes } = usePopper(
+  const { styles: popperStyles, attributes, update: updatePopper } = usePopper(
     anchorElement,
     popperRef,
     {
       placement: preferOpenDirection,
       modifiers: [
-        { name: 'offset', options: [0, 4] }
+        { name: 'offset', options: [ 0, 4 ] }
       ]
     }
   )
+
+  useEffect(() => {
+    setIsMenuOpen(isOpen)
+  }, [ isOpen ])
+
+  const handleOnAnchorClick = useCallback(() => setIsMenuOpen(true), [])
+
+  useEffect(() => {
+    async function update() {
+      if (anchorElement && updatePopper) {
+        anchorElement.onclick = handleOnAnchorClick
+        await updatePopper()
+      }
+    }
+    update()
+  }, [ anchorElement, handleOnAnchorClick, updatePopper ])
 
 
 
@@ -56,25 +60,25 @@ const Menu = ({
     if (!isMenuOpen || (anchorElement && anchorElement.contains(event.target))) {
       return
     }
-    if(isOpen === undefined) {
+    if (isOpen === undefined) {
       setIsMenuOpen(false)
     }
     onClose(event)
   }, { current: popperRef })
 
-  const handleKeyDown = useCallback( event => {
+  const handleKeyDown = useCallback(event => {
     const nextFocus = (nextFocusDirection, firstFocus) => {
-      if(!currentFocus) {
-        const focusItem = popperRef.firstChild[firstFocus]
+      if (!currentFocus) {
+        const focusItem = popperRef.firstChild[ firstFocus ]
         focusItem.focus()
         setCurrentFocus(focusItem)
       }
-      else if(!currentFocus[nextFocusDirection]) {
+      else if (!currentFocus[ nextFocusDirection ]) {
         anchorElement.focus()
         setCurrentFocus(null)
       }
-      else if (currentFocus[nextFocusDirection]) {
-        const focusItem = currentFocus[nextFocusDirection]
+      else if (currentFocus[ nextFocusDirection ]) {
+        const focusItem = currentFocus[ nextFocusDirection ]
         focusItem.focus()
         setCurrentFocus(focusItem)
       }
@@ -93,17 +97,17 @@ const Menu = ({
     default:
       break
     }
-  }, [popperRef, currentFocus, anchorElement, onClose])
+  }, [ popperRef, currentFocus, anchorElement, onClose ])
 
   useEffect(() => {
-    if(isMenuOpen) {
+    if (isMenuOpen) {
       document.addEventListener('keydown', handleKeyDown)
     } else {
       setCurrentFocus(null)
       document.removeEventListener('keydown', handleKeyDown)
     }
     return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [isMenuOpen, handleKeyDown])
+  }, [ isMenuOpen, handleKeyDown ])
 
   const renderMenuList = () => (
     <ul
@@ -121,7 +125,7 @@ const Menu = ({
   )
   const menuClasses = classNames(
     styles.menu,
-    styles[variant],
+    styles[ variant ],
     className,
   )
 
@@ -156,9 +160,9 @@ const Menu = ({
 
 Menu.defaultProps = {
   variant: 'regular',
-  onClose: () => {},
-  onClosed: () => {},
-  onOpened: () => {},
+  onClose: () => { },
+  onClosed: () => { },
+  onOpened: () => { },
   isSubMenu: false,
   preferOpenDirection: 'bottom-start'
 }
@@ -167,7 +171,7 @@ Menu.propTypes = {
   /** Should the menu appear on screen or not. */
   isOpen: propTypes.bool,
   /** Determine the size of the menu's items. */
-  variant: propTypes.oneOf(['regular', 'dense']),
+  variant: propTypes.oneOf([ 'regular', 'dense' ]),
   /** Reference to the controlling element,
    *  used to attached the to the menu to the controller which causes it to open. */
   anchorElement: propTypes.oneOfType([
@@ -176,7 +180,7 @@ Menu.propTypes = {
   ]),
   /** Determine whether the menu should be attached to
    *  the controlling element from the side, or top/bottom. */
-  attachAxis: propTypes.oneOf(['vertical', 'horizontal']),
+  attachAxis: propTypes.oneOf([ 'vertical', 'horizontal' ]),
   /** Add custom styling to the menu. */
   className: propTypes.string,
   /** Menu items (Menu.Item) or sub menus (Menu.SubMenu). */
