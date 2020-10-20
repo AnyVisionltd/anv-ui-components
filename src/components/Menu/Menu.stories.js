@@ -42,17 +42,12 @@ export const Default = () => {
 
 export const DifferentPositions = () => {
   const [ anchorElement, setAnchorElement ] = useState(null)
-  const [ openDirection, setOpenDirection ] = useState('bottom-start')
 
   const handleClose = () => setAnchorElement(null)
-  const handleButtonClick = (event, direction) => {
-    if(anchorElement)
-      setAnchorElement(null)
-    else
-      setAnchorElement(event.currentTarget)
-    
-    setOpenDirection(direction)
-  }
+  const handleButtonClick = event => anchorElement ?
+    setAnchorElement(null) :
+    setAnchorElement(event.currentTarget)
+
 
   return (
     <div className={ styles.menuExample }>
@@ -60,7 +55,7 @@ export const DifferentPositions = () => {
         style={ { position: 'absolute', top: 10, left: 10 } }
         aria-controls="menu-story"
         aria-haspopup="true"
-        onClick={ event => handleButtonClick(event, 'bottom-start') }
+        onClick={ handleButtonClick }
       >
         Top, Left
       </Button>
@@ -69,7 +64,7 @@ export const DifferentPositions = () => {
         style={ { position: 'absolute', top: 10, right: 10 } }
         aria-controls="menu-story"
         aria-haspopup="true"
-        onClick={ event => handleButtonClick(event, 'bottom-end') }
+        onClick={ handleButtonClick }
       >
         Top, Right
       </Button>
@@ -78,7 +73,7 @@ export const DifferentPositions = () => {
         style={ { position: 'absolute', bottom: 10, left: 10 } }
         aria-controls="menu-story"
         aria-haspopup="true"
-        onClick={ event => handleButtonClick(event, 'top-start') }
+        onClick={ handleButtonClick }
       >
         Bottom, Left
       </Button>
@@ -87,7 +82,7 @@ export const DifferentPositions = () => {
         style={ { position: 'absolute', bottom: 10, right: 10 } }
         aria-controls="menu-story"
         aria-haspopup="true"
-        onClick={ event => handleButtonClick(event, 'top-end') }
+        onClick={ handleButtonClick }
       >
         Bottom, Right
       </Button>
@@ -101,7 +96,6 @@ export const DifferentPositions = () => {
         anchorElement={ anchorElement }
         isOpen={ !!anchorElement }
         onClose={ handleClose }
-        preferOpenDirection = { openDirection }
       >
         <Menu.Item>List Item #1</Menu.Item>
         <Menu.Item>List Item #2</Menu.Item>
@@ -122,8 +116,20 @@ export const PreferOpenToDirection = () => {
     ? setAnchorElement(null)
     : setAnchorElement(ref.current))
 
-  const side = select('Side', [ 'top', 'right', 'bottom', 'left' ], 'bottom')
-  const position = select('Position', [ 'start', 'center', 'end' ], 'start')
+  const preferOpenDirection = select('preferOpenDirection', [
+    'top-start',
+    'top',
+    'top-end',
+    'right-start',
+    'right',
+    'right-end',
+    'bottom-start',
+    'bottom',
+    'bottom-end',
+    'left-start',
+    'left',
+    'left-end'
+  ], 'bottom-start')
 
   return (
     <div className={ styles.menuExample }>
@@ -141,7 +147,7 @@ export const PreferOpenToDirection = () => {
         anchorElement={ anchorElement }
         isOpen={ !!anchorElement }
         onClose={ handleClose }
-        preferOpenDirection={ position === 'center' ? side : `${side}-${position}` }
+        preferOpenDirection={ preferOpenDirection }
       >
         <Menu.Item>List Item #1</Menu.Item>
         <Menu.Item>List Item #2</Menu.Item>

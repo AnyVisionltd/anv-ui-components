@@ -7,10 +7,10 @@
 
 ### Breaking Changes :boom:
 - Added label prop to textField
+- Removed AttachedAxis and changed preferOpenDirection to match the directions PopperJS uses
 
 ### Changed
 - Changed textfield to be uncontrolled
-- Removed AttachedAxis and changed preferOpenDirection to match the directions PopperJS uses
 
 ### Added
 - New @anyvision/anv-icon section.
@@ -21,6 +21,7 @@
 - New Table.
 - New Text Field.
 - New Wizard Dialog.
+- Added default behavior that doesn't require isOpen in Menu
 
 <!-- 
 Sections: 

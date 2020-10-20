@@ -213,13 +213,13 @@ Menu.propTypes = {
    * <code>top</code> - means that the menu will open in the top-side-center<br />
    * <code>top-end</code> - means that the menu will open in the top-side-right<br />
    * <code>right-start</code> - means that the menu will open in the right-side-top<br />
-   * <code>right',</code> - means that the menu will open in the right-side-center<br />
+   * <code>right</code> - means that the menu will open in the right-side-center<br />
    * <code>right-end</code> - means that the menu will open in the right-side-bottom<br />
    * <code>bottom-start</code> - means that the menu will open in the bottom-side-left<br />
-   * <code>bottom',</code> - means that the menu will open in the bottom-side-center<br />
+   * <code>bottom</code> - means that the menu will open in the bottom-side-center<br />
    * <code>bottom-end</code> - means that the menu will open in the bottom-side-right<br />
    * <code>left-start</code> - means that the menu will open in the left-side-top<br />
-   * <code>left',</code> - means that the menu will open in the left-side-center <br />
+   * <code>left</code> - means that the menu will open in the left-side-center <br />
    * <code>left-end</code> - means that the menu will open in the left-side-bottom<br />
   
    * */
