@@ -55,7 +55,7 @@ const SubMenu = ({
         className={ subMenuClassName }
         isOpen={ isOpened }
         anchorElement={ ref.current }
-        attachAxis="horizontal"
+        preferOpenDirection={ 'right-start' }
         isSubMenu
         { ...otherProps }
       >

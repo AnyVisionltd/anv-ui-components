@@ -1,20 +1,20 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useState, useRef } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { MenuItem } from './MenuItem'
 import { SubMenu } from './SubMenu'
 import keymap from "../../utils/enums/keymap"
-import { useClickOutsideListener, usePopoverPositioning } from '../../hooks'
+import { useClickOutsideListener } from '../../hooks'
 import { Animations } from '../Animations'
 import { Portal } from '../Portal'
 import styles from './Menu.module.scss'
+import { usePopper } from "react-popper"
 
 const Menu = ({
   isOpen,
   variant,
   className,
   anchorElement,
-  attachAxis,
   children,
   preferOpenDirection,
   isSubMenu,
@@ -23,40 +23,71 @@ const Menu = ({
   onOpened,
   ...otherProps
 }) => {
-  const [menuAnchor, setMenuAnchor] = useState(false)
-  const [currentFocus, setCurrentFocus] = useState(false)
+  const [ currentFocus, setCurrentFocus ] = useState(false)
+  const [ popperRef, setPopperRef ] = useState(null)
+  const [ isMenuOpen, setIsMenuOpen ] = useState(isOpen || false)
+  const sideToOpenFrom = useRef(null)
+  const positionToOpenFrom = useRef(null)
 
-  const menuWrapperRef = useRef()
-
-  const popoverDirection = usePopoverPositioning(
+  const { styles: popperStyles, attributes, update: updatePopper } = usePopper(
     anchorElement,
-    menuWrapperRef && menuWrapperRef.current,
-    attachAxis,
-    menuAnchor,
-    preferOpenDirection,
-    !isSubMenu,
+    popperRef,
+    {
+      placement: preferOpenDirection,
+      modifiers: [
+        { name: 'offset', options: [ 0, 4 ] }
+      ]
+    }
   )
 
+  useEffect(() => {
+    setIsMenuOpen(isOpen)
+  }, [ isOpen ])
+
+  const handleOnAnchorClick = useCallback(() => setIsMenuOpen(true), [])
+
+  useEffect(() => {
+    async function update() {
+      if (anchorElement && updatePopper) {
+        anchorElement.onclick = handleOnAnchorClick
+        await updatePopper()
+      }
+    }
+    update()
+  }, [ anchorElement, handleOnAnchorClick, updatePopper ])
+
+  
+  useEffect(() => {
+    const [side, position] = preferOpenDirection.split('-')
+    sideToOpenFrom.current = side
+    positionToOpenFrom.current = position === undefined ? 'center' : position
+  }, [preferOpenDirection])
+
+
+
   useClickOutsideListener(event => {
-    if (!isOpen || (anchorElement && anchorElement.contains(event.target))) {
+    if (!isMenuOpen || (anchorElement && anchorElement.contains(event.target))) {
       return
     }
+    if (isOpen === undefined) {
+      setIsMenuOpen(false)
+    }
     onClose(event)
-  }, menuWrapperRef)
+  }, { current: popperRef })
 
   const handleKeyDown = useCallback(event => {
     const nextFocus = (nextFocusDirection, firstFocus) => {
-      if(!currentFocus) {
-        const focusItem = menuWrapperRef.current.firstChild[firstFocus]
+      if (!currentFocus) {
+        const focusItem = popperRef.firstChild[ firstFocus ]
         focusItem.focus()
         setCurrentFocus(focusItem)
       }
-      else if(!currentFocus[nextFocusDirection]) {
+      else if (!currentFocus[ nextFocusDirection ]) {
         anchorElement.focus()
         setCurrentFocus(null)
       }
-      else if (currentFocus[nextFocusDirection]) {
-        const focusItem = currentFocus[nextFocusDirection]
+      else if (currentFocus[ nextFocusDirection ]) {
+        const focusItem = currentFocus[ nextFocusDirection ]
         focusItem.focus()
         setCurrentFocus(focusItem)
       }
@@ -75,38 +106,17 @@ const Menu = ({
     default:
       break
     }
-  }, [currentFocus, anchorElement, onClose])
+  }, [ popperRef, currentFocus, anchorElement, onClose ])
 
   useEffect(() => {
-    if(isOpen) {
+    if (isMenuOpen) {
       document.addEventListener('keydown', handleKeyDown)
     } else {
       setCurrentFocus(null)
       document.removeEventListener('keydown', handleKeyDown)
     }
     return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [isOpen, handleKeyDown])
-
-  const handleMenuOpen = () => {
-    setMenuAnchor(true)
-    onOpened()
-  }
-
-  const handleMenuClose = () => {
-    setMenuAnchor(false)
-    onClosed()
-  }
-
-  // Scale animations direction props represent the start point,
-  // whilst open direction means the opposite.
-  // Therefore, we need to switch the directions
-  const animationVerticalStartingPoint = popoverDirection && popoverDirection.vertical === 'up'
-    ? 'bottom'
-    : 'top'
-
-  const animationHorizontalStartingPoint = popoverDirection && popoverDirection.horizontal === 'start'
-    ? 'end'
-    : 'start'
+  }, [ isMenuOpen, handleKeyDown ])
 
   const renderMenuList = () => (
     <ul
@@ -120,27 +130,34 @@ const Menu = ({
 
   const containerClasses = classNames(
     styles.menuContainer,
-    popoverDirection && styles[popoverDirection.vertical],
-    popoverDirection && styles[popoverDirection.horizontal],
     isSubMenu && styles.subMenu,
   )
   const menuClasses = classNames(
     styles.menu,
-    styles[variant],
+    styles[ variant ],
     className,
   )
 
+  const sideToOpenTo = {
+    top: 'bottom',
+    bottom: 'top',
+    right: 'left',
+    left: 'right'
+  }
+
   const renderMenu = () => (
     <div
-      ref={ menuWrapperRef }
+      ref={ setPopperRef }
       className={ containerClasses }
+      style={ popperStyles.popper }
+      { ...attributes.popper }
     >
       <Animations.Scale
-        isOpen={ isOpen }
-        onEnter={ () => handleMenuOpen() }
-        onExited={ () => handleMenuClose() }
-        verticalStart={ animationVerticalStartingPoint }
-        horizontalStart={ animationHorizontalStartingPoint }
+        isOpen={ isMenuOpen || false }
+        onEnter={ () => onOpened() }
+        onExited={ () => onClosed() }
+        horizontalStart={ positionToOpenFrom.current }
+        verticalStart = { sideToOpenTo[sideToOpenFrom] }
       >
         { renderMenuList() }
       </Animations.Scale>
@@ -159,21 +176,19 @@ const Menu = ({
 }
 
 Menu.defaultProps = {
-  isOpen: false,
   variant: 'regular',
-  onClose: () => {},
-  onClosed: () => {},
-  onOpened: () => {},
+  onClose: () => { },
+  onClosed: () => { },
+  onOpened: () => { },
   isSubMenu: false,
-  preferOpenDirection: 'down-end',
-  attachAxis: 'vertical',
+  preferOpenDirection: 'bottom-start'
 }
 
 Menu.propTypes = {
   /** Should the menu appear on screen or not. */
-  isOpen: propTypes.bool.isRequired,
+  isOpen: propTypes.bool,
   /** Determine the size of the menu's items. */
-  variant: propTypes.oneOf(['regular', 'dense']),
+  variant: propTypes.oneOf([ 'regular', 'dense' ]),
   /** Reference to the controlling element,
    *  used to attached the to the menu to the controller which causes it to open. */
   anchorElement: propTypes.oneOfType([
@@ -182,7 +197,7 @@ Menu.propTypes = {
   ]),
   /** Determine whether the menu should be attached to
    *  the controlling element from the side, or top/bottom. */
-  attachAxis: propTypes.oneOf(['vertical', 'horizontal']),
+  attachAxis: propTypes.oneOf([ 'vertical', 'horizontal' ]),
   /** Add custom styling to the menu. */
   className: propTypes.string,
   /** Menu items (Menu.Item) or sub menus (Menu.SubMenu). */
@@ -194,16 +209,33 @@ Menu.propTypes = {
   /** A callback triggered after the menu is closed. */
   onClosed: propTypes.func,
   /** Force the menu to open <b>to</b> a certain side.<br />
-   * <code>up</code> - means that the menu will open <u>upwards</u><br />
-   * <code>down</code> - means that the menu will open <u>downwards</u><br />
-   * <code>start</code> - means that the menu will open
-   * <u>towards the inline-start</u> of the document<br />
-   * <code>end</code> - means that the menu will open
-   * <u>towards the inline-end</u> of the document
+   * <code>top-start</code> - means that the menu will open on the top-side-left<br />
+   * <code>top</code> - means that the menu will open in the top-side-center<br />
+   * <code>top-end</code> - means that the menu will open in the top-side-right<br />
+   * <code>right-start</code> - means that the menu will open in the right-side-top<br />
+   * <code>right</code> - means that the menu will open in the right-side-center<br />
+   * <code>right-end</code> - means that the menu will open in the right-side-bottom<br />
+   * <code>bottom-start</code> - means that the menu will open in the bottom-side-left<br />
+   * <code>bottom</code> - means that the menu will open in the bottom-side-center<br />
+   * <code>bottom-end</code> - means that the menu will open in the bottom-side-right<br />
+   * <code>left-start</code> - means that the menu will open in the left-side-top<br />
+   * <code>left</code> - means that the menu will open in the left-side-center <br />
+   * <code>left-end</code> - means that the menu will open in the left-side-bottom<br />
+  
    * */
   preferOpenDirection: propTypes.oneOf([
-    'up-start', 'up-end',
-    'down-start', 'down-end',
+    'top-start',
+    'top',
+    'top-end',
+    'right-start',
+    'right',
+    'right-end',
+    'bottom-start',
+    'bottom',
+    'bottom-end',
+    'left-start',
+    'left',
+    'left-end',
   ]),
   /** <code>INTERNAL</code> Is the menu is in-fact a sub menu.
    * Is set internally by <code>Menu.SubMenu</code> */

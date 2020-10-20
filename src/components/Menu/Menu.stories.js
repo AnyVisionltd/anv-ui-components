@@ -2,23 +2,18 @@ import React, { useRef, useState } from 'react'
 import { select } from '@storybook/addon-knobs'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import { Menu, Button } from '../../index'
+import { Switch } from '../Switch'
 import styles from '../../storybook/index.module.scss'
 
 export default {
   title: 'Components/Menu',
   component: Menu,
-  decorators: [centerDecorator],
+  decorators: [ centerDecorator ],
   subcomponents: { Item: Menu.Item }
 }
 
 export const Default = () => {
-  const ref = useRef()
-  const [anchorElement, setAnchorElement] = useState(null)
-
-  const handleMenuClose = () => setAnchorElement(null)
-  const handleButtonClick = () => (anchorElement
-    ? setAnchorElement(null)
-    : setAnchorElement(ref.current))
+  const [ anchorElement, setAnchorElement ] = useState(null)
 
   return (
     <div className={ styles.menuExample }>
@@ -26,8 +21,7 @@ export const Default = () => {
       <Button
         aria-controls="menu-story-default"
         aria-haspopup="true"
-        onClick={ handleButtonClick }
-        ref={ ref }
+        ref={ setAnchorElement }
       >
         Pizza Toppings
       </Button>
@@ -35,8 +29,6 @@ export const Default = () => {
       <Menu
         aria-labelledby="menu-story-default"
         anchorElement={ anchorElement }
-        isOpen={ !!anchorElement }
-        onClose={ handleMenuClose }
       >
         <Menu.Item>Extra cheese</Menu.Item>
         <Menu.Item>Tomatoes</Menu.Item>
@@ -49,12 +41,12 @@ export const Default = () => {
 }
 
 export const DifferentPositions = () => {
-  const [anchorElement, setAnchorElement] = useState(null)
+  const [ anchorElement, setAnchorElement ] = useState(null)
 
   const handleClose = () => setAnchorElement(null)
-  const handleButtonClick = event => (anchorElement
-    ? setAnchorElement(null)
-    : setAnchorElement(event.currentTarget))
+  const handleButtonClick = event => anchorElement ?
+    setAnchorElement(null) :
+    setAnchorElement(event.currentTarget)
 
 
   return (
@@ -117,16 +109,27 @@ export const DifferentPositions = () => {
 
 export const PreferOpenToDirection = () => {
   const ref = useRef()
-  const [anchorElement, setAnchorElement] = useState(null)
+  const [ anchorElement, setAnchorElement ] = useState(null)
 
   const handleClose = () => setAnchorElement(null)
   const handleButtonClick = () => (anchorElement
     ? setAnchorElement(null)
     : setAnchorElement(ref.current))
 
-  const vertical = select('Vertical axis', ['up', 'down'], 'down')
-  const horizontal = select('Horizontal axis', ['start', 'end'], 'end')
-  const attachAxis = select('Attach axis', ['vertical', 'horizontal'], 'vertical')
+  const preferOpenDirection = select('preferOpenDirection', [
+    'top-start',
+    'top',
+    'top-end',
+    'right-start',
+    'right',
+    'right-end',
+    'bottom-start',
+    'bottom',
+    'bottom-end',
+    'left-start',
+    'left',
+    'left-end'
+  ], 'bottom-start')
 
   return (
     <div className={ styles.menuExample }>
@@ -144,8 +147,7 @@ export const PreferOpenToDirection = () => {
         anchorElement={ anchorElement }
         isOpen={ !!anchorElement }
         onClose={ handleClose }
-        preferOpenDirection={ `${vertical}-${horizontal}` }
-        attachAxis={ attachAxis }
+        preferOpenDirection={ preferOpenDirection }
       >
         <Menu.Item>List Item #1</Menu.Item>
         <Menu.Item>List Item #2</Menu.Item>
@@ -157,7 +159,7 @@ export const PreferOpenToDirection = () => {
 
 export const WithSubMenus = () => {
   const ref = useRef()
-  const [anchorElement, setAnchorElement] = useState(null)
+  const [ anchorElement, setAnchorElement ] = useState(null)
 
   const handleMenuClose = () => setAnchorElement(null)
   const handleButtonClick = () => (anchorElement
@@ -201,12 +203,61 @@ export const WithSubMenus = () => {
   )
 }
 
+export const WithIsOpen = () => {
+  const ref = useRef()
+  const [ anchorElement, setAnchorElement ] = useState(null)
+  const [ isOpen, setIsOpen ] = useState(false)
+
+  const handleSwitchClick = () => {
+    setIsOpen(!isOpen)
+    if (!anchorElement)
+      setAnchorElement(ref.current)
+  }
+
+  return (
+    <div className={ styles.menuExample }>
+      <div className={ styles.microMargin }>
+        <Switch onClick={ handleSwitchClick } checked={ isOpen } />
+      </div>
+      <div className={ styles.microMargin }>
+        <Button
+          aria-controls="menu-story-submenu"
+          aria-haspopup="true"
+          ref={ ref }
+        >
+          Menu Anchor
+        </Button>
+
+        <Menu
+          aria-labelledby="menu-story-submenu"
+          anchorElement={ anchorElement }
+          isOpen={ isOpen }
+        >
+          <Menu.Item>List Item #1</Menu.Item>
+          <Menu.Item>List Item #2</Menu.Item>
+          <Menu.SubMenu label="Sub menu #1">
+            <Menu.Item>Item #1</Menu.Item>
+            <Menu.Item>Item #2</Menu.Item>
+            <Menu.SubMenu label="Sub menu #2">
+              <Menu.Item>Item #1</Menu.Item>
+              <Menu.Item>Item #2</Menu.Item>
+              <Menu.Item>Item #3</Menu.Item>
+              <Menu.Item>Item #4</Menu.Item>
+            </Menu.SubMenu>
+          </Menu.SubMenu>
+          <Menu.Item>List Item #4</Menu.Item>
+        </Menu>
+      </div>
+    </div>
+  )
+}
+
 export const Variants = () => {
   const regularAnchorElement = useRef()
   const denseAnchorElement = useRef()
 
-  const [regularAnchorElementOpened, setRegularAnchorElementOpened] = useState(null)
-  const [denseAnchorElementOpened, setDenseAnchorElementOpened] = useState(null)
+  const [ regularAnchorElementOpened, setRegularAnchorElementOpened ] = useState(null)
+  const [ denseAnchorElementOpened, setDenseAnchorElementOpened ] = useState(null)
 
   const openRegularMenu = () => (regularAnchorElementOpened
     ? setRegularAnchorElementOpened(null)

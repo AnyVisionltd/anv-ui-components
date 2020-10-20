@@ -2222,6 +2222,13 @@ exports[`Storyshots Components/Menu Default 1`] = `
       <portal-for-test>
         <div
           className="menuContainer"
+          style={
+            Object {
+              "left": "0",
+              "position": "absolute",
+              "top": "0",
+            }
+          }
         />
       </portal-for-test>
     </div>
@@ -2313,6 +2320,13 @@ exports[`Storyshots Components/Menu Different Positions 1`] = `
       <portal-for-test>
         <div
           className="menuContainer"
+          style={
+            Object {
+              "left": "0",
+              "position": "absolute",
+              "top": "0",
+            }
+          }
         />
       </portal-for-test>
     </div>
@@ -2341,6 +2355,13 @@ exports[`Storyshots Components/Menu Prefer Open To Direction 1`] = `
       <portal-for-test>
         <div
           className="menuContainer"
+          style={
+            Object {
+              "left": "0",
+              "position": "absolute",
+              "top": "0",
+            }
+          }
         />
       </portal-for-test>
     </div>
@@ -2372,6 +2393,13 @@ exports[`Storyshots Components/Menu Variants 1`] = `
         <portal-for-test>
           <div
             className="menuContainer"
+            style={
+              Object {
+                "left": "0",
+                "position": "absolute",
+                "top": "0",
+              }
+            }
           />
         </portal-for-test>
       </div>
@@ -2391,6 +2419,81 @@ exports[`Storyshots Components/Menu Variants 1`] = `
         <portal-for-test>
           <div
             className="menuContainer"
+            style={
+              Object {
+                "left": "0",
+                "position": "absolute",
+                "top": "0",
+              }
+            }
+          />
+        </portal-for-test>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Menu With Is Open 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="menuExample"
+    >
+      <div
+        className="microMargin"
+      >
+        <div
+          className="switch unchecked enabled"
+          onClick={[Function]}
+        >
+          <label
+            className="switchLabel"
+          >
+            <div
+              className="switchLine"
+            />
+            <div
+              className="switchToggle"
+            >
+              <span
+                className="switchToggleInner"
+              />
+              <input
+                defaultChecked={false}
+                disabled={false}
+                onChange={[Function]}
+                type="checkbox"
+              />
+            </div>
+          </label>
+        </div>
+      </div>
+      <div
+        className="microMargin"
+      >
+        <button
+          aria-controls="menu-story-submenu"
+          aria-haspopup="true"
+          className="button medium fill"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Menu Anchor
+        </button>
+        <portal-for-test>
+          <div
+            className="menuContainer"
+            style={
+              Object {
+                "left": "0",
+                "position": "absolute",
+                "top": "0",
+              }
+            }
           />
         </portal-for-test>
       </div>
@@ -2420,6 +2523,13 @@ exports[`Storyshots Components/Menu With Sub Menus 1`] = `
       <portal-for-test>
         <div
           className="menuContainer"
+          style={
+            Object {
+              "left": "0",
+              "position": "absolute",
+              "top": "0",
+            }
+          }
         />
       </portal-for-test>
     </div>
@@ -2581,6 +2691,13 @@ exports[`Storyshots Components/SSF Default 1`] = `
         <portal-for-test>
           <div
             className="menuContainer"
+            style={
+              Object {
+                "left": "0",
+                "position": "absolute",
+                "top": "0",
+              }
+            }
           />
         </portal-for-test>
         <div
@@ -2635,6 +2752,13 @@ exports[`Storyshots Components/SSF Without Menu Fields 1`] = `
         <portal-for-test>
           <div
             className="menuContainer"
+            style={
+              Object {
+                "left": "0",
+                "position": "absolute",
+                "top": "0",
+              }
+            }
           />
         </portal-for-test>
         <div
@@ -3023,6 +3147,13 @@ exports[`Storyshots Components/Table Basic 1`] = `
       <portal-for-test>
         <div
           className="menuContainer"
+          style={
+            Object {
+              "left": "0",
+              "position": "absolute",
+              "top": "0",
+            }
+          }
         />
       </portal-for-test>
       <div
@@ -3360,6 +3491,13 @@ exports[`Storyshots Components/TextField Type Options 1`] = `
         <portal-for-test>
           <div
             className="menuContainer"
+            style={
+              Object {
+                "left": "0",
+                "position": "absolute",
+                "top": "0",
+              }
+            }
           />
         </portal-for-test>
       </div>
@@ -3393,6 +3531,13 @@ exports[`Storyshots Components/TextField Type Options 1`] = `
         <portal-for-test>
           <div
             className="menuContainer"
+            style={
+              Object {
+                "left": "0",
+                "position": "absolute",
+                "top": "0",
+              }
+            }
           />
         </portal-for-test>
       </div>
@@ -3989,6 +4134,13 @@ exports[`Storyshots Components/TextField With Render Item 1`] = `
         <portal-for-test>
           <div
             className="menuContainer"
+            style={
+              Object {
+                "left": "0",
+                "position": "absolute",
+                "top": "0",
+              }
+            }
           />
         </portal-for-test>
       </div>

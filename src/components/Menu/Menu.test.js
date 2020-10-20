@@ -1,60 +1,70 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, act } from '@testing-library/react'
 import { Menu } from '.'
 import { Button } from '../Button'
 
 describe('<Menu />', () => {
+  let button
+  beforeEach(() => {
+    button = document.createElement('button')
+  })
+  afterEach(() => {
+    button.remove()
+  })
   describe('clicking inside/outside the menu', () => {
-    it('click outside the menu should close it by firing \'on close\' event', () => {
+
+    it('click outside the menu should close it by firing \'on close\' event', async () => {
       const handleClose = jest.fn()
       const { getByRole } = render(
         <>
           <Button>I will click on this button, it should close the opened menu</Button>
-          <Menu isOpen onClose={ handleClose }>
+          <Menu isOpen onClose={ handleClose } anchorElement={ button }>
             <Menu.Item>Simple menu item</Menu.Item>
           </Menu>
         </>,
       )
       const buttonNode = getByRole('button')
-      fireEvent.mouseUp(buttonNode)
+      await act(async () => await fireEvent.mouseUp(buttonNode))
       expect(handleClose).toBeCalled()
     })
 
-    it('click within the menu should not close it', () => {
+    it('click within the menu should not close it', async () => {
       const handleClickOutside = jest.fn()
       const { getByText } = render(
         <>
-          <Menu isOpen onClose={ handleClickOutside }>
+          <Menu isOpen onClose={ handleClickOutside } anchorElement={ button }>
             <Menu.Item>Menu item</Menu.Item>
           </Menu>
         </>,
       )
       const menuItemNode = getByText('Menu item')
-      fireEvent.mouseUp(menuItemNode)
+      await act(async() => await fireEvent.mouseUp(menuItemNode))
       expect(handleClickOutside).not.toBeCalled()
     })
   })
 
   describe('sub menus', () => {
-    it('inactive sub-menus shouldn\'t be displayed', () => {
+    it('inactive sub-menus shouldn\'t be displayed', async () => {
       const { container } = render(
-        <Menu isOpen>
+        <Menu isOpen anchorElement={ button }>
           <Menu.SubMenu label="Sub menu label">
             <Menu.Item>Sub menu item</Menu.Item>
           </Menu.SubMenu>
         </Menu>,
       )
 
-      const subMenuInnerHTML = container.querySelector('.subMenuItem > .subMenu')
-      expect(subMenuInnerHTML).toBeEmpty()
+      await act(async () => {
+        const subMenuInnerHTML = container.querySelector('.subMenuItem > .subMenu')
+        expect(subMenuInnerHTML).toBeEmpty()
+      })
     })
 
-    it('hovering sub-menu items should display the sub menu', () => {
+    it('hovering sub-menu items should display the sub menu', async () => {
       const onOpenedHandler = jest.fn()
       jest.useFakeTimers()
 
       const { getByText } = render(
-        <Menu isOpen>
+        <Menu isOpen anchorElement={ button }>
           <Menu.SubMenu onOpened={ onOpenedHandler } label="Sub menu label">
             <Menu.Item>Sub menu item</Menu.Item>
           </Menu.SubMenu>
@@ -62,19 +72,19 @@ describe('<Menu />', () => {
       )
 
       const subMenuItemLabel = getByText('Sub menu label')
-      fireEvent.mouseEnter(subMenuItemLabel)
+      await act(async () => await fireEvent.mouseEnter(subMenuItemLabel))
       const subMenuItem = getByText('Sub menu item')
       expect(subMenuItem).toBeInTheDocument()
       jest.advanceTimersByTime(500) // Wait for the animation to be completed
       expect(onOpenedHandler).toBeCalled()
     })
 
-    it('leaving the sub menu list item should hide the sub menu', () => {
+    it('leaving the sub menu list item should hide the sub menu', async () => {
       const onClosedHandler = jest.fn()
       jest.useFakeTimers()
 
       const { getByText } = render(
-        <Menu isOpen>
+        <Menu isOpen anchorElement={ button }>
           <Menu.SubMenu onClosed={ onClosedHandler } label="Sub menu label">
             <Menu.Item>Sub menu item</Menu.Item>
           </Menu.SubMenu>
@@ -82,9 +92,9 @@ describe('<Menu />', () => {
       )
 
       const subMenuItemLabel = getByText('Sub menu label')
-      fireEvent.mouseEnter(subMenuItemLabel)
+      await act(async () => await fireEvent.mouseEnter(subMenuItemLabel))
       const subMenuItem = getByText('Sub menu item')
-      fireEvent.mouseLeave(subMenuItem)
+      await act(async () => await fireEvent.mouseLeave(subMenuItem))
       jest.advanceTimersByTime(500) // Wait for the animation to be completed
       expect(onClosedHandler).toBeCalled()
       expect(subMenuItem).not.toBeInTheDocument()
@@ -92,21 +102,21 @@ describe('<Menu />', () => {
   })
 
   describe('keydown navigation', () => {
-    it('ESCAPE key should close the menu by firing \'on close\' event', () => {
+    it('ESCAPE key should close the menu by firing \'on close\' event', async () => {
       const handleClose = jest.fn()
       render(
         <>
-          <Menu isOpen onClose={ handleClose }>
+          <Menu isOpen onClose={ handleClose } anchorElement={ button }>
             <Menu.Item>Simple menu item</Menu.Item>
           </Menu>
         </>,
       )
-      fireEvent.keyDown(document, { keyCode: 27 })
+      await act(async () => await fireEvent.keyDown(document, { keyCode: 27 }))
       expect(handleClose).toBeCalled()
     })
 
-    it('Arrow Down key should focus the first > second > anchor > first <Menu.Item/>', () => {
-      const button = document.createElement('button')
+    it('Arrow Down key should focus the first > second > anchor > first <Menu.Item/>', async () => {
+
       const { getAllByRole } = render(
         <>
           <Menu anchorElement={ button } isOpen>
@@ -115,19 +125,19 @@ describe('<Menu />', () => {
           </Menu>
         </>,
       )
+
       const [firstMenuItem, secondMenuItem] = getAllByRole('menuitem')
-      fireEvent.keyDown(document, { keyCode: 40 })
+      await act(async () => await fireEvent.keyDown(document, { keyCode: 40 }))
       expect(document.activeElement).toBe(firstMenuItem)
-      fireEvent.keyDown(document, { keyCode: 40 })
+      await act(async () => await fireEvent.keyDown(document, { keyCode: 40 }))
       expect(document.activeElement).toBe(secondMenuItem)
-      fireEvent.keyDown(document, { keyCode: 40 })
+      await act(async () => await fireEvent.keyDown(document, { keyCode: 40 }))
       expect(document.activeElement).toBe(button)
-      fireEvent.keyDown(document, { keyCode: 40 })
+      await act(async () => await fireEvent.keyDown(document, { keyCode: 40 }))
       expect(document.activeElement).toBe(firstMenuItem)
     })
 
-    it('Arrow Up key should focus the last <Menu.Item/>', () => {
-      const button = document.createElement('button')
+    it('Arrow Up key should focus the last <Menu.Item/>', async () => {
       const { getAllByRole } = render(
         <>
           <Menu anchorElement={ button } isOpen>
@@ -137,13 +147,13 @@ describe('<Menu />', () => {
         </>,
       )
       const [firstMenuItem, secondMenuItem] = getAllByRole('menuitem')
-      fireEvent.keyDown(document, { keyCode: 38 })
+      await act(async () => await fireEvent.keyDown(document, { keyCode: 38 }))
       expect(document.activeElement).toBe(secondMenuItem)
-      fireEvent.keyDown(document, { keyCode: 38 })
+      await act(async () => await fireEvent.keyDown(document, { keyCode: 38 }))
       expect(document.activeElement).toBe(firstMenuItem)
-      fireEvent.keyDown(document, { keyCode: 38 })
+      await act(async () => await fireEvent.keyDown(document, { keyCode: 38 }))
       expect(document.activeElement).toBe(button)
-      fireEvent.keyDown(document, { keyCode: 38 })
+      await act(async () => await fireEvent.keyDown(document, { keyCode: 38 }))
       expect(document.activeElement).toBe(secondMenuItem)
     })
   })
