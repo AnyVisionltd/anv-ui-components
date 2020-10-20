@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState, useRef } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { MenuItem } from './MenuItem'
@@ -26,6 +26,8 @@ const Menu = ({
   const [ currentFocus, setCurrentFocus ] = useState(false)
   const [ popperRef, setPopperRef ] = useState(null)
   const [ isMenuOpen, setIsMenuOpen ] = useState(isOpen || false)
+  const sideToOpenFrom = useRef(null)
+  const positionToOpenFrom = useRef(null)
 
   const { styles: popperStyles, attributes, update: updatePopper } = usePopper(
     anchorElement,
@@ -53,6 +55,13 @@ const Menu = ({
     }
     update()
   }, [ anchorElement, handleOnAnchorClick, updatePopper ])
+
+  
+  useEffect(() => {
+    const [side, position] = preferOpenDirection.split('-')
+    sideToOpenFrom.current = side
+    positionToOpenFrom.current = position === undefined ? 'center' : position
+  }, [preferOpenDirection])
 
 
 
@@ -129,6 +138,13 @@ const Menu = ({
     className,
   )
 
+  const sideToOpenTo = {
+    top: 'bottom',
+    bottom: 'top',
+    right: 'left',
+    left: 'right'
+  }
+
   const renderMenu = () => (
     <div
       ref={ setPopperRef }
@@ -137,10 +153,11 @@ const Menu = ({
       { ...attributes.popper }
     >
       <Animations.Scale
-        isOpen={ isMenuOpen }
+        isOpen={ isMenuOpen || false }
         onEnter={ () => onOpened() }
         onExited={ () => onClosed() }
-        horizontalStart={ 'start' }
+        horizontalStart={ positionToOpenFrom.current }
+        verticalStart = { sideToOpenTo[sideToOpenFrom] }
       >
         { renderMenuList() }
       </Animations.Scale>

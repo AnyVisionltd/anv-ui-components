@@ -21,7 +21,6 @@ export const Default = () => {
       <Button
         aria-controls="menu-story-default"
         aria-haspopup="true"
-        onClick={ () => console.log('clicked 2') }
         ref={ setAnchorElement }
       >
         Pizza Toppings
@@ -117,8 +116,8 @@ export const PreferOpenToDirection = () => {
     ? setAnchorElement(null)
     : setAnchorElement(ref.current))
 
-  const vertical = select('Vertical axis', [ 'top', 'right', 'bottom', 'left' ], 'bottom')
-  const horizontal = select('Horizontal axis', [ 'start', 'end' ], 'start')
+  const side = select('Side', [ 'top', 'right', 'bottom', 'left' ], 'bottom')
+  const position = select('Position', [ 'start', 'center', 'end' ], 'start')
 
   return (
     <div className={ styles.menuExample }>
@@ -136,7 +135,7 @@ export const PreferOpenToDirection = () => {
         anchorElement={ anchorElement }
         isOpen={ !!anchorElement }
         onClose={ handleClose }
-        preferOpenDirection={ `${vertical}-${horizontal}` }
+        preferOpenDirection={ position === 'center' ? side : `${side}-${position}` }
       >
         <Menu.Item>List Item #1</Menu.Item>
         <Menu.Item>List Item #2</Menu.Item>
