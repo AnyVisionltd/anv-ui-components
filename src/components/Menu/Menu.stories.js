@@ -42,12 +42,17 @@ export const Default = () => {
 
 export const DifferentPositions = () => {
   const [ anchorElement, setAnchorElement ] = useState(null)
+  const [ openDirection, setOpenDirection ] = useState('bottom-start')
 
   const handleClose = () => setAnchorElement(null)
-  const handleButtonClick = event => (anchorElement
-    ? setAnchorElement(null)
-    : setAnchorElement(event.currentTarget))
-
+  const handleButtonClick = (event, direction) => {
+    if(anchorElement)
+      setAnchorElement(null)
+    else
+      setAnchorElement(event.currentTarget)
+    
+    setOpenDirection(direction)
+  }
 
   return (
     <div className={ styles.menuExample }>
@@ -55,7 +60,7 @@ export const DifferentPositions = () => {
         style={ { position: 'absolute', top: 10, left: 10 } }
         aria-controls="menu-story"
         aria-haspopup="true"
-        onClick={ handleButtonClick }
+        onClick={ event => handleButtonClick(event, 'bottom-start') }
       >
         Top, Left
       </Button>
@@ -64,7 +69,7 @@ export const DifferentPositions = () => {
         style={ { position: 'absolute', top: 10, right: 10 } }
         aria-controls="menu-story"
         aria-haspopup="true"
-        onClick={ handleButtonClick }
+        onClick={ event => handleButtonClick(event, 'bottom-end') }
       >
         Top, Right
       </Button>
@@ -73,7 +78,7 @@ export const DifferentPositions = () => {
         style={ { position: 'absolute', bottom: 10, left: 10 } }
         aria-controls="menu-story"
         aria-haspopup="true"
-        onClick={ handleButtonClick }
+        onClick={ event => handleButtonClick(event, 'top-start') }
       >
         Bottom, Left
       </Button>
@@ -82,7 +87,7 @@ export const DifferentPositions = () => {
         style={ { position: 'absolute', bottom: 10, right: 10 } }
         aria-controls="menu-story"
         aria-haspopup="true"
-        onClick={ handleButtonClick }
+        onClick={ event => handleButtonClick(event, 'top-end') }
       >
         Bottom, Right
       </Button>
@@ -96,6 +101,7 @@ export const DifferentPositions = () => {
         anchorElement={ anchorElement }
         isOpen={ !!anchorElement }
         onClose={ handleClose }
+        preferOpenDirection = { openDirection }
       >
         <Menu.Item>List Item #1</Menu.Item>
         <Menu.Item>List Item #2</Menu.Item>
