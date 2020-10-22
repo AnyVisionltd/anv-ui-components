@@ -4506,7 +4506,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
                       <span
                         className="token string"
                       >
-                        '@anyvision/icons'
+                        '@anyvision/anv-icons'
                       </span>
                       <span
                         className=""
