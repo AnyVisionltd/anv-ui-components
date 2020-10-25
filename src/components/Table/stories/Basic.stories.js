@@ -71,6 +71,7 @@ export const Basic = () => {
       firstname: 'Donte',
       location: 'Tel Aviv',
       weather: 30,
+      isEditable: false,
     },
     {
       id: '2',
@@ -78,6 +79,7 @@ export const Basic = () => {
       firstname: 'Cleo',
       location: 'Jerusalem',
       weather: 15,
+      isEditable: true,
     },
     {
       id: '3',
@@ -85,6 +87,7 @@ export const Basic = () => {
       firstname: 'Hubert Blaine Wolfeschle Gelsteinhau Senber Gerdorff Sr',
       location: 'Eilat',
       weather: 40,
+      isEditable: true,
     },
     {
       id: '4',
@@ -92,6 +95,7 @@ export const Basic = () => {
       firstname: 'Neelam',
       location: 'Haifa',
       weather: 25,
+      isEditable: true,
     },
     {
       id: '5',
@@ -99,6 +103,7 @@ export const Basic = () => {
       firstname: 'Carole',
       location: 'Tzfat',
       weather: 20,
+      isEditable: false,
     },
   ], [])
 
@@ -110,7 +115,8 @@ export const Basic = () => {
     },
     {
       label: 'Edit',
-      onClick: action('edit action clicked')
+      onClick: action('edit action clicked'),
+      hidden: row => !row.isEditable
     },
   ], [])
 
