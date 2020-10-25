@@ -129,6 +129,8 @@ TableBody.propTypes = {
     confirmMessage: propTypes.string,
     /** The callback when click the <Menu.Items/> */
     onClick: propTypes.func,
+    /** A callback function that returns a bool value that determines if the specific row action should be rendered */
+    hidden: propTypes.func,
   })),
   /** Callback fire when row click. */
   onRowClick: propTypes.func,

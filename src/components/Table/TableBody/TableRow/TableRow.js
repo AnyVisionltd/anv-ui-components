@@ -68,15 +68,18 @@ const TableRow = ({
           onClose={ handleActionsClose }
         >
           {
-            rowActions.map(({ label, icon, onClick, confirmMessage }, index) => (
-              <Menu.Item
-                leadingComponent={ icon }
-                key={ index }
-                onClick={ e => handleMenuItemClick(e, row, onClick, confirmMessage) }
-              >
-                { label }
-              </Menu.Item>
-            ))
+            rowActions
+              .filter(({ hidden }) => !hidden || !hidden(row))
+              .map(({ label, icon, hidden, onClick, confirmMessage }, index) =>
+                (
+                  <Menu.Item
+                    leadingComponent={ icon }
+                    key={ index }
+                    onClick={ e => handleMenuItemClick(e, row, onClick, confirmMessage) }
+                  >
+                    { label }
+                  </Menu.Item>
+                ))
           }
         </Menu>
         <div
