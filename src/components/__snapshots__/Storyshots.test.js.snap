@@ -884,7 +884,8 @@ exports[`Storyshots Components/ChipsInput Get Icon Handler 1`] = `
         <b>
           Arrow
         </b>
-         icon and everything else for 
+         
+        icon and everything else for 
         <b>
           Filter
         </b>
