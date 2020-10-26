@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import Table from '../Table'
 import { Chip } from '../../Chip'
-import { ReactComponent as SunIcon } from "../../../assets/svg/Sun.svg"
-import { action } from "@storybook/addon-actions"
+import { ReactComponent as SunIcon } from '../../../assets/svg/Sun.svg'
+import { action } from '@storybook/addon-actions'
 
 export default {
   title: 'Components/Table',
@@ -12,7 +12,7 @@ export default {
     TableBody: Table.Body,
     TableSSF: Table.SSF,
     Sortable: Table.Sortable,
-    Selection: Table.Selection
+    Selection: Table.Selection,
   },
 }
 
@@ -39,28 +39,30 @@ export const InfiniteScroll = () => {
     }, 2500)
   }, [data])
 
-  const columns = useMemo(() => [
-    {
-      field: 'firstname',
-      content: 'First Name',
-      width: '200px',
-    },
-    {
-      field: 'role',
-      content: 'Role',
-    },
-    {
-      field: 'location',
-      content: 'Location',
-      columnRender: data => <Chip label={ data }/>,
-    },
-    {
-      field: 'date',
-      content: 'Date',
-      type: 'date',
-    }
-
-  ], [])
+  const columns = useMemo(
+    () => [
+      {
+        field: 'firstname',
+        content: 'First Name',
+        width: '200px',
+      },
+      {
+        field: 'role',
+        content: 'Role',
+      },
+      {
+        field: 'location',
+        content: 'Location',
+        columnRender: data => <Chip label={data} />,
+      },
+      {
+        field: 'date',
+        content: 'Date',
+        type: 'date',
+      },
+    ],
+    [],
+  )
 
   const onTableChange = useCallback(() => {
     // TODO add server mock for filters and sort
@@ -68,7 +70,7 @@ export const InfiniteScroll = () => {
 
   const bulkActions = [
     {
-      icon: <SunIcon/>,
+      icon: <SunIcon />,
       label: 'action 1',
       onClick: action('bulk action 1'),
     },
@@ -77,15 +79,15 @@ export const InfiniteScroll = () => {
   const style = { width: '100%', height: '400px' }
 
   return (
-    <Table style={ style } onChange={ onTableChange }>
-      <Table.Header columns={ columns }/>
+    <Table style={style} onChange={onTableChange}>
+      <Table.Header columns={columns} />
       <Table.Body
-        totalItems={ totalItems }
-        data={ data }
-        isLoading={ isLoading }
-        loadMoreData={ loadMoreItems }
+        totalItems={totalItems}
+        data={data}
+        isLoading={isLoading}
+        loadMoreData={loadMoreItems}
       />
-      <Table.Selection bulkActions={ bulkActions }/>
+      <Table.Selection bulkActions={bulkActions} />
     </Table>
   )
 }

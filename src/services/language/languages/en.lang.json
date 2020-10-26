@@ -1,14 +1,14 @@
 {
- "en": {
-   "save": "Save",
-   "finish": "Finish",
-   "next": "Next",
-   "cancel": "Cancel",
-   "step": "step",
-   "columnManagement": "Column Management",
-   "results": "Results",
-   "yes": "Yes",
-   "no": "No",
-   "areYouSure": "Are You Sure?"
+  "en": {
+    "save": "Save",
+    "finish": "Finish",
+    "next": "Next",
+    "cancel": "Cancel",
+    "step": "step",
+    "columnManagement": "Column Management",
+    "results": "Results",
+    "yes": "Yes",
+    "no": "No",
+    "areYouSure": "Are You Sure?"
   }
 }

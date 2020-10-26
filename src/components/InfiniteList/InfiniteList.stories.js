@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useRef } from 'react'
 import { InfiniteList, Button } from '../../index'
-import { centerDecorator } from "../../utils/storybook/decorators"
+import { centerDecorator } from '../../utils/storybook/decorators'
 
 export default {
   title: 'Components/InfiniteList',
@@ -28,31 +28,30 @@ export const Default = () => {
     }, 2500)
   }, [items])
 
-
   const rowRender = item => {
-    return <div style={ { height: '56px' } }> item { item }</div>
+    return <div style={{ height: '56px' }}> item {item}</div>
   }
 
   const loaderRender = () => 'Fetching data...'
 
   return (
-    <div style={ { width: '80%', height: '300px' } }>
+    <div style={{ width: '80%', height: '300px' }}>
       <Button
-        size={ 'small' }
-        style={ { 'marginLeft': 'auto' } }
-        variant={ 'ghost' }
-        onClick={ scrollToTop }
+        size={'small'}
+        style={{ marginLeft: 'auto' }}
+        variant={'ghost'}
+        onClick={scrollToTop}
       >
         scroll to top
       </Button>
       <InfiniteList
-        ref={ listRef }
-        items={ items }
-        totalItems={ totalItems }
-        rowRender={ rowRender }
-        customLoader={ loaderRender }
-        loadMoreItems={ loadMoreItems }
-        isLoading={ isLoading }
+        ref={listRef}
+        items={items}
+        totalItems={totalItems}
+        rowRender={rowRender}
+        customLoader={loaderRender}
+        loadMoreItems={loadMoreItems}
+        isLoading={isLoading}
       />
     </div>
   )

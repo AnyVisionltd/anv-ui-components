@@ -1,4 +1,4 @@
-@import "~@anyvision/style-guide";
+@import '~@anyvision/style-guide';
 
 .inputBase {
   box-sizing: border-box;
@@ -19,8 +19,8 @@
     opacity: av-opacity(disabled);
   }
 
- > input,
- > textarea {
+  > input,
+  > textarea {
     color: av-color(content);
     outline: none;
     border: none;
@@ -28,10 +28,10 @@
     flex-grow: 1;
     background-color: inherit;
 
-   &::placeholder {
-     color: av-color(content);
-     opacity: av-opacity(medium);
-   }
+    &::placeholder {
+      color: av-color(content);
+      opacity: av-opacity(medium);
+    }
   }
 
   > textarea {

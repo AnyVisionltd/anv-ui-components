@@ -3,59 +3,60 @@ import propTypes from 'prop-types'
 import classNames from 'classnames'
 import styles from './MenuItem.module.scss'
 
-const MenuItem = forwardRef(({
-  className,
-  onClick,
-  disabled,
-  isSubMenu,
-  children,
-  leadingComponent,
-  ...otherProps
-}, ref) => {
-  const classes = classNames(
-    styles.menuItem,
-    isSubMenu && styles.subMenuItem,
-    className,
-  )
+const MenuItem = forwardRef(
+  (
+    {
+      className,
+      onClick,
+      disabled,
+      isSubMenu,
+      children,
+      leadingComponent,
+      ...otherProps
+    },
+    ref,
+  ) => {
+    const classes = classNames(
+      styles.menuItem,
+      isSubMenu && styles.subMenuItem,
+      className,
+    )
 
-  const handleOnClick = event => {
-    if (disabled) {
-      return
-    }
-    onClick(event)
-  }
-
-  const handleOnKeyDown = event => {
-    if (event.key === 'Enter') {
-      handleOnClick(event)
-    }
-  }
-
-  // Disabled since the element is non-interactive only when disabled flag passed, which also makes
-  // the callback handlers non-interactive
-  /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-  return (
-    <li
-      role={ !disabled ? 'menuitem' : undefined }
-      tabIndex={ !disabled ? '0' : undefined }
-      className={ classes }
-      onClick={ !disabled && handleOnClick }
-      onKeyDown={ !disabled && handleOnKeyDown }
-      ref={ ref }
-      { ...otherProps }
-    >
-      {
-        leadingComponent &&  (
-          <div className={ styles.menuLeadingComponent }>
-            { leadingComponent }
-          </div>
-        )
+    const handleOnClick = event => {
+      if (disabled) {
+        return
       }
-      { children }
-    </li>
-  )
-  /* eslint-enable jsx-a11y/no-noninteractive-element-interactions */
-})
+      onClick(event)
+    }
+
+    const handleOnKeyDown = event => {
+      if (event.key === 'Enter') {
+        handleOnClick(event)
+      }
+    }
+
+    // Disabled since the element is non-interactive only when disabled flag passed, which also makes
+    // the callback handlers non-interactive
+    /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+    return (
+      <li
+        role={!disabled ? 'menuitem' : undefined}
+        tabIndex={!disabled ? '0' : undefined}
+        className={classes}
+        onClick={!disabled && handleOnClick}
+        onKeyDown={!disabled && handleOnKeyDown}
+        ref={ref}
+        {...otherProps}
+      >
+        {leadingComponent && (
+          <div className={styles.menuLeadingComponent}>{leadingComponent}</div>
+        )}
+        {children}
+      </li>
+    )
+    /* eslint-enable jsx-a11y/no-noninteractive-element-interactions */
+  },
+)
 
 MenuItem.defaultProps = {
   disabled: false,

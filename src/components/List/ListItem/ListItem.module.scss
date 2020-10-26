@@ -1,5 +1,5 @@
-@import "~@anyvision/style-guide";
-@import "../../../styles/mixin/ripple";
+@import '~@anyvision/style-guide';
+@import '../../../styles/mixin/ripple';
 
 .listItem {
   box-sizing: border-box;
@@ -11,7 +11,7 @@
   color: av-color(content);
   padding: 0 av-space(tiny);
 
-  &:hover{
+  &:hover {
     background-color: av-color(primary, av-opacity(divider));
   }
 

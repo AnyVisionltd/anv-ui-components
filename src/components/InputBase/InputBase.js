@@ -50,7 +50,8 @@ const InputBase = React.forwardRef((props, ref) => {
 
   const onPasswordIconClick = e => {
     e.stopPropagation()
-    const type = inputType === inputTypes.PASSWORD ? inputTypes.TEXT : inputTypes.PASSWORD
+    const type =
+      inputType === inputTypes.PASSWORD ? inputTypes.TEXT : inputTypes.PASSWORD
     setInputType(type)
     inputRef.current.type = type
     inputRef.current.focus()
@@ -61,33 +62,38 @@ const InputBase = React.forwardRef((props, ref) => {
       return null
     }
     if (trailingIcon) {
-      return <div className={ classNames(styles.trailingIcon, trailingIconClassName) }>
-        { trailingIcon }
-      </div>
+      return (
+        <div className={classNames(styles.trailingIcon, trailingIconClassName)}>
+          {trailingIcon}
+        </div>
+      )
     }
 
     return (
       <IconButton
-        variant="ghost"
-        onClick={ onPasswordIconClick }
-        disabled={ disabled }
-        className={ classNames(styles.trailingIcon, trailingIconClassName) }
+        variant='ghost'
+        onClick={onPasswordIconClick}
+        disabled={disabled}
+        className={classNames(styles.trailingIcon, trailingIconClassName)}
       >
-        { inputType === inputTypes.PASSWORD ? <EyeDisabledIcon /> : <EyeEnabledIcon /> }
+        {inputType === inputTypes.PASSWORD ? (
+          <EyeDisabledIcon />
+        ) : (
+          <EyeEnabledIcon />
+        )}
       </IconButton>
     )
   }
 
   return (
-    <div className={ inputClasses }>
-      { leadingIcon && <span className={ classNames(styles.leadingIcon, leadingIconClassName) }>{ leadingIcon }</span> }
-      <Input
-        ref={ inputRef }
-        disabled={ disabled }
-        type={ type }
-        { ...elementProps }
-      />
-      { renderTrailingIcon() }
+    <div className={inputClasses}>
+      {leadingIcon && (
+        <span className={classNames(styles.leadingIcon, leadingIconClassName)}>
+          {leadingIcon}
+        </span>
+      )}
+      <Input ref={inputRef} disabled={disabled} type={type} {...elementProps} />
+      {renderTrailingIcon()}
     </div>
   )
 })
@@ -114,7 +120,7 @@ InputBase.propTypes = {
   /** For css customization. */
   className: propTypes.string,
   /** For icon css customization. */
-  leadingIconClassName: propTypes.string, 
+  leadingIconClassName: propTypes.string,
   /** For icon css customization. */
   trailingIconClassName: propTypes.string,
   /** Icon before the children. */

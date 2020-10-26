@@ -26,76 +26,76 @@
 .scale {
   &-top {
     &-start {
-      @include scale(top, left)
+      @include scale(top, left);
     }
 
     &-center {
-      @include scale(top, center)
+      @include scale(top, center);
     }
 
     &-end {
-      @include scale(top, right)
+      @include scale(top, right);
     }
   }
 
   &-center {
     &-start {
-      @include scale(center, left)
+      @include scale(center, left);
     }
 
     &-center {
-      @include scale(center, center)
+      @include scale(center, center);
     }
 
     &-end {
-      @include scale(center, right)
+      @include scale(center, right);
     }
   }
 
   &-bottom {
     &-start {
-      @include scale(bottom, left)
+      @include scale(bottom, left);
     }
 
     &-center {
-      @include scale(bottom, center)
+      @include scale(bottom, center);
     }
 
     &-end {
-      @include scale(bottom, right)
+      @include scale(bottom, right);
     }
   }
 }
 
-html[dir=rtl] {
+html[dir='rtl'] {
   .scale {
     &-top {
       &-start {
-        @include scale(top, right)
+        @include scale(top, right);
       }
 
       &-end {
-        @include scale(top, left)
+        @include scale(top, left);
       }
     }
 
     &-center {
       &-start {
-        @include scale(center, right)
+        @include scale(center, right);
       }
 
       &-end {
-        @include scale(center, left)
+        @include scale(center, left);
       }
     }
 
     &-bottom {
       &-start {
-        @include scale(bottom, right)
+        @include scale(bottom, right);
       }
 
       &-end {
-        @include scale(left, left)
+        @include scale(left, left);
       }
     }
   }

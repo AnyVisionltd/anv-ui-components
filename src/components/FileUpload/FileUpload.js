@@ -12,7 +12,7 @@ const FileUpload = ({ onChange, accept, multiple, children, ...other }) => {
 
   const onChangeHandler = e => {
     const { files } = e.target
-    onChange( files, e )
+    onChange(files, e)
   }
 
   const clearInput = e => {
@@ -22,29 +22,29 @@ const FileUpload = ({ onChange, accept, multiple, children, ...other }) => {
   return (
     <>
       <input
-        className={ styles.hide }
-        ref={ fileRef }
-        type={ 'file' }
-        accept={ accept }
-        multiple={ multiple }
-        onChange={ onChangeHandler }
-        onClick={ clearInput }
-        { ...other }
+        className={styles.hide}
+        ref={fileRef}
+        type={'file'}
+        accept={accept}
+        multiple={multiple}
+        onChange={onChangeHandler}
+        onClick={clearInput}
+        {...other}
       />
       {
         // extend children onClick
-        React.Children.map(children, (
-          child => cloneElement(child, {
-            onClick: (...args) => uploadClick(child.props.onClick, args)
-          })
-        ))
+        React.Children.map(children, child =>
+          cloneElement(child, {
+            onClick: (...args) => uploadClick(child.props.onClick, args),
+          }),
+        )
       }
     </>
   )
 }
 
 FileUpload.defaultProps = {
-  onChange: () => {}
+  onChange: () => {},
 }
 
 FileUpload.propTypes = {

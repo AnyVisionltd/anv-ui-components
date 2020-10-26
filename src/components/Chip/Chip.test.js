@@ -5,13 +5,10 @@ import Chip from './Chip'
 
 const chipText = 'Chip text'
 describe('<Chip />', () => {
-  it('should fire click handler if \'onClick\' prop is set', () => {
+  it("should fire click handler if 'onClick' prop is set", () => {
     const handleClick = jest.fn()
     const { getByRole } = render(
-      <Chip
-        label={ chipText }
-        onClick={ handleClick }
-      />,
+      <Chip label={chipText} onClick={handleClick} />,
     )
     const node = getByRole('button')
     fireEvent.click(node)
@@ -21,11 +18,7 @@ describe('<Chip />', () => {
   it('should not be clickable when disabled', () => {
     const handleClick = jest.fn()
     const { getByRole } = render(
-      <Chip
-        label={ chipText }
-        disabled
-        onClick={ handleClick }
-      />,
+      <Chip label={chipText} disabled onClick={handleClick} />,
     )
     const node = getByRole('button')
     fireEvent.click(node)
@@ -35,10 +28,7 @@ describe('<Chip />', () => {
   it('should be clickable by pressing return key while focused', () => {
     const handleClick = jest.fn()
     const { getByRole } = render(
-      <Chip
-        label={ chipText }
-        onClick={ handleClick }
-      />,
+      <Chip label={chipText} onClick={handleClick} />,
     )
     const node = getByRole('button')
     fireEvent.focus(node)
@@ -46,14 +36,10 @@ describe('<Chip />', () => {
     expect(handleClick).toBeCalled()
   })
 
-  it('should call \'on trailing icon click\' when set as deletable and pressed on backspace key while focused', () => {
+  it("should call 'on trailing icon click' when set as deletable and pressed on backspace key while focused", () => {
     const handleClick = jest.fn()
     const { getAllByRole } = render(
-      <Chip
-        label={ chipText }
-        deletable
-        onTrailingIconClick={ handleClick }
-      />,
+      <Chip label={chipText} deletable onTrailingIconClick={handleClick} />,
     )
     const [node] = getAllByRole('button')
     fireEvent.focus(node)
@@ -61,14 +47,10 @@ describe('<Chip />', () => {
     expect(handleClick).toBeCalled()
   })
 
-  it('should call \'on trailing icon click\' when set as deletable and pressed on delete key while focused', () => {
+  it("should call 'on trailing icon click' when set as deletable and pressed on delete key while focused", () => {
     const handleClick = jest.fn()
     const { getAllByRole } = render(
-      <Chip
-        label={ chipText }
-        deletable
-        onTrailingIconClick={ handleClick }
-      />,
+      <Chip label={chipText} deletable onTrailingIconClick={handleClick} />,
     )
     const [node] = getAllByRole('button')
     fireEvent.focus(node)
@@ -76,13 +58,13 @@ describe('<Chip />', () => {
     expect(handleClick).toBeCalled()
   })
 
-  it('should call \'on trailing icon click\' when trailing icon is clicked', () => {
+  it("should call 'on trailing icon click' when trailing icon is clicked", () => {
     const handleClick = jest.fn()
     const { getAllByRole } = render(
       <Chip
-        label={ chipText }
-        onTrailingIconClick={ handleClick }
-        trailingIcon={ <SvgIcon /> }
+        label={chipText}
+        onTrailingIconClick={handleClick}
+        trailingIcon={<SvgIcon />}
       />,
     )
     const [, node] = getAllByRole('button')
@@ -90,14 +72,14 @@ describe('<Chip />', () => {
     expect(handleClick).toBeCalled()
   })
 
-  it('should not call \'on trailing icon click\' when set as disabled and trailing icon is clicked', () => {
+  it("should not call 'on trailing icon click' when set as disabled and trailing icon is clicked", () => {
     const handleClick = jest.fn()
     const { getAllByRole } = render(
       <Chip
-        label={ chipText }
+        label={chipText}
         disabled
-        onTrailingIconClick={ handleClick }
-        trailingIcon={ <SvgIcon /> }
+        onTrailingIconClick={handleClick}
+        trailingIcon={<SvgIcon />}
       />,
     )
     const [, node] = getAllByRole('button')

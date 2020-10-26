@@ -5,12 +5,12 @@ import './SlideAnimation.scss'
 
 const SlideAnimation = ({ children, isOpen, direction }) => (
   <CSSTransition
-    in={ isOpen }
+    in={isOpen}
     unmountOnExit
-    classNames={ `slide-${direction}` }
-    timeout={ 200 }
+    classNames={`slide-${direction}`}
+    timeout={200}
   >
-    { children }
+    {children}
   </CSSTransition>
 )
 

@@ -1,19 +1,18 @@
 import React from 'react'
-import { Tooltip } from "."
+import { Tooltip } from '.'
 import { render, fireEvent, act } from '@testing-library/react'
 
 describe('<Tooltip/>', () => {
   describe('Hovering over anchor component', () => {
-
     beforeEach(() => {
       jest.useFakeTimers()
     })
 
     it('should display the tooltip when hovering over anchor element', async () => {
       const { getByText, queryByText } = render(
-        <Tooltip content={ 'tooltip!' }>
+        <Tooltip content={'tooltip!'}>
           <button>button</button>
-        </Tooltip>
+        </Tooltip>,
       )
 
       await act(async () => {
@@ -25,9 +24,9 @@ describe('<Tooltip/>', () => {
 
     it('should hide the tooltip when leaving anchor element', async () => {
       const { getByText, queryByText } = render(
-        <Tooltip content={ 'tooltip!' }>
+        <Tooltip content={'tooltip!'}>
           <button>button</button>
-        </Tooltip>
+        </Tooltip>,
       )
 
       await act(async () => {
@@ -42,9 +41,9 @@ describe('<Tooltip/>', () => {
       const customEnterTime = 10000
 
       const { getByText, queryByText } = render(
-        <Tooltip content={ 'tooltip!' }>
+        <Tooltip content={'tooltip!'}>
           <button>button</button>
-        </Tooltip>
+        </Tooltip>,
       )
       await act(async () => {
         fireEvent.mouseEnter(getByText('button'))
@@ -58,14 +57,14 @@ describe('<Tooltip/>', () => {
       const customLeaveTime = 10000
 
       const { getByText, queryByText } = render(
-        <Tooltip content={ 'tooltip!' }>
+        <Tooltip content={'tooltip!'}>
           <button>button</button>
-        </Tooltip>
+        </Tooltip>,
       )
 
       await act(async () => {
         fireEvent.mouseEnter(getByText('button'))
-        await  jest.advanceTimersByTime(0) // wait for tooltip to show
+        await jest.advanceTimersByTime(0) // wait for tooltip to show
         expect(queryByText('tooltip!')).toBeVisible()
         fireEvent.mouseLeave(getByText('button'))
         await jest.advanceTimersByTime(customLeaveTime)
@@ -75,9 +74,9 @@ describe('<Tooltip/>', () => {
 
     it('should keep tooltip showing while the mouse is hover anchor', async () => {
       const { getByText, queryByText } = render(
-        <Tooltip content={ 'tooltip!' }>
+        <Tooltip content={'tooltip!'}>
           <button>button</button>
-        </Tooltip>
+        </Tooltip>,
       )
 
       await act(async () => {
@@ -90,9 +89,9 @@ describe('<Tooltip/>', () => {
 
     it('should keep the tooltip visible when hovering over the tooltip', async () => {
       const { getByText, queryByText } = render(
-        <Tooltip content={ 'tooltip!' }>
+        <Tooltip content={'tooltip!'}>
           <button>button</button>
-        </Tooltip>
+        </Tooltip>,
       )
 
       await act(async () => {
@@ -106,9 +105,9 @@ describe('<Tooltip/>', () => {
 
     it('should show the tooltip with arrow when arrow attribute exists', async () => {
       const { getByText, container } = render(
-        <Tooltip content={ 'tooltip!' } arrow={ true }>
+        <Tooltip content={'tooltip!'} arrow={true}>
           <button>button</button>
-        </Tooltip>
+        </Tooltip>,
       )
 
       await act(async () => {

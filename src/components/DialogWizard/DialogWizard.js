@@ -24,7 +24,6 @@ const DialogWizard = ({
   disabled,
   ...otherProps
 }) => {
-
   const [step, setStep] = useState(currentStep || 1)
 
   useEffect(() => {
@@ -46,12 +45,12 @@ const DialogWizard = ({
 
   const renderSteps = () => {
     return (
-      <div className={ styles.steps }>
-        <small>{ languageService.getTranslation('step') }</small>
-        <div className={ styles.stepsNumbers }>
-          <small>{ step }</small>
+      <div className={styles.steps}>
+        <small>{languageService.getTranslation('step')}</small>
+        <div className={styles.stepsNumbers}>
+          <small>{step}</small>
           <small>-</small>
-          <small>{ steps.length }</small>
+          <small>{steps.length}</small>
         </div>
       </div>
     )
@@ -72,10 +71,10 @@ const DialogWizard = ({
 
     return (
       <IconButton
-        variant={ 'ghost' }
-        onClick={ onBack }
-        className={ styles.backButton }
-        data-testid={ 'back-button' }
+        variant={'ghost'}
+        onClick={onBack}
+        className={styles.backButton}
+        data-testid={'back-button'}
       >
         <BackIcon />
       </IconButton>
@@ -83,7 +82,7 @@ const DialogWizard = ({
   }
 
   const handleClose = () => {
-    if(!currentStep) {
+    if (!currentStep) {
       setStep(1)
     }
     onClose()
@@ -91,47 +90,48 @@ const DialogWizard = ({
 
   return (
     <Dialog
-      className={ className }
-      isOpen={ isDialogOpen }
-      onClose={ handleClose }
-      { ...otherProps }
+      className={className}
+      isOpen={isDialogOpen}
+      onClose={handleClose}
+      {...otherProps}
     >
-      <Dialog.Header >
-        <div className={ styles.header }>
-          <div className={ styles.headerLeftSide }>
-            { renderBackIcon() }
-            { headerTitle }
+      <Dialog.Header>
+        <div className={styles.header}>
+          <div className={styles.headerLeftSide}>
+            {renderBackIcon()}
+            {headerTitle}
           </div>
-          { renderSteps() }
+          {renderSteps()}
         </div>
       </Dialog.Header>
-      <div className={ styles.progress }>
-        <div className={ styles.innerProgress } style={ { width: `${(step / steps.length) * 100}%` } } />
+      <div className={styles.progress}>
+        <div
+          className={styles.innerProgress}
+          style={{ width: `${(step / steps.length) * 100}%` }}
+        />
       </div>
-      <div className={ styles.content }>
-        <Dialog.Body >
-          { steps.length && steps[step - 1] }
-        </Dialog.Body>
+      <div className={styles.content}>
+        <Dialog.Body>{steps.length && steps[step - 1]}</Dialog.Body>
         <Dialog.Footer>
-          <div className={ styles.footer }>
-            { footerMessage }
-            <div className={ styles.buttons }>
-              {
-                cancelText
-                &&
-                <Button variant={ 'ghost' } onClick={ handleClose }>
-                  { cancelText }
+          <div className={styles.footer}>
+            {footerMessage}
+            <div className={styles.buttons}>
+              {cancelText && (
+                <Button variant={'ghost'} onClick={handleClose}>
+                  {cancelText}
                 </Button>
-              }
-              <Button onClick={ handleNextClick } disabled={ disabled }>
-                { step === steps.length ? finishText : nextText }
+              )}
+              <Button onClick={handleNextClick} disabled={disabled}>
+                {step === steps.length ? finishText : nextText}
               </Button>
             </div>
           </div>
         </Dialog.Footer>
-        { overlayContent && <div className={ classNames(styles.overlay, overlayClassName) }>
-          { overlayContent }
-        </div> }
+        {overlayContent && (
+          <div className={classNames(styles.overlay, overlayClassName)}>
+            {overlayContent}
+          </div>
+        )}
       </div>
     </Dialog>
   )
@@ -139,15 +139,15 @@ const DialogWizard = ({
 
 DialogWizard.defaultProps = {
   isOpen: false,
-  onClose: () => { },
-  onNextClick: () => { },
+  onClose: () => {},
+  onNextClick: () => {},
   disableBackdropClick: false,
   disableEscapeKeyDown: false,
   steps: [],
   cancelText: languageService.getTranslation('cancel'),
   nextText: languageService.getTranslation('next'),
   finishText: languageService.getTranslation('finish'),
-  disabled: false, 
+  disabled: false,
 }
 
 DialogWizard.propTypes = {
@@ -178,7 +178,7 @@ DialogWizard.propTypes = {
   /** text for next button */
   nextText: propTypes.string,
   /** text for cancel button, if text is null button will be hidden */
-  cancelText: propTypes.string, 
+  cancelText: propTypes.string,
   /** boolean to disable next/finish button */
   disabled: propTypes.bool,
 }

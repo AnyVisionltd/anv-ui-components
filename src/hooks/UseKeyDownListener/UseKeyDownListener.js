@@ -2,7 +2,9 @@ import { useCallback, useEffect } from 'react'
 
 const UseKeyDownListener = keyDownHandlersMap => {
   const onKeyDownHandler = useCallback(
-    event => keyDownHandlersMap[event.keyCode] && keyDownHandlersMap[event.keyCode](event),
+    event =>
+      keyDownHandlersMap[event.keyCode] &&
+      keyDownHandlersMap[event.keyCode](event),
     [keyDownHandlersMap],
   )
   useEffect(() => {

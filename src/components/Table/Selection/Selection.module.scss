@@ -1,4 +1,4 @@
-@import "~@anyvision/style-guide";
+@import '~@anyvision/style-guide';
 
 .selectionBar {
   @include av-elevation(temporary);
@@ -40,6 +40,5 @@
     display: flex;
     margin-left: auto;
     align-items: center;
-
   }
 }

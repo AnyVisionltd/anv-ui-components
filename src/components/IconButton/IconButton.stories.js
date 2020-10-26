@@ -18,47 +18,56 @@ export const Default = () => (
 )
 
 export const variants = () => (
-  <div className={ styles.marginFlexContainer }>
+  <div className={styles.marginFlexContainer}>
     <IconButton>
       <SunBrightens />
     </IconButton>
-    <IconButton variant="outline">
+    <IconButton variant='outline'>
       <SunBrightens />
     </IconButton>
-    <IconButton variant="ghost">
+    <IconButton variant='ghost'>
       <SunBrightens />
     </IconButton>
   </div>
 )
 
 export const sizes = () => (
-  <div className={ styles.marginFlexContainer }>
-    <IconButton><SunBrightens /></IconButton>
-    <IconButton size="medium"><SunBrightens /></IconButton>
-    <IconButton size="large"><SunBrightens /></IconButton>
+  <div className={styles.marginFlexContainer}>
+    <IconButton>
+      <SunBrightens />
+    </IconButton>
+    <IconButton size='medium'>
+      <SunBrightens />
+    </IconButton>
+    <IconButton size='large'>
+      <SunBrightens />
+    </IconButton>
   </div>
 )
 
-
 export const disable = () => (
-  <div className={ styles.marginFlexContainer }>
-    <IconButton><SunBrightens /></IconButton>
-    <IconButton disabled><SunBrightens /></IconButton>
+  <div className={styles.marginFlexContainer}>
+    <IconButton>
+      <SunBrightens />
+    </IconButton>
+    <IconButton disabled>
+      <SunBrightens />
+    </IconButton>
   </div>
 )
 
 export const withClassName = () => (
-  <div className={ styles.marginFlexContainer }>
-    { /* background-color: av-color(success); */ }
-    <IconButton className={ styles.successBackgroundColor }>
+  <div className={styles.marginFlexContainer}>
+    {/* background-color: av-color(success); */}
+    <IconButton className={styles.successBackgroundColor}>
       <SunBrightens />
     </IconButton>
-    { /* color: av-color(alert); */ }
-    <IconButton className={ styles.alertColor } variant="outline">
+    {/* color: av-color(alert); */}
+    <IconButton className={styles.alertColor} variant='outline'>
       <SunBrightens />
     </IconButton>
-    { /* color: av-color(error); */ }
-    <IconButton className={ styles.errorColor } variant="ghost">
+    {/* color: av-color(error); */}
+    <IconButton className={styles.errorColor} variant='ghost'>
       <SunBrightens />
     </IconButton>
   </div>
@@ -66,9 +75,9 @@ export const withClassName = () => (
 
 export const playGround = () => (
   <IconButton
-    size={ select('size', ['small', 'medium', 'large'], 'small') }
-    variant={ select('variant', ['fill', 'outline', 'ghost'], 'fill') }
-    disabled={ boolean('disabled', false) }
+    size={select('size', ['small', 'medium', 'large'], 'small')}
+    variant={select('variant', ['fill', 'outline', 'ghost'], 'fill')}
+    disabled={boolean('disabled', false)}
   >
     <SunBrightens />
   </IconButton>

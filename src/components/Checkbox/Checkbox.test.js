@@ -13,7 +13,7 @@ describe('<Checkbox />', () => {
         expect(checkbox.checked).toBe(true)
       })
 
-      it('shouldn\'t be checked when not set to be', () => {
+      it("shouldn't be checked when not set to be", () => {
         const { container } = render(<Checkbox />)
         const checkbox = getByRole(container, 'checkbox')
         expect(checkbox.checked).toBe(false)
@@ -27,7 +27,7 @@ describe('<Checkbox />', () => {
         expect(checkbox.indeterminate).toBe(true)
       })
 
-      it('shouldn\'t be indeterminate when not set to be', () => {
+      it("shouldn't be indeterminate when not set to be", () => {
         const { container } = render(<Checkbox />)
         const checkbox = getByRole(container, 'checkbox')
         expect(checkbox.indeterminate).toBe(false)
@@ -41,7 +41,7 @@ describe('<Checkbox />', () => {
         expect(checkbox.disabled).toBe(true)
       })
 
-      it('shouldn\'t be disabled when not set to be', () => {
+      it("shouldn't be disabled when not set to be", () => {
         const { container } = render(<Checkbox />)
         const checkbox = getByRole(container, 'checkbox')
         expect(checkbox.disabled).toBe(false)
@@ -70,7 +70,7 @@ describe('<Checkbox />', () => {
 
       it('should trigger a change handler', async () => {
         const onChange = jest.fn()
-        const { container } = render(<Checkbox onChange={ onChange } />)
+        const { container } = render(<Checkbox onChange={onChange} />)
         const checkbox = getByRole(container, 'checkbox')
 
         await userEvent.click(checkbox)
@@ -99,7 +99,7 @@ describe('<Checkbox />', () => {
 
       it('should trigger a change handler', async () => {
         const onChange = jest.fn()
-        const { container } = render(<Checkbox onChange={ onChange } />)
+        const { container } = render(<Checkbox onChange={onChange} />)
         const checkbox = getByRole(container, 'checkbox')
 
         await userEvent.click(checkbox)
@@ -110,7 +110,7 @@ describe('<Checkbox />', () => {
     describe('disabled checkbox', () => {
       it('unchecked input should stay unchecked, change event should not be triggered', async () => {
         const onChange = jest.fn()
-        const { container } = render(<Checkbox disabled onChange={ onChange } />)
+        const { container } = render(<Checkbox disabled onChange={onChange} />)
         const checkbox = getByRole(container, 'checkbox')
 
         expect(checkbox.checked).toBe(false)
@@ -121,7 +121,9 @@ describe('<Checkbox />', () => {
 
       it('checked input should stay unchecked, change event should not be triggered', async () => {
         const onChange = jest.fn()
-        const { container } = render(<Checkbox checked disabled onChange={ onChange } />)
+        const { container } = render(
+          <Checkbox checked disabled onChange={onChange} />,
+        )
         const checkbox = getByRole(container, 'checkbox')
 
         expect(checkbox.checked).toBe(true)

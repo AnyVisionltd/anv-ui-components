@@ -1,4 +1,3 @@
-
 <p>
   <img width="300" src="https://anyvision.co/boss/wp-content/uploads/2016/01/anyvision_logo_bbw-1.png">
 
@@ -15,10 +14,13 @@
 </h4>
 
 ## Install
+
 ```bash
 npm install @anyvision/anv-ui-components
 ```
+
 ## :rainbow: Theming
+
 This library uses `@anyvision/style-guide`.
 </br>
 You can customize your theme by change the colors, the typography and much more.

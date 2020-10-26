@@ -11,7 +11,9 @@ describe('<Button />', () => {
   })
 
   it('should render leadingIcon', () => {
-    const { container } = render(<Button leadingIcon={ <SvgIcon /> }>Button Text</Button>)
+    const { container } = render(
+      <Button leadingIcon={<SvgIcon />}>Button Text</Button>,
+    )
     const node = container.querySelector('svg')
     expect(node).toBeTruthy()
   })
@@ -33,7 +35,7 @@ describe('<Button />', () => {
   it('should call onClick', () => {
     const handleClick = jest.fn()
     const { getByText } = render(
-      <Button onClick={ handleClick }>Click Me</Button>,
+      <Button onClick={handleClick}>Click Me</Button>,
     )
     const node = getByText('Click Me')
     fireEvent.click(node)

@@ -4,37 +4,23 @@ import classNames from 'classnames'
 import { ListItem } from './ListItem'
 import styles from './List.module.scss'
 
-const List = forwardRef(({
-  draggable,
-  children,
-  className,
-  ...otherProps
-}, ref) => {
-  const classes = classNames(
-    styles.list,
-    className
-  )
+const List = forwardRef(
+  ({ draggable, children, className, ...otherProps }, ref) => {
+    const classes = classNames(styles.list, className)
 
-  return (
-    <ul
-      { ...otherProps }
-      ref={ ref }
-	    className={ classes }
-    >
-	  {
-	    children
-	  }
-    </ul>
-  )
-})
+    return (
+      <ul {...otherProps} ref={ref} className={classes}>
+        {children}
+      </ul>
+    )
+  },
+)
 
-List.defaultProps = {
-
-}
+List.defaultProps = {}
 
 List.propTypes = {
   /** For css customization. */
-  className: propTypes.string
+  className: propTypes.string,
 }
 
 List.Item = ListItem

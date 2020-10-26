@@ -22,11 +22,7 @@ const Portal = ({ children, containerId, className }) => {
   const mountNode = getPortalElement(containerId)
   mountNode.classList.add(className)
 
-  return (
-    <>
-      { createPortal(children, mountNode) }
-    </>
-  )
+  return <>{createPortal(children, mountNode)}</>
 }
 
 Portal.propTypes = {

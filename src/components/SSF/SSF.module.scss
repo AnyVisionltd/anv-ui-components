@@ -1,4 +1,4 @@
-@import "~@anyvision/style-guide";
+@import '~@anyvision/style-guide';
 
 .SmartFilter {
   position: relative;
@@ -14,8 +14,8 @@
     fill: av-color(content);
 
     &.openedMenu {
-     background-color: av-color(primary);
-     fill: av-color(surface);
+      background-color: av-color(primary);
+      fill: av-color(surface);
     }
   }
 

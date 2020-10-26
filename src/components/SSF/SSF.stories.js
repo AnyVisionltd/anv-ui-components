@@ -15,29 +15,32 @@ export default {
 export const Default = () => {
   const fields = [
     {
-      field: 'subjectName', label: 'Subject Name', type: 'string',
+      field: 'subjectName',
+      label: 'Subject Name',
+      type: 'string',
     },
     {
-      field: 'age', type: 'number', label: 'Age', icon: <ArrowSolidRight />,
+      field: 'age',
+      type: 'number',
+      label: 'Age',
+      icon: <ArrowSolidRight />,
     },
     {
-      field: 'subjectDescription', label: 'Description', type: 'string', icon: <EyeEnabled />,
+      field: 'subjectDescription',
+      label: 'Description',
+      type: 'string',
+      icon: <EyeEnabled />,
     },
   ]
   return (
-    <div className={ styles.marginFlexContainer }>
-      <SmartFilter
-        fields={ fields }
-        onChange={ action('Result') }
-      />
+    <div className={styles.marginFlexContainer}>
+      <SmartFilter fields={fields} onChange={action('Result')} />
     </div>
   )
 }
 
 export const WithoutMenuFields = () => (
-  <div className={ styles.marginFlexContainer }>
-    <SmartFilter
-      onChange={ action('Result') }
-    />
+  <div className={styles.marginFlexContainer}>
+    <SmartFilter onChange={action('Result')} />
   </div>
 )

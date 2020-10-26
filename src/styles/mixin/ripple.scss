@@ -5,7 +5,7 @@ $ripple-transition-duration: 0.3s;
   &:not([disabled]):not(.disabled) {
     &::before,
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       top: 0;
       left: 0;
@@ -26,8 +26,10 @@ $ripple-transition-duration: 0.3s;
     }
 
     &::after {
-      background: radial-gradient(circle at center, $color 1%, transparent 1%) center/10000% 10000% no-repeat;
-      transition: opacity 1s ease-in-out, background-size $ripple-transition-duration ease-in-out;
+      background: radial-gradient(circle at center, $color 1%, transparent 1%)
+        center/10000% 10000% no-repeat;
+      transition: opacity 1s ease-in-out,
+        background-size $ripple-transition-duration ease-in-out;
     }
 
     &:hover::before {

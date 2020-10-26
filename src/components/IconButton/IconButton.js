@@ -4,31 +4,22 @@ import propTypes from 'prop-types'
 import { Button } from '../Button'
 import styles from './IconButton.module.scss'
 
-const IconButton = forwardRef(({
-  size,
-  variant,
-  className,
-  children,
-  ...buttonProps
-}, ref) => {
-  const classes = classNames(
-    styles.iconButton,
-    styles[size],
-    styles[variant],
-    className,
-  )
+const IconButton = forwardRef(
+  ({ size, variant, className, children, ...buttonProps }, ref) => {
+    const classes = classNames(
+      styles.iconButton,
+      styles[size],
+      styles[variant],
+      className,
+    )
 
-  return (
-    <Button
-      ref={ ref }
-      className={ classes }
-      variant={ variant }
-      { ...buttonProps }
-    >
-      { children }
-    </Button>
-  )
-})
+    return (
+      <Button ref={ref} className={classes} variant={variant} {...buttonProps}>
+        {children}
+      </Button>
+    )
+  },
+)
 
 IconButton.defaultProps = {
   size: 'small',

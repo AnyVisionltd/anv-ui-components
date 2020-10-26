@@ -14,10 +14,9 @@ const Tooltip = ({
   arrow,
   offset,
   className,
-  overflowOnly
+  overflowOnly,
 }) => {
-
-  const [isOpen, setIsOpen ] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
   const [anchorRef, setAnchorRef] = useState(null)
   const [popperRef, setPopperRef] = useState(null)
   const [arrowRef, setArrowRef] = useState(null)
@@ -25,38 +24,28 @@ const Tooltip = ({
   const enterTimer = React.useRef()
   const leaveTimer = React.useRef()
 
-  const { styles: popperStyles, attributes } = usePopper(
-    anchorRef,
-    popperRef,
-    {
-      placement: placement,
-      modifiers: [
-        { name: 'arrow', options: { element: arrowRef } },
-        { name: 'offset', options: { offset: [0, offset] } }
-      ]
-    }
-  )
+  const { styles: popperStyles, attributes } = usePopper(anchorRef, popperRef, {
+    placement: placement,
+    modifiers: [
+      { name: 'arrow', options: { element: arrowRef } },
+      { name: 'offset', options: { offset: [0, offset] } },
+    ],
+  })
 
   const openTooltip = () => {
     clearTimeout(enterTimer.current)
     clearTimeout(leaveTimer.current)
-    enterTimer.current = setTimeout(
-      () => {
-        setIsOpen(true)
-      },
-      enterDelay,
-    )
+    enterTimer.current = setTimeout(() => {
+      setIsOpen(true)
+    }, enterDelay)
   }
 
   const closeTooltip = () => {
     clearTimeout(enterTimer.current)
     clearTimeout(leaveTimer.current)
-    leaveTimer.current = setTimeout(
-      () => {
-        setIsOpen(false)
-      },
-      leaveDelay,
-    )
+    leaveTimer.current = setTimeout(() => {
+      setIsOpen(false)
+    }, leaveDelay)
   }
 
   const handleMouseEnterTooltip = () => {
@@ -68,10 +57,7 @@ const Tooltip = ({
     closeTooltip()
   }
 
-  const containerClasses = classNames(
-    styles.popperContainer,
-    className
-  )
+  const containerClasses = classNames(styles.popperContainer, className)
 
   const isOverflown = () => {
     return anchorRef && anchorRef.scrollWidth > anchorRef.clientWidth
@@ -81,33 +67,35 @@ const Tooltip = ({
 
   return (
     <>
-      {
-        React.cloneElement(children, {
-          onMouseEnter: openTooltip,
-          onMouseLeave: closeTooltip,
-          ref: setAnchorRef
-        })
-      }
+      {React.cloneElement(children, {
+        onMouseEnter: openTooltip,
+        onMouseLeave: closeTooltip,
+        ref: setAnchorRef,
+      })}
 
-      { showTooltip ? (
-        <Portal containerId={ 'tooltip' }>
+      {showTooltip ? (
+        <Portal containerId={'tooltip'}>
           <div
-            ref={ setPopperRef }
-            style={ popperStyles.popper }
-            { ...attributes.popper }
-            onMouseEnter={ handleMouseEnterTooltip }
-            onMouseLeave={ handleMouseLeaveTooltip }
-            className={ containerClasses }
+            ref={setPopperRef}
+            style={popperStyles.popper}
+            {...attributes.popper}
+            onMouseEnter={handleMouseEnterTooltip}
+            onMouseLeave={handleMouseLeaveTooltip}
+            className={containerClasses}
           >
-            { content }
-            { arrow &&
-              <div ref={ setArrowRef } style={ popperStyles.arrow } className={ styles.popperArrow }>
+            {content}
+            {arrow && (
+              <div
+                ref={setArrowRef}
+                style={popperStyles.arrow}
+                className={styles.popperArrow}
+              >
                 <div></div>
               </div>
-            }
+            )}
           </div>
         </Portal>
-      ) : null }
+      ) : null}
     </>
   )
 }
@@ -124,12 +112,12 @@ Tooltip.propTypes = {
   /** The tooltip content */
   content: propTypes.any.isRequired,
   /** Placement of the tooltip from the anchor element*/
-  placement: propTypes.oneOf(['top','bottom','left','right']),
+  placement: propTypes.oneOf(['top', 'bottom', 'left', 'right']),
   /** After how much time the tooltip should appear after hovering
-     * the anchor element, or tooltip when in interactive mode*/
+   * the anchor element, or tooltip when in interactive mode*/
   enterDelay: propTypes.number,
   /** After how much time the tooltip should leave after the mouse
-     *  left the anchor element, or tooltip when in interactive mode*/
+   *  left the anchor element, or tooltip when in interactive mode*/
   leaveDelay: propTypes.number,
   /** The anchor element */
   children: propTypes.node.isRequired,

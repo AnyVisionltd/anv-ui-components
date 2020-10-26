@@ -15,10 +15,7 @@ const SubMenu = ({
   ...otherProps
 }) => {
   const ref = useRef()
-  const classes = classNames(
-    styles.subMenuItem,
-    className,
-  )
+  const classes = classNames(styles.subMenuItem, className)
   const [isOpened, setIsOpened] = useState(false)
 
   const handleMouseEnter = () => {
@@ -42,24 +39,24 @@ const SubMenu = ({
   /* eslint-disable jsx-a11y/mouse-events-have-key-events */
   return (
     <MenuItem
-      className={ classes }
-      onMouseEnter={ handleMouseEnter }
-      onMouseLeave={ handleMouseLeave }
-      onFocus={ handleOnFocus }
+      className={classes}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onFocus={handleOnFocus}
       isSubMenu
-      ref={ ref }
+      ref={ref}
     >
-      <span className={ styles.parentItemLabel }>{ label }</span>
+      <span className={styles.parentItemLabel}>{label}</span>
       <ArrowIcon />
       <Menu
-        className={ subMenuClassName }
-        isOpen={ isOpened }
-        anchorElement={ ref.current }
-        preferOpenDirection={ 'right-start' }
+        className={subMenuClassName}
+        isOpen={isOpened}
+        anchorElement={ref.current}
+        preferOpenDirection={'right-start'}
         isSubMenu
-        { ...otherProps }
+        {...otherProps}
       >
-        { children }
+        {children}
       </Menu>
     </MenuItem>
   )

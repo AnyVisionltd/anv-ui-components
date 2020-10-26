@@ -51,11 +51,14 @@ const TextField = React.forwardRef((props, ref) => {
     setActive(false)
   }, textFieldRef)
 
-  const setActiveFocus = useCallback(e => {
-    if(!disabled && !readOnly) {
-      setActive(textFieldRef.current.contains(e.target))
-    }
-  }, [disabled, readOnly])
+  const setActiveFocus = useCallback(
+    e => {
+      if (!disabled && !readOnly) {
+        setActive(textFieldRef.current.contains(e.target))
+      }
+    },
+    [disabled, readOnly],
+  )
 
   useEffect(() => {
     window.addEventListener('focusin', setActiveFocus)
@@ -71,23 +74,25 @@ const TextField = React.forwardRef((props, ref) => {
   }, [defaultValue])
 
   useEffect(() => {
-    if(autoFocus) {
+    if (autoFocus) {
       inputRef.current.focus()
       setActive(true)
     }
   }, [autoFocus, inputRef])
 
   useEffect(() => {
-    if(otherProps.value !== undefined) {
+    if (otherProps.value !== undefined) {
       setEmpty(!otherProps.value)
       setValue(otherProps.value)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [otherProps.value])
 
   const onInputChange = e => {
     e.persist()
-    const { target: { value } } = e
+    const {
+      target: { value },
+    } = e
     setEmpty(!value)
     onChange(e)
   }
@@ -96,7 +101,11 @@ const TextField = React.forwardRef((props, ref) => {
     if (type === types.options) {
       return <ArrowSolidDown />
     }
-    return error && type !== types.password ? <ErrorCircleIcon /> : otherProps.trailingIcon
+    return error && type !== types.password ? (
+      <ErrorCircleIcon />
+    ) : (
+      otherProps.trailingIcon
+    )
   }
 
   const handleMenuClose = () => {
@@ -109,7 +118,7 @@ const TextField = React.forwardRef((props, ref) => {
       inputRef.current.focus()
     }
     setAnchorElement(anchorElement ? null : textFieldRef.current)
-    if(!disabled) {
+    if (!disabled) {
       onClick(e)
     }
   }
@@ -123,24 +132,23 @@ const TextField = React.forwardRef((props, ref) => {
   const renderMenu = () => {
     return (
       <Menu
-        aria-labelledby={ 'menu-element' }
-        anchorElement={ anchorElement }
-        isOpen={ !!anchorElement }
-        onClose={ handleMenuClose }
-        className={ classNames(styles.textFieldMenu, menuClassName) }
+        aria-labelledby={'menu-element'}
+        anchorElement={anchorElement}
+        isOpen={!!anchorElement}
+        onClose={handleMenuClose}
+        className={classNames(styles.textFieldMenu, menuClassName)}
       >
-        {
-          items.map(item => renderItem
-            ?
-            <div key={ item.value } onClick={ handleMenuClose }>
-              { renderItem(item) }
+        {items.map(item =>
+          renderItem ? (
+            <div key={item.value} onClick={handleMenuClose}>
+              {renderItem(item)}
             </div>
-            :
-            (<Menu.Item key={ item.value } onClick={ () => onItemClick(item) }>
-              { item.label }
-            </Menu.Item>)
-          )
-        }
+          ) : (
+            <Menu.Item key={item.value} onClick={() => onItemClick(item)}>
+              {item.label}
+            </Menu.Item>
+          ),
+        )}
       </Menu>
     )
   }
@@ -158,36 +166,50 @@ const TextField = React.forwardRef((props, ref) => {
       [styles.notEmpty]: !isEmpty,
       [styles.multiline]: multiline,
       [styles.withLabel]: !!label,
-    }
+    },
   )
 
-  const inputValue = type === types.options ? (value || defaultValue) : value
+  const inputValue = type === types.options ? value || defaultValue : value
 
   const inputDefaultValue = type === types.options ? undefined : defaultValue
 
   return (
-    <div className={ classNames(styles.container, className) }>
-      <div ref={ textFieldRef } onClick={ handleClick } className={ classes }>
-        <label className={ classNames(styles.label, { [styles.left]: !!leadingIcon }) }>{ label }</label>
+    <div className={classNames(styles.container, className)}>
+      <div ref={textFieldRef} onClick={handleClick} className={classes}>
+        <label
+          className={classNames(styles.label, { [styles.left]: !!leadingIcon })}
+        >
+          {label}
+        </label>
         <InputBase
-          { ...otherProps }
-          disabled={ disabled }
-          className={ classNames(styles.inputBase, { [styles.bottom]: !!label }) }
-          value={ inputValue }
-          onChange={ onInputChange }
-          leadingIconClassName={ classNames(styles.leadingIcon, leadingIconClassName) }
-          trailingIconClassName={ classNames(styles.trailingIcon, trailingIconClassName) }
-          readOnly={ readOnly || type === types.options }
-          trailingIcon={ renderTrailingIcon() }
-          ref={ inputRef }
-          leadingIcon={ leadingIcon }
-          multiline={ multiline }
-          type={ type }
-          defaultValue={ inputDefaultValue }
+          {...otherProps}
+          disabled={disabled}
+          className={classNames(styles.inputBase, { [styles.bottom]: !!label })}
+          value={inputValue}
+          onChange={onInputChange}
+          leadingIconClassName={classNames(
+            styles.leadingIcon,
+            leadingIconClassName,
+          )}
+          trailingIconClassName={classNames(
+            styles.trailingIcon,
+            trailingIconClassName,
+          )}
+          readOnly={readOnly || type === types.options}
+          trailingIcon={renderTrailingIcon()}
+          ref={inputRef}
+          leadingIcon={leadingIcon}
+          multiline={multiline}
+          type={type}
+          defaultValue={inputDefaultValue}
         />
       </div>
-      { type === types.options && renderMenu() }
-      { !!message && <span className={ classNames(styles.message, { [styles.error]: error }) }>{ message }</span> }
+      {type === types.options && renderMenu()}
+      {!!message && (
+        <span className={classNames(styles.message, { [styles.error]: error })}>
+          {message}
+        </span>
+      )}
     </div>
   )
 })
@@ -196,8 +218,8 @@ TextField.defaultProps = {
   type: 'text',
   variant: 'outline',
   size: 'medium',
-  onClick: () => { },
-  onChange: () => { },
+  onClick: () => {},
+  onChange: () => {},
   items: [],
 }
 
@@ -238,7 +260,12 @@ TextField.propTypes = {
   /** autoFocus on input. */
   autoFocus: propTypes.bool,
   /** Array of items if type is options. */
-  items: propTypes.arrayOf(propTypes.shape({ value: propTypes.string, label: propTypes.oneOfType([propTypes.string, propTypes.number]) })),
+  items: propTypes.arrayOf(
+    propTypes.shape({
+      value: propTypes.string,
+      label: propTypes.oneOfType([propTypes.string, propTypes.number]),
+    }),
+  ),
   /** Callback to render items of type options */
   renderItem: propTypes.func,
   /** label text to be present in the top of the textField*/

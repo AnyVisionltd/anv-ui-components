@@ -3,13 +3,13 @@ import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { getCellWidth } from '../utlis'
 import languageService from '../../../services/language'
-import { orderTypes } from "../../../utils/enums/common"
+import { orderTypes } from '../../../utils/enums/common'
 import { ReactComponent as LongArrowIcon } from '../../../assets/svg/LongArrow.svg'
 import { ReactComponent as ManageColumnIcon } from '../../../assets/svg/ManageColumn.svg'
 import TableContext from '../TableContext'
 import { Checkbox, IconButton } from '../../../index'
 import styles from './TableHeader.module.scss'
-import { useTableData } from "../UseTableData"
+import { useTableData } from '../UseTableData'
 
 const getTranslation = path => languageService.getTranslation(`${path}`)
 
@@ -19,8 +19,21 @@ const TableHeader = ({
   className,
   ...otherProps
 }) => {
-  const { state, setSortBy, setColumns, toggleSelectAll, setColumnManagementIsOpen } = useContext(TableContext)
-  const { columns: contextColumns, sort, withRowActions, selection, columnManagement, totalItems } = state
+  const {
+    state,
+    setSortBy,
+    setColumns,
+    toggleSelectAll,
+    setColumnManagementIsOpen,
+  } = useContext(TableContext)
+  const {
+    columns: contextColumns,
+    sort,
+    withRowActions,
+    selection,
+    columnManagement,
+    totalItems,
+  } = state
   const { sortBy, sortable: contextSortable } = sort
   const { isActive: columnManagementIsActive } = columnManagement
   const tableData = useTableData()
@@ -33,18 +46,23 @@ const TableHeader = ({
     const activeSort = sortBy && sortBy.field === field
     const activeSortOrder = activeSort && sortBy.order === orderTypes.DESC
     const classes = classNames(
-	  styles.sortingIcon,
-	  activeSort && styles.activeSort,
-	  activeSortOrder && styles.sortingIconDesc,
+      styles.sortingIcon,
+      activeSort && styles.activeSort,
+      activeSortOrder && styles.sortingIconDesc,
     )
-    return <LongArrowIcon className={ classes }/>
+    return <LongArrowIcon className={classes} />
   }
 
   const sortColumn = headerCell => {
-    const sortOrder = headerCell.field === sortBy.field && sortBy.order === orderTypes.ASC
-	  ? orderTypes.DESC
-	  : orderTypes.ASC
-    setSortBy({ field: headerCell.field, order: sortOrder, type: headerCell.type })
+    const sortOrder =
+      headerCell.field === sortBy.field && sortBy.order === orderTypes.ASC
+        ? orderTypes.DESC
+        : orderTypes.ASC
+    setSortBy({
+      field: headerCell.field,
+      order: sortOrder,
+      type: headerCell.type,
+    })
   }
 
   const handleHeaderCellClick = (headerCell, sortableColumn) => {
@@ -53,36 +71,31 @@ const TableHeader = ({
   }
 
   const renderCell = headerCell => {
-    const {
-	  field, content, sortable = true, hide, width,
-    } = headerCell
+    const { field, content, sortable = true, hide, width } = headerCell
     if (hide) {
-	  return null
+      return null
     }
     const style = getCellWidth(width)
 
     const sortableColumn = contextSortable && sortable
-    const tableCellClass = classNames(
-	  styles.headerCell,
-	  { [styles.sortableColumn]: sortableColumn },
-    )
+    const tableCellClass = classNames(styles.headerCell, {
+      [styles.sortableColumn]: sortableColumn,
+    })
     return (
-	  <div
-        key={ field }
-        role="cell"
-        style={ style }
-        className={ tableCellClass }
-        onClick={ () => handleHeaderCellClick(headerCell, sortableColumn) }
-	  >
-        {
-		  typeof content === 'function'
-            ? content()
-            : <div className={ styles.ellipsis }>{ content }</div>
-        }
-        {
-		  sortableColumn && renderSortingIcon(field)
-        }
-	  </div>
+      <div
+        key={field}
+        role='cell'
+        style={style}
+        className={tableCellClass}
+        onClick={() => handleHeaderCellClick(headerCell, sortableColumn)}
+      >
+        {typeof content === 'function' ? (
+          content()
+        ) : (
+          <div className={styles.ellipsis}>{content}</div>
+        )}
+        {sortableColumn && renderSortingIcon(field)}
+      </div>
     )
   }
   const handleSelectAll = () => {
@@ -90,67 +103,60 @@ const TableHeader = ({
   }
   const renderSelection = () => {
     const { isActive, excludeMode, items } = selection
-    const isAllSelected = excludeMode  ? !items.length : !!(tableData.length && tableData.length === selection.items.length)
+    const isAllSelected = excludeMode
+      ? !items.length
+      : !!(tableData.length && tableData.length === selection.items.length)
     if (!isActive) {
-	  return null
+      return null
     }
     return (
-	  <div
-        role={ 'cell' }
-        className={ styles.selectionCell }>
+      <div role={'cell'} className={styles.selectionCell}>
         <Checkbox
-          checked={ isAllSelected }
-          indeterminate={ !!items.length }
-          onChange={ handleSelectAll }
-          disabled={ !tableData.length }
+          checked={isAllSelected}
+          indeterminate={!!items.length}
+          onChange={handleSelectAll}
+          disabled={!tableData.length}
         />
-	  </div>
+      </div>
     )
   }
 
-  const renderActionsPlaceholder = () => (
-    (withRowActions && !columnManagementIsActive ) && <div className={ styles.columnManagementCell }/>
-  )
+  const renderActionsPlaceholder = () =>
+    withRowActions &&
+    !columnManagementIsActive && <div className={styles.columnManagementCell} />
 
-  const renderColumnManagement = () => (
+  const renderColumnManagement = () =>
     columnManagementIsActive && (
-      <div className={ styles.columnManagementCell }>
+      <div className={styles.columnManagementCell}>
         <IconButton
-          onClick={ () => setColumnManagementIsOpen(true) }
-          size={ 'small' }
-          variant={ 'ghost' }
+          onClick={() => setColumnManagementIsOpen(true)}
+          size={'small'}
+          variant={'ghost'}
         >
-		      <ManageColumnIcon/>
+          <ManageColumnIcon />
         </IconButton>
-	  </div>
+      </div>
     )
-  )
 
-  const classes = classNames(
-    styles.tableHeader,
-    className,
-  )
+  const classes = classNames(styles.tableHeader, className)
 
   return (
     <div>
-	  <div className={ styles.results }>{ totalItems } { getTranslation('results') }</div>
-	  <div
-        role="row"
-        className={ classes }
-        { ...otherProps }
-	  >
-        { renderSelection() }
-        { contextColumns.map(renderCell) }
-        { renderActionsPlaceholder() }
-        { renderColumnManagement() }
-	  </div>
+      <div className={styles.results}>
+        {totalItems} {getTranslation('results')}
+      </div>
+      <div role='row' className={classes} {...otherProps}>
+        {renderSelection()}
+        {contextColumns.map(renderCell)}
+        {renderActionsPlaceholder()}
+        {renderColumnManagement()}
+      </div>
     </div>
   )
 }
 
 TableHeader.defaultProps = {
-  onHeaderCellClick: () => {
-  },
+  onHeaderCellClick: () => {},
 }
 
 TableHeader.propTypes = {
@@ -173,10 +179,8 @@ TableHeader.propTypes = {
   columns: propTypes.arrayOf(
     propTypes.shape({
       field: propTypes.string.isRequired,
-      content: propTypes.oneOfType([
-        propTypes.string,
-        propTypes.func,
-      ]).isRequired,
+      content: propTypes.oneOfType([propTypes.string, propTypes.func])
+        .isRequired,
       label: propTypes.string,
       type: propTypes.oneOf(['string', 'number', 'date', 'bool']),
       columnRender: propTypes.func,

@@ -2,11 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import propTypes from 'prop-types'
 import TableContext from '../TableContext'
 
-const Sortable = ({
-  sortBy,
-  defaultSortBy,
-  onSortChange,
-}) => {
+const Sortable = ({ sortBy, defaultSortBy, onSortChange }) => {
   const { state, setSortable, setSortBy } = useContext(TableContext)
   const { sortable, sortBy: contextSortBy } = state.sort
 

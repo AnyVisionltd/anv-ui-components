@@ -1,4 +1,4 @@
-@import "~@anyvision/style-guide";
+@import '~@anyvision/style-guide';
 
 .container {
   display: flex;
@@ -44,7 +44,7 @@
       color: av-color(content);
 
       &:hover {
-        @include av-elevation(raised)
+        @include av-elevation(raised);
       }
 
       .icon {

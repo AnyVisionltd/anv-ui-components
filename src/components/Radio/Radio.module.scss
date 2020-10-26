@@ -1,5 +1,5 @@
 @import '~@anyvision/style-guide';
-@import "../../styles/mixin/ripple";
+@import '../../styles/mixin/ripple';
 
 $radio-container-size: 32px;
 
@@ -38,7 +38,7 @@ $radio-container-size: 32px;
     border: solid 2px av-color(content, av-opacity(disabled));
   }
 
-  &.checked{
+  &.checked {
     .iconContainer {
       border-color: currentColor;
       fill: av-color(purewhite);
@@ -62,8 +62,3 @@ $radio-container-size: 32px;
     }
   }
 }
-
-
-
-
-

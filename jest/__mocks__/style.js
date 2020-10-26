@@ -1,3 +1,3 @@
 module.exports = {
-  'primary': '#000'
+  primary: '#000',
 }

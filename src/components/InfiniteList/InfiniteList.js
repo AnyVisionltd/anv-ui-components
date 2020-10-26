@@ -16,65 +16,72 @@ const Item = ({ data, index, style }) => {
     content = rowRender(items[index], index)
   }
 
-  return <div style={ style }>{ content }</div>
+  return <div style={style}>{content}</div>
 }
 
-const InfiniteList = forwardRef(({
-  rowRender,
-  customLoader,
-  rowHeight,
-  totalItems,
-  items,
-  loadMoreItems,
-  isLoading,
-  className
-}, forwardRef) => {
+const InfiniteList = forwardRef(
+  (
+    {
+      rowRender,
+      customLoader,
+      rowHeight,
+      totalItems,
+      items,
+      loadMoreItems,
+      isLoading,
+      className,
+    },
+    forwardRef,
+  ) => {
+    const hasNextPage = items.length < totalItems || isLoading
+    const itemCount = hasNextPage ? items.length + 1 : items.length
+    const loadMore = isLoading ? () => {} : loadMoreItems
 
-  const hasNextPage = items.length < totalItems || isLoading
-  const itemCount = hasNextPage ? items.length + 1 : items.length
-  const loadMore = isLoading ? () => {} : loadMoreItems
+    // Every row is loaded except for our loading indicator row.
+    const isItemLoaded = index => !hasNextPage || index < items.length
 
-  // Every row is loaded except for our loading indicator row.
-  const isItemLoaded = index => !hasNextPage || index < items.length
+    const classes = classNames(styles.infiniteList, className)
 
-  const classes = classNames(
-    styles.infiniteList,
-    className
-  )
-
-  return (
-    <AutoSizer>
-      { ({ height, width }) => (
-        <InfiniteLoader
-          isItemLoaded={ isItemLoaded }
-          itemCount={ itemCount }
-          loadMoreItems={ loadMore }
-          threshold={ 0 }
-        >
-          { ({ onItemsRendered, ref }) => (
-            <List
-              ref={ mergeRefs(ref, forwardRef) }
-              className={ classes }
-              height={ height }
-              width={ width }
-              itemData={ { items, rowRender, isItemLoaded, customLoader, rowHeight } }
-              itemCount={ itemCount }
-              itemSize={ rowHeight }
-              onItemsRendered={ onItemsRendered }
-            >
-              { Item }
-            </List>
-          ) }
-        </InfiniteLoader>
-      ) }
-    </AutoSizer>
-  )
-})
+    return (
+      <AutoSizer>
+        {({ height, width }) => (
+          <InfiniteLoader
+            isItemLoaded={isItemLoaded}
+            itemCount={itemCount}
+            loadMoreItems={loadMore}
+            threshold={0}
+          >
+            {({ onItemsRendered, ref }) => (
+              <List
+                ref={mergeRefs(ref, forwardRef)}
+                className={classes}
+                height={height}
+                width={width}
+                itemData={{
+                  items,
+                  rowRender,
+                  isItemLoaded,
+                  customLoader,
+                  rowHeight,
+                }}
+                itemCount={itemCount}
+                itemSize={rowHeight}
+                onItemsRendered={onItemsRendered}
+              >
+                {Item}
+              </List>
+            )}
+          </InfiniteLoader>
+        )}
+      </AutoSizer>
+    )
+  },
+)
 
 InfiniteList.defaultProps = {
   loadMoreItems: () => {},
   customLoader: () => 'Loading...',
-  rowHeight: 56
+  rowHeight: 56,
 }
 
 InfiniteList.propTypes = {
@@ -93,7 +100,7 @@ InfiniteList.propTypes = {
   /** True when fetching data. */
   isLoading: propTypes.bool,
   /** For css customization. */
-  className: propTypes.string
+  className: propTypes.string,
 }
 
 export default InfiniteList

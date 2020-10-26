@@ -1,5 +1,6 @@
 {
   "*.+(js|jsx)": [
+    "pretty-quick --staged",
     "npm run test:staged",
     "npm run lint"
   ]

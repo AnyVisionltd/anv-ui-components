@@ -4,11 +4,11 @@ const mergeRefs = (...refs) => {
   if (filteredRefs.length === 0) return filteredRefs[0]
   return inst => {
     for (const ref of filteredRefs) {
-	  if (typeof ref === 'function') {
+      if (typeof ref === 'function') {
         ref(inst)
-	  } else if (ref) {
+      } else if (ref) {
         ref.current = inst
-	  }
+      }
     }
   }
 }

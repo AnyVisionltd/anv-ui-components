@@ -1,11 +1,11 @@
-@import "~@anyvision/style-guide";
+@import '~@anyvision/style-guide';
 
 .light {
-    color: av-color(decorative);
+  color: av-color(decorative);
 }
 
 .dark {
-    --surface: #{hex-to-rgb-string(#002450)};
-    --content: #{hex-to-rgb-string(#ffffff)};
-    color: av-color(decorative);
+  --surface: #{hex-to-rgb-string(#002450)};
+  --content: #{hex-to-rgb-string(#ffffff)};
+  color: av-color(decorative);
 }

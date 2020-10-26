@@ -13,7 +13,7 @@ export const actionTypes = Object.freeze({
   SET_FILTERS: 'SET_FILTERS',
   SET_SORT_BY: 'SET_SORT_BY',
   SET_COLUMN_MANAGEMENT_ACTIVITY: 'SET_COLUMN_MANAGEMENT_ACTIVITY',
-  SET_COLUMN_MANAGEMENT_IS_OPEN: 'SET_COLUMN_MANAGEMENT_IS_OPEN'
+  SET_COLUMN_MANAGEMENT_IS_OPEN: 'SET_COLUMN_MANAGEMENT_IS_OPEN',
 })
 
 export const actions = dispatch => ({
@@ -74,7 +74,7 @@ export const actions = dispatch => ({
   toggleSelectAll: currentData => {
     dispatch({
       type: actionTypes.TOGGLE_SELECT_ALL,
-      payload: currentData
+      payload: currentData,
     })
   },
   deselectAll: () => {

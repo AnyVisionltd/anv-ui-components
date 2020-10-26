@@ -6,7 +6,9 @@ const getWindowDimensions = () => {
 }
 
 const useWindowDimensions = () => {
-  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions())
+  const [windowDimensions, setWindowDimensions] = useState(
+    getWindowDimensions(),
+  )
   useEffect(() => {
     const handleResize = () => setWindowDimensions(getWindowDimensions())
     window.addEventListener('resize', handleResize)

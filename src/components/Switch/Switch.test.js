@@ -25,7 +25,7 @@ describe('<Switch />', () => {
 
       it('should trigger a change handler', async () => {
         const onChange = jest.fn()
-        const { getByRole } = render(<Switch onChange={ onChange } />)
+        const { getByRole } = render(<Switch onChange={onChange} />)
         const switchToggle = getByRole('checkbox', { hidden: true })
 
         await userEvent.click(switchToggle)
@@ -36,7 +36,9 @@ describe('<Switch />', () => {
     describe('disabled switch', () => {
       it('on switch should stay on, change event should not be triggered', async () => {
         const onChange = jest.fn()
-        const { getByRole } = render(<Switch checked disabled onChange={ onChange } />)
+        const { getByRole } = render(
+          <Switch checked disabled onChange={onChange} />,
+        )
         const switchToggle = getByRole('checkbox', { hidden: true })
 
         expect(switchToggle.checked).toBe(true)
@@ -47,7 +49,9 @@ describe('<Switch />', () => {
 
       it('off switch should stay off, change event should not be triggered', async () => {
         const onChange = jest.fn()
-        const { getByRole } = render(<Switch checked={ false } disabled onChange={ onChange } />)
+        const { getByRole } = render(
+          <Switch checked={false} disabled onChange={onChange} />,
+        )
         const switchToggle = getByRole('checkbox', { hidden: true })
 
         expect(switchToggle.checked).toBe(false)

@@ -18,7 +18,7 @@ services:
     image: gcr.io/anyvision-training/anv-ui-components-storybook:development
     restart: always
     ports:
-      - "80:80"
+      - '80:80'
     logging:
       options:
         max-size: 1g

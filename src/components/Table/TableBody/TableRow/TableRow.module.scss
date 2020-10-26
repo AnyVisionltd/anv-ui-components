@@ -1,4 +1,4 @@
-@import "~@anyvision/style-guide";
+@import '~@anyvision/style-guide';
 
 .tableRow {
   box-sizing: border-box;
@@ -41,7 +41,7 @@
     margin-left: auto;
 
     .actionButton {
-      color: av-color(content)
+      color: av-color(content);
     }
   }
 

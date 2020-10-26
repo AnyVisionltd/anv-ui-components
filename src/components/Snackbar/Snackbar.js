@@ -40,13 +40,8 @@ const Snackbar = ({
     }
   }, [isOpen, hideTimeout, setHideTimeout, onOpen])
 
-  const renderLeadingIcon = () => (
-    leadingIcon && (
-      <span className={ styles.leadingIcon }>
-        { leadingIcon }
-      </span>
-    )
-  )
+  const renderLeadingIcon = () =>
+    leadingIcon && <span className={styles.leadingIcon}>{leadingIcon}</span>
 
   const renderCloseIcon = () => {
     if (!closeIcon) {
@@ -54,40 +49,32 @@ const Snackbar = ({
     }
     return (
       <IconButton
-        variant="ghost"
-        className={ styles.closeIcon }
-        onClick={ onClose }
+        variant='ghost'
+        className={styles.closeIcon}
+        onClick={onClose}
       >
-        { closeIcon }
+        {closeIcon}
       </IconButton>
     )
   }
 
-  const classes = classNames(
-    styles.snackbar,
-    className,
-  )
+  const classes = classNames(styles.snackbar, className)
 
   return (
-    <Animations.Slide isOpen={ isOpen }>
-      <Portal
-        containerId="snackbar-portal"
-        className={ styles.portal }
-      >
+    <Animations.Slide isOpen={isOpen}>
+      <Portal containerId='snackbar-portal' className={styles.portal}>
         <div
-          className={ classes }
-          onMouseEnter={ () => clearTimeout(timerHide.current) }
-          onMouseLeave={ setHideTimeout }
+          className={classes}
+          onMouseEnter={() => clearTimeout(timerHide.current)}
+          onMouseLeave={setHideTimeout}
         >
-          <div className={ styles.messageContainer }>
-            { renderLeadingIcon() }
-            <span>
-              { message }
-            </span>
+          <div className={styles.messageContainer}>
+            {renderLeadingIcon()}
+            <span>{message}</span>
           </div>
-          <div className={ styles.actionsContainer }>
-            { action }
-            { renderCloseIcon() }
+          <div className={styles.actionsContainer}>
+            {action}
+            {renderCloseIcon()}
           </div>
         </div>
       </Portal>

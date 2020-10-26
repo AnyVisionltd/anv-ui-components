@@ -1,4 +1,4 @@
-@import "~@anyvision/style-guide";
+@import '~@anyvision/style-guide';
 
 .snackbar {
   display: flex;
@@ -9,7 +9,7 @@
   background-color: av-color(secondary);
   align-items: center;
   border-left: solid 4px av-color(primary);
-  border-radius: 0 av-radius() av-radius() 0 ;
+  border-radius: 0 av-radius() av-radius() 0;
   padding: 0 16px;
   justify-content: space-between;
 }

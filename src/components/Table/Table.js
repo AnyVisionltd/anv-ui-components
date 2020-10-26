@@ -32,7 +32,7 @@ const Table = ({
     const timer = setTimeout(() => {
       const params = {
         filters,
-        sort: sortBy
+        sort: sortBy,
       }
       onChange(params)
     }, 100)
@@ -41,15 +41,12 @@ const Table = ({
     }
   }, [filters, sortBy, onChange])
 
-  const classes = classNames(
-    styles.table,
-    className,
-  )
+  const classes = classNames(styles.table, className)
 
   return (
-    <TableContext.Provider value={ { state, ...actions } }>
-      <div className={ classes } { ...otherProps }>
-        { children }
+    <TableContext.Provider value={{ state, ...actions }}>
+      <div className={classes} {...otherProps}>
+        {children}
       </div>
     </TableContext.Provider>
   )
@@ -57,7 +54,7 @@ const Table = ({
 
 Table.defaultProps = {
   selfControlled: false,
-  onChange: () => {}
+  onChange: () => {},
 }
 
 Table.propTypes = {

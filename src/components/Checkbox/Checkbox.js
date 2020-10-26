@@ -5,7 +5,6 @@ import { ReactComponent as CheckboxChecked } from '../../assets/svg/Checked.svg'
 import { ReactComponent as CheckboxIndeterminate } from '../../assets/svg/CheckboxIndeterminate.svg'
 import styles from './Checkbox.module.scss'
 
-
 const Checkbox = ({
   checked,
   indeterminate,
@@ -40,20 +39,18 @@ const Checkbox = ({
   }
 
   return (
-    <label className={ classes } htmlFor={ id }>
+    <label className={classes} htmlFor={id}>
       <input
-        type="checkbox"
-        ref={ ref }
-        className={ styles.parent }
-        checked={ checked }
-        disabled={ disabled }
-        onChange={ onChange }
-        id={ id }
-        { ...otherProps }
+        type='checkbox'
+        ref={ref}
+        className={styles.parent}
+        checked={checked}
+        disabled={disabled}
+        onChange={onChange}
+        id={id}
+        {...otherProps}
       />
-      <span className={ styles.iconContainer }>
-        { renderCheckboxIcon() }
-      </span>
+      <span className={styles.iconContainer}>{renderCheckboxIcon()}</span>
     </label>
   )
 }

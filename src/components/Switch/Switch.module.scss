@@ -1,7 +1,8 @@
-@import "~@anyvision/style-guide";
-@import "../../styles/mixin/ripple";
+@import '~@anyvision/style-guide';
+@import '../../styles/mixin/ripple';
 
-$switch-transition: transform 200ms ease-in-out, color 100ms ease-in-out, left 100ms ease-in-out;
+$switch-transition: transform 200ms ease-in-out, color 100ms ease-in-out,
+  left 100ms ease-in-out;
 
 .switch {
   color: av-color(primary);

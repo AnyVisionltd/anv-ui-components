@@ -1,4 +1,4 @@
-@import "~@anyvision/style-guide";
+@import '~@anyvision/style-guide';
 
 .colors {
   align-items: center;
@@ -32,7 +32,7 @@
   }
   .content {
     background-color: av-color(content);
-    color: av-color(surface)
+    color: av-color(surface);
   }
   .primary {
     background-color: av-color(primary);

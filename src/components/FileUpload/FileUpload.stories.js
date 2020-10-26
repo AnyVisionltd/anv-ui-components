@@ -4,7 +4,6 @@ import { Button } from '../../index'
 import FileUpload from './FileUpload'
 import { centerDecorator } from '../../utils/storybook/decorators'
 
-
 export default {
   title: 'Utils/FileUpload',
   component: FileUpload,
@@ -12,19 +11,19 @@ export default {
 }
 
 export const Basic = () => (
-  <FileUpload onChange={ action('Upload File Changed') }>
+  <FileUpload onChange={action('Upload File Changed')}>
     <Button>Upload File</Button>
   </FileUpload>
 )
 
 export const Multiple = () => (
-  <FileUpload onChange={ action('Upload Files Changed') } multiple>
+  <FileUpload onChange={action('Upload Files Changed')} multiple>
     <Button>Upload Files</Button>
   </FileUpload>
 )
 
 export const JustImage = () => (
-  <FileUpload onChange={ action('Upload Image') } accept={ 'image/*' }>
+  <FileUpload onChange={action('Upload Image')} accept={'image/*'}>
     <Button>Upload Images</Button>
   </FileUpload>
 )

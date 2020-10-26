@@ -20,18 +20,31 @@ const SmartFilter = ({
   const [chips, setChips] = useState()
   const inputBaseRef = useRef()
 
-  const handleMenuOpen = useCallback(() => setMenuAnchor(inputBaseRef.current), [inputBaseRef])
+  const handleMenuOpen = useCallback(
+    () => setMenuAnchor(inputBaseRef.current),
+    [inputBaseRef],
+  )
   const handleMenuClose = useCallback(() => setMenuAnchor(null), [])
 
   const getLabelTextForInput = useCallback(label => `${label}: `, [])
 
-  const getChipField = useCallback(chipLabel => {
-    return fields.find(({ label }) => chipLabel.indexOf(getLabelTextForInput(label)) === 0)
-  }, [fields, getLabelTextForInput])
+  const getChipField = useCallback(
+    chipLabel => {
+      return fields.find(
+        ({ label }) => chipLabel.indexOf(getLabelTextForInput(label)) === 0,
+      )
+    },
+    [fields, getLabelTextForInput],
+  )
 
-  const isValueContainedInField = useCallback(value => {
-    return fields.find(({ label }) => label.toLowerCase().indexOf(value.toLowerCase()) === 0)
-  }, [fields])
+  const isValueContainedInField = useCallback(
+    value => {
+      return fields.find(
+        ({ label }) => label.toLowerCase().indexOf(value.toLowerCase()) === 0,
+      )
+    },
+    [fields],
+  )
 
   useEffect(() => {
     if (inputValue && !isValueContainedInField(inputValue)) {
@@ -39,41 +52,56 @@ const SmartFilter = ({
     }
   }, [inputValue, isValueContainedInField, handleMenuClose, inputBaseRef])
 
-  const handleChipChange = useCallback(chips => {
-    const searchQuery = chips.map(chipLabel => {
-      const chipField = getChipField(chipLabel)
-      return chipField
-        ? { field: chipField.field, value: chipLabel.substr(chipLabel.indexOf(':') + 2) }
-        : { value: chipLabel }
-    })
-    setChips(chips)
-    onChange(searchQuery)
-  }, [onChange, getChipField])
+  const handleChipChange = useCallback(
+    chips => {
+      const searchQuery = chips.map(chipLabel => {
+        const chipField = getChipField(chipLabel)
+        return chipField
+          ? {
+              field: chipField.field,
+              value: chipLabel.substr(chipLabel.indexOf(':') + 2),
+            }
+          : { value: chipLabel }
+      })
+      setChips(chips)
+      onChange(searchQuery)
+    },
+    [onChange, getChipField],
+  )
 
   const renderChipIcon = ({ label }) => {
     const menuItem = getChipField(label)
     return menuItem && menuItem.icon
   }
 
-  const getInputType = useCallback(value => {
-    const menuItem = getChipField(value)
-    return menuItem ? menuItem.type : types.STRING
-  }, [getChipField])
+  const getInputType = useCallback(
+    value => {
+      const menuItem = getChipField(value)
+      return menuItem ? menuItem.type : types.STRING
+    },
+    [getChipField],
+  )
 
-  const onInputChange = useCallback(value => {
-    if (getInputType(value) === types.NUMBER) {
-      const inputValueOnly = value.slice(value.indexOf(':') + 2)
-      if (!Number.isNaN(Number(inputValueOnly))) {
+  const onInputChange = useCallback(
+    value => {
+      if (getInputType(value) === types.NUMBER) {
+        const inputValueOnly = value.slice(value.indexOf(':') + 2)
+        if (!Number.isNaN(Number(inputValueOnly))) {
+          setInputValue(value)
+        }
+      } else {
         setInputValue(value)
       }
-    } else {
-      setInputValue(value)
-    }
-  }, [setInputValue, getInputType])
+    },
+    [setInputValue, getInputType],
+  )
 
   const menuItems = useMemo(() => {
-    const menuItems = fields.filter(({ label }) => label.toLowerCase().indexOf(inputValue.toLowerCase()) === 0)
-    if(menuItems.length && document.activeElement === inputBaseRef.current) {
+    const menuItems = fields.filter(
+      ({ label }) =>
+        label.toLowerCase().indexOf(inputValue.toLowerCase()) === 0,
+    )
+    if (menuItems.length && document.activeElement === inputBaseRef.current) {
       handleMenuOpen()
     } else {
       handleMenuClose()
@@ -81,9 +109,13 @@ const SmartFilter = ({
     return menuItems
   }, [inputValue, fields, handleMenuClose, handleMenuOpen, inputBaseRef])
 
-  const handleButtonClick = useCallback(() => menuAnchor || menuItems.length === 0
-    ? handleMenuClose()
-    : handleMenuOpen(), [menuAnchor, menuItems.length, handleMenuOpen, handleMenuClose])
+  const handleButtonClick = useCallback(
+    () =>
+      menuAnchor || menuItems.length === 0
+        ? handleMenuClose()
+        : handleMenuOpen(),
+    [menuAnchor, menuItems.length, handleMenuOpen, handleMenuClose],
+  )
 
   const renderAutoComplete = useMemo(() => {
     const onItemClick = label => {
@@ -94,45 +126,61 @@ const SmartFilter = ({
 
     return (
       <Menu
-        variant={ 'dense' }
-        aria-labelledby="menu-element"
-        anchorElement={ menuAnchor }
-        isOpen={ !!menuAnchor }
-        onClose={ handleMenuClose }
+        variant={'dense'}
+        aria-labelledby='menu-element'
+        anchorElement={menuAnchor}
+        isOpen={!!menuAnchor}
+        onClose={handleMenuClose}
       >
-        { menuItems.map(({ label }) => (
-          <Menu.Item key={ label } onClick={ () => onItemClick(label) }>{ label }</Menu.Item>
-        )) }
+        {menuItems.map(({ label }) => (
+          <Menu.Item key={label} onClick={() => onItemClick(label)}>
+            {label}
+          </Menu.Item>
+        ))}
       </Menu>
     )
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[handleMenuClose, menuAnchor, menuItems, inputBaseRef, getLabelTextForInput, chips])
+  }, [
+    handleMenuClose,
+    menuAnchor,
+    menuItems,
+    inputBaseRef,
+    getLabelTextForInput,
+    chips,
+  ])
 
-  const onInputFocus = useCallback(isFocused => isFocused && menuItems.length ? handleMenuOpen() : handleMenuClose(), [menuItems, handleMenuClose, handleMenuOpen])
-
-  const classes = classNames(
-    styles.SmartFilter,
-    className,
+  const onInputFocus = useCallback(
+    isFocused =>
+      isFocused && menuItems.length ? handleMenuOpen() : handleMenuClose(),
+    [menuItems, handleMenuClose, handleMenuOpen],
   )
 
+  const classes = classNames(styles.SmartFilter, className)
+
   return (
-    <div className={ classes }>
-      <div className={ styles.elevationOverlay }/>
-      <Button className={ classNames(styles.searchFilter, menuAnchor && styles.openedMenu) } onClick={ handleButtonClick }>
+    <div className={classes}>
+      <div className={styles.elevationOverlay} />
+      <Button
+        className={classNames(
+          styles.searchFilter,
+          menuAnchor && styles.openedMenu,
+        )}
+        onClick={handleButtonClick}
+      >
         <FilterIcon />
       </Button>
-      { renderAutoComplete }
+      {renderAutoComplete}
       <ChipsInput
-        className={ styles.chipInput }
-        renderChipIcon={ renderChipIcon }
-        placeholder={ placeholder }
-        onFocusChange={ onInputFocus }
-        onInputChange={ onInputChange }
-        inputValue={ inputValue }
-        onChange={ handleChipChange }
-        onSubmit={ handleMenuOpen }
-        ref={ inputBaseRef }
-        { ...otherProps }
+        className={styles.chipInput}
+        renderChipIcon={renderChipIcon}
+        placeholder={placeholder}
+        onFocusChange={onInputFocus}
+        onInputChange={onInputChange}
+        inputValue={inputValue}
+        onChange={handleChipChange}
+        onSubmit={handleMenuOpen}
+        ref={inputBaseRef}
+        {...otherProps}
       />
     </div>
   )
@@ -153,12 +201,14 @@ SmartFilter.propTypes = {
    *  <code>icon</code>      - the icon on the chip that will appear
    *                           if the user choose this line in the menu.
    **/
-  fields: propTypes.arrayOf(propTypes.shape({
-    field: propTypes.string.isRequired,
-    label: propTypes.string.isRequired,
-    type: propTypes.oneOf(['string', 'number', 'date', 'bool']),
-    icon: propTypes.element,
-  })),
+  fields: propTypes.arrayOf(
+    propTypes.shape({
+      field: propTypes.string.isRequired,
+      label: propTypes.string.isRequired,
+      type: propTypes.oneOf(['string', 'number', 'date', 'bool']),
+      icon: propTypes.element,
+    }),
+  ),
   /** Callback when changed. */
   onChange: propTypes.func,
   /** Default input place holder. */

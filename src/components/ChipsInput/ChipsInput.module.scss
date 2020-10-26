@@ -1,4 +1,4 @@
-@import "~@anyvision/style-guide";
+@import '~@anyvision/style-guide';
 
 .ChipsInput {
   position: relative;
@@ -23,7 +23,8 @@
       border-color: av-color(primary);
     }
 
-    &.error, &.error:focus-within {
+    &.error,
+    &.error:focus-within {
       border-color: av-color(error);
     }
 

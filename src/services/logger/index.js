@@ -1,6 +1,5 @@
 const isProduction = process.env.NODE_ENV === 'production'
 
-
 /* eslint-disable no-console */
 const print = type => {
   if (!isProduction) {
@@ -15,5 +14,5 @@ export default {
   log: print('log'),
   error: print('error'),
   warn: print('warn'),
-  debug: print('debug')
+  debug: print('debug'),
 }

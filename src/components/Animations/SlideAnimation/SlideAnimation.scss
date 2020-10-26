@@ -32,17 +32,17 @@
 }
 
 .slide-up {
-  @include slide(100%, Y)
+  @include slide(100%, Y);
 }
 
 .slide-down {
-  @include slide(-100%, Y)
+  @include slide(-100%, Y);
 }
 
 .slide-left {
-  @include slide(100%, X)
+  @include slide(100%, X);
 }
 
 .slide-right {
-  @include slide(-100%, X)
+  @include slide(-100%, X);
 }

@@ -1,6 +1,6 @@
 @import '~@anyvision/style-guide';
 
-.popperContainer{
+.popperContainer {
   @include av-elevation(overlay);
   background-color: av-color(secondary);
   padding: av-space(tiny);
@@ -23,28 +23,28 @@
     }
   }
 
-  &[data-popper-placement*="bottom"] .popperArrow {
+  &[data-popper-placement*='bottom'] .popperArrow {
     top: -0.4em;
     div {
       transform: rotate(135deg);
     }
   }
 
-  &[data-popper-placement*="top"] .popperArrow {
+  &[data-popper-placement*='top'] .popperArrow {
     bottom: -0.4em;
     div {
       transform: rotate(-45deg);
     }
   }
 
-  &[data-popper-placement*="right"] .popperArrow {
+  &[data-popper-placement*='right'] .popperArrow {
     left: -0.4em;
     div {
       transform: rotate(45deg);
     }
   }
 
-  &[data-popper-placement*="left"] .popperArrow {
+  &[data-popper-placement*='left'] .popperArrow {
     right: -0.4em;
     div {
       transform: rotate(-135deg);

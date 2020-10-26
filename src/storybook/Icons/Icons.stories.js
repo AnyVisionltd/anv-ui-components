@@ -10,13 +10,13 @@ export default {
   decorators: [centerDecorator],
   parameters: {
     docs: {
-      disabled: true
+      disabled: true,
     },
     previewTabs: {
       'storybook/docs/panel': {
         hidden: true,
       },
-    }
+    },
   },
 }
 
@@ -25,40 +25,50 @@ export const All = () => {
   const [iconName, setIconName] = useState('IconName')
 
   return (
-    <div className={ styles.container } >
-      <div className={ styles.comment }>* The following icons import from
-        <a href={ 'https://github.com/AnyVisionltd/anv-icons' }>@anyvision/anv-icons</a>.
+    <div className={styles.container}>
+      <div className={styles.comment}>
+        * The following icons import from
+        <a href={'https://github.com/AnyVisionltd/anv-icons'}>
+          @anyvision/anv-icons
+        </a>
+        .
       </div>
-      <div className={ styles.searchAndCodeContainer }>
+      <div className={styles.searchAndCodeContainer}>
         <TextField
-          className={ styles.search }
-          placeholder={ 'Search' }
-          value={ search }
-          onChange={ e => setSearch(e.target.value) }
+          className={styles.search}
+          placeholder={'Search'}
+          value={search}
+          onChange={e => setSearch(e.target.value)}
         />
-        <Source language={ 'js' } code={ `
+        <Source
+          language={'js'}
+          code={`
           //import
 import { ${iconName} } from '@anyvision/anv-icons'
 // use        
 <${iconName}/> 
-        ` } dark/>
+        `}
+          dark
+        />
       </div>
-      <div className={ styles.icons }>
-        {
-          Object.entries(icons).map(([name, Icon]) => {
-            if(name.toLowerCase().includes(search.toLowerCase())){
-              return (
-                <div key={ name } className={ styles.iconCard } onClick={ () => setIconName(name) }>
-                  <Icon className={ styles.icon }/>
-                  <Tooltip overflowOnly arrow content={ name } offset={ 40 }>
-                    <span className={ styles.name }>{ name }</span>
-                  </Tooltip>
-                </div>
-              )
-            }
-            return null
-          })
-        }
+      <div className={styles.icons}>
+        {Object.entries(icons).map(([name, Icon]) => {
+          if (name.toLowerCase().includes(search.toLowerCase())) {
+            return (
+              <div
+                key={name}
+                className={styles.iconCard}
+                onClick={() => setIconName(name)}
+              >
+                <Icon className={styles.icon} />
+                <Tooltip overflowOnly arrow content={name} offset={40}>
+                  <span className={styles.name}>{name}</span>
+                </Tooltip>
+              </div>
+            )
+          }
+          return null
+        })}
       </div>
     </div>
   )

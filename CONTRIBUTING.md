@@ -19,7 +19,7 @@ No software is bug-free. So, if you got an issue, follow these steps:
   - Describe the issue in clear language.
   - Share error logs, screenshots and etc.
 
-```sh
+````sh
 # Download and build this repository:
 git clone https://github.com/AnyVisionltd/anv-ui-components.git
 cd anv-ui-components
@@ -44,7 +44,7 @@ When creating new unit test files, the tests should adhere to a particular folde
 |   +-- [filename].js
 |   +-- [filename].test.js
 |   +-- [filename].stories.js
-```
+````
 
 ## Pull Requests (PRs)
 
@@ -59,7 +59,6 @@ Before you submit a new PR, make sure you run `npm run test` and check storybook
 > NOTE: All development happens in the `development` branch. Please Submit PR's, to `development` branch.
 
 All issues should have a `type` label. `bug`/`feature`/`question`/etc...`.
-
 
 ## Development Guide
 

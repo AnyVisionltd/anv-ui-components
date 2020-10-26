@@ -12,13 +12,14 @@ describe('<Menu />', () => {
     button.remove()
   })
   describe('clicking inside/outside the menu', () => {
-
-    it('click outside the menu should close it by firing \'on close\' event', async () => {
+    it("click outside the menu should close it by firing 'on close' event", async () => {
       const handleClose = jest.fn()
       const { getByRole } = render(
         <>
-          <Button>I will click on this button, it should close the opened menu</Button>
-          <Menu isOpen onClose={ handleClose } anchorElement={ button }>
+          <Button>
+            I will click on this button, it should close the opened menu
+          </Button>
+          <Menu isOpen onClose={handleClose} anchorElement={button}>
             <Menu.Item>Simple menu item</Menu.Item>
           </Menu>
         </>,
@@ -32,29 +33,31 @@ describe('<Menu />', () => {
       const handleClickOutside = jest.fn()
       const { getByText } = render(
         <>
-          <Menu isOpen onClose={ handleClickOutside } anchorElement={ button }>
+          <Menu isOpen onClose={handleClickOutside} anchorElement={button}>
             <Menu.Item>Menu item</Menu.Item>
           </Menu>
         </>,
       )
       const menuItemNode = getByText('Menu item')
-      await act(async() => await fireEvent.mouseUp(menuItemNode))
+      await act(async () => await fireEvent.mouseUp(menuItemNode))
       expect(handleClickOutside).not.toBeCalled()
     })
   })
 
   describe('sub menus', () => {
-    it('inactive sub-menus shouldn\'t be displayed', async () => {
+    it("inactive sub-menus shouldn't be displayed", async () => {
       const { container } = render(
-        <Menu isOpen anchorElement={ button }>
-          <Menu.SubMenu label="Sub menu label">
+        <Menu isOpen anchorElement={button}>
+          <Menu.SubMenu label='Sub menu label'>
             <Menu.Item>Sub menu item</Menu.Item>
           </Menu.SubMenu>
         </Menu>,
       )
 
       await act(async () => {
-        const subMenuInnerHTML = container.querySelector('.subMenuItem > .subMenu')
+        const subMenuInnerHTML = container.querySelector(
+          '.subMenuItem > .subMenu',
+        )
         expect(subMenuInnerHTML).toBeEmpty()
       })
     })
@@ -64,8 +67,8 @@ describe('<Menu />', () => {
       jest.useFakeTimers()
 
       const { getByText } = render(
-        <Menu isOpen anchorElement={ button }>
-          <Menu.SubMenu onOpened={ onOpenedHandler } label="Sub menu label">
+        <Menu isOpen anchorElement={button}>
+          <Menu.SubMenu onOpened={onOpenedHandler} label='Sub menu label'>
             <Menu.Item>Sub menu item</Menu.Item>
           </Menu.SubMenu>
         </Menu>,
@@ -84,8 +87,8 @@ describe('<Menu />', () => {
       jest.useFakeTimers()
 
       const { getByText } = render(
-        <Menu isOpen anchorElement={ button }>
-          <Menu.SubMenu onClosed={ onClosedHandler } label="Sub menu label">
+        <Menu isOpen anchorElement={button}>
+          <Menu.SubMenu onClosed={onClosedHandler} label='Sub menu label'>
             <Menu.Item>Sub menu item</Menu.Item>
           </Menu.SubMenu>
         </Menu>,
@@ -102,11 +105,11 @@ describe('<Menu />', () => {
   })
 
   describe('keydown navigation', () => {
-    it('ESCAPE key should close the menu by firing \'on close\' event', async () => {
+    it("ESCAPE key should close the menu by firing 'on close' event", async () => {
       const handleClose = jest.fn()
       render(
         <>
-          <Menu isOpen onClose={ handleClose } anchorElement={ button }>
+          <Menu isOpen onClose={handleClose} anchorElement={button}>
             <Menu.Item>Simple menu item</Menu.Item>
           </Menu>
         </>,
@@ -116,10 +119,9 @@ describe('<Menu />', () => {
     })
 
     it('Arrow Down key should focus the first > second > anchor > first <Menu.Item/>', async () => {
-
       const { getAllByRole } = render(
         <>
-          <Menu anchorElement={ button } isOpen>
+          <Menu anchorElement={button} isOpen>
             <Menu.Item>Simple menu item</Menu.Item>
             <Menu.Item>Simple menu item</Menu.Item>
           </Menu>
@@ -140,7 +142,7 @@ describe('<Menu />', () => {
     it('Arrow Up key should focus the last <Menu.Item/>', async () => {
       const { getAllByRole } = render(
         <>
-          <Menu anchorElement={ button } isOpen>
+          <Menu anchorElement={button} isOpen>
             <Menu.Item>Simple menu item</Menu.Item>
             <Menu.Item>Simple menu item</Menu.Item>
           </Menu>

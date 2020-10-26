@@ -15,18 +15,20 @@ class LanguageService {
   }
 
   getTranslation(path, replaceObject) {
-    const translation = path.split('.').reduce((acc, part) => acc && acc[part], content[this.lang])
+    const translation = path
+      .split('.')
+      .reduce((acc, part) => acc && acc[part], content[this.lang])
     if (!replaceObject) {
       return translation
     }
     return Object.keys(replaceObject).reduce((acc, key) => {
-      acc = acc.replace(`{{ ${ key } }}`, replaceObject[key] || '')
+      acc = acc.replace(`{{ ${key} }}`, replaceObject[key] || '')
       return acc
     }, translation)
   }
 
   getGeneralTranslation(path) {
-    return this.getTranslation(`general.${ path }`)
+    return this.getTranslation(`general.${path}`)
   }
 }
 

@@ -22,7 +22,7 @@ const Chip = ({
   const focusable = clickable || deletable
 
   useEffect(() => {
-    if(chipRef.current) {
+    if (chipRef.current) {
       if (isFocused) {
         chipRef.current.focus()
       } else {
@@ -31,7 +31,8 @@ const Chip = ({
     }
   }, [isFocused, chipRef])
 
-  const isDeleteKeyboardEvent = event => deletable && ['Backspace', 'Delete'].includes(event.key)
+  const isDeleteKeyboardEvent = event =>
+    deletable && ['Backspace', 'Delete'].includes(event.key)
 
   const handleKeyDown = event => {
     if (event.currentTarget === event.target) {
@@ -65,11 +66,8 @@ const Chip = ({
     onTrailingIconClick(event)
   }
 
-  const renderLeadingIcon = () => leadingIcon && (
-    <div className={ styles.leadingIcon }>
-      { leadingIcon }
-    </div>
-  )
+  const renderLeadingIcon = () =>
+    leadingIcon && <div className={styles.leadingIcon}>{leadingIcon}</div>
 
   const renderTrailingIcon = () => {
     let displayedTrailingIcon = trailingIcon
@@ -88,16 +86,16 @@ const Chip = ({
 
     return (
       <button
-        className={ trailingIconClasses }
-        onClick={ onTrailingIconClickHandler }
-        disabled={ disabled }
+        className={trailingIconClasses}
+        onClick={onTrailingIconClickHandler}
+        disabled={disabled}
       >
-        { displayedTrailingIcon }
+        {displayedTrailingIcon}
       </button>
     )
   }
 
-  const renderLabel = () => <span className={ styles.label }>{ label }</span>
+  const renderLabel = () => <span className={styles.label}>{label}</span>
 
   const classes = classNames(
     styles.chip,
@@ -109,19 +107,19 @@ const Chip = ({
 
   return (
     <div
-      role="button"
-      aria-disabled={ disabled ? true : undefined }
-      tabIndex={ focusable ? 0 : undefined }
-      className={ classes }
-      onClick={ onClickHandler }
-      onKeyDown={ handleKeyDown }
-      ref={ chipRef }
-      data-testid={ 'chip' }
-      { ...otherProps }
+      role='button'
+      aria-disabled={disabled ? true : undefined}
+      tabIndex={focusable ? 0 : undefined}
+      className={classes}
+      onClick={onClickHandler}
+      onKeyDown={handleKeyDown}
+      ref={chipRef}
+      data-testid={'chip'}
+      {...otherProps}
     >
-      { renderLeadingIcon() }
-      { renderLabel() }
-      { renderTrailingIcon() }
+      {renderLeadingIcon()}
+      {renderLabel()}
+      {renderTrailingIcon()}
     </div>
   )
 }

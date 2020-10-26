@@ -1,4 +1,4 @@
-@import "~@anyvision/style-guide";
+@import '~@anyvision/style-guide';
 @import '../../styles/constants';
 
 .header {
@@ -81,10 +81,9 @@
   }
 }
 
-
 .content {
   display: flex;
   flex-direction: column;
-  flex:1;
+  flex: 1;
   position: relative;
 }

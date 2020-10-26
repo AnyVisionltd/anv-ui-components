@@ -5,6 +5,6 @@ module.exports = {
     '@storybook/addon-docs',
     '@storybook/addon-knobs',
     './av-theme-addon/register.js',
-    '@storybook/addon-actions'
+    '@storybook/addon-actions',
   ],
 }

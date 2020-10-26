@@ -4,16 +4,20 @@ import { CSSTransition } from 'react-transition-group'
 import './ScaleAnimation.scss'
 
 const ScaleAnimation = ({
-  children, isOpen, verticalStart, horizontalStart, ...otherProps
+  children,
+  isOpen,
+  verticalStart,
+  horizontalStart,
+  ...otherProps
 }) => (
   <CSSTransition
-    in={ isOpen }
+    in={isOpen}
     unmountOnExit
-    classNames={ `scale-${verticalStart}-${horizontalStart}` }
-    timeout={ 200 }
-    { ...otherProps }
+    classNames={`scale-${verticalStart}-${horizontalStart}`}
+    timeout={200}
+    {...otherProps}
   >
-    { children }
+    {children}
   </CSSTransition>
 )
 

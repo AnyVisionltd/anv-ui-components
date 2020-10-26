@@ -6,18 +6,14 @@ import url from 'rollup-plugin-url'
 import postcss from 'rollup-plugin-postcss'
 import json from 'rollup-plugin-json'
 
-
 export default {
   input: 'src/index.js',
   output: {
     file: 'dist/index.js',
-    format: 'cjs'
+    format: 'cjs',
   },
   // All the used libs needs to be here
-  external: [
-    'react',
-    'react-proptypes'
-  ],
+  external: ['react', 'react-proptypes'],
   plugins: [
     json(),
     resolve(),
@@ -25,16 +21,18 @@ export default {
       extract: true,
       use: ['sass'],
     }),
-    babel({
-    }),
+    babel({}),
     url(),
     svgr({ svgo: false }),
     commonjs({
       include: 'node_modules/**',
       namedExports: {
-        "react-dom": ["createPortal", "findDOMNode", 'unstable_batchedUpdates'],
-        'node_modules/react-is/index.js': ['isValidElementType', 'isContextConsumer']
+        'react-dom': ['createPortal', 'findDOMNode', 'unstable_batchedUpdates'],
+        'node_modules/react-is/index.js': [
+          'isValidElementType',
+          'isContextConsumer',
+        ],
       },
     }),
-  ]
+  ],
 }

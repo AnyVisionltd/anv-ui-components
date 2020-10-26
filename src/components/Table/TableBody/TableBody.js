@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import { InfiniteList } from '../../../index'
 import TableContext from '../TableContext'
 import { TableRow } from './TableRow'
-import { useTableData } from "../UseTableData"
+import { useTableData } from '../UseTableData'
 import styles from './TableBody.module.scss'
 
 const TableBody = ({
@@ -18,11 +18,23 @@ const TableBody = ({
   className,
   ...otherProps
 }) => {
-
   const listRef = useRef()
 
-  const { state, setData, setWithRowActions, setTotalItems,toggleSelectedItem } = useContext(TableContext)
-  const { columns, columnManagement, selection, selfControlled, filters, sort } = state
+  const {
+    state,
+    setData,
+    setWithRowActions,
+    setTotalItems,
+    toggleSelectedItem,
+  } = useContext(TableContext)
+  const {
+    columns,
+    columnManagement,
+    selection,
+    selfControlled,
+    filters,
+    sort,
+  } = state
   const tableData = useTableData()
 
   useEffect(() => {
@@ -41,21 +53,21 @@ const TableBody = ({
     setWithRowActions(!!rowActions)
   }, [setWithRowActions, rowActions])
 
-
-  const renderRow = ((row, index) => {
-    return(
+  const renderRow = (row, index) => {
+    return (
       <TableRow
-        isActive={ !!selection.isActive }
-        isSelected={ isRowSelected(row[selection.selectBy]) }
-        toggleSelectedItem={ toggleSelectedItem }
-        columns={ columns }
-        columnManagement={ columnManagement.isActive }
-        rowActions={ rowActions }
-        row={ row }
-        rowHeight={ rowHeight }
-        onRowClick={ onRowClick }
+        isActive={!!selection.isActive}
+        isSelected={isRowSelected(row[selection.selectBy])}
+        toggleSelectedItem={toggleSelectedItem}
+        columns={columns}
+        columnManagement={columnManagement.isActive}
+        rowActions={rowActions}
+        row={row}
+        rowHeight={rowHeight}
+        onRowClick={onRowClick}
       />
-    ) })
+    )
+  }
   const isRowSelected = selectField => {
     const { isActive, excludeMode, items } = selection
     if (!isActive) {
@@ -65,36 +77,29 @@ const TableBody = ({
     return excludeMode ? !isSelected : isSelected
   }
   const loadingRender = () => {
-    if(!isLoading) {
+    if (!isLoading) {
       return
     }
 
     return Array.from({ length: 5 }, (_, index) => (
-      <TableRow columns={ columns } isLoading={ true } key={ index }/>
+      <TableRow columns={columns} isLoading={true} key={index} />
     ))
   }
 
-  const classes = classNames(
-    styles.tableBody,
-    className,
-  )
+  const classes = classNames(styles.tableBody, className)
 
   return (
-    <div
-      className={ classes }
-	    { ...otherProps }
-    >
+    <div className={classes} {...otherProps}>
       <InfiniteList
-        rowHeight={ rowHeight }
-        totalItems={ +totalItems }
-        rowRender={ renderRow }
-        items={ tableData }
-        customLoader={ loadingRender }
-        isLoading={ isLoading }
-        loadMoreItems={ loadMoreData }
-        ref={ listRef }
-      >
-      </InfiniteList>
+        rowHeight={rowHeight}
+        totalItems={+totalItems}
+        rowRender={renderRow}
+        items={tableData}
+        customLoader={loadingRender}
+        isLoading={isLoading}
+        loadMoreItems={loadMoreData}
+        ref={listRef}
+      ></InfiniteList>
     </div>
   )
 }
@@ -120,18 +125,20 @@ TableBody.propTypes = {
   /** The row height. <code>min-height: 48</code>. */
   rowHeight: propTypes.number,
   /** If pass, render action menu at the end of each row. */
-  rowActions: propTypes.arrayOf(propTypes.shape({
-    /** The label to render inside the <Menu.Items/>. */
-    label: propTypes.string,
-    /** The icon to render before the label. */
-    icon: propTypes.node,
-    /** if pass confirmation dialog will show after click the action. */
-    confirmMessage: propTypes.string,
-    /** The callback when click the <Menu.Items/> */
-    onClick: propTypes.func,
-    /** A callback function that returns a bool value that determines if the specific row action should be rendered */
-    hidden: propTypes.func,
-  })),
+  rowActions: propTypes.arrayOf(
+    propTypes.shape({
+      /** The label to render inside the <Menu.Items/>. */
+      label: propTypes.string,
+      /** The icon to render before the label. */
+      icon: propTypes.node,
+      /** if pass confirmation dialog will show after click the action. */
+      confirmMessage: propTypes.string,
+      /** The callback when click the <Menu.Items/> */
+      onClick: propTypes.func,
+      /** A callback function that returns a bool value that determines if the specific row action should be rendered */
+      hidden: propTypes.func,
+    }),
+  ),
   /** Callback fire when row click. */
   onRowClick: propTypes.func,
   /** For css customization. */

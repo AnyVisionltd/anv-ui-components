@@ -17,15 +17,9 @@ export const Default = () => {
     setIsEnabled(target.checked)
   }
   return (
-    <div className={ styles.marginFlexContainer }>
-      <Switch
-        checked={ isEnabled }
-        onChange={ onChange }
-        id="switch-example"
-      />
-      <label htmlFor="switch-example">
-        Check me out!
-      </label>
+    <div className={styles.marginFlexContainer}>
+      <Switch checked={isEnabled} onChange={onChange} id='switch-example' />
+      <label htmlFor='switch-example'>Check me out!</label>
     </div>
   )
 }
@@ -41,42 +35,40 @@ export const MultipleSwitches = () => {
   }
 
   return (
-    <div className={ styles.marginFlexContainer }>
+    <div className={styles.marginFlexContainer}>
       <Switch
-        checked={ isEnabled1 }
-        onChange={ value => onChange(value, setIsEnabled1) }
-        id="switch-example1"
+        checked={isEnabled1}
+        onChange={value => onChange(value, setIsEnabled1)}
+        id='switch-example1'
       />
       <Switch
-        checked={ isEnabled2 }
-        onChange={ value => onChange(value, setIsEnabled2) }
-        id="switch-example2"
+        checked={isEnabled2}
+        onChange={value => onChange(value, setIsEnabled2)}
+        id='switch-example2'
       />
       <Switch
-        checked={ isEnabled3 }
+        checked={isEnabled3}
         disabled
-        onChange={ value => onChange(value, setIsEnabled3) }
-        id="switch-example3"
+        onChange={value => onChange(value, setIsEnabled3)}
+        id='switch-example3'
       />
       <Switch
-        checked={ isEnabled4 }
+        checked={isEnabled4}
         disabled
-        onChange={ value => onChange(value, setIsEnabled4) }
-        id="switch-example4"
+        onChange={value => onChange(value, setIsEnabled4)}
+        id='switch-example4'
       />
     </div>
   )
 }
 
 export const playground = () => (
-  <div className={ styles.marginFlexContainer }>
+  <div className={styles.marginFlexContainer}>
     <Switch
-      checked={ boolean('checked', false) }
-      disabled={ boolean('disabled', false) }
-      id="switch-playground"
+      checked={boolean('checked', false)}
+      disabled={boolean('disabled', false)}
+      id='switch-playground'
     />
-    <label htmlFor="switch-playground">
-      { text('Label text', 'Hit me!') }
-    </label>
+    <label htmlFor='switch-playground'>{text('Label text', 'Hit me!')}</label>
   </div>
 )

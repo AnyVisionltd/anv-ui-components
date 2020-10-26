@@ -1,20 +1,27 @@
 import React from 'react'
 import { render, fireEvent, act } from '@testing-library/react'
-import SmartFilter from "./SSF"
-import { ReactComponent as ArrowSolidRight } from "../../assets/svg/ArrowSolidRight.svg"
-import { screen } from "@testing-library/dom"
-import keymap from "../../utils/enums/keymap"
+import SmartFilter from './SSF'
+import { ReactComponent as ArrowSolidRight } from '../../assets/svg/ArrowSolidRight.svg'
+import { screen } from '@testing-library/dom'
+import keymap from '../../utils/enums/keymap'
 
 const fields = [
   {
-    field: 'menuItemText', label: 'Menu Item Text', type: 'string',
+    field: 'menuItemText',
+    label: 'Menu Item Text',
+    type: 'string',
   },
   {
-    field: 'menuItemIcon', label: 'Menu Item Icon', type: 'string', icon: <ArrowSolidRight />,
+    field: 'menuItemIcon',
+    label: 'Menu Item Icon',
+    type: 'string',
+    icon: <ArrowSolidRight />,
   },
   {
-    field: 'menuItemNumber', label: 'Menu Item Number', type: 'number',
-  }
+    field: 'menuItemNumber',
+    label: 'Menu Item Number',
+    type: 'number',
+  },
 ]
 
 const changeInput = value => {
@@ -32,7 +39,7 @@ const addFreeTextChip = value => {
 describe('<SSF />', () => {
   describe('auto complete menu', () => {
     it('should open auto complete menu when input focus', async () => {
-      const { getByRole } = render(<SmartFilter fields={ fields } />)
+      const { getByRole } = render(<SmartFilter fields={fields} />)
       const input = getByRole('textbox')
       await act(async () => input.focus())
       const autoComplete = getByRole('menu')
@@ -40,7 +47,7 @@ describe('<SSF />', () => {
     })
 
     it('should open menu when click filter icon', async () => {
-      const { getByRole } = render(<SmartFilter fields={ fields } />)
+      const { getByRole } = render(<SmartFilter fields={fields} />)
       const filterIcon = getByRole('button')
       await act(async () => filterIcon.click())
       const autoComplete = getByRole('menu')
@@ -48,18 +55,24 @@ describe('<SSF />', () => {
     })
 
     it('should show menu items that match typing', async () => {
-      const { getByRole, getAllByRole } = render(<SmartFilter fields={ fields } />)
+      const { getByRole, getAllByRole } = render(
+        <SmartFilter fields={fields} />,
+      )
       const input = getByRole('textbox')
       await act(async () => input.focus())
       let menuItems = getAllByRole('menuitem')
       expect(menuItems).toHaveLength(3)
-      await act(async () => fireEvent.change(input, { target: { value: 'Menu Item Text' } }))
+      await act(async () =>
+        fireEvent.change(input, { target: { value: 'Menu Item Text' } }),
+      )
       menuItems = getAllByRole('menuitem')
       expect(menuItems).toHaveLength(1)
     })
 
     it('should add text from menu to input and validate following inputs', async () => {
-      const { getByRole, getAllByRole } = render(<SmartFilter fields={ fields } />)
+      const { getByRole, getAllByRole } = render(
+        <SmartFilter fields={fields} />,
+      )
       const input = getByRole('textbox')
       await act(async () => input.focus())
       let menuItems = getAllByRole('menuitem')
@@ -92,7 +105,9 @@ describe('<SSF />', () => {
         })
       }
       await act(async () => {
-        const { getAllByRole, getByRole } = render(<SmartFilter fields={ fields } onChange={ await onChange } />)
+        const { getAllByRole, getByRole } = render(
+          <SmartFilter fields={fields} onChange={await onChange} />,
+        )
         addFreeTextChip(mockRegularChip)
         const input = getByRole('textbox')
         let menuItems = getAllByRole('menuitem')
