@@ -5394,6 +5394,29 @@ exports[`Storyshots Icons/Icons All 1`] = `
         >
           <svg
             className="icon"
+            data-name="Briefcase"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+          >
+            <path
+              d="M17.521 7.658h-2.368v-.79A2.368 2.368 0 0012.784 4.5h-1.579a2.368 2.368 0 00-2.368 2.368v.789H6.468A2.368 2.368 0 004.1 10.026v7.105A2.368 2.368 0 006.468 19.5h11.053a2.368 2.368 0 002.368-2.368v-7.106a2.368 2.368 0 00-2.368-2.368zm-7.105-.79a.789.789 0 01.789-.789h1.579a.789.789 0 01.789.789v.789h-3.157zm7.895 10.263a.789.789 0 01-.789.789H6.468a.789.789 0 01-.789-.789v-3.986h2.368v.829a.79.79 0 001.579 0v-.829h4.737v.829a.79.79 0 001.579 0v-.829h2.368zm0-5.526H5.679v-1.579a.789.789 0 01.789-.789h11.053a.789.789 0 01.789.789z"
+            />
+          </svg>
+          <span
+            className="name"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            Briefcase
+          </span>
+        </div>
+        <div
+          className="iconCard"
+          onClick={[Function]}
+        >
+          <svg
+            className="icon"
             height="1em"
             viewBox="0 0 24 24"
             width="1em"
@@ -8893,6 +8916,29 @@ exports[`Storyshots Icons/Icons All 1`] = `
         >
           <svg
             className="icon"
+            data-name="Mask medical"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+          >
+            <path
+              d="M18.6 15.82a3.333 3.333 0 100-6.664l-.267-.001A1.336 1.336 0 0017 7.822H7a1.335 1.335 0 00-1.332 1.332l-.267.001a3.333 3.333 0 000 6.667h.267A1.337 1.337 0 007 17.155H17a1.339 1.339 0 001.334-1.333zm-11.6-4h10v1.334H7zm10-2.665v1.334l-10-.001V9.154zM5.4 14.487a2 2 0 010-4l.267.002v3.998zM7 15.822V14.49h10v1.334zm11.599-1.333h-.266v-4h.266a2 2 0 010 4z"
+            />
+          </svg>
+          <span
+            className="name"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            MaskMedical
+          </span>
+        </div>
+        <div
+          className="iconCard"
+          onClick={[Function]}
+        >
+          <svg
+            className="icon"
             height="1em"
             viewBox="0 0 24 24"
             width="1em"
@@ -10754,6 +10800,29 @@ exports[`Storyshots Icons/Icons All 1`] = `
         >
           <svg
             className="icon"
+            data-name="user arrows"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+          >
+            <path
+              d="M19.177 15.1a2.7 2.7 0 10-4.08 0 3.855 3.855 0 00-1.823 3.267.773.773 0 001.545 0 2.318 2.318 0 014.636 0 .773.773 0 001.545 0 3.855 3.855 0 00-1.823-3.267zm-2.04-.6a1.159 1.159 0 111.163-1.159 1.159 1.159 0 01-1.164 1.159zm-8.66-5.635l1.545 1.545a.773.773 0 101.093-1.093l-.226-.226h3.224l-.226.226a.773.773 0 101.091 1.093l1.545-1.545a.775.775 0 000-1.093l-1.545-1.546a.773.773 0 10-1.093 1.093l.226.226h-3.223l.226-.226a.773.773 0 10-1.092-1.093L8.477 7.772a.775.775 0 000 1.093zM9.9 15.1a2.7 2.7 0 10-4.745-1.755 2.68 2.68 0 00.668 1.755A3.855 3.855 0 004 18.364a.773.773 0 001.545 0 2.318 2.318 0 014.636 0 .773.773 0 101.545 0A3.855 3.855 0 009.9 15.1zm-2.04-.6a1.159 1.159 0 111.159-1.159A1.159 1.159 0 017.864 14.5z"
+            />
+          </svg>
+          <span
+            className="name"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            UserArrows
+          </span>
+        </div>
+        <div
+          className="iconCard"
+          onClick={[Function]}
+        >
+          <svg
+            className="icon"
             data-name="User Avatar"
             height="1em"
             viewBox="0 0 24 24"
@@ -11195,6 +11264,30 @@ exports[`Storyshots Icons/Icons All 1`] = `
             onMouseLeave={[Function]}
           >
             UsersPeople
+          </span>
+        </div>
+        <div
+          className="iconCard"
+          onClick={[Function]}
+        >
+          <svg
+            className="icon"
+            data-name="Users times"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+          >
+            <path
+              d="M16.77 17.903a5.1 5.1 0 00-2.91-4.647l-.1-.049-.283-.19a.73.73 0 01.033-1.237 2.181 2.181 0 00-1.092-4.072.728.728 0 010-1.455 3.641 3.641 0 012.725 6.06 6.552 6.552 0 013.084 5.592.73.73 0 01-1.459 0zm-4.35 0a4.368 4.368 0 10-8.736 0 .73.73 0 01-1.459 0 5.832 5.832 0 013.426-5.3 3.574 3.574 0 01-1.238-2.709 3.641 3.641 0 017.281 0 3.574 3.574 0 01-1.238 2.709 5.838 5.838 0 013.426 5.3.73.73 0 01-1.461 0zM5.867 9.889a2.186 2.186 0 102.188-2.183A2.188 2.188 0 005.868 9.89zm13.367 3.3v-.792h-.793a.8.8 0 110-1.591h.793v-.793a.795.795 0 011.59 0v.793h.793a.8.8 0 010 1.591h-.793v.792a.795.795 0 01-1.59 0z"
+              data-name="Union 93"
+            />
+          </svg>
+          <span
+            className="name"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            UsersTimes
           </span>
         </div>
         <div
