@@ -68,7 +68,7 @@ const BulkAction = ({ icon, onClick, subMenu, confirmMessage }) => {
           isOpen={!!anchorElement}
           onClose={handleMenuClose}
           anchorElement={anchorElement}
-          preferOpenDirection='bottom-end'
+          preferOpenDirection='top-end'
         >
           {subMenu.map(({ onClick, icon, label, confirmMessage }) => (
             <Menu.Item
