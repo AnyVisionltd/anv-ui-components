@@ -45,6 +45,7 @@ const TextField = React.forwardRef((props, ref) => {
   const [active, setActive] = useState(false)
   const [anchorElement, setAnchorElement] = useState(null)
   const textFieldRef = useRef({})
+  const cursorRef = useRef({})
   const inputRef = useCombinedRefs(useRef({}), ref)
 
   useClickOutsideListener(() => {
@@ -88,12 +89,23 @@ const TextField = React.forwardRef((props, ref) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [otherProps.value])
 
+  useEffect(() => {
+    const { caretStart, caretEnd } = cursorRef.current
+    if (type !== types.options && caretStart && inputRef && inputRef.current) {
+      inputRef.current.setSelectionRange(caretStart, caretEnd)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value])
+
   const onInputChange = e => {
     e.persist()
     const {
       target: { value },
     } = e
     setEmpty(!value)
+    const caretStart = e.target.selectionStart
+    const caretEnd = e.target.selectionEnd
+    cursorRef.current = { caretStart, caretEnd }
     onChange(e)
   }
 
