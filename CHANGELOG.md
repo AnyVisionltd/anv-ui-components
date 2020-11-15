@@ -6,6 +6,10 @@
 - Positioning of the menu dropdown by using popper JS
 - Fixed cursor jumping to the end when using controlled TextField
 
+### Added
+
+- Add tooltip show prop
+
 ## 1.0.0 - 06-09-2020
 
 ### Breaking Changes :boom:

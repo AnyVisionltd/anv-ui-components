@@ -6,6 +6,7 @@ import { Portal } from '../../index'
 import styles from './Tooltip.module.scss'
 
 const Tooltip = ({
+  show,
   content,
   placement,
   enterDelay,
@@ -63,7 +64,11 @@ const Tooltip = ({
     return anchorRef && anchorRef.scrollWidth > anchorRef.clientWidth
   }
 
-  const showTooltip = overflowOnly ? isOverflown() && isOpen : isOpen
+  const showTooltip = show
+    ? overflowOnly
+      ? isOverflown() && isOpen
+      : isOpen
+    : false
 
   return (
     <>
@@ -101,6 +106,7 @@ const Tooltip = ({
 }
 
 Tooltip.defaultProps = {
+  show: true,
   placement: 'top',
   enterDelay: 0,
   leaveDelay: 0,
@@ -111,6 +117,8 @@ Tooltip.defaultProps = {
 Tooltip.propTypes = {
   /** The tooltip content */
   content: propTypes.any.isRequired,
+  /** Show or hide tooltip */
+  show: propTypes.bool,
   /** Placement of the tooltip from the anchor element*/
   placement: propTypes.oneOf(['top', 'bottom', 'left', 'right']),
   /** After how much time the tooltip should appear after hovering
