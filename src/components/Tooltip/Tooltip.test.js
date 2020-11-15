@@ -22,6 +22,20 @@ describe('<Tooltip/>', () => {
       expect(queryByText('tooltip!')).toBeVisible()
     })
 
+    it('should not display the tooltip when hovering over anchor element', async () => {
+      const { getByText, queryByText } = render(
+        <Tooltip show={false} content={'tooltip!'}>
+          <button>button</button>
+        </Tooltip>,
+      )
+
+      await act(async () => {
+        fireEvent.mouseEnter(getByText('button'))
+        await jest.advanceTimersByTime(0) // wait for enter timeout
+      })
+      expect(queryByText('tooltip!')).toBeNull()
+    })
+
     it('should hide the tooltip when leaving anchor element', async () => {
       const { getByText, queryByText } = render(
         <Tooltip content={'tooltip!'}>
