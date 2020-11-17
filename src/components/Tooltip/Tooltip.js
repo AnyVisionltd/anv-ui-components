@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { usePopper } from 'react-popper'
@@ -33,20 +33,28 @@ const Tooltip = ({
     ],
   })
 
+  // Temp solution for: https://github.com/facebook/react/issues/10396
+  const closeTooltip = useCallback(() => {
+    clearTimeout(enterTimer.current)
+    clearTimeout(leaveTimer.current)
+    leaveTimer.current = setTimeout(() => {
+      setIsOpen(false)
+    }, leaveDelay)
+  }, [leaveDelay])
+
+  useEffect(() => {
+    anchorRef && anchorRef.addEventListener('mouseleave', closeTooltip)
+    return () => {
+      anchorRef && anchorRef.removeEventListener('mouseleave', closeTooltip)
+    }
+  }, [anchorRef, closeTooltip])
+
   const openTooltip = () => {
     clearTimeout(enterTimer.current)
     clearTimeout(leaveTimer.current)
     enterTimer.current = setTimeout(() => {
       setIsOpen(true)
     }, enterDelay)
-  }
-
-  const closeTooltip = () => {
-    clearTimeout(enterTimer.current)
-    clearTimeout(leaveTimer.current)
-    leaveTimer.current = setTimeout(() => {
-      setIsOpen(false)
-    }, leaveDelay)
   }
 
   const handleMouseEnterTooltip = () => {
@@ -74,7 +82,6 @@ const Tooltip = ({
     <>
       {React.cloneElement(children, {
         onMouseEnter: openTooltip,
-        onMouseLeave: closeTooltip,
         ref: setAnchorRef,
       })}
 
@@ -95,7 +102,7 @@ const Tooltip = ({
                 style={popperStyles.arrow}
                 className={styles.popperArrow}
               >
-                <div></div>
+                <div />
               </div>
             )}
           </div>

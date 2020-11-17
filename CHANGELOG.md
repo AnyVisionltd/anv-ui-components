@@ -5,6 +5,11 @@
 - TextField empty state bug
 - Positioning of the menu dropdown by using popper JS
 - Fixed cursor jumping to the end when using controlled TextField
+- Tooltip child disabled bug fix
+
+### Changed
+
+- Update react to 17.0.1
 
 ### Added
 
