@@ -45,8 +45,9 @@ jobs:
       run: |
         python -m pip install --upgrade pip
 
-    - run: echo ::set-env name=REPOSITORY_NAME::$(echo "$GITHUB_REPOSITORY" | awk -F / '{print $2}' | sed -e "s/:refs//")
+    - name: set the repo name
+      run: echo "REPOSITORY_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')" >> $GITHUB_ENV 
       shell: bash
 
     - name: run the whitesource agent
-      run: ./wss_agent.sh -apiKey ${{secrets.WS_API_KEY}} -userKey ${{secrets.WS_USER_TOKEN}} -product ${{secrets.WS_PROD_NAME}} -productToken ${{secrets.WS_PROD_TOKEN}} -project $REPOSITORY_NAME -c wss-unified-agent-cloud-v2.config -d .
+      run: ./wss_agent.sh -apiKey ${{secrets.WS_API_KEY}} -userKey ${{secrets.WS_USER_TOKEN}} -product ${{secrets.WS_PROD_NAME}} -productToken ${{secrets.WS_PROD_TOKEN}} -project ${{env.REPOSITORY_NAME}} -c wss-unified-agent-cloud-v2.config -d .
