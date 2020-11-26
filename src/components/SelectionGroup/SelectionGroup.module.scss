@@ -1,0 +1,21 @@
+@import '~@anyvision/style-guide';
+
+.selectionGroup {
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  padding: av-space(micro);
+}
+
+.sharp,
+.round {
+  background-color: av-color(primary, av-opacity(divider));
+}
+
+.sharp {
+  border-radius: av-radius(tidy);
+}
+
+.round {
+  border-radius: av-radius(curvy);
+}

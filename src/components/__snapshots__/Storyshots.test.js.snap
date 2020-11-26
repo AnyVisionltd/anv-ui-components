@@ -2789,6 +2789,445 @@ exports[`Storyshots Components/SSF Without Menu Fields 1`] = `
 </div>
 `;
 
+exports[`Storyshots Components/SelectionGroup Controlled 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="selectionGroup sharp"
+    >
+      <div
+        className="leastOneActive selectionGroupItem sharp active"
+        onClick={[Function]}
+      >
+        <div>
+          One
+        </div>
+      </div>
+      <div
+        className="leastOneActive selectionGroupItem sharp"
+        onClick={[Function]}
+      >
+        <div>
+          Two
+        </div>
+      </div>
+      <div
+        className="leastOneActive selectionGroupItem sharp"
+        onClick={[Function]}
+      >
+        <div>
+          Three
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/SelectionGroup Default 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="selectionGroup sharp"
+    >
+      <div
+        className="selectionGroupItem sharp"
+        onClick={[Function]}
+      >
+        <div>
+          One
+        </div>
+      </div>
+      <div
+        className="leastOneActive selectionGroupItem sharp active"
+        onClick={[Function]}
+      >
+        <div>
+          Two
+        </div>
+      </div>
+      <div
+        className="leastOneActive selectionGroupItem sharp"
+        onClick={[Function]}
+      >
+        <div>
+          Three
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/SelectionGroup Disabled 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      style={
+        Object {
+          "display": "grid",
+          "gridGap": "8px",
+        }
+      }
+    >
+      <div
+        className="selectionGroup sharp"
+      >
+        <div
+          className="leastOneActive selectionGroupItem sharp active"
+          onClick={[Function]}
+        >
+          <div>
+            One
+          </div>
+        </div>
+        <div
+          className="leastOneActive selectionGroupItem sharp disabled"
+          onClick={[Function]}
+        >
+          <div>
+            Two
+          </div>
+        </div>
+        <div
+          className="leastOneActive selectionGroupItem sharp"
+          onClick={[Function]}
+        >
+          <div>
+            Three
+          </div>
+        </div>
+      </div>
+      <div
+        className="selectionGroup sharp"
+      >
+        <div
+          className="leastOneActive selectionGroupItem sharp active disabled"
+          onClick={[Function]}
+        >
+          <div>
+            One
+          </div>
+        </div>
+        <div
+          className="leastOneActive selectionGroupItem sharp disabled"
+          onClick={[Function]}
+        >
+          <div>
+            Two
+          </div>
+        </div>
+        <div
+          className="leastOneActive selectionGroupItem sharp disabled"
+          onClick={[Function]}
+        >
+          <div>
+            Three
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/SelectionGroup Playground 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="selectionGroup sharp"
+    >
+      <div
+        className="leastOneActive selectionGroupItem sharp active"
+        onClick={[Function]}
+      >
+        <div>
+          One
+        </div>
+      </div>
+      <div
+        className="leastOneActive selectionGroupItem sharp"
+        onClick={[Function]}
+      >
+        <div>
+          Two
+        </div>
+      </div>
+      <div
+        className="leastOneActive selectionGroupItem sharp"
+        onClick={[Function]}
+      >
+        <div>
+          Three
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/SelectionGroup Variants 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      style={
+        Object {
+          "display": "grid",
+          "gridGap": "8px",
+        }
+      }
+    >
+      <div
+        className="selectionGroup sharp"
+      >
+        <div
+          className="leastOneActive selectionGroupItem sharp active"
+          onClick={[Function]}
+        >
+          <div>
+            One
+          </div>
+        </div>
+        <div
+          className="leastOneActive selectionGroupItem sharp"
+          onClick={[Function]}
+        >
+          <div>
+            Two
+          </div>
+        </div>
+        <div
+          className="leastOneActive selectionGroupItem sharp"
+          onClick={[Function]}
+        >
+          <div>
+            Three
+          </div>
+        </div>
+      </div>
+      <div
+        className="selectionGroup round"
+      >
+        <div
+          className="leastOneActive selectionGroupItem round active"
+          onClick={[Function]}
+        >
+          <div>
+            One
+          </div>
+        </div>
+        <div
+          className="leastOneActive selectionGroupItem round"
+          onClick={[Function]}
+        >
+          <div>
+            Two
+          </div>
+        </div>
+        <div
+          className="leastOneActive selectionGroupItem round"
+          onClick={[Function]}
+        >
+          <div>
+            Three
+          </div>
+        </div>
+      </div>
+      <div
+        className="selectionGroup ghost"
+      >
+        <div
+          className="selectionGroupItem ghost active"
+          onClick={[Function]}
+        >
+          <div>
+            One
+          </div>
+        </div>
+        <div
+          className="selectionGroupItem ghost"
+          onClick={[Function]}
+        >
+          <div>
+            Two
+          </div>
+        </div>
+        <div
+          className="selectionGroupItem ghost"
+          onClick={[Function]}
+        >
+          <div>
+            Three
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/SelectionGroup With Icon 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      style={
+        Object {
+          "display": "grid",
+          "gridGap": "8px",
+        }
+      }
+    >
+      <div
+        className="selectionGroup sharp"
+      >
+        <div
+          className="leastOneActive selectionGroupItem sharp active"
+          onClick={[Function]}
+        >
+          <div>
+            <span
+              className="leadingIcon"
+            >
+              <svg
+                data-name="Sun / Brightens"
+                height="1em"
+                viewBox="0 0 24 24"
+                width="1em"
+              >
+                <path
+                  d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
+                />
+              </svg>
+            </span>
+            One
+          </div>
+        </div>
+        <div
+          className="leastOneActive selectionGroupItem sharp"
+          onClick={[Function]}
+        >
+          <div>
+            <span
+              className="leadingIcon"
+            >
+              <svg
+                data-name="Sun / Brightens"
+                height="1em"
+                viewBox="0 0 24 24"
+                width="1em"
+              >
+                <path
+                  d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
+                />
+              </svg>
+            </span>
+            Two
+          </div>
+        </div>
+        <div
+          className="leastOneActive selectionGroupItem sharp"
+          onClick={[Function]}
+        >
+          <div>
+            <span
+              className="leadingIcon"
+            >
+              <svg
+                data-name="Sun / Brightens"
+                height="1em"
+                viewBox="0 0 24 24"
+                width="1em"
+              >
+                <path
+                  d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
+                />
+              </svg>
+            </span>
+            Three
+          </div>
+        </div>
+      </div>
+      <div
+        style={
+          Object {
+            "display": "flex",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <div
+          className="selectionGroup sharp"
+        >
+          <div
+            className="leastOneActive selectionGroupItem sharp active"
+            onClick={[Function]}
+          >
+            <div>
+              <svg
+                data-name="Sun / Brightens"
+                height="1em"
+                viewBox="0 0 24 24"
+                width="1em"
+              >
+                <path
+                  d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            className="leastOneActive selectionGroupItem sharp"
+            onClick={[Function]}
+          >
+            <div>
+              <svg
+                data-name="Sun / Brightens"
+                height="1em"
+                viewBox="0 0 24 24"
+                width="1em"
+              >
+                <path
+                  d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            className="leastOneActive selectionGroupItem sharp"
+            onClick={[Function]}
+          >
+            <div>
+              <svg
+                data-name="Sun / Brightens"
+                height="1em"
+                viewBox="0 0 24 24"
+                width="1em"
+              >
+                <path
+                  d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Components/SkeletonLoader Default 1`] = `
 <div>
   <div

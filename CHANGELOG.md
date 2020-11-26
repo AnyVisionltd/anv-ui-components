@@ -14,6 +14,7 @@
 ### Added
 
 - Add tooltip show prop
+- Add <SelectionGroup> component
 
 ## 1.0.0 - 06-09-2020
 

@@ -18,5 +18,6 @@ export { TextField } from './components/TextField'
 export { DialogWizard } from './components/DialogWizard'
 export { Tooltip } from './components/Tooltip'
 export { Snackbar } from './components/Snackbar'
+export { SelectionGroup } from './components/SelectionGroup'
 
 export { default as mockAutoSizer } from './testUtils/mockAutoSizer'

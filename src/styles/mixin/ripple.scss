@@ -28,7 +28,7 @@ $ripple-transition-duration: 0.3s;
     &::after {
       background: radial-gradient(circle at center, $color 1%, transparent 1%)
         center/10000% 10000% no-repeat;
-      transition: opacity 1s ease-in-out,
+      transition: opacity 0.8s ease-in-out,
         background-size $ripple-transition-duration ease-in-out;
     }
 
