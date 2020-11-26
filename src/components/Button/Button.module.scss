@@ -26,6 +26,7 @@
 .leadingIcon {
   display: flex;
   margin-left: calc(#{av-space(micro)} * -1);
+  margin-right: av-space(micro);
 }
 
 .small {

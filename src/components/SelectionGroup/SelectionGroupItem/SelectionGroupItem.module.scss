@@ -1,0 +1,106 @@
+@import '~@anyvision/style-guide';
+@import '../../../styles/mixin/ripple';
+
+.selectionGroupItem {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  transition: color 0.3s, fill 0.3s, background-color 0.3s;
+  cursor: pointer;
+  color: av-color(content, av-opacity(medium));
+  fill: av-color(content, av-opacity(medium));
+  @extend %av-body2;
+
+  &.active {
+    font-weight: av-font-weight(bold);
+    color: av-color(primary);
+    fill: av-color(primary);
+
+    &.disabled {
+      color: av-color(primary, av-opacity(disabled));
+      fill: av-color(primary, av-opacity(disabled));
+    }
+  }
+
+  &:hover {
+    &:not(.active) {
+      background-color: av-color(primary, av-opacity(divider));
+    }
+  }
+
+  &:active {
+    &:not(.active) {
+      background-color: av-color(primary, av-opacity(disabled));
+    }
+  }
+
+  &.disabled {
+    pointer-events: none;
+    color: av-color(content, av-opacity(disabled));
+    fill: av-color(content, av-opacity(disabled));
+  }
+
+  > div {
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    @extend %av-body2;
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .leadingIcon {
+    display: flex;
+    align-items: center;
+    margin-left: calc(#{av-space(micro)} * -1);
+    margin-right: av-space(micro);
+  }
+}
+
+.sharp {
+  border-radius: av-radius(tidy);
+  &::before {
+    border-radius: av-radius(tidy);
+  }
+}
+
+.round {
+  border-radius: av-radius(curvy);
+  &::before {
+    border-radius: av-radius(curvy);
+  }
+}
+
+.ghost {
+  @include av-ripple(av-color(primary));
+  padding: 0 av-space(tiny);
+  border-radius: av-radius(tidy);
+}
+
+.sharp,
+.round {
+  position: relative;
+  padding: 0 av-space();
+
+  &.leastOneActive:last-child::before {
+    pointer-events: none;
+    transition: 0.3s all;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    @include av-elevation(raised);
+  }
+}
+
+@for $i from 1 through 20 {
+  .active:not(.ghost):nth-last-child(#{$i + 1}) ~ ::before {
+    transform: translateX(($i * -100%));
+  }
+}
