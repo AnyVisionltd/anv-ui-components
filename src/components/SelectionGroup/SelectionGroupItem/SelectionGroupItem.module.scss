@@ -14,6 +14,7 @@
   @extend %av-body2;
 
   &.active {
+    pointer-events: none;
     font-weight: av-font-weight(bold);
     color: av-color(primary);
     fill: av-color(primary);

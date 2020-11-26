@@ -25,7 +25,11 @@ const SelectionGroupItem = ({
   )
 
   return (
-    <div className={classes} {...otherProps} onClick={() => onChange(value)}>
+    <div
+      className={classes}
+      {...otherProps}
+      onClick={() => !disabled && onChange(value)}
+    >
       <div>
         {leadingIcon && (
           <span className={styles.leadingIcon}>{leadingIcon}</span>

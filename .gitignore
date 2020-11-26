@@ -11,3 +11,4 @@ npm-debug.log*
 /build
 .vscode/
 /dist
+/storybook-static
