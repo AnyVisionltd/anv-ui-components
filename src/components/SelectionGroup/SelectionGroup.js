@@ -28,7 +28,7 @@ const SelectionGroup = ({
 
   const onSelectionChange = newValue => {
     !value && setSelectedValue(newValue)
-    onChange(newValue)
+    selectedValue !== newValue && onChange(newValue)
   }
 
   const childrenWithProps = () => {
