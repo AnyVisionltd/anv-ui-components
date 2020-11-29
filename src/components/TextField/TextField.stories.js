@@ -8,7 +8,7 @@ import { boolean, select } from '@storybook/addon-knobs'
 import { Menu } from '../Menu'
 
 export default {
-  title: 'Components/TextField',
+  title: 'User Inputs/TextField',
   component: TextField.type,
   decorators: [centerDecorator],
 }

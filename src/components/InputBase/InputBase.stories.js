@@ -7,7 +7,7 @@ import { centerDecorator } from '../../utils/storybook/decorators'
 import styles from '../../storybook/index.module.scss'
 
 export default {
-  title: 'Components/InputBase',
+  title: 'User Inputs/InputBase',
   component: InputBase.type,
   decorators: [centerDecorator],
 }

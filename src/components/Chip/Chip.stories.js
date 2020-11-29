@@ -7,7 +7,7 @@ import { centerDecorator } from '../../utils/storybook/decorators'
 import styles from '../../storybook/index.module.scss'
 
 export default {
-  title: 'Components/Chip',
+  title: 'Content/Chip',
   component: Chip,
   decorators: [centerDecorator],
 }

@@ -7,7 +7,7 @@ import { ReactComponent as ArrowSolidRight } from '../../assets/svg/ArrowSolidRi
 import styles from '../../storybook/index.module.scss'
 
 export default {
-  title: 'Components/SSF',
+  title: 'User Inputs/SSF',
   component: SmartFilter,
   decorators: [centerDecorator],
 }
