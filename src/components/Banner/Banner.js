@@ -6,7 +6,6 @@ import { ErrorCircleOutlined } from '@anyvision/anv-icons'
 import { Warning } from '@anyvision/anv-icons'
 import { CheckCircleOutlined } from '@anyvision/anv-icons'
 import { MailShiled } from '@anyvision/anv-icons'
-
 import styles from './Banner.module.scss'
 
 const iconsMapper = {
