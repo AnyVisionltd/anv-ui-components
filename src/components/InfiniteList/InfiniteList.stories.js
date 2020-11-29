@@ -3,7 +3,7 @@ import { InfiniteList, Button } from '../../index'
 import { centerDecorator } from '../../utils/storybook/decorators'
 
 export default {
-  title: 'Components/InfiniteList',
+  title: 'Content/Lists/InfiniteList',
   component: InfiniteList,
   decorators: [centerDecorator],
 }

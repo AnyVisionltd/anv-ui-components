@@ -6,7 +6,7 @@ import { Button } from '../../index'
 import Banner from './Banner'
 
 export default {
-  title: 'Components/Banner',
+  title: 'Content/Banner',
   component: Banner,
   decorators: [centerDecorator],
 }

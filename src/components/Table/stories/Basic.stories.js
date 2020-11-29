@@ -7,7 +7,7 @@ import { ReactComponent as EyeEnabledIcon } from '../../../assets/svg/EyeEnabled
 import { ReactComponent as EyeDisabledIcon } from '../../../assets/svg/EyeDisabled.svg'
 
 export default {
-  title: 'Components/Table',
+  title: 'Content/Table',
   component: Table,
   subcomponents: {
     TableHeader: Table.Header,

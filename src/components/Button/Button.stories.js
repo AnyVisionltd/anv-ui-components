@@ -6,7 +6,7 @@ import styles from '../../storybook/index.module.scss'
 import { centerDecorator } from '../../utils/storybook/decorators'
 
 export default {
-  title: 'Components/Button',
+  title: 'User Inputs/Buttons/Button',
   component: Button,
   decorators: [centerDecorator],
 }

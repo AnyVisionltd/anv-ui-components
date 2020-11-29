@@ -5,7 +5,7 @@ import { ReactComponent as SunIcon } from '../../../assets/svg/Sun.svg'
 import { action } from '@storybook/addon-actions'
 
 export default {
-  title: 'Components/Table',
+  title: 'Content/Table',
   component: Table,
   subcomponents: {
     TableHeader: Table.Header,

@@ -4,7 +4,7 @@ import avTheme from './av-theme-addon/decorator'
 addParameters({
   options: {
     storySort: {
-      order: ['Style', 'Components', 'Icons'],
+      order: ['Style', 'Icons', 'User Inputs', 'Content', 'User Feedback'],
     },
   },
 })

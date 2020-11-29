@@ -5,7 +5,7 @@ import { centerDecorator } from '../../utils/storybook/decorators'
 import { boolean, text } from '@storybook/addon-knobs'
 
 export default {
-  title: 'Components/Radio',
+  title: 'User Inputs/Radio',
   component: Radio,
   decorators: [centerDecorator],
 }

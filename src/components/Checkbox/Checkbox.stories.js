@@ -5,7 +5,7 @@ import { centerDecorator } from '../../utils/storybook/decorators'
 import styles from '../../storybook/index.module.scss'
 
 export default {
-  title: 'Components/Checkbox',
+  title: 'User Inputs/Checkbox',
   component: Checkbox,
   decorators: [centerDecorator],
 }

@@ -4,7 +4,7 @@ import { Checkbox, Button } from '../../index'
 import { centerDecorator } from '../../utils/storybook/decorators'
 
 export default {
-  title: 'Components/List',
+  title: 'Content/Lists/List',
   component: List,
   decorators: [centerDecorator],
   subcomponents: { Item: List.Item },
