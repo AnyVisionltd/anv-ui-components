@@ -4,7 +4,7 @@ import { centerDecorator } from '../../utils/storybook/decorators'
 import { Button } from '../Button'
 
 export default {
-  title: 'Components/Tooltip',
+  title: 'Content/Tooltip',
   component: Tooltip,
   decorators: [centerDecorator],
 }

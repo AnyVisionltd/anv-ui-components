@@ -4,7 +4,7 @@ import { centerDecorator } from '../../utils/storybook/decorators'
 import styles from '../../storybook/index.module.scss'
 
 export default {
-  title: 'Components/SkeletonLoader',
+  title: 'User Feedback/SkeletonLoader',
   component: SkeletonLoader,
   decorators: [centerDecorator],
 }

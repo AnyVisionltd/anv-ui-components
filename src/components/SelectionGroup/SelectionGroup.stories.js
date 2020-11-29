@@ -6,7 +6,7 @@ import { centerDecorator } from '../../utils/storybook/decorators'
 import { boolean, select } from '@storybook/addon-knobs'
 
 export default {
-  title: 'Components/SelectionGroup',
+  title: 'User Inputs/SelectionGroup',
   component: SelectionGroup,
   decorators: [centerDecorator],
   subcomponents: {

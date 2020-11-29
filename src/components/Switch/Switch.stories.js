@@ -5,7 +5,7 @@ import styles from '../../storybook/index.module.scss'
 import { centerDecorator } from '../../utils/storybook/decorators'
 
 export default {
-  title: 'Components/Switch',
+  title: 'User Inputs/Switch',
   component: Switch,
   decorators: [centerDecorator],
 }

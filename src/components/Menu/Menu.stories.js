@@ -6,7 +6,7 @@ import { Switch } from '../Switch'
 import styles from '../../storybook/index.module.scss'
 
 export default {
-  title: 'Components/Menu',
+  title: 'User Inputs/Menu',
   component: Menu,
   decorators: [centerDecorator],
   subcomponents: { Item: Menu.Item },

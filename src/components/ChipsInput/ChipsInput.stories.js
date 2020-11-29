@@ -15,7 +15,7 @@ const mockInitialData = [
 ]
 
 export default {
-  title: 'Components/ChipsInput',
+  title: 'User Inputs/ChipsInput',
   component: ChipsInput,
   decorators: [centerDecorator],
 }
