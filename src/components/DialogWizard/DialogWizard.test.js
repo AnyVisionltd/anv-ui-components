@@ -15,7 +15,7 @@ describe('<DialogWizard />', () => {
     expect(queryByTestId('test-child')).not.toEqual(null)
   })
 
-  it('should render children Wizard', () => {
+  it('should render children into Wizard', () => {
     const steps = [<div />]
     const { getByText } = render(
       <DialogWizard isOpen steps={steps}>
