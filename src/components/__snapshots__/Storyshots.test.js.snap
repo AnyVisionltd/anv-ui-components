@@ -167,6 +167,118 @@ exports[`Storyshots Animations/Slide Basic 1`] = `
 </div>
 `;
 
+exports[`Storyshots Content/Banner Default 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <button
+      className="button medium fill"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Click to toggle Banner
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Content/Banner Play Ground 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="banner warning"
+    >
+      <span
+        className="leadingIcon"
+      >
+        <svg
+          height="1em"
+          viewBox="0 0 24 24"
+          width="1em"
+        >
+          <path
+            d="M12.001 15.016a.747.747 0 10.747.747.747.747 0 00-.747-.747zm7.975 1.1L13.959 5.65a2.242 2.242 0 00-3.917 0L4.063 16.114A2.242 2.242 0 005.976 19.5h12.049a2.242 2.242 0 001.951-3.386zm-1.293 1.493a.747.747 0 01-.658.381H5.976a.755.755 0 01-.658-1.129l5.98-10.463a.747.747 0 011.33 0l6.017 10.464a.747.747 0 01.037.762zm-6.682-8.573a.747.747 0 00-.747.747v2.986a.748.748 0 001.495 0V9.784a.747.747 0 00-.748-.748z"
+            data-name="Warning"
+          />
+        </svg>
+      </span>
+      <div
+        className="mainContent"
+      >
+        Banner Text
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Content/Banner With Leading Icon 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="banner warning"
+    >
+      <span
+        className="leadingIcon"
+      >
+        <svg />
+      </span>
+      <div
+        className="mainContent"
+      >
+        Banner Text
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Content/Banner With Trailing Component 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="banner warning"
+    >
+      <span
+        className="leadingIcon"
+      >
+        <svg
+          height="1em"
+          viewBox="0 0 24 24"
+          width="1em"
+        >
+          <path
+            d="M12.001 15.016a.747.747 0 10.747.747.747.747 0 00-.747-.747zm7.975 1.1L13.959 5.65a2.242 2.242 0 00-3.917 0L4.063 16.114A2.242 2.242 0 005.976 19.5h12.049a2.242 2.242 0 001.951-3.386zm-1.293 1.493a.747.747 0 01-.658.381H5.976a.755.755 0 01-.658-1.129l5.98-10.463a.747.747 0 011.33 0l6.017 10.464a.747.747 0 01.037.762zm-6.682-8.573a.747.747 0 00-.747.747v2.986a.748.748 0 001.495 0V9.784a.747.747 0 00-.748-.748z"
+            data-name="Warning"
+          />
+        </svg>
+      </span>
+      <div
+        className="mainContent"
+      >
+        Banner Text
+      </div>
+      <button
+        className="button medium ghost"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        Congrats
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Content/Chip Default 1`] = `
 <div>
   <div
@@ -416,6 +528,28 @@ exports[`Storyshots Content/Dialogs/DialogWizard Uncontrolled 1`] = `
 </div>
 `;
 
+exports[`Storyshots Content/Dialogs/DialogWizard With Banner 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div>
+      <button
+        aria-controls="menu-story-default"
+        aria-haspopup="true"
+        className="button medium fill"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        Open Wizard
+      </button>
+      <portal-for-test />
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Content/Dialogs/DialogWizard With Overlay 1`] = `
 <div>
   <div
@@ -498,9 +632,9 @@ exports[`Storyshots Content/Lists/List Basic 1`] = `
         <div
           className="content"
         >
-
+           
           Item 1
-
+           
         </div>
         <div />
       </li>
@@ -511,9 +645,9 @@ exports[`Storyshots Content/Lists/List Basic 1`] = `
         <div
           className="content"
         >
-
+           
           Item 2
-
+           
         </div>
         <div />
       </li>
@@ -524,9 +658,9 @@ exports[`Storyshots Content/Lists/List Basic 1`] = `
         <div
           className="content"
         >
-
+           
           Item 3
-
+           
         </div>
         <div />
       </li>
@@ -537,9 +671,9 @@ exports[`Storyshots Content/Lists/List Basic 1`] = `
         <div
           className="content"
         >
-
+           
           Item 4
-
+           
         </div>
         <div />
       </li>
@@ -583,9 +717,9 @@ exports[`Storyshots Content/Lists/List With Leading 1`] = `
         <div
           className="content"
         >
-
+           
           Item 1
-
+           
         </div>
         <div />
       </li>
@@ -611,9 +745,9 @@ exports[`Storyshots Content/Lists/List With Leading 1`] = `
         <div
           className="content"
         >
-
+           
           Item 2
-
+           
         </div>
         <div />
       </li>
@@ -639,9 +773,9 @@ exports[`Storyshots Content/Lists/List With Leading 1`] = `
         <div
           className="content"
         >
-
+           
           Item 3
-
+           
         </div>
         <div />
       </li>
@@ -667,9 +801,9 @@ exports[`Storyshots Content/Lists/List With Leading 1`] = `
         <div
           className="content"
         >
-
+           
           Item 4
-
+           
         </div>
         <div />
       </li>
@@ -695,9 +829,9 @@ exports[`Storyshots Content/Lists/List With Leading 1`] = `
         <div
           className="content"
         >
-
+           
           Item 5
-
+           
         </div>
         <div />
       </li>
@@ -723,9 +857,9 @@ exports[`Storyshots Content/Lists/List With Leading 1`] = `
         <div
           className="content"
         >
-
+           
           Item 6
-
+           
         </div>
         <div />
       </li>
@@ -751,9 +885,9 @@ exports[`Storyshots Content/Lists/List With Leading 1`] = `
         <div
           className="content"
         >
-
+           
           Item 7
-
+           
         </div>
         <div />
       </li>
@@ -782,9 +916,9 @@ exports[`Storyshots Content/Lists/List With Trailing 1`] = `
         <div
           className="content"
         >
-
+           
           Item 1
-
+           
         </div>
         <div>
           <button
@@ -804,9 +938,9 @@ exports[`Storyshots Content/Lists/List With Trailing 1`] = `
         <div
           className="content"
         >
-
+           
           Item 2
-
+           
         </div>
         <div>
           <button
@@ -826,9 +960,9 @@ exports[`Storyshots Content/Lists/List With Trailing 1`] = `
         <div
           className="content"
         >
-
+           
           Item 3
-
+           
         </div>
         <div>
           <button
@@ -848,9 +982,9 @@ exports[`Storyshots Content/Lists/List With Trailing 1`] = `
         <div
           className="content"
         >
-
+           
           Item 4
-
+           
         </div>
         <div>
           <button
@@ -870,9 +1004,9 @@ exports[`Storyshots Content/Lists/List With Trailing 1`] = `
         <div
           className="content"
         >
-
+           
           Item 5
-
+           
         </div>
         <div>
           <button
@@ -892,9 +1026,9 @@ exports[`Storyshots Content/Lists/List With Trailing 1`] = `
         <div
           className="content"
         >
-
+           
           Item 6
-
+           
         </div>
         <div>
           <button
@@ -914,9 +1048,9 @@ exports[`Storyshots Content/Lists/List With Trailing 1`] = `
         <div
           className="content"
         >
-
+           
           Item 7
-
+           
         </div>
         <div>
           <button
@@ -998,7 +1132,7 @@ exports[`Storyshots Content/Table Basic 1`] = `
         className="results"
       >
         0
-
+         
         Results
       </div>
       <div
@@ -1040,7 +1174,7 @@ exports[`Storyshots Content/Table Infinite Scroll 1`] = `
         className="results"
       >
         0
-
+         
         Results
       </div>
       <div
@@ -1244,13 +1378,13 @@ exports[`Storyshots Icons/Icons All 1`] = `
                       <span
                         className=""
                       >
-
+                        
 
                       </span>
                       <span
                         className=""
                       >
-
+                        
                       </span>
                       <span
                         className="token keyword module"
@@ -1260,7 +1394,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
                       <span
                         className=""
                       >
-
+                         
                       </span>
                       <span
                         className="token punctuation"
@@ -1270,7 +1404,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
                       <span
                         className=""
                       >
-
+                         
                       </span>
                       <span
                         className="token maybe-class-name"
@@ -1280,7 +1414,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
                       <span
                         className=""
                       >
-
+                         
                       </span>
                       <span
                         className="token punctuation"
@@ -1290,7 +1424,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
                       <span
                         className=""
                       >
-
+                         
                       </span>
                       <span
                         className="token keyword module"
@@ -1300,7 +1434,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
                       <span
                         className=""
                       >
-
+                         
                       </span>
                       <span
                         className="token string"
@@ -1310,29 +1444,29 @@ exports[`Storyshots Icons/Icons All 1`] = `
                       <span
                         className=""
                       >
-
+                        
 
                       </span>
                       <span
                         className=""
                       >
-
+                        
                       </span>
                       <span
                         className="token comment"
                       >
-                        // use
+                        // use        
                       </span>
                       <span
                         className=""
                       >
-
+                        
 
                       </span>
                       <span
                         className=""
                       >
-
+                        
                       </span>
                       <span
                         className="token operator"
@@ -9184,7 +9318,7 @@ exports[`Storyshots User Inputs/ChipsInput Custom Chip Validation 1`] = `
       <span
         className="marginFlexContainer"
       >
-        Only chips that contain
+        Only chips that contain 
         <b>
           abc
         </b>
@@ -9348,24 +9482,24 @@ exports[`Storyshots User Inputs/ChipsInput Get Icon Handler 1`] = `
       <span
         className="marginFlexContainer"
       >
-        Insert
+        Insert 
         <b>
           first
         </b>
-         for
+         for 
         <b>
           Eye
         </b>
-         icon,
+         icon, 
         <b>
           second
         </b>
-         for
+         for 
         <b>
           Arrow
         </b>
-
-        icon and everything else for
+         
+        icon and everything else for 
         <b>
           Filter
         </b>
@@ -9568,9 +9702,9 @@ exports[`Storyshots User Inputs/ChipsInput Play Ground 1`] = `
       <label
         className="helperText"
       >
-
+         
         This is the helper text
-
+         
       </label>
     </div>
   </div>

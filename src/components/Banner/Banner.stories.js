@@ -17,7 +17,9 @@ export const Default = () => {
   const [isOpen, setOpenBanner] = useState(false)
   return (
     <React.Fragment>
-      <Banner isOpen={isOpen}>{text('text', 'Banner Text')}</Banner>
+      <Banner type={'warning'} isOpen={isOpen}>
+        {text('text', 'Banner Text')}
+      </Banner>
       <Button onClick={() => setOpenBanner(!isOpen)}>
         Click to toggle Banner
       </Button>
@@ -27,7 +29,7 @@ export const Default = () => {
 
 export const withLeadingIcon = () => (
   <React.Fragment>
-    <Banner isOpen leadingIcon={<SunIcon />}>
+    <Banner isOpen type={'warning'} leadingIcon={<SunIcon />}>
       {text('text', 'Banner Text')}
     </Banner>
   </React.Fragment>
@@ -36,7 +38,7 @@ export const withLeadingIcon = () => (
 export const withTrailingComponent = () => {
   return (
     <React.Fragment>
-      <Banner isOpen trailingComponent={myButton}>
+      <Banner isOpen type={'warning'} trailingComponent={myButton}>
         {text('text', 'Banner Text')}
       </Banner>
     </React.Fragment>

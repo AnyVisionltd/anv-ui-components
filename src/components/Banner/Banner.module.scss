@@ -7,6 +7,7 @@
   height: 56px;
   width: 100%;
   color: av-color(content);
+  box-sizing: border-box;
 
   &.info {
     background-color: av-color(primary, av-opacity(ghost));
