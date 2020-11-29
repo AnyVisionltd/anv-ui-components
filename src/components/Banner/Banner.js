@@ -54,7 +54,7 @@ Banner.propTypes = {
   children: propTypes.node.isRequired,
   /** Should the banner appear on screen or not */
   isOpen: propTypes.bool,
-  /** Should the banner appear on screen or not */
+  /** The type of the banner */
   type: propTypes.oneOf(['info', 'warning', 'error', 'success']),
 }
 
