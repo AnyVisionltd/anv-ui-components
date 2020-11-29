@@ -71,6 +71,12 @@ export const WithBanner = () => {
     false,
   )
 
+  const banner = (
+    <Banner isOpen type={'error'}>
+      Banner text
+    </Banner>
+  )
+
   return (
     <div>
       <Button
@@ -89,11 +95,8 @@ export const WithBanner = () => {
         disableEscapeKeyDown={disableEscapeKeyDown}
         headerTitle={'Header title'}
         steps={steps}
-      >
-        <Banner isOpen type={'error'}>
-          Banner text
-        </Banner>
-      </DialogWizard>
+        banner={banner}
+      />
     </div>
   )
 }

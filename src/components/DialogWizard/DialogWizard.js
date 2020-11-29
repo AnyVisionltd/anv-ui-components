@@ -22,7 +22,7 @@ const DialogWizard = ({
   nextText,
   cancelText,
   disabled,
-  children,
+  banner,
   ...otherProps
 }) => {
   const [step, setStep] = useState(currentStep || 1)
@@ -111,7 +111,7 @@ const DialogWizard = ({
           style={{ width: `${(step / steps.length) * 100}%` }}
         />
       </div>
-      {children}
+      {banner}
       <div className={styles.content}>
         <Dialog.Body>{steps.length && steps[step - 1]}</Dialog.Body>
         <Dialog.Footer>
@@ -163,7 +163,7 @@ DialogWizard.propTypes = {
   disableBackdropClick: propTypes.bool,
   /** Disable onClose firing when escape button is clicked */
   disableEscapeKeyDown: propTypes.bool,
-  /** footer meesage can be a string or an element */
+  /** footer message can be a string or an element */
   footerMessage: propTypes.oneOfType([propTypes.string, propTypes.element]),
   /** header title can be a string or an element */
   headerTitle: propTypes.oneOfType([propTypes.string, propTypes.element]),
@@ -173,7 +173,7 @@ DialogWizard.propTypes = {
   currentStep: propTypes.number,
   /** overlay content element*/
   overlayContent: propTypes.element,
-  /** css costumization for ovarlay */
+  /** css customization for ovarlay */
   overlayClassName: propTypes.string,
   /** text for done button */
   finishText: propTypes.string,
@@ -183,6 +183,8 @@ DialogWizard.propTypes = {
   cancelText: propTypes.string,
   /** boolean to disable next/finish button */
   disabled: propTypes.bool,
+  /** banner component to be rendered */
+  banner: propTypes.element,
 }
 
 export default DialogWizard
