@@ -22,6 +22,7 @@ const DialogWizard = ({
   nextText,
   cancelText,
   disabled,
+  children,
   ...otherProps
 }) => {
   const [step, setStep] = useState(currentStep || 1)
@@ -48,9 +49,9 @@ const DialogWizard = ({
       <div className={styles.steps}>
         <small>{languageService.getTranslation('step')}</small>
         <div className={styles.stepsNumbers}>
-          <small>{step}</small>
-          <small>-</small>
-          <small>{steps.length}</small>
+          <small className={styles.stepNumber}>{step}</small>
+          <small>{languageService.getTranslation('stepOutOf')}</small>
+          <small className={styles.stepNumber}>{steps.length}</small>
         </div>
       </div>
     )
@@ -110,6 +111,7 @@ const DialogWizard = ({
           style={{ width: `${(step / steps.length) * 100}%` }}
         />
       </div>
+      {children}
       <div className={styles.content}>
         <Dialog.Body>{steps.length && steps[step - 1]}</Dialog.Body>
         <Dialog.Footer>

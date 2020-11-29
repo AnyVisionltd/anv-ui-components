@@ -1,0 +1,47 @@
+@import '~@anyvision/style-guide';
+
+.banner {
+  display: flex;
+  align-items: center;
+  padding: 0 av-space();
+  height: 56px;
+  width: 100%;
+  color: av-color(content);
+
+  &.info {
+    background-color: av-color(primary, av-opacity(ghost));
+    fill: av-color(primary);
+  }
+
+  &.success {
+    background-color: av-color(success, av-opacity(ghost));
+    fill: av-color(success);
+  }
+
+  &.error {
+    background-color: av-color(error, av-opacity(ghost));
+    fill: av-color(error);
+  }
+
+  &.warning {
+    background-color: av-color(alert, av-opacity(ghost));
+    fill: av-color(alert);
+  }
+
+  .mainContent {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    margin: 0 av-space();
+  }
+
+  .leadingIcon {
+    display: flex;
+    align-items: center;
+
+    > svg {
+      height: av-size(sz-32);
+      width: av-size(sz-32);
+    }
+  }
+}

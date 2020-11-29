@@ -15,6 +15,16 @@ describe('<DialogWizard />', () => {
     expect(queryByTestId('test-child')).not.toEqual(null)
   })
 
+  it('should render children Wizard', () => {
+    const steps = [<div />]
+    const { getByText } = render(
+      <DialogWizard isOpen steps={steps}>
+        <p>my text</p>
+      </DialogWizard>,
+    )
+    expect(getByText('my text')).toBeTruthy()
+  })
+
   it('should change step when clicking next', () => {
     const steps = [
       <div data-testid={'test-child-1'} />,
