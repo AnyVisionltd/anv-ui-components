@@ -8479,294 +8479,106 @@ exports[`Storyshots User Feedback/Banner Play Ground 1`] = `
 </div>
 `;
 
-exports[`Storyshots User Feedback/Banner Type Error 1`] = `
-<div>
-  <div
-    className="center"
-  >
-    <div
-      className="banner error open"
-    >
-      <span
-        className="leadingIcon"
-      >
-        <svg
-          data-name="error circle outlined"
-          height="1em"
-          viewBox="0 0 24 24"
-          width="1em"
-        >
-          <path
-            d="M12 12.75a.75.75 0 00.75-.75V9a.75.75 0 00-1.5 0v3a.75.75 0 00.75.75zm-.285 2.94a.775.775 0 00.818-.158.863.863 0 00.158-.248.63.63 0 00.06-.285.75.75 0 00-.218-.532.862.862 0 00-.248-.158.75.75 0 00-1.035.691.788.788 0 00.217.532.75.75 0 00.248.158zM12 19.5A7.5 7.5 0 104.5 12a7.5 7.5 0 007.5 7.5zM12 6a6 6 0 11-6 6 6 6 0 016-6z"
-          />
-        </svg>
-      </span>
-      <div
-        className="mainContent"
-      >
-        Banner Text
-      </div>
-      <button
-        className="button medium ghost"
-        disabled={false}
-        onClick={[Function]}
-        type="button"
-      >
-        Congrats
-      </button>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots User Feedback/Banner Type Info 1`] = `
-<div>
-  <div
-    className="center"
-  >
-    <div
-      className="banner info open"
-    >
-      <span
-        className="leadingIcon"
-      >
-        <svg
-          data-name="Mail shiled"
-          height="1em"
-          viewBox="0 0 24 24"
-          width="1em"
-        >
-          <path
-            d="M20.365 5.71a.834.834 0 00-.7-.167 2.284 2.284 0 01-1.834-.383.834.834 0 00-.984 0 2.284 2.284 0 01-1.834.383A.834.834 0 0014 6.36v2.76a3.852 3.852 0 001.534 3.085l1.309.967a.834.834 0 00.984 0l1.309-.967A3.852 3.852 0 0020.67 9.12V6.36a.834.834 0 00-.305-.65zm-1.359 3.41a2.176 2.176 0 01-.834 1.742l-.834.584-.834-.6a2.176 2.176 0 01-.834-1.742V7.278a3.893 3.893 0 001.667-.45 3.893 3.893 0 001.667.45zm.834 5a.834.834 0 00-.834.834v2.5a.834.834 0 01-.834.834H6.5a.834.834 0 01-.834-.834V9.503l4.9 4.9a2.5 2.5 0 003.551-.017l-.584-.592-.613-.562a.834.834 0 01-1.167 0l-4.91-4.9H11.5a.834.834 0 100-1.667h-5A2.5 2.5 0 004 9.162v8.337a2.5 2.5 0 002.5 2.5h11.673a2.5 2.5 0 002.5-2.5v-2.5a.834.834 0 00-.834-.834z"
-          />
-        </svg>
-      </span>
-      <div
-        className="mainContent"
-      >
-        Banner Text
-      </div>
-      <button
-        className="button medium ghost"
-        disabled={false}
-        onClick={[Function]}
-        type="button"
-      >
-        Congrats
-      </button>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots User Feedback/Banner Type Success 1`] = `
-<div>
-  <div
-    className="center"
-  >
-    <div
-      className="banner success open"
-    >
-      <span
-        className="leadingIcon"
-      >
-        <svg
-          data-name="check circle outlined"
-          height="1em"
-          viewBox="0 0 24 24"
-          width="1em"
-        >
-          <path
-            d="M14.04 9.592l-3.217 3.226-1.238-1.238a.75.75 0 10-1.057 1.058l1.762 1.77a.751.751 0 001.058 0l3.75-3.75a.751.751 0 10-1.058-1.066zM12 4.5a7.5 7.5 0 107.5 7.5A7.5 7.5 0 0012 4.5zM12 18a6 6 0 116-6 6 6 0 01-6 6z"
-          />
-        </svg>
-      </span>
-      <div
-        className="mainContent"
-      >
-        Banner Text
-      </div>
-      <button
-        className="button medium ghost"
-        disabled={false}
-        onClick={[Function]}
-        type="button"
-      >
-        Congrats
-      </button>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots User Feedback/Banner Type Warning 1`] = `
-<div>
-  <div
-    className="center"
-  >
-    <div
-      className="banner warning open"
-    >
-      <span
-        className="leadingIcon"
-      >
-        <svg
-          height="1em"
-          viewBox="0 0 24 24"
-          width="1em"
-        >
-          <path
-            d="M12.001 15.016a.747.747 0 10.747.747.747.747 0 00-.747-.747zm7.975 1.1L13.959 5.65a2.242 2.242 0 00-3.917 0L4.063 16.114A2.242 2.242 0 005.976 19.5h12.049a2.242 2.242 0 001.951-3.386zm-1.293 1.493a.747.747 0 01-.658.381H5.976a.755.755 0 01-.658-1.129l5.98-10.463a.747.747 0 011.33 0l6.017 10.464a.747.747 0 01.037.762zm-6.682-8.573a.747.747 0 00-.747.747v2.986a.748.748 0 001.495 0V9.784a.747.747 0 00-.748-.748z"
-            data-name="Warning"
-          />
-        </svg>
-      </span>
-      <div
-        className="mainContent"
-      >
-        Banner Text
-      </div>
-      <button
-        className="button medium ghost"
-        disabled={false}
-        onClick={[Function]}
-        type="button"
-      >
-        Congrats
-      </button>
-    </div>
-  </div>
-</div>
-`;
-
 exports[`Storyshots User Feedback/Banner Types 1`] = `
 <div>
   <div
     className="center"
   >
     <div
-      className="banner success open"
+      className="flexMultipleRows fullWidth"
     >
-      <span
-        className="leadingIcon"
-      >
-        <svg
-          data-name="check circle outlined"
-          height="1em"
-          viewBox="0 0 24 24"
-          width="1em"
-        >
-          <path
-            d="M14.04 9.592l-3.217 3.226-1.238-1.238a.75.75 0 10-1.057 1.058l1.762 1.77a.751.751 0 001.058 0l3.75-3.75a.751.751 0 10-1.058-1.066zM12 4.5a7.5 7.5 0 107.5 7.5A7.5 7.5 0 0012 4.5zM12 18a6 6 0 116-6 6 6 0 01-6 6z"
-          />
-        </svg>
-      </span>
       <div
-        className="mainContent"
+        className="banner success open"
       >
-        Banner Text
-      </div>
-      <button
-        className="button medium ghost"
-        disabled={false}
-        onClick={[Function]}
-        type="button"
-      >
-        Congrats
-      </button>
-    </div>
-    <div
-      className="banner info open"
-    >
-      <span
-        className="leadingIcon"
-      >
-        <svg
-          data-name="Mail shiled"
-          height="1em"
-          viewBox="0 0 24 24"
-          width="1em"
+        <span
+          className="leadingIcon"
         >
-          <path
-            d="M20.365 5.71a.834.834 0 00-.7-.167 2.284 2.284 0 01-1.834-.383.834.834 0 00-.984 0 2.284 2.284 0 01-1.834.383A.834.834 0 0014 6.36v2.76a3.852 3.852 0 001.534 3.085l1.309.967a.834.834 0 00.984 0l1.309-.967A3.852 3.852 0 0020.67 9.12V6.36a.834.834 0 00-.305-.65zm-1.359 3.41a2.176 2.176 0 01-.834 1.742l-.834.584-.834-.6a2.176 2.176 0 01-.834-1.742V7.278a3.893 3.893 0 001.667-.45 3.893 3.893 0 001.667.45zm.834 5a.834.834 0 00-.834.834v2.5a.834.834 0 01-.834.834H6.5a.834.834 0 01-.834-.834V9.503l4.9 4.9a2.5 2.5 0 003.551-.017l-.584-.592-.613-.562a.834.834 0 01-1.167 0l-4.91-4.9H11.5a.834.834 0 100-1.667h-5A2.5 2.5 0 004 9.162v8.337a2.5 2.5 0 002.5 2.5h11.673a2.5 2.5 0 002.5-2.5v-2.5a.834.834 0 00-.834-.834z"
-          />
-        </svg>
-      </span>
-      <div
-        className="mainContent"
-      >
-        Banner Text
-      </div>
-      <button
-        className="button medium ghost"
-        disabled={false}
-        onClick={[Function]}
-        type="button"
-      >
-        Congrats
-      </button>
-    </div>
-    <div
-      className="banner warning open"
-    >
-      <span
-        className="leadingIcon"
-      >
-        <svg
-          height="1em"
-          viewBox="0 0 24 24"
-          width="1em"
+          <svg
+            data-name="check circle outlined"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+          >
+            <path
+              d="M14.04 9.592l-3.217 3.226-1.238-1.238a.75.75 0 10-1.057 1.058l1.762 1.77a.751.751 0 001.058 0l3.75-3.75a.751.751 0 10-1.058-1.066zM12 4.5a7.5 7.5 0 107.5 7.5A7.5 7.5 0 0012 4.5zM12 18a6 6 0 116-6 6 6 0 01-6 6z"
+            />
+          </svg>
+        </span>
+        <div
+          className="mainContent"
         >
-          <path
-            d="M12.001 15.016a.747.747 0 10.747.747.747.747 0 00-.747-.747zm7.975 1.1L13.959 5.65a2.242 2.242 0 00-3.917 0L4.063 16.114A2.242 2.242 0 005.976 19.5h12.049a2.242 2.242 0 001.951-3.386zm-1.293 1.493a.747.747 0 01-.658.381H5.976a.755.755 0 01-.658-1.129l5.98-10.463a.747.747 0 011.33 0l6.017 10.464a.747.747 0 01.037.762zm-6.682-8.573a.747.747 0 00-.747.747v2.986a.748.748 0 001.495 0V9.784a.747.747 0 00-.748-.748z"
-            data-name="Warning"
-          />
-        </svg>
-      </span>
-      <div
-        className="mainContent"
-      >
-        Banner Text
+          success
+        </div>
       </div>
-      <button
-        className="button medium ghost"
-        disabled={false}
-        onClick={[Function]}
-        type="button"
+      <div
+        className="banner info open"
       >
-        Congrats
-      </button>
-    </div>
-    <div
-      className="banner error open"
-    >
-      <span
-        className="leadingIcon"
-      >
-        <svg
-          data-name="error circle outlined"
-          height="1em"
-          viewBox="0 0 24 24"
-          width="1em"
+        <span
+          className="leadingIcon"
         >
-          <path
-            d="M12 12.75a.75.75 0 00.75-.75V9a.75.75 0 00-1.5 0v3a.75.75 0 00.75.75zm-.285 2.94a.775.775 0 00.818-.158.863.863 0 00.158-.248.63.63 0 00.06-.285.75.75 0 00-.218-.532.862.862 0 00-.248-.158.75.75 0 00-1.035.691.788.788 0 00.217.532.75.75 0 00.248.158zM12 19.5A7.5 7.5 0 104.5 12a7.5 7.5 0 007.5 7.5zM12 6a6 6 0 11-6 6 6 6 0 016-6z"
-          />
-        </svg>
-      </span>
-      <div
-        className="mainContent"
-      >
-        Banner Text
+          <svg
+            data-name="Mail shiled"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+          >
+            <path
+              d="M20.365 5.71a.834.834 0 00-.7-.167 2.284 2.284 0 01-1.834-.383.834.834 0 00-.984 0 2.284 2.284 0 01-1.834.383A.834.834 0 0014 6.36v2.76a3.852 3.852 0 001.534 3.085l1.309.967a.834.834 0 00.984 0l1.309-.967A3.852 3.852 0 0020.67 9.12V6.36a.834.834 0 00-.305-.65zm-1.359 3.41a2.176 2.176 0 01-.834 1.742l-.834.584-.834-.6a2.176 2.176 0 01-.834-1.742V7.278a3.893 3.893 0 001.667-.45 3.893 3.893 0 001.667.45zm.834 5a.834.834 0 00-.834.834v2.5a.834.834 0 01-.834.834H6.5a.834.834 0 01-.834-.834V9.503l4.9 4.9a2.5 2.5 0 003.551-.017l-.584-.592-.613-.562a.834.834 0 01-1.167 0l-4.91-4.9H11.5a.834.834 0 100-1.667h-5A2.5 2.5 0 004 9.162v8.337a2.5 2.5 0 002.5 2.5h11.673a2.5 2.5 0 002.5-2.5v-2.5a.834.834 0 00-.834-.834z"
+            />
+          </svg>
+        </span>
+        <div
+          className="mainContent"
+        >
+          info
+        </div>
       </div>
-      <button
-        className="button medium ghost"
-        disabled={false}
-        onClick={[Function]}
-        type="button"
+      <div
+        className="banner warning open"
       >
-        Congrats
-      </button>
+        <span
+          className="leadingIcon"
+        >
+          <svg
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+          >
+            <path
+              d="M12.001 15.016a.747.747 0 10.747.747.747.747 0 00-.747-.747zm7.975 1.1L13.959 5.65a2.242 2.242 0 00-3.917 0L4.063 16.114A2.242 2.242 0 005.976 19.5h12.049a2.242 2.242 0 001.951-3.386zm-1.293 1.493a.747.747 0 01-.658.381H5.976a.755.755 0 01-.658-1.129l5.98-10.463a.747.747 0 011.33 0l6.017 10.464a.747.747 0 01.037.762zm-6.682-8.573a.747.747 0 00-.747.747v2.986a.748.748 0 001.495 0V9.784a.747.747 0 00-.748-.748z"
+              data-name="Warning"
+            />
+          </svg>
+        </span>
+        <div
+          className="mainContent"
+        >
+          warning
+        </div>
+      </div>
+      <div
+        className="banner error open"
+      >
+        <span
+          className="leadingIcon"
+        >
+          <svg
+            data-name="error circle outlined"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+          >
+            <path
+              d="M12 12.75a.75.75 0 00.75-.75V9a.75.75 0 00-1.5 0v3a.75.75 0 00.75.75zm-.285 2.94a.775.775 0 00.818-.158.863.863 0 00.158-.248.63.63 0 00.06-.285.75.75 0 00-.218-.532.862.862 0 00-.248-.158.75.75 0 00-1.035.691.788.788 0 00.217.532.75.75 0 00.248.158zM12 19.5A7.5 7.5 0 104.5 12a7.5 7.5 0 007.5 7.5zM12 6a6 6 0 11-6 6 6 6 0 016-6z"
+            />
+          </svg>
+        </span>
+        <div
+          className="mainContent"
+        >
+          error
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -8801,22 +8613,8 @@ exports[`Storyshots User Feedback/Banner With Trailing Component 1`] = `
     className="center"
   >
     <div
-      className="banner warning open"
+      className="banner open"
     >
-      <span
-        className="leadingIcon"
-      >
-        <svg
-          height="1em"
-          viewBox="0 0 24 24"
-          width="1em"
-        >
-          <path
-            d="M12.001 15.016a.747.747 0 10.747.747.747.747 0 00-.747-.747zm7.975 1.1L13.959 5.65a2.242 2.242 0 00-3.917 0L4.063 16.114A2.242 2.242 0 005.976 19.5h12.049a2.242 2.242 0 001.951-3.386zm-1.293 1.493a.747.747 0 01-.658.381H5.976a.755.755 0 01-.658-1.129l5.98-10.463a.747.747 0 011.33 0l6.017 10.464a.747.747 0 01.037.762zm-6.682-8.573a.747.747 0 00-.747.747v2.986a.748.748 0 001.495 0V9.784a.747.747 0 00-.748-.748z"
-            data-name="Warning"
-          />
-        </svg>
-      </span>
       <div
         className="mainContent"
       >
