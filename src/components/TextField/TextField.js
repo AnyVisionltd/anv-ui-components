@@ -294,7 +294,7 @@ TextField.propTypes = {
   /** Array of items if type is options. */
   items: propTypes.arrayOf(
     propTypes.shape({
-      value: propTypes.string,
+      value: propTypes.oneOfType([propTypes.string, propTypes.number]),
       label: propTypes.oneOfType([propTypes.string, propTypes.number]),
     }),
   ),

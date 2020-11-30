@@ -6,6 +6,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/jsx-props-no-spreading': 'off',
     'import/no-extraneous-dependencies': 'off',
+    'import/no-anonymous-default-export': 'off',
     'react/require-default-props': 'off',
     'react/button-has-type': 'off',
     semi: ['error', 'never'],

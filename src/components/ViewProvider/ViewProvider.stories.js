@@ -20,7 +20,7 @@ export const Default = args => {
   ]
 
   return (
-    <ViewProvider {...args}>
+    <ViewProvider { ...args }>
       <div style={formStyle}>
         <TextField label={'Username'} defaultValue={'AnyVisionAdmin'} />
         <TextField type={'number'} label={'Age'} defaultValue={24} />
