@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { boolean } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
-import { Button } from '../../index'
+import { Button, Banner } from '../../index'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import styles from '../../storybook/wizard.module.scss'
 import DialogWizard from './DialogWizard'
@@ -49,6 +49,52 @@ export const Basic = () => {
           'Opps! Connection failed, Please re-check your details and try again'
         }
         steps={steps}
+      />
+    </div>
+  )
+}
+
+export const WithBanner = () => {
+  const steps = [<div>Step 1</div>, <div>Step 2</div>, <div>Step 3</div>]
+  const [isDialogOpen, setDialogOpen] = useState(false)
+
+  const handleOpenDialog = () => setDialogOpen(true)
+  const handleCloseDialog = () => setDialogOpen(false)
+
+  const disableBackdropClick = boolean(
+    'Disable backdrop click to close dialog',
+    false,
+  )
+  const disableEscapeKeyDown = boolean(
+    'Disable escape key press to close dialog',
+    false,
+  )
+
+  const banner = (
+    <Banner isOpen type={'error'}>
+      Banner text
+    </Banner>
+  )
+
+  return (
+    <div>
+      <Button
+        aria-controls='menu-story-default'
+        aria-haspopup='true'
+        onClick={handleOpenDialog}
+      >
+        Open Wizard
+      </Button>
+      <DialogWizard
+        className={styles.wizardExample}
+        isOpen={isDialogOpen}
+        onClose={handleCloseDialog}
+        onNextClick={action('next')}
+        disableBackdropClick={disableBackdropClick}
+        disableEscapeKeyDown={disableEscapeKeyDown}
+        headerTitle={'Header title'}
+        steps={steps}
+        banner={banner}
       />
     </div>
   )

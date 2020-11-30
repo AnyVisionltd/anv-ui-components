@@ -16,18 +16,22 @@
   .steps {
     display: flex;
     align-items: center;
+    @extend %av-caption;
 
     small {
       @extend %av-overline;
       margin-left: av-space(micro);
       cursor: default;
+      text-transform: uppercase;
     }
 
     .stepsNumbers {
       display: flex;
       align-items: center;
-      font-weight: bold;
-      width: av-size(sz-32);
+
+      .stepNumber {
+        font-weight: av-font-weight(bold);
+      }
     }
   }
 

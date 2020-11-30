@@ -13,8 +13,9 @@
 
 ### Added
 
-- Add tooltip show prop
-- Add <SelectionGroup> component
+- Added Banner component and implemented in DialogWizard
+- Added tooltip show prop
+- Added SelectionGroup component
 
 ## 1.0.0 - 06-09-2020
 
