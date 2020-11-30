@@ -1,6 +1,6 @@
 {
   "name": "@anyvision/anv-ui-components",
-  "version": "1.0.0-beta.23",
+  "version": "1.0.0-beta.24",
   "main": "dist/index.js",
   "description": "Anyvision Components Library",
   "license": "MIT",
@@ -62,6 +62,7 @@
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-react": "^7.9.4",
     "@storybook/addon-actions": "6.1.0-alpha.1",
+    "@storybook/addon-controls": "^6.1.9",
     "@storybook/addon-docs": "6.1.0-alpha.1",
     "@storybook/addon-knobs": "6.1.0-alpha.1",
     "@storybook/addon-storyshots": "6.1.0-alpha.1",
