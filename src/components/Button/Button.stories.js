@@ -1,5 +1,4 @@
 import React from 'react'
-import { select, boolean, text } from '@storybook/addon-knobs'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
 import Button from './Button'
 import styles from '../../storybook/index.module.scss'
@@ -53,12 +52,5 @@ export const withClassName = () => (
   </div>
 )
 
-export const playGround = () => (
-  <Button
-    size={select('size', ['small', 'medium', 'large'], 'large')}
-    variant={select('variant', ['fill', 'outline', 'ghost'], 'fill')}
-    disabled={boolean('disabled', false)}
-  >
-    {text('text', 'Button Text')}
-  </Button>
-)
+export const PlayGround = args => <Button {...args} />
+PlayGround.args = { children: 'Button Text' }

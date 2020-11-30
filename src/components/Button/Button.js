@@ -3,6 +3,10 @@ import classNames from 'classnames'
 import propTypes from 'prop-types'
 import styles from './Button.module.scss'
 
+/**
+ * Buttons allow users to take actions, and make choices, with a single tap.
+ **/
+
 const Button = forwardRef(
   (
     {
