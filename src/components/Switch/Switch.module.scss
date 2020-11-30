@@ -7,6 +7,7 @@ $switch-transition: transform 200ms ease-in-out, color 100ms ease-in-out,
 .switch {
   color: av-color(primary);
   position: relative;
+  margin: 0 av-space(tiny);
 
   input {
     cursor: pointer;

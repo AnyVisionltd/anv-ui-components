@@ -263,7 +263,7 @@ TextField.propTypes = {
   size: propTypes.oneOf(['small', 'medium']),
   /** If true, the input will be disabled. */
   disabled: propTypes.bool,
-  /** If true, the input will be view mode. <br/>
+  /** If true, will be view mode. <br/>
    *  <i style="background-color:#ffc40026;">NOTE: Also from \<ViewProvider> by context. </i>
    */
   view: propTypes.bool,

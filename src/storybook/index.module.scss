@@ -58,3 +58,10 @@
   align-items: center;
   justify-content: center;
 }
+
+.card {
+  @include av-elevation(sticky);
+  width: av-size(sz-640);
+  padding: av-space();
+  border-radius: av-radius();
+}

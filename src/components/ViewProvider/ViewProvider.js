@@ -3,8 +3,8 @@ import propTypes from 'prop-types'
 import ViewContext from './Context'
 
 /**
- * Wrapper for forms which add view capabilty for supported components.
- * Supported components - <TextField/>,
+ * Wrapper for forms, add view capability for supported components. <br/>
+ * Supported components - <code>\<TextField/></code>, <code>\<Checkbox/></code>, <code>\<Radio/></code>
  */
 
 const ViewProvider = ({ isView, children }) => (

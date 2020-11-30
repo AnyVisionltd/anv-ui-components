@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
+import { ViewProvider } from '../ViewProvider'
 import { ReactComponent as CheckboxChecked } from '../../assets/svg/Checked.svg'
 import { ReactComponent as CheckboxIndeterminate } from '../../assets/svg/CheckboxIndeterminate.svg'
 import styles from './Checkbox.module.scss'
@@ -9,16 +10,20 @@ const Checkbox = ({
   checked,
   indeterminate,
   disabled,
+  view,
   onChange,
   className,
   id,
   ...otherProps
 }) => {
+  const isViewModeContext = useContext(ViewProvider.Context)
+  const isViewMode = view || isViewModeContext
+
   const classes = classNames(
     styles.checkbox,
     checked && styles.checked,
     indeterminate && styles.indeterminate,
-    disabled ? styles.disabled : styles.enabled,
+    (disabled || isViewMode) && styles.disabled,
     className,
   )
 
@@ -65,6 +70,10 @@ Checkbox.defaultProps = {
 Checkbox.propTypes = {
   /** If true, the checkbox will be disabled. */
   disabled: propTypes.bool,
+  /** If true, will be view mode. <br/>
+   *  <i style="background-color:#ffc40026;">NOTE: Also from \<ViewProvider> by context. </i>
+   */
+  view: propTypes.bool,
   /** For css customization. */
   className: propTypes.string,
   /** Whether the checkbox is checked, or not. */

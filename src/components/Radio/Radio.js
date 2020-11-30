@@ -1,21 +1,26 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import styles from './Radio.module.scss'
+import { ViewProvider } from '../ViewProvider'
 
 const Radio = ({
   checked,
   indeterminate,
   disabled,
+  view,
   onChange,
   className,
   id,
   ...otherProps
 }) => {
+  const isViewModeContext = useContext(ViewProvider.Context)
+  const isViewMode = view || isViewModeContext
+
   const classes = classNames(
     styles.radio,
     checked && styles.checked,
-    disabled && styles.disabled,
+    (disabled || isViewMode) && styles.disabled,
     className,
   )
 
@@ -50,6 +55,10 @@ Radio.defaultProps = {
 Radio.propTypes = {
   /** If true, the radio will be disabled. */
   disabled: propTypes.bool,
+  /** If true, will be view mode. <br/>
+   *  <i style="background-color:#ffc40026;">NOTE: Also from \<ViewProvider> by context. </i>
+   */
+  view: propTypes.bool,
   /** For css customization. */
   className: propTypes.string,
   /** Whether the radio button is selected or not. */
