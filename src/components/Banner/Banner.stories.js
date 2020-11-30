@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { select, text, boolean } from '@storybook/addon-knobs'
+import { text } from '@storybook/addon-knobs'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import { Button } from '../../index'
