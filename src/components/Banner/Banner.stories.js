@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import classNames from 'classnames'
 import { text } from '@storybook/addon-knobs'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import { Button } from '../../index'
 import Banner from './Banner'
+import styles from '../../storybook/index.module.scss'
 
 export default {
   title: 'User Feedback/Banner',
@@ -36,50 +38,29 @@ export const withLeadingIcon = () => (
 export const withTrailingComponent = () => {
   return (
     <React.Fragment>
-      <Banner isOpen type={'warning'} trailingComponent={myButton}>
+      <Banner isOpen trailingComponent={myButton}>
         {text('text', 'Banner Text')}
       </Banner>
     </React.Fragment>
   )
 }
 
-export const TypeSuccess = () => {
+export const types = () => {
   return (
-    <React.Fragment>
-      <Banner isOpen type={'success'} trailingComponent={myButton}>
-        {text('text', 'Banner Text')}
+    <div className={classNames(styles.flexMultipleRows, styles.fullWidth)}>
+      <Banner isOpen type={'success'}>
+        success
       </Banner>
-    </React.Fragment>
-  )
-}
-
-export const TypeInfo = () => {
-  return (
-    <React.Fragment>
-      <Banner isOpen type={'info'} trailingComponent={myButton}>
-        {text('text', 'Banner Text')}
+      <Banner isOpen type={'info'}>
+        info
       </Banner>
-    </React.Fragment>
-  )
-}
-
-export const TypeWarning = () => {
-  return (
-    <React.Fragment>
-      <Banner isOpen type={'warning'} trailingComponent={myButton}>
-        {text('text', 'Banner Text')}
+      <Banner isOpen type={'warning'}>
+        warning
       </Banner>
-    </React.Fragment>
-  )
-}
-
-export const TypeError = () => {
-  return (
-    <React.Fragment>
-      <Banner isOpen type={'error'} trailingComponent={myButton}>
-        {text('text', 'Banner Text')}
+      <Banner isOpen type={'error'}>
+        error
       </Banner>
-    </React.Fragment>
+    </div>
   )
 }
 
