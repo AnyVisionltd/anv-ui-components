@@ -1,5 +1,6 @@
 export { Button } from './components/Button'
 export { IconButton } from './components/IconButton'
+export { InputBase } from './components/InputBase'
 export { Portal } from './components/Portal'
 export { Chip } from './components/Chip'
 export { Checkbox } from './components/Checkbox'
@@ -19,5 +20,6 @@ export { DialogWizard } from './components/DialogWizard'
 export { Tooltip } from './components/Tooltip'
 export { Snackbar } from './components/Snackbar'
 export { SelectionGroup } from './components/SelectionGroup'
+export { ViewProvider } from './components/ViewProvider'
 
 export { default as mockAutoSizer } from './testUtils/mockAutoSizer'

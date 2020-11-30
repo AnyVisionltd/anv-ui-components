@@ -1,3 +1,1 @@
-import InputBase from './InputBase'
-
-export default InputBase
+export { default as InputBase } from './InputBase'
