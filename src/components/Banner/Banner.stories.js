@@ -6,7 +6,7 @@ import { Button } from '../../index'
 import Banner from './Banner'
 
 export default {
-  title: 'Content/Banner',
+  title: 'User Feedback/Banner',
   component: Banner,
   decorators: [centerDecorator],
 }
@@ -17,9 +17,7 @@ export const Default = () => {
   const [isOpen, setOpenBanner] = useState(false)
   return (
     <React.Fragment>
-      <Banner type={'warning'} isOpen={isOpen}>
-        {text('text', 'Banner Text')}
-      </Banner>
+      <Banner isOpen={isOpen}>{text('text', 'Banner Text')}</Banner>
       <Button onClick={() => setOpenBanner(!isOpen)}>
         Click to toggle Banner
       </Button>
@@ -29,7 +27,7 @@ export const Default = () => {
 
 export const withLeadingIcon = () => (
   <React.Fragment>
-    <Banner isOpen type={'warning'} leadingIcon={<SunIcon />}>
+    <Banner isOpen leadingIcon={<SunIcon />}>
       {text('text', 'Banner Text')}
     </Banner>
   </React.Fragment>
@@ -39,6 +37,46 @@ export const withTrailingComponent = () => {
   return (
     <React.Fragment>
       <Banner isOpen type={'warning'} trailingComponent={myButton}>
+        {text('text', 'Banner Text')}
+      </Banner>
+    </React.Fragment>
+  )
+}
+
+export const TypeSuccess = () => {
+  return (
+    <React.Fragment>
+      <Banner isOpen type={'success'} trailingComponent={myButton}>
+        {text('text', 'Banner Text')}
+      </Banner>
+    </React.Fragment>
+  )
+}
+
+export const TypeInfo = () => {
+  return (
+    <React.Fragment>
+      <Banner isOpen type={'info'} trailingComponent={myButton}>
+        {text('text', 'Banner Text')}
+      </Banner>
+    </React.Fragment>
+  )
+}
+
+export const TypeWarning = () => {
+  return (
+    <React.Fragment>
+      <Banner isOpen type={'warning'} trailingComponent={myButton}>
+        {text('text', 'Banner Text')}
+      </Banner>
+    </React.Fragment>
+  )
+}
+
+export const TypeError = () => {
+  return (
+    <React.Fragment>
+      <Banner isOpen type={'error'} trailingComponent={myButton}>
         {text('text', 'Banner Text')}
       </Banner>
     </React.Fragment>

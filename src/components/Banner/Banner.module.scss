@@ -4,10 +4,17 @@
   display: flex;
   align-items: center;
   padding: 0 av-space();
-  height: 56px;
   width: 100%;
   color: av-color(content);
   box-sizing: border-box;
+  height: 0;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+
+  &.open {
+    height: 56px;
+    opacity: 1;
+  }
 
   &.info {
     background-color: av-color(primary, av-opacity(ghost));

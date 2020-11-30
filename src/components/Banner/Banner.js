@@ -23,23 +23,24 @@ const Banner = ({
   isOpen,
   type,
 }) => {
-  const classes = classNames(styles.banner, className, styles[type])
+  const classes = classNames(styles.banner, className, styles[type], {
+    [styles.open]: isOpen,
+  })
 
   const icon = leadingIcon || iconsMapper[type]
 
   return (
-    <Animations.Slide isOpen={isOpen} direction={'down'}>
-      <div className={classes}>
-        {icon && <span className={styles.leadingIcon}>{icon}</span>}
-        <div className={styles.mainContent}>{children}</div>
-        {trailingComponent}
-      </div>
-    </Animations.Slide>
+    <div className={classes}>
+      {icon && <span className={styles.leadingIcon}>{icon}</span>}
+      <div className={styles.mainContent}>{children}</div>
+      {trailingComponent}
+    </div>
   )
 }
 
 Banner.defaultProps = {
   isOpen: false,
+  type: '',
 }
 
 Banner.propTypes = {
