@@ -8591,7 +8591,7 @@ exports[`Storyshots User Inputs/Buttons/Button Play Ground 1`] = `
     className="center"
   >
     <button
-      className="button large fill"
+      className="button medium fill"
       disabled={false}
       onClick={[Function]}
       type="button"
