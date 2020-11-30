@@ -1,7 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
-import { Animations } from '../Animations/'
 import { ErrorCircleOutlined } from '@anyvision/anv-icons'
 import { Warning } from '@anyvision/anv-icons'
 import { CheckCircleOutlined } from '@anyvision/anv-icons'
@@ -23,9 +22,12 @@ const Banner = ({
   isOpen,
   type,
 }) => {
-  const classes = classNames(styles.banner, className, styles[type], {
-    [styles.open]: isOpen,
-  })
+  const classes = classNames(
+    styles.banner,
+    className,
+    { [styles[type]]: !!type },
+    { [styles.open]: isOpen },
+  )
 
   const icon = leadingIcon || iconsMapper[type]
 
@@ -40,7 +42,6 @@ const Banner = ({
 
 Banner.defaultProps = {
   isOpen: false,
-  type: '',
 }
 
 Banner.propTypes = {

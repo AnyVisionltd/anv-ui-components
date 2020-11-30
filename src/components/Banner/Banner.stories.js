@@ -83,23 +83,6 @@ export const TypeError = () => {
   )
 }
 
-export const PlayGround = () => {
-  const withIcon = boolean('leading icon', false)
-  const withTrailingComponent = boolean('trailing component', false)
-  return (
-    <React.Fragment>
-      <Banner
-        isOpen
-        leadingIcon={withIcon ? <SunIcon /> : null}
-        trailingComponent={withTrailingComponent ? myButton : null}
-        type={select(
-          'type',
-          ['info', 'warning', 'error', 'success'],
-          'warning',
-        )}
-      >
-        {text('text', 'Banner Text')}
-      </Banner>
-    </React.Fragment>
-  )
-}
+export const PlayGround = args => <Banner {...args} />
+
+PlayGround.args = { children: 'Banner Text' }
