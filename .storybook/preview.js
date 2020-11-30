@@ -7,6 +7,7 @@ addParameters({
       order: ['Style', 'Icons', 'User Inputs', 'Content', 'User Feedback'],
     },
   },
+  controls: { hideNoControlsWarning: true },
 })
 
 addDecorator(avTheme)
