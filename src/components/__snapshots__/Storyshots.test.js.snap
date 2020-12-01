@@ -8352,8 +8352,22 @@ exports[`Storyshots User Feedback/Banner Default 1`] = `
     className="center"
   >
     <div
-      className="banner"
+      className="banner info"
     >
+      <span
+        className="leadingIcon"
+      >
+        <svg
+          data-name="Mail shiled"
+          height="1em"
+          viewBox="0 0 24 24"
+          width="1em"
+        >
+          <path
+            d="M20.365 5.71a.834.834 0 00-.7-.167 2.284 2.284 0 01-1.834-.383.834.834 0 00-.984 0 2.284 2.284 0 01-1.834.383A.834.834 0 0014 6.36v2.76a3.852 3.852 0 001.534 3.085l1.309.967a.834.834 0 00.984 0l1.309-.967A3.852 3.852 0 0020.67 9.12V6.36a.834.834 0 00-.305-.65zm-1.359 3.41a2.176 2.176 0 01-.834 1.742l-.834.584-.834-.6a2.176 2.176 0 01-.834-1.742V7.278a3.893 3.893 0 001.667-.45 3.893 3.893 0 001.667.45zm.834 5a.834.834 0 00-.834.834v2.5a.834.834 0 01-.834.834H6.5a.834.834 0 01-.834-.834V9.503l4.9 4.9a2.5 2.5 0 003.551-.017l-.584-.592-.613-.562a.834.834 0 01-1.167 0l-4.91-4.9H11.5a.834.834 0 100-1.667h-5A2.5 2.5 0 004 9.162v8.337a2.5 2.5 0 002.5 2.5h11.673a2.5 2.5 0 002.5-2.5v-2.5a.834.834 0 00-.834-.834z"
+          />
+        </svg>
+      </span>
       <div
         className="mainContent"
       >
@@ -8378,8 +8392,22 @@ exports[`Storyshots User Feedback/Banner Play Ground 1`] = `
     className="center"
   >
     <div
-      className="banner"
+      className="banner info"
     >
+      <span
+        className="leadingIcon"
+      >
+        <svg
+          data-name="Mail shiled"
+          height="1em"
+          viewBox="0 0 24 24"
+          width="1em"
+        >
+          <path
+            d="M20.365 5.71a.834.834 0 00-.7-.167 2.284 2.284 0 01-1.834-.383.834.834 0 00-.984 0 2.284 2.284 0 01-1.834.383A.834.834 0 0014 6.36v2.76a3.852 3.852 0 001.534 3.085l1.309.967a.834.834 0 00.984 0l1.309-.967A3.852 3.852 0 0020.67 9.12V6.36a.834.834 0 00-.305-.65zm-1.359 3.41a2.176 2.176 0 01-.834 1.742l-.834.584-.834-.6a2.176 2.176 0 01-.834-1.742V7.278a3.893 3.893 0 001.667-.45 3.893 3.893 0 001.667.45zm.834 5a.834.834 0 00-.834.834v2.5a.834.834 0 01-.834.834H6.5a.834.834 0 01-.834-.834V9.503l4.9 4.9a2.5 2.5 0 003.551-.017l-.584-.592-.613-.562a.834.834 0 01-1.167 0l-4.91-4.9H11.5a.834.834 0 100-1.667h-5A2.5 2.5 0 004 9.162v8.337a2.5 2.5 0 002.5 2.5h11.673a2.5 2.5 0 002.5-2.5v-2.5a.834.834 0 00-.834-.834z"
+          />
+        </svg>
+      </span>
       <div
         className="mainContent"
       >
@@ -8501,7 +8529,7 @@ exports[`Storyshots User Feedback/Banner With Leading Icon 1`] = `
     className="center"
   >
     <div
-      className="banner open"
+      className="banner info open"
     >
       <span
         className="leadingIcon"
@@ -8524,8 +8552,22 @@ exports[`Storyshots User Feedback/Banner With Trailing Component 1`] = `
     className="center"
   >
     <div
-      className="banner open"
+      className="banner info open"
     >
+      <span
+        className="leadingIcon"
+      >
+        <svg
+          data-name="Mail shiled"
+          height="1em"
+          viewBox="0 0 24 24"
+          width="1em"
+        >
+          <path
+            d="M20.365 5.71a.834.834 0 00-.7-.167 2.284 2.284 0 01-1.834-.383.834.834 0 00-.984 0 2.284 2.284 0 01-1.834.383A.834.834 0 0014 6.36v2.76a3.852 3.852 0 001.534 3.085l1.309.967a.834.834 0 00.984 0l1.309-.967A3.852 3.852 0 0020.67 9.12V6.36a.834.834 0 00-.305-.65zm-1.359 3.41a2.176 2.176 0 01-.834 1.742l-.834.584-.834-.6a2.176 2.176 0 01-.834-1.742V7.278a3.893 3.893 0 001.667-.45 3.893 3.893 0 001.667.45zm.834 5a.834.834 0 00-.834.834v2.5a.834.834 0 01-.834.834H6.5a.834.834 0 01-.834-.834V9.503l4.9 4.9a2.5 2.5 0 003.551-.017l-.584-.592-.613-.562a.834.834 0 01-1.167 0l-4.91-4.9H11.5a.834.834 0 100-1.667h-5A2.5 2.5 0 004 9.162v8.337a2.5 2.5 0 002.5 2.5h11.673a2.5 2.5 0 002.5-2.5v-2.5a.834.834 0 00-.834-.834z"
+          />
+        </svg>
+      </span>
       <div
         className="mainContent"
       >
@@ -9717,6 +9759,452 @@ exports[`Storyshots User Inputs/ChipsInput Play Ground 1`] = `
         This is the helper text
          
       </label>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots User Inputs/FormProvider Basic 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="card"
+      style={
+        Object {
+          "display": "grid",
+          "gridGap": "8px",
+        }
+      }
+    >
+      <div
+        className="container fullWidth view"
+      >
+        <div
+          className="TextField outline text medium notEmpty withLabel"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+          >
+            Username
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <input
+              defaultValue="AnyVisionAdmin"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="container fullWidth view"
+      >
+        <div
+          className="TextField outline number medium notEmpty withLabel"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+          >
+            Age
+          </label>
+          <div
+            className="inputBase number inputBase bottom"
+          >
+            <input
+              defaultValue={24}
+              onChange={[Function]}
+              readOnly={false}
+              type="number"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="container fullWidth view"
+      >
+        <div
+          className="TextField outline password medium notEmpty withLabel"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+          >
+            Password
+          </label>
+          <div
+            className="inputBase password inputBase bottom"
+          >
+            <input
+              defaultValue="123456789"
+              onChange={[Function]}
+              readOnly={false}
+              type="password"
+            />
+            <button
+              className="button medium ghost iconButton small ghost trailingIcon trailingIcon"
+              disabled={false}
+              onClick={[Function]}
+              type="button"
+            >
+              <svg
+                data-name="Eye disabled"
+                data-password-toggle={true}
+                height="1em"
+                viewBox="0 0 24 24"
+                width="1em"
+              >
+                <path
+                  d="M11.204 7.561a5.2 5.2 0 01.8-.057c2.384 0 4.625 1.717 5.93 4.5a11.417 11.417 0 01-.675 1.229.749.749 0 101.274.787 11.822 11.822 0 00.907-1.724.75.75 0 000-.592c-1.519-3.52-4.367-5.7-7.436-5.7a5.825 5.825 0 00-1.049.09.76.76 0 10.255 1.5zM5.785 4.72A.753.753 0 004.72 5.785l2.324 2.319a10.96 10.96 0 00-2.481 3.6.75.75 0 000 .6c1.514 3.516 4.363 5.7 7.436 5.7a6.942 6.942 0 003.786-1.154l2.429 2.436a.753.753 0 101.064-1.064zm4.767 6.889l1.837 1.837a1.357 1.357 0 01-.39.052 1.5 1.5 0 01-1.495-1.494 1.357 1.357 0 01.048-.395zm1.452 4.888c-2.384 0-4.625-1.717-5.922-4.5a9.063 9.063 0 012.022-2.839l1.324 1.346a3 3 0 004.07 4.07l1.192 1.177a5.427 5.427 0 01-2.691.75z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        className="container fullWidth view"
+      >
+        <div
+          className="TextField outline options medium notEmpty"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+          />
+          <div
+            className="inputBase options inputBase"
+          >
+            <input
+              onChange={[Function]}
+              readOnly={true}
+              type="options"
+              value={1}
+            />
+            <div
+              className="trailingIcon trailingIcon"
+            >
+              <svg
+                className="optionsIcon"
+              />
+            </div>
+          </div>
+        </div>
+        <portal-for-test>
+          <div
+            className="menuContainer"
+            style={
+              Object {
+                "left": "0",
+                "position": "absolute",
+                "top": "0",
+              }
+            }
+          />
+        </portal-for-test>
+      </div>
+      <div
+        className="checkboxLabel"
+      >
+        <label
+          className="checkbox checked disabled"
+        >
+          <input
+            checked={true}
+            className="parent"
+            disabled={false}
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="iconContainer"
+          >
+            <svg />
+          </span>
+        </label>
+        <label>
+          Check box
+        </label>
+      </div>
+      <div
+        className="checkboxLabel"
+      >
+        <label
+          className="radio checked disabled"
+        >
+          <input
+            checked={true}
+            disabled={false}
+            onChange={[Function]}
+            type="radio"
+          />
+          <span
+            className="iconContainer"
+          >
+            <span
+              className="circle"
+            />
+          </span>
+        </label>
+        <label>
+          Radio Button
+        </label>
+      </div>
+      <div
+        className="checkboxLabel"
+      >
+        <div
+          className="switch disabled"
+        >
+          <label
+            className="switchLabel"
+          >
+            <div
+              className="switchLine"
+            />
+            <div
+              className="switchToggle"
+            >
+              <span
+                className="switchToggleInner"
+              />
+              <input
+                defaultChecked={true}
+                disabled={false}
+                onChange={[Function]}
+                type="checkbox"
+              />
+            </div>
+          </label>
+        </div>
+        <label>
+          Switch
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots User Inputs/FormProvider Nested 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="card"
+      style={
+        Object {
+          "display": "grid",
+          "gridGap": "8px",
+        }
+      }
+    >
+      <div
+        className="container fullWidth view"
+      >
+        <div
+          className="TextField outline text medium notEmpty withLabel"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+          >
+            First Name
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <input
+              defaultValue="Any"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="container fullWidth view"
+      >
+        <div
+          className="TextField outline text medium notEmpty withLabel"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+          >
+            Last Name
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <input
+              defaultValue="Vision"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+            />
+          </div>
+        </div>
+      </div>
+      <hr
+        style={
+          Object {
+            "borderTop": "1px solid",
+            "width": "100%",
+          }
+        }
+      />
+      <button
+        className="button medium ghost iconButton small ghost"
+        disabled={false}
+        onClick={[Function]}
+        style={
+          Object {
+            "justifySelf": "end",
+          }
+        }
+        type="button"
+      >
+        <svg
+          data-name="Pencil / Edit"
+          height="1em"
+          viewBox="0 0 24 24"
+          width="1em"
+        >
+          <path
+            d="M19.5 8.43a.75.75 0 00-.217-.532L16.1 4.717a.761.761 0 00-1.065 0L12.914 6.84l-8.2 8.2a.75.75 0 00-.214.529v3.18a.75.75 0 00.75.75h3.18a.75.75 0 00.57-.217l8.152-8.2L19.281 9a.892.892 0 00.165-.247.75.75 0 000-.18.525.525 0 000-.1zM8.122 18H6v-2.123l7.447-7.447 2.122 2.122zm8.5-8.5L14.5 7.372l1.065-1.057 2.119 2.115z"
+          />
+        </svg>
+      </button>
+      <div
+        className="container fullWidth"
+      >
+        <div
+          className="TextField outline text medium notEmpty withLabel"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+          >
+            Username
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <input
+              defaultValue="AnyVisionAdmin"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="container fullWidth view"
+      >
+        <div
+          className="TextField outline password medium notEmpty withLabel"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+          >
+            Password
+          </label>
+          <div
+            className="inputBase password inputBase bottom"
+          >
+            <input
+              defaultValue="123456789"
+              onChange={[Function]}
+              readOnly={false}
+              type="password"
+            />
+            <button
+              className="button medium ghost iconButton small ghost trailingIcon trailingIcon"
+              disabled={false}
+              onClick={[Function]}
+              type="button"
+            >
+              <svg
+                data-name="Eye disabled"
+                data-password-toggle={true}
+                height="1em"
+                viewBox="0 0 24 24"
+                width="1em"
+              >
+                <path
+                  d="M11.204 7.561a5.2 5.2 0 01.8-.057c2.384 0 4.625 1.717 5.93 4.5a11.417 11.417 0 01-.675 1.229.749.749 0 101.274.787 11.822 11.822 0 00.907-1.724.75.75 0 000-.592c-1.519-3.52-4.367-5.7-7.436-5.7a5.825 5.825 0 00-1.049.09.76.76 0 10.255 1.5zM5.785 4.72A.753.753 0 004.72 5.785l2.324 2.319a10.96 10.96 0 00-2.481 3.6.75.75 0 000 .6c1.514 3.516 4.363 5.7 7.436 5.7a6.942 6.942 0 003.786-1.154l2.429 2.436a.753.753 0 101.064-1.064zm4.767 6.889l1.837 1.837a1.357 1.357 0 01-.39.052 1.5 1.5 0 01-1.495-1.494 1.357 1.357 0 01.048-.395zm1.452 4.888c-2.384 0-4.625-1.717-5.922-4.5a9.063 9.063 0 012.022-2.839l1.324 1.346a3 3 0 004.07 4.07l1.192 1.177a5.427 5.427 0 01-2.691.75z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <hr
+        style={
+          Object {
+            "borderTop": "1px solid",
+            "width": "100%",
+          }
+        }
+      />
+      <div
+        className="container fullWidth view"
+      >
+        <div
+          className="TextField outline number medium notEmpty withLabel"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+          >
+            Age
+          </label>
+          <div
+            className="inputBase number inputBase bottom"
+          >
+            <input
+              defaultValue={24}
+              onChange={[Function]}
+              readOnly={false}
+              type="number"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="checkboxLabel"
+      >
+        <label
+          className="checkbox checked disabled"
+        >
+          <input
+            checked={true}
+            className="parent"
+            disabled={false}
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="iconContainer"
+          >
+            <svg />
+          </span>
+        </label>
+        <label>
+          Confirm
+        </label>
+      </div>
     </div>
   </div>
 </div>
@@ -12315,452 +12803,6 @@ exports[`Storyshots User Inputs/TextField With Value 1`] = `
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots User Inputs/FormProvider Basic 1`] = `
-<div>
-  <div
-    className="center"
-  >
-    <div
-      className="card"
-      style={
-        Object {
-          "display": "grid",
-          "gridGap": "8px",
-        }
-      }
-    >
-      <div
-        className="container fullWidth view"
-      >
-        <div
-          className="TextField outline text medium notEmpty withLabel"
-          onClick={[Function]}
-        >
-          <label
-            className="label"
-          >
-            Username
-          </label>
-          <div
-            className="inputBase text inputBase bottom"
-          >
-            <input
-              defaultValue="AnyVisionAdmin"
-              onChange={[Function]}
-              readOnly={false}
-              type="text"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        className="container fullWidth view"
-      >
-        <div
-          className="TextField outline number medium notEmpty withLabel"
-          onClick={[Function]}
-        >
-          <label
-            className="label"
-          >
-            Age
-          </label>
-          <div
-            className="inputBase number inputBase bottom"
-          >
-            <input
-              defaultValue={24}
-              onChange={[Function]}
-              readOnly={false}
-              type="number"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        className="container fullWidth view"
-      >
-        <div
-          className="TextField outline password medium notEmpty withLabel"
-          onClick={[Function]}
-        >
-          <label
-            className="label"
-          >
-            Password
-          </label>
-          <div
-            className="inputBase password inputBase bottom"
-          >
-            <input
-              defaultValue="123456789"
-              onChange={[Function]}
-              readOnly={false}
-              type="password"
-            />
-            <button
-              className="button medium ghost iconButton small ghost trailingIcon trailingIcon"
-              disabled={false}
-              onClick={[Function]}
-              type="button"
-            >
-              <svg
-                data-name="Eye disabled"
-                data-password-toggle={true}
-                height="1em"
-                viewBox="0 0 24 24"
-                width="1em"
-              >
-                <path
-                  d="M11.204 7.561a5.2 5.2 0 01.8-.057c2.384 0 4.625 1.717 5.93 4.5a11.417 11.417 0 01-.675 1.229.749.749 0 101.274.787 11.822 11.822 0 00.907-1.724.75.75 0 000-.592c-1.519-3.52-4.367-5.7-7.436-5.7a5.825 5.825 0 00-1.049.09.76.76 0 10.255 1.5zM5.785 4.72A.753.753 0 004.72 5.785l2.324 2.319a10.96 10.96 0 00-2.481 3.6.75.75 0 000 .6c1.514 3.516 4.363 5.7 7.436 5.7a6.942 6.942 0 003.786-1.154l2.429 2.436a.753.753 0 101.064-1.064zm4.767 6.889l1.837 1.837a1.357 1.357 0 01-.39.052 1.5 1.5 0 01-1.495-1.494 1.357 1.357 0 01.048-.395zm1.452 4.888c-2.384 0-4.625-1.717-5.922-4.5a9.063 9.063 0 012.022-2.839l1.324 1.346a3 3 0 004.07 4.07l1.192 1.177a5.427 5.427 0 01-2.691.75z"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div
-        className="container fullWidth view"
-      >
-        <div
-          className="TextField outline options medium notEmpty"
-          onClick={[Function]}
-        >
-          <label
-            className="label"
-          />
-          <div
-            className="inputBase options inputBase"
-          >
-            <input
-              onChange={[Function]}
-              readOnly={true}
-              type="options"
-              value={1}
-            />
-            <div
-              className="trailingIcon trailingIcon"
-            >
-              <svg
-                className="optionsIcon"
-              />
-            </div>
-          </div>
-        </div>
-        <portal-for-test>
-          <div
-            className="menuContainer"
-            style={
-              Object {
-                "left": "0",
-                "position": "absolute",
-                "top": "0",
-              }
-            }
-          />
-        </portal-for-test>
-      </div>
-      <div
-        className="checkboxLabel"
-      >
-        <label
-          className="checkbox checked disabled"
-        >
-          <input
-            checked={true}
-            className="parent"
-            disabled={false}
-            onChange={[Function]}
-            type="checkbox"
-          />
-          <span
-            className="iconContainer"
-          >
-            <svg />
-          </span>
-        </label>
-        <label>
-          Check box
-        </label>
-      </div>
-      <div
-        className="checkboxLabel"
-      >
-        <label
-          className="radio checked disabled"
-        >
-          <input
-            checked={true}
-            disabled={false}
-            onChange={[Function]}
-            type="radio"
-          />
-          <span
-            className="iconContainer"
-          >
-            <span
-              className="circle"
-            />
-          </span>
-        </label>
-        <label>
-          Radio Button
-        </label>
-      </div>
-      <div
-        className="checkboxLabel"
-      >
-        <div
-          className="switch disabled"
-        >
-          <label
-            className="switchLabel"
-          >
-            <div
-              className="switchLine"
-            />
-            <div
-              className="switchToggle"
-            >
-              <span
-                className="switchToggleInner"
-              />
-              <input
-                defaultChecked={true}
-                disabled={false}
-                onChange={[Function]}
-                type="checkbox"
-              />
-            </div>
-          </label>
-        </div>
-        <label>
-          Switch
-        </label>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots User Inputs/FormProvider Nested 1`] = `
-<div>
-  <div
-    className="center"
-  >
-    <div
-      className="card"
-      style={
-        Object {
-          "display": "grid",
-          "gridGap": "8px",
-        }
-      }
-    >
-      <div
-        className="container fullWidth view"
-      >
-        <div
-          className="TextField outline text medium notEmpty withLabel"
-          onClick={[Function]}
-        >
-          <label
-            className="label"
-          >
-            First Name
-          </label>
-          <div
-            className="inputBase text inputBase bottom"
-          >
-            <input
-              defaultValue="Any"
-              onChange={[Function]}
-              readOnly={false}
-              type="text"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        className="container fullWidth view"
-      >
-        <div
-          className="TextField outline text medium notEmpty withLabel"
-          onClick={[Function]}
-        >
-          <label
-            className="label"
-          >
-            Last Name
-          </label>
-          <div
-            className="inputBase text inputBase bottom"
-          >
-            <input
-              defaultValue="Vision"
-              onChange={[Function]}
-              readOnly={false}
-              type="text"
-            />
-          </div>
-        </div>
-      </div>
-      <hr
-        style={
-          Object {
-            "borderTop": "1px solid",
-            "width": "100%",
-          }
-        }
-      />
-      <button
-        className="button medium ghost iconButton small ghost"
-        disabled={false}
-        onClick={[Function]}
-        style={
-          Object {
-            "justifySelf": "end",
-          }
-        }
-        type="button"
-      >
-        <svg
-          data-name="Pencil / Edit"
-          height="1em"
-          viewBox="0 0 24 24"
-          width="1em"
-        >
-          <path
-            d="M19.5 8.43a.75.75 0 00-.217-.532L16.1 4.717a.761.761 0 00-1.065 0L12.914 6.84l-8.2 8.2a.75.75 0 00-.214.529v3.18a.75.75 0 00.75.75h3.18a.75.75 0 00.57-.217l8.152-8.2L19.281 9a.892.892 0 00.165-.247.75.75 0 000-.18.525.525 0 000-.1zM8.122 18H6v-2.123l7.447-7.447 2.122 2.122zm8.5-8.5L14.5 7.372l1.065-1.057 2.119 2.115z"
-          />
-        </svg>
-      </button>
-      <div
-        className="container fullWidth"
-      >
-        <div
-          className="TextField outline text medium notEmpty withLabel"
-          onClick={[Function]}
-        >
-          <label
-            className="label"
-          >
-            Username
-          </label>
-          <div
-            className="inputBase text inputBase bottom"
-          >
-            <input
-              defaultValue="AnyVisionAdmin"
-              onChange={[Function]}
-              readOnly={false}
-              type="text"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        className="container fullWidth view"
-      >
-        <div
-          className="TextField outline password medium notEmpty withLabel"
-          onClick={[Function]}
-        >
-          <label
-            className="label"
-          >
-            Password
-          </label>
-          <div
-            className="inputBase password inputBase bottom"
-          >
-            <input
-              defaultValue="123456789"
-              onChange={[Function]}
-              readOnly={false}
-              type="password"
-            />
-            <button
-              className="button medium ghost iconButton small ghost trailingIcon trailingIcon"
-              disabled={false}
-              onClick={[Function]}
-              type="button"
-            >
-              <svg
-                data-name="Eye disabled"
-                data-password-toggle={true}
-                height="1em"
-                viewBox="0 0 24 24"
-                width="1em"
-              >
-                <path
-                  d="M11.204 7.561a5.2 5.2 0 01.8-.057c2.384 0 4.625 1.717 5.93 4.5a11.417 11.417 0 01-.675 1.229.749.749 0 101.274.787 11.822 11.822 0 00.907-1.724.75.75 0 000-.592c-1.519-3.52-4.367-5.7-7.436-5.7a5.825 5.825 0 00-1.049.09.76.76 0 10.255 1.5zM5.785 4.72A.753.753 0 004.72 5.785l2.324 2.319a10.96 10.96 0 00-2.481 3.6.75.75 0 000 .6c1.514 3.516 4.363 5.7 7.436 5.7a6.942 6.942 0 003.786-1.154l2.429 2.436a.753.753 0 101.064-1.064zm4.767 6.889l1.837 1.837a1.357 1.357 0 01-.39.052 1.5 1.5 0 01-1.495-1.494 1.357 1.357 0 01.048-.395zm1.452 4.888c-2.384 0-4.625-1.717-5.922-4.5a9.063 9.063 0 012.022-2.839l1.324 1.346a3 3 0 004.07 4.07l1.192 1.177a5.427 5.427 0 01-2.691.75z"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <hr
-        style={
-          Object {
-            "borderTop": "1px solid",
-            "width": "100%",
-          }
-        }
-      />
-      <div
-        className="container fullWidth view"
-      >
-        <div
-          className="TextField outline number medium notEmpty withLabel"
-          onClick={[Function]}
-        >
-          <label
-            className="label"
-          >
-            Age
-          </label>
-          <div
-            className="inputBase number inputBase bottom"
-          >
-            <input
-              defaultValue={24}
-              onChange={[Function]}
-              readOnly={false}
-              type="number"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        className="checkboxLabel"
-      >
-        <label
-          className="checkbox checked disabled"
-        >
-          <input
-            checked={true}
-            className="parent"
-            disabled={false}
-            onChange={[Function]}
-            type="checkbox"
-          />
-          <span
-            className="iconContainer"
-          >
-            <svg />
-          </span>
-        </label>
-        <label>
-          Confirm
-        </label>
       </div>
     </div>
   </div>
