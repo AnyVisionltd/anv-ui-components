@@ -59,6 +59,13 @@
   justify-content: center;
 }
 
-.fullWidth {
+div.fullWidth {
   width: 100%;
+}
+
+.card {
+  @include av-elevation(sticky);
+  width: av-size(sz-640);
+  padding: av-space();
+  border-radius: av-radius();
 }

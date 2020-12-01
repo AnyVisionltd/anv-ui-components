@@ -1,9 +1,8 @@
 import React, { memo, useState } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
+import { EyeEnabled, EyeDisabled } from '@anyvision/anv-icons'
 import { IconButton } from '../IconButton'
-import { ReactComponent as EyeDisabledIcon } from '../../assets/svg/EyeDisabled.svg'
-import { ReactComponent as EyeEnabledIcon } from '../../assets/svg/EyeEnabled.svg'
 import styles from './InputBase.module.scss'
 
 const inputElements = Object.freeze({
@@ -76,10 +75,11 @@ const InputBase = React.forwardRef((props, ref) => {
         disabled={disabled}
         className={classNames(styles.trailingIcon, trailingIconClassName)}
       >
+        {/* data-password-toggle used for TextField view mode */}
         {inputType === inputTypes.PASSWORD ? (
-          <EyeDisabledIcon />
+          <EyeDisabled data-password-toggle />
         ) : (
-          <EyeEnabledIcon />
+          <EyeEnabled data-password-toggle />
         )}
       </IconButton>
     )

@@ -1,6 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
+import { useFormProvider } from '../../index'
 import styles from './Switch.module.scss'
 
 const Switch = ({
@@ -8,14 +9,17 @@ const Switch = ({
   className,
   checked,
   disabled,
+  view,
   onChange,
   onClick,
   ...otherProps
 }) => {
+  const { isView } = useFormProvider({ view })
+
   const classes = classNames(
     styles.switch,
     !checked && styles.unchecked,
-    disabled ? styles.disabled : styles.enabled,
+    (disabled || isView) && styles.disabled,
     className,
   )
 
@@ -53,6 +57,10 @@ Switch.propTypes = {
   checked: propTypes.bool,
   /** If true, the switch will be disabled. */
   disabled: propTypes.bool,
+  /** If true, will be view mode. <br/>
+   *  <i style="background-color:#ffc40026;">NOTE: Also from \<FormProvider> by context. </i>
+   */
+  view: propTypes.bool,
   /** Callback when changed. */
   onChange: propTypes.func,
 }

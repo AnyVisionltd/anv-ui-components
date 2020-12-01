@@ -1,21 +1,25 @@
 import React from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
+import { useFormProvider } from '../../index'
 import styles from './Radio.module.scss'
 
 const Radio = ({
   checked,
   indeterminate,
   disabled,
+  view,
   onChange,
   className,
   id,
   ...otherProps
 }) => {
+  const { isView } = useFormProvider({ view })
+
   const classes = classNames(
     styles.radio,
     checked && styles.checked,
-    disabled && styles.disabled,
+    (disabled || isView) && styles.disabled,
     className,
   )
 
@@ -50,6 +54,10 @@ Radio.defaultProps = {
 Radio.propTypes = {
   /** If true, the radio will be disabled. */
   disabled: propTypes.bool,
+  /** If true, will be view mode. <br/>
+   *  <i style="background-color:#ffc40026;">NOTE: Also from \<FormProvider> by context. </i>
+   */
+  view: propTypes.bool,
   /** For css customization. */
   className: propTypes.string,
   /** Whether the radio button is selected or not. */

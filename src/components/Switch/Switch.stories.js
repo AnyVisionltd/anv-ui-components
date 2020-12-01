@@ -10,7 +10,7 @@ export default {
   decorators: [centerDecorator],
 }
 
-export const Default = () => {
+export const Basic = () => {
   const [isEnabled, setIsEnabled] = useState(true)
 
   const onChange = ({ target }) => {
@@ -24,7 +24,7 @@ export const Default = () => {
   )
 }
 
-export const MultipleSwitches = () => {
+export const States = () => {
   const [isEnabled1, setIsEnabled1] = useState(false)
   const [isEnabled2, setIsEnabled2] = useState(true)
   const [isEnabled3, setIsEnabled3] = useState(false)
@@ -58,6 +58,7 @@ export const MultipleSwitches = () => {
         onChange={value => onChange(value, setIsEnabled4)}
         id='switch-example4'
       />
+      <Switch checked view />
     </div>
   )
 }

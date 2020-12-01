@@ -1,7 +1,6 @@
 import React from 'react'
 import { boolean, number, select } from '@storybook/addon-knobs'
-import InputBase from './InputBase'
-import { IconButton } from '../IconButton'
+import { InputBase, IconButton } from '../../index'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import styles from '../../storybook/index.module.scss'

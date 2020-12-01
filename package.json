@@ -37,8 +37,8 @@
     "lint:fix": "eslint -c .eslintrc.js src --fix",
     "test:staged": "cross-env CI=true react-scripts test --bail --env=jsdom --findRelatedTests",
     "test-jenkins": "CI=true npm test",
-    "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public",
+    "storybook": "start-storybook -p 9009",
+    "build-storybook": "build-storybook",
     "prepublishOnly": "npm run build"
   },
   "browserslist": {
@@ -61,14 +61,14 @@
     "@babel/cli": "^7.8.4",
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-react": "^7.9.4",
-    "@storybook/addon-actions": "6.1.0-alpha.1",
+    "@storybook/addon-actions": "6.1.9",
     "@storybook/addon-controls": "^6.1.9",
-    "@storybook/addon-docs": "6.1.0-alpha.1",
-    "@storybook/addon-knobs": "6.1.0-alpha.1",
-    "@storybook/addon-storyshots": "6.1.0-alpha.1",
-    "@storybook/addons": "6.1.0-alpha.1",
-    "@storybook/preset-create-react-app": "^3.1.4",
-    "@storybook/react": "6.1.0-alpha.1",
+    "@storybook/addon-docs": "6.1.9",
+    "@storybook/addon-knobs": "6.1.9",
+    "@storybook/addon-storyshots": "6.1.9",
+    "@storybook/addons": "6.1.9",
+    "@storybook/preset-create-react-app": "^3.1.5",
+    "@storybook/react": "6.1.9",
     "@svgr/rollup": "^5.4.0",
     "@svgr/webpack": "^5.3.1",
     "@testing-library/dom": "^7.2.0",
@@ -94,7 +94,9 @@
     "rollup-plugin-postcss": "^3.1.2",
     "rollup-plugin-sass": "^1.2.2",
     "rollup-plugin-url": "^3.0.1",
-    "url-loader": "^4.1.0"
+    "url-loader": "^4.1.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "jest": {
     "moduleNameMapper": {

@@ -42,6 +42,7 @@ const Banner = ({
 
 Banner.defaultProps = {
   isOpen: false,
+  type: 'info',
 }
 
 Banner.propTypes = {

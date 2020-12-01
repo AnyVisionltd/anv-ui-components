@@ -7,15 +7,13 @@
 - Fixed cursor jumping to the end when using controlled TextField
 - Tooltip child disabled bug fix
 
-### Changed
-
-- Update react to 17.0.1
-
 ### Added
 
 - Added Banner component and implemented in DialogWizard
 - Added tooltip show prop
 - Added SelectionGroup component
+- Add View prop to \<TextField/> \<Checkbox/> \<Radio/> \<Switch/>
+- Add FormProvider Component
 
 ## 1.0.0 - 06-09-2020
 

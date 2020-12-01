@@ -10,7 +10,7 @@ export default {
   decorators: [centerDecorator],
 }
 
-export const Default = () => {
+export const Basic = () => {
   const [isChecked, setChecked] = useState(false)
   const onChange = ({ target }) => {
     setChecked(target.checked)
@@ -26,16 +26,17 @@ export const Default = () => {
   )
 }
 
-export const states = () => (
+export const States = () => (
   <>
     <Radio className={styles.microMargin} checked />
     <Radio className={styles.microMargin} />
     <Radio className={styles.microMargin} checked disabled />
     <Radio className={styles.microMargin} disabled />
+    <Radio className={styles.microMargin} view />
   </>
 )
 
-export const playground = () => (
+export const Playground = () => (
   <>
     <Radio
       checked={boolean('checked', false)}

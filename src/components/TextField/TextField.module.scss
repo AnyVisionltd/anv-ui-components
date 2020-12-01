@@ -252,3 +252,20 @@
 .textFieldMenu {
   width: av-size(sz-240);
 }
+
+.view {
+  * {
+    pointer-events: none !important;
+    border: none !important;
+  }
+
+  .optionsIcon {
+    display: none;
+  }
+
+  .inputBase {
+    [data-password-toggle] {
+      display: none;
+    }
+  }
+}
