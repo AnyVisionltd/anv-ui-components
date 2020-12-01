@@ -6,12 +6,12 @@ RUN apk update \
        busybox-extras \
        libc-dev bash make g++
 
-RUN mkdir -p /root
-COPY . /root
-WORKDIR /root
+RUN mkdir -p /jenkins
+COPY . /jenkins
+WORKDIR /jenkins
 
 ## Copy Artifact certificate for login
-COPY .npmrc /root/.npmrc
+COPY .npmrc /jenkins/.npmrc
 RUN npm config set registry https://anyvision.jfrog.io/anyvision/api/npm/npm/
 ARG RUN_TYPE
 #RUN PYTHON=/usr/bin/python npm install
