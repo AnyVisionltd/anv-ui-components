@@ -1,6 +1,7 @@
 import React from 'react'
 import { fireEvent, render } from '@testing-library/react'
 import DialogWizard from './DialogWizard'
+import { Banner } from '../../index'
 
 describe('<DialogWizard />', () => {
   it('should render dialog and backdrop when isOpen', () => {
@@ -13,6 +14,19 @@ describe('<DialogWizard />', () => {
     const steps = [<div data-testid={'test-child'} />]
     const { queryByTestId } = render(<DialogWizard isOpen steps={steps} />)
     expect(queryByTestId('test-child')).not.toEqual(null)
+  })
+
+  it('should render banner into Wizard', () => {
+    const steps = [<div />]
+    const banner = (
+      <Banner isOpen type={'error'}>
+        Banner text
+      </Banner>
+    )
+    const { getByText } = render(
+      <DialogWizard isOpen steps={steps} banner={banner} />,
+    )
+    expect(getByText('Banner text')).toBeTruthy()
   })
 
   it('should change step when clicking next', () => {

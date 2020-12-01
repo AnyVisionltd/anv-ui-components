@@ -22,5 +22,6 @@ export { Tooltip } from './components/Tooltip'
 export { Snackbar } from './components/Snackbar'
 export { SelectionGroup } from './components/SelectionGroup'
 export { ViewProvider } from './components/ViewProvider'
+export { Banner } from './components/Banner'
 
 export { default as mockAutoSizer } from './testUtils/mockAutoSizer'

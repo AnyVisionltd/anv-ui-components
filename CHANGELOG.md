@@ -9,8 +9,9 @@
 
 ### Added
 
-- Add tooltip show prop
-- Add <SelectionGroup> component
+- Added Banner component and implemented in DialogWizard
+- Added tooltip show prop
+- Added SelectionGroup component
 - Add View prop to \<TextField/> \<Checkbox/> \<Radio/> \<Switch/>
 - Add ViewProvider Component
 
