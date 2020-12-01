@@ -7,14 +7,12 @@
 - Fixed cursor jumping to the end when using controlled TextField
 - Tooltip child disabled bug fix
 
-### Changed
-
-- Update react to 17.0.1
-
 ### Added
 
 - Add tooltip show prop
 - Add <SelectionGroup> component
+- Add View prop to \<TextField/> \<Checkbox/> \<Radio/> \<Switch/>
+- Add ViewProvider Component
 
 ## 1.0.0 - 06-09-2020
 
