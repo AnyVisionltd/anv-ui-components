@@ -27,10 +27,6 @@ const dividerStyle = {
   width: '100%',
 }
 
-const fullWidthStyle = {
-  width: '100%',
-}
-
 export const Basic = args => {
   const items = [
     { value: 1, label: 'Admin' },
@@ -43,25 +39,25 @@ export const Basic = args => {
         <TextField
           label={'Username'}
           defaultValue={'AnyVisionAdmin'}
-          style={fullWidthStyle}
+          className={styles.fullWidth}
         />
         <TextField
           type={'number'}
           label={'Age'}
           defaultValue={24}
-          style={fullWidthStyle}
+          className={styles.fullWidth}
         />
         <TextField
           type={'password'}
           label={'Password'}
           defaultValue={'123456789'}
-          style={fullWidthStyle}
+          className={styles.fullWidth}
         />
         <TextField
           defaultValue={1}
           type={'options'}
           items={items}
-          style={fullWidthStyle}
+          className={styles.fullWidth}
         />
         <div className={styles.checkboxLabel}>
           <Checkbox checked />
@@ -92,12 +88,12 @@ export const Nested = args => {
         <TextField
           label={'First Name'}
           defaultValue={'Any'}
-          style={fullWidthStyle}
+          className={styles.fullWidth}
         />
         <TextField
           label={'Last Name'}
           defaultValue={'Vision'}
-          style={fullWidthStyle}
+          className={styles.fullWidth}
         />
         <hr style={dividerStyle} />
         <IconButton
@@ -112,13 +108,13 @@ export const Nested = args => {
             label={'Username'}
             defaultValue={'AnyVisionAdmin'}
             view={false}
-            style={fullWidthStyle}
+            className={styles.fullWidth}
           />
           <TextField
             type={'password'}
             label={'Password'}
             defaultValue={'123456789'}
-            style={fullWidthStyle}
+            className={styles.fullWidth}
           />
         </ViewProvider>
         <hr style={dividerStyle} />
@@ -126,7 +122,7 @@ export const Nested = args => {
           type={'number'}
           label={'Age'}
           defaultValue={24}
-          style={fullWidthStyle}
+          className={styles.fullWidth}
         />
         <div className={styles.checkboxLabel}>
           <Checkbox checked />
