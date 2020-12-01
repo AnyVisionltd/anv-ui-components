@@ -12336,12 +12336,7 @@ exports[`Storyshots User Inputs/ViewProvider Basic 1`] = `
       }
     >
       <div
-        className="container view"
-        style={
-          Object {
-            "width": "100%",
-          }
-        }
+        className="container fullWidth view"
       >
         <div
           className="TextField outline text medium notEmpty withLabel"
@@ -12365,12 +12360,7 @@ exports[`Storyshots User Inputs/ViewProvider Basic 1`] = `
         </div>
       </div>
       <div
-        className="container view"
-        style={
-          Object {
-            "width": "100%",
-          }
-        }
+        className="container fullWidth view"
       >
         <div
           className="TextField outline number medium notEmpty withLabel"
@@ -12394,12 +12384,7 @@ exports[`Storyshots User Inputs/ViewProvider Basic 1`] = `
         </div>
       </div>
       <div
-        className="container view"
-        style={
-          Object {
-            "width": "100%",
-          }
-        }
+        className="container fullWidth view"
       >
         <div
           className="TextField outline password medium notEmpty withLabel"
@@ -12441,12 +12426,7 @@ exports[`Storyshots User Inputs/ViewProvider Basic 1`] = `
         </div>
       </div>
       <div
-        className="container view"
-        style={
-          Object {
-            "width": "100%",
-          }
-        }
+        className="container fullWidth view"
       >
         <div
           className="TextField outline options medium notEmpty"
@@ -12584,12 +12564,7 @@ exports[`Storyshots User Inputs/ViewProvider Nested 1`] = `
       }
     >
       <div
-        className="container view"
-        style={
-          Object {
-            "width": "100%",
-          }
-        }
+        className="container fullWidth view"
       >
         <div
           className="TextField outline text medium notEmpty withLabel"
@@ -12613,12 +12588,7 @@ exports[`Storyshots User Inputs/ViewProvider Nested 1`] = `
         </div>
       </div>
       <div
-        className="container view"
-        style={
-          Object {
-            "width": "100%",
-          }
-        }
+        className="container fullWidth view"
       >
         <div
           className="TextField outline text medium notEmpty withLabel"
@@ -12672,12 +12642,7 @@ exports[`Storyshots User Inputs/ViewProvider Nested 1`] = `
         </svg>
       </button>
       <div
-        className="container"
-        style={
-          Object {
-            "width": "100%",
-          }
-        }
+        className="container fullWidth"
       >
         <div
           className="TextField outline text medium notEmpty withLabel"
@@ -12701,12 +12666,7 @@ exports[`Storyshots User Inputs/ViewProvider Nested 1`] = `
         </div>
       </div>
       <div
-        className="container view"
-        style={
-          Object {
-            "width": "100%",
-          }
-        }
+        className="container fullWidth view"
       >
         <div
           className="TextField outline password medium notEmpty withLabel"
@@ -12756,12 +12716,7 @@ exports[`Storyshots User Inputs/ViewProvider Nested 1`] = `
         }
       />
       <div
-        className="container view"
-        style={
-          Object {
-            "width": "100%",
-          }
-        }
+        className="container fullWidth view"
       >
         <div
           className="TextField outline number medium notEmpty withLabel"
