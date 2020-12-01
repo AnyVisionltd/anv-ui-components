@@ -566,7 +566,7 @@ exports[`Storyshots Content/Lists/List With Leading 1`] = `
       >
         <div>
           <label
-            className="checkbox enabled"
+            className="checkbox"
           >
             <input
               checked={false}
@@ -594,7 +594,7 @@ exports[`Storyshots Content/Lists/List With Leading 1`] = `
       >
         <div>
           <label
-            className="checkbox enabled"
+            className="checkbox"
           >
             <input
               checked={false}
@@ -622,7 +622,7 @@ exports[`Storyshots Content/Lists/List With Leading 1`] = `
       >
         <div>
           <label
-            className="checkbox enabled"
+            className="checkbox"
           >
             <input
               checked={false}
@@ -650,7 +650,7 @@ exports[`Storyshots Content/Lists/List With Leading 1`] = `
       >
         <div>
           <label
-            className="checkbox enabled"
+            className="checkbox"
           >
             <input
               checked={false}
@@ -678,7 +678,7 @@ exports[`Storyshots Content/Lists/List With Leading 1`] = `
       >
         <div>
           <label
-            className="checkbox enabled"
+            className="checkbox"
           >
             <input
               checked={false}
@@ -706,7 +706,7 @@ exports[`Storyshots Content/Lists/List With Leading 1`] = `
       >
         <div>
           <label
-            className="checkbox enabled"
+            className="checkbox"
           >
             <input
               checked={false}
@@ -734,7 +734,7 @@ exports[`Storyshots Content/Lists/List With Leading 1`] = `
       >
         <div>
           <label
-            className="checkbox enabled"
+            className="checkbox"
           >
             <input
               checked={false}
@@ -8937,13 +8937,13 @@ exports[`Storyshots User Inputs/Buttons/IconButton With Class Name 1`] = `
 </div>
 `;
 
-exports[`Storyshots User Inputs/Checkbox Default 1`] = `
+exports[`Storyshots User Inputs/Checkbox Basic 1`] = `
 <div>
   <div
     className="center"
   >
     <label
-      className="checkbox enabled"
+      className="checkbox"
       htmlFor="checkbox-example"
     >
       <input
@@ -8974,7 +8974,7 @@ exports[`Storyshots User Inputs/Checkbox Playground 1`] = `
     className="center"
   >
     <label
-      className="checkbox enabled"
+      className="checkbox"
       htmlFor="checkbox-playground"
     >
       <input
@@ -9005,7 +9005,7 @@ exports[`Storyshots User Inputs/Checkbox States 1`] = `
     className="center"
   >
     <label
-      className="checkbox checked enabled microMargin"
+      className="checkbox checked microMargin"
     >
       <input
         checked={true}
@@ -9021,7 +9021,7 @@ exports[`Storyshots User Inputs/Checkbox States 1`] = `
       </span>
     </label>
     <label
-      className="checkbox enabled microMargin"
+      className="checkbox microMargin"
     >
       <input
         checked={false}
@@ -9051,7 +9051,7 @@ exports[`Storyshots User Inputs/Checkbox States 1`] = `
       </span>
     </label>
     <label
-      className="checkbox indeterminate enabled microMargin"
+      className="checkbox indeterminate microMargin"
     >
       <input
         checked={false}
@@ -9073,6 +9073,20 @@ exports[`Storyshots User Inputs/Checkbox States 1`] = `
         checked={false}
         className="parent"
         disabled={true}
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <span
+        className="iconContainer"
+      />
+    </label>
+    <label
+      className="checkbox disabled microMargin"
+    >
+      <input
+        checked={false}
+        className="parent"
+        disabled={false}
         onChange={[Function]}
         type="checkbox"
       />
@@ -9973,7 +9987,7 @@ exports[`Storyshots User Inputs/Menu With Is Open 1`] = `
         className="microMargin"
       >
         <div
-          className="switch unchecked enabled"
+          className="switch unchecked"
           onClick={[Function]}
         >
           <label
@@ -10064,7 +10078,7 @@ exports[`Storyshots User Inputs/Menu With Sub Menus 1`] = `
 </div>
 `;
 
-exports[`Storyshots User Inputs/Radio Default 1`] = `
+exports[`Storyshots User Inputs/Radio Basic 1`] = `
 <div>
   <div
     className="center"
@@ -10182,6 +10196,19 @@ exports[`Storyshots User Inputs/Radio States 1`] = `
       <input
         checked={false}
         disabled={true}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="iconContainer"
+      />
+    </label>
+    <label
+      className="radio disabled microMargin"
+    >
+      <input
+        checked={false}
+        disabled={false}
         onChange={[Function]}
         type="radio"
       />
@@ -10754,7 +10781,7 @@ exports[`Storyshots User Inputs/SelectionGroup With Icon 1`] = `
 </div>
 `;
 
-exports[`Storyshots User Inputs/Switch Default 1`] = `
+exports[`Storyshots User Inputs/Switch Basic 1`] = `
 <div>
   <div
     className="center"
@@ -10763,7 +10790,7 @@ exports[`Storyshots User Inputs/Switch Default 1`] = `
       className="marginFlexContainer"
     >
       <div
-        className="switch enabled"
+        className="switch"
       >
         <label
           className="switchLabel"
@@ -10798,7 +10825,7 @@ exports[`Storyshots User Inputs/Switch Default 1`] = `
 </div>
 `;
 
-exports[`Storyshots User Inputs/Switch Multiple Switches 1`] = `
+exports[`Storyshots User Inputs/Switch Playground 1`] = `
 <div>
   <div
     className="center"
@@ -10807,7 +10834,51 @@ exports[`Storyshots User Inputs/Switch Multiple Switches 1`] = `
       className="marginFlexContainer"
     >
       <div
-        className="switch unchecked enabled"
+        className="switch unchecked"
+      >
+        <label
+          className="switchLabel"
+          htmlFor="switch-playground"
+        >
+          <div
+            className="switchLine"
+          />
+          <div
+            className="switchToggle"
+          >
+            <span
+              className="switchToggleInner"
+            />
+            <input
+              defaultChecked={false}
+              disabled={false}
+              id="switch-playground"
+              onChange={[Function]}
+              type="checkbox"
+            />
+          </div>
+        </label>
+      </div>
+      <label
+        htmlFor="switch-playground"
+      >
+        Hit me!
+      </label>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots User Inputs/Switch States 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="marginFlexContainer"
+    >
+      <div
+        className="switch unchecked"
       >
         <label
           className="switchLabel"
@@ -10833,7 +10904,7 @@ exports[`Storyshots User Inputs/Switch Multiple Switches 1`] = `
         </label>
       </div>
       <div
-        className="switch enabled"
+        className="switch"
       >
         <label
           className="switchLabel"
@@ -10910,25 +10981,11 @@ exports[`Storyshots User Inputs/Switch Multiple Switches 1`] = `
           </div>
         </label>
       </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots User Inputs/Switch Playground 1`] = `
-<div>
-  <div
-    className="center"
-  >
-    <div
-      className="marginFlexContainer"
-    >
       <div
-        className="switch unchecked enabled"
+        className="switch disabled"
       >
         <label
           className="switchLabel"
-          htmlFor="switch-playground"
         >
           <div
             className="switchLine"
@@ -10940,20 +10997,79 @@ exports[`Storyshots User Inputs/Switch Playground 1`] = `
               className="switchToggleInner"
             />
             <input
-              defaultChecked={false}
+              defaultChecked={true}
               disabled={false}
-              id="switch-playground"
               onChange={[Function]}
               type="checkbox"
             />
           </div>
         </label>
       </div>
-      <label
-        htmlFor="switch-playground"
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots User Inputs/TextField Basic 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexMultipleRows"
+    >
+      <div
+        className="container"
       >
-        Hit me!
-      </label>
+        <div
+          className="TextField outline text medium notEmpty withLabel"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+          >
+            label
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <input
+              defaultValue="default value"
+              id="textField-1"
+              onChange={[Function]}
+              placeholder="placeholder"
+              readOnly={false}
+              type="text"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="container"
+      >
+        <div
+          className="TextField fill text medium notEmpty withLabel"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+          >
+            label
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <input
+              defaultValue="default value"
+              id="textField-2"
+              onChange={[Function]}
+              placeholder="placeholder"
+              readOnly={false}
+              type="text"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -11313,7 +11429,7 @@ exports[`Storyshots User Inputs/TextField Type Password 1`] = `
 </div>
 `;
 
-exports[`Storyshots User Inputs/TextField With Default Value 1`] = `
+exports[`Storyshots User Inputs/TextField View 1`] = `
 <div>
   <div
     className="center"
@@ -11322,25 +11438,26 @@ exports[`Storyshots User Inputs/TextField With Default Value 1`] = `
       className="flexMultipleRows"
     >
       <div
-        className="container"
+        className="container view"
       >
         <div
-          className="TextField outline text medium notEmpty withLabel"
+          className="TextField outline text medium"
           onClick={[Function]}
         >
           <label
-            className="label"
-          >
-            label
-          </label>
+            className="label left"
+          />
           <div
-            className="inputBase text inputBase bottom"
+            className="inputBase text inputBase"
           >
+            <span
+              className="leadingIcon leadingIcon"
+            >
+              <svg />
+            </span>
             <input
-              defaultValue="default value"
-              id="textField-1"
               onChange={[Function]}
-              placeholder="placeholder"
+              placeholder="view"
               readOnly={false}
               type="text"
             />
@@ -11348,25 +11465,26 @@ exports[`Storyshots User Inputs/TextField With Default Value 1`] = `
         </div>
       </div>
       <div
-        className="container"
+        className="container view"
       >
         <div
-          className="TextField fill text medium notEmpty withLabel"
+          className="TextField fill text medium"
           onClick={[Function]}
         >
           <label
-            className="label"
-          >
-            label
-          </label>
+            className="label left"
+          />
           <div
-            className="inputBase text inputBase bottom"
+            className="inputBase text inputBase"
           >
+            <span
+              className="leadingIcon leadingIcon"
+            >
+              <svg />
+            </span>
             <input
-              defaultValue="default value"
-              id="textField-2"
               onChange={[Function]}
-              placeholder="placeholder"
+              placeholder="view"
               readOnly={false}
               type="text"
             />
@@ -11983,12 +12101,13 @@ exports[`Storyshots User Inputs/TextField With Value 1`] = `
 </div>
 `;
 
-exports[`Storyshots User Inputs/ViewProvider Default 1`] = `
+exports[`Storyshots User Inputs/ViewProvider Basic 1`] = `
 <div>
   <div
     className="center"
   >
     <div
+      className="card"
       style={
         Object {
           "display": "grid",
@@ -11998,6 +12117,11 @@ exports[`Storyshots User Inputs/ViewProvider Default 1`] = `
     >
       <div
         className="container view"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
       >
         <div
           className="TextField outline text medium notEmpty withLabel"
@@ -12022,6 +12146,11 @@ exports[`Storyshots User Inputs/ViewProvider Default 1`] = `
       </div>
       <div
         className="container view"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
       >
         <div
           className="TextField outline number medium notEmpty withLabel"
@@ -12046,6 +12175,11 @@ exports[`Storyshots User Inputs/ViewProvider Default 1`] = `
       </div>
       <div
         className="container view"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
       >
         <div
           className="TextField outline password medium notEmpty withLabel"
@@ -12088,6 +12222,11 @@ exports[`Storyshots User Inputs/ViewProvider Default 1`] = `
       </div>
       <div
         className="container view"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
       >
         <div
           className="TextField outline options medium notEmpty"
@@ -12126,6 +12265,327 @@ exports[`Storyshots User Inputs/ViewProvider Default 1`] = `
             }
           />
         </portal-for-test>
+      </div>
+      <div
+        className="checkboxLabel"
+      >
+        <label
+          className="checkbox checked disabled"
+        >
+          <input
+            checked={true}
+            className="parent"
+            disabled={false}
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="iconContainer"
+          >
+            <svg />
+          </span>
+        </label>
+        <label>
+          Check box
+        </label>
+      </div>
+      <div
+        className="checkboxLabel"
+      >
+        <label
+          className="radio checked disabled"
+        >
+          <input
+            checked={true}
+            disabled={false}
+            onChange={[Function]}
+            type="radio"
+          />
+          <span
+            className="iconContainer"
+          >
+            <span
+              className="circle"
+            />
+          </span>
+        </label>
+        <label>
+          Radio Button
+        </label>
+      </div>
+      <div
+        className="checkboxLabel"
+      >
+        <div
+          className="switch disabled"
+        >
+          <label
+            className="switchLabel"
+          >
+            <div
+              className="switchLine"
+            />
+            <div
+              className="switchToggle"
+            >
+              <span
+                className="switchToggleInner"
+              />
+              <input
+                defaultChecked={true}
+                disabled={false}
+                onChange={[Function]}
+                type="checkbox"
+              />
+            </div>
+          </label>
+        </div>
+        <label>
+          Switch
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots User Inputs/ViewProvider Nested 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="card"
+      style={
+        Object {
+          "display": "grid",
+          "gridGap": "8px",
+        }
+      }
+    >
+      <div
+        className="container view"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          className="TextField outline text medium notEmpty withLabel"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+          >
+            First Name
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <input
+              defaultValue="Any"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="container view"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          className="TextField outline text medium notEmpty withLabel"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+          >
+            Last Name
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <input
+              defaultValue="Vision"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+            />
+          </div>
+        </div>
+      </div>
+      <hr
+        style={
+          Object {
+            "borderTop": "1px solid",
+            "width": "100%",
+          }
+        }
+      />
+      <button
+        className="button medium ghost iconButton small ghost"
+        disabled={false}
+        onClick={[Function]}
+        style={
+          Object {
+            "justifySelf": "end",
+          }
+        }
+        type="button"
+      >
+        <svg
+          data-name="Pencil / Edit"
+          height="1em"
+          viewBox="0 0 24 24"
+          width="1em"
+        >
+          <path
+            d="M19.5 8.43a.75.75 0 00-.217-.532L16.1 4.717a.761.761 0 00-1.065 0L12.914 6.84l-8.2 8.2a.75.75 0 00-.214.529v3.18a.75.75 0 00.75.75h3.18a.75.75 0 00.57-.217l8.152-8.2L19.281 9a.892.892 0 00.165-.247.75.75 0 000-.18.525.525 0 000-.1zM8.122 18H6v-2.123l7.447-7.447 2.122 2.122zm8.5-8.5L14.5 7.372l1.065-1.057 2.119 2.115z"
+          />
+        </svg>
+      </button>
+      <div
+        className="container"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          className="TextField outline text medium notEmpty withLabel"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+          >
+            Username
+          </label>
+          <div
+            className="inputBase text inputBase bottom"
+          >
+            <input
+              defaultValue="AnyVisionAdmin"
+              onChange={[Function]}
+              readOnly={false}
+              type="text"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="container view"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          className="TextField outline password medium notEmpty withLabel"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+          >
+            Password
+          </label>
+          <div
+            className="inputBase password inputBase bottom"
+          >
+            <input
+              defaultValue="123456789"
+              onChange={[Function]}
+              readOnly={false}
+              type="password"
+            />
+            <button
+              className="button medium ghost iconButton small ghost trailingIcon trailingIcon"
+              disabled={false}
+              onClick={[Function]}
+              type="button"
+            >
+              <svg
+                data-name="Eye disabled"
+                data-password-toggle={true}
+                height="1em"
+                viewBox="0 0 24 24"
+                width="1em"
+              >
+                <path
+                  d="M11.204 7.561a5.2 5.2 0 01.8-.057c2.384 0 4.625 1.717 5.93 4.5a11.417 11.417 0 01-.675 1.229.749.749 0 101.274.787 11.822 11.822 0 00.907-1.724.75.75 0 000-.592c-1.519-3.52-4.367-5.7-7.436-5.7a5.825 5.825 0 00-1.049.09.76.76 0 10.255 1.5zM5.785 4.72A.753.753 0 004.72 5.785l2.324 2.319a10.96 10.96 0 00-2.481 3.6.75.75 0 000 .6c1.514 3.516 4.363 5.7 7.436 5.7a6.942 6.942 0 003.786-1.154l2.429 2.436a.753.753 0 101.064-1.064zm4.767 6.889l1.837 1.837a1.357 1.357 0 01-.39.052 1.5 1.5 0 01-1.495-1.494 1.357 1.357 0 01.048-.395zm1.452 4.888c-2.384 0-4.625-1.717-5.922-4.5a9.063 9.063 0 012.022-2.839l1.324 1.346a3 3 0 004.07 4.07l1.192 1.177a5.427 5.427 0 01-2.691.75z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <hr
+        style={
+          Object {
+            "borderTop": "1px solid",
+            "width": "100%",
+          }
+        }
+      />
+      <div
+        className="container view"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          className="TextField outline number medium notEmpty withLabel"
+          onClick={[Function]}
+        >
+          <label
+            className="label"
+          >
+            Age
+          </label>
+          <div
+            className="inputBase number inputBase bottom"
+          >
+            <input
+              defaultValue={24}
+              onChange={[Function]}
+              readOnly={false}
+              type="number"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="checkboxLabel"
+      >
+        <label
+          className="checkbox checked disabled"
+        >
+          <input
+            checked={true}
+            className="parent"
+            disabled={false}
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="iconContainer"
+          >
+            <svg />
+          </span>
+        </label>
+        <label>
+          Confirm
+        </label>
       </div>
     </div>
   </div>
