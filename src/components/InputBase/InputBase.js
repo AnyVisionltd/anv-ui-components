@@ -75,6 +75,7 @@ const InputBase = React.forwardRef((props, ref) => {
         disabled={disabled}
         className={classNames(styles.trailingIcon, trailingIconClassName)}
       >
+        {/* data-password-toggle used for TextField view mode */}
         {inputType === inputTypes.PASSWORD ? (
           <EyeDisabled data-password-toggle />
         ) : (

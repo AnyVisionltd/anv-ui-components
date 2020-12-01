@@ -1,8 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
+import { useFormProvider } from '../../index'
 import styles from './Switch.module.scss'
-import { ViewProvider } from '../ViewProvider'
 
 const Switch = ({
   id,
@@ -14,13 +14,12 @@ const Switch = ({
   onClick,
   ...otherProps
 }) => {
-  const isViewModeContext = useContext(ViewProvider.Context)
-  const isViewMode = view !== undefined ? view : !!isViewModeContext
+  const { isView } = useFormProvider({ view })
 
   const classes = classNames(
     styles.switch,
     !checked && styles.unchecked,
-    (disabled || isViewMode) && styles.disabled,
+    (disabled || isView) && styles.disabled,
     className,
   )
 
@@ -59,7 +58,7 @@ Switch.propTypes = {
   /** If true, the switch will be disabled. */
   disabled: propTypes.bool,
   /** If true, will be view mode. <br/>
-   *  <i style="background-color:#ffc40026;">NOTE: Also from \<ViewProvider> by context. </i>
+   *  <i style="background-color:#ffc40026;">NOTE: Also from \<FormProvider> by context. </i>
    */
   view: propTypes.bool,
   /** Callback when changed. */

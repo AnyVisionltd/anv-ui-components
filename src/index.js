@@ -21,7 +21,9 @@ export { DialogWizard } from './components/DialogWizard'
 export { Tooltip } from './components/Tooltip'
 export { Snackbar } from './components/Snackbar'
 export { SelectionGroup } from './components/SelectionGroup'
-export { ViewProvider } from './components/ViewProvider'
+export { FormProvider } from './components/FormProvider'
 export { Banner } from './components/Banner'
+
+export { useFormProvider } from './components/FormProvider/useFormProvider'
 
 export { default as mockAutoSizer } from './testUtils/mockAutoSizer'

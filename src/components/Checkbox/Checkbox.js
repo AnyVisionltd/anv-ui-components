@@ -1,7 +1,7 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
-import { ViewProvider } from '../ViewProvider'
+import { useFormProvider } from '../../index'
 import { ReactComponent as CheckboxChecked } from '../../assets/svg/Checked.svg'
 import { ReactComponent as CheckboxIndeterminate } from '../../assets/svg/CheckboxIndeterminate.svg'
 import styles from './Checkbox.module.scss'
@@ -16,14 +16,13 @@ const Checkbox = ({
   id,
   ...otherProps
 }) => {
-  const isViewModeContext = useContext(ViewProvider.Context)
-  const isViewMode = view !== undefined ? view : !!isViewModeContext
+  const { isView } = useFormProvider({ view })
 
   const classes = classNames(
     styles.checkbox,
     checked && styles.checked,
     indeterminate && styles.indeterminate,
-    (disabled || isViewMode) && styles.disabled,
+    (disabled || isView) && styles.disabled,
     className,
   )
 
@@ -71,7 +70,7 @@ Checkbox.propTypes = {
   /** If true, the checkbox will be disabled. */
   disabled: propTypes.bool,
   /** If true, will be view mode. <br/>
-   *  <i style="background-color:#ffc40026;">NOTE: Also from \<ViewProvider> by context. </i>
+   *  <i style="background-color:#ffc40026;">NOTE: Also from \<FormProvider> by context. </i>
    */
   view: propTypes.bool,
   /** For css customization. */

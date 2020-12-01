@@ -12321,7 +12321,7 @@ exports[`Storyshots User Inputs/TextField With Value 1`] = `
 </div>
 `;
 
-exports[`Storyshots User Inputs/ViewProvider Basic 1`] = `
+exports[`Storyshots User Inputs/FormProvider Basic 1`] = `
 <div>
   <div
     className="center"
@@ -12549,7 +12549,7 @@ exports[`Storyshots User Inputs/ViewProvider Basic 1`] = `
 </div>
 `;
 
-exports[`Storyshots User Inputs/ViewProvider Nested 1`] = `
+exports[`Storyshots User Inputs/FormProvider Nested 1`] = `
 <div>
   <div
     className="center"

@@ -13,7 +13,7 @@
 - Added tooltip show prop
 - Added SelectionGroup component
 - Add View prop to \<TextField/> \<Checkbox/> \<Radio/> \<Switch/>
-- Add ViewProvider Component
+- Add FormProvider Component
 
 ## 1.0.0 - 06-09-2020
 

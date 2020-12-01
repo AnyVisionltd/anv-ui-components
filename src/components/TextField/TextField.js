@@ -1,17 +1,11 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  memo,
-  useCallback,
-  useContext,
-} from 'react'
+import React, { useState, useEffect, useRef, memo, useCallback } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
+import { useFormProvider } from '../../index'
 import { ReactComponent as ArrowSolidDown } from '../../assets/svg/ArrowSolidDown.svg'
 import { ReactComponent as ErrorCircleIcon } from '../../assets/svg/ErrorCircleOutlined.svg'
 import { useClickOutsideListener } from '../../hooks'
-import { InputBase, Menu, ViewProvider } from '../../index'
+import { InputBase, Menu } from '../../index'
 import { useCombinedRefs } from '../../hooks/UseCombinedRefs'
 import styles from './TextField.module.scss'
 
@@ -48,8 +42,7 @@ const TextField = React.forwardRef((props, ref) => {
     ...otherProps
   } = props
 
-  const isViewModeContext = useContext(ViewProvider.Context)
-  const isViewMode = view !== undefined ? view : !!isViewModeContext
+  const { isView } = useFormProvider({ view })
 
   const [isEmpty, setEmpty] = useState(!defaultValue)
   const [value, setValue] = useState(otherProps.value)
@@ -198,11 +191,7 @@ const TextField = React.forwardRef((props, ref) => {
 
   return (
     <div
-      className={classNames(
-        styles.container,
-        className,
-        isViewMode && styles.view,
-      )}
+      className={classNames(styles.container, className, isView && styles.view)}
       style={style}
     >
       <div ref={textFieldRef} onClick={handleClick} className={classes}>
@@ -266,7 +255,7 @@ TextField.propTypes = {
   /** If true, the input will be disabled. */
   disabled: propTypes.bool,
   /** If true, will be view mode. <br/>
-   *  <i style="background-color:#ffc40026;">NOTE: Also from \<ViewProvider> by context. </i>
+   *  <i style="background-color:#ffc40026;">NOTE: Also from \<FormProvider> by context. </i>
    */
   view: propTypes.bool,
   /** Will change the input to text field */

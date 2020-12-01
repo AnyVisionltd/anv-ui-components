@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { PencilEdit } from '@anyvision/anv-icons'
 import {
-  ViewProvider,
+  FormProvider,
   TextField,
   Checkbox,
   Radio,
@@ -12,8 +12,8 @@ import { centerDecorator } from '../../utils/storybook/decorators'
 import styles from '../../storybook/index.module.scss'
 
 export default {
-  title: 'User Inputs/ViewProvider',
-  component: ViewProvider,
+  title: 'User Inputs/FormProvider',
+  component: FormProvider,
   decorators: [centerDecorator],
 }
 
@@ -34,7 +34,7 @@ export const Basic = args => {
   ]
 
   return (
-    <ViewProvider {...args}>
+    <FormProvider {...args}>
       <div style={formStyle} className={styles.card}>
         <TextField
           label={'Username'}
@@ -72,7 +72,7 @@ export const Basic = args => {
           <label>Switch</label>
         </div>
       </div>
-    </ViewProvider>
+    </FormProvider>
   )
 }
 Basic.args = {
@@ -83,7 +83,7 @@ export const Nested = args => {
   const [isEdit, setIsEdit] = useState(true)
 
   return (
-    <ViewProvider {...args}>
+    <FormProvider {...args}>
       <div className={styles.card} style={formStyle}>
         <TextField
           label={'First Name'}
@@ -103,7 +103,7 @@ export const Nested = args => {
         >
           <PencilEdit />
         </IconButton>
-        <ViewProvider isView={isEdit}>
+        <FormProvider isView={isEdit}>
           <TextField
             label={'Username'}
             defaultValue={'AnyVisionAdmin'}
@@ -116,7 +116,7 @@ export const Nested = args => {
             defaultValue={'123456789'}
             className={styles.fullWidth}
           />
-        </ViewProvider>
+        </FormProvider>
         <hr style={dividerStyle} />
         <TextField
           type={'number'}
@@ -129,7 +129,7 @@ export const Nested = args => {
           <label>Confirm</label>
         </div>
       </div>
-    </ViewProvider>
+    </FormProvider>
   )
 }
 Nested.args = {

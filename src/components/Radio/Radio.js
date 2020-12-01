@@ -1,8 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
+import { useFormProvider } from '../../index'
 import styles from './Radio.module.scss'
-import { ViewProvider } from '../ViewProvider'
 
 const Radio = ({
   checked,
@@ -14,13 +14,12 @@ const Radio = ({
   id,
   ...otherProps
 }) => {
-  const isViewModeContext = useContext(ViewProvider.Context)
-  const isViewMode = view !== undefined ? view : !!isViewModeContext
+  const { isView } = useFormProvider({ view })
 
   const classes = classNames(
     styles.radio,
     checked && styles.checked,
-    (disabled || isViewMode) && styles.disabled,
+    (disabled || isView) && styles.disabled,
     className,
   )
 
@@ -56,7 +55,7 @@ Radio.propTypes = {
   /** If true, the radio will be disabled. */
   disabled: propTypes.bool,
   /** If true, will be view mode. <br/>
-   *  <i style="background-color:#ffc40026;">NOTE: Also from \<ViewProvider> by context. </i>
+   *  <i style="background-color:#ffc40026;">NOTE: Also from \<FormProvider> by context. </i>
    */
   view: propTypes.bool,
   /** For css customization. */
