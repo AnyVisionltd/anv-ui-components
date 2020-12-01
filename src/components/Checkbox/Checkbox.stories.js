@@ -10,7 +10,7 @@ export default {
   decorators: [centerDecorator],
 }
 
-export const Default = () => {
+export const Basic = () => {
   const [isChecked, setChecked] = useState(false)
   const [isIndeterminate, setIndeterminate] = useState(false)
   const onChange = ({ target }) => {
@@ -40,6 +40,7 @@ export const states = () => (
     <Checkbox className={styles.microMargin} checked disabled />
     <Checkbox className={styles.microMargin} indeterminate />
     <Checkbox className={styles.microMargin} disabled />
+    <Checkbox className={styles.microMargin} view />
   </>
 )
 

@@ -3,7 +3,7 @@ import propTypes from 'prop-types'
 import ViewContext from './Context'
 
 /**
- * Wrapper for forms, add view capability for supported components. <br/>
+ * Wrapper for forms, add view capability using context for supported components. <br/>
  * Supported components - <code>\<TextField/></code>, <code>\<Checkbox/></code>, <code>\<Radio/></code>
  */
 

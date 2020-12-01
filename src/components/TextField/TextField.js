@@ -44,11 +44,12 @@ const TextField = React.forwardRef((props, ref) => {
     leadingIconClassName,
     trailingIconClassName,
     label,
+    style,
     ...otherProps
   } = props
 
   const isViewModeContext = useContext(ViewProvider.Context)
-  const isViewMode = view || isViewModeContext
+  const isViewMode = view !== undefined ? view : !!isViewModeContext
 
   const [isEmpty, setEmpty] = useState(!defaultValue)
   const [value, setValue] = useState(otherProps.value)
@@ -202,6 +203,7 @@ const TextField = React.forwardRef((props, ref) => {
         className,
         isViewMode && styles.view,
       )}
+      style={style}
     >
       <div ref={textFieldRef} onClick={handleClick} className={classes}>
         <label
@@ -302,6 +304,8 @@ TextField.propTypes = {
   renderItem: propTypes.func,
   /** label text to be present in the top of the textField*/
   label: propTypes.string,
+  /** @ignore */
+  style: propTypes.string,
 }
 
 export default memo(TextField)

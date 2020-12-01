@@ -54,7 +54,7 @@ $radio-container-size: 32px;
   }
 
   &.disabled {
-    cursor: not-allowed;
+    cursor: default;
     opacity: av-opacity(disabled);
 
     &:not(&.checked) {

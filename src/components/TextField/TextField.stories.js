@@ -13,7 +13,7 @@ export default {
   decorators: [centerDecorator],
 }
 
-export const withDefaultValue = () => (
+export const Basic = () => (
   <div className={styles.flexMultipleRows}>
     <TextField
       placeholder={'placeholder'}
@@ -33,7 +33,7 @@ export const withDefaultValue = () => (
   </div>
 )
 
-export const sizes = () => (
+export const Sizes = () => (
   <div className={styles.flexMultipleRows}>
     <TextField
       placeholder={'placeholder'}
@@ -52,7 +52,7 @@ export const sizes = () => (
   </div>
 )
 
-export const withLeadingIcon = () => (
+export const WithLeadingIcon = () => (
   <div className={styles.flexMultipleRows}>
     <TextField
       leadingIcon={<SunIcon />}
@@ -70,7 +70,7 @@ export const withLeadingIcon = () => (
   </div>
 )
 
-export const disabled = () => (
+export const Disabled = () => (
   <div className={styles.flexMultipleRows}>
     <TextField
       leadingIcon={<SunIcon />}
@@ -85,6 +85,24 @@ export const disabled = () => (
       disabled
       variant={'fill'}
       id={'textField-10'}
+      onClick={action('click')}
+    />
+  </div>
+)
+
+export const View = () => (
+  <div className={styles.flexMultipleRows}>
+    <TextField
+      leadingIcon={<SunIcon />}
+      placeholder={'view'}
+      view={true}
+      onClick={action('click')}
+    />
+    <TextField
+      leadingIcon={<SunIcon />}
+      placeholder={'view'}
+      view
+      variant={'fill'}
       onClick={action('click')}
     />
   </div>

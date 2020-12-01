@@ -17,7 +17,7 @@ const Checkbox = ({
   ...otherProps
 }) => {
   const isViewModeContext = useContext(ViewProvider.Context)
-  const isViewMode = view || isViewModeContext
+  const isViewMode = view !== undefined ? view : !!isViewModeContext
 
   const classes = classNames(
     styles.checkbox,

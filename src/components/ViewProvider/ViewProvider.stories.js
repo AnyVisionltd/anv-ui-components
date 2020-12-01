@@ -27,6 +27,10 @@ const dividerStyle = {
   width: '100%',
 }
 
+const fullWidthStyle = {
+  width: '100%',
+}
+
 export const Basic = args => {
   const items = [
     { value: 1, label: 'Admin' },
@@ -36,14 +40,29 @@ export const Basic = args => {
   return (
     <ViewProvider {...args}>
       <div style={formStyle} className={styles.card}>
-        <TextField label={'Username'} defaultValue={'AnyVisionAdmin'} />
-        <TextField type={'number'} label={'Age'} defaultValue={24} />
+        <TextField
+          label={'Username'}
+          defaultValue={'AnyVisionAdmin'}
+          style={fullWidthStyle}
+        />
+        <TextField
+          type={'number'}
+          label={'Age'}
+          defaultValue={24}
+          style={fullWidthStyle}
+        />
         <TextField
           type={'password'}
           label={'Password'}
           defaultValue={'123456789'}
+          style={fullWidthStyle}
         />
-        <TextField defaultValue={1} type={'options'} items={items} />
+        <TextField
+          defaultValue={1}
+          type={'options'}
+          items={items}
+          style={fullWidthStyle}
+        />
         <div className={styles.checkboxLabel}>
           <Checkbox checked />
           <label>Check box</label>
@@ -65,13 +84,21 @@ Basic.args = {
 }
 
 export const Nested = args => {
-  const [isEdit, setIsEdit] = useState(false)
+  const [isEdit, setIsEdit] = useState(true)
 
   return (
     <ViewProvider {...args}>
       <div className={styles.card} style={formStyle}>
-        <TextField label={'First Name'} defaultValue={'Any'} />
-        <TextField label={'Last Name'} defaultValue={'Vision'} />
+        <TextField
+          label={'First Name'}
+          defaultValue={'Any'}
+          style={fullWidthStyle}
+        />
+        <TextField
+          label={'Last Name'}
+          defaultValue={'Vision'}
+          style={fullWidthStyle}
+        />
         <hr style={dividerStyle} />
         <IconButton
           variant={'ghost'}
@@ -81,15 +108,26 @@ export const Nested = args => {
           <PencilEdit />
         </IconButton>
         <ViewProvider isView={isEdit}>
-          <TextField label={'Username'} defaultValue={'AnyVisionAdmin'} />
+          <TextField
+            label={'Username'}
+            defaultValue={'AnyVisionAdmin'}
+            view={false}
+            style={fullWidthStyle}
+          />
           <TextField
             type={'password'}
             label={'Password'}
             defaultValue={'123456789'}
+            style={fullWidthStyle}
           />
         </ViewProvider>
         <hr style={dividerStyle} />
-        <TextField type={'number'} label={'Age'} defaultValue={24} />
+        <TextField
+          type={'number'}
+          label={'Age'}
+          defaultValue={24}
+          style={fullWidthStyle}
+        />
         <div className={styles.checkboxLabel}>
           <Checkbox checked />
           <label>Confirm</label>
