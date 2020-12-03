@@ -6,7 +6,7 @@
   box-sizing: border-box;
   width: av-size(sz-240);
 
-  .TextField {
+  .textField {
     cursor: default;
     outline: none;
     position: relative;
@@ -18,14 +18,6 @@
     height: av-size(sz-56);
     width: 100%;
     box-sizing: border-box;
-
-    &.multiline {
-      height: unset;
-      .label {
-        top: 0;
-        transform: translateY(16px);
-      }
-    }
 
     &.small {
       height: av-size(sz-40);
@@ -58,7 +50,7 @@
 
     &:focus-within,
     &.notEmpty,
-    &.active.multiline {
+    &.active {
       label {
         top: av-space(micro);
         font-size: av-font-size(tiny);
@@ -123,6 +115,14 @@
           box-shadow: inset 0 0 0 2px av-color(primary);
         }
       }
+    }
+  }
+
+  .multiline {
+    height: unset;
+    .label {
+      top: 0;
+      transform: translateY(16px);
     }
   }
 
@@ -263,8 +263,11 @@
 
 .view {
   * {
-    pointer-events: none !important;
-    border: none !important;
+    pointer-events: none;
+  }
+
+  .textField {
+    border: none;
   }
 
   .optionsIcon {

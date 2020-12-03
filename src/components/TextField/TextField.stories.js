@@ -95,15 +95,29 @@ export const View = () => (
     <TextField
       leadingIcon={<SunIcon />}
       placeholder={'view'}
-      view={true}
+      view
+      label={'view'}
+      defaultValue={'View mode'}
       onClick={action('click')}
     />
     <TextField
       leadingIcon={<SunIcon />}
       placeholder={'view'}
       view
+      label={'view'}
       variant={'fill'}
+      defaultValue={'View mode fill'}
       onClick={action('click')}
+    />
+    <TextField
+      leadingIcon={<SunIcon />}
+      placeholder={'view'}
+      view
+      label={'view'}
+      onClick={action('click')}
+      multiline
+      defaultValue={'multiline text view mode'}
+      rows={5}
     />
   </div>
 )
