@@ -67,7 +67,7 @@ const TableRow = ({
         <Menu
           anchorElement={actionsAnchorElement}
           isOpen={!!actionsAnchorElement}
-          preferOpenDirection='bottom-end'
+          preferOpenDirection='left'
           onClose={handleActionsClose}
         >
           {rowActions
