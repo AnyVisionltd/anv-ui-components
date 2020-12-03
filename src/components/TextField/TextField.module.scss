@@ -21,6 +21,10 @@
 
     &.multiline {
       height: unset;
+      .label {
+        top: 0;
+        transform: translateY(16px);
+      }
     }
 
     &.small {
@@ -36,9 +40,11 @@
 
     &.medium {
       .bottom {
-        input,
-        textarea {
+        input {
           margin-top: av-space(base);
+        }
+        textarea {
+          margin-top: 20px;
         }
       }
     }
@@ -52,7 +58,7 @@
 
     &:focus-within,
     &.notEmpty,
-    &.active {
+    &.active.multiline {
       label {
         top: av-space(micro);
         font-size: av-font-size(tiny);
@@ -193,9 +199,11 @@
   }
 
   .label {
+    user-select: none;
+    text-transform: capitalize;
     position: absolute;
-    bottom: 50%;
-    transform: translateY(50%);
+    top: 50%;
+    transform: translateY(-50%);
     font-size: av-font-size(base);
     transition: 0.2s ease;
     color: av-color(content, av-opacity(medium));

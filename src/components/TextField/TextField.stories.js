@@ -169,14 +169,14 @@ export const withError = () => (
 export const withMultiline = () => (
   <div className={styles.flexMultipleRows}>
     <TextField
-      placeholder={'placeholder'}
+      label={'placeholder'}
       onChange={action('Typing')}
       id={'textField-17'}
       multiline
       rows={5}
     />
     <TextField
-      placeholder={'placeholder'}
+      label={'placeholder'}
       onChange={action('Typing')}
       multiline
       rows={5}
