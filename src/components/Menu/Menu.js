@@ -52,7 +52,7 @@ const Menu = ({
       }
     }
     update()
-  }, [anchorElement, handleOnAnchorClick, updatePopper])
+  }, [anchorElement, handleOnAnchorClick, updatePopper, isOpen])
 
   useEffect(() => {
     const [side, position] = preferOpenDirection.split('-')
