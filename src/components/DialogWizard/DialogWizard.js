@@ -23,6 +23,7 @@ const DialogWizard = ({
   cancelText,
   disabled,
   banner,
+  onFinish,
   ...otherProps
 }) => {
   const [step, setStep] = useState(currentStep || 1)
@@ -39,7 +40,7 @@ const DialogWizard = ({
       setStep(step === steps.length ? 1 : nextStep)
     }
     if (step === steps.length) {
-      return onClose()
+      return onFinish()
     }
     onNextClick(nextStep)
   }
@@ -159,6 +160,8 @@ DialogWizard.propTypes = {
   isOpen: propTypes.bool.isRequired,
   /** A callback triggered whenever the wizard is closed */
   onClose: propTypes.func,
+  /** A callback triggered whenever the wizard is finished */
+  onFinish: propTypes.func,
   /** Disable onClose firing when backdrop is clicked */
   disableBackdropClick: propTypes.bool,
   /** Disable onClose firing when escape button is clicked */
