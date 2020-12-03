@@ -95,15 +95,29 @@ export const View = () => (
     <TextField
       leadingIcon={<SunIcon />}
       placeholder={'view'}
-      view={true}
+      view
+      label={'view'}
+      defaultValue={'View mode'}
       onClick={action('click')}
     />
     <TextField
       leadingIcon={<SunIcon />}
       placeholder={'view'}
       view
+      label={'view'}
       variant={'fill'}
+      defaultValue={'View mode fill'}
       onClick={action('click')}
+    />
+    <TextField
+      leadingIcon={<SunIcon />}
+      placeholder={'view'}
+      view
+      label={'view'}
+      onClick={action('click')}
+      multiline
+      defaultValue={'multiline text view mode'}
+      rows={5}
     />
   </div>
 )
@@ -169,14 +183,14 @@ export const withError = () => (
 export const withMultiline = () => (
   <div className={styles.flexMultipleRows}>
     <TextField
-      placeholder={'placeholder'}
+      label={'placeholder'}
       onChange={action('Typing')}
       id={'textField-17'}
       multiline
       rows={5}
     />
     <TextField
-      placeholder={'placeholder'}
+      label={'placeholder'}
       onChange={action('Typing')}
       multiline
       rows={5}

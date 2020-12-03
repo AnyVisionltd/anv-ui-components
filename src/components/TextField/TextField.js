@@ -170,7 +170,7 @@ const TextField = React.forwardRef((props, ref) => {
   }
 
   const classes = classNames(
-    styles.TextField,
+    styles.textField,
     styles[variant],
     styles[type],
     styles[size],
