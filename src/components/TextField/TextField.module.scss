@@ -6,7 +6,7 @@
   box-sizing: border-box;
   width: av-size(sz-240);
 
-  .TextField {
+  .textField {
     cursor: default;
     outline: none;
     position: relative;
@@ -18,10 +18,6 @@
     height: av-size(sz-56);
     width: 100%;
     box-sizing: border-box;
-
-    &.multiline {
-      height: unset;
-    }
 
     &.small {
       height: av-size(sz-40);
@@ -36,9 +32,11 @@
 
     &.medium {
       .bottom {
-        input,
-        textarea {
+        input {
           margin-top: av-space(base);
+        }
+        textarea {
+          margin-top: 20px;
         }
       }
     }
@@ -120,6 +118,14 @@
     }
   }
 
+  .multiline {
+    height: unset;
+    .label {
+      top: 0;
+      transform: translateY(16px);
+    }
+  }
+
   .fill {
     color: av-color(purewhite);
     background-color: av-color(content, av-opacity(ghost));
@@ -193,9 +199,11 @@
   }
 
   .label {
+    user-select: none;
+    text-transform: capitalize;
     position: absolute;
-    bottom: 50%;
-    transform: translateY(50%);
+    top: 50%;
+    transform: translateY(-50%);
     font-size: av-font-size(base);
     transition: 0.2s ease;
     color: av-color(content, av-opacity(medium));
@@ -255,8 +263,11 @@
 
 .view {
   * {
-    pointer-events: none !important;
-    border: none !important;
+    pointer-events: none;
+  }
+
+  .textField {
+    border: none;
   }
 
   .optionsIcon {
