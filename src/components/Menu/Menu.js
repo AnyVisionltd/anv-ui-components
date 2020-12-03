@@ -46,7 +46,7 @@ const Menu = ({
 
   useEffect(() => {
     async function update() {
-      if (anchorElement && updatePopper) {
+      if (anchorElement && updatePopper && isOpen === undefined) {
         anchorElement.onclick = handleOnAnchorClick
         await updatePopper()
       }
@@ -211,7 +211,7 @@ Menu.propTypes = {
    * <code>left-start</code> - means that the menu will open in the left-side-top<br />
    * <code>left</code> - means that the menu will open in the left-side-center <br />
    * <code>left-end</code> - means that the menu will open in the left-side-bottom<br />
-  
+
    * */
   preferOpenDirection: propTypes.oneOf([
     'top-start',

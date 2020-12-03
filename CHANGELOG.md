@@ -2,6 +2,7 @@
 
 ### Fixed
 
+- Fixed Menu to not self open when controlled from outside
 - TextField empty state bug
 - Positioning of the menu dropdown by using popper JS
 - Fixed cursor jumping to the end when using controlled TextField
@@ -9,6 +10,7 @@
 
 ### Added
 
+- Added z-index to Tooltip component
 - Added Banner component and implemented in DialogWizard
 - Added tooltip show prop
 - Added SelectionGroup component
@@ -19,6 +21,8 @@
 
 ### Breaking Changes :boom:
 
+- Changed last step of DialogWizard to trigger onFinish
+- Added onFinish callback function to DialogWizard
 - Added label prop to textField
 - Removed AttachedAxis and changed preferOpenDirection to match the directions PopperJS uses
 

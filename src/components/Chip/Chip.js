@@ -1,128 +1,134 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 import { ReactComponent as CloseIcon } from '../../assets/svg/Cancel.svg'
+import { useCombinedRefs } from '../../hooks/UseCombinedRefs'
 import styles from './Chip.module.scss'
 
-const Chip = ({
-  leadingIcon,
-  className,
-  trailingIcon,
-  disabled,
-  deletable,
-  label,
-  isFocused,
-  onClick,
-  onTrailingIconClick,
-  onKeyDown,
-  ...otherProps
-}) => {
-  const chipRef = React.createRef()
-  const clickable = !disabled && !!onClick
-  const focusable = clickable || deletable
+const Chip = React.forwardRef(
+  (
+    {
+      leadingIcon,
+      className,
+      trailingIcon,
+      disabled,
+      deletable,
+      label,
+      isFocused,
+      onClick,
+      onTrailingIconClick,
+      onKeyDown,
+      ...otherProps
+    },
+    forwardRef,
+  ) => {
+    const chipRef = useCombinedRefs(forwardRef, useRef({}))
+    const clickable = !disabled && !!onClick
+    const focusable = clickable || deletable
 
-  useEffect(() => {
-    if (chipRef.current) {
-      if (isFocused) {
-        chipRef.current.focus()
-      } else {
-        chipRef.current.blur()
+    useEffect(() => {
+      if (chipRef.current) {
+        if (isFocused) {
+          chipRef.current.focus()
+        } else {
+          chipRef.current.blur()
+        }
       }
-    }
-  }, [isFocused, chipRef])
+    }, [isFocused, chipRef])
 
-  const isDeleteKeyboardEvent = event =>
-    deletable && ['Backspace', 'Delete'].includes(event.key)
+    const isDeleteKeyboardEvent = event =>
+      deletable && ['Backspace', 'Delete'].includes(event.key)
 
-  const handleKeyDown = event => {
-    if (event.currentTarget === event.target) {
-      if (isDeleteKeyboardEvent(event) && onTrailingIconClick) {
-        onTrailingIconClick(event)
-      } else if (event.key === 'Enter' && chipRef.current && clickable) {
-        onClick(event)
-      } else if (event.key === 'Escape' && chipRef.current) {
-        chipRef.current.blur()
+    const handleKeyDown = event => {
+      if (event.currentTarget === event.target) {
+        if (isDeleteKeyboardEvent(event) && onTrailingIconClick) {
+          onTrailingIconClick(event)
+        } else if (event.key === 'Enter' && chipRef.current && clickable) {
+          onClick(event)
+        } else if (event.key === 'Escape' && chipRef.current) {
+          chipRef.current.blur()
+        }
       }
+
+      return onKeyDown && onKeyDown(event)
     }
 
-    return onKeyDown && onKeyDown(event)
-  }
-
-  const onClickHandler = event => {
-    if (!clickable) {
-      return
-    }
-
-    onClick(event)
-  }
-
-  const onTrailingIconClickHandler = event => {
-    if (!onTrailingIconClick) {
-      return
-    }
-    event.stopPropagation()
-    // When clicked using mouse, we would expect the chip to not be focused anymore.
-    chipRef.current.blur()
-    onTrailingIconClick(event)
-  }
-
-  const renderLeadingIcon = () =>
-    leadingIcon && <div className={styles.leadingIcon}>{leadingIcon}</div>
-
-  const renderTrailingIcon = () => {
-    let displayedTrailingIcon = trailingIcon
-    if (!displayedTrailingIcon) {
-      if (onTrailingIconClick && deletable) {
-        displayedTrailingIcon = <CloseIcon />
-      } else {
-        return null
+    const onClickHandler = event => {
+      if (!clickable) {
+        return
       }
+
+      onClick(event)
     }
 
-    const trailingIconClasses = classNames(
-      styles.trailingIcon,
-      onTrailingIconClick && styles.trailingIconClickable,
+    const onTrailingIconClickHandler = event => {
+      if (!onTrailingIconClick) {
+        return
+      }
+      event.stopPropagation()
+      // When clicked using mouse, we would expect the chip to not be focused anymore.
+      chipRef.current.blur()
+      onTrailingIconClick(event)
+    }
+
+    const renderLeadingIcon = () =>
+      leadingIcon && <div className={styles.leadingIcon}>{leadingIcon}</div>
+
+    const renderTrailingIcon = () => {
+      let displayedTrailingIcon = trailingIcon
+      if (!displayedTrailingIcon) {
+        if (onTrailingIconClick && deletable) {
+          displayedTrailingIcon = <CloseIcon />
+        } else {
+          return null
+        }
+      }
+
+      const trailingIconClasses = classNames(
+        styles.trailingIcon,
+        onTrailingIconClick && styles.trailingIconClickable,
+      )
+
+      return (
+        <button
+          className={trailingIconClasses}
+          onClick={onTrailingIconClickHandler}
+          disabled={disabled}
+        >
+          {displayedTrailingIcon}
+        </button>
+      )
+    }
+
+    const renderLabel = () => <span className={styles.label}>{label}</span>
+
+    const classes = classNames(
+      styles.chip,
+      focusable && styles.focusable,
+      clickable && styles.clickable,
+      disabled && styles.disabled,
+      className,
     )
 
     return (
-      <button
-        className={trailingIconClasses}
-        onClick={onTrailingIconClickHandler}
-        disabled={disabled}
+      <div
+        role='button'
+        aria-disabled={disabled ? true : undefined}
+        tabIndex={focusable ? 0 : undefined}
+        className={classes}
+        onClick={onClickHandler}
+        onKeyDown={handleKeyDown}
+        ref={chipRef}
+        data-testid={'chip'}
+        {...otherProps}
       >
-        {displayedTrailingIcon}
-      </button>
+        {renderLeadingIcon()}
+        {renderLabel()}
+        {renderTrailingIcon()}
+      </div>
     )
-  }
-
-  const renderLabel = () => <span className={styles.label}>{label}</span>
-
-  const classes = classNames(
-    styles.chip,
-    focusable && styles.focusable,
-    clickable && styles.clickable,
-    disabled && styles.disabled,
-    className,
-  )
-
-  return (
-    <div
-      role='button'
-      aria-disabled={disabled ? true : undefined}
-      tabIndex={focusable ? 0 : undefined}
-      className={classes}
-      onClick={onClickHandler}
-      onKeyDown={handleKeyDown}
-      ref={chipRef}
-      data-testid={'chip'}
-      {...otherProps}
-    >
-      {renderLeadingIcon()}
-      {renderLabel()}
-      {renderTrailingIcon()}
-    </div>
-  )
-}
+  },
+)
 
 Chip.defaultProps = {
   disabled: false,
