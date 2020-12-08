@@ -1,7 +1,7 @@
 import React from 'react'
 import { boolean, text } from '@storybook/addon-knobs'
 import Chip from './Chip'
-import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
+import { SunBrightens } from '@anyvision/anv-icons'
 import { ReactComponent as CheckedIcon } from '../../assets/svg/Checked.svg'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import styles from '../../storybook/index.module.scss'
@@ -15,7 +15,7 @@ export default {
 export const Default = () => (
   <Chip
     label='Chocolate'
-    leadingIcon={<SunIcon />}
+    leadingIcon={<SunBrightens />}
     onClick={() => {}}
     onTrailingIconClick={() => {}}
     deletable
@@ -30,7 +30,7 @@ export const Variants = () => (
     <Chip
       label='Leading Icon'
       className={styles.microMargin}
-      leadingIcon={<SunIcon />}
+      leadingIcon={<SunBrightens />}
     />
     <Chip
       label='Trailing Icon'
@@ -40,7 +40,7 @@ export const Variants = () => (
     <Chip
       label='Both Icons'
       className={styles.microMargin}
-      leadingIcon={<SunIcon />}
+      leadingIcon={<SunBrightens />}
       trailingIcon={<CheckedIcon />}
     />
   </>
@@ -48,7 +48,7 @@ export const Variants = () => (
 
 export const playground = () => {
   const leadingIcon = boolean('Display leading icon?', false) ? (
-    <SunIcon />
+    <SunBrightens />
   ) : null
   const isDeletable = boolean(
     'Will clicking on trailing icon end with deleting the chip?',
