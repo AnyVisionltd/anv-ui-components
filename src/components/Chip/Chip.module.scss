@@ -44,11 +44,11 @@
   }
 
   .leadingIcon {
-    height: av-size(sz-24);
-    width: av-size(sz-24);
-
-    img {
+    img,
+    svg {
       border-radius: 100%;
+      height: av-size(sz-24);
+      width: av-size(sz-24);
     }
   }
 
@@ -92,7 +92,7 @@
   }
 
   .label {
-    padding: 0 av-space(tiny);
+    padding: 0 av-space(micro);
   }
 
   > button {
