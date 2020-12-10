@@ -12,11 +12,16 @@ const Selection = ({
   selected,
   bulkActions,
   selectBy,
+  checkRowSelectable,
   className,
 }) => {
-  const { state, setSelectionActivity, setSelection, deselectAll } = useContext(
-    TableContext,
-  )
+  const {
+    state,
+    setSelectionActivity,
+    setSelection,
+    deselectAll,
+    setCheckRowSelectable,
+  } = useContext(TableContext)
   const { totalItems } = state
   const { items, excludeMode } = state.selection
   const tableData = useTableData()
@@ -49,6 +54,10 @@ const Selection = ({
   useEffect(() => {
     setSelectionActivity(true, selectBy)
   }, [setSelectionActivity, selectBy])
+
+  useEffect(() => {
+    checkRowSelectable && setCheckRowSelectable(checkRowSelectable)
+  }, [checkRowSelectable, setCheckRowSelectable])
 
   const renderActions = () => {
     return (
@@ -132,6 +141,8 @@ Selection.propTypes = {
   ),
   /** The selection evaluate by this prop. Set to the id field. */
   selectBy: propTypes.string,
+  /** Check for each row if selection enabled <code>(row) => {}</code>. */
+  checkRowSelectable: propTypes.func,
   /** Selection bar css customization. */
   className: propTypes.string,
 }

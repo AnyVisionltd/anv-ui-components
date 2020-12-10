@@ -13,6 +13,7 @@ const initialState = {
     selectBy: 'id',
     items: [],
     excludeMode: false,
+    checkRowSelectable: () => true,
   },
   columnManagement: {
     isActive: false,
@@ -92,6 +93,14 @@ const reducer = (state, action) => {
           ...state.selection,
           items: action.payload.items,
           excludeMode: action.payload.excludeMode,
+        },
+      }
+    case actionTypes.SET_CHECK_ROW_SELECTABLE:
+      return {
+        ...state,
+        selection: {
+          ...state.selection,
+          checkRowSelectable: action.payload,
         },
       }
     case actionTypes.TOGGLE_SELECTED_ITEM:

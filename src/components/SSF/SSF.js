@@ -60,9 +60,11 @@ const SmartFilter = ({
           ? {
               field: chipField.field,
               value: chipLabel.substr(chipLabel.indexOf(':') + 2),
+              ...chipField,
             }
           : { value: chipLabel }
       })
+      setMenuAnchor(null)
       setChips(chips)
       onChange(searchQuery)
     },
