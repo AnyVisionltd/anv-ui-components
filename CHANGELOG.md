@@ -7,6 +7,7 @@
 - Positioning of the menu dropdown by using popper JS
 - Fixed cursor jumping to the end when using controlled TextField
 - Tooltip child disabled bug fix
+- Fix SSF menu position after delete chip
 
 ### Added
 
@@ -16,6 +17,8 @@
 - Added SelectionGroup component
 - Add View prop to \<TextField/> \<Checkbox/> \<Radio/> \<Switch/>
 - Add FormProvider Component
+- Add additionalFilters to tableSSF
+- Add the ability to disable table row selection
 
 ## 1.0.0 - 06-09-2020
 
