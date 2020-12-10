@@ -8,6 +8,7 @@ export const actionTypes = Object.freeze({
   SET_SORTABLE: 'SET_SORTABLE',
   SET_SELECTION_ACTIVITY: 'SET_SELECTION_ACTIVITY',
   SET_SELECTION: 'SET_SELECTION',
+  SET_CHECK_ROW_SELECTABLE: 'SET_CHECK_ROW_SELECTABLE',
   TOGGLE_SELECTED_ITEM: 'TOGGLE_SELECTED_ITEM',
   TOGGLE_SELECT_ALL: 'TOGGLE_SELECT_ALL',
   SET_FILTERS: 'SET_FILTERS',
@@ -57,6 +58,12 @@ export const actions = dispatch => ({
     dispatch({
       type: actionTypes.SET_SELECTION,
       payload: selection,
+    })
+  },
+  setCheckRowSelectable: checkRowSelectable => {
+    dispatch({
+      type: actionTypes.SET_CHECK_ROW_SELECTABLE,
+      payload: checkRowSelectable,
     })
   },
   setSelectionActivity: (selectable, selectBy) => {

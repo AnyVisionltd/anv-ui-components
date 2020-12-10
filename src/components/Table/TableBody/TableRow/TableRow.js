@@ -20,10 +20,11 @@ const TableRow = ({
   isLoading,
   onRowClick,
   isSelected,
-  isActive,
+  isSelectionActive,
   columns,
   toggleSelectedItem,
   columnManagement,
+  selectionEnabled,
 }) => {
   const [actionsAnchorElement, setActionsAnchorElement] = useState(null)
   const [isHover, setIsHover] = useState(false)
@@ -62,6 +63,9 @@ const TableRow = ({
 
   const renderActions = row => {
     if (!rowActions) return
+    const activeRowActions = rowActions.filter(
+      ({ hidden }) => !hidden || !hidden(row),
+    )
     return (
       <>
         <Menu
@@ -70,9 +74,8 @@ const TableRow = ({
           preferOpenDirection='left'
           onClose={handleActionsClose}
         >
-          {rowActions
-            .filter(({ hidden }) => !hidden || !hidden(row))
-            .map(({ label, icon, hidden, onClick, confirmMessage }, index) => (
+          {activeRowActions.map(
+            ({ label, icon, hidden, onClick, confirmMessage }, index) => (
               <Menu.Item
                 leadingComponent={icon}
                 key={index}
@@ -82,7 +85,8 @@ const TableRow = ({
               >
                 {label}
               </Menu.Item>
-            ))}
+            ),
+          )}
         </Menu>
         <div
           role='cell'
@@ -90,6 +94,7 @@ const TableRow = ({
           onClick={e => e.stopPropagation()}
         >
           <IconButton
+            disabled={activeRowActions.length === 0}
             className={styles.actionButton}
             variant='ghost'
             onClick={handleActionsClick}
@@ -102,7 +107,7 @@ const TableRow = ({
   }
 
   const renderSelection = (row, isSelected) => {
-    if (!isActive) return
+    if (!isSelectionActive) return
     return (
       <div
         role='cell'
@@ -110,6 +115,7 @@ const TableRow = ({
         onClick={e => handleCellClick({ e, row, triggerRowClick: false })}
       >
         <Checkbox
+          disabled={!selectionEnabled}
           onClick={e => e.stopPropagation()}
           onChange={() => toggleSelectedItem(row, isSelected)}
           checked={isSelected}
@@ -255,6 +261,8 @@ TableRow.propTypes = {
   rowHeight: propTypes.number,
   isLoading: propTypes.bool,
   onRowClick: propTypes.func,
+  selectionEnabled: propTypes.bool,
+  isSelectionActive: propTypes.bool,
 }
 
 export default memo(TableRow)

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useCallback } from 'react'
 import { action } from '@storybook/addon-actions'
 import Table from '../Table'
 import { Chip, Switch } from '../../../index'
@@ -77,7 +77,6 @@ export const Basic = () => {
         firstname: 'Donte',
         location: 'Tel Aviv',
         weather: 30,
-        isEditable: false,
       },
       {
         id: '2',
@@ -85,7 +84,6 @@ export const Basic = () => {
         firstname: 'Cleo',
         location: 'Jerusalem',
         weather: 15,
-        isEditable: true,
       },
       {
         id: '3',
@@ -93,7 +91,6 @@ export const Basic = () => {
         firstname: 'Hubert Blaine Wolfeschle Gelsteinhau Senber Gerdorff Sr',
         location: 'Eilat',
         weather: 40,
-        isEditable: true,
       },
       {
         id: '4',
@@ -101,7 +98,7 @@ export const Basic = () => {
         firstname: 'Neelam',
         location: 'Haifa',
         weather: 25,
-        isEditable: true,
+        withoutAction: true,
       },
       {
         id: '5',
@@ -109,7 +106,6 @@ export const Basic = () => {
         firstname: 'Carole',
         location: 'Tzfat',
         weather: 20,
-        isEditable: false,
       },
     ],
     [],
@@ -121,11 +117,12 @@ export const Basic = () => {
         label: 'Delete',
         onClick: action('delete action clicked'),
         confirmMessage: 'Are you sure you want to delete this item?',
+        hidden: row => !!row.withoutAction,
       },
       {
         label: 'Edit',
         onClick: action('edit action clicked'),
-        hidden: row => !row.isEditable,
+        hidden: row => !!row.withoutAction,
       },
     ],
     [],
@@ -161,10 +158,25 @@ export const Basic = () => {
     },
   ]
 
+  const checkRowSelectable = useCallback(row => {
+    return row.weather < 40
+  }, [])
+
+  const additionalFilters = [
+    {
+      field: 'additionalField',
+      label: 'Additional Filter',
+      filterFunction: () => true,
+    },
+  ]
+
   const style = { width: '100%', height: '450px' }
   return (
     <Table style={style} selfControlled={true}>
-      <Table.SSF onChange={action('SSF changed')} />
+      <Table.SSF
+        onChange={action('SSF changed')}
+        additionalFilters={additionalFilters}
+      />
       <Table.Header
         columns={columns}
         onHeaderCellClick={action('header cell clicked')}
@@ -178,6 +190,7 @@ export const Basic = () => {
       <Table.Selection
         bulkActions={bulkActions}
         onChange={action('selection changed')}
+        checkRowSelectable={checkRowSelectable}
       />
       <Table.ColumnManagement onChange={action('columns changed')} />
     </Table>

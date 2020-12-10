@@ -35,6 +35,7 @@ const TableBody = ({
     filters,
     sort,
   } = state
+
   const tableData = useTableData()
 
   useEffect(() => {
@@ -56,7 +57,8 @@ const TableBody = ({
   const renderRow = (row, index) => {
     return (
       <TableRow
-        isActive={!!selection.isActive}
+        isSelectionActive={!!selection.isActive}
+        selectionEnabled={selection.checkRowSelectable(row)}
         isSelected={isRowSelected(row[selection.selectBy])}
         toggleSelectedItem={toggleSelectedItem}
         columns={columns}

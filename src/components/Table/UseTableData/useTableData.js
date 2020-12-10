@@ -19,12 +19,19 @@ const useTableData = () => {
   const filterData = useCallback(
     data => {
       return data.filter(row => {
-        return filters.every(({ field, value }) => {
+        return filters.every(({ field, value, filterFunction }) => {
           if (field) {
-            return row[field]
-              .toString()
-              .toLowerCase()
-              .includes(value.toString().toLowerCase())
+            if (row[field]) {
+              return row[field]
+                .toString()
+                .toLowerCase()
+                .includes(value.toString().toLowerCase())
+            }
+            if (filterFunction) {
+              return filterFunction(row)
+            }
+            console.warn(`There is no filter function for field: '${field}'`)
+            return false
           } else {
             return Object.entries(row).some(([cellField, cellValue]) => {
               if (
