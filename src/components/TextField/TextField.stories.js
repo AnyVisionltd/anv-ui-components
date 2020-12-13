@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { action } from '@storybook/addon-actions'
+import { SunBrightens } from '@anyvision/anv-icons'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import styles from '../../storybook/index.module.scss'
-import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
 import TextField from './TextField'
 import { boolean, select } from '@storybook/addon-knobs'
 import { Menu } from '../Menu'
@@ -55,13 +55,13 @@ export const Sizes = () => (
 export const WithLeadingIcon = () => (
   <div className={styles.flexMultipleRows}>
     <TextField
-      leadingIcon={<SunIcon />}
+      leadingIcon={<SunBrightens />}
       placeholder={'With leading Icon'}
       onChange={action('Typing')}
       id={'textField-7'}
     />
     <TextField
-      leadingIcon={<SunIcon />}
+      leadingIcon={<SunBrightens />}
       placeholder={'With leading Icon'}
       onChange={action('Typing')}
       variant={'fill'}
@@ -73,14 +73,14 @@ export const WithLeadingIcon = () => (
 export const Disabled = () => (
   <div className={styles.flexMultipleRows}>
     <TextField
-      leadingIcon={<SunIcon />}
+      leadingIcon={<SunBrightens />}
       placeholder={'disabled'}
       disabled
       id={'textField-9'}
       onClick={action('click')}
     />
     <TextField
-      leadingIcon={<SunIcon />}
+      leadingIcon={<SunBrightens />}
       placeholder={'disabled'}
       disabled
       variant={'fill'}
@@ -93,7 +93,7 @@ export const Disabled = () => (
 export const View = () => (
   <div className={styles.flexMultipleRows}>
     <TextField
-      leadingIcon={<SunIcon />}
+      leadingIcon={<SunBrightens />}
       placeholder={'view'}
       view
       label={'view'}
@@ -101,7 +101,7 @@ export const View = () => (
       onClick={action('click')}
     />
     <TextField
-      leadingIcon={<SunIcon />}
+      leadingIcon={<SunBrightens />}
       placeholder={'view'}
       view
       label={'view'}
@@ -110,7 +110,7 @@ export const View = () => (
       onClick={action('click')}
     />
     <TextField
-      leadingIcon={<SunIcon />}
+      leadingIcon={<SunBrightens />}
       placeholder={'view'}
       view
       label={'view'}
@@ -125,12 +125,12 @@ export const View = () => (
 export const withTrailingIcon = () => (
   <div className={styles.flexMultipleRows}>
     <TextField
-      trailingIcon={<SunIcon />}
+      trailingIcon={<SunBrightens />}
       onChange={action('Typing')}
       id={'textField-11'}
     />
     <TextField
-      trailingIcon={<SunIcon />}
+      trailingIcon={<SunBrightens />}
       onChange={action('Typing')}
       variant={'fill'}
       id={'textField-12'}
@@ -141,14 +141,14 @@ export const withTrailingIcon = () => (
 export const withMessage = () => (
   <div className={styles.flexMultipleRows}>
     <TextField
-      trailingIcon={<SunIcon />}
+      trailingIcon={<SunBrightens />}
       placeholder={'placeholder'}
       onChange={action('Typing')}
       message={'Optional helper text goes here'}
       id={'textField-13'}
     />
     <TextField
-      trailingIcon={<SunIcon />}
+      trailingIcon={<SunBrightens />}
       placeholder={'placeholder'}
       onChange={action('Typing')}
       message={'Optional helper text goes here'}
@@ -161,7 +161,7 @@ export const withMessage = () => (
 export const withError = () => (
   <div className={styles.flexMultipleRows}>
     <TextField
-      trailingIcon={<SunIcon />}
+      trailingIcon={<SunBrightens />}
       placeholder={'placeholder'}
       onChange={action('Typing')}
       message={'This is an error'}
@@ -169,7 +169,7 @@ export const withError = () => (
       id={'textField-15'}
     />
     <TextField
-      trailingIcon={<SunIcon />}
+      trailingIcon={<SunBrightens />}
       placeholder={'placeholder'}
       onChange={action('Typing')}
       message={'This is an error'}
@@ -203,7 +203,7 @@ export const withMultiline = () => (
 export const withReadOnly = () => (
   <div className={styles.flexMultipleRows}>
     <TextField
-      trailingIcon={<SunIcon />}
+      trailingIcon={<SunBrightens />}
       placeholder={'This is read only text'}
       onChange={action('Typing')}
       defaultValue={'text'}
@@ -211,7 +211,7 @@ export const withReadOnly = () => (
       id={'textField-19'}
     />
     <TextField
-      trailingIcon={<SunIcon />}
+      trailingIcon={<SunBrightens />}
       placeholder={'This is read only text'}
       onChange={action('Typing')}
       readOnly
@@ -230,7 +230,7 @@ export const typeOptions = () => {
   return (
     <div className={styles.flexMultipleRows}>
       <TextField
-        trailingIcon={<SunIcon />}
+        trailingIcon={<SunBrightens />}
         type={'options'}
         onClick={action('click')}
         onChange={action('change')}
@@ -239,7 +239,7 @@ export const typeOptions = () => {
         items={items}
       />
       <TextField
-        trailingIcon={<SunIcon />}
+        trailingIcon={<SunBrightens />}
         type={'options'}
         variant={'fill'}
         onClick={action('click')}
@@ -257,7 +257,7 @@ export const WithValue = () => {
   return (
     <div className={styles.flexMultipleRows}>
       <TextField
-        trailingIcon={<SunIcon />}
+        trailingIcon={<SunBrightens />}
         onChange={({ target: { value: text } }) => setValue(text)}
         value={value}
         id={'textField-23'}
@@ -285,7 +285,7 @@ export const WithRenderItem = () => {
   return (
     <div className={styles.flexMultipleRows}>
       <TextField
-        trailingIcon={<SunIcon />}
+        trailingIcon={<SunBrightens />}
         onChange={item => setValue(item)}
         defaultValue={'Olives'}
         value={value.label}
@@ -306,7 +306,7 @@ export const WithLabel = () => {
   return (
     <div className={styles.flexMultipleRows}>
       <TextField
-        trailingIcon={<SunIcon />}
+        trailingIcon={<SunBrightens />}
         defaultValue={'Olives'}
         label={'label'}
       />
@@ -317,7 +317,7 @@ export const WithLabel = () => {
 export const WithPlaceholder = () => {
   return (
     <div className={styles.flexMultipleRows}>
-      <TextField trailingIcon={<SunIcon />} placeholder={'placeholder'} />
+      <TextField trailingIcon={<SunBrightens />} placeholder={'placeholder'} />
     </div>
   )
 }
