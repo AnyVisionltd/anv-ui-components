@@ -6,6 +6,11 @@
   box-sizing: border-box;
   width: av-size(sz-240);
 
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+
   .textField {
     cursor: default;
     outline: none;
