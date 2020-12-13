@@ -1,6 +1,7 @@
 @import '~@anyvision/style-guide';
 
 .ChipsInput {
+  box-sizing: border-box;
   position: relative;
   display: flex;
   flex-direction: column;
