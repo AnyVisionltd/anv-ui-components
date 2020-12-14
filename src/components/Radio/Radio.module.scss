@@ -9,6 +9,8 @@ $radio-container-size: 32px;
   position: relative;
   height: av-size(sz-32);
   width: av-size(sz-32);
+  min-height: av-size(sz-32);
+  min-width: av-size(sz-32);
   display: inline-flex;
   justify-content: center;
   align-items: center;
