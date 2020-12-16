@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react'
 
-const UseKeyDownListener = keyDownHandlersMap => {
+const UseKeyDownListener = (keyDownHandlersMap, addEventListener = true) => {
   const onKeyDownHandler = useCallback(
     event =>
       keyDownHandlersMap[event.keyCode] &&
@@ -8,9 +8,9 @@ const UseKeyDownListener = keyDownHandlersMap => {
     [keyDownHandlersMap],
   )
   useEffect(() => {
-    document.addEventListener('keydown', onKeyDownHandler)
+    addEventListener && document.addEventListener('keydown', onKeyDownHandler)
     return () => document.removeEventListener('keydown', onKeyDownHandler)
-  }, [onKeyDownHandler])
+  }, [addEventListener, onKeyDownHandler])
 }
 
 export default UseKeyDownListener
