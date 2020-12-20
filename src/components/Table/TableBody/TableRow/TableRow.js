@@ -167,7 +167,7 @@ const TableRow = ({
   const renderDataRow = () => {
     const tableRowClassNames = classNames(
       styles.tableRow,
-      { [styles.triggerRowClick]: onRowClick },
+      { [styles.clickable]: onRowClick },
       { [styles.selectedRow]: isSelected },
     )
     return (
