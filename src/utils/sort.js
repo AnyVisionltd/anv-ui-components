@@ -4,10 +4,14 @@ export const stringSort = (data, field, order) =>
   data.sort((rowA, rowB) => {
     if (order === orderTypes.ASC) {
       return rowA[field].localeCompare(rowB[field], undefined, {
+        numeric: true,
+        sensitivity: 'base',
         caseFirst: 'upper',
       })
     }
     return rowB[field].localeCompare(rowA[field], undefined, {
+      numeric: true,
+      sensitivity: 'base',
       caseFirst: 'upper',
     })
   })
