@@ -39,6 +39,7 @@ const TextField = React.forwardRef((props, ref) => {
     trailingIconClassName,
     label,
     style,
+    menuProps,
     ...otherProps
   } = props
 
@@ -153,6 +154,7 @@ const TextField = React.forwardRef((props, ref) => {
         isOpen={!!anchorElement}
         onClose={handleMenuClose}
         className={classNames(styles.textFieldMenu, menuClassName)}
+        {...menuProps}
       >
         {items.map(item =>
           renderItem ? (
@@ -188,10 +190,6 @@ const TextField = React.forwardRef((props, ref) => {
   const inputValue = type === types.options ? value || defaultValue : value
 
   const inputDefaultValue = type === types.options ? undefined : defaultValue
-
-  if (isView && type === 'password') {
-    return
-  }
 
   return (
     <div
@@ -244,6 +242,7 @@ TextField.defaultProps = {
   onClick: () => {},
   onChange: () => {},
   items: [],
+  menuProps: {},
 }
 
 TextField.propTypes = {
@@ -299,6 +298,8 @@ TextField.propTypes = {
   label: propTypes.string,
   /** @ignore */
   style: propTypes.string,
+  /** props to be propagated to menu component*/
+  menuProps: propTypes.object,
 }
 
 export default memo(TextField)
