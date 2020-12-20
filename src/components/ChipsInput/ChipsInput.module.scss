@@ -1,7 +1,6 @@
 @import '~@anyvision/style-guide';
 
 .ChipsInput {
-  box-sizing: border-box;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -9,6 +8,7 @@
   .container {
     @extend %av-scrollbar;
     border-radius: av-radius();
+    box-sizing: border-box;
     border: solid 1px av-color(content, av-opacity(disabled));
     overflow-y: auto;
     overflow-wrap: anywhere;

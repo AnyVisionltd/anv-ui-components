@@ -39,7 +39,7 @@ const Dialog = ({
     }
   }
 
-  UseKeyDownListener({ [keymap.ESCAPE]: onEscapeKeyDown })
+  UseKeyDownListener({ [keymap.ESCAPE]: onEscapeKeyDown }, isOpen)
 
   return (
     <Portal containerId='dialog-container'>

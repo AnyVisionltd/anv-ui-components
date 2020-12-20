@@ -1,6 +1,6 @@
 {
   "name": "@anyvision/anv-ui-components",
-  "version": "1.0.0-beta.39",
+  "version": "1.0.0-beta.46",
   "main": "dist/index.js",
   "description": "Anyvision Components Library",
   "license": "MIT",
@@ -14,7 +14,7 @@
     "url": "https://github.com/AnyVisionltd/anv-ui-components"
   },
   "dependencies": {
-    "@anyvision/anv-icons": "^1.0.0-beta.4",
+    "@anyvision/anv-icons": "1.0.0-beta.7",
     "@anyvision/style-guide": "1.0.4",
     "@popperjs/core": "^2.4.4",
     "classnames": "^2.2.6",

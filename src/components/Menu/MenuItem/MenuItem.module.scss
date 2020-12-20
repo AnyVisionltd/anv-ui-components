@@ -16,6 +16,10 @@
     display: flex;
     align-items: center;
     margin-right: av-space();
+    svg {
+      height: 24px;
+      width: 24px
+    }
   }
 
   .menuItemLabel {
