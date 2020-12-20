@@ -11,6 +11,7 @@
 
 ### Added
 
+- Added menuProps to TextField component to be propagated to Menu component
 - Added z-index to Tooltip component
 - Added Banner component and implemented in DialogWizard
 - Added tooltip show prop
