@@ -191,6 +191,10 @@ const TextField = React.forwardRef((props, ref) => {
 
   const inputDefaultValue = type === types.options ? undefined : defaultValue
 
+  if (isView && type === types.password) {
+    return
+  }
+
   return (
     <div
       className={classNames(styles.container, className, isView && styles.view)}

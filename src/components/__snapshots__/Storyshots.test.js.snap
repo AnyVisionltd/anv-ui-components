@@ -10301,50 +10301,6 @@ exports[`Storyshots User Inputs/FormProvider Basic 1`] = `
         className="container fullWidth view"
       >
         <div
-          className="textField outline password medium notEmpty withLabel"
-          onClick={[Function]}
-        >
-          <label
-            className="label"
-          >
-            Password
-          </label>
-          <div
-            className="inputBase password inputBase bottom"
-          >
-            <input
-              defaultValue="123456789"
-              onChange={[Function]}
-              readOnly={false}
-              type="password"
-            />
-            <button
-              className="button medium ghost iconButton small ghost trailingIcon trailingIcon"
-              disabled={false}
-              onClick={[Function]}
-              tabindex="-1"
-              type="button"
-            >
-              <svg
-                data-name="Eye disabled"
-                data-password-toggle={true}
-                height="1em"
-                viewBox="0 0 24 24"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M11.204 7.561a5.2 5.2 0 01.8-.057c2.384 0 4.625 1.717 5.93 4.5a11.417 11.417 0 01-.675 1.229.749.749 0 101.274.787 11.822 11.822 0 00.907-1.724.75.75 0 000-.592c-1.519-3.52-4.367-5.7-7.436-5.7a5.825 5.825 0 00-1.049.09.76.76 0 10.255 1.5zM5.785 4.72A.753.753 0 004.72 5.785l2.324 2.319a10.96 10.96 0 00-2.481 3.6.75.75 0 000 .6c1.514 3.516 4.363 5.7 7.436 5.7a6.942 6.942 0 003.786-1.154l2.429 2.436a.753.753 0 101.064-1.064zm4.767 6.889l1.837 1.837a1.357 1.357 0 01-.39.052 1.5 1.5 0 01-1.495-1.494 1.357 1.357 0 01.048-.395zm1.452 4.888c-2.384 0-4.625-1.717-5.922-4.5a9.063 9.063 0 012.022-2.839l1.324 1.346a3 3 0 004.07 4.07l1.192 1.177a5.427 5.427 0 01-2.691.75z"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div
-        className="container fullWidth view"
-      >
-        <div
           className="textField outline options medium notEmpty"
           onClick={[Function]}
         >
@@ -10579,50 +10535,6 @@ exports[`Storyshots User Inputs/FormProvider Nested 1`] = `
               readOnly={false}
               type="text"
             />
-          </div>
-        </div>
-      </div>
-      <div
-        className="container fullWidth view"
-      >
-        <div
-          className="textField outline password medium notEmpty withLabel"
-          onClick={[Function]}
-        >
-          <label
-            className="label"
-          >
-            Password
-          </label>
-          <div
-            className="inputBase password inputBase bottom"
-          >
-            <input
-              defaultValue="123456789"
-              onChange={[Function]}
-              readOnly={false}
-              type="password"
-            />
-            <button
-              className="button medium ghost iconButton small ghost trailingIcon trailingIcon"
-              disabled={false}
-              onClick={[Function]}
-              tabindex="-1"
-              type="button"
-            >
-              <svg
-                data-name="Eye disabled"
-                data-password-toggle={true}
-                height="1em"
-                viewBox="0 0 24 24"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M11.204 7.561a5.2 5.2 0 01.8-.057c2.384 0 4.625 1.717 5.93 4.5a11.417 11.417 0 01-.675 1.229.749.749 0 101.274.787 11.822 11.822 0 00.907-1.724.75.75 0 000-.592c-1.519-3.52-4.367-5.7-7.436-5.7a5.825 5.825 0 00-1.049.09.76.76 0 10.255 1.5zM5.785 4.72A.753.753 0 004.72 5.785l2.324 2.319a10.96 10.96 0 00-2.481 3.6.75.75 0 000 .6c1.514 3.516 4.363 5.7 7.436 5.7a6.942 6.942 0 003.786-1.154l2.429 2.436a.753.753 0 101.064-1.064zm4.767 6.889l1.837 1.837a1.357 1.357 0 01-.39.052 1.5 1.5 0 01-1.495-1.494 1.357 1.357 0 01.048-.395zm1.452 4.888c-2.384 0-4.625-1.717-5.922-4.5a9.063 9.063 0 012.022-2.839l1.324 1.346a3 3 0 004.07 4.07l1.192 1.177a5.427 5.427 0 01-2.691.75z"
-                />
-              </svg>
-            </button>
           </div>
         </div>
       </div>
