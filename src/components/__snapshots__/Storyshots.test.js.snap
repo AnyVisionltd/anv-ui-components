@@ -10701,7 +10701,7 @@ exports[`Storyshots User Inputs/InputBase States 1`] = `
           className="button medium ghost iconButton small ghost trailingIcon"
           disabled={false}
           onClick={[Function]}
-          tabindex="-1"
+          tabIndex="-1"
           type="button"
         >
           <svg
@@ -12531,7 +12531,7 @@ exports[`Storyshots User Inputs/TextField Type Password 1`] = `
               className="button medium ghost iconButton small ghost trailingIcon trailingIcon"
               disabled={false}
               onClick={[Function]}
-              tabindex="-1"
+              tabIndex="-1"
               type="button"
             >
               <svg

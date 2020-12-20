@@ -70,7 +70,7 @@ const InputBase = React.forwardRef((props, ref) => {
 
     return (
       <IconButton
-        tabindex='-1'
+        tabIndex='-1'
         variant='ghost'
         onClick={onPasswordIconClick}
         disabled={disabled}
