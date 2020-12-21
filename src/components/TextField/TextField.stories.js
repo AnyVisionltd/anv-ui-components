@@ -102,11 +102,8 @@ export const View = () => (
     />
     <TextField
       leadingIcon={<SunBrightens />}
-      placeholder={'view'}
       view
-      label={'view'}
-      variant={'fill'}
-      defaultValue={'View mode fill'}
+      label={'This is empty '}
       onClick={action('click')}
     />
     <TextField

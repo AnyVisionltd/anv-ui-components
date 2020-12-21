@@ -7,12 +7,14 @@ import React, {
 } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
+import { useFormProvider } from '../FormProvider/useFormProvider'
 import { SelectionGroupItem } from './SelectionGroupItem'
 import styles from './SelectionGroup.module.scss'
 
 const SelectionGroup = ({
   variant,
   value,
+  view,
   defaultValue,
   onChange,
   disabled,
@@ -20,6 +22,8 @@ const SelectionGroup = ({
   children,
   ...otherProps
 }) => {
+  const { isView } = useFormProvider({ view })
+
   const [selectedValue, setSelectedValue] = useState(value || defaultValue)
 
   useEffect(() => {
@@ -45,7 +49,7 @@ const SelectionGroup = ({
           onChange: onSelectionChange,
           active,
           leastOneActive,
-          disabled: child.props.disabled || disabled,
+          disabled: child.props.disabled || disabled || isView,
         })
       }
       return child
@@ -76,6 +80,10 @@ SelectionGroup.propTypes = {
   defaultValue: propTypes.oneOfType([propTypes.string, propTypes.number]),
   /** Callback fired when selected item changed. */
   onChange: propTypes.func,
+  /** If true, will be view mode. <br/>
+   *  <i style="background-color:#ffc40026;">NOTE: Also from \<FormProvider> by context. </i>
+   */
+  view: propTypes.bool,
   /** If true disabled all items. */
   disabled: propTypes.bool,
   /** SelectionGroup.Item elements . */

@@ -7,6 +7,7 @@ import {
   Radio,
   Switch,
   IconButton,
+  SelectionGroup,
 } from '../../index'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import styles from '../../storybook/index.module.scss'
@@ -59,6 +60,11 @@ export const Basic = args => {
           items={items}
           className={styles.fullWidth}
         />
+        <SelectionGroup defaultValue={1}>
+          <SelectionGroup.Item value={1}>One</SelectionGroup.Item>
+          <SelectionGroup.Item value={2}>Two</SelectionGroup.Item>
+          <SelectionGroup.Item value={3}>Three</SelectionGroup.Item>
+        </SelectionGroup>
         <div className={styles.checkboxLabel}>
           <Checkbox checked />
           <label>Check box</label>

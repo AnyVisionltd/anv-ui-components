@@ -10280,93 +10280,84 @@ exports[`Storyshots User Inputs/FormProvider Basic 1`] = `
       }
     >
       <div
-        className="container fullWidth view"
+        className="container fullWidth"
       >
         <div
-          className="textField outline text medium notEmpty withLabel"
-          onClick={[Function]}
+          className="view"
         >
-          <label
-            className="label"
-          >
-            Username
-          </label>
-          <div
-            className="inputBase text inputBase bottom"
-          >
-            <input
-              defaultValue="AnyVisionAdmin"
-              onChange={[Function]}
-              readOnly={false}
-              type="text"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        className="container fullWidth view"
-      >
-        <div
-          className="textField outline number medium notEmpty withLabel"
-          onClick={[Function]}
-        >
-          <label
-            className="label"
-          >
-            Age
-          </label>
-          <div
-            className="inputBase number inputBase bottom"
-          >
-            <input
-              defaultValue={24}
-              onChange={[Function]}
-              readOnly={false}
-              type="number"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        className="container fullWidth view"
-      >
-        <div
-          className="textField outline options medium notEmpty"
-          onClick={[Function]}
-        >
-          <label
-            className="label"
-          />
-          <div
-            className="inputBase options inputBase"
-          >
-            <input
-              onChange={[Function]}
-              readOnly={true}
-              type="options"
-              value={1}
-            />
+          <div>
+            <label>
+              Username
+            </label>
             <div
-              className="trailingIcon trailingIcon"
+              className=""
             >
-              <svg
-                className="optionsIcon"
-              />
+              AnyVisionAdmin
             </div>
           </div>
         </div>
-        <portal-for-test>
-          <div
-            className="menuContainer"
-            style={
-              Object {
-                "left": "0",
-                "position": "absolute",
-                "top": "0",
-              }
-            }
-          />
-        </portal-for-test>
+      </div>
+      <div
+        className="container fullWidth"
+      >
+        <div
+          className="view"
+        >
+          <div>
+            <label>
+              Age
+            </label>
+            <div
+              className=""
+            >
+              24
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="container fullWidth"
+      >
+        <div
+          className="view"
+        >
+          <div>
+            <label />
+            <div
+              className=""
+            >
+              1
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="selectionGroup sharp"
+      >
+        <div
+          className="leastOneActive selectionGroupItem sharp active disabled"
+          onClick={[Function]}
+        >
+          <div>
+            One
+          </div>
+        </div>
+        <div
+          className="leastOneActive selectionGroupItem sharp disabled"
+          onClick={[Function]}
+        >
+          <div>
+            Two
+          </div>
+        </div>
+        <div
+          className="leastOneActive selectionGroupItem sharp disabled"
+          onClick={[Function]}
+        >
+          <div>
+            Three
+          </div>
+        </div>
       </div>
       <div
         className="checkboxLabel"
@@ -10466,50 +10457,38 @@ exports[`Storyshots User Inputs/FormProvider Nested 1`] = `
       }
     >
       <div
-        className="container fullWidth view"
+        className="container fullWidth"
       >
         <div
-          className="textField outline text medium notEmpty withLabel"
-          onClick={[Function]}
+          className="view"
         >
-          <label
-            className="label"
-          >
-            First Name
-          </label>
-          <div
-            className="inputBase text inputBase bottom"
-          >
-            <input
-              defaultValue="Any"
-              onChange={[Function]}
-              readOnly={false}
-              type="text"
-            />
+          <div>
+            <label>
+              First Name
+            </label>
+            <div
+              className=""
+            >
+              Any
+            </div>
           </div>
         </div>
       </div>
       <div
-        className="container fullWidth view"
+        className="container fullWidth"
       >
         <div
-          className="textField outline text medium notEmpty withLabel"
-          onClick={[Function]}
+          className="view"
         >
-          <label
-            className="label"
-          >
-            Last Name
-          </label>
-          <div
-            className="inputBase text inputBase bottom"
-          >
-            <input
-              defaultValue="Vision"
-              onChange={[Function]}
-              readOnly={false}
-              type="text"
-            />
+          <div>
+            <label>
+              Last Name
+            </label>
+            <div
+              className=""
+            >
+              Vision
+            </div>
           </div>
         </div>
       </div>
@@ -10577,26 +10556,20 @@ exports[`Storyshots User Inputs/FormProvider Nested 1`] = `
         }
       />
       <div
-        className="container fullWidth view"
+        className="container fullWidth"
       >
         <div
-          className="textField outline number medium notEmpty withLabel"
-          onClick={[Function]}
+          className="view"
         >
-          <label
-            className="label"
-          >
-            Age
-          </label>
-          <div
-            className="inputBase number inputBase bottom"
-          >
-            <input
-              defaultValue={24}
-              onChange={[Function]}
-              readOnly={false}
-              type="number"
-            />
+          <div>
+            <label>
+              Age
+            </label>
+            <div
+              className=""
+            >
+              24
+            </div>
           </div>
         </div>
       </div>
@@ -11757,6 +11730,52 @@ exports[`Storyshots User Inputs/SelectionGroup Variants 1`] = `
 </div>
 `;
 
+exports[`Storyshots User Inputs/SelectionGroup View 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      style={
+        Object {
+          "display": "grid",
+          "gridGap": "8px",
+        }
+      }
+    >
+      <div
+        className="selectionGroup sharp"
+      >
+        <div
+          className="leastOneActive selectionGroupItem sharp active disabled"
+          onClick={[Function]}
+        >
+          <div>
+            One
+          </div>
+        </div>
+        <div
+          className="leastOneActive selectionGroupItem sharp disabled"
+          onClick={[Function]}
+        >
+          <div>
+            Two
+          </div>
+        </div>
+        <div
+          className="leastOneActive selectionGroupItem sharp disabled"
+          onClick={[Function]}
+        >
+          <div>
+            Three
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots User Inputs/SelectionGroup With Icon 1`] = `
 <div>
   <div
@@ -12594,123 +12613,89 @@ exports[`Storyshots User Inputs/TextField View 1`] = `
       className="flexMultipleRows"
     >
       <div
-        className="container view"
+        className="container"
       >
         <div
-          className="textField outline text medium notEmpty withLabel"
-          onClick={[Function]}
+          className="view"
         >
-          <label
-            className="label left"
+          <svg
+            data-name="Sun / Brightens"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            view
-          </label>
-          <div
-            className="inputBase text inputBase bottom"
-          >
-            <span
-              className="leadingIcon leadingIcon"
-            >
-              <svg
-                data-name="Sun / Brightens"
-                height="1em"
-                viewBox="0 0 24 24"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
-                />
-              </svg>
-            </span>
-            <input
-              defaultValue="View mode"
-              onChange={[Function]}
-              placeholder="view"
-              readOnly={false}
-              type="text"
+            <path
+              d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
             />
+          </svg>
+          <div>
+            <label>
+              view
+            </label>
+            <div
+              className=""
+            >
+              View mode
+            </div>
           </div>
         </div>
       </div>
       <div
-        className="container view"
+        className="container"
       >
         <div
-          className="textField fill text medium notEmpty withLabel"
-          onClick={[Function]}
+          className="view"
         >
-          <label
-            className="label left"
+          <svg
+            data-name="Sun / Brightens"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            view
-          </label>
-          <div
-            className="inputBase text inputBase bottom"
-          >
-            <span
-              className="leadingIcon leadingIcon"
-            >
-              <svg
-                data-name="Sun / Brightens"
-                height="1em"
-                viewBox="0 0 24 24"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
-                />
-              </svg>
-            </span>
-            <input
-              defaultValue="View mode fill"
-              onChange={[Function]}
-              placeholder="view"
-              readOnly={false}
-              type="text"
+            <path
+              d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
             />
+          </svg>
+          <div>
+            <label>
+              This is empty 
+            </label>
+            <div
+              className="none"
+            >
+              None
+            </div>
           </div>
         </div>
       </div>
       <div
-        className="container view"
+        className="container"
       >
         <div
-          className="textField outline text medium notEmpty multiline withLabel"
-          onClick={[Function]}
+          className="view"
         >
-          <label
-            className="label left"
+          <svg
+            data-name="Sun / Brightens"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            view
-          </label>
-          <div
-            className="inputBase text multiline inputBase bottom"
-          >
-            <span
-              className="leadingIcon leadingIcon"
-            >
-              <svg
-                data-name="Sun / Brightens"
-                height="1em"
-                viewBox="0 0 24 24"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
-                />
-              </svg>
-            </span>
-            <textarea
-              defaultValue="multiline text view mode"
-              onChange={[Function]}
-              placeholder="view"
-              readOnly={false}
-              rows={5}
-              type="text"
+            <path
+              d="M6.75 16.125l-.586.586a.823.823 0 001.163 1.163l.586-.586a.825.825 0 00-1.163-1.163zM6.225 12a.825.825 0 00-.825-.825h-.825a.825.825 0 100 1.65H5.4A.825.825 0 006.225 12zM12 6.225a.825.825 0 00.825-.825v-.825a.825.825 0 10-1.65 0V5.4a.825.825 0 00.825.825zM6.75 7.916A.824.824 0 007.916 6.75l-.586-.586a.825.825 0 00-1.163 1.167zm9.9.239a.825.825 0 00.578-.239l.586-.586a.825.825 0 10-1.164-1.163l-.525.583a.822.822 0 00.545 1.4zm2.772 3.019H18.6a.825.825 0 000 1.65h.825a.825.825 0 100-1.65zm-7.425 6.6a.825.825 0 00-.825.825v.825a.825.825 0 101.65 0V18.6a.825.825 0 00-.822-.825zm5.247-1.65a.825.825 0 00-1.119 1.126l.586.586a.823.823 0 101.163-1.163zM12 7.463a4.537 4.537 0 104.537 4.538A4.538 4.538 0 0012 7.463zm0 7.425a2.887 2.887 0 112.887-2.887A2.887 2.887 0 0112 14.888z"
             />
+          </svg>
+          <div>
+            <label>
+              view
+            </label>
+            <div
+              className=""
+            >
+              multiline text view mode
+            </div>
           </div>
         </div>
       </div>

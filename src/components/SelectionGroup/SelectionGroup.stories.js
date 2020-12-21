@@ -97,6 +97,16 @@ export const WithIcon = () => (
   </div>
 )
 
+export const View = () => (
+  <div style={containerStyle}>
+    <SelectionGroup defaultValue={1} view>
+      <SelectionGroup.Item value={1}>One</SelectionGroup.Item>
+      <SelectionGroup.Item value={2}>Two</SelectionGroup.Item>
+      <SelectionGroup.Item value={3}>Three</SelectionGroup.Item>
+    </SelectionGroup>
+  </div>
+)
+
 export const Disabled = () => (
   <div style={containerStyle}>
     <SelectionGroup defaultValue={1}>
