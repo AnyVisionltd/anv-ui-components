@@ -266,22 +266,26 @@
 }
 
 .view {
-  * {
-    pointer-events: none;
+  display: flex;
+  align-items: center;
+  color: av-color(content);
+  fill: av-color(content);
+
+  svg {
+    margin-right: av-space(tiny);
   }
 
-  .textField:not(.fill) {
-    border: none;
-    padding: 0;
+  label {
+    @extend %av-caption;
+    text-transform: capitalize;
+    opacity: av-opacity(medium);
   }
 
-  .optionsIcon {
-    display: none;
+  .none {
+    color: av-color(content, av-opacity(disabled));
   }
 
-  .inputBase {
-    [data-password-toggle] {
-      display: none;
-    }
+  div {
+    @extend %av-body1;
   }
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, memo, useCallback } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
+import languageService from '../../services/language'
 import { useFormProvider } from '../../index'
 import { ReactComponent as ArrowSolidDown } from '../../assets/svg/ArrowSolidDown.svg'
 import { ReactComponent as ErrorCircleIcon } from '../../assets/svg/ErrorCircleOutlined.svg'
@@ -14,6 +15,8 @@ const types = {
   text: 'text',
   password: 'password',
 }
+
+const getTranslation = path => languageService.getTranslation(`${path}`)
 
 const TextField = React.forwardRef((props, ref) => {
   const {
@@ -195,11 +198,23 @@ const TextField = React.forwardRef((props, ref) => {
     return
   }
 
-  return (
-    <div
-      className={classNames(styles.container, className, isView && styles.view)}
-      style={style}
-    >
+  const renderView = () => {
+    const viewValue = value || defaultValue
+    return (
+      <div className={styles.view}>
+        {leadingIcon}
+        <div>
+          <label>{label}</label>
+          <div className={classNames(!viewValue && styles.none)}>
+            {viewValue || getTranslation('none')}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  const renderInput = () => (
+    <>
       <div ref={textFieldRef} onClick={handleClick} className={classes}>
         <label
           className={classNames(styles.label, { [styles.left]: !!leadingIcon })}
@@ -235,6 +250,12 @@ const TextField = React.forwardRef((props, ref) => {
           {message}
         </span>
       )}
+    </>
+  )
+
+  return (
+    <div className={classNames(styles.container, className)} style={style}>
+      {isView ? renderView() : renderInput()}
     </div>
   )
 })
