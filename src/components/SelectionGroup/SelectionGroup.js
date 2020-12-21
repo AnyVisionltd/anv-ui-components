@@ -23,7 +23,6 @@ const SelectionGroup = ({
   ...otherProps
 }) => {
   const { isView } = useFormProvider({ view })
-  console.log(isView)
 
   const [selectedValue, setSelectedValue] = useState(value || defaultValue)
 
