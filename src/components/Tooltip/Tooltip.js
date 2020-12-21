@@ -123,7 +123,7 @@ Tooltip.defaultProps = {
 
 Tooltip.propTypes = {
   /** The tooltip content */
-  content: propTypes.any.isRequired,
+  content: propTypes.any,
   /** Show or hide tooltip */
   show: propTypes.bool,
   /** Placement of the tooltip from the anchor element*/
@@ -135,7 +135,7 @@ Tooltip.propTypes = {
    *  left the anchor element, or tooltip when in interactive mode*/
   leaveDelay: propTypes.number,
   /** The anchor element */
-  children: propTypes.node.isRequired,
+  children: propTypes.node,
   /** Custom styles for the tooltip */
   className: propTypes.string,
   /** Whether to use arrows or not */
