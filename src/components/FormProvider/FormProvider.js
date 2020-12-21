@@ -4,7 +4,7 @@ import FormContext from './Context'
 
 /**
  * Wrapper for forms, add view capability using context for supported components. <br/>
- * Supported components - <code>\<TextField/></code>, <code>\<Checkbox/></code>, <code>\<Radio/></code>
+ * Supported components - <code>\<TextField/></code>, <code>\<Checkbox/></code>, <code>\<Radio/></code>, <code>\<SelectionGroup/></code>
  * <br/>
  * <br/>
  * <code>useFormProvider</code> - hook for getting the isView value.

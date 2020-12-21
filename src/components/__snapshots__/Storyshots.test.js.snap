@@ -10339,6 +10339,34 @@ exports[`Storyshots User Inputs/FormProvider Basic 1`] = `
         </portal-for-test>
       </div>
       <div
+        className="selectionGroup sharp"
+      >
+        <div
+          className="leastOneActive selectionGroupItem sharp active disabled"
+          onClick={[Function]}
+        >
+          <div>
+            One
+          </div>
+        </div>
+        <div
+          className="leastOneActive selectionGroupItem sharp disabled"
+          onClick={[Function]}
+        >
+          <div>
+            Two
+          </div>
+        </div>
+        <div
+          className="leastOneActive selectionGroupItem sharp disabled"
+          onClick={[Function]}
+        >
+          <div>
+            Three
+          </div>
+        </div>
+      </div>
+      <div
         className="checkboxLabel"
       >
         <label
@@ -11715,6 +11743,52 @@ exports[`Storyshots User Inputs/SelectionGroup Variants 1`] = `
         </div>
         <div
           className="selectionGroupItem ghost"
+          onClick={[Function]}
+        >
+          <div>
+            Three
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots User Inputs/SelectionGroup View 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      style={
+        Object {
+          "display": "grid",
+          "gridGap": "8px",
+        }
+      }
+    >
+      <div
+        className="selectionGroup sharp"
+      >
+        <div
+          className="leastOneActive selectionGroupItem sharp active disabled"
+          onClick={[Function]}
+        >
+          <div>
+            One
+          </div>
+        </div>
+        <div
+          className="leastOneActive selectionGroupItem sharp disabled"
+          onClick={[Function]}
+        >
+          <div>
+            Two
+          </div>
+        </div>
+        <div
+          className="leastOneActive selectionGroupItem sharp disabled"
           onClick={[Function]}
         >
           <div>
