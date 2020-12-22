@@ -204,7 +204,7 @@ const TextField = React.forwardRef((props, ref) => {
       <div className={styles.view}>
         {leadingIcon}
         <div>
-          <label ref={inputRef}>{label}</label>
+          <label>{label}</label>
           <div className={classNames(!viewValue && styles.none)}>
             {viewValue || getTranslation('none')}
           </div>
