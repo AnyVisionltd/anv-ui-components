@@ -271,6 +271,12 @@
   color: av-color(content);
   fill: av-color(content);
 
+  .ellipsis {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
   svg {
     margin-right: av-space(tiny);
   }
@@ -286,6 +292,7 @@
   }
 
   div {
+    width: 100%;
     @extend %av-body1;
   }
 }

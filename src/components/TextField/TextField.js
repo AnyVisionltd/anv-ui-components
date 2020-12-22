@@ -6,7 +6,7 @@ import { useFormProvider } from '../../index'
 import { ReactComponent as ArrowSolidDown } from '../../assets/svg/ArrowSolidDown.svg'
 import { ReactComponent as ErrorCircleIcon } from '../../assets/svg/ErrorCircleOutlined.svg'
 import { useClickOutsideListener } from '../../hooks'
-import { InputBase, Menu } from '../../index'
+import { InputBase, Menu, Tooltip } from '../../index'
 import { useCombinedRefs } from '../../hooks/UseCombinedRefs'
 import styles from './TextField.module.scss'
 
@@ -205,9 +205,13 @@ const TextField = React.forwardRef((props, ref) => {
         {leadingIcon}
         <div>
           <label>{label}</label>
-          <div className={classNames(!viewValue && styles.none)}>
-            {viewValue || getTranslation('none')}
-          </div>
+          <Tooltip overflowOnly content={viewValue}>
+            <div
+              className={classNames(styles.ellipsis, !viewValue && styles.none)}
+            >
+              {viewValue || getTranslation('none')}
+            </div>
+          </Tooltip>
         </div>
       </div>
     )
