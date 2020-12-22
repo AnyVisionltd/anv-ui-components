@@ -10290,7 +10290,8 @@ exports[`Storyshots User Inputs/FormProvider Basic 1`] = `
               Username
             </label>
             <div
-              className=""
+              className="ellipsis"
+              onMouseEnter={[Function]}
             >
               AnyVisionAdmin
             </div>
@@ -10308,7 +10309,8 @@ exports[`Storyshots User Inputs/FormProvider Basic 1`] = `
               Age
             </label>
             <div
-              className=""
+              className="ellipsis"
+              onMouseEnter={[Function]}
             >
               24
             </div>
@@ -10324,7 +10326,8 @@ exports[`Storyshots User Inputs/FormProvider Basic 1`] = `
           <div>
             <label />
             <div
-              className=""
+              className="ellipsis"
+              onMouseEnter={[Function]}
             >
               1
             </div>
@@ -10467,7 +10470,8 @@ exports[`Storyshots User Inputs/FormProvider Nested 1`] = `
               First Name
             </label>
             <div
-              className=""
+              className="ellipsis"
+              onMouseEnter={[Function]}
             >
               Any
             </div>
@@ -10485,7 +10489,8 @@ exports[`Storyshots User Inputs/FormProvider Nested 1`] = `
               Last Name
             </label>
             <div
-              className=""
+              className="ellipsis"
+              onMouseEnter={[Function]}
             >
               Vision
             </div>
@@ -10566,7 +10571,8 @@ exports[`Storyshots User Inputs/FormProvider Nested 1`] = `
               Age
             </label>
             <div
-              className=""
+              className="ellipsis"
+              onMouseEnter={[Function]}
             >
               24
             </div>
@@ -12634,7 +12640,8 @@ exports[`Storyshots User Inputs/TextField View 1`] = `
               view
             </label>
             <div
-              className=""
+              className="ellipsis"
+              onMouseEnter={[Function]}
             >
               View mode
             </div>
@@ -12663,7 +12670,8 @@ exports[`Storyshots User Inputs/TextField View 1`] = `
               This is empty 
             </label>
             <div
-              className="none"
+              className="ellipsis none"
+              onMouseEnter={[Function]}
             >
               None
             </div>
@@ -12692,7 +12700,8 @@ exports[`Storyshots User Inputs/TextField View 1`] = `
               view
             </label>
             <div
-              className=""
+              className="ellipsis"
+              onMouseEnter={[Function]}
             >
               multiline text view mode
             </div>
