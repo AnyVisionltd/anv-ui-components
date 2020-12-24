@@ -106,6 +106,20 @@ export const customChipValidation = () => {
   )
 }
 
+export const AutoComplete = () => {
+  const autoCompleteItems = [
+    { label: 'first', value: 'first' },
+    { label: 'second', value: 'second' },
+    { label: 'third', value: 'third' }
+    ]
+  const autoComplete = inputValue => autoCompleteItems.filter(({ value }) => value.includes(inputValue))
+  return (
+    <ChipsInput
+      autoComplete={autoComplete}
+    />
+  )
+}
+
 export const playGround = () => {
   const selectOptions = {
     noValues: 1,

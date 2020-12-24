@@ -2,7 +2,7 @@ import React, { memo, useState } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { EyeEnabled, EyeDisabled } from '@anyvision/anv-icons'
-import { IconButton } from '../IconButton'
+import { IconButton } from '../../index'
 import styles from './InputBase.module.scss'
 
 const inputElements = Object.freeze({

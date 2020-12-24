@@ -10,7 +10,7 @@ import classNames from 'classnames'
 import propTypes from 'prop-types'
 import { useCombinedRefs } from '../../hooks/UseCombinedRefs'
 import { usePrevious } from '../../hooks/UsePrevious'
-import { InputBase, Chip } from '../../index'
+import { InputBase, Chip, Menu } from '../../index'
 import keymap from '../../utils/enums/keymap'
 import styles from './ChipsInput.module.scss'
 import IconButton from '../IconButton/IconButton'
@@ -33,12 +33,15 @@ const ChipsInput = forwardRef(
       validation,
       helperText,
       error,
+      autoComplete,
       ...otherProps
     },
     forwardRef,
   ) => {
     const [chipValues, setChipValues] = useState(defaultChipValues)
     const [inputValue, setInputValue] = useState(defaultInputValue)
+    const [isFocus, setIsFocus] = useState(false)
+    const [autoCompleteItems, setAutoCompleteItems] = useState([])
     const [focusedChipIndex, setFocusedChipIndex] = useState()
     const previousFocusedChipIndex = usePrevious(focusedChipIndex)
     const innerRef = useRef(null)
@@ -173,9 +176,18 @@ const ChipsInput = forwardRef(
       keyFunctionMapping[event.keyCode] &&
       keyFunctionMapping[event.keyCode](event)
 
-    const handleInputChange = ({ target }) => setInputValue(target.value)
+    const handleInputChange = ({ target }) => {
+      if(autoComplete) {
+        setAutoCompleteItems(autoComplete(inputValue))
+      }
+      setInputValue(target.value)
+    }
 
     const onInputFocus = () => {
+      if(autoComplete) {
+        setAutoCompleteItems(autoComplete())
+      }
+      setIsFocus(true)
       setFocusedChipIndex(null)
       onFocusChange(true)
     }
@@ -243,12 +255,22 @@ const ChipsInput = forwardRef(
     const containerClasses = classNames(
       styles.container,
       isChipWithError || error ? styles.error : undefined,
+      disabled && styles.disabled
     )
 
+    const renderAutoComplete = () => {
+      return (
+        <Menu isOpen={isFocus} anchorElement={inputBaseRef.current}>
+          { autoCompleteItems.map(item => <Menu.Item>{item.label}</Menu.Item>) }
+        </Menu>
+      )
+    }
+
     return (
-      <div className={classes}>
+      <div className={classes} onBlur={() => setIsFocus(false)}>
         <div onKeyDown={keyPress} className={containerClasses}>
           {renderChips}
+          { renderAutoComplete() }
           <InputBase
             autoComplete='off'
             value={controlledInputValue || inputValue}
@@ -319,6 +341,8 @@ ChipsInput.propTypes = {
   error: propTypes.bool,
   /** helper text value. */
   helperText: propTypes.string,
+  /** Callback fire when input change. return auto complete items array. */
+  autoComplete: propTypes.func,
 }
 
 export default ChipsInput
