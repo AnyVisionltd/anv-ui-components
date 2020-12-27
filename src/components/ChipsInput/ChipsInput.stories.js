@@ -106,16 +106,21 @@ export const customChipValidation = () => {
   )
 }
 
-export const AutoComplete = () => {
-  const autoCompleteItems = [
-    { label: 'first', value: 'first' },
-    { label: 'second', value: 'second' },
-    { label: 'third', value: 'third' }
-    ]
-  const autoComplete = inputValue => autoCompleteItems.filter(({ value }) => value.includes(inputValue))
+export const Autocomplete = () => {
+  const autocompleteItems = [
+    { label: 'first', value: '1' },
+    { label: 'second', value: '2' },
+    { label: 'third', value: '3' },
+  ]
+  const autoComplete = inputValue =>
+    inputValue && inputValue.length
+      ? autocompleteItems.filter(({ value }) => value.includes(inputValue))
+      : autocompleteItems
   return (
     <ChipsInput
-      autoComplete={autoComplete}
+      onChange={action('Chips Changed Result')}
+      onSubmit={action('Chip was submitted')}
+      autocomplete={autoComplete}
     />
   )
 }

@@ -23,6 +23,15 @@
     flex-grow: 1;
     div {
       border: none;
+      &:hover:not(:focus-within):not(.error):not(.disabled) {
+        box-shadow: none;
+        border: none;
+      }
+
+      &:focus-within {
+        box-shadow: none;
+        border: none;
+      }
     }
   }
 }

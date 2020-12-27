@@ -1025,7 +1025,7 @@ exports[`Storyshots Content/Table Basic 1`] = `
       </portal-for-test>
       <div
         className="ChipsInput chipInput"
-        onBlur={[Function]}
+        onClick={[Function]}
       >
         <div
           className="container"
@@ -9881,7 +9881,50 @@ exports[`Storyshots User Inputs/ChipsInput Auto Complete 1`] = `
   >
     <div
       className="ChipsInput"
-      onBlur={[Function]}
+      onClick={[Function]}
+    >
+      <div
+        className="container"
+        onKeyDown={[Function]}
+      >
+        <portal-for-test>
+          <div
+            className="menuContainer"
+            style={
+              Object {
+                "left": "0",
+                "position": "absolute",
+                "top": "0",
+              }
+            }
+          />
+        </portal-for-test>
+        <div
+          className="inputBase text inputBase"
+        >
+          <input
+            autoComplete="off"
+            onChange={[Function]}
+            onFocus={[Function]}
+            placeholder="Input text in here"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots User Inputs/ChipsInput Autocomplete 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="ChipsInput"
+      onClick={[Function]}
     >
       <div
         className="container"
@@ -9936,7 +9979,7 @@ exports[`Storyshots User Inputs/ChipsInput Custom Chip Validation 1`] = `
       </span>
       <div
         className="ChipsInput"
-        onBlur={[Function]}
+        onClick={[Function]}
       >
         <div
           className="container"
@@ -9983,7 +10026,7 @@ exports[`Storyshots User Inputs/ChipsInput Default 1`] = `
     >
       <div
         className="ChipsInput"
-        onBlur={[Function]}
+        onClick={[Function]}
       >
         <div
           className="container"
@@ -10020,7 +10063,7 @@ exports[`Storyshots User Inputs/ChipsInput Default 1`] = `
       />
       <div
         className="ChipsInput"
-        onBlur={[Function]}
+        onClick={[Function]}
       >
         <div
           className="container disabled"
@@ -10156,7 +10199,7 @@ exports[`Storyshots User Inputs/ChipsInput Get Icon Handler 1`] = `
       </span>
       <div
         className="ChipsInput"
-        onBlur={[Function]}
+        onClick={[Function]}
       >
         <div
           className="container"
@@ -10200,7 +10243,7 @@ exports[`Storyshots User Inputs/ChipsInput Initial Values 1`] = `
   >
     <div
       className="ChipsInput"
-      onBlur={[Function]}
+      onClick={[Function]}
     >
       <div
         className="container"
@@ -10326,7 +10369,7 @@ exports[`Storyshots User Inputs/ChipsInput Place Holder 1`] = `
   >
     <div
       className="ChipsInput"
-      onBlur={[Function]}
+      onClick={[Function]}
     >
       <div
         className="container"
@@ -10369,7 +10412,7 @@ exports[`Storyshots User Inputs/ChipsInput Play Ground 1`] = `
   >
     <div
       className="ChipsInput"
-      onBlur={[Function]}
+      onClick={[Function]}
     >
       <div
         className="container"
@@ -11510,7 +11553,7 @@ exports[`Storyshots User Inputs/SSF Default 1`] = `
         </portal-for-test>
         <div
           className="ChipsInput chipInput"
-          onBlur={[Function]}
+          onClick={[Function]}
         >
           <div
             className="container"
@@ -11584,7 +11627,7 @@ exports[`Storyshots User Inputs/SSF Without Menu Fields 1`] = `
         </portal-for-test>
         <div
           className="ChipsInput chipInput"
-          onBlur={[Function]}
+          onClick={[Function]}
         >
           <div
             className="container"

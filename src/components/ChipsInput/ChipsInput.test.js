@@ -22,12 +22,15 @@ describe('<ChipsInput />', () => {
       const onSubmit = jest.fn()
       render(<ChipsInput onChange={onChange} onSubmit={onSubmit} />)
       addFreeTextChip('mockData')
-      addFreeTextChip('mockData2')
-      // 3 because onChange fire on first render
-      expect(onChange).toBeCalledTimes(3)
-      expect(onSubmit).toBeCalledTimes(2)
-      expect(onChange.mock.calls[2][0]).toEqual(['mockData', 'mockData2'])
-      expect(onSubmit.mock.calls[1][0]).toEqual(['mockData', 'mockData2'])
+      // 2 because onChange fire on first render
+      expect(onChange).toBeCalledTimes(2)
+      expect(onSubmit).toBeCalledTimes(1)
+      expect(onChange.mock.calls[1][0]).toEqual([
+        { label: 'mockData', value: 'mockData' },
+      ])
+      expect(onSubmit.mock.calls[0][0]).toEqual([
+        { label: 'mockData', value: 'mockData' },
+      ])
     })
 
     it('should fire onInputChange with relevant data when chip created', () => {
@@ -50,10 +53,12 @@ describe('<ChipsInput />', () => {
       expect(renderChipIcon.mock.calls[0][0]).toEqual({
         icon: undefined,
         label: 'mockData',
+        value: 'mockData',
       })
       expect(renderChipIcon.mock.calls[1][0]).toEqual({
         icon: undefined,
         label: 'mockData2',
+        value: 'mockData2',
       })
     })
 
@@ -125,14 +130,17 @@ describe('<ChipsInput />', () => {
 
     it('should remove chip when DELETE', () => {
       const onChange = jest.fn()
-      const { getAllByTestId, queryAllByTestId } = render(
+      const { getAllByTestId, queryAllByTestId, getByRole } = render(
         <ChipsInput onChange={onChange} />,
       )
       addFreeTextChip('mockData')
       addFreeTextChip('mockData2')
       const chips = getAllByTestId('chip')
+      const input = getByRole('textbox')
       const [firstChip] = chips
       fireEvent.click(firstChip)
+      fireEvent.keyDown(input, { keyCode: keymap.ARROW_LEFT })
+      fireEvent.keyDown(input, { keyCode: keymap.ARROW_LEFT })
       fireEvent.keyDown(firstChip, { keyCode: keymap.DELETE })
       fireEvent.keyDown(firstChip, { keyCode: keymap.DELETE })
       expect(onChange.mock.calls[4][0]).toEqual([])
@@ -161,8 +169,7 @@ describe('<ChipsInput />', () => {
       expect(document.activeElement).toBe(secondChip)
       fireEvent.keyDown(input, { keyCode: keymap.ARROW_RIGHT })
       expect(document.activeElement).toBe(input)
-      // Should be invoked once on mount and for each time focus entered and left the input
-      expect(onFocusChange).toBeCalledTimes(5)
+      expect(onFocusChange).toBeCalledTimes(3)
     })
   })
 

@@ -54,7 +54,7 @@ const SmartFilter = ({
 
   const handleChipChange = useCallback(
     chips => {
-      const searchQuery = chips.map(chipLabel => {
+      const searchQuery = chips.map(({ label: chipLabel }) => {
         const chipField = getChipField(chipLabel)
         return chipField
           ? {
