@@ -114,7 +114,7 @@ export const Autocomplete = () => {
   ]
   const autoComplete = inputValue =>
     inputValue && inputValue.length
-      ? autocompleteItems.filter(({ value }) => value.includes(inputValue))
+      ? autocompleteItems.filter(({ label }) => label.includes(inputValue))
       : autocompleteItems
   return (
     <ChipsInput
