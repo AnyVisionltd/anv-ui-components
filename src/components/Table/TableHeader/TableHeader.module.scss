@@ -76,6 +76,10 @@
   transition: transform 200ms ease-in-out, opacity 200ms ease-in-out;
 }
 
+.trailingIcon {
+  margin-left: av-space(micro);
+}
+
 .activeSort {
   opacity: av-opacity(high);
 }
