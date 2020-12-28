@@ -20,6 +20,7 @@
 - Add FormProvider Component
 - Add additionalFilters to tableSSF
 - Add the ability to disable table row selection
+- Add autocomplete to chips
 
 ## 1.0.0 - 06-09-2020
 
@@ -29,6 +30,7 @@
 - Added onFinish callback function to DialogWizard
 - Added label prop to textField
 - Removed AttachedAxis and changed preferOpenDirection to match the directions PopperJS uses
+- `<ChipsInput/>` - change onSubmit/onChange return value from `['string', 'string']` to `[{label: 'string'', value: 'any'}]`
 
 ### Changed
 

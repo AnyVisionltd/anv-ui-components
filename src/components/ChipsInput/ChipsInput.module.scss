@@ -7,26 +7,42 @@
 
   .container {
     @extend %av-scrollbar;
-    border-radius: av-radius();
+    border-radius: av-radius(tidy);
     box-sizing: border-box;
     border: solid 1px av-color(content, av-opacity(disabled));
     overflow-y: auto;
     overflow-wrap: anywhere;
-    min-height: 48px;
+    min-height: 56px;
     max-height: 168px;
-    transition: border-color 200ms;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     flex-grow: 1;
 
+    > svg {
+      margin-left: av-space(tiny);
+      width: av-size(sz-24);
+      height: av-size(sz-24);
+
+      + .inputBase {
+        padding: 0 av-space(tiny);
+      }
+    }
+
+    &:hover:not(:focus-within):not(.error):not(.disabled) {
+      box-shadow: inset 0 0 0 2px av-color(content, av-opacity(disabled));
+      border: solid 1px transparent;
+    }
+
     &:focus-within {
-      border-color: av-color(primary);
+      box-shadow: inset 0 0 0 2px av-color(primary);
+      border: solid 1px transparent;
     }
 
     &.error,
     &.error:focus-within {
-      border-color: av-color(error);
+      box-shadow: inset 0 0 0 2px av-color(error);
+      border: solid 1px transparent;
     }
 
     .chipStyle {
@@ -43,12 +59,12 @@
     }
 
     .inputBase {
-      padding-left: av-space(tiny);
+      padding: 0 av-space();
       border: none;
       flex-grow: 1;
 
       > input {
-        @extend %av-body2;
+        @extend %av-body1;
       }
     }
   }

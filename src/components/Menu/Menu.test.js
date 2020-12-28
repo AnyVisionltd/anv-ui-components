@@ -1,12 +1,25 @@
-import React from 'react'
-import { render, fireEvent, act } from '@testing-library/react'
+import React, { useState } from 'react'
+import { render, fireEvent, act, waitFor, screen } from '@testing-library/react'
 import { Menu } from '.'
 import { Button } from '../Button'
+
+const MenuWithAnchor = () => {
+  const [anchor, setAnchor] = useState()
+  return (
+    <>
+      <Button ref={setAnchor}>button</Button>
+      <Menu anchorElement={anchor} isOpen>
+        <Menu.Item>Simple menu item</Menu.Item>
+        <Menu.Item>Simple menu item</Menu.Item>
+      </Menu>
+    </>
+  )
+}
 
 describe('<Menu />', () => {
   let button
   beforeEach(() => {
-    button = document.createElement('button')
+    button = document.createElement('BUTTON')
   })
   afterEach(() => {
     button.remove()
@@ -58,7 +71,7 @@ describe('<Menu />', () => {
         const subMenuInnerHTML = container.querySelector(
           '.subMenuItem > .subMenu',
         )
-        expect(subMenuInnerHTML).toBeEmpty()
+        expect(subMenuInnerHTML).toBeEmptyDOMElement()
       })
     })
 
@@ -119,43 +132,34 @@ describe('<Menu />', () => {
     })
 
     it('Arrow Down key should focus the first > second > anchor > first <Menu.Item/>', async () => {
-      const { getAllByRole } = render(
-        <>
-          <Menu anchorElement={button} isOpen>
-            <Menu.Item>Simple menu item</Menu.Item>
-            <Menu.Item>Simple menu item</Menu.Item>
-          </Menu>
-        </>,
-      )
-
+      const { getAllByRole } = render(<MenuWithAnchor />)
+      await waitFor(() => {})
+      const anchor = screen.getByRole('button')
+      fireEvent.click(anchor)
       const [firstMenuItem, secondMenuItem] = getAllByRole('menuitem')
-      await act(async () => await fireEvent.keyDown(document, { keyCode: 40 }))
+      fireEvent.keyDown(document, { keyCode: 40 })
       expect(document.activeElement).toBe(firstMenuItem)
-      await act(async () => await fireEvent.keyDown(document, { keyCode: 40 }))
+      fireEvent.keyDown(document, { keyCode: 40 })
       expect(document.activeElement).toBe(secondMenuItem)
-      await act(async () => await fireEvent.keyDown(document, { keyCode: 40 }))
-      expect(document.activeElement).toBe(button)
-      await act(async () => await fireEvent.keyDown(document, { keyCode: 40 }))
+      fireEvent.keyDown(document, { keyCode: 40 })
+      expect(document.activeElement).toBe(anchor)
+      fireEvent.keyDown(document, { keyCode: 40 })
       expect(document.activeElement).toBe(firstMenuItem)
     })
 
     it('Arrow Up key should focus the last <Menu.Item/>', async () => {
-      const { getAllByRole } = render(
-        <>
-          <Menu anchorElement={button} isOpen>
-            <Menu.Item>Simple menu item</Menu.Item>
-            <Menu.Item>Simple menu item</Menu.Item>
-          </Menu>
-        </>,
-      )
+      const { getAllByRole } = render(<MenuWithAnchor />)
+      await waitFor(() => {})
+      const anchor = screen.getByRole('button')
+      fireEvent.click(anchor)
       const [firstMenuItem, secondMenuItem] = getAllByRole('menuitem')
-      await act(async () => await fireEvent.keyDown(document, { keyCode: 38 }))
+      fireEvent.keyDown(document, { keyCode: 38 })
       expect(document.activeElement).toBe(secondMenuItem)
-      await act(async () => await fireEvent.keyDown(document, { keyCode: 38 }))
+      fireEvent.keyDown(document, { keyCode: 38 })
       expect(document.activeElement).toBe(firstMenuItem)
-      await act(async () => await fireEvent.keyDown(document, { keyCode: 38 }))
-      expect(document.activeElement).toBe(button)
-      await act(async () => await fireEvent.keyDown(document, { keyCode: 38 }))
+      fireEvent.keyDown(document, { keyCode: 38 })
+      expect(document.activeElement).toBe(anchor)
+      fireEvent.keyDown(document, { keyCode: 38 })
       expect(document.activeElement).toBe(secondMenuItem)
     })
   })

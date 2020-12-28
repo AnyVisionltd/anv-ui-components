@@ -3,6 +3,7 @@ module.exports = {
   plugins: ['react-hooks'],
   rules: {
     'import/prefer-default-export': 'off',
+    'import/no-anonymous-default-export': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/jsx-props-no-spreading': 'off',
     'import/no-extraneous-dependencies': 'off',

@@ -25,5 +25,3 @@ export { FormProvider } from './components/FormProvider'
 export { Banner } from './components/Banner'
 
 export { useFormProvider } from './components/FormProvider/useFormProvider'
-
-export { default as mockAutoSizer } from './testUtils/mockAutoSizer'

@@ -9,25 +9,28 @@ import { Animations } from '../Animations'
 import { Portal } from '../Portal'
 import styles from './Menu.module.scss'
 import { usePopper } from 'react-popper'
+import { useCombinedRefs } from '../../hooks/UseCombinedRefs'
 
-const Menu = ({
-  isOpen,
-  variant,
-  className,
-  anchorElement,
-  children,
-  preferOpenDirection,
-  isSubMenu,
-  onClose,
-  onClosed,
-  onOpened,
-  ...otherProps
-}) => {
+const Menu = React.forwardRef((props, ref) => {
+  const {
+    isOpen,
+    variant,
+    className,
+    anchorElement,
+    children,
+    preferOpenDirection,
+    isSubMenu,
+    onClose,
+    onClosed,
+    onOpened,
+    ...otherProps
+  } = props
   const [currentFocus, setCurrentFocus] = useState(false)
   const [popperRef, setPopperRef] = useState(null)
   const [isMenuOpen, setIsMenuOpen] = useState(isOpen || false)
   const sideToOpenFrom = useRef(null)
   const positionToOpenFrom = useRef(null)
+  const inputRef = useCombinedRefs(useRef({}), ref)
 
   const { styles: popperStyles, attributes, update: updatePopper } = usePopper(
     anchorElement,
@@ -45,14 +48,19 @@ const Menu = ({
   const handleOnAnchorClick = useCallback(() => setIsMenuOpen(true), [])
 
   useEffect(() => {
+    if (anchorElement) {
+      anchorElement.onclick = handleOnAnchorClick
+    }
+  }, [anchorElement, handleOnAnchorClick])
+
+  useEffect(() => {
     async function update() {
-      if (anchorElement && updatePopper && isOpen === undefined) {
-        anchorElement.onclick = handleOnAnchorClick
+      if (updatePopper && isOpen) {
         await updatePopper()
       }
     }
     update()
-  }, [anchorElement, handleOnAnchorClick, updatePopper, isOpen])
+  }, [anchorElement, updatePopper, isOpen])
 
   useEffect(() => {
     const [side, position] = preferOpenDirection.split('-')
@@ -139,9 +147,14 @@ const Menu = ({
     left: 'right',
   }
 
+  const setMenuRef = element => {
+    setPopperRef(element)
+    inputRef.current = element
+  }
+
   const renderMenu = () => (
     <div
-      ref={setPopperRef}
+      ref={setMenuRef}
       className={containerClasses}
       style={popperStyles.popper}
       {...attributes.popper}
@@ -163,7 +176,7 @@ const Menu = ({
   )
 
   return !isSubMenu ? renderMenuInPortal() : renderMenu()
-}
+})
 
 Menu.defaultProps = {
   variant: 'regular',

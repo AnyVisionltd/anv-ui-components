@@ -10,7 +10,7 @@ import classNames from 'classnames'
 import propTypes from 'prop-types'
 import { useCombinedRefs } from '../../hooks/UseCombinedRefs'
 import { usePrevious } from '../../hooks/UsePrevious'
-import { InputBase, Chip } from '../../index'
+import { InputBase, Chip, Menu } from '../../index'
 import keymap from '../../utils/enums/keymap'
 import styles from './ChipsInput.module.scss'
 import IconButton from '../IconButton/IconButton'
@@ -33,19 +33,23 @@ const ChipsInput = forwardRef(
       validation,
       helperText,
       error,
+      autocomplete,
+      leadingIcon,
       ...otherProps
     },
     forwardRef,
   ) => {
     const [chipValues, setChipValues] = useState(defaultChipValues)
     const [inputValue, setInputValue] = useState(defaultInputValue)
+    const [isAutocompleteOpen, setIsAutocompleteOpen] = useState(false)
+    const [autocompleteItems, setAutocompleteItems] = useState([])
     const [focusedChipIndex, setFocusedChipIndex] = useState()
     const previousFocusedChipIndex = usePrevious(focusedChipIndex)
     const innerRef = useRef(null)
     const inputBaseRef = useCombinedRefs(forwardRef, innerRef)
 
     useEffect(() => {
-      onChange(chipValues.map(({ label }) => label))
+      onChange(chipValues)
     }, [chipValues, onChange])
 
     useEffect(() => {
@@ -61,6 +65,13 @@ const ChipsInput = forwardRef(
       }
     }, [focusedChipIndex, onFocusChange, previousFocusedChipIndex])
 
+    const updateAutocomplete = async value => {
+      if (!autocomplete) return
+      setAutocompleteItems([])
+      const items = await autocomplete(value)
+      setAutocompleteItems(items)
+    }
+
     const isChipEditable = () => {
       const inputElement = inputBaseRef.current
       const cursorPosition = inputElement.selectionStart
@@ -72,6 +83,7 @@ const ChipsInput = forwardRef(
       const chipsLength = chipValues.length
       if (!isChipEditable()) return
       if (focusedChipIndex === null) {
+        setIsAutocompleteOpen(false)
         setFocusedChipIndex(chipsLength - 1)
         event.preventDefault()
       } else if (focusedChipIndex > 0) {
@@ -106,23 +118,37 @@ const ChipsInput = forwardRef(
         focusedChipIndex === null ? chipsLength - 1 : focusedChipIndex,
         event,
       )
+      updateAutocomplete()
     }
 
     const removeChipAfterFocusedChip = event => {
-      event.preventDefault()
       const chipsLength = chipValues.length
-      if (!isChipEditable() || focusedChipIndex === chipsLength - 1) return
+      if (
+        !isChipEditable() ||
+        focusedChipIndex === chipsLength - 1 ||
+        focusedChipIndex === null
+      )
+        return
+      event.preventDefault()
       removeChip(focusedChipIndex, event)
     }
 
-    const onAddChip = () => {
-      const chip = { label: inputValue }
-      if (!inputValue.length) return
-      chip.icon = renderChipIcon(chip)
+    const createChip = chip => {
+      if (!chip && !inputValue.length) {
+        return
+      }
+      const newChip = chip ? chip : { label: inputValue, value: inputValue }
+      if (renderChipIcon) {
+        newChip.icon = renderChipIcon(newChip)
+      }
       setInputValue('')
-      const newChips = [...chipValues, chip]
-      setChipValues(newChips)
-      onSubmit(newChips.map(({ label }) => label))
+      updateAutocomplete()
+      inputBaseRef.current.focus()
+      setChipValues(chipValues => {
+        const newChips = [...chipValues, newChip]
+        onSubmit(newChips)
+        return newChips
+      })
     }
 
     const updateChipFocus = useCallback(
@@ -161,7 +187,7 @@ const ChipsInput = forwardRef(
     )
 
     const keyFunctionMapping = Object.freeze({
-      [keymap.ENTER]: onAddChip,
+      [keymap.ENTER]: () => createChip(),
       [keymap.ARROW_LEFT]: moveCursorLeft,
       [keymap.ARROW_RIGHT]: moveCursorRight,
       [keymap.ESCAPE]: clearChipFocus,
@@ -173,11 +199,15 @@ const ChipsInput = forwardRef(
       keyFunctionMapping[event.keyCode] &&
       keyFunctionMapping[event.keyCode](event)
 
-    const handleInputChange = ({ target }) => setInputValue(target.value)
+    const handleInputChange = async ({ target: { value } }) => {
+      updateAutocomplete(value)
+      setInputValue(value)
+    }
 
     const onInputFocus = () => {
+      updateAutocomplete()
+      setIsAutocompleteOpen(true)
       setFocusedChipIndex(null)
-      onFocusChange(true)
     }
 
     const removeAllChips = () => setChipValues([])
@@ -243,12 +273,43 @@ const ChipsInput = forwardRef(
     const containerClasses = classNames(
       styles.container,
       isChipWithError || error ? styles.error : undefined,
+      disabled && styles.disabled,
     )
 
+    const renderAutoComplete = () => {
+      return (
+        <Menu
+          isOpen={isAutocompleteOpen && !!autocompleteItems.length}
+          anchorElement={inputBaseRef.current}
+          variant={'dense'}
+          onClose={() => setIsAutocompleteOpen(false)}
+        >
+          {autocompleteItems.map(item => (
+            <Menu.Item
+              leadingComponent={item.icon}
+              key={item.label}
+              onClick={e => {
+                e.stopPropagation()
+                createChip(item)
+              }}
+            >
+              {item.label}
+            </Menu.Item>
+          ))}
+        </Menu>
+      )
+    }
+
+    const handleClick = () => {
+      inputBaseRef.current.focus()
+    }
+
     return (
-      <div className={classes}>
+      <div className={classes} onClick={handleClick}>
         <div onKeyDown={keyPress} className={containerClasses}>
+          {leadingIcon}
           {renderChips}
+          {renderAutoComplete()}
           <InputBase
             autoComplete='off'
             value={controlledInputValue || inputValue}
@@ -271,7 +332,6 @@ const ChipsInput = forwardRef(
 ChipsInput.defaultProps = {
   onChange: () => {},
   onInputChange: () => {},
-  renderChipIcon: () => {},
   onFocusChange: () => {},
   onSubmit: () => {},
   validation: () => true,
@@ -317,8 +377,16 @@ ChipsInput.propTypes = {
   validation: propTypes.func,
   /** Toggles the error state. */
   error: propTypes.bool,
+  /** Leading icon. */
+  leadingIcon: propTypes.element,
   /** helper text value. */
   helperText: propTypes.string,
+  /** Callback fire when input change. <br />
+   *  Should return autocomplete items array: <br />
+   *  <code>label</code>      - autocomplete item label<br />
+   *  <code>value</code>      - autocomplete item value<br/>
+   **/
+  autocomplete: propTypes.func,
 }
 
 export default ChipsInput

@@ -1,10 +1,8 @@
 import React from 'react'
 import { action } from '@storybook/addon-actions'
 import { select, text, boolean } from '@storybook/addon-knobs'
+import { Filter, EyeEnabled, ArrowSolidRight } from '@anyvision/anv-icons'
 import ChipsInput from './ChipsInput'
-import { ReactComponent as EyeEnabled } from '../../assets/svg/EyeEnabled.svg'
-import { ReactComponent as ArrowSolidRight } from '../../assets/svg/ArrowSolidRight.svg'
-import { ReactComponent as Filter } from '../../assets/svg/Filter.svg'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import styles from '../../storybook/index.module.scss'
 
@@ -103,6 +101,37 @@ export const customChipValidation = () => {
         onSubmit={action('Chip was submitted')}
       />
     </div>
+  )
+}
+
+export const leadingIcon = () => (
+  <div className={styles.flexColumn}>
+    <ChipsInput
+      leadingIcon={<Filter />}
+      onChange={action('Chips Changed Result')}
+      onInputChange={action('Input Changed Result')}
+      onFocusChange={action('Input Focus Changed Result')}
+      onSubmit={action('Chip was submitted')}
+    />
+  </div>
+)
+
+export const Autocomplete = () => {
+  const autocompleteItems = [
+    { label: 'first', value: '1' },
+    { label: 'second', value: '2' },
+    { label: 'third', value: '3' },
+  ]
+  const autoComplete = inputValue =>
+    inputValue && inputValue.length
+      ? autocompleteItems.filter(({ label }) => label.includes(inputValue))
+      : autocompleteItems
+  return (
+    <ChipsInput
+      onChange={action('Chips Changed Result')}
+      onSubmit={action('Chip was submitted')}
+      autocomplete={autoComplete}
+    />
   )
 }
 
