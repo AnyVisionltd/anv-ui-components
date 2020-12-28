@@ -1,12 +1,13 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, waitFor } from '@testing-library/react'
+import user from '@testing-library/user-event'
 import { screen } from '@testing-library/dom'
 import keymap from '../../utils/enums/keymap'
 import ChipsInput from './ChipsInput'
 
 const changeInput = value => {
   const input = screen.getByRole('textbox')
-  fireEvent.change(input, { target: { value } })
+  user.type(input, value)
   return input
 }
 
@@ -17,7 +18,7 @@ const addFreeTextChip = value => {
 
 describe('<ChipsInput />', () => {
   describe('chips creation', () => {
-    it('should fire onChange and onSubmit with relevant data when chip created', () => {
+    it('should fire onChange and onSubmit with relevant data when chip created', async () => {
       const onChange = jest.fn()
       const onSubmit = jest.fn()
       render(<ChipsInput onChange={onChange} onSubmit={onSubmit} />)
@@ -41,7 +42,7 @@ describe('<ChipsInput />', () => {
       // 3 because onInputChange fire on first render + add & clear for each submit
       expect(onInputChange).toBeCalledTimes(3)
       expect(onInputChange.mock.calls[1][0]).toEqual('a')
-      expect(onInputChange.mock.calls[2][0]).toEqual('b')
+      expect(onInputChange.mock.calls[2][0]).toEqual('ab')
     })
 
     it('should fire renderChipIcon when submitting a chip', () => {
