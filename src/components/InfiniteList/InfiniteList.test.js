@@ -1,7 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import InfiniteList from './InfiniteList'
-import mockAutoSizer from '../../testUtils/mockAutoSizer'
 
 const items = [...Array(10).keys()]
 const totalItems = 20
@@ -15,16 +14,11 @@ const rowRender = item => {
   )
 }
 
-jest.mock('react-virtualized-auto-sizer', () => jest.fn())
+jest.mock('react-virtualized-auto-sizer', () => ({ children }) =>
+  children({ height: 56, width: 100 }),
+)
 
 describe('<InfiniteList />', () => {
-  beforeAll(() => {
-    mockAutoSizer.size(56)
-  })
-  afterAll(() => {
-    mockAutoSizer.restore()
-  })
-
   it('should render 3 rows', () => {
     const { getAllByTestId, getByText } = render(
       <InfiniteList

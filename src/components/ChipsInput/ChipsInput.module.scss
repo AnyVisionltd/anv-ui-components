@@ -19,6 +19,16 @@
     align-items: center;
     flex-grow: 1;
 
+    > svg {
+      margin-left: av-space(tiny);
+      width: av-size(sz-24);
+      height: av-size(sz-24);
+
+      + .inputBase {
+        padding: 0 av-space(tiny);
+      }
+    }
+
     &:hover:not(:focus-within):not(.error):not(.disabled) {
       box-shadow: inset 0 0 0 2px av-color(content, av-opacity(disabled));
       border: solid 1px transparent;

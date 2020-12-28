@@ -9874,49 +9874,6 @@ exports[`Storyshots User Inputs/Checkbox States 1`] = `
 </div>
 `;
 
-exports[`Storyshots User Inputs/ChipsInput Auto Complete 1`] = `
-<div>
-  <div
-    className="center"
-  >
-    <div
-      className="ChipsInput"
-      onClick={[Function]}
-    >
-      <div
-        className="container"
-        onKeyDown={[Function]}
-      >
-        <portal-for-test>
-          <div
-            className="menuContainer"
-            style={
-              Object {
-                "left": "0",
-                "position": "absolute",
-                "top": "0",
-              }
-            }
-          />
-        </portal-for-test>
-        <div
-          className="inputBase text inputBase"
-        >
-          <input
-            autoComplete="off"
-            onChange={[Function]}
-            onFocus={[Function]}
-            placeholder="Input text in here"
-            type="text"
-            value=""
-          />
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
 exports[`Storyshots User Inputs/ChipsInput Autocomplete 1`] = `
 <div>
   <div
@@ -10108,7 +10065,18 @@ exports[`Storyshots User Inputs/ChipsInput Default 1`] = `
             <div
               className="leadingIcon"
             >
-              <svg />
+              <svg
+                data-name="Arrow solid right"
+                height="1em"
+                viewBox="0 0 24 24"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M15.318 11.248a1 1 0 010 1.505l-4.339 3.8a1 1 0 01-1.658-.752v-7.6a1 1 0 011.657-.749z"
+                  data-name="Arrow solid right"
+                />
+              </svg>
             </div>
             <span
               className="label"
@@ -10302,7 +10270,18 @@ exports[`Storyshots User Inputs/ChipsInput Initial Values 1`] = `
           <div
             className="leadingIcon"
           >
-            <svg />
+            <svg
+              data-name="Arrow solid right"
+              height="1em"
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15.318 11.248a1 1 0 010 1.505l-4.339 3.8a1 1 0 01-1.658-.752v-7.6a1 1 0 011.657-.749z"
+                data-name="Arrow solid right"
+              />
+            </svg>
           </div>
           <span
             className="label"
@@ -10354,6 +10333,64 @@ exports[`Storyshots User Inputs/ChipsInput Initial Values 1`] = `
                 className="cancelIcon"
               />
             </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots User Inputs/ChipsInput Leading Icon 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexColumn"
+    >
+      <div
+        className="ChipsInput"
+        onClick={[Function]}
+      >
+        <div
+          className="container"
+          onKeyDown={[Function]}
+        >
+          <svg
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M5.25 9h13.5a.75.75 0 100-1.5H5.25a.75.75 0 100 1.5zM15 15H9a.75.75 0 000 1.5h6a.75.75 0 000-1.5zm1.875-3.75h-9.75a.75.75 0 000 1.5h9.75a.75.75 0 000-1.5z"
+              data-name="Filter"
+            />
+          </svg>
+          <portal-for-test>
+            <div
+              className="menuContainer"
+              style={
+                Object {
+                  "left": "0",
+                  "position": "absolute",
+                  "top": "0",
+                }
+              }
+            />
+          </portal-for-test>
+          <div
+            className="inputBase text inputBase"
+          >
+            <input
+              autoComplete="off"
+              onChange={[Function]}
+              onFocus={[Function]}
+              placeholder="Input text in here"
+              type="text"
+              value=""
+            />
           </div>
         </div>
       </div>

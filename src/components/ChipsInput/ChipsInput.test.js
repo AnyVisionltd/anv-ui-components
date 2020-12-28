@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent, waitFor } from '@testing-library/react'
+import { render, fireEvent, act, waitFor } from '@testing-library/react'
 import user from '@testing-library/user-event'
 import { screen } from '@testing-library/dom'
 import keymap from '../../utils/enums/keymap'
@@ -34,11 +34,12 @@ describe('<ChipsInput />', () => {
       ])
     })
 
-    it('should fire onInputChange with relevant data when chip created', () => {
+    it('should fire onInputChange with relevant data when chip created', async () => {
       const onInputChange = jest.fn()
       render(<ChipsInput onInputChange={onInputChange} />)
       changeInput('a')
       changeInput('b')
+      await waitFor(() => {})
       // 3 because onInputChange fire on first render + add & clear for each submit
       expect(onInputChange).toBeCalledTimes(3)
       expect(onInputChange.mock.calls[1][0]).toEqual('a')
@@ -80,6 +81,24 @@ describe('<ChipsInput />', () => {
       addFreeTextChip('1')
       const chipWithoutError = container.querySelector('.chipError')
       expect(chipWithoutError).toBe(null)
+    })
+  })
+
+  describe('autocomplete', () => {
+    it('should render autocomplete', async () => {
+      const autocomplete = async () => [{ label: 'first', value: '1' }]
+      const onChange = jest.fn()
+      const { debug } = render(
+        <ChipsInput onChange={onChange} autocomplete={autocomplete} />,
+      )
+      const input = screen.getByRole('textbox')
+      fireEvent.focus(input)
+      await waitFor(() => screen.getByText('first'))
+      const firstAutocompleteItem = screen.getByText('first')
+      expect(firstAutocompleteItem).toBeTruthy()
+      user.click(firstAutocompleteItem)
+      await waitFor(() => screen.getByText('first'))
+      expect(screen.getByTestId('chip')).toBeTruthy()
     })
   })
 

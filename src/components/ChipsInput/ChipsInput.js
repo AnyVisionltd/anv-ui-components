@@ -34,6 +34,7 @@ const ChipsInput = forwardRef(
       helperText,
       error,
       autocomplete,
+      leadingIcon,
       ...otherProps
     },
     forwardRef,
@@ -306,6 +307,7 @@ const ChipsInput = forwardRef(
     return (
       <div className={classes} onClick={handleClick}>
         <div onKeyDown={keyPress} className={containerClasses}>
+          {leadingIcon}
           {renderChips}
           {renderAutoComplete()}
           <InputBase
@@ -375,6 +377,8 @@ ChipsInput.propTypes = {
   validation: propTypes.func,
   /** Toggles the error state. */
   error: propTypes.bool,
+  /** Leading icon. */
+  leadingIcon: propTypes.element,
   /** helper text value. */
   helperText: propTypes.string,
   /** Callback fire when input change. <br />

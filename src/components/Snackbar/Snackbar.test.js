@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent, wait } from '@testing-library/react'
+import { render, fireEvent, waitFor } from '@testing-library/react'
 import Snackbar from './Snackbar'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
 
@@ -67,7 +67,7 @@ describe('<Snackbar />', () => {
           hideTimeout={1}
         />,
       )
-      await wait(() => expect(onClose).toHaveBeenCalledTimes(1), { timeout: 1 })
+      await waitFor(() => expect(onClose).toHaveBeenCalledTimes(1))
     })
 
     it('should NOT fire onClose after hideTimeout', async () => {
@@ -82,9 +82,9 @@ describe('<Snackbar />', () => {
       )
       const node = container.firstChild.firstChild
       fireEvent.mouseEnter(node)
-      await wait(() => expect(onClose).toHaveBeenCalledTimes(0), { timeout: 1 })
+      await waitFor(() => expect(onClose).toHaveBeenCalledTimes(0))
       fireEvent.mouseLeave(node)
-      await wait(() => expect(onClose).toHaveBeenCalledTimes(1), { timeout: 1 })
+      await waitFor(() => expect(onClose).toHaveBeenCalledTimes(1))
     })
   })
 })
