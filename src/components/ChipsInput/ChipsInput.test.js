@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent, act, waitFor } from '@testing-library/react'
+import { render, fireEvent, waitFor } from '@testing-library/react'
 import user from '@testing-library/user-event'
 import { screen } from '@testing-library/dom'
 import keymap from '../../utils/enums/keymap'
@@ -88,9 +88,7 @@ describe('<ChipsInput />', () => {
     it('should render autocomplete', async () => {
       const autocomplete = async () => [{ label: 'first', value: '1' }]
       const onChange = jest.fn()
-      const { debug } = render(
-        <ChipsInput onChange={onChange} autocomplete={autocomplete} />,
-      )
+      render(<ChipsInput onChange={onChange} autocomplete={autocomplete} />)
       const input = screen.getByRole('textbox')
       fireEvent.focus(input)
       await waitFor(() => screen.getByText('first'))

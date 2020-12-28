@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { render, fireEvent, act, waitFor, screen } from '@testing-library/react'
 import { Menu } from '.'
 import { Button } from '../Button'
