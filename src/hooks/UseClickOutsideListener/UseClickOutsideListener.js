@@ -6,6 +6,7 @@ const useClickOutsideListener = (onClickOutside, ref) => {
       if (
         ref &&
         ref.current &&
+        Object.values(ref.current).length &&
         onClickOutside &&
         !ref.current.contains(event.target)
       ) {

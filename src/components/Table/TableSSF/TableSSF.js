@@ -16,7 +16,7 @@ const TableSSF = ({ onChange, additionalFilters, className }) => {
           if (!hide && filterable) {
             acc.push({
               field: field,
-              label: label || (content === 'function' ? content() : content),
+              label: label || content,
               ...(type && { type }),
             })
           }
