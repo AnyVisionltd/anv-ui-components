@@ -71,7 +71,14 @@ const TableHeader = ({
   }
 
   const renderCell = headerCell => {
-    const { field, content, sortable = true, hide, width } = headerCell
+    const {
+      field,
+      content,
+      sortable = true,
+      hide,
+      width,
+      trailingIcon,
+    } = headerCell
     if (hide) {
       return null
     }
@@ -93,6 +100,9 @@ const TableHeader = ({
           content()
         ) : (
           <div className={styles.ellipsis}>{content}</div>
+        )}
+        {!!trailingIcon && (
+          <div className={styles.trailingIcon}>{trailingIcon}</div>
         )}
         {sortableColumn && renderSortingIcon(field)}
       </div>
@@ -192,6 +202,7 @@ TableHeader.propTypes = {
       triggerRowClick: propTypes.bool,
       hide: propTypes.bool,
       width: propTypes.string,
+      trailingIcon: propTypes.element,
     }),
   ).isRequired,
   /** Callback fire when header cell click with cell field. */

@@ -63,7 +63,12 @@ const TextField = React.forwardRef((props, ref) => {
   const setActiveFocus = useCallback(
     e => {
       if (!disabled && !readOnly) {
-        setActive(textFieldRef.current.contains(e.target))
+        setActive(
+          textFieldRef &&
+            textFieldRef.current &&
+            Object.values(textFieldRef.current).length &&
+            textFieldRef.current.contains(e.target),
+        )
       }
     },
     [disabled, readOnly],
