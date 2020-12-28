@@ -202,6 +202,7 @@ TableHeader.propTypes = {
       triggerRowClick: propTypes.bool,
       hide: propTypes.bool,
       width: propTypes.string,
+      trailingIcon: propTypes.element,
     }),
   ).isRequired,
   /** Callback fire when header cell click with cell field. */
