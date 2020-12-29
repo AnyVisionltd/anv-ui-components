@@ -116,6 +116,31 @@ export const leadingIcon = () => (
   </div>
 )
 
+export const Controlled = () => {
+  const [chips, setChips] = useState([
+    { label: 'chip with a', value: 'chip with a' },
+  ])
+
+  const handleChipsChange = chips => {
+    const newChips = chips.filter(({ label }) => label.includes('a'))
+    setChips(newChips)
+  }
+
+  return (
+    <div className={styles.flexColumn}>
+      <span className={styles.marginFlexContainer}>
+        Only chips that contain <b>a</b> can be submitted.
+      </span>
+      <ChipsInput
+        chips={chips}
+        onSubmit={handleChipsChange}
+        onInputChange={action('Input Changed Result')}
+        onFocusChange={action('Input Focus Changed Result')}
+      />
+    </div>
+  )
+}
+
 export const Autocomplete = () => {
   const [autocomplete, setAutocomplete] = useState()
   const handleInputChange = useCallback(inputValue => {

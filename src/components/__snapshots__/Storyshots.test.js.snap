@@ -9893,6 +9893,50 @@ exports[`Storyshots User Inputs/ChipsInput Autocomplete 1`] = `
 </div>
 `;
 
+exports[`Storyshots User Inputs/ChipsInput Controlled 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="flexColumn"
+    >
+      <span
+        className="marginFlexContainer"
+      >
+        Only chips that contain 
+        <b>
+          a
+        </b>
+         can be submitted.
+      </span>
+      <div
+        className="ChipsInput"
+        onClick={[Function]}
+      >
+        <div
+          className="container"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="inputBase text inputBase"
+          >
+            <input
+              autoComplete="off"
+              onChange={[Function]}
+              onFocus={[Function]}
+              placeholder="Input text in here"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots User Inputs/ChipsInput Custom Chip Validation 1`] = `
 <div>
   <div
