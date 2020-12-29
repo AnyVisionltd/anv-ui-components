@@ -9918,18 +9918,6 @@ exports[`Storyshots User Inputs/ChipsInput Controlled 1`] = `
           className="container"
           onKeyDown={[Function]}
         >
-          <portal-for-test>
-            <div
-              className="menuContainer"
-              style={
-                Object {
-                  "left": "0",
-                  "position": "absolute",
-                  "top": "0",
-                }
-              }
-            />
-          </portal-for-test>
           <div
             className="inputBase text inputBase"
           >
