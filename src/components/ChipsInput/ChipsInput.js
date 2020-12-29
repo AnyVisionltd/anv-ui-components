@@ -19,6 +19,7 @@ import { ReactComponent as CancelFilledIcon } from '../../assets/svg/CancelFille
 const ChipsInput = forwardRef(
   (
     {
+      chips: controlledChips,
       defaultChipValues,
       defaultInputValue,
       inputValue: controlledInputValue,
@@ -51,6 +52,10 @@ const ChipsInput = forwardRef(
     useEffect(() => {
       onChange(chipValues)
     }, [chipValues, onChange])
+
+    useEffect(() => {
+      controlledChips && setChipValues(controlledChips)
+    }, [controlledChips])
 
     useEffect(() => {
       onInputChange(inputValue)
@@ -181,9 +186,10 @@ const ChipsInput = forwardRef(
         if (disabled) return
         const chips = chipValues.filter((chip, index) => chipIndex !== index)
         updateChipFocus(chipIndex, event)
+        onSubmit(chips)
         setChipValues(chips)
       },
-      [chipValues, disabled, updateChipFocus],
+      [onSubmit, chipValues, disabled, updateChipFocus],
     )
 
     const keyFunctionMapping = Object.freeze({
@@ -210,7 +216,10 @@ const ChipsInput = forwardRef(
       setFocusedChipIndex(null)
     }
 
-    const removeAllChips = () => setChipValues([])
+    const removeAllChips = useCallback(() => {
+      onSubmit([])
+      setChipValues([])
+    }, [onSubmit])
 
     const renderChips = useMemo(
       () => (
@@ -261,7 +270,7 @@ const ChipsInput = forwardRef(
           <CancelFilledIcon className={styles.cancelIcon} />
         </IconButton>
       )
-    }, [chipValues, disabled])
+    }, [removeAllChips, chipValues, disabled])
 
     const classes = classNames(styles.ChipsInput, className)
 
@@ -345,6 +354,8 @@ ChipsInput.defaultProps = {
  * Note: controlled mode was not implemented for this component!
  */
 ChipsInput.propTypes = {
+  /** Chips array for controlled ChipsInput */
+  chips: propTypes.func,
   /** Function to render icon for chip */
   renderChipIcon: propTypes.func,
   /** Chips that are going to appear on the ChipInput:<br />

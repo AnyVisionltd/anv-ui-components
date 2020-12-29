@@ -9,7 +9,7 @@
     @extend %av-scrollbar;
     border-radius: av-radius(tidy);
     box-sizing: border-box;
-    border: solid 1px av-color(content, av-opacity(disabled));
+    border: solid 1px av-color(content, av-opacity(divider));
     overflow-y: auto;
     overflow-wrap: anywhere;
     min-height: 56px;
