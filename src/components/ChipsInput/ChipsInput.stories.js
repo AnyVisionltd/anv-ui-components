@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { action } from '@storybook/addon-actions'
 import { select, text, boolean } from '@storybook/addon-knobs'
 import { Filter, EyeEnabled, ArrowSolidRight } from '@anyvision/anv-icons'
@@ -117,23 +117,21 @@ export const leadingIcon = () => (
 )
 
 export const Autocomplete = () => {
-  const [autocomplete, setAutocomplete] = useState([])
-  const autocompleteItems = [
-    { label: 'first', value: '1' },
-    { label: 'second', value: '2' },
-    { label: 'third', value: '3' },
-  ]
-  const handleInputChange = inputValue => {
-    const items = inputValue && inputValue.length
-      ? autocompleteItems.filter(({ label }) => label.includes(inputValue))
-      : autocompleteItems
+  const [autocomplete, setAutocomplete] = useState()
+  const handleInputChange = useCallback(inputValue => {
+    const autocompleteItems = [
+      { label: 'first', value: '1' },
+      { label: 'second', value: '2' },
+      { label: 'third', value: '3' },
+    ]
+    const items =
+      inputValue && inputValue.length
+        ? autocompleteItems.filter(({ label }) => label.includes(inputValue))
+        : autocompleteItems
     setAutocomplete(items)
-  }
+  }, [])
   return (
-    <ChipsInput
-      onInputChange={handleInputChange}
-      autocomplete={autocomplete}
-    />
+    <ChipsInput onInputChange={handleInputChange} autocomplete={autocomplete} />
   )
 }
 

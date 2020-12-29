@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import propTypes from 'prop-types'
 
@@ -21,6 +21,12 @@ const getPortalElement = elementId => {
 const Portal = ({ children, containerId, className }) => {
   const mountNode = getPortalElement(containerId)
   mountNode.classList.add(className)
+
+  useEffect(() => {
+    return () => {
+      mountNode.remove()
+    }
+  }, [mountNode])
 
   return <>{createPortal(children, mountNode)}</>
 }

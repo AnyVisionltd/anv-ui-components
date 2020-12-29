@@ -41,6 +41,25 @@ const Menu = React.forwardRef((props, ref) => {
     },
   )
 
+  // update menu position when dom change
+  useEffect(() => {
+    if (updatePopper) {
+      const observer = new MutationObserver(() => {
+        updatePopper()
+      })
+
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+      })
+      return () => {
+        observer.disconnect()
+      }
+    }
+    // Only when isMenuOpen changed
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMenuOpen])
+
   useEffect(() => {
     setIsMenuOpen(isOpen)
   }, [isOpen])

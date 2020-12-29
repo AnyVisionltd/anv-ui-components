@@ -64,7 +64,6 @@ const SmartFilter = ({
             }
           : { value: chipLabel }
       })
-      setMenuAnchor(null)
       setChips(chips)
       onChange(searchQuery)
     },

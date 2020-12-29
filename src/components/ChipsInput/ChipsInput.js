@@ -52,6 +52,10 @@ const ChipsInput = forwardRef(
     }, [chipValues, onChange])
 
     useEffect(() => {
+      onInputChange(inputValue)
+    }, [inputValue, onInputChange])
+
+    useEffect(() => {
       if (
         (previousFocusedChipIndex === null || focusedChipIndex === null) &&
         previousFocusedChipIndex !== focusedChipIndex
@@ -185,8 +189,7 @@ const ChipsInput = forwardRef(
       keyFunctionMapping[event.keyCode] &&
       keyFunctionMapping[event.keyCode](event)
 
-    const handleInputChange = async ({ target: { value } }) => {
-      onInputChange(value)
+    const handleInputChange = ({ target: { value } }) => {
       setInputValue(value)
     }
 
@@ -262,7 +265,8 @@ const ChipsInput = forwardRef(
     )
 
     const renderAutoComplete = () => {
-      if(!autocomplete) return
+      if (!autocomplete) return
+      console.log('sadfasdf')
       return (
         <Menu
           isOpen={isAutocompleteOpen && !!autocomplete.length}
@@ -367,12 +371,17 @@ ChipsInput.propTypes = {
   leadingIcon: propTypes.element,
   /** helper text value. */
   helperText: propTypes.string,
-  /** Callback fire when input change. <br />
-   *  Should return autocomplete items array: <br />
+  /** Autocomplete items array: <br />
    *  <code>label</code>      - autocomplete item label<br />
    *  <code>value</code>      - autocomplete item value<br/>
    **/
-  autocomplete: propTypes.func,
+  autocomplete: propTypes.arrayOf(
+    propTypes.shape({
+      label: propTypes.oneOfType([propTypes.string, propTypes.number])
+        .isRequired,
+      value: propTypes.oneOfType([propTypes.string, propTypes.number]),
+    }),
+  ),
 }
 
 export default ChipsInput
