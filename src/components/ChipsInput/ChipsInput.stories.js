@@ -131,7 +131,11 @@ export const Autocomplete = () => {
     setAutocomplete(items)
   }, [])
   return (
-    <ChipsInput onInputChange={handleInputChange} autocomplete={autocomplete} />
+    <ChipsInput
+      onInputChange={handleInputChange}
+      onChange={action('Chips Changed Result')}
+      autocomplete={autocomplete}
+    />
   )
 }
 

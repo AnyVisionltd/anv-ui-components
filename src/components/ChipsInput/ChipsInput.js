@@ -128,7 +128,20 @@ const ChipsInput = forwardRef(
       if (!chip && !inputValue.length) {
         return
       }
-      const newChip = chip ? chip : { label: inputValue, value: inputValue }
+      let newChip
+      if (chip) {
+        newChip = chip
+      } else if (autocomplete) {
+        const autocompleteIndex = autocomplete.findIndex(
+          ({ label }) => label === inputValue,
+        )
+        newChip =
+          autocompleteIndex >= 0
+            ? autocomplete[autocompleteIndex]
+            : { label: inputValue, value: inputValue }
+      } else {
+        newChip = { label: inputValue, value: inputValue }
+      }
       if (renderChipIcon) {
         newChip.icon = renderChipIcon(newChip)
       }
@@ -266,7 +279,6 @@ const ChipsInput = forwardRef(
 
     const renderAutoComplete = () => {
       if (!autocomplete) return
-      console.log('sadfasdf')
       return (
         <Menu
           isOpen={isAutocompleteOpen && !!autocomplete.length}
