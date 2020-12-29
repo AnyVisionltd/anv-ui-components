@@ -42,7 +42,6 @@ const ChipsInput = forwardRef(
     const [chipValues, setChipValues] = useState(defaultChipValues)
     const [inputValue, setInputValue] = useState(defaultInputValue)
     const [isAutocompleteOpen, setIsAutocompleteOpen] = useState(false)
-    const [autocompleteItems, setAutocompleteItems] = useState([])
     const [focusedChipIndex, setFocusedChipIndex] = useState()
     const previousFocusedChipIndex = usePrevious(focusedChipIndex)
     const innerRef = useRef(null)
@@ -64,13 +63,6 @@ const ChipsInput = forwardRef(
         onFocusChange(focusedChipIndex === null)
       }
     }, [focusedChipIndex, onFocusChange, previousFocusedChipIndex])
-
-    const updateAutocomplete = async value => {
-      if (!autocomplete) return
-      setAutocompleteItems([])
-      const items = await autocomplete(value)
-      setAutocompleteItems(items)
-    }
 
     const isChipEditable = () => {
       const inputElement = inputBaseRef.current
@@ -118,7 +110,6 @@ const ChipsInput = forwardRef(
         focusedChipIndex === null ? chipsLength - 1 : focusedChipIndex,
         event,
       )
-      updateAutocomplete()
     }
 
     const removeChipAfterFocusedChip = event => {
@@ -137,12 +128,24 @@ const ChipsInput = forwardRef(
       if (!chip && !inputValue.length) {
         return
       }
-      const newChip = chip ? chip : { label: inputValue, value: inputValue }
+      let newChip
+      if (chip) {
+        newChip = chip
+      } else if (autocomplete) {
+        const autocompleteIndex = autocomplete.findIndex(
+          ({ label }) => label === inputValue,
+        )
+        newChip =
+          autocompleteIndex >= 0
+            ? autocomplete[autocompleteIndex]
+            : { label: inputValue, value: inputValue }
+      } else {
+        newChip = { label: inputValue, value: inputValue }
+      }
       if (renderChipIcon) {
         newChip.icon = renderChipIcon(newChip)
       }
       setInputValue('')
-      updateAutocomplete()
       inputBaseRef.current.focus()
       setChipValues(chipValues => {
         const newChips = [...chipValues, newChip]
@@ -199,13 +202,11 @@ const ChipsInput = forwardRef(
       keyFunctionMapping[event.keyCode] &&
       keyFunctionMapping[event.keyCode](event)
 
-    const handleInputChange = async ({ target: { value } }) => {
-      updateAutocomplete(value)
+    const handleInputChange = ({ target: { value } }) => {
       setInputValue(value)
     }
 
     const onInputFocus = () => {
-      updateAutocomplete()
       setIsAutocompleteOpen(true)
       setFocusedChipIndex(null)
     }
@@ -277,14 +278,15 @@ const ChipsInput = forwardRef(
     )
 
     const renderAutoComplete = () => {
+      if (!autocomplete) return
       return (
         <Menu
-          isOpen={isAutocompleteOpen && !!autocompleteItems.length}
+          isOpen={isAutocompleteOpen && !!autocomplete.length}
           anchorElement={inputBaseRef.current}
           variant={'dense'}
           onClose={() => setIsAutocompleteOpen(false)}
         >
-          {autocompleteItems.map(item => (
+          {autocomplete.map(item => (
             <Menu.Item
               leadingComponent={item.icon}
               key={item.label}
@@ -381,12 +383,17 @@ ChipsInput.propTypes = {
   leadingIcon: propTypes.element,
   /** helper text value. */
   helperText: propTypes.string,
-  /** Callback fire when input change. <br />
-   *  Should return autocomplete items array: <br />
+  /** Autocomplete items array: <br />
    *  <code>label</code>      - autocomplete item label<br />
    *  <code>value</code>      - autocomplete item value<br/>
    **/
-  autocomplete: propTypes.func,
+  autocomplete: propTypes.arrayOf(
+    propTypes.shape({
+      label: propTypes.oneOfType([propTypes.string, propTypes.number])
+        .isRequired,
+      value: propTypes.oneOfType([propTypes.string, propTypes.number]),
+    }),
+  ),
 }
 
 export default ChipsInput
