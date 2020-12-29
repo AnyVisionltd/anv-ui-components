@@ -1031,18 +1031,6 @@ exports[`Storyshots Content/Table Basic 1`] = `
           className="container"
           onKeyDown={[Function]}
         >
-          <portal-for-test>
-            <div
-              className="menuContainer"
-              style={
-                Object {
-                  "left": "0",
-                  "position": "absolute",
-                  "top": "0",
-                }
-              }
-            />
-          </portal-for-test>
           <div
             className="inputBase text inputBase"
           >
@@ -9887,18 +9875,6 @@ exports[`Storyshots User Inputs/ChipsInput Autocomplete 1`] = `
         className="container"
         onKeyDown={[Function]}
       >
-        <portal-for-test>
-          <div
-            className="menuContainer"
-            style={
-              Object {
-                "left": "0",
-                "position": "absolute",
-                "top": "0",
-              }
-            }
-          />
-        </portal-for-test>
         <div
           className="inputBase text inputBase"
         >
@@ -9998,18 +9974,6 @@ exports[`Storyshots User Inputs/ChipsInput Custom Chip Validation 1`] = `
           className="container"
           onKeyDown={[Function]}
         >
-          <portal-for-test>
-            <div
-              className="menuContainer"
-              style={
-                Object {
-                  "left": "0",
-                  "position": "absolute",
-                  "top": "0",
-                }
-              }
-            />
-          </portal-for-test>
           <div
             className="inputBase text inputBase"
           >
@@ -10045,18 +10009,6 @@ exports[`Storyshots User Inputs/ChipsInput Default 1`] = `
           className="container"
           onKeyDown={[Function]}
         >
-          <portal-for-test>
-            <div
-              className="menuContainer"
-              style={
-                Object {
-                  "left": "0",
-                  "position": "absolute",
-                  "top": "0",
-                }
-              }
-            />
-          </portal-for-test>
           <div
             className="inputBase text inputBase"
           >
@@ -10140,18 +10092,6 @@ exports[`Storyshots User Inputs/ChipsInput Default 1`] = `
               third with icon
             </span>
           </div>
-          <portal-for-test>
-            <div
-              className="menuContainer"
-              style={
-                Object {
-                  "left": "0",
-                  "position": "absolute",
-                  "top": "0",
-                }
-              }
-            />
-          </portal-for-test>
           <div
             className="inputBase text disabled inputBase"
           >
@@ -10229,18 +10169,6 @@ exports[`Storyshots User Inputs/ChipsInput Get Icon Handler 1`] = `
           className="container"
           onKeyDown={[Function]}
         >
-          <portal-for-test>
-            <div
-              className="menuContainer"
-              style={
-                Object {
-                  "left": "0",
-                  "position": "absolute",
-                  "top": "0",
-                }
-              }
-            />
-          </portal-for-test>
           <div
             className="inputBase text inputBase"
           >
@@ -10352,18 +10280,6 @@ exports[`Storyshots User Inputs/ChipsInput Initial Values 1`] = `
             <svg />
           </button>
         </div>
-        <portal-for-test>
-          <div
-            className="menuContainer"
-            style={
-              Object {
-                "left": "0",
-                "position": "absolute",
-                "top": "0",
-              }
-            }
-          />
-        </portal-for-test>
         <div
           className="inputBase text inputBase"
         >
@@ -10424,18 +10340,6 @@ exports[`Storyshots User Inputs/ChipsInput Leading Icon 1`] = `
               data-name="Filter"
             />
           </svg>
-          <portal-for-test>
-            <div
-              className="menuContainer"
-              style={
-                Object {
-                  "left": "0",
-                  "position": "absolute",
-                  "top": "0",
-                }
-              }
-            />
-          </portal-for-test>
           <div
             className="inputBase text inputBase"
           >
@@ -10468,18 +10372,6 @@ exports[`Storyshots User Inputs/ChipsInput Place Holder 1`] = `
         className="container"
         onKeyDown={[Function]}
       >
-        <portal-for-test>
-          <div
-            className="menuContainer"
-            style={
-              Object {
-                "left": "0",
-                "position": "absolute",
-                "top": "0",
-              }
-            }
-          />
-        </portal-for-test>
         <div
           className="inputBase text inputBase"
         >
@@ -10511,18 +10403,6 @@ exports[`Storyshots User Inputs/ChipsInput Play Ground 1`] = `
         className="container"
         onKeyDown={[Function]}
       >
-        <portal-for-test>
-          <div
-            className="menuContainer"
-            style={
-              Object {
-                "left": "0",
-                "position": "absolute",
-                "top": "0",
-              }
-            }
-          />
-        </portal-for-test>
         <div
           className="inputBase text inputBase"
         >
@@ -11652,18 +11532,6 @@ exports[`Storyshots User Inputs/SSF Default 1`] = `
             className="container"
             onKeyDown={[Function]}
           >
-            <portal-for-test>
-              <div
-                className="menuContainer"
-                style={
-                  Object {
-                    "left": "0",
-                    "position": "absolute",
-                    "top": "0",
-                  }
-                }
-              />
-            </portal-for-test>
             <div
               className="inputBase text inputBase"
             >
@@ -11726,18 +11594,6 @@ exports[`Storyshots User Inputs/SSF Without Menu Fields 1`] = `
             className="container"
             onKeyDown={[Function]}
           >
-            <portal-for-test>
-              <div
-                className="menuContainer"
-                style={
-                  Object {
-                    "left": "0",
-                    "position": "absolute",
-                    "top": "0",
-                  }
-                }
-              />
-            </portal-for-test>
             <div
               className="inputBase text inputBase"
             >
