@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { action } from '@storybook/addon-actions'
 import { select, text, boolean } from '@storybook/addon-knobs'
 import { Filter, EyeEnabled, ArrowSolidRight } from '@anyvision/anv-icons'
@@ -117,20 +117,22 @@ export const leadingIcon = () => (
 )
 
 export const Autocomplete = () => {
+  const [autocomplete, setAutocomplete] = useState([])
   const autocompleteItems = [
     { label: 'first', value: '1' },
     { label: 'second', value: '2' },
     { label: 'third', value: '3' },
   ]
-  const autoComplete = inputValue =>
-    inputValue && inputValue.length
+  const handleInputChange = inputValue => {
+    const items = inputValue && inputValue.length
       ? autocompleteItems.filter(({ label }) => label.includes(inputValue))
       : autocompleteItems
+    setAutocomplete(items)
+  }
   return (
     <ChipsInput
-      onChange={action('Chips Changed Result')}
-      onSubmit={action('Chip was submitted')}
-      autocomplete={autoComplete}
+      onInputChange={handleInputChange}
+      autocomplete={autocomplete}
     />
   )
 }

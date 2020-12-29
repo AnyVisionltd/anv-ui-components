@@ -42,7 +42,6 @@ const ChipsInput = forwardRef(
     const [chipValues, setChipValues] = useState(defaultChipValues)
     const [inputValue, setInputValue] = useState(defaultInputValue)
     const [isAutocompleteOpen, setIsAutocompleteOpen] = useState(false)
-    const [autocompleteItems, setAutocompleteItems] = useState([])
     const [focusedChipIndex, setFocusedChipIndex] = useState()
     const previousFocusedChipIndex = usePrevious(focusedChipIndex)
     const innerRef = useRef(null)
@@ -53,10 +52,6 @@ const ChipsInput = forwardRef(
     }, [chipValues, onChange])
 
     useEffect(() => {
-      onInputChange(inputValue)
-    }, [inputValue, onInputChange])
-
-    useEffect(() => {
       if (
         (previousFocusedChipIndex === null || focusedChipIndex === null) &&
         previousFocusedChipIndex !== focusedChipIndex
@@ -64,13 +59,6 @@ const ChipsInput = forwardRef(
         onFocusChange(focusedChipIndex === null)
       }
     }, [focusedChipIndex, onFocusChange, previousFocusedChipIndex])
-
-    const updateAutocomplete = async value => {
-      if (!autocomplete) return
-      setAutocompleteItems([])
-      const items = await autocomplete(value)
-      setAutocompleteItems(items)
-    }
 
     const isChipEditable = () => {
       const inputElement = inputBaseRef.current
@@ -118,7 +106,6 @@ const ChipsInput = forwardRef(
         focusedChipIndex === null ? chipsLength - 1 : focusedChipIndex,
         event,
       )
-      updateAutocomplete()
     }
 
     const removeChipAfterFocusedChip = event => {
@@ -142,7 +129,6 @@ const ChipsInput = forwardRef(
         newChip.icon = renderChipIcon(newChip)
       }
       setInputValue('')
-      updateAutocomplete()
       inputBaseRef.current.focus()
       setChipValues(chipValues => {
         const newChips = [...chipValues, newChip]
@@ -200,12 +186,11 @@ const ChipsInput = forwardRef(
       keyFunctionMapping[event.keyCode](event)
 
     const handleInputChange = async ({ target: { value } }) => {
-      updateAutocomplete(value)
+      onInputChange(value)
       setInputValue(value)
     }
 
     const onInputFocus = () => {
-      updateAutocomplete()
       setIsAutocompleteOpen(true)
       setFocusedChipIndex(null)
     }
@@ -277,14 +262,15 @@ const ChipsInput = forwardRef(
     )
 
     const renderAutoComplete = () => {
+      if(!autocomplete) return
       return (
         <Menu
-          isOpen={isAutocompleteOpen && !!autocompleteItems.length}
+          isOpen={isAutocompleteOpen && !!autocomplete.length}
           anchorElement={inputBaseRef.current}
           variant={'dense'}
           onClose={() => setIsAutocompleteOpen(false)}
         >
-          {autocompleteItems.map(item => (
+          {autocomplete.map(item => (
             <Menu.Item
               leadingComponent={item.icon}
               key={item.label}
