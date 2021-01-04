@@ -26,6 +26,7 @@ const Portal = ({ children, containerId, className }) => {
     return () => {
       mountNode.remove()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return <>{createPortal(children, mountNode)}</>
