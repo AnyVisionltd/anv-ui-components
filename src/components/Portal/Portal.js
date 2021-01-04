@@ -22,13 +22,6 @@ const Portal = ({ children, containerId, className }) => {
   const mountNode = getPortalElement(containerId)
   mountNode.classList.add(className)
 
-  useEffect(() => {
-    return () => {
-      mountNode.remove()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
   return <>{createPortal(children, mountNode)}</>
 }
 
