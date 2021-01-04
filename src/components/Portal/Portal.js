@@ -26,7 +26,7 @@ const Portal = ({ children, containerId, className }) => {
     return () => {
       mountNode.remove()
     }
-  }, [mountNode])
+  }, [])
 
   return <>{createPortal(children, mountNode)}</>
 }
