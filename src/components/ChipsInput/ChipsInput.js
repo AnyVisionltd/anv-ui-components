@@ -295,10 +295,10 @@ const ChipsInput = forwardRef(
           variant={'dense'}
           onClose={() => setIsAutocompleteOpen(false)}
         >
-          {autocomplete.map(item => (
+          {autocomplete.map((item, index) => (
             <Menu.Item
               leadingComponent={item.icon}
-              key={item.label}
+              key={index}
               onClick={e => {
                 e.stopPropagation()
                 createChip(item)
