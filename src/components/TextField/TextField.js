@@ -104,7 +104,12 @@ const TextField = React.forwardRef((props, ref) => {
 
   useEffect(() => {
     const { caretStart, caretEnd } = cursorRef.current
-    if (type !== types.options && caretStart && inputRef && inputRef.current) {
+    if (
+      type !== types.options &&
+      caretStart !== undefined &&
+      inputRef &&
+      inputRef.current
+    ) {
       inputRef.current.setSelectionRange(caretStart, caretEnd)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

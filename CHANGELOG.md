@@ -2,6 +2,7 @@
 
 ### Fixed
 
+- Fixed TextField cursor jump when deleting first letter
 - Fixed Menu to not self open when controlled from outside
 - TextField empty state bug
 - Positioning of the menu dropdown by using popper JS
