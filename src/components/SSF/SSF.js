@@ -156,11 +156,6 @@ const SmartFilter = ({
     [menuItems, handleMenuClose, handleMenuOpen],
   )
 
-  const onChipsSubmit = useCallback(() => {
-    handleMenuOpen()
-    setInputValue('')
-  }, [handleMenuOpen, setInputValue])
-
   const classes = classNames(styles.SmartFilter, className)
 
   return (
@@ -184,7 +179,7 @@ const SmartFilter = ({
         onInputChange={onInputChange}
         inputValue={inputValue}
         onChange={handleChipChange}
-        onSubmit={onChipsSubmit}
+        onSubmit={handleMenuOpen}
         ref={inputBaseRef}
         {...otherProps}
       />

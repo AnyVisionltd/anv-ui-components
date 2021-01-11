@@ -130,24 +130,22 @@ const ChipsInput = forwardRef(
     }
 
     const createChip = chip => {
-      if (!chip && !inputValue.length && controlledInputValue === undefined) {
+      if (!chip && !inputValue.length) {
         return
       }
-      const value =
-        controlledInputValue === undefined ? inputValue : controlledInputValue
       let newChip
       if (chip) {
         newChip = chip
       } else if (autocomplete) {
         const autocompleteIndex = autocomplete.findIndex(
-          ({ label }) => label === value,
+          ({ label }) => label === inputValue,
         )
         newChip =
           autocompleteIndex >= 0
             ? autocomplete[autocompleteIndex]
-            : { label: value, value }
+            : { label: inputValue, value: inputValue }
       } else {
-        newChip = { label: value, value }
+        newChip = { label: inputValue, value: inputValue }
       }
       if (renderChipIcon) {
         newChip.icon = renderChipIcon(newChip)
@@ -211,11 +209,7 @@ const ChipsInput = forwardRef(
       keyFunctionMapping[event.keyCode](event)
 
     const handleInputChange = ({ target: { value } }) => {
-      if (controlledInputValue === undefined) {
-        setInputValue(value)
-      } else {
-        onInputChange(value)
-      }
+      setInputValue(value)
     }
 
     const onInputFocus = () => {
@@ -329,11 +323,7 @@ const ChipsInput = forwardRef(
           {renderAutoComplete()}
           <InputBase
             autoComplete='off'
-            value={
-              controlledInputValue === undefined
-                ? inputValue
-                : controlledInputValue
-            }
+            value={controlledInputValue || inputValue}
             className={styles.inputBase}
             ref={inputBaseRef}
             onChange={handleInputChange}
