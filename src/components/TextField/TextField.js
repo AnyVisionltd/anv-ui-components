@@ -14,6 +14,7 @@ const types = {
   options: 'options',
   text: 'text',
   password: 'password',
+  number: 'number',
 }
 
 const getTranslation = path => languageService.getTranslation(`${path}`)
@@ -106,6 +107,7 @@ const TextField = React.forwardRef((props, ref) => {
     const { caretStart, caretEnd } = cursorRef.current
     if (
       type !== types.options &&
+      type !== types.number &&
       caretStart !== undefined &&
       inputRef &&
       inputRef.current
