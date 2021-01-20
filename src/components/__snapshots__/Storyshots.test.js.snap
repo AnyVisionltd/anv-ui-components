@@ -9075,6 +9075,93 @@ exports[`Storyshots User Feedback/Banner With Trailing Component 1`] = `
 </div>
 `;
 
+exports[`Storyshots User Feedback/Progress Basic 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="lineProgress"
+    >
+      <div
+        className="bar"
+        style={
+          Object {
+            "width": "0%",
+          }
+        }
+      />
+    </div>
+    <svg
+      className="circleProgress"
+    >
+      <circle
+        className="circleBar"
+        cx={24}
+        cy={24}
+        r={16}
+        strokeDasharray="100.53096491487338 100.53096491487338"
+        style={
+          Object {
+            "strokeDashoffset": 100.53096491487338,
+          }
+        }
+      />
+    </svg>
+  </div>
+</div>
+`;
+
+exports[`Storyshots User Feedback/Progress Indeterminate 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="lineProgress"
+    >
+      <div
+        className="bar indeterminate"
+        style={Object {}}
+      />
+    </div>
+    <svg
+      className="circleProgress indeterminate"
+    >
+      <circle
+        className="circleBar"
+        cx={24}
+        cy={24}
+        r={16}
+        strokeDasharray="100.53096491487338 100.53096491487338"
+        style={
+          Object {
+            "strokeDashoffset": undefined,
+          }
+        }
+      />
+    </svg>
+  </div>
+</div>
+`;
+
+exports[`Storyshots User Feedback/Progress Play Ground 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="lineProgress"
+    >
+      <div
+        className="bar indeterminate"
+        style={Object {}}
+      />
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots User Feedback/SkeletonLoader Default 1`] = `
 <div>
   <div
