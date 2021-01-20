@@ -9075,6 +9075,109 @@ exports[`Storyshots User Feedback/Banner With Trailing Component 1`] = `
 </div>
 `;
 
+exports[`Storyshots User Feedback/Progress Basic 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "column",
+          "width": "50%",
+        }
+      }
+    >
+      <h2>
+        line
+      </h2>
+      <div
+        className="lineProgress"
+      >
+        <div
+          className="lineBar"
+          style={
+            Object {
+              "width": "0%",
+            }
+          }
+        />
+      </div>
+      <h2>
+        circle
+      </h2>
+      <svg
+        className="circleProgress"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots User Feedback/Progress Indeterminate 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "column",
+          "width": "50%",
+        }
+      }
+    >
+      <h2>
+        line
+      </h2>
+      <div
+        className="lineProgress"
+      >
+        <div
+          className="lineBar indeterminate"
+          style={
+            Object {
+              "width": "false%",
+            }
+          }
+        />
+      </div>
+      <h2>
+        circle
+      </h2>
+      <svg
+        className="circleProgress indeterminate"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots User Feedback/Progress Play Ground 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="lineProgress"
+    >
+      <div
+        className="lineBar"
+        style={
+          Object {
+            "width": "25%",
+          }
+        }
+      />
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots User Feedback/SkeletonLoader Default 1`] = `
 <div>
   <div

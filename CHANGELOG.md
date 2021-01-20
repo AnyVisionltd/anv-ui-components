@@ -22,6 +22,7 @@
 - Add additionalFilters to tableSSF
 - Add the ability to disable table row selection
 - Add autocomplete to chips
+- New `<Progress/>` component
 
 ## 1.0.0 - 06-09-2020
 
