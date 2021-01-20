@@ -9081,33 +9081,37 @@ exports[`Storyshots User Feedback/Progress Basic 1`] = `
     className="center"
   >
     <div
-      className="lineProgress"
-    >
-      <div
-        className="bar"
-        style={
-          Object {
-            "width": "0%",
-          }
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "column",
+          "width": "50%",
         }
+      }
+    >
+      <h2>
+        line
+      </h2>
+      <div
+        className="lineProgress"
+      >
+        <div
+          className="lineBar"
+          style={
+            Object {
+              "width": "0%",
+            }
+          }
+        />
+      </div>
+      <h2>
+        circle
+      </h2>
+      <svg
+        className="circleProgress"
       />
     </div>
-    <svg
-      className="circleProgress"
-    >
-      <circle
-        className="circleBar"
-        cx={24}
-        cy={24}
-        r={16}
-        strokeDasharray="100.53096491487338 100.53096491487338"
-        style={
-          Object {
-            "strokeDashoffset": 100.53096491487338,
-          }
-        }
-      />
-    </svg>
   </div>
 </div>
 `;
@@ -9118,29 +9122,37 @@ exports[`Storyshots User Feedback/Progress Indeterminate 1`] = `
     className="center"
   >
     <div
-      className="lineProgress"
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "column",
+          "width": "50%",
+        }
+      }
     >
+      <h2>
+        line
+      </h2>
       <div
-        className="bar indeterminate"
-        style={Object {}}
+        className="lineProgress"
+      >
+        <div
+          className="lineBar indeterminate"
+          style={
+            Object {
+              "width": "false%",
+            }
+          }
+        />
+      </div>
+      <h2>
+        circle
+      </h2>
+      <svg
+        className="circleProgress indeterminate"
       />
     </div>
-    <svg
-      className="circleProgress indeterminate"
-    >
-      <circle
-        className="circleBar"
-        cx={24}
-        cy={24}
-        r={16}
-        strokeDasharray="100.53096491487338 100.53096491487338"
-        style={
-          Object {
-            "strokeDashoffset": undefined,
-          }
-        }
-      />
-    </svg>
   </div>
 </div>
 `;
@@ -9154,8 +9166,12 @@ exports[`Storyshots User Feedback/Progress Play Ground 1`] = `
       className="lineProgress"
     >
       <div
-        className="bar indeterminate"
-        style={Object {}}
+        className="lineBar"
+        style={
+          Object {
+            "width": "25%",
+          }
+        }
       />
     </div>
   </div>

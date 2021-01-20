@@ -3,30 +3,36 @@ import propTypes from 'prop-types'
 import classNames from 'classnames'
 import styles from './Progress.module.scss'
 
-const Progress = ({ value, variant, className, ...otherProps }) => {
+const Progress = ({
+  value,
+  variant,
+  indeterminate,
+  className,
+  ...otherProps
+}) => {
   const [circleRef, setCircleRef] = useState()
 
-  const renderCircle = () => {
-    const height =
-      circleRef && circleRef.offsetHeight ? circleRef.offsetHeight : 48
-
-    let strokeDashoffset
-    const radius = height / 2
-    const strokeWidth = 4
-    const normalizedRadius = radius - strokeWidth * 2
-    const circumference = normalizedRadius * 2 * Math.PI
-    if (value >= 0) {
-      const progress = value <= 100 ? value : 100
-      strokeDashoffset = circumference - (progress / 100) * circumference
-    }
-
+  const renderProgressCircle = () => {
     const classes = classNames(
       styles.circleProgress,
-      value === undefined && styles.indeterminate,
+      indeterminate && styles.indeterminate,
     )
 
-    return (
-      <svg ref={setCircleRef} className={classes}>
+    const renderCircle = () => {
+      if (!circleRef) return
+      const height = circleRef.clientHeight
+      let strokeDashoffset, progress
+      const radius = height / 2
+      const strokeWidth = 4
+      const normalizedRadius = radius - strokeWidth * 2
+      const circumference = normalizedRadius * 2 * Math.PI
+      if (indeterminate) {
+        progress = 25
+      } else {
+        progress = value <= 100 ? value : 100
+      }
+      strokeDashoffset = circumference - (progress / 100) * circumference
+      return (
         <circle
           className={styles.circleBar}
           strokeDasharray={circumference + ' ' + circumference}
@@ -35,16 +41,22 @@ const Progress = ({ value, variant, className, ...otherProps }) => {
           cx={radius}
           cy={radius}
         />
+      )
+    }
+
+    return (
+      <svg ref={setCircleRef} className={classes}>
+        {renderCircle()}
       </svg>
     )
   }
 
-  const renderLine = () => {
+  const renderProgressLine = () => {
     const classes = classNames(styles.lineProgress, className)
 
     const barClasses = classNames(
-      styles.bar,
-      value === undefined && styles.indeterminate,
+      styles.lineBar,
+      indeterminate && styles.indeterminate,
     )
 
     let width = {}
@@ -58,21 +70,25 @@ const Progress = ({ value, variant, className, ...otherProps }) => {
     )
   }
 
-  return variant === 'linear' ? renderLine() : renderCircle()
+  return variant === 'linear' ? renderProgressLine() : renderProgressCircle()
 }
 
 Progress.defaultProps = {
-  className: false,
+  className: '',
   variant: 'linear',
+  value: false,
+  indeterminate: false,
 }
 
 Progress.propTypes = {
   /** For css customization. */
   className: propTypes.string,
-  /** For css customization. */
+  /** The progress variant. */
   variant: propTypes.oneOf(['linear', 'circle']),
-  /** For css customization. */
+  /** Progress value between - <code>0-100</code>. */
   value: propTypes.number,
+  /** Indeterminate mode. */
+  indeterminate: propTypes.bool,
 }
 
 export default Progress

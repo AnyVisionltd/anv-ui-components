@@ -6,7 +6,7 @@
   height: 4px;
   background-color: av-color(primary, av-opacity(disabled));
 
-  .bar {
+  .lineBar {
     background-color: av-color(primary);
     height: 4px;
     transition: width 0.4s;
@@ -33,17 +33,17 @@
 }
 
 .circleProgress {
+  transform: rotate(-90deg);
   height: 48px;
   width: 48px;
 
   @keyframes circle-indeterminate {
     to {
-      transform: rotate(360deg);
+      transform: rotate(270deg);
     }
   }
 
   &.indeterminate {
-    stroke-dashoffset: 75;
     animation: circle-indeterminate 1s linear infinite;
   }
 
