@@ -222,7 +222,7 @@ export const withReadOnly = () => (
 export const typeOptions = () => {
   const items = [
     { value: 'Olives', label: 'Olives' },
-    { value: 'Tomatoes', label: 'Tomatoesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' },
+    { value: 'Tomatoes', label: 'Tomatoes' },
   ]
   return (
     <div className={styles.flexMultipleRows}>
