@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
+import { Tooltip } from '../../Tooltip'
 import styles from './MenuItem.module.scss'
 
 const MenuItem = forwardRef(
@@ -51,7 +52,13 @@ const MenuItem = forwardRef(
         {leadingComponent && (
           <div className={styles.menuLeadingComponent}>{leadingComponent}</div>
         )}
-        {children}
+        {typeof children === 'string' ? (
+          <Tooltip content={children} overflowOnly>
+            <div className={styles.ellipsis}>{children}</div>
+          </Tooltip>
+        ) : (
+          children
+        )}
       </li>
     )
     /* eslint-enable jsx-a11y/no-noninteractive-element-interactions */
