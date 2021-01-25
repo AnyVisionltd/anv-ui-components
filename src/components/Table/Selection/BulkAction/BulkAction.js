@@ -5,13 +5,13 @@ import TableContext from '../../TableContext'
 import { ConfirmationDialog } from '../../ConfirmationDialog'
 import styles from './BulkAction.module.scss'
 
-const BulkAction = ({ icon, onClick, subMenu, confirmMessage }) => {
+const BulkAction = ({ icon, onClick, subMenu, confirmDialogBody }) => {
   const { state } = useContext(TableContext)
   const { items, excludeMode } = state.selection
   const moreActionsRef = useRef()
   const [anchorElement, setAnchorElement] = useState(null)
   const [confirmationDialog, setConfirmationDialog] = useState({
-    confirmMessage: '',
+    confirmDialogBody: '',
     onConfirm: () => {},
   })
 
@@ -26,15 +26,15 @@ const BulkAction = ({ icon, onClick, subMenu, confirmMessage }) => {
   }
 
   const handleDismissConfirmationDialog = () => {
-    setConfirmationDialog({ confirmMessage: '' })
+    setConfirmationDialog({ confirmDialogBody: '' })
   }
 
-  const handleActionClick = (onClick, confirmMessage, subMenu) => {
+  const handleActionClick = (onClick, confirmDialogBody, subMenu) => {
     if (subMenu) {
       handleButtonClick()
-    } else if (confirmMessage) {
+    } else if (confirmDialogBody) {
       setConfirmationDialog({
-        confirmMessage,
+        confirmDialogBody,
         onConfirm: () => handleClick(onClick),
       })
     } else {
@@ -44,19 +44,19 @@ const BulkAction = ({ icon, onClick, subMenu, confirmMessage }) => {
 
   const handleConfirmDialog = () => {
     confirmationDialog.onConfirm()
-    setConfirmationDialog({ confirmMessage: '' })
+    setConfirmationDialog({ confirmDialogBody: '' })
   }
 
   return (
     <>
       <ConfirmationDialog
-        isOpen={!!confirmationDialog.confirmMessage}
+        isOpen={!!confirmationDialog.confirmDialogBody}
         onConfirm={handleConfirmDialog}
         onDismiss={handleDismissConfirmationDialog}
-        confirmMessage={confirmationDialog.confirmMessage}
+        confirmDialogBody={confirmationDialog.confirmDialogBody}
       />
       <IconButton
-        onClick={() => handleActionClick(onClick, confirmMessage, subMenu)}
+        onClick={() => handleActionClick(onClick, confirmDialogBody, subMenu)}
         variant={'ghost'}
         ref={moreActionsRef}
         className={styles.actionButton}
@@ -70,9 +70,9 @@ const BulkAction = ({ icon, onClick, subMenu, confirmMessage }) => {
           anchorElement={anchorElement}
           preferOpenDirection='top-end'
         >
-          {subMenu.map(({ onClick, icon, label, confirmMessage }) => (
+          {subMenu.map(({ onClick, icon, label, confirmDialogBody }) => (
             <Menu.Item
-              onClick={() => handleActionClick(onClick, confirmMessage)}
+              onClick={() => handleActionClick(onClick, confirmDialogBody)}
               key={label}
               leadingComponent={icon}
             >
@@ -94,18 +94,18 @@ BulkAction.propTypes = {
   /** Table bulk actions. <br />
    *  <code>icon</code>             - icon for the action. <br />
    *  <code>label</code>            - label for the action icon.<br />
-   *  <code>confirmMessage</code>   - if pass confirmation dialog will show after click the action. <br />
+   *  <code>confirmDialogBody</code>   - if pass confirmation dialog will show after click the action. <br />
    *  <code>onClick</code>          - callback fire when action click. <br />
    **/
   subMenu: propTypes.arrayOf(
     propTypes.shape({
       icon: propTypes.node,
       label: propTypes.string,
-      confirmMessage: propTypes.string,
+      confirmDialogBody: propTypes.any,
       onClick: propTypes.func.isRequired,
     }),
   ),
-  confirmMessage: propTypes.string,
+  confirmDialogBody: propTypes.any,
   /** Selection bar css customization. */
   className: propTypes.string,
 }

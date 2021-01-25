@@ -29,7 +29,7 @@ const TableRow = ({
   const [actionsAnchorElement, setActionsAnchorElement] = useState(null)
   const [isHover, setIsHover] = useState(false)
   const [confirmationDialog, setConfirmationDialog] = useState({
-    confirmMessage: '',
+    confirmDialogBody: '',
     onConfirm: () => {},
   })
 
@@ -38,14 +38,14 @@ const TableRow = ({
   }
 
   const dismissConfirmationDialog = () => {
-    setConfirmationDialog({ confirmMessage: '' })
+    setConfirmationDialog({ confirmDialogBody: '' })
   }
 
-  const handleMenuItemClick = (e, row, onClick, confirmMessage) => {
+  const handleMenuItemClick = (e, row, onClick, confirmDialogBody) => {
     e.stopPropagation()
-    if (confirmMessage) {
+    if (confirmDialogBody) {
       setConfirmationDialog({
-        confirmMessage,
+        confirmDialogBody,
         onConfirm: () => {
           onClick(row)
           dismissConfirmationDialog()
@@ -75,12 +75,12 @@ const TableRow = ({
           onClose={handleActionsClose}
         >
           {activeRowActions.map(
-            ({ label, icon, hidden, onClick, confirmMessage }, index) => (
+            ({ label, icon, hidden, onClick, confirmDialogBody }, index) => (
               <Menu.Item
                 leadingComponent={icon}
                 key={index}
                 onClick={e =>
-                  handleMenuItemClick(e, row, onClick, confirmMessage)
+                  handleMenuItemClick(e, row, onClick, confirmDialogBody)
                 }
               >
                 {label}
@@ -241,10 +241,10 @@ const TableRow = ({
   return (
     <>
       <ConfirmationDialog
-        isOpen={!!confirmationDialog.confirmMessage}
+        isOpen={!!confirmationDialog.confirmDialogBody}
         onConfirm={confirmationDialog.onConfirm}
         onDismiss={dismissConfirmationDialog}
-        confirmMessage={confirmationDialog.confirmMessage}
+        confirmDialogBody={confirmationDialog.confirmDialogBody}
       />
       {isLoading ? renderLoadingRow() : renderDataRow()}
     </>

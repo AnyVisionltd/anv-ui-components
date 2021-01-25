@@ -63,12 +63,12 @@ const Selection = ({
     return (
       <div className={styles.actionsContainer}>
         {bulkActions.map(
-          ({ icon, onClick, subMenu, confirmMessage }, index) => (
+          ({ icon, onClick, subMenu, confirmDialogBody }, index) => (
             <BulkAction
               icon={icon}
               onClick={onClick}
               subMenu={subMenu}
-              confirmMessage={confirmMessage}
+              confirmDialogBody={confirmDialogBody}
               key={index}
             />
           ),
@@ -120,7 +120,7 @@ Selection.propTypes = {
    *  <code>icon</code>             - icon for the action. <br />
    *  <code>label</code>            - label for the action icon.<br />
    *  <code>submenu</code>          - submenu for the action icon.<br />
-   *  <code>confirmMessage</code>   - if pass confirmation dialog will show after click the action. <br />
+   *  <code>confirmDialogBody</code>   - if pass confirmation dialog will show after click the action. <br />
    *  <code>onClick</code>          - callback fire when action click. <br />
    **/
   bulkActions: propTypes.arrayOf(
@@ -131,12 +131,12 @@ Selection.propTypes = {
           icon: propTypes.node,
           label: propTypes.string,
           onClick: propTypes.func.isRequired,
-          confirmMessage: propTypes.string,
+          confirmDialogBody: propTypes.any,
         }),
       ),
       label: propTypes.string,
       onClick: propTypes.func,
-      confirmMessage: propTypes.string,
+      confirmDialogBody: propTypes.any,
     }),
   ),
   /** The selection evaluate by this prop. Set to the id field. */

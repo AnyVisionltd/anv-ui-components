@@ -10,7 +10,7 @@ const ConfirmationDialog = ({
   isOpen,
   onConfirm,
   onDismiss,
-  confirmMessage,
+  confirmDialogBody,
 }) => (
   <Dialog
     className={styles.confirmationDialog}
@@ -18,7 +18,7 @@ const ConfirmationDialog = ({
     onClose={onDismiss}
   >
     <Dialog.Header>{getTranslation('areYouSure')}</Dialog.Header>
-    <Dialog.Body>{confirmMessage}</Dialog.Body>
+    <Dialog.Body>{confirmDialogBody}</Dialog.Body>
     <Dialog.Footer className={styles.footer}>
       <Button onClick={onDismiss} variant={'ghost'}>
         {getTranslation('no')}
@@ -32,7 +32,7 @@ ConfirmationDialog.propTypes = {
   isOpen: propTypes.bool,
   onConfirm: propTypes.func,
   onDismiss: propTypes.func,
-  confirmMessage: propTypes.string,
+  confirmDialogBody: propTypes.any,
 }
 
 export default ConfirmationDialog

@@ -1,5 +1,9 @@
 ## Unreleased
 
+### Breaking Changes :boom:
+
+- Change confirmation dialog prop for row action and bulk actions in Table, changed prop `confirmMassage:Stirng` to `confirmDialogBody:Any`
+
 ### Fixed
 
 - Fixed TextField cursor jump when deleting first letter
