@@ -116,12 +116,13 @@ export const Basic = () => {
       {
         label: 'Delete',
         onClick: action('delete action clicked'),
-        confirmMessage: 'Are you sure you want to delete this item?',
+        confirmDialogBody: 'Are you sure you want to delete this item?',
         hidden: row => !!row.withoutAction,
       },
       {
         label: 'Edit',
         onClick: action('edit action clicked'),
+        confirmDialogBody: <h3>Are you sure you want to edit this item?</h3>,
         hidden: row => !!row.withoutAction,
       },
     ],
@@ -133,7 +134,7 @@ export const Basic = () => {
       icon: <SunIcon />,
       label: 'action 1',
       onClick: action('bulk action 1'),
-      confirmMessage: 'Are you sure you want to sun all the items?',
+      confirmDialogBody: <h3>Are you sure you want to sun all the items?</h3>,
     },
     {
       icon: <EyeEnabledIcon />,
@@ -152,7 +153,7 @@ export const Basic = () => {
           icon: <EyeEnabledIcon />,
           label: 'action 4',
           onClick: action('bulk action 4'),
-          confirmMessage: 'Are you sure you want to eye all the items?',
+          confirmDialogBody: 'Are you sure you want to eye all the items?',
         },
       ],
     },

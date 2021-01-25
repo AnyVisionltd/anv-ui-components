@@ -133,8 +133,12 @@ TableBody.propTypes = {
       label: propTypes.string,
       /** The icon to render before the label. */
       icon: propTypes.node,
-      /** if pass confirmation dialog will show after click the action. */
-      confirmMessage: propTypes.string,
+      /**
+       * if pass confirmation dialog will show after click the action.
+       * confirmDialogBody can be string or JSX components
+       * for example <div>Are you sure make this action?</div>
+       * */
+      confirmDialogBody: propTypes.any,
       /** The callback when click the <Menu.Items/> */
       onClick: propTypes.func,
       /** A callback function that returns a bool value that determines if the specific row action should be rendered */
