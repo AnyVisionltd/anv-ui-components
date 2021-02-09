@@ -27,6 +27,7 @@
 - Add the ability to disable table row selection
 - Add autocomplete to chips
 - New `<Progress/>` component
+- Add no results message to table
 
 ## 1.0.0 - 06-09-2020
 

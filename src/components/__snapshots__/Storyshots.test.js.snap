@@ -1060,17 +1060,19 @@ exports[`Storyshots Content/Table Basic 1`] = `
       />
     </div>
     <div
-      className="tableBody"
+      className="noResults"
     >
+      <svg />
       <div
-        style={
-          Object {
-            "height": 0,
-            "overflow": "visible",
-            "width": 0,
-          }
-        }
-      />
+        className="noResultsTitle"
+      >
+        No results found
+      </div>
+      <div
+        className="noResultsMessage"
+      >
+        Try adjusting your search or filter to find what your’e looking for.
+      </div>
     </div>
     <portal-for-test />
   </div>
@@ -1102,17 +1104,19 @@ exports[`Storyshots Content/Table Infinite Scroll 1`] = `
       />
     </div>
     <div
-      className="tableBody"
+      className="noResults"
     >
+      <svg />
       <div
-        style={
-          Object {
-            "height": 0,
-            "overflow": "visible",
-            "width": 0,
-          }
-        }
-      />
+        className="noResultsTitle"
+      >
+        No results found
+      </div>
+      <div
+        className="noResultsMessage"
+      >
+        Try adjusting your search or filter to find what your’e looking for.
+      </div>
     </div>
   </div>
 </div>
