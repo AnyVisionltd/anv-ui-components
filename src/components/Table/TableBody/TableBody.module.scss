@@ -7,3 +7,28 @@
   flex-grow: 1;
   color: av-color(content);
 }
+
+.noResults {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+  color: av-color(content);
+
+  svg {
+    margin-bottom: av-space();
+  }
+
+  .noResultsTitle {
+    @extend %av-headline6;
+    margin-bottom: av-space(tiny);
+  }
+
+  .noResultsMessage {
+    @extend %av-body2;
+    text-align: center;
+    opacity: av-opacity(medium);
+    width: av-size(sz-320);
+  }
+}

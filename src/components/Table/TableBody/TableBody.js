@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
+import { ReactComponent as NoResultsIcon } from '../../../assets/svg/NoResults.svg'
 import { InfiniteList } from '../../../index'
 import TableContext from '../TableContext'
 import { TableRow } from './TableRow'
@@ -88,9 +89,19 @@ const TableBody = ({
     ))
   }
 
+  const renderNoResults = () => (
+    <div className={styles.noResults}>
+      <NoResultsIcon />
+      <div className={styles.noResultsTitle}>No results found</div>
+      <div className={styles.noResultsMessage}>
+        Try adjusting your search or filter to find what your’e looking for.
+      </div>
+    </div>
+  )
+
   const classes = classNames(styles.tableBody, className)
 
-  return (
+  return state.totalItems ? (
     <div className={classes} {...otherProps}>
       <InfiniteList
         rowHeight={rowHeight}
@@ -101,8 +112,10 @@ const TableBody = ({
         isLoading={isLoading}
         loadMoreItems={loadMoreData}
         ref={listRef}
-      ></InfiniteList>
+      />
     </div>
+  ) : (
+    renderNoResults()
   )
 }
 
