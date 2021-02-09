@@ -2,11 +2,14 @@ import React, { useContext, useEffect, useRef } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { ReactComponent as NoResultsIcon } from '../../../assets/svg/NoResults.svg'
+import languageService from '../../../services/language'
 import { InfiniteList } from '../../../index'
 import TableContext from '../TableContext'
 import { TableRow } from './TableRow'
 import { useTableData } from '../UseTableData'
 import styles from './TableBody.module.scss'
+
+const getTranslation = path => languageService.getTranslation(`${path}`)
 
 const TableBody = ({
   data,
@@ -92,9 +95,11 @@ const TableBody = ({
   const renderNoResults = () => (
     <div className={styles.noResults}>
       <NoResultsIcon />
-      <div className={styles.noResultsTitle}>No results found</div>
+      <div className={styles.noResultsTitle}>
+        {getTranslation('noResultsFound')}
+      </div>
       <div className={styles.noResultsMessage}>
-        Try adjusting your search or filter to find what your’e looking for.
+        {getTranslation('noResultsMessage')}
       </div>
     </div>
   )
