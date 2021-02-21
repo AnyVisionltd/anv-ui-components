@@ -23,5 +23,6 @@ export { Snackbar } from './components/Snackbar'
 export { SelectionGroup } from './components/SelectionGroup'
 export { FormProvider } from './components/FormProvider'
 export { Banner } from './components/Banner'
+export { Progress } from './components/Progress'
 
 export { useFormProvider } from './components/FormProvider/useFormProvider'
