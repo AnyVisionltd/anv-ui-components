@@ -60,9 +60,5 @@
   &.disabled {
     cursor: unset;
     opacity: av-opacity(disabled);
-
-    &:not(&.checked):not(&.indeterminate) {
-      border: solid 2px av-color(content, av-opacity(disabled));
-    }
   }
 }
