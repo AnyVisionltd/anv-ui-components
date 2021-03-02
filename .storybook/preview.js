@@ -8,6 +8,7 @@ addParameters({
     },
   },
   controls: { hideNoControlsWarning: true },
+  viewMode: 'docs',
 })
 
 addDecorator(avTheme)
