@@ -33,6 +33,9 @@ You can customize your theme by change the colors, the typography and much more.
 </br>
 For additional information and usage guide - [click here](https://github.com/AnyVisionltd/anv-ui-style-guide)
 
+## Icons 
+Our icons library - [click here](https://github.com/AnyVisionltd/anv-icons)
+
 ## 🤝 Contributing
 
 We welcome contributions to AnyVisionUI!
