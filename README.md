@@ -19,6 +19,12 @@
 npm install @anyvision/anv-ui-components
 ```
 
+## Usage 
+  import index.css once to your project.
+```
+  import '@anyvision/anv-ui-components/dist/index.css'
+```
+
 ## :rainbow: Theming
 
 This library uses `@anyvision/style-guide`.
