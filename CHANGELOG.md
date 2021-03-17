@@ -28,6 +28,7 @@
 - Add autocomplete to chips
 - New `<Progress/>` component
 - Add no results message to table
+- Added `classes` prop to `<DialogWizard/>`
 
 ## 1.0.0 - 06-09-2020
 

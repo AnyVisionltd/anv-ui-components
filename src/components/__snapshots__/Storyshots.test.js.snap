@@ -468,6 +468,28 @@ exports[`Storyshots Content/Dialogs/DialogWizard With Banner 1`] = `
 </div>
 `;
 
+exports[`Storyshots Content/Dialogs/DialogWizard With Custom Styles 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div>
+      <button
+        aria-controls="menu-story-default"
+        aria-haspopup="true"
+        className="button medium fill"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        Open Wizard
+      </button>
+      <portal-for-test />
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Content/Dialogs/DialogWizard With Overlay 1`] = `
 <div>
   <div
