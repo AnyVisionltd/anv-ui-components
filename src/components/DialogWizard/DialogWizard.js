@@ -24,6 +24,7 @@ const DialogWizard = ({
   disabled,
   banner,
   onFinish,
+  classes,
   ...otherProps
 }) => {
   const [step, setStep] = useState(currentStep || 1)
@@ -97,7 +98,7 @@ const DialogWizard = ({
       onClose={handleClose}
       {...otherProps}
     >
-      <Dialog.Header>
+      <Dialog.Header className={classes.header}>
         <div className={styles.header}>
           <div className={styles.headerLeftSide}>
             {renderBackIcon()}
@@ -115,7 +116,7 @@ const DialogWizard = ({
       {banner}
       <div className={styles.content}>
         <Dialog.Body>{steps.length && steps[step - 1]}</Dialog.Body>
-        <Dialog.Footer>
+        <Dialog.Footer className={classNames({ footer: classes.footer })}>
           <div className={styles.footer}>
             {footerMessage}
             <div className={styles.buttons}>
@@ -151,6 +152,7 @@ DialogWizard.defaultProps = {
   nextText: languageService.getTranslation('next'),
   finishText: languageService.getTranslation('finish'),
   disabled: false,
+  classes: {},
 }
 
 DialogWizard.propTypes = {
@@ -188,6 +190,8 @@ DialogWizard.propTypes = {
   disabled: propTypes.bool,
   /** banner component to be rendered */
   banner: propTypes.element,
+  /** styles object for various parts of the component */
+  classes: propTypes.object,
 }
 
 export default DialogWizard

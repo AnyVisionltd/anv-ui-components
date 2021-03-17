@@ -2,3 +2,16 @@
   width: 960px;
   height: 550px;
 }
+
+.customHeaderExample {
+  background-color: #02234b;
+  color: #ffffff;
+  padding-right: 24px;
+  padding-left: 24px;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  margin: 0;
+  svg {
+    fill: #ffffff;
+  }
+}
