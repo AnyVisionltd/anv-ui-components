@@ -175,20 +175,6 @@ export const WithCustomStyles = () => {
     false,
   )
 
-  const renderOverlayContent = () => {
-    return (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        This is an overlay content
-      </div>
-    )
-  }
-
   return (
     <div>
       <Button

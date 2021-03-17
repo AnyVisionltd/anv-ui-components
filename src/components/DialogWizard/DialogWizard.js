@@ -116,7 +116,7 @@ const DialogWizard = ({
       {banner}
       <div className={styles.content}>
         <Dialog.Body>{steps.length && steps[step - 1]}</Dialog.Body>
-        <Dialog.Footer className={classNames({ footer: classes.footer })}>
+        <Dialog.Footer className={classes.footer}>
           <div className={styles.footer}>
             {footerMessage}
             <div className={styles.buttons}>
@@ -191,7 +191,10 @@ DialogWizard.propTypes = {
   /** banner component to be rendered */
   banner: propTypes.element,
   /** styles object for various parts of the component */
-  classes: propTypes.object,
+  classes: propTypes.shape({
+    header: propTypes.string,
+    footer: propTypes.string,
+  }),
 }
 
 export default DialogWizard
