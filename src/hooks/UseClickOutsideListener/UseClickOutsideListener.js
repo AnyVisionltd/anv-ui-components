@@ -1,4 +1,5 @@
 import { useCallback, useEffect } from 'react'
+import { isFunction } from '../../utils'
 
 const useClickOutsideListener = (onClickOutside, ref) => {
   const onClickOutsideHandler = useCallback(
@@ -6,7 +7,7 @@ const useClickOutsideListener = (onClickOutside, ref) => {
       if (
         ref &&
         ref.current &&
-        Object.values(ref.current).length &&
+        isFunction(ref.current.contains) &&
         onClickOutside &&
         !ref.current.contains(event.target)
       ) {

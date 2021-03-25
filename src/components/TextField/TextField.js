@@ -8,6 +8,7 @@ import { ReactComponent as ErrorCircleIcon } from '../../assets/svg/ErrorCircleO
 import { useClickOutsideListener } from '../../hooks'
 import { InputBase, Menu, Tooltip } from '../../index'
 import { useCombinedRefs } from '../../hooks/UseCombinedRefs'
+import { isFunction } from '../../utils'
 import styles from './TextField.module.scss'
 
 const types = {
@@ -67,7 +68,7 @@ const TextField = React.forwardRef((props, ref) => {
         setActive(
           textFieldRef &&
             textFieldRef.current &&
-            Object.values(textFieldRef.current).length &&
+            !!Object.values(textFieldRef.current).length &&
             textFieldRef.current.contains(e.target),
         )
       }
@@ -75,14 +76,27 @@ const TextField = React.forwardRef((props, ref) => {
     [disabled, readOnly],
   )
 
-  useEffect(() => {
-    window.addEventListener('focusin', setActiveFocus)
-    window.addEventListener('click', setActiveFocus)
-    return () => {
-      window.removeEventListener('focusin', setActiveFocus)
-      window.removeEventListener('click', setActiveFocus)
+  const setFocusOut = useCallback(() => {
+    if (!disabled && !readOnly) {
+      setActive(false)
     }
-  }, [setActiveFocus])
+  }, [disabled, readOnly])
+
+  useEffect(() => {
+    const ref = textFieldRef && textFieldRef.current
+    if (ref && isFunction(ref.addEventListener)) {
+      ref.addEventListener('focusin', setActiveFocus)
+      ref.addEventListener('focusout', setFocusOut)
+      ref.addEventListener('click', setActiveFocus)
+    }
+    return () => {
+      if (ref && isFunction(ref.addEventListener)) {
+        ref.removeEventListener('focusin', setActiveFocus)
+        ref.removeEventListener('focusout', setFocusOut)
+        ref.removeEventListener('click', setActiveFocus)
+      }
+    }
+  }, [setActiveFocus, textFieldRef, setFocusOut])
 
   useEffect(() => {
     setEmpty(!defaultValue)
@@ -141,6 +155,7 @@ const TextField = React.forwardRef((props, ref) => {
   }
 
   const handleMenuClose = () => {
+    setActive(false)
     setAnchorElement(null)
   }
 
