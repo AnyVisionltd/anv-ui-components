@@ -59,7 +59,6 @@ const TextField = React.forwardRef((props, ref) => {
   const inputRef = useCombinedRefs(useRef({}), ref)
 
   useClickOutsideListener(() => {
-    console.log('useClickOutsideListener')
     setActive(false)
   }, textFieldRef)
 
