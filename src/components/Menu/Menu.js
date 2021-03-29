@@ -68,7 +68,7 @@ const Menu = React.forwardRef((props, ref) => {
     if (isOpen === undefined) {
       setIsMenuOpen(true)
     }
-  }, [])
+  }, [isOpen])
 
   useEffect(() => {
     if (anchorElement) {
