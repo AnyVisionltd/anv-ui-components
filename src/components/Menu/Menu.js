@@ -64,7 +64,11 @@ const Menu = React.forwardRef((props, ref) => {
     setIsMenuOpen(isOpen)
   }, [isOpen])
 
-  const handleOnAnchorClick = useCallback(() => setIsMenuOpen(true), [])
+  const handleOnAnchorClick = useCallback(() => {
+    if (isOpen === undefined) {
+      setIsMenuOpen(true)
+    }
+  }, [isOpen])
 
   useEffect(() => {
     if (anchorElement) {
