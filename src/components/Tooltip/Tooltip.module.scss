@@ -1,5 +1,11 @@
 @import '~@anyvision/style-guide';
 
+.childrenStyle {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .popperContainer {
   @include av-elevation(overlay);
   background-color: av-color(secondary);

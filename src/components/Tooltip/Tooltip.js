@@ -83,6 +83,7 @@ const Tooltip = ({
       {React.cloneElement(children, {
         onMouseEnter: openTooltip,
         ref: setAnchorRef,
+        className: classNames(children.props.className, styles.childrenStyle),
       })}
 
       {showTooltip ? (
