@@ -1157,21 +1157,25 @@ exports[`Storyshots Content/Tooltip Arrow Variations 1`] = `
       }
     >
       <h6
+        className="childrenStyle"
         onMouseEnter={[Function]}
       >
         Right
       </h6>
       <h6
+        className="childrenStyle"
         onMouseEnter={[Function]}
       >
         Left
       </h6>
       <h6
+        className="childrenStyle"
         onMouseEnter={[Function]}
       >
         Top
       </h6>
       <h6
+        className="childrenStyle"
         onMouseEnter={[Function]}
       >
         Bottom
@@ -1187,6 +1191,7 @@ exports[`Storyshots Content/Tooltip Default 1`] = `
     className="center"
   >
     <h6
+      className="childrenStyle"
       onMouseEnter={[Function]}
     >
       Hover over me!
@@ -1201,6 +1206,7 @@ exports[`Storyshots Content/Tooltip Interactive 1`] = `
     className="center"
   >
     <h6
+      className="childrenStyle"
       onMouseEnter={[Function]}
     >
       Hover over me!
@@ -1216,6 +1222,7 @@ exports[`Storyshots Content/Tooltip Overflow Only 1`] = `
   >
     <div>
       <h6
+        className="childrenStyle"
         onMouseEnter={[Function]}
         style={
           Object {
@@ -1228,6 +1235,7 @@ exports[`Storyshots Content/Tooltip Overflow Only 1`] = `
         shot text
       </h6>
       <h6
+        className="childrenStyle"
         onMouseEnter={[Function]}
         style={
           Object {
@@ -1496,7 +1504,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Accessory
@@ -1520,7 +1528,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             AppAccessControl
@@ -1549,7 +1557,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             AppAnalytics
@@ -1581,7 +1589,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             </g>
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             AppDevices
@@ -1604,7 +1612,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             AppHome
@@ -1632,7 +1640,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             AppInvastigate
@@ -1664,7 +1672,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             </g>
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             AppLocations
@@ -1687,7 +1695,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             AppPeople
@@ -1719,7 +1727,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             AppRadar
@@ -1757,7 +1765,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             AppRadarAlt
@@ -1781,7 +1789,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             AppSearch
@@ -1808,7 +1816,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             AppSecurityAlerts
@@ -1832,7 +1840,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             AppSecurityLevel
@@ -1860,7 +1868,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             AppSettings
@@ -1884,7 +1892,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             AppShield
@@ -1908,7 +1916,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             AppShieldUserList
@@ -1932,7 +1940,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ArrowDown
@@ -1956,7 +1964,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ArrowLeft
@@ -1980,7 +1988,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ArrowRight
@@ -2004,7 +2012,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ArrowSolidDown
@@ -2028,7 +2036,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ArrowSolidLeft
@@ -2052,7 +2060,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ArrowSolidRight
@@ -2076,7 +2084,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ArrowSolidUp
@@ -2100,7 +2108,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ArrowUp
@@ -2123,7 +2131,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             At
@@ -2146,7 +2154,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Back
@@ -2169,7 +2177,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Backpack
@@ -2192,7 +2200,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Ball
@@ -2214,7 +2222,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Blocked
@@ -2237,7 +2245,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Book
@@ -2259,7 +2267,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Bot
@@ -2282,7 +2290,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Briefcase
@@ -2305,7 +2313,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Building
@@ -2332,7 +2340,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             BuildingArea
@@ -2355,7 +2363,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             BuildingsDouble
@@ -2379,7 +2387,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             BuildingsTriple
@@ -2402,7 +2410,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             BulletList
@@ -2425,7 +2433,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Bus
@@ -2447,7 +2455,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Calendar
@@ -2471,7 +2479,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             CalendarClock
@@ -2494,7 +2502,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             CameraStills
@@ -2517,7 +2525,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             CameraStillsChange
@@ -2540,7 +2548,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             CameraStillsPlus
@@ -2563,7 +2571,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             CameraStillsSlash
@@ -2586,7 +2594,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ChatBubble
@@ -2610,7 +2618,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ChatBubbleAdd
@@ -2634,7 +2642,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ChatBubbleDownload
@@ -2658,7 +2666,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ChatBubbleEdit
@@ -2682,7 +2690,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ChatBubbleMinus
@@ -2712,7 +2720,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ChatBubbleNumber
@@ -2736,7 +2744,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             CheckCircleFilled
@@ -2759,7 +2767,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             CheckCircleOutlined
@@ -2782,7 +2790,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             CheckThick
@@ -2805,7 +2813,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             CheckThin
@@ -2827,7 +2835,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Clipboard
@@ -2850,7 +2858,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Clock
@@ -2873,7 +2881,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ClockHistory
@@ -2899,7 +2907,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ClockRunning
@@ -2922,7 +2930,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             CloudBlock
@@ -2945,7 +2953,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             CloudBookmark
@@ -2968,7 +2976,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             CloudCheck
@@ -2991,7 +2999,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             CloudDatabaseTree
@@ -3014,7 +3022,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             CloudDownload
@@ -3037,7 +3045,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             CloudInfo
@@ -3060,7 +3068,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             CloudRedo
@@ -3083,7 +3091,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             CloudShiled
@@ -3106,7 +3114,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             CloudSlash
@@ -3129,7 +3137,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             CloudTimes
@@ -3152,7 +3160,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             CloudUnlock
@@ -3175,7 +3183,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             CloudUpload
@@ -3205,7 +3213,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             CloudUser
@@ -3228,7 +3236,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             CloudWifi
@@ -3252,7 +3260,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ColoumnsManagement
@@ -3275,7 +3283,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Comments
@@ -3298,7 +3306,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Copy
@@ -3321,7 +3329,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Crop
@@ -3344,7 +3352,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Deselect
@@ -3366,7 +3374,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Doc
@@ -3389,7 +3397,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             DocBlocked
@@ -3412,7 +3420,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             DocCheck
@@ -3435,7 +3443,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             DocDownload
@@ -3458,7 +3466,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             DocEdit
@@ -3481,7 +3489,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             DocError
@@ -3504,7 +3512,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             DotsHorizontal
@@ -3528,7 +3536,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             DotsVertical
@@ -3551,7 +3559,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Download
@@ -3575,7 +3583,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             DownloadCircleFilled
@@ -3598,7 +3606,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             DownloadCircleOutlined
@@ -3662,7 +3670,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             </g>
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Drag
@@ -3684,7 +3692,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Email
@@ -3707,7 +3715,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             EmailConfirmd
@@ -3734,7 +3742,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Entities
@@ -3758,7 +3766,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ErrorCircleFilled
@@ -3781,7 +3789,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ErrorCircleOutlined
@@ -3804,7 +3812,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Exchange
@@ -3827,7 +3835,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ExpandAlt
@@ -3850,7 +3858,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ExpandCorner
@@ -3873,7 +3881,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ExportAlt
@@ -3896,7 +3904,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ExtarnalLink
@@ -3919,7 +3927,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             EyeDisabled
@@ -3942,7 +3950,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             EyeEnabled
@@ -3965,7 +3973,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             FatalError
@@ -3989,7 +3997,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             FatalErrorCircleFilled
@@ -4011,7 +4019,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Feedback
@@ -4034,7 +4042,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             File
@@ -4057,7 +4065,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             FileChart
@@ -4080,7 +4088,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             FileCheck
@@ -4104,7 +4112,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             FileDownload
@@ -4127,7 +4135,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             FileError
@@ -4150,7 +4158,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             FileImport
@@ -4174,7 +4182,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             FilePlus
@@ -4198,7 +4206,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             FileUpload
@@ -4221,7 +4229,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Filter
@@ -4244,7 +4252,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Fire
@@ -4267,7 +4275,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Focus
@@ -4290,7 +4298,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             FocusPlus
@@ -4314,7 +4322,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             FocusPreson
@@ -4337,7 +4345,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             FocusTarget
@@ -4360,7 +4368,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Folder
@@ -4392,7 +4400,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             </g>
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Footer
@@ -4415,7 +4423,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Forward
@@ -4438,7 +4446,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             GatewayCloud
@@ -4460,7 +4468,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Grid
@@ -4483,7 +4491,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             GridAlt
@@ -4505,7 +4513,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Hamburger
@@ -4528,7 +4536,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Hourglass
@@ -4572,7 +4580,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             </g>
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             IdDocument
@@ -4595,7 +4603,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Image
@@ -4618,7 +4626,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ImageBlock
@@ -4641,7 +4649,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ImageCheck
@@ -4665,7 +4673,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ImageCrop
@@ -4689,7 +4697,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ImageDisabled
@@ -4712,7 +4720,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ImageDownload
@@ -4736,7 +4744,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ImageEdit
@@ -4759,7 +4767,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ImageLandscape
@@ -4782,7 +4790,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ImageLock
@@ -4805,7 +4813,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ImagePlus
@@ -4828,7 +4836,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ImageQuestion
@@ -4852,7 +4860,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ImageSearch
@@ -4875,7 +4883,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ImageShield
@@ -4898,7 +4906,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ImageStack
@@ -4921,7 +4929,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ImageTimes
@@ -4945,7 +4953,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ImageUpload
@@ -4969,7 +4977,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             InfoCircleFilled
@@ -4993,7 +5001,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             InfoCircleOutlined
@@ -5016,7 +5024,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Lab
@@ -5039,7 +5047,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Label
@@ -5062,7 +5070,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             LayerGroup
@@ -5085,7 +5093,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             LifeRing
@@ -5108,7 +5116,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Link
@@ -5132,7 +5140,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             LinkMini
@@ -5160,7 +5168,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ListAdd
@@ -5183,7 +5191,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ListSortAscending
@@ -5206,7 +5214,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ListSortDescending
@@ -5230,7 +5238,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ListStar
@@ -5253,7 +5261,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             LocationArrow
@@ -5276,7 +5284,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             LocationArrowDeg
@@ -5299,7 +5307,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             LocationTarget
@@ -5322,7 +5330,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             LockLocked
@@ -5345,7 +5353,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             LockLockedAlt
@@ -5368,7 +5376,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             LockSlashAlt
@@ -5391,7 +5399,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             LockUnlocked
@@ -5414,7 +5422,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             LockUnlockedAlt
@@ -5437,7 +5445,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Logout
@@ -5460,7 +5468,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             LongArrow
@@ -5484,7 +5492,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             LongArrowUp
@@ -5507,7 +5515,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             MailBlock
@@ -5530,7 +5538,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             MailDownload
@@ -5553,7 +5561,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             MailDownloadAlt
@@ -5576,7 +5584,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             MailEdit
@@ -5599,7 +5607,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             MailInfo
@@ -5622,7 +5630,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             MailLock
@@ -5645,7 +5653,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             MailOpen
@@ -5668,7 +5676,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             MailPlus
@@ -5691,7 +5699,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             MailQuestion
@@ -5714,7 +5722,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             MailRedo
@@ -5737,7 +5745,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             MailShiled
@@ -5760,7 +5768,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             MailTimes
@@ -5783,7 +5791,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             MailWarning
@@ -5806,7 +5814,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Map
@@ -5829,7 +5837,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             MaskMedical
@@ -5852,7 +5860,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Medal
@@ -5875,7 +5883,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             MedalAward
@@ -5898,7 +5906,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             MobilePhone
@@ -5921,7 +5929,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             MoneyWithdrawal
@@ -5944,7 +5952,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Moon
@@ -5975,7 +5983,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             NewMessages
@@ -5998,7 +6006,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Newspaper
@@ -6020,7 +6028,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Note
@@ -6043,7 +6051,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Notes
@@ -6067,7 +6075,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             NotificationsBell
@@ -6091,7 +6099,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             OldAbraxasPoint
@@ -6114,7 +6122,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Page
@@ -6136,7 +6144,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Panorama
@@ -6159,7 +6167,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             PaperPlan
@@ -6182,7 +6190,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             PencilEdit
@@ -6209,7 +6217,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             PeopleLists
@@ -6232,7 +6240,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             PinMarker
@@ -6255,7 +6263,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             PinMarkerAlt
@@ -6278,7 +6286,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             PinMarkerEdit
@@ -6301,7 +6309,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             PinMarkerInfo
@@ -6324,7 +6332,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             PinMarkerMinus
@@ -6347,7 +6355,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             PinMarkerPlus
@@ -6370,7 +6378,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             PinMarkerQuestion
@@ -6393,7 +6401,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             PinMarkerShiled
@@ -6416,7 +6424,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             PinMarkerSlash
@@ -6439,7 +6447,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             PinMarkerUnderline
@@ -6462,7 +6470,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             PinUser
@@ -6485,7 +6493,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Plane
@@ -6508,7 +6516,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             PlaneArrival
@@ -6531,7 +6539,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             PlaneDeparture
@@ -6555,7 +6563,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             PlugUnplugged
@@ -6586,7 +6594,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Plugin
@@ -6610,7 +6618,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             PlusCircleFilled
@@ -6634,7 +6642,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             PlusCircleOutlined
@@ -6658,7 +6666,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             PlusThick
@@ -6681,7 +6689,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             PlusThin
@@ -6704,7 +6712,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Power
@@ -6726,7 +6734,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Printer
@@ -6748,7 +6756,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Pulse
@@ -6772,7 +6780,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             QuestionCircleFilled
@@ -6796,7 +6804,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             QuestionCircleOutlined
@@ -6820,7 +6828,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             QuestionMark
@@ -6843,7 +6851,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Redo
@@ -6865,7 +6873,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Remove
@@ -6899,7 +6907,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             </g>
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ScanTablet
@@ -6922,7 +6930,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ScreenDesktop
@@ -6945,7 +6953,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Search
@@ -6969,7 +6977,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             SettingsCog
@@ -6997,7 +7005,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             SettingsCogAlt
@@ -7020,7 +7028,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             SettingsWrench
@@ -7043,7 +7051,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Shield
@@ -7076,7 +7084,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             </g>
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             SideNav
@@ -7099,7 +7107,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             SmileBeam
@@ -7128,7 +7136,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             SortAscending
@@ -7157,7 +7165,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             SortDecending
@@ -7179,7 +7187,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Star
@@ -7214,7 +7222,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             </g>
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             StorageBox
@@ -7237,7 +7245,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             SunBrightens
@@ -7260,7 +7268,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Sunset
@@ -7283,7 +7291,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Table
@@ -7306,7 +7314,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Tablet
@@ -7329,7 +7337,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Telescope
@@ -7352,7 +7360,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Ticket
@@ -7379,7 +7387,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             TimeProfile
@@ -7405,7 +7413,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             TimelineAlt
@@ -7429,7 +7437,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             TimesCircleFilled
@@ -7452,7 +7460,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             TimesCircleOutlined
@@ -7475,7 +7483,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             TimesThick
@@ -7498,7 +7506,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             TimesThin
@@ -7521,7 +7529,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ToggleOn
@@ -7553,7 +7561,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             </g>
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             TopNav
@@ -7576,7 +7584,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             TrashDelete
@@ -7599,7 +7607,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             TrashLines
@@ -7622,7 +7630,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Trees
@@ -7645,7 +7653,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Upload
@@ -7669,7 +7677,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             UploadCircleFilled
@@ -7692,7 +7700,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             UploadCircleOutlined
@@ -7715,7 +7723,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             User
@@ -7739,7 +7747,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             UserAdd
@@ -7762,7 +7770,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             UserArrows
@@ -7789,7 +7797,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             UserAvatar
@@ -7813,7 +7821,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             UserCard
@@ -7845,7 +7853,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             </g>
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             UserCards
@@ -7877,7 +7885,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             </g>
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             UserClock
@@ -7908,7 +7916,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             </g>
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             UserEdit
@@ -7931,7 +7939,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             UserMinus
@@ -7955,7 +7963,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             UserPinned
@@ -7979,7 +7987,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             UserRectangle
@@ -8003,7 +8011,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             UserSlash
@@ -8031,7 +8039,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             </g>
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             UserStats
@@ -8054,7 +8062,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             UserTemporary
@@ -8077,7 +8085,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             UserTimes
@@ -8100,7 +8108,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             UserVerified
@@ -8124,7 +8132,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             UserWarning
@@ -8156,7 +8164,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             </g>
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             UsersBack
@@ -8188,7 +8196,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             </g>
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             UsersFront
@@ -8211,7 +8219,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             UsersPeople
@@ -8235,7 +8243,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             UsersTimes
@@ -8376,7 +8384,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             </g>
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Vacation
@@ -8400,7 +8408,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             VideoCameraAlt
@@ -8423,7 +8431,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             VideoCameraAltQue
@@ -8447,7 +8455,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             VideoCameraCctv
@@ -8470,7 +8478,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             VideoCameraSlashAlt
@@ -8493,7 +8501,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Wallet
@@ -8516,7 +8524,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Warning
@@ -8540,7 +8548,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             WarningCircleFilled
@@ -8563,7 +8571,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             WindowExpand
@@ -8590,7 +8598,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             Zone
@@ -8613,7 +8621,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ZoomIn
@@ -8636,7 +8644,7 @@ exports[`Storyshots Icons/Icons All 1`] = `
             />
           </svg>
           <span
-            className="name"
+            className="name childrenStyle"
             onMouseEnter={[Function]}
           >
             ZoomOut
@@ -10570,7 +10578,7 @@ exports[`Storyshots User Inputs/FormProvider Basic 1`] = `
               Username
             </label>
             <div
-              className="ellipsis"
+              className="ellipsis childrenStyle"
               onMouseEnter={[Function]}
             >
               AnyVisionAdmin
@@ -10589,7 +10597,7 @@ exports[`Storyshots User Inputs/FormProvider Basic 1`] = `
               Age
             </label>
             <div
-              className="ellipsis"
+              className="ellipsis childrenStyle"
               onMouseEnter={[Function]}
             >
               24
@@ -10606,7 +10614,7 @@ exports[`Storyshots User Inputs/FormProvider Basic 1`] = `
           <div>
             <label />
             <div
-              className="ellipsis"
+              className="ellipsis childrenStyle"
               onMouseEnter={[Function]}
             >
               1
@@ -10750,7 +10758,7 @@ exports[`Storyshots User Inputs/FormProvider Nested 1`] = `
               First Name
             </label>
             <div
-              className="ellipsis"
+              className="ellipsis childrenStyle"
               onMouseEnter={[Function]}
             >
               Any
@@ -10769,7 +10777,7 @@ exports[`Storyshots User Inputs/FormProvider Nested 1`] = `
               Last Name
             </label>
             <div
-              className="ellipsis"
+              className="ellipsis childrenStyle"
               onMouseEnter={[Function]}
             >
               Vision
@@ -10851,7 +10859,7 @@ exports[`Storyshots User Inputs/FormProvider Nested 1`] = `
               Age
             </label>
             <div
-              className="ellipsis"
+              className="ellipsis childrenStyle"
               onMouseEnter={[Function]}
             >
               24
@@ -12922,7 +12930,7 @@ exports[`Storyshots User Inputs/TextField View 1`] = `
               view
             </label>
             <div
-              className="ellipsis"
+              className="ellipsis childrenStyle"
               onMouseEnter={[Function]}
             >
               View mode
@@ -12952,7 +12960,7 @@ exports[`Storyshots User Inputs/TextField View 1`] = `
               This is empty 
             </label>
             <div
-              className="ellipsis none"
+              className="ellipsis none childrenStyle"
               onMouseEnter={[Function]}
             >
               None
@@ -12982,7 +12990,7 @@ exports[`Storyshots User Inputs/TextField View 1`] = `
               view
             </label>
             <div
-              className="ellipsis"
+              className="ellipsis childrenStyle"
               onMouseEnter={[Function]}
             >
               multiline text view mode
