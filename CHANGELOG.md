@@ -4,6 +4,10 @@
 
 - Change confirmation dialog prop for row action and bulk actions in Table, changed prop `confirmMassage:Stirng` to `confirmDialogBody:Any`
 
+### Changed
+
+- Changed default CSS of Tooltip's children
+
 ### Fixed
 
 - Fixed Menu to not self open when controlled from outside

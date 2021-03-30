@@ -91,9 +91,6 @@ export const OverflowOnly = () => {
         <h6
           style={{
             width: '50px',
-            overflow: 'hidden',
-            whiteSpace: 'nowrap',
-            textOverflow: 'ellipsis',
           }}
         >
           {longText}

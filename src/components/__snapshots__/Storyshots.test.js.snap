@@ -1239,9 +1239,6 @@ exports[`Storyshots Content/Tooltip Overflow Only 1`] = `
         onMouseEnter={[Function]}
         style={
           Object {
-            "overflow": "hidden",
-            "textOverflow": "ellipsis",
-            "whiteSpace": "nowrap",
             "width": "50px",
           }
         }
