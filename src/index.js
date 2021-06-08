@@ -24,5 +24,6 @@ export { SelectionGroup } from './components/SelectionGroup'
 export { FormProvider } from './components/FormProvider'
 export { Banner } from './components/Banner'
 export { Progress } from './components/Progress'
+export { Tabs } from './components/Tabs'
 
 export { useFormProvider } from './components/FormProvider/useFormProvider'

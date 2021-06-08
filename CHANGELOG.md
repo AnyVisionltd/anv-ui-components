@@ -25,7 +25,7 @@
 - Added z-index to Tooltip component
 - Added Banner component and implemented in DialogWizard
 - Added tooltip show prop
-- Added SelectionGroup component
+- Added Tabs component
 - Add View prop to \<TextField/> \<Checkbox/> \<Radio/> \<Switch/>
 - Add FormProvider Component
 - Add additionalFilters to tableSSF
@@ -34,6 +34,7 @@
 - New `<Progress/>` component
 - Add no results message to table
 - Added `classes` prop to `<DialogWizard/>`
+- New `<Tabs/>` component
 
 ## 1.0.0 - 06-09-2020
 

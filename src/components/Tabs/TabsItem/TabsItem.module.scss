@@ -1,0 +1,48 @@
+@import '~@anyvision/style-guide';
+@import '../../../styles/mixin/ripple';
+
+.tabsItem {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  cursor: pointer;
+  color: av-color(content, av-opacity(medium));
+  fill: av-color(content, av-opacity(medium));
+  padding: 0 av-space(tiny);
+  @extend %av-body2;
+  @include av-ripple(av-color(primary));
+
+  &.active {
+    font-weight: av-font-weight(bold);
+    color: av-color(primary);
+    fill: av-color(primary);
+    border-bottom: solid 4px av-color(primary);
+  }
+
+  &.disabled {
+    pointer-events: none;
+    color: av-color(content, av-opacity(disabled));
+    fill: av-color(content, av-opacity(disabled));
+  }
+
+  > div {
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    @extend %av-body2;
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .leadingIcon {
+    display: flex;
+    align-items: center;
+    margin-left: calc(#{av-space(micro)} * -1);
+    margin-right: av-space(micro);
+  }
+}
