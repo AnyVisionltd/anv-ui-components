@@ -1,0 +1,21 @@
+@import '~@anyvision/style-guide';
+
+$opacities: high, medium, disabled, divider, ghost;
+
+.opacity {
+  color: av-color(content);
+
+  div {
+    height: 100px;
+    @extend %av-headline4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @each $opacity in $opacities {
+    .#{$opacity} {
+      background-color: av-color(primary, av-opacity(#{$opacity}));
+    }
+  }
+}

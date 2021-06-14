@@ -1,0 +1,28 @@
+@import '~@anyvision/style-guide';
+
+$sizes: 8, 16, 24, 32, 40, 48, 56, 64, 80, 96, 144, 240, 320, 480, 640, 960;
+
+.size {
+  color: av-color(content);
+
+  div {
+    height: 40px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    @extend %av-subtitle2;
+  }
+
+  label {
+    margin-right: av-space();
+    white-space: nowrap;
+    width: 50px;
+  }
+
+  @each $size in $sizes {
+    .sz#{$size} {
+      width: av-size(sz-#{$size});
+      background-color: av-color(primary);
+    }
+  }
+}

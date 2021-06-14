@@ -1,0 +1,29 @@
+@import '~@anyvision/style-guide';
+
+$spaces: micro, tiny, base, medium, loose, large, grand, giant;
+
+.space {
+  width: 100%;
+  color: av-color(content);
+
+  div {
+    height: 20px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    @extend %av-subtitle2;
+  }
+
+  label {
+    margin-right: av-space();
+    white-space: nowrap;
+    width: 50px;
+  }
+
+  @each $space in $spaces {
+    .#{$space} {
+      width: av-space(#{$space});
+      background-color: av-color(primary);
+    }
+  }
+}
