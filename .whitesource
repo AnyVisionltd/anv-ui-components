@@ -1,0 +1,15 @@
+{
+  "scanSettings": {
+    "configMode": "EXTERNAL",
+    "configExternalURL": "https://open-test-public-anv.s3.eu-west-3.amazonaws.com/wss-unified-agent-1.config",
+    "projectToken": "a64e0a0653cf4875865f0e562acb7e3402ea7dd1b117414586cd5c4ff116c3dc",
+    "baseBranches": []
+  },
+  "checkRunSettings": {
+    "vulnerableCheckRunConclusionLevel": "failure",
+    "displayMode": "diff"
+  },
+  "issueSettings": {
+    "minSeverityLevel": "NONE"
+  }
+}
