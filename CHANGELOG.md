@@ -10,7 +10,7 @@
 
 ### Fixed
 
-- Fixed Portal to remove itself from dom on umount
+- Fixed Portal to remove itself from dom on unmount
 - Fixed Menu to not self open when controlled from outside
 - Fixed TextField cursor jump when deleting first letter
 - Fixed Menu to not self open when controlled from outside
