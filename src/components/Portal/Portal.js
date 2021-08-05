@@ -1,28 +1,27 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import propTypes from 'prop-types'
 
-/**
- * getPortalElement - Should check if there is a div in the dom for the portal
- * if not -> create on body and return it
- * @return {HTMLElement} (element)
- */
-const getPortalElement = elementId => {
-  let portalElement = document.getElementById(elementId)
-  if (!portalElement) {
-    portalElement = document.createElement('div')
-    portalElement.id = elementId
-    document.body.appendChild(portalElement)
+const Portal = ({ children, containerId, className }) => {
+  const target = useRef(document.getElementById(containerId))
+
+  useEffect(() => {
+    return () => {
+      if (target.current) {
+        target.current.remove()
+        target.current = null
+      }
+    }
+  }, [])
+
+  if (!target.current) {
+    target.current = document.createElement('div')
+    target.current.setAttribute('id', containerId)
+    target.current.classList.add(className)
+    document.body.appendChild(target.current)
   }
 
-  return portalElement
-}
-
-const Portal = ({ children, containerId, className }) => {
-  const mountNode = getPortalElement(containerId)
-  mountNode.classList.add(className)
-
-  return <>{createPortal(children, mountNode)}</>
+  return createPortal(children, target.current)
 }
 
 Portal.propTypes = {
