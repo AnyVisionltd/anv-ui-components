@@ -248,7 +248,7 @@ RangeSlider.propTypes = {
   sliderWidth: propTypes.oneOf([
     'sz144',
     'sz240',
-    'sz360',
+    'sz320',
     'sz480',
     'sz640',
     'sz960',
