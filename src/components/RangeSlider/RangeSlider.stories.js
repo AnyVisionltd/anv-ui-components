@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import RangeSlider from './';
-import { centerDecorator } from '../../../utils/storybook/decorators';
+import React, { useState } from 'react'
+import RangeSlider from './'
+import { centerDecorator } from '../../../utils/storybook/decorators'
 
 export default {
   title: 'User Inputs/RangeSlider',
   component: RangeSlider,
   decorators: [centerDecorator],
-};
+}
 
 export const Basic = () => {
-  const [value1, setValue1] = useState(50);
-  const [value2, setValue2] = useState(0.5);
-  const [value3, setValue3] = useState(360);
-  const [value4, setValue4] = useState(0.2);
+  const [value1, setValue1] = useState(50)
+  const [value2, setValue2] = useState(0.5)
+  const [value3, setValue3] = useState(360)
+  const [value4, setValue4] = useState(0.2)
 
   return (
     <>
@@ -48,5 +48,5 @@ export const Basic = () => {
         disabled
       />
     </>
-  );
-};
+  )
+}

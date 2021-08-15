@@ -1,2 +1,2 @@
-import RangeSlider from './RangeSlider';
-export default RangeSlider;
+import RangeSlider from './RangeSlider'
+export default RangeSlider
