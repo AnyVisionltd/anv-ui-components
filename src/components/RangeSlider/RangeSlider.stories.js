@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import RangeSlider from './'
-import { centerDecorator } from '../../../utils/storybook/decorators'
+import { centerDecorator } from '../../utils/storybook/decorators'
 
 export default {
   title: 'User Inputs/RangeSlider',
