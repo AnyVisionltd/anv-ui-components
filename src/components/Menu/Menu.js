@@ -196,9 +196,7 @@ const Menu = React.forwardRef((props, ref) => {
   )
 
   const renderMenuInPortal = () => (
-    <Portal containerId={menuContainerId || 'menu-container'}>
-      {renderMenu()}
-    </Portal>
+    <Portal containerId={menuContainerId}>{renderMenu()}</Portal>
   )
 
   return !isSubMenu ? renderMenuInPortal() : renderMenu()
@@ -211,6 +209,7 @@ Menu.defaultProps = {
   onOpened: () => {},
   isSubMenu: false,
   preferOpenDirection: 'bottom-start',
+  menuContainerId: 'menu-container',
 }
 
 Menu.propTypes = {
@@ -269,6 +268,10 @@ Menu.propTypes = {
   /** <code>INTERNAL</code> Is the menu is in-fact a sub menu.
    * Is set internally by <code>Menu.SubMenu</code> */
   isSubMenu: propTypes.bool,
+  /** Sometimes due to its cleanup, during specific situations,
+   * the menu might not show up. To avoid this, it is best practice
+   * to specify a unique menuContainerId.*/
+  menuContainerId: propTypes.string,
 }
 
 Menu.Item = MenuItem
