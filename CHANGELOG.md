@@ -10,6 +10,7 @@
 
 ### Fixed
 
+- Fixed falsey check in TextField that led to the label being on top of the inputted text
 - Fixed Portal to remove itself from dom on unmount
 - Fixed Menu to not self open when controlled from outside
 - Fixed TextField cursor jump when deleting first letter
@@ -22,6 +23,7 @@
 
 ### Added
 
+- Added menuContainerId to Menu to specify a containerId in the portal component
 - Added menuProps to TextField component to be propagated to Menu component
 - Added z-index to Tooltip component
 - Added Banner component and implemented in DialogWizard
