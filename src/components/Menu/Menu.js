@@ -23,6 +23,7 @@ const Menu = React.forwardRef((props, ref) => {
     onClose,
     onClosed,
     onOpened,
+    menuContainerId,
     ...otherProps
   } = props
   const [currentFocus, setCurrentFocus] = useState(false)
@@ -195,7 +196,9 @@ const Menu = React.forwardRef((props, ref) => {
   )
 
   const renderMenuInPortal = () => (
-    <Portal containerId='menu-container'>{renderMenu()}</Portal>
+    <Portal containerId={menuContainerId || 'menu-container'}>
+      {renderMenu()}
+    </Portal>
   )
 
   return !isSubMenu ? renderMenuInPortal() : renderMenu()
