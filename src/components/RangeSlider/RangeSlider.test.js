@@ -56,8 +56,8 @@ describe('<RangeSlider/>', () => {
       const onChange = fireEvent.change(rangerInput, {
         target: { value },
       })
-      expect(handleChange).toHaveBeenCalledTimes(1)
       expect(onChange).toBeTruthy()
+      expect(handleChange).toHaveBeenCalledTimes(1)
     })
 
     it('should change value when input is decreased', () => {
@@ -69,8 +69,8 @@ describe('<RangeSlider/>', () => {
       const onChange = fireEvent.change(rangerInput, {
         target: { value },
       })
-      expect(handleChange).toHaveBeenCalledTimes(1)
       expect(onChange).toBeTruthy()
+      expect(handleChange).toHaveBeenCalledTimes(1)
     })
   })
 })

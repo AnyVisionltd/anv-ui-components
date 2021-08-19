@@ -1,16 +1,7 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react'
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react'
 import styles from './RangeSlider.module.scss'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-
-const SLIDER_WIDTHS = {
-  sz144: 144,
-  sz240: 240,
-  sz320: 320,
-  sz480: 480,
-  sz640: 640,
-  sz960: 960,
-}
 
 const RangeSlider = ({
   min,
@@ -20,7 +11,6 @@ const RangeSlider = ({
   step,
   disabled,
   sliderWidth,
-  isDarkTheme,
   isToggleTooltip,
   ...otherProps
 }) => {
@@ -30,18 +20,18 @@ const RangeSlider = ({
   const sliderRef = useRef(null)
   const tooltipRef = useRef(null)
 
-  const SLIDER_SETTINGS = {
-    fill: styles.fill,
-    background: styles.bg,
-    thumbSize: 24,
-    width: SLIDER_WIDTHS[sliderWidth] || 480,
-    get fixRangeRatio() {
-      return (this.thumbSize * 0.5) / this.width
-    },
-    get fixRangePercentage() {
-      return this.fixRangeRatio * 100
-    },
-  }
+  const SLIDER_SETTINGS = useMemo(
+    () => ({
+      fill: styles.fill,
+      background: styles.bg,
+      thumbSize: 24,
+      width: sliderWidth,
+      get fixRangeRatio() {
+        return (this.thumbSize * 0.5) / this.width
+      },
+    }),
+    [sliderWidth],
+  )
 
   // Get relative position in the slider, between 0 - 1
   const getPositionInSlider = useCallback(
@@ -49,11 +39,40 @@ const RangeSlider = ({
     [min, max],
   )
 
+  // Get value of slider from the relative position in percentage
+  const getValueInSlider = useCallback(
+    percentage => (percentage * (max - min)) / 100 + min,
+    [min, max],
+  )
+
+  // Returns the correct ratio based on the total width times the fixRangeRatio
+  const getFixRange = useCallback(
+    () => (max - min) * SLIDER_SETTINGS.fixRangeRatio,
+    [min, max, SLIDER_SETTINGS.fixRangeRatio],
+  )
+
+  // If min value is not divisible by a step bigger than 1, for example min = 3, step = 2
+  const fixModuloFromMin = useCallback(() => min % step, [min, step])
+
+  // If step is integer that is not 1. For example, values of step 2 => 0, 2, 4, 6, 8
+  const roundValueBasedOnStep = useCallback(
+    value => step * Math.round(value / step) + fixModuloFromMin(),
+    [step, fixModuloFromMin],
+  )
+
+  // Counts number of decimals for float steps like 0.1, 0.01, 1.5
+  const countDecimals = useCallback(() => {
+    const text = step.toString()
+    const index = text.indexOf('.')
+    return index === -1 ? 0 : text.length - index - 1
+  }, [step])
+
   useEffect(() => {
+    if (!tooltipRef.current) return
     if (isToggleTooltip && !showTooltip) return
-    const tooltipPos = (100 * ((hoverPos || value) - min)) / (max - min)
+    const tooltipPos = hoverPos ?? 100 * getPositionInSlider(value)
     tooltipRef.current.style.left = `${tooltipPos}%`
-  }, [showTooltip, hoverPos, isToggleTooltip, min, max, value])
+  }, [showTooltip, hoverPos, isToggleTooltip, value, getPositionInSlider])
 
   useEffect(() => {
     if (!sliderRef.current) return
@@ -64,8 +83,6 @@ const RangeSlider = ({
     sliderRef.current.style.background = bg
   }, [
     value,
-    min,
-    max,
     getPositionInSlider,
     SLIDER_SETTINGS.fill,
     SLIDER_SETTINGS.background,
@@ -81,16 +98,16 @@ const RangeSlider = ({
    * @returns {number} returns the accurate value
    */
   const fixThumbRangeDeviation = hoverVal => {
-    const pos = getPositionInSlider(hoverValue)
-    const { fixRangePercentage } = SLIDER_SETTINGS
+    const pos = getPositionInSlider(hoverVal)
     let fixedValue = hoverVal
+    const fixRange = getFixRange()
 
-    if (pos < 0.5) {
-      const substraction = (0.5 - pos) / 0.5
-      fixedValue -= substraction * fixRangePercentage
-    } else {
-      const addition = (pos - 0.5) / 0.5
-      fixedValue += addition * fixRangePercentage
+    const posFromCenter = (pos - 0.5) * 2
+    const adjustment = posFromCenter * fixRange
+    fixedValue += adjustment
+
+    if (step > 1) {
+      fixedValue = roundValueBasedOnStep(fixedValue)
     }
 
     if (fixedValue > max) fixedValue = max
@@ -108,42 +125,26 @@ const RangeSlider = ({
    */
   const posTooltipMiddleThumb = val => {
     const pos = getPositionInSlider(val)
-    const { fixRangePercentage, fixRangeRatio } = SLIDER_SETTINGS
     let middleValue = Number(val)
+    const fixRange = getFixRange()
 
-    if (pos < 0.5) {
-      const addition = (0.5 - pos) / 0.5
-      if (step === 0.1) {
-        middleValue += addition * fixRangeRatio
-      } else {
-        middleValue += addition * fixRangePercentage
-      }
-    } else {
-      const substraction = (pos - 0.5) / 0.5
-      if (step === 0.1) {
-        middleValue -= substraction * fixRangeRatio
-      } else {
-        middleValue -= substraction * fixRangePercentage
-      }
-    }
+    const posFromCenter = (pos - 0.5) / 0.5
+    const adjustment = posFromCenter * fixRange
+    middleValue -= adjustment
 
     return middleValue
   }
 
   const calculatePercentage = e => {
     const mouseX = Number(e.nativeEvent.offsetX)
-    const hoverVal = (mouseX / e.target.clientWidth) * parseInt(max, 10)
-    if (hoverVal > max || hoverVal < min) return
+    const curHoverPos = (mouseX / e.target.clientWidth) * 100
+    const curHoverVal = getValueInSlider(curHoverPos)
+    if (curHoverVal > max || curHoverVal < min) return
+    const stepDecimalCount = countDecimals()
 
-    if (step === 0.1) {
-      setHoverPos(hoverVal)
-      setHoverValue(hoverVal.toFixed(1))
-      return
-    }
-
-    let updatedVal = fixThumbRangeDeviation(hoverVal)
-    setHoverPos(hoverVal)
-    setHoverValue(Math.round(updatedVal))
+    const updatedVal = fixThumbRangeDeviation(curHoverVal)
+    setHoverPos(curHoverPos)
+    setHoverValue(updatedVal.toFixed(stepDecimalCount))
   }
 
   const posTooltipToHover = e => {
@@ -160,21 +161,13 @@ const RangeSlider = ({
     if (disabled) return
     if (isToggleTooltip) return hideTooltip()
     const middleValue = posTooltipMiddleThumb(value)
-    setHoverPos(middleValue)
+    setHoverPos(100 * getPositionInSlider(middleValue))
     setHoverValue(value)
   }
 
   const renderLabels = () => {
-    const minLabel = classNames(
-      styles.label,
-      styles.minLabel,
-      isDarkTheme && styles.dark,
-    )
-    const maxLabel = classNames(
-      styles.label,
-      styles.maxLabel,
-      isDarkTheme && styles.dark,
-    )
+    const minLabel = classNames(styles.label, styles.minLabel)
+    const maxLabel = classNames(styles.label, styles.maxLabel)
 
     return (
       <>
@@ -226,8 +219,7 @@ RangeSlider.defaultProps = {
   onChange: () => {},
   step: 1,
   disabled: false,
-  sliderWidth: 'sz480',
-  isDarkTheme: false,
+  sliderWidth: 480,
   isToggleTooltip: false,
 }
 
@@ -244,17 +236,8 @@ RangeSlider.propTypes = {
   step: propTypes.number,
   /** Determines the disabled mode of the RangeSlider, if true - disabled. */
   disabled: propTypes.bool,
-  /** The width of the range slider. Default is 'sz480' = 480px. */
-  sliderWidth: propTypes.oneOf([
-    'sz144',
-    'sz240',
-    'sz320',
-    'sz480',
-    'sz640',
-    'sz960',
-  ]),
-  /** Changes the styles based on background theme, if true - theme is dark. */
-  isDarkTheme: propTypes.bool,
+  /** The width of the range slider. Default is 480 = 480px. */
+  sliderWidth: propTypes.number,
   /** Determines if tooltip is toggleable or not, if false - the tooltip is always shown,
    *  else - tooltip is shown only when user hovers over the slider */
   isToggleTooltip: propTypes.bool,

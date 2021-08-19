@@ -77,8 +77,7 @@
 
   .label {
     position: absolute;
-    color: av-color(trueblack);
-    // font-size: av-font-size(tiny);
+    color: av-color(content);
     font-size: 11px;
     bottom: 5px;
   }
@@ -91,10 +90,6 @@
     right: 5px;
   }
 
-  .dark {
-    color: av-color(purewhite);
-  }
-
   .tooltip {
     position: absolute;
     z-index: av-z-index(popup);
@@ -105,7 +100,6 @@
     border-radius: av-radius(tidy);
     color: av-color(purewhite);
     background-color: av-color(primary);
-    // font-size: av-font-size(tiny);
     font-size: 11px;
 
     &::before {
