@@ -48,24 +48,28 @@ describe('<RangeSlider/>', () => {
 
   describe('should change value when input is changed', () => {
     it('should change value when input is increased', () => {
-      const { container } = render(<RangeSlider />)
+      const handleChange = jest.fn()
+      const { container } = render(<RangeSlider onChange={handleChange} />)
 
       const rangerInput = getByRole(container, 'slider')
       const value = 80
       const onChange = fireEvent.change(rangerInput, {
         target: { value },
       })
+      expect(handleChange).toHaveBeenCalledTimes(1)
       expect(onChange).toBeTruthy()
     })
 
     it('should change value when input is decreased', () => {
-      const { container } = render(<RangeSlider />)
+      const handleChange = jest.fn()
+      const { container } = render(<RangeSlider onChange={handleChange} />)
 
       const rangerInput = getByRole(container, 'slider')
       const value = 20
       const onChange = fireEvent.change(rangerInput, {
         target: { value },
       })
+      expect(handleChange).toHaveBeenCalledTimes(1)
       expect(onChange).toBeTruthy()
     })
   })
