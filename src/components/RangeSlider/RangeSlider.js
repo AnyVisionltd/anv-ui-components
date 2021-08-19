@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react'
-import styles from './RangeSlider.module.scss'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
+import styles from './RangeSlider.module.scss'
 
 const RangeSlider = ({
   min,
