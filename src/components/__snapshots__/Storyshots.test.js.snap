@@ -11612,6 +11612,349 @@ exports[`Storyshots User Inputs/Radio States 1`] = `
 </div>
 `;
 
+exports[`Storyshots User Inputs/RangeSlider Basic 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="container"
+    >
+      <div
+        className="rangeContainer"
+      >
+        <input
+          disabled={false}
+          max={100}
+          min={0}
+          onChange={[Function]}
+          onMouseMove={[Function]}
+          onMouseOut={[Function]}
+          step={1}
+          style={
+            Object {
+              "width": "480px",
+            }
+          }
+          type="range"
+          value={50}
+        />
+        <span
+          className="label minLabel"
+        >
+          0
+        </span>
+        <span
+          className="label maxLabel"
+        >
+          100
+        </span>
+        <div
+          className="tooltip"
+        >
+          50
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots User Inputs/RangeSlider Different Steps 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="container"
+    >
+      <div
+        className="rangeContainer"
+      >
+        <input
+          disabled={false}
+          max={100}
+          min={0}
+          onChange={[Function]}
+          onMouseMove={[Function]}
+          onMouseOut={[Function]}
+          step={2}
+          style={
+            Object {
+              "width": "480px",
+            }
+          }
+          type="range"
+          value={42}
+        />
+        <span
+          className="label minLabel"
+        >
+          0
+        </span>
+        <span
+          className="label maxLabel"
+        >
+          100
+        </span>
+        <div
+          className="tooltip"
+        >
+          42
+        </div>
+      </div>
+    </div>
+    <div
+      className="container"
+    >
+      <div
+        className="rangeContainer"
+      >
+        <input
+          disabled={false}
+          max={100}
+          min={0}
+          onChange={[Function]}
+          onMouseMove={[Function]}
+          onMouseOut={[Function]}
+          step={1}
+          style={
+            Object {
+              "width": "480px",
+            }
+          }
+          type="range"
+          value={50}
+        />
+        <span
+          className="label minLabel"
+        >
+          0
+        </span>
+        <span
+          className="label maxLabel"
+        >
+          100
+        </span>
+        <div
+          className="tooltip"
+        >
+          50
+        </div>
+      </div>
+    </div>
+    <div
+      className="container"
+    >
+      <div
+        className="rangeContainer"
+      >
+        <input
+          disabled={false}
+          max={1}
+          min={0}
+          onChange={[Function]}
+          onMouseMove={[Function]}
+          onMouseOut={[Function]}
+          step={0.1}
+          style={
+            Object {
+              "width": "480px",
+            }
+          }
+          type="range"
+          value={0.4}
+        />
+        <span
+          className="label minLabel"
+        >
+          0
+        </span>
+        <span
+          className="label maxLabel"
+        >
+          1
+        </span>
+        <div
+          className="tooltip"
+        >
+          0.4
+        </div>
+      </div>
+    </div>
+    <div
+      className="container"
+    >
+      <div
+        className="rangeContainer"
+      >
+        <input
+          disabled={false}
+          max={1}
+          min={0}
+          onChange={[Function]}
+          onMouseMove={[Function]}
+          onMouseOut={[Function]}
+          step={0.01}
+          style={
+            Object {
+              "width": "480px",
+            }
+          }
+          type="range"
+          value={0.55}
+        />
+        <span
+          className="label minLabel"
+        >
+          0
+        </span>
+        <span
+          className="label maxLabel"
+        >
+          1
+        </span>
+        <div
+          className="tooltip"
+        >
+          0.55
+        </div>
+      </div>
+    </div>
+    <div
+      className="container"
+    >
+      <div
+        className="rangeContainer"
+      >
+        <input
+          disabled={false}
+          max={1}
+          min={0}
+          onChange={[Function]}
+          onMouseMove={[Function]}
+          onMouseOut={[Function]}
+          step={0.001}
+          style={
+            Object {
+              "width": "480px",
+            }
+          }
+          type="range"
+          value={0.632}
+        />
+        <span
+          className="label minLabel"
+        >
+          0
+        </span>
+        <span
+          className="label maxLabel"
+        >
+          1
+        </span>
+        <div
+          className="tooltip"
+        >
+          0.632
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots User Inputs/RangeSlider Disabled 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="container disabled"
+    >
+      <div
+        className="rangeContainer"
+      >
+        <input
+          disabled={true}
+          max={100}
+          min={0}
+          onChange={[Function]}
+          onMouseMove={[Function]}
+          onMouseOut={[Function]}
+          step={1}
+          style={
+            Object {
+              "width": "480px",
+            }
+          }
+          type="range"
+          value={40}
+        />
+        <span
+          className="label minLabel"
+        >
+          0
+        </span>
+        <span
+          className="label maxLabel"
+        >
+          100
+        </span>
+        <div
+          className="tooltip"
+        >
+          40
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots User Inputs/RangeSlider Toggled Tooltip 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      className="container"
+    >
+      <div
+        className="rangeContainer"
+      >
+        <input
+          disabled={false}
+          max={100}
+          min={0}
+          onChange={[Function]}
+          onMouseMove={[Function]}
+          onMouseOut={[Function]}
+          step={1}
+          style={
+            Object {
+              "width": "480px",
+            }
+          }
+          type="range"
+          value={60}
+        />
+        <span
+          className="label minLabel"
+        >
+          0
+        </span>
+        <span
+          className="label maxLabel"
+        >
+          100
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots User Inputs/SSF Default 1`] = `
 <div>
   <div
