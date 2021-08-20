@@ -29,11 +29,12 @@ describe('<RangeSlider/>', () => {
       expect(+rangerInput.value).toBe(10)
     })
 
-    it('should render correctly with props that are otherProps (arent specified as expected props)', () => {
-      const { container } = render(<RangeSlider className='customClassName' />)
+    it('should render correctly with props that are otherProps (are not specified as expected props)', () => {
+      const customClass = 'customClassName'
+      const { container } = render(<RangeSlider className={customClass} />)
 
       const rangerInput = getByRole(container, 'slider')
-      expect(rangerInput.className).toBe('customClassName')
+      expect(rangerInput.className).toBe(customClass)
     })
 
     it('should have two spans to specify the min and max values', () => {

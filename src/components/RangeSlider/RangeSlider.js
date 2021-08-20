@@ -111,7 +111,7 @@ const RangeSlider = ({
     }
 
     if (fixedValue > max) fixedValue = max
-    if (fixedValue < min) fixedValue = min
+    else if (fixedValue < min) fixedValue = min
     return fixedValue
   }
 
@@ -125,14 +125,10 @@ const RangeSlider = ({
    */
   const posTooltipMiddleThumb = val => {
     const pos = getPositionInSlider(val)
-    let middleValue = Number(val)
-    const fixRange = getFixRange()
-
     const posFromCenter = (pos - 0.5) / 0.5
+    const fixRange = getFixRange()
     const adjustment = posFromCenter * fixRange
-    middleValue -= adjustment
-
-    return middleValue
+    return Number(val) - adjustment
   }
 
   const calculatePercentage = e => {
@@ -140,10 +136,10 @@ const RangeSlider = ({
     const curHoverPos = (mouseX / e.target.clientWidth) * 100
     const curHoverVal = getValueInSlider(curHoverPos)
     if (curHoverVal > max || curHoverVal < min) return
-    const stepDecimalCount = countDecimals()
 
-    const updatedVal = fixThumbRangeDeviation(curHoverVal)
     setHoverPos(curHoverPos)
+    const stepDecimalCount = countDecimals()
+    const updatedVal = fixThumbRangeDeviation(curHoverVal)
     setHoverValue(updatedVal.toFixed(stepDecimalCount))
   }
 
@@ -153,9 +149,7 @@ const RangeSlider = ({
     isToggleTooltip && setShowTooltip(true)
   }
 
-  const hideTooltip = () => {
-    setShowTooltip(false)
-  }
+  const hideTooltip = () => setShowTooltip(false)
 
   const posTooltipToValue = () => {
     if (disabled) return
@@ -177,16 +171,12 @@ const RangeSlider = ({
     )
   }
 
-  const renderTooltip = () => {
-    const tooltipEl = (
+  const renderTooltip = () =>
+    !isToggleTooltip || showTooltip ? (
       <div ref={tooltipRef} className={styles.tooltip}>
         {hoverValue ?? value}
       </div>
-    )
-
-    if (isToggleTooltip) return showTooltip && tooltipEl
-    return tooltipEl
-  }
+    ) : null
 
   return (
     <div className={classNames(styles.container, disabled && styles.disabled)}>
@@ -224,9 +214,9 @@ RangeSlider.defaultProps = {
 }
 
 RangeSlider.propTypes = {
-  /** The min value of the range */
+  /** The min value of the range. */
   min: propTypes.number,
-  /** The max value of the range */
+  /** The max value of the range. */
   max: propTypes.number,
   /** Value of the slider */
   value: propTypes.oneOfType([propTypes.string, propTypes.number]),
@@ -239,7 +229,7 @@ RangeSlider.propTypes = {
   /** The width of the range slider. Default is 480 = 480px. */
   sliderWidth: propTypes.number,
   /** Determines if tooltip is toggleable or not, if false - the tooltip is always shown,
-   *  else - tooltip is shown only when user hovers over the slider */
+   *  else - tooltip is shown only when user hovers over the slider. */
   isToggleTooltip: propTypes.bool,
 }
 

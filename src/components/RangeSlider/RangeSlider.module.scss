@@ -35,7 +35,7 @@
       height: av-size(sz-24);
       width: av-size(sz-24);
       border-radius: av-radius(circle);
-      background: rgb(255, 255, 255);
+      background: av-color(purewhite);
       cursor: inherit;
       -webkit-transition: all 0.15s ease-in-out;
       transition: all 0.15s ease-in-out;
@@ -45,6 +45,7 @@
         background: rgb(212, 212, 212);
         transform: scale(1.1);
       }
+
       &:active {
         box-shadow: 0 8px 16px 0.1px av-color(trueblack);
       }
@@ -55,7 +56,7 @@
       height: av-size(sz-24);
       width: av-size(sz-24);
       border-radius: av-radius(circle);
-      background: rgb(255, 255, 255);
+      background: av-color(purewhite);
       cursor: inherit;
       transition: all 0.15s ease-in-out;
       border: av-color(primary) solid 3px;
@@ -64,6 +65,7 @@
         background: rgb(212, 212, 212);
         transform: scale(1.1);
       }
+
       &:active {
         box-shadow: 0 8px 16px 0.1px av-color(trueblack);
       }
@@ -78,7 +80,7 @@
   .label {
     position: absolute;
     color: av-color(content);
-    font-size: 11px;
+    font-size: av-font-size(tiny);
     bottom: 5px;
   }
 
@@ -100,7 +102,7 @@
     border-radius: av-radius(tidy);
     color: av-color(purewhite);
     background-color: av-color(primary);
-    font-size: 11px;
+    font-size: av-font-size(tiny);
 
     &::before {
       content: '';

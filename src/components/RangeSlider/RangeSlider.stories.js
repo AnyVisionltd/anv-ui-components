@@ -70,6 +70,7 @@ export const DifferentSteps = () => {
         min={0}
         max={100}
         value={value2}
+        step={1}
         onChange={e => setValue2(e.target.value)}
       />
 
