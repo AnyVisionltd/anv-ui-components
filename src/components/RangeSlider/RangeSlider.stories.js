@@ -100,3 +100,30 @@ export const DifferentSteps = () => {
     </>
   )
 }
+
+export const DifferentMeasureUnits = () => {
+  const [value1, setValue1] = useState(10)
+  const [value2, setValue2] = useState(30)
+
+  return (
+    <>
+      <RangeSlider
+        min={0}
+        max={24}
+        value={value1}
+        step={1}
+        onChange={e => setValue1(e.target.value)}
+        measureUnitText={'H'}
+      />
+
+      <RangeSlider
+        min={0}
+        max={60}
+        value={value2}
+        step={1}
+        onChange={e => setValue2(e.target.value)}
+        measureUnitText={'min'}
+      />
+    </>
+  )
+}

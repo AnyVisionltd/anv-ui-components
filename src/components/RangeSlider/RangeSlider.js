@@ -12,6 +12,7 @@ const RangeSlider = ({
   disabled,
   sliderWidth,
   isToggleTooltip,
+  measureUnitText,
   ...otherProps
 }) => {
   const [showTooltip, setShowTooltip] = useState(false)
@@ -102,7 +103,7 @@ const RangeSlider = ({
     let fixedValue = hoverVal
     const fixRange = getFixRange()
 
-    const posFromCenter = (pos - 0.5) * 2
+    const posFromCenter = (pos - 0.5) / 0.5
     const adjustment = posFromCenter * fixRange
     fixedValue += adjustment
 
@@ -117,7 +118,7 @@ const RangeSlider = ({
 
   /**
    * Calculates the middle of the range thumb. If relative position is less than
-   * half, it adds 0 - 2.5% to current pos, else - it subtracts 0 - 2.5%. With fixRangeRatio: 0 - 0.025%
+   * half, it adds 0 - 2.5% to current pos, else - it subtracts 0 - 2.5%.
    * This function is about position of the thumb, the first function is about hover value.
    * @function posTooltipMiddleThumb
    * @param {number} val the value of the slider
@@ -149,7 +150,7 @@ const RangeSlider = ({
     isToggleTooltip && setShowTooltip(true)
   }
 
-  const hideTooltip = () => setShowTooltip(false)
+  const hideTooltip = () => showTooltip && setShowTooltip(false)
 
   const posTooltipToValue = () => {
     if (disabled) return
@@ -159,14 +160,30 @@ const RangeSlider = ({
     setHoverValue(value)
   }
 
+  // KeyDown is called while user presses the arrows and KeyUp is called when the press
+  // is done, so the input value will be updated and won't be one step ahead.
+  const handleKeyPress = e => {
+    if (e.keyCode === 37 || e.keyCode === 39) {
+      posTooltipToValue()
+    }
+  }
+
+  const renderMeasureUnitText = () => measureUnitText || null
+
   const renderLabels = () => {
     const minLabel = classNames(styles.label, styles.minLabel)
     const maxLabel = classNames(styles.label, styles.maxLabel)
 
     return (
       <>
-        <span className={minLabel}>{min}</span>
-        <span className={maxLabel}>{max}</span>
+        <span className={minLabel}>
+          {min}
+          {renderMeasureUnitText()}
+        </span>
+        <span className={maxLabel}>
+          {max}
+          {renderMeasureUnitText()}
+        </span>
       </>
     )
   }
@@ -175,6 +192,7 @@ const RangeSlider = ({
     !isToggleTooltip || showTooltip ? (
       <div ref={tooltipRef} className={styles.tooltip}>
         {hoverValue ?? value}
+        {renderMeasureUnitText()}
       </div>
     ) : null
 
@@ -185,6 +203,8 @@ const RangeSlider = ({
           type='range'
           onMouseMove={posTooltipToHover}
           onMouseOut={posTooltipToValue}
+          onKeyUp={handleKeyPress}
+          onKeyDown={handleKeyPress}
           ref={sliderRef}
           style={{ width: `${SLIDER_SETTINGS.width}px` }}
           min={min}
@@ -211,6 +231,7 @@ RangeSlider.defaultProps = {
   disabled: false,
   sliderWidth: 480,
   isToggleTooltip: false,
+  measureUnitText: '',
 }
 
 RangeSlider.propTypes = {
@@ -231,6 +252,8 @@ RangeSlider.propTypes = {
   /** Determines if tooltip is toggleable or not, if false - the tooltip is always shown,
    *  else - tooltip is shown only when user hovers over the slider. */
   isToggleTooltip: propTypes.bool,
+  /** Possibly add units of measurement for labels and hover value, like hours, minutes, meters etc. */
+  measureUnitText: propTypes.string,
 }
 
 export default RangeSlider
