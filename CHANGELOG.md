@@ -64,6 +64,7 @@
 - New Text Field.
 - New Wizard Dialog.
 - Added default behavior that doesn't require isOpen in Menu
+- New Range Slider.
 
 <!--
 Sections:

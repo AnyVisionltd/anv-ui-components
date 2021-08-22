@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
+import keymap from '../../utils/enums/keymap'
 import styles from './RangeSlider.module.scss'
 
 const RangeSlider = ({
@@ -101,18 +102,21 @@ const RangeSlider = ({
   const fixThumbRangeDeviation = hoverVal => {
     const pos = getPositionInSlider(hoverVal)
     let fixedValue = hoverVal
-    const fixRange = getFixRange()
 
     const posFromCenter = (pos - 0.5) / 0.5
-    const adjustment = posFromCenter * fixRange
+    const adjustment = posFromCenter * getFixRange()
     fixedValue += adjustment
 
     if (step > 1) {
       fixedValue = roundValueBasedOnStep(fixedValue)
     }
 
-    if (fixedValue > max) fixedValue = max
-    else if (fixedValue < min) fixedValue = min
+    if (fixedValue > max) {
+      fixedValue = max
+    } else if (fixedValue < min) {
+      fixedValue = min
+    }
+
     return fixedValue
   }
 
@@ -127,8 +131,7 @@ const RangeSlider = ({
   const posTooltipMiddleThumb = val => {
     const pos = getPositionInSlider(val)
     const posFromCenter = (pos - 0.5) / 0.5
-    const fixRange = getFixRange()
-    const adjustment = posFromCenter * fixRange
+    const adjustment = posFromCenter * getFixRange()
     return Number(val) - adjustment
   }
 
@@ -163,12 +166,10 @@ const RangeSlider = ({
   // KeyDown is called while user presses the arrows and KeyUp is called when the press
   // is done, so the input value will be updated and won't be one step ahead.
   const handleKeyPress = e => {
-    if (e.keyCode === 37 || e.keyCode === 39) {
+    if (e.keyCode === keymap.ARROW_LEFT || e.keyCode === keymap.ARROW_RIGHT) {
       posTooltipToValue()
     }
   }
-
-  const renderMeasureUnitText = () => measureUnitText || null
 
   const renderLabels = () => {
     const minLabel = classNames(styles.label, styles.minLabel)
@@ -178,11 +179,11 @@ const RangeSlider = ({
       <>
         <span className={minLabel}>
           {min}
-          {renderMeasureUnitText()}
+          {measureUnitText}
         </span>
         <span className={maxLabel}>
           {max}
-          {renderMeasureUnitText()}
+          {measureUnitText}
         </span>
       </>
     )
@@ -192,7 +193,7 @@ const RangeSlider = ({
     !isToggleTooltip || showTooltip ? (
       <div ref={tooltipRef} className={styles.tooltip}>
         {hoverValue ?? value}
-        {renderMeasureUnitText()}
+        {measureUnitText}
       </div>
     ) : null
 

@@ -30,7 +30,7 @@
     cursor: pointer;
     height: 6px;
     width: av-size(sz-480);
-    max-width: 100vw;
+    max-width: 100vw - 2 * 16px;
 
     &::-webkit-slider-thumb {
       -webkit-appearance: none;
