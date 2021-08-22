@@ -171,6 +171,8 @@ const RangeSlider = ({
     }
   }
 
+  const renderMeasureUnitText = () => measureUnitText || null
+
   const renderLabels = () => {
     const minLabel = classNames(styles.label, styles.minLabel)
     const maxLabel = classNames(styles.label, styles.maxLabel)
@@ -179,11 +181,11 @@ const RangeSlider = ({
       <>
         <span className={minLabel}>
           {min}
-          {measureUnitText}
+          {renderMeasureUnitText()}
         </span>
         <span className={maxLabel}>
           {max}
-          {measureUnitText}
+          {renderMeasureUnitText()}
         </span>
       </>
     )
@@ -193,7 +195,7 @@ const RangeSlider = ({
     !isToggleTooltip || showTooltip ? (
       <div ref={tooltipRef} className={styles.tooltip}>
         {hoverValue ?? value}
-        {measureUnitText}
+        {renderMeasureUnitText()}
       </div>
     ) : null
 
