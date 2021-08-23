@@ -1,8 +1,7 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
 import { getByRole, getByText } from '@testing-library/dom'
-import { SLIDER_SETTINGS } from './RangeSlider'
-import RangeSlider from './'
+import RangeSlider from './RangeSlider'
 
 describe('<RangeSlider/>', () => {
   describe('initial conditions', () => {

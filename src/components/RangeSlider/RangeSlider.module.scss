@@ -121,7 +121,7 @@
 }
 
 .width {
-  width: 480px;
+  width: av-size(sz-480);
 }
 
 $range-bg: av-color(primary, av-opacity(disabled));

@@ -47,14 +47,14 @@ const RangeSlider = ({
         return (this.thumbSize * 0.5) / this.width
       },
     }),
-    [sliderRef.current],
+    [],
   )
 
   useLayoutEffect(() => {
     if (!sliderRef.current) return
     if (SLIDER_SETTINGS.width) return
     SLIDER_SETTINGS.width = sliderRef.current.offsetWidth
-  }, [sliderRef.current])
+  }, [sliderRef.current, SLIDER_SETTINGS])
 
   // Get relative position in the slider, between 0 - 1
   const getPositionInSlider = useCallback(

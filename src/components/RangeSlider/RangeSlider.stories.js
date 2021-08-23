@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import RangeSlider from './'
+import RangeSlider from './RangeSlider'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import styles from './RangeSlider.module.scss'
 
