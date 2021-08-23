@@ -11633,11 +11633,6 @@ exports[`Storyshots User Inputs/RangeSlider Basic 1`] = `
           onMouseMove={[Function]}
           onMouseOut={[Function]}
           step={1}
-          style={
-            Object {
-              "width": "480px",
-            }
-          }
           type="range"
           value={50}
         />
@@ -11683,11 +11678,6 @@ exports[`Storyshots User Inputs/RangeSlider Different Measure Units 1`] = `
           onMouseMove={[Function]}
           onMouseOut={[Function]}
           step={1}
-          style={
-            Object {
-              "width": "480px",
-            }
-          }
           type="range"
           value={10}
         />
@@ -11727,11 +11717,6 @@ exports[`Storyshots User Inputs/RangeSlider Different Measure Units 1`] = `
           onMouseMove={[Function]}
           onMouseOut={[Function]}
           step={1}
-          style={
-            Object {
-              "width": "480px",
-            }
-          }
           type="range"
           value={30}
         />
@@ -11780,11 +11765,6 @@ exports[`Storyshots User Inputs/RangeSlider Different Steps 1`] = `
           onMouseMove={[Function]}
           onMouseOut={[Function]}
           step={2}
-          style={
-            Object {
-              "width": "480px",
-            }
-          }
           type="range"
           value={42}
         />
@@ -11821,11 +11801,6 @@ exports[`Storyshots User Inputs/RangeSlider Different Steps 1`] = `
           onMouseMove={[Function]}
           onMouseOut={[Function]}
           step={1}
-          style={
-            Object {
-              "width": "480px",
-            }
-          }
           type="range"
           value={50}
         />
@@ -11862,11 +11837,6 @@ exports[`Storyshots User Inputs/RangeSlider Different Steps 1`] = `
           onMouseMove={[Function]}
           onMouseOut={[Function]}
           step={0.1}
-          style={
-            Object {
-              "width": "480px",
-            }
-          }
           type="range"
           value={0.4}
         />
@@ -11903,11 +11873,6 @@ exports[`Storyshots User Inputs/RangeSlider Different Steps 1`] = `
           onMouseMove={[Function]}
           onMouseOut={[Function]}
           step={0.01}
-          style={
-            Object {
-              "width": "480px",
-            }
-          }
           type="range"
           value={0.55}
         />
@@ -11944,11 +11909,6 @@ exports[`Storyshots User Inputs/RangeSlider Different Steps 1`] = `
           onMouseMove={[Function]}
           onMouseOut={[Function]}
           step={0.001}
-          style={
-            Object {
-              "width": "480px",
-            }
-          }
           type="range"
           value={0.632}
         />
@@ -11994,11 +11954,6 @@ exports[`Storyshots User Inputs/RangeSlider Disabled 1`] = `
           onMouseMove={[Function]}
           onMouseOut={[Function]}
           step={1}
-          style={
-            Object {
-              "width": "480px",
-            }
-          }
           type="range"
           value={40}
         />
@@ -12044,11 +11999,6 @@ exports[`Storyshots User Inputs/RangeSlider Toggled Tooltip 1`] = `
           onMouseMove={[Function]}
           onMouseOut={[Function]}
           step={1}
-          style={
-            Object {
-              "width": "480px",
-            }
-          }
           type="range"
           value={60}
         />
