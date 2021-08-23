@@ -1,6 +1,7 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
 import { getByRole, getByText } from '@testing-library/dom'
+import { SLIDER_SETTINGS } from './RangeSlider'
 import RangeSlider from './'
 
 describe('<RangeSlider/>', () => {
@@ -35,6 +36,14 @@ describe('<RangeSlider/>', () => {
 
       const rangerInput = getByRole(container, 'slider')
       expect(rangerInput.className).toBe(customClass)
+    })
+
+    it('should render correctly with style prop', () => {
+      const sliderStyle = { width: '650px' }
+
+      const { container } = render(<RangeSlider style={sliderStyle} />)
+      const rangerInput = getByRole(container, 'slider')
+      expect(rangerInput.style.width).toBe(sliderStyle.width)
     })
 
     it('should have two spans to specify the min and max values', () => {

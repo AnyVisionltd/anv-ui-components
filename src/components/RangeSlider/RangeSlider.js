@@ -1,8 +1,24 @@
-import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react'
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  useMemo,
+  useLayoutEffect,
+} from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import keymap from '../../utils/enums/keymap'
 import styles from './RangeSlider.module.scss'
+
+const keyboardButtons = [
+  keymap.ARROW_DOWN,
+  keymap.ARROW_UP,
+  keymap.ARROW_LEFT,
+  keymap.ARROW_RIGHT,
+  keymap.PAGE_UP,
+  keymap.PAGE_DOWN,
+]
 
 const RangeSlider = ({
   min,
@@ -11,7 +27,6 @@ const RangeSlider = ({
   onChange,
   step,
   disabled,
-  sliderWidth,
   isToggleTooltip,
   measureUnitText,
   ...otherProps
@@ -27,13 +42,19 @@ const RangeSlider = ({
       fill: styles.fill,
       background: styles.bg,
       thumbSize: 24,
-      width: sliderWidth,
+      width: null,
       get fixRangeRatio() {
         return (this.thumbSize * 0.5) / this.width
       },
     }),
-    [sliderWidth],
+    [sliderRef.current],
   )
+
+  useLayoutEffect(() => {
+    if (!sliderRef.current) return
+    if (SLIDER_SETTINGS.width) return
+    SLIDER_SETTINGS.width = sliderRef.current.offsetWidth
+  }, [sliderRef.current])
 
   // Get relative position in the slider, between 0 - 1
   const getPositionInSlider = useCallback(
@@ -166,7 +187,7 @@ const RangeSlider = ({
   // KeyDown is called while user presses the arrows and KeyUp is called when the press
   // is done, so the input value will be updated and won't be one step ahead.
   const handleKeyPress = e => {
-    if (e.keyCode === keymap.ARROW_LEFT || e.keyCode === keymap.ARROW_RIGHT) {
+    if (keyboardButtons.includes(e.keyCode)) {
       posTooltipToValue()
     }
   }
@@ -209,7 +230,6 @@ const RangeSlider = ({
           onKeyUp={handleKeyPress}
           onKeyDown={handleKeyPress}
           ref={sliderRef}
-          style={{ width: `${SLIDER_SETTINGS.width}px` }}
           min={min}
           max={max}
           value={value}
@@ -232,7 +252,6 @@ RangeSlider.defaultProps = {
   onChange: () => {},
   step: 1,
   disabled: false,
-  sliderWidth: 480,
   isToggleTooltip: false,
   measureUnitText: '',
 }
@@ -250,8 +269,6 @@ RangeSlider.propTypes = {
   step: propTypes.number,
   /** Determines the disabled mode of the RangeSlider, if true - disabled. */
   disabled: propTypes.bool,
-  /** The width of the range slider. Default is 480 = 480px. */
-  sliderWidth: propTypes.number,
   /** Determines if tooltip is toggleable or not, if false - the tooltip is always shown,
    *  else - tooltip is shown only when user hovers over the slider. */
   isToggleTooltip: propTypes.bool,

@@ -36,6 +36,7 @@
 - Add no results message to table
 - Added `classes` prop to `<DialogWizard/>`
 - New `<Tabs/>` component
+- New RangeSlider component
 
 ## 1.0.0 - 06-09-2020
 
@@ -64,7 +65,6 @@
 - New Text Field.
 - New Wizard Dialog.
 - Added default behavior that doesn't require isOpen in Menu
-- New Range Slider.
 
 <!--
 Sections:
