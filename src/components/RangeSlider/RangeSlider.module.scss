@@ -2,7 +2,7 @@
 
 .container {
   height: fit-content;
-  width: fit-content;
+  width: 100%;
   padding: 0 av-space(base);
   background-color: inherit;
 
@@ -16,7 +16,7 @@
   height: av-size(sz-24);
   padding: av-space(base) 0;
   display: flex;
-  width: fit-content;
+  width: 100%;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -29,6 +29,7 @@
     outline: none;
     cursor: pointer;
     height: 6px;
+    width: 100%;
     max-width: 100vw;
 
     &::-webkit-slider-thumb {
@@ -118,10 +119,6 @@
       clip-path: polygon(100% 0, 0 0, 50% 100%);
     }
   }
-}
-
-.width {
-  width: av-size(sz-480);
 }
 
 $range-bg: av-color(primary, av-opacity(disabled));
