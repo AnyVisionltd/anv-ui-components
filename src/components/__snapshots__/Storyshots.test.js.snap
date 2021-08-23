@@ -11624,6 +11624,7 @@ exports[`Storyshots User Inputs/RangeSlider Basic 1`] = `
         className="rangeContainer"
       >
         <input
+          className="width"
           disabled={false}
           max={100}
           min={0}
@@ -11669,6 +11670,7 @@ exports[`Storyshots User Inputs/RangeSlider Different Measure Units 1`] = `
         className="rangeContainer"
       >
         <input
+          className="width"
           disabled={false}
           max={24}
           min={0}
@@ -11708,6 +11710,7 @@ exports[`Storyshots User Inputs/RangeSlider Different Measure Units 1`] = `
         className="rangeContainer"
       >
         <input
+          className="width"
           disabled={false}
           max={60}
           min={0}
@@ -11756,6 +11759,7 @@ exports[`Storyshots User Inputs/RangeSlider Different Steps 1`] = `
         className="rangeContainer"
       >
         <input
+          className="width"
           disabled={false}
           max={100}
           min={0}
@@ -11792,6 +11796,7 @@ exports[`Storyshots User Inputs/RangeSlider Different Steps 1`] = `
         className="rangeContainer"
       >
         <input
+          className="width"
           disabled={false}
           max={100}
           min={0}
@@ -11828,6 +11833,7 @@ exports[`Storyshots User Inputs/RangeSlider Different Steps 1`] = `
         className="rangeContainer"
       >
         <input
+          className="width"
           disabled={false}
           max={1}
           min={0}
@@ -11864,6 +11870,7 @@ exports[`Storyshots User Inputs/RangeSlider Different Steps 1`] = `
         className="rangeContainer"
       >
         <input
+          className="width"
           disabled={false}
           max={1}
           min={0}
@@ -11900,6 +11907,7 @@ exports[`Storyshots User Inputs/RangeSlider Different Steps 1`] = `
         className="rangeContainer"
       >
         <input
+          className="width"
           disabled={false}
           max={1}
           min={0}
@@ -11945,6 +11953,7 @@ exports[`Storyshots User Inputs/RangeSlider Disabled 1`] = `
         className="rangeContainer"
       >
         <input
+          className="width"
           disabled={true}
           max={100}
           min={0}
@@ -11990,6 +11999,7 @@ exports[`Storyshots User Inputs/RangeSlider Toggled Tooltip 1`] = `
         className="rangeContainer"
       >
         <input
+          className="width"
           disabled={false}
           max={100}
           min={0}

@@ -29,7 +29,6 @@
     outline: none;
     cursor: pointer;
     height: 6px;
-    width: av-size(sz-480);
     max-width: 100vw;
 
     &::-webkit-slider-thumb {
@@ -119,6 +118,10 @@
       clip-path: polygon(100% 0, 0 0, 50% 100%);
     }
   }
+}
+
+.width {
+  width: 480px;
 }
 
 $range-bg: av-color(primary, av-opacity(disabled));

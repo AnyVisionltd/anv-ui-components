@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import RangeSlider from './'
 import { centerDecorator } from '../../utils/storybook/decorators'
+import styles from './RangeSlider.module.scss'
 
 export default {
   title: 'User Inputs/RangeSlider',
@@ -17,6 +18,7 @@ export const Basic = () => {
       max={100}
       value={value}
       onChange={e => setValue(e.target.value)}
+      className={styles.width}
     />
   )
 }
@@ -31,6 +33,7 @@ export const ToggledTooltip = () => {
       value={value}
       onChange={e => setValue(e.target.value)}
       isToggleTooltip
+      className={styles.width}
     />
   )
 }
@@ -45,6 +48,7 @@ export const Disabled = () => {
       value={value}
       disabled
       onChange={e => setValue(e.target.value)}
+      className={styles.width}
     />
   )
 }
@@ -64,6 +68,7 @@ export const DifferentSteps = () => {
         value={value1}
         step={2}
         onChange={e => setValue1(e.target.value)}
+        className={styles.width}
       />
 
       <RangeSlider
@@ -72,6 +77,7 @@ export const DifferentSteps = () => {
         value={value2}
         step={1}
         onChange={e => setValue2(e.target.value)}
+        className={styles.width}
       />
 
       <RangeSlider
@@ -80,6 +86,7 @@ export const DifferentSteps = () => {
         value={value3}
         onChange={e => setValue3(e.target.value)}
         step={0.1}
+        className={styles.width}
       />
 
       <RangeSlider
@@ -88,6 +95,7 @@ export const DifferentSteps = () => {
         value={value4}
         onChange={e => setValue4(e.target.value)}
         step={0.01}
+        className={styles.width}
       />
 
       <RangeSlider
@@ -96,6 +104,7 @@ export const DifferentSteps = () => {
         value={value5}
         onChange={e => setValue5(e.target.value)}
         step={0.001}
+        className={styles.width}
       />
     </>
   )
@@ -114,6 +123,7 @@ export const DifferentMeasureUnits = () => {
         step={1}
         onChange={e => setValue1(e.target.value)}
         measureUnitText={'H'}
+        className={styles.width}
       />
 
       <RangeSlider
@@ -123,6 +133,7 @@ export const DifferentMeasureUnits = () => {
         step={1}
         onChange={e => setValue2(e.target.value)}
         measureUnitText={'min'}
+        className={styles.width}
       />
     </>
   )
