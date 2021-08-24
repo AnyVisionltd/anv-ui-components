@@ -21,6 +21,11 @@
     opacity: av-opacity(disabled);
     cursor: default;
   }
+  
+  svg[data-name="Arrow solid down"] {
+    font-size: av-size(sz-24);
+    margin-left: av-space(tiny);
+  }
 }
 
 .leadingIcon {
