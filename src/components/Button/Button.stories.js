@@ -52,5 +52,11 @@ export const withClassName = () => (
   </div>
 )
 
+export const dropdown = () => (
+  <div className={styles.marginFlexContainer}>
+    <Button isDropdown>Select</Button>
+  </div>
+)
+
 export const PlayGround = args => <Button {...args} />
 PlayGround.args = { children: 'Button Text' }
