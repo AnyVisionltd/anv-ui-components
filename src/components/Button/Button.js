@@ -2,6 +2,8 @@ import React, { forwardRef } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 import styles from './Button.module.scss'
+import { ArrowSolidDown } from '@anyvision/anv-icons'
+
 
 /**
  * Buttons allow users to take actions, and make choices, with a single tap.
@@ -18,6 +20,7 @@ const Button = forwardRef(
       type,
       className,
       children,
+      isDropdown,
       ...otherProps
     },
     ref,
@@ -42,6 +45,7 @@ const Button = forwardRef(
           <span className={styles.leadingIcon}>{leadingIcon}</span>
         )}
         {children}
+        {isDropdown && <ArrowSolidDown />}
       </button>
     )
   },
@@ -53,6 +57,7 @@ Button.defaultProps = {
   disabled: false,
   onClick: () => {},
   type: 'button',
+  isDropdown: false
 }
 
 Button.propTypes = {
@@ -72,6 +77,8 @@ Button.propTypes = {
   className: propTypes.string,
   /** The component content. */
   children: propTypes.node.isRequired,
+  /** If true, view as dropdown. */
+  isDropdown: propTypes.bool
 }
 
 export default Button
