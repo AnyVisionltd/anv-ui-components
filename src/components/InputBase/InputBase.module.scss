@@ -32,6 +32,11 @@
       color: av-color(content);
       opacity: av-opacity(medium);
     }
+
+    &:-webkit-autofill {
+      -webkit-text-fill-color: av-color(content);
+      caret-color: av-color(content);
+    }
   }
 
   > textarea {
