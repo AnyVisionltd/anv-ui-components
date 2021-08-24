@@ -21,6 +21,7 @@ export const Default = () => {
         aria-controls='menu-story-default'
         aria-haspopup='true'
         ref={setAnchorElement}
+        isDropdown
       >
         Pizza Toppings
       </Button>
@@ -51,6 +52,7 @@ export const DifferentPositions = () => {
         aria-controls='menu-story'
         aria-haspopup='true'
         onClick={handleButtonClick}
+        isDropdown
       >
         Top, Left
       </Button>
@@ -60,6 +62,7 @@ export const DifferentPositions = () => {
         aria-controls='menu-story'
         aria-haspopup='true'
         onClick={handleButtonClick}
+        isDropdown
       >
         Top, Right
       </Button>
@@ -69,6 +72,7 @@ export const DifferentPositions = () => {
         aria-controls='menu-story'
         aria-haspopup='true'
         onClick={handleButtonClick}
+        isDropdown
       >
         Bottom, Left
       </Button>
@@ -78,6 +82,7 @@ export const DifferentPositions = () => {
         aria-controls='menu-story'
         aria-haspopup='true'
         onClick={handleButtonClick}
+        isDropdown
       >
         Bottom, Right
       </Button>
@@ -133,6 +138,7 @@ export const PreferOpenToDirection = () => {
         aria-haspopup='true'
         onClick={handleButtonClick}
         ref={ref}
+        isDropdown
       >
         Open Menu
       </Button>
@@ -166,6 +172,7 @@ export const WithSubMenus = () => {
         aria-haspopup='true'
         onClick={handleButtonClick}
         ref={ref}
+        isDropdown
       >
         Open Menu
       </Button>
@@ -214,6 +221,7 @@ export const WithIsOpen = () => {
           aria-controls='menu-story-submenu'
           aria-haspopup='true'
           ref={ref}
+          isDropdown
         >
           Menu Anchor
         </Button>
@@ -271,6 +279,7 @@ export const Variants = () => {
           aria-haspopup='true'
           onClick={openRegularMenu}
           ref={regularAnchorElement}
+          isDropdown
         >
           Regular
         </Button>
@@ -292,6 +301,7 @@ export const Variants = () => {
           aria-haspopup='true'
           onClick={openDenseMenu}
           ref={denseAnchorElement}
+          isDropdown
         >
           Dense
         </Button>
