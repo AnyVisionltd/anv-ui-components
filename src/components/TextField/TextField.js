@@ -99,7 +99,11 @@ const TextField = React.forwardRef((props, ref) => {
   }, [setActiveFocus, textFieldRef, setFocusOut])
 
   useEffect(() => {
-    setEmpty(!defaultValue)
+    setEmpty(
+      defaultValue === null ||
+        defaultValue === undefined ||
+        defaultValue?.length === 0,
+    )
   }, [defaultValue])
 
   useEffect(() => {
