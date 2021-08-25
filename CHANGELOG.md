@@ -38,7 +38,8 @@
 - Add no results message to table
 - Added `classes` prop to `<DialogWizard/>`
 - New `<Tabs/>` component
-- Added -webkit-auto-fill in InputBase 
+- New RangeSlider component
+- Added -webkit-auto-fill in InputBase
 
 ## 1.0.0 - 06-09-2020
 
