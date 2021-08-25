@@ -54,7 +54,7 @@ const RangeSlider = ({
     if (!sliderRef.current) return
     if (SLIDER_SETTINGS.width) return
     SLIDER_SETTINGS.width = sliderRef.current.offsetWidth
-  }, [sliderRef.current, SLIDER_SETTINGS])
+  }, [SLIDER_SETTINGS])
 
   // Get relative position in the slider, between 0 - 1
   const getPositionInSlider = useCallback(
