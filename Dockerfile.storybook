@@ -1,12 +1,5 @@
 # Stage 0, "build-stage", based on Node.js, to build and compile the frontend
-FROM node:alpine as build-stage
-
-RUN apk add --no-cache \
-        ca-certificates curl wget lsof \
-        busybox-extras \
-        nethogs \
-        unzip wget python2 gcc \
-        libc-dev bash make g++ && apk upgrade
+FROM nikolaik/python-nodejs:python3.9-nodejs16-alpine as build-stage
 
 ENV APP_DIR /home/node/anv-ui-components
 WORKDIR $APP_DIR
