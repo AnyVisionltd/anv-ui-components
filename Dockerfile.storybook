@@ -15,7 +15,7 @@ COPY ./ ./
 
 ## Copy Artifact certificate for login + install + build
 COPY .npmrc /.npmrc
-RUN npm config set @anyvision:registry https://anyvision.jfrog.io/anyvision/api/npm/npm/
+RUN npm config set registry https://anyvision.jfrog.io/anyvision/api/npm/npm/
 RUN npm --verbose ci
 
 RUN rm .npmrc
