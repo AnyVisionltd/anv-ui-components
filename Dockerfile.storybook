@@ -14,10 +14,12 @@ WORKDIR $APP_DIR
 COPY ./ ./
 
 ## Copy Artifact certificate for login + install + build
-COPY .npmrc .npmrc
+COPY .npmrc /.npmrc
 RUN npm config set @anyvision:registry https://anyvision.jfrog.io/anyvision/api/npm/npm/
 RUN npm --verbose ci
+
 RUN rm .npmrc
+
 RUN PYTHON=/usr/bin/python
 RUN npm run build-storybook
 
