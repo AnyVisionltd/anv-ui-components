@@ -5,7 +5,7 @@ RUN apk add --no-cache \
         ca-certificates curl wget lsof \
         busybox-extras \
         nethogs \
-        unzip wget python3 gcc \
+        unzip wget python2 gcc \
         libc-dev bash make g++ && apk upgrade
 
 ENV APP_DIR /home/node/anv-ui-components
