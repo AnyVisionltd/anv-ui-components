@@ -163,4 +163,19 @@ describe('<Menu />', () => {
       expect(document.activeElement).toBe(secondMenuItem)
     })
   })
+
+  // describe("Menu with isOpen should be displayed and without should not be displayed ", () =>{
+  //   const renderMenu = isOpen => render(<Menu isOpen={isOpen} anchorElement={button}>Test content</Menu>)
+
+  //   it('should be displayed', async() =>{
+  //       const { container } = renderMenu(true)
+
+  //       await act(async () => {
+  //         const subMenuInnerHTML = container.querySelector(
+  //           '.subMenuItem > .subMenu',
+  //         )
+  //         expect(subMenuInnerHTML).toBeEmptyDOMElement()
+  //       })
+  //     })
+  // })
 })
