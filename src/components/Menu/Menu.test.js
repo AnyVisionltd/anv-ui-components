@@ -164,18 +164,24 @@ describe('<Menu />', () => {
     })
   })
 
-  // describe("Menu with isOpen should be displayed and without should not be displayed ", () =>{
-  //   const renderMenu = isOpen => render(<Menu isOpen={isOpen} anchorElement={button}>Test content</Menu>)
+  describe('Menu with isOpen should be displayed and without should not be displayed ', () => {
+    const content = 'Test content'
+    const renderMenu = isOpen =>
+      render(
+        <Menu isOpen={isOpen} anchorElement={button}>
+          {content}
+        </Menu>,
+      )
 
-  //   it('should be displayed', async() =>{
-  //       const { container } = renderMenu(true)
+    it('should be displayed', async () => {
+      const { getByText } = renderMenu(true)
+      const menu = getByText(content)
+      expect(menu).toBeInTheDocument()
+    })
 
-  //       await act(async () => {
-  //         const subMenuInnerHTML = container.querySelector(
-  //           '.subMenuItem > .subMenu',
-  //         )
-  //         expect(subMenuInnerHTML).toBeEmptyDOMElement()
-  //       })
-  //     })
-  // })
+    it('should not be displayed', async () => {
+      const { getByText } = renderMenu(false)
+      expect(() => getByText(content)).toThrow()
+    })
+  })
 })
