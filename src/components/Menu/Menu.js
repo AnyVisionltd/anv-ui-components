@@ -196,9 +196,7 @@ const Menu = React.forwardRef((props, ref) => {
   )
 
   const renderMenuInPortal = () => (
-    <Portal containerId={menuContainerId} isPortalOpen={isMenuOpen}>
-      {renderMenu()}
-    </Portal>
+    <Portal containerId={menuContainerId}>{renderMenu()}</Portal>
   )
 
   return (
