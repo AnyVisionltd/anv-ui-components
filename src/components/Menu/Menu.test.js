@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { render, fireEvent, act, waitFor, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { Menu } from '.'
 import { Button } from '../Button'
 
@@ -15,6 +16,8 @@ const MenuWithAnchor = () => {
     </>
   )
 }
+
+const menuTestContent = 'Test content'
 
 describe('<Menu />', () => {
   let button
@@ -162,5 +165,55 @@ describe('<Menu />', () => {
       fireEvent.keyDown(document, { keyCode: 38 })
       expect(document.activeElement).toBe(secondMenuItem)
     })
+  })
+
+  describe('Menu with isOpen should be displayed and without should not be displayed ', () => {
+    const menuEl = isOpen => (
+      <Menu isOpen={isOpen} anchorElement={button}>
+        {menuTestContent}
+      </Menu>
+    )
+
+    const renderMenu = isOpen => render(menuEl(isOpen))
+
+    it('should be displayed', async () => {
+      const { getByText, rerender } = renderMenu(true)
+      const menu = getByText(menuTestContent)
+      expect(menu).toBeInTheDocument()
+      rerender(<Menu anchorElement={button}>{menuTestContent}</Menu>)
+      expect(() => getByText(menuTestContent)).toThrow()
+    })
+
+    it('should not be displayed', async () => {
+      const { getByText } = renderMenu(false)
+      expect(() => getByText(menuTestContent)).toThrow()
+    })
+
+    it('Menu should be displayed and then when rerendered with different props its not in the document', () => {
+      const { getByText, rerender } = renderMenu(true)
+      const menu = getByText(menuTestContent)
+      expect(menu).toBeInTheDocument()
+      rerender(menuEl(false))
+      expect(() => getByText(menuTestContent)).toThrow()
+    })
+  })
+
+  it("User clicks outside the menu and 'onClose' is fired", async () => {
+    const handleClose = jest.fn()
+    const { getByRole } = render(
+      <>
+        <div role='document'>Content outside menu</div>
+        <Button>
+          I will click on this button, it should close the opened menu
+        </Button>
+        <Menu isOpen onClose={handleClose} anchorElement={button}>
+          {menuTestContent}
+        </Menu>
+      </>,
+    )
+
+    const div = getByRole('document')
+    userEvent.click(div)
+    expect(handleClose).toHaveBeenCalledTimes(1)
   })
 })
