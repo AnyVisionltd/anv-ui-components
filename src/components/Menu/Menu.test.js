@@ -1,12 +1,5 @@
 import React, { useState } from 'react'
-import {
-  render,
-  fireEvent,
-  act,
-  waitFor,
-  screen,
-  waitForElementToBeRemoved,
-} from '@testing-library/react'
+import { render, fireEvent, act, waitFor, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Menu } from '.'
 import { Button } from '../Button'
