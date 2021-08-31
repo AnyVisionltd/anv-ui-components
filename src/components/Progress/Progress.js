@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import { CheckCircleFilled, TimesCircleFilled } from '@anyvision/anv-icons'
+import {
+  CheckCircleFilled,
+  TimesCircleFilled,
+  Hourglass,
+} from '@anyvision/anv-icons'
 import { Tooltip } from '../Tooltip'
 import styles from './Progress.module.scss'
 
@@ -16,9 +20,18 @@ const Progress = ({
   error,
   errorMessage,
   successMessage,
+  inQueue,
   ...otherProps
 }) => {
   const [circleRef, setCircleRef] = useState()
+
+  const renderInQueue = () => (
+    <Tooltip content='In queue'>
+      <div className={styles.inQueueContainer}>
+        <Hourglass /> {!tiny && 'in queue'}
+      </div>
+    </Tooltip>
+  )
 
   const renderResult = () => {
     const classes = classNames(
@@ -116,7 +129,12 @@ const Progress = ({
     )
   }
 
-  return variant === 'linear' ? renderProgressLine() : renderProgressCircle()
+  const variantsRender = {
+    linear: renderProgressLine,
+    circle: renderProgressCircle,
+  }
+
+  return inQueue ? renderInQueue() : variantsRender[variant]()
 }
 
 Progress.defaultProps = {
@@ -126,6 +144,7 @@ Progress.defaultProps = {
   indeterminate: false,
   successMessage: 'Completed',
   errorMessage: 'Failed',
+  inQueue: false,
 }
 
 Progress.propTypes = {
@@ -149,6 +168,8 @@ Progress.propTypes = {
   errorMessage: propTypes.string,
   /** Message to show when action succeeds.*/
   successMessage: propTypes.string,
+  /** Action waits to be done.*/
+  inQueue: propTypes.bool,
 }
 
 export default Progress

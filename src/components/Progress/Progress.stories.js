@@ -72,61 +72,79 @@ export const Indeterminate = () => (
   </div>
 )
 
-export const Error = () => {
+export const Example = () => {
   const [value, setValue] = useState(0)
-  const [error, setError] = useState(false)
+  const [results, setResults] = useState({})
+  const [index, setIndex] = useState(0)
 
   useEffect(() => {
-    if (value >= 100 || error) return
+    if (value >= 100) return
     const interval = setInterval(() => {
       setValue(value => value + 1)
       if (value >= 100) clearInterval(interval)
     }, 300)
     return () => clearInterval(interval)
-  }, [value, error])
+  }, [value])
 
   useEffect(() => {
+    if (index > 3) return
     const fetchUser = () => {
-      return new Promise((_, reject) => {
+      return new Promise((resolve, reject) => {
         setTimeout(
-          () => reject({ success: false, message: 'Could not fetch user' }),
-          4000,
+          () =>
+            Math.random() > 0.5
+              ? resolve({ success: true, message: 'Fetched successfuly' })
+              : reject({ success: false, message: 'Could not fetch user' }),
+          3000,
         )
       })
     }
 
-    fetchUser().catch(err => setError(err))
-  }, [])
+    fetchUser()
+      .then(res => setResults({ ...results, [index]: res }))
+      .catch(err => setResults({ ...results, [index]: err }))
+      .finally(() => {
+        setIndex(index + 1)
+        setValue(0)
+      })
+  }, [index])
+
+  const renderProgress = keyIndex => (
+    <Progress
+      key={keyIndex}
+      value={value}
+      withText
+      errorMessage={results[keyIndex]?.message}
+      successMessage={results[keyIndex]?.message}
+      error={results[keyIndex]?.success === false}
+      success={results[keyIndex]?.success === true}
+      inQueue={index < keyIndex}
+      style={{ marginBottom: '16px' }}
+    />
+  )
+
+  const style = {
+    ...containerStyle,
+    justifyContent: 'flexStart',
+    alignItems: 'start',
+  }
 
   return (
-    <div style={{ ...containerStyle, width: '200px' }}>
-      <Progress
-        value={value}
-        withText
-        success={value === 100}
-        error={error}
-        errorMessage={error ? error.message : ''}
-        style={{ marginBottom: '16px' }}
-      />
-      <Progress
-        value={value}
-        withText
-        success={value === 100}
-        error={error}
-        errorMessage={error ? error.message : ''}
-        variant='circle'
-      />
+    <div style={style}>
+      {[...new Array(4)].map((_, index) => renderProgress(index))}
     </div>
   )
 }
 
-export const ErrorAndSuccessResults = () => (
+export const UserFeedbacks = () => (
   <div style={containerStyle}>
     <Progress error />
     <Progress success />
+    <Progress inQueue />
     <div style={{ display: 'flex' }}>
       <Progress tiny error errorMessage='Fail' />
       <Progress tiny success successMessage='Success' />
+      <Progress tiny inQueue />
     </div>
   </div>
 )
