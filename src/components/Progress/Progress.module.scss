@@ -1,4 +1,16 @@
 @import '~@anyvision/style-guide';
+
+.progressText {
+  text-transform: uppercase;
+  align-self: start;
+  text-align: left;
+  color: av-color(primary);
+  margin-bottom: 0;
+  white-space: nowrap;
+  letter-spacing: 1.1px;
+  text-shadow: -0.01ex 0 currentColor, 0.01ex 0 currentColor;
+}
+
 .lineProgress {
   overflow: hidden;
   position: relative;
@@ -54,5 +66,55 @@
     stroke: currentColor;
     stroke-width: 4px;
     transition: stroke-dashoffset 0.35s;
+  }
+}
+
+@keyframes expandIn {
+  0% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+  90% {
+    opacity: 1;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.resultContainer {
+  border-radius: av-radius();
+  padding: av-space(micro);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+  text-transform: uppercase;
+  animation: expandIn 0.25s;
+  @extend %av-subtitle1;
+
+  &.success {
+    color: av-color(success);
+
+    &:hover {
+      background: av-color(success, av-opacity(disabled));
+    }
+  }
+
+  &.error {
+    color: av-color(error);
+
+    &:hover {
+      background-color: av-color(error, av-opacity(disabled));
+    }
+  }
+
+  svg {
+    width: av-size(sz-24);
+    height: av-size(sz-24);
+    fill: currentColor;
+    margin-right: 2px;
   }
 }

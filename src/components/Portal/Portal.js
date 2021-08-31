@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import propTypes from 'prop-types'
+import { generateId } from '../../utils/index'
 
 const Portal = ({ children, containerId, className }) => {
-  const target = useRef(document.getElementById(containerId))
+  const target = useRef(null)
 
   useEffect(
     () => () => {
@@ -17,7 +18,7 @@ const Portal = ({ children, containerId, className }) => {
 
   if (!target.current) {
     target.current = document.createElement('div')
-    target.current.setAttribute('id', containerId)
+    target.current.setAttribute('id', `${containerId}${generateId()}`)
     target.current.classList.add(className)
     document.body.appendChild(target.current)
   }

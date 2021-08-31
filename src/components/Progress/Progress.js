@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
+import { CheckCircleFilled, TimesCircleFilled } from '@anyvision/anv-icons'
+import { Tooltip } from '../Tooltip'
 import styles from './Progress.module.scss'
 
 const Progress = ({
@@ -8,11 +10,50 @@ const Progress = ({
   variant,
   indeterminate,
   className,
+  withText,
+  tiny,
+  success,
+  error,
+  errorMessage,
+  successMessage,
   ...otherProps
 }) => {
   const [circleRef, setCircleRef] = useState()
 
+  const renderResult = () => {
+    const classes = classNames(
+      styles.resultContainer,
+      success && styles.success,
+      error && styles.error,
+    )
+
+    return (
+      <Tooltip content={success ? successMessage : errorMessage}>
+        <div className={classes}>
+          {success ? (
+            <>
+              {' '}
+              <CheckCircleFilled /> {!tiny && 'done'}{' '}
+            </>
+          ) : (
+            <>
+              {' '}
+              <TimesCircleFilled /> {!tiny && 'failed'}{' '}
+            </>
+          )}
+        </div>
+      </Tooltip>
+    )
+  }
+
+  const progressText = withText && !indeterminate && (
+    <h5 className={styles.progressText}>
+      {!tiny && 'processing'} {value}%
+    </h5>
+  )
+
   const renderProgressCircle = () => {
+    if (success || error) return renderResult()
     const classes = classNames(
       styles.circleProgress,
       indeterminate && styles.indeterminate,
@@ -45,13 +86,17 @@ const Progress = ({
     }
 
     return (
-      <svg ref={setCircleRef} className={classes}>
-        {renderCircle()}
-      </svg>
+      <>
+        {progressText}
+        <svg ref={setCircleRef} className={classes}>
+          {renderCircle()}
+        </svg>
+      </>
     )
   }
 
   const renderProgressLine = () => {
+    if (success || error) return renderResult()
     const classes = classNames(styles.lineProgress, className)
 
     const barClasses = classNames(
@@ -64,9 +109,12 @@ const Progress = ({
       width = { width: `${value}%` }
     }
     return (
-      <div className={classes} {...otherProps}>
-        <div className={barClasses} style={width} />
-      </div>
+      <>
+        {progressText}
+        <div className={classes} {...otherProps}>
+          <div className={barClasses} style={width} />
+        </div>
+      </>
     )
   }
 
@@ -76,8 +124,10 @@ const Progress = ({
 Progress.defaultProps = {
   className: '',
   variant: 'linear',
-  value: false,
+  value: 0,
   indeterminate: false,
+  successMessage: 'Completed',
+  errorMessage: 'Failed',
 }
 
 Progress.propTypes = {
@@ -89,6 +139,18 @@ Progress.propTypes = {
   value: propTypes.number,
   /** Indeterminate mode. */
   indeterminate: propTypes.bool,
+  /** With text above progress. For use with min-width 150px, otherwise using tiny prop. */
+  withText: propTypes.bool,
+  /** Determines if text with `processing` or not. */
+  tiny: propTypes.bool,
+  /** Determines if the action was done successfully. */
+  success: propTypes.bool,
+  /** Determines if the action fails. */
+  error: propTypes.bool,
+  /** Message to show when action fails.*/
+  errorMessage: propTypes.string,
+  /** Message to show when action succeeds.*/
+  successMessage: propTypes.string,
 }
 
 export default Progress
