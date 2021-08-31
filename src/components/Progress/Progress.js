@@ -32,13 +32,11 @@ const Progress = ({
         <div className={classes}>
           {success ? (
             <>
-              {' '}
-              <CheckCircleFilled /> {!tiny && 'done'}{' '}
+              <CheckCircleFilled /> {!tiny && 'done'}
             </>
           ) : (
             <>
-              {' '}
-              <TimesCircleFilled /> {!tiny && 'failed'}{' '}
+              <TimesCircleFilled /> {!tiny && 'failed'}
             </>
           )}
         </div>
