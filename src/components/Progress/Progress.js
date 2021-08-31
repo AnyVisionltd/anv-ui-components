@@ -7,7 +7,10 @@ import {
   Hourglass,
 } from '@anyvision/anv-icons'
 import { Tooltip } from '../Tooltip'
+import languageService from '../../services/language'
 import styles from './Progress.module.scss'
+
+const getTranslation = word => languageService.getTranslation(word)
 
 const Progress = ({
   value,
@@ -26,9 +29,9 @@ const Progress = ({
   const [circleRef, setCircleRef] = useState()
 
   const renderInQueue = () => (
-    <Tooltip content='In queue'>
+    <Tooltip content={getTranslation('inQueue')}>
       <div className={styles.inQueueContainer}>
-        <Hourglass /> {!tiny && 'in queue'}
+        <Hourglass /> {!tiny && getTranslation('inQueue')}
       </div>
     </Tooltip>
   )
@@ -45,11 +48,11 @@ const Progress = ({
         <div className={classes}>
           {success ? (
             <>
-              <CheckCircleFilled /> {!tiny && 'done'}
+              <CheckCircleFilled /> {!tiny && getTranslation('done')}
             </>
           ) : (
             <>
-              <TimesCircleFilled /> {!tiny && 'failed'}
+              <TimesCircleFilled /> {!tiny && getTranslation('failed')}
             </>
           )}
         </div>
@@ -59,7 +62,7 @@ const Progress = ({
 
   const progressText = withText && !indeterminate && (
     <h5 className={styles.progressText}>
-      {!tiny && 'processing'} {value}%
+      {!tiny && getTranslation('processing')} {value}%
     </h5>
   )
 
@@ -142,8 +145,8 @@ Progress.defaultProps = {
   variant: 'linear',
   value: 0,
   indeterminate: false,
-  successMessage: 'Completed',
-  errorMessage: 'Failed',
+  successMessage: getTranslation('completed'),
+  errorMessage: getTranslation('failed'),
   inQueue: false,
 }
 
