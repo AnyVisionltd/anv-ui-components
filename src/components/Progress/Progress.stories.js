@@ -87,7 +87,13 @@ export const Example = () => {
   }, [value])
 
   useEffect(() => {
-    if (index > 3) return
+    if (index > 3) {
+      setTimeout(() => {
+        setResults({})
+        setIndex(0)
+      }, 1500)
+      return
+    }
     const fetchUser = () => {
       return new Promise((resolve, reject) => {
         setTimeout(
