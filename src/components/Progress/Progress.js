@@ -1,12 +1,7 @@
 import React, { useState } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import {
-  CheckCircleFilled,
-  TimesCircleFilled,
-  Hourglass,
-} from '@anyvision/anv-icons'
-import { Tooltip } from '../Tooltip'
+import { ResultIndicator } from '../ResultIndicator'
 import languageService from '../../services/language'
 import styles from './Progress.module.scss'
 
@@ -28,38 +23,6 @@ const Progress = ({
 }) => {
   const [circleRef, setCircleRef] = useState()
 
-  const renderInQueue = () => (
-    <Tooltip content={getTranslation('inQueue')}>
-      <div className={styles.inQueueContainer}>
-        <Hourglass /> {!tiny && getTranslation('inQueue')}
-      </div>
-    </Tooltip>
-  )
-
-  const renderResult = () => {
-    const classes = classNames(
-      styles.resultContainer,
-      success && styles.success,
-      error && styles.error,
-    )
-
-    return (
-      <Tooltip content={success ? successMessage : errorMessage}>
-        <div className={classes}>
-          {success ? (
-            <>
-              <CheckCircleFilled /> {!tiny && getTranslation('done')}
-            </>
-          ) : (
-            <>
-              <TimesCircleFilled /> {!tiny && getTranslation('failed')}
-            </>
-          )}
-        </div>
-      </Tooltip>
-    )
-  }
-
   const progressText = withText && !indeterminate && (
     <h5 className={styles.progressText}>
       {!tiny && getTranslation('processing')} {value}%
@@ -67,7 +30,6 @@ const Progress = ({
   )
 
   const renderProgressCircle = () => {
-    if (success || error) return renderResult()
     const classes = classNames(
       styles.circleProgress,
       indeterminate && styles.indeterminate,
@@ -110,7 +72,6 @@ const Progress = ({
   }
 
   const renderProgressLine = () => {
-    if (success || error) return renderResult()
     const classes = classNames(styles.lineProgress, className)
 
     const barClasses = classNames(
@@ -132,12 +93,25 @@ const Progress = ({
     )
   }
 
+  const feedbackProps = {
+    tiny,
+    error,
+    success,
+    errorMessage,
+    successMessage,
+    inQueue,
+  }
+  const feedbackOptions = [error, success, inQueue].filter(Boolean)
   const variantsRender = {
     linear: renderProgressLine,
     circle: renderProgressCircle,
   }
 
-  return inQueue ? renderInQueue() : variantsRender[variant]()
+  return feedbackOptions.length ? (
+    <ResultIndicator {...feedbackProps} />
+  ) : (
+    variantsRender[variant]()
+  )
 }
 
 Progress.defaultProps = {
@@ -145,9 +119,6 @@ Progress.defaultProps = {
   variant: 'linear',
   value: 0,
   indeterminate: false,
-  successMessage: getTranslation('completed'),
-  errorMessage: getTranslation('failed'),
-  inQueue: false,
 }
 
 Progress.propTypes = {

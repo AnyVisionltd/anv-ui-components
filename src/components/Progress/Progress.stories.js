@@ -216,16 +216,3 @@ export const ExampleTiny = () => {
     </div>
   )
 }
-
-export const UserFeedbacks = () => (
-  <div style={containerStyle}>
-    <Progress error />
-    <Progress success />
-    <Progress inQueue />
-    <div style={{ display: 'flex' }}>
-      <Progress tiny error errorMessage='Fail' />
-      <Progress tiny success successMessage='Success' />
-      <Progress tiny inQueue />
-    </div>
-  </div>
-)
