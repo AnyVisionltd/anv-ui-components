@@ -82,7 +82,7 @@ export const Example = () => {
     const interval = setInterval(() => {
       setValue(value => value + 1)
       if (value >= 100) clearInterval(interval)
-    }, 300)
+    }, 40)
     return () => clearInterval(interval)
   }, [value])
 
@@ -113,6 +113,7 @@ export const Example = () => {
         setIndex(index + 1)
         setValue(0)
       })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index])
 
   const renderProgress = keyIndex => (
@@ -152,7 +153,7 @@ export const ExampleTiny = () => {
     const interval = setInterval(() => {
       setValue(value => value + 1)
       if (value >= 100) clearInterval(interval)
-    }, 300)
+    }, 40)
     return () => clearInterval(interval)
   }, [value])
 
@@ -183,6 +184,7 @@ export const ExampleTiny = () => {
         setIndex(index + 1)
         setValue(0)
       })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index])
 
   const renderTinyProgress = keyIndex => (
