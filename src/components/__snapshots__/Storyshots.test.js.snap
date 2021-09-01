@@ -9105,13 +9105,19 @@ exports[`Storyshots User Feedback/Progress Basic 1`] = `
           "alignItems": "center",
           "display": "flex",
           "flexDirection": "column",
-          "width": "50%",
+          "justifyContent": "center",
+          "width": "200px",
         }
       }
     >
-      <h2>
-        line
-      </h2>
+      <h5
+        className="progressText"
+      >
+        Processsing
+         
+        0
+        %
+      </h5>
       <div
         className="lineProgress"
       >
@@ -9124,12 +9130,117 @@ exports[`Storyshots User Feedback/Progress Basic 1`] = `
           }
         />
       </div>
-      <h2>
-        circle
-      </h2>
+      <h5
+        className="progressText"
+      >
+        Processsing
+         
+        0
+        %
+      </h5>
       <svg
         className="circleProgress"
       />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots User Feedback/Progress Example 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      style={
+        Object {
+          "alignItems": "start",
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "flexStart",
+          "width": "50%",
+        }
+      }
+    >
+      <h5
+        className="progressText"
+      >
+        Processsing
+         
+        0
+        %
+      </h5>
+      <div
+        className="lineProgress"
+        style={
+          Object {
+            "marginBottom": "16px",
+          }
+        }
+      >
+        <div
+          className="lineBar"
+          style={
+            Object {
+              "width": "0%",
+            }
+          }
+        />
+      </div>
+      <div
+        className="inQueueContainer childrenStyle"
+        onMouseEnter={[Function]}
+      >
+        <svg
+          height="1em"
+          viewBox="0 0 24 24"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M16.545 17.727h-.637v-1.061a3.182 3.182 0 00-.19-1.068.515.515 0 00-.023-.054 3.167 3.167 0 00-.423-.787l-.891-1.188a1.921 1.921 0 01-.382-1.146v-.642a1.922 1.922 0 01.559-1.35l.418-.418a3.147 3.147 0 00.889-1.806c0-.009.005-.016.005-.025v-.009a3.193 3.193 0 00.04-.409V6.273h.636a.636.636 0 000-1.273h-8.91a.636.636 0 100 1.273h.636v1.491a3.193 3.193 0 00.04.409v.009c0 .009 0 .016.005.025a3.147 3.147 0 00.891 1.806l.418.418a1.923 1.923 0 01.559 1.35v.643a1.923 1.923 0 01-.382 1.146l-.895 1.188a3.171 3.171 0 00-.423.787l-.023.053a3.184 3.184 0 00-.191 1.068v1.061h-.635a.636.636 0 000 1.273h8.909a.636.636 0 000-1.273zm-7-10.182V6.273h5.091v1.272zm.563 1.568a1.89 1.89 0 01-.24-.3h4.453a1.891 1.891 0 01-.24.3l-.418.418a3.157 3.157 0 00-.9 1.832h-1.336a3.157 3.157 0 00-.9-1.832zm.714 5.22a3.205 3.205 0 00.629-1.7h1.283a3.2 3.2 0 00.629 1.7l.636.849h-3.818zm3.818 3.394H9.545v-1.061a1.88 1.88 0 01.017-.212h5.056a1.88 1.88 0 01.017.212z"
+            data-name="End of tour"
+          />
+        </svg>
+         
+        In queue
+      </div>
+      <div
+        className="inQueueContainer childrenStyle"
+        onMouseEnter={[Function]}
+      >
+        <svg
+          height="1em"
+          viewBox="0 0 24 24"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M16.545 17.727h-.637v-1.061a3.182 3.182 0 00-.19-1.068.515.515 0 00-.023-.054 3.167 3.167 0 00-.423-.787l-.891-1.188a1.921 1.921 0 01-.382-1.146v-.642a1.922 1.922 0 01.559-1.35l.418-.418a3.147 3.147 0 00.889-1.806c0-.009.005-.016.005-.025v-.009a3.193 3.193 0 00.04-.409V6.273h.636a.636.636 0 000-1.273h-8.91a.636.636 0 100 1.273h.636v1.491a3.193 3.193 0 00.04.409v.009c0 .009 0 .016.005.025a3.147 3.147 0 00.891 1.806l.418.418a1.923 1.923 0 01.559 1.35v.643a1.923 1.923 0 01-.382 1.146l-.895 1.188a3.171 3.171 0 00-.423.787l-.023.053a3.184 3.184 0 00-.191 1.068v1.061h-.635a.636.636 0 000 1.273h8.909a.636.636 0 000-1.273zm-7-10.182V6.273h5.091v1.272zm.563 1.568a1.89 1.89 0 01-.24-.3h4.453a1.891 1.891 0 01-.24.3l-.418.418a3.157 3.157 0 00-.9 1.832h-1.336a3.157 3.157 0 00-.9-1.832zm.714 5.22a3.205 3.205 0 00.629-1.7h1.283a3.2 3.2 0 00.629 1.7l.636.849h-3.818zm3.818 3.394H9.545v-1.061a1.88 1.88 0 01.017-.212h5.056a1.88 1.88 0 01.017.212z"
+            data-name="End of tour"
+          />
+        </svg>
+         
+        In queue
+      </div>
+      <div
+        className="inQueueContainer childrenStyle"
+        onMouseEnter={[Function]}
+      >
+        <svg
+          height="1em"
+          viewBox="0 0 24 24"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M16.545 17.727h-.637v-1.061a3.182 3.182 0 00-.19-1.068.515.515 0 00-.023-.054 3.167 3.167 0 00-.423-.787l-.891-1.188a1.921 1.921 0 01-.382-1.146v-.642a1.922 1.922 0 01.559-1.35l.418-.418a3.147 3.147 0 00.889-1.806c0-.009.005-.016.005-.025v-.009a3.193 3.193 0 00.04-.409V6.273h.636a.636.636 0 000-1.273h-8.91a.636.636 0 100 1.273h.636v1.491a3.193 3.193 0 00.04.409v.009c0 .009 0 .016.005.025a3.147 3.147 0 00.891 1.806l.418.418a1.923 1.923 0 01.559 1.35v.643a1.923 1.923 0 01-.382 1.146l-.895 1.188a3.171 3.171 0 00-.423.787l-.023.053a3.184 3.184 0 00-.191 1.068v1.061h-.635a.636.636 0 000 1.273h8.909a.636.636 0 000-1.273zm-7-10.182V6.273h5.091v1.272zm.563 1.568a1.89 1.89 0 01-.24-.3h4.453a1.891 1.891 0 01-.24.3l-.418.418a3.157 3.157 0 00-.9 1.832h-1.336a3.157 3.157 0 00-.9-1.832zm.714 5.22a3.205 3.205 0 00.629-1.7h1.283a3.2 3.2 0 00.629 1.7l.636.849h-3.818zm3.818 3.394H9.545v-1.061a1.88 1.88 0 01.017-.212h5.056a1.88 1.88 0 01.017.212z"
+            data-name="End of tour"
+          />
+        </svg>
+         
+        In queue
+      </div>
     </div>
   </div>
 </div>
@@ -9146,11 +9257,19 @@ exports[`Storyshots User Feedback/Progress Indeterminate 1`] = `
           "alignItems": "center",
           "display": "flex",
           "flexDirection": "column",
+          "justifyContent": "center",
           "width": "50%",
         }
       }
     >
-      <h2>
+      <h2
+        style={
+          Object {
+            "marginTop": "10px",
+            "textTransform": "uppercase",
+          }
+        }
+      >
         line
       </h2>
       <div
@@ -9160,12 +9279,19 @@ exports[`Storyshots User Feedback/Progress Indeterminate 1`] = `
           className="lineBar indeterminate"
           style={
             Object {
-              "width": "false%",
+              "width": "0%",
             }
           }
         />
       </div>
-      <h2>
+      <h2
+        style={
+          Object {
+            "marginTop": "10px",
+            "textTransform": "uppercase",
+          }
+        }
+      >
         circle
       </h2>
       <svg
@@ -9176,21 +9302,194 @@ exports[`Storyshots User Feedback/Progress Indeterminate 1`] = `
 </div>
 `;
 
-exports[`Storyshots User Feedback/Progress Play Ground 1`] = `
+exports[`Storyshots User Feedback/Progress User Feedbacks 1`] = `
 <div>
   <div
     className="center"
   >
     <div
-      className="lineProgress"
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "center",
+          "width": "50%",
+        }
+      }
     >
       <div
-        className="lineBar"
+        className="resultContainer error childrenStyle"
+        onMouseEnter={[Function]}
+      >
+        <svg
+          data-name="times circle filled"
+          height="1em"
+          viewBox="0 0 24 24"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12.5 20A7.5 7.5 0 017.2 7.2a7.5 7.5 0 1110.6 10.6 7.444 7.444 0 01-5.3 2.2zm0-6.442l2.468 2.469a.789.789 0 00.3.183.755.755 0 00.234.037.742.742 0 00.529-.22.752.752 0 00.22-.53.744.744 0 00-.22-.529L13.56 12.5l2.468-2.469a.749.749 0 000-1.06.747.747 0 00-1.06 0l-2.468 2.47-2.47-2.469a.747.747 0 00-1.06 0 .754.754 0 000 1.06l2.47 2.468-2.47 2.47a.742.742 0 00-.218.529.747.747 0 00.749.75.742.742 0 00.529-.22l2.47-2.469z"
+            data-name="Subtraction 5"
+          />
+        </svg>
+         
+        Failed
+      </div>
+      <div
+        className="resultContainer success childrenStyle"
+        onMouseEnter={[Function]}
+      >
+        <svg
+          data-name="check circle filled"
+          height="1em"
+          viewBox="0 0 24 24"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 19.5a7.5 7.5 0 117.5-7.5 7.51 7.51 0 01-7.5 7.5zm-2.99-8.182a.908.908 0 00-.17.018.752.752 0 00-.314 1.3l1.76 1.771a.753.753 0 00.512.213h.021a.76.76 0 00.527-.213l3.75-3.75a.76.76 0 00.225-.533.753.753 0 00-1.281-.533l-3.221 3.227-1.236-1.242a.746.746 0 00-.571-.258z"
+            data-name="Subtraction 28"
+          />
+        </svg>
+         
+        Done
+      </div>
+      <div
+        className="inQueueContainer childrenStyle"
+        onMouseEnter={[Function]}
+      >
+        <svg
+          height="1em"
+          viewBox="0 0 24 24"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M16.545 17.727h-.637v-1.061a3.182 3.182 0 00-.19-1.068.515.515 0 00-.023-.054 3.167 3.167 0 00-.423-.787l-.891-1.188a1.921 1.921 0 01-.382-1.146v-.642a1.922 1.922 0 01.559-1.35l.418-.418a3.147 3.147 0 00.889-1.806c0-.009.005-.016.005-.025v-.009a3.193 3.193 0 00.04-.409V6.273h.636a.636.636 0 000-1.273h-8.91a.636.636 0 100 1.273h.636v1.491a3.193 3.193 0 00.04.409v.009c0 .009 0 .016.005.025a3.147 3.147 0 00.891 1.806l.418.418a1.923 1.923 0 01.559 1.35v.643a1.923 1.923 0 01-.382 1.146l-.895 1.188a3.171 3.171 0 00-.423.787l-.023.053a3.184 3.184 0 00-.191 1.068v1.061h-.635a.636.636 0 000 1.273h8.909a.636.636 0 000-1.273zm-7-10.182V6.273h5.091v1.272zm.563 1.568a1.89 1.89 0 01-.24-.3h4.453a1.891 1.891 0 01-.24.3l-.418.418a3.157 3.157 0 00-.9 1.832h-1.336a3.157 3.157 0 00-.9-1.832zm.714 5.22a3.205 3.205 0 00.629-1.7h1.283a3.2 3.2 0 00.629 1.7l.636.849h-3.818zm3.818 3.394H9.545v-1.061a1.88 1.88 0 01.017-.212h5.056a1.88 1.88 0 01.017.212z"
+            data-name="End of tour"
+          />
+        </svg>
+         
+        In queue
+      </div>
+      <div
         style={
           Object {
-            "width": "25%",
+            "display": "flex",
           }
         }
+      >
+        <div
+          className="resultContainer error childrenStyle"
+          onMouseEnter={[Function]}
+        >
+          <svg
+            data-name="times circle filled"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12.5 20A7.5 7.5 0 017.2 7.2a7.5 7.5 0 1110.6 10.6 7.444 7.444 0 01-5.3 2.2zm0-6.442l2.468 2.469a.789.789 0 00.3.183.755.755 0 00.234.037.742.742 0 00.529-.22.752.752 0 00.22-.53.744.744 0 00-.22-.529L13.56 12.5l2.468-2.469a.749.749 0 000-1.06.747.747 0 00-1.06 0l-2.468 2.47-2.47-2.469a.747.747 0 00-1.06 0 .754.754 0 000 1.06l2.47 2.468-2.47 2.47a.742.742 0 00-.218.529.747.747 0 00.749.75.742.742 0 00.529-.22l2.47-2.469z"
+              data-name="Subtraction 5"
+            />
+          </svg>
+           
+        </div>
+        <div
+          className="resultContainer success childrenStyle"
+          onMouseEnter={[Function]}
+        >
+          <svg
+            data-name="check circle filled"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 19.5a7.5 7.5 0 117.5-7.5 7.51 7.51 0 01-7.5 7.5zm-2.99-8.182a.908.908 0 00-.17.018.752.752 0 00-.314 1.3l1.76 1.771a.753.753 0 00.512.213h.021a.76.76 0 00.527-.213l3.75-3.75a.76.76 0 00.225-.533.753.753 0 00-1.281-.533l-3.221 3.227-1.236-1.242a.746.746 0 00-.571-.258z"
+              data-name="Subtraction 28"
+            />
+          </svg>
+           
+        </div>
+        <div
+          className="inQueueContainer childrenStyle"
+          onMouseEnter={[Function]}
+        >
+          <svg
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M16.545 17.727h-.637v-1.061a3.182 3.182 0 00-.19-1.068.515.515 0 00-.023-.054 3.167 3.167 0 00-.423-.787l-.891-1.188a1.921 1.921 0 01-.382-1.146v-.642a1.922 1.922 0 01.559-1.35l.418-.418a3.147 3.147 0 00.889-1.806c0-.009.005-.016.005-.025v-.009a3.193 3.193 0 00.04-.409V6.273h.636a.636.636 0 000-1.273h-8.91a.636.636 0 100 1.273h.636v1.491a3.193 3.193 0 00.04.409v.009c0 .009 0 .016.005.025a3.147 3.147 0 00.891 1.806l.418.418a1.923 1.923 0 01.559 1.35v.643a1.923 1.923 0 01-.382 1.146l-.895 1.188a3.171 3.171 0 00-.423.787l-.023.053a3.184 3.184 0 00-.191 1.068v1.061h-.635a.636.636 0 000 1.273h8.909a.636.636 0 000-1.273zm-7-10.182V6.273h5.091v1.272zm.563 1.568a1.89 1.89 0 01-.24-.3h4.453a1.891 1.891 0 01-.24.3l-.418.418a3.157 3.157 0 00-.9 1.832h-1.336a3.157 3.157 0 00-.9-1.832zm.714 5.22a3.205 3.205 0 00.629-1.7h1.283a3.2 3.2 0 00.629 1.7l.636.849h-3.818zm3.818 3.394H9.545v-1.061a1.88 1.88 0 01.017-.212h5.056a1.88 1.88 0 01.017.212z"
+              data-name="End of tour"
+            />
+          </svg>
+           
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots User Feedback/Progress Variants 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "center",
+          "width": "50%",
+        }
+      }
+    >
+      <h2
+        style={
+          Object {
+            "marginTop": "10px",
+            "textTransform": "uppercase",
+          }
+        }
+      >
+        line
+      </h2>
+      <div
+        className="lineProgress"
+      >
+        <div
+          className="lineBar"
+          style={
+            Object {
+              "width": "0%",
+            }
+          }
+        />
+      </div>
+      <h2
+        style={
+          Object {
+            "marginTop": "10px",
+            "textTransform": "uppercase",
+          }
+        }
+      >
+        circle
+      </h2>
+      <svg
+        className="circleProgress"
       />
     </div>
   </div>
