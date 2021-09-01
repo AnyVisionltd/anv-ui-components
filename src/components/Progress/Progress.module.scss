@@ -88,8 +88,8 @@
   border-radius: av-radius();
   padding: av-space(micro);
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: start;
+  justify-content: flex-start;
   transition: all 0.3s ease-in-out;
   text-transform: uppercase;
   @extend %av-subtitle1;
