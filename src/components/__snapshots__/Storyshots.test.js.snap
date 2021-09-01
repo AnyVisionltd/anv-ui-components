@@ -9406,7 +9406,63 @@ exports[`Storyshots User Feedback/Progress Indeterminate 1`] = `
 </div>
 `;
 
-exports[`Storyshots User Feedback/Progress User Feedbacks 1`] = `
+exports[`Storyshots User Feedback/Progress Variants 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "center",
+          "width": "50%",
+        }
+      }
+    >
+      <h2
+        style={
+          Object {
+            "marginTop": "10px",
+            "textTransform": "uppercase",
+          }
+        }
+      >
+        line
+      </h2>
+      <div
+        className="lineProgress"
+      >
+        <div
+          className="lineBar"
+          style={
+            Object {
+              "width": "0%",
+            }
+          }
+        />
+      </div>
+      <h2
+        style={
+          Object {
+            "marginTop": "10px",
+            "textTransform": "uppercase",
+          }
+        }
+      >
+        circle
+      </h2>
+      <svg
+        className="circleProgress"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots User Feedback/ResultIndicator Basic 1`] = `
 <div>
   <div
     className="center"
@@ -9539,62 +9595,6 @@ exports[`Storyshots User Feedback/Progress User Feedbacks 1`] = `
            
         </div>
       </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots User Feedback/Progress Variants 1`] = `
-<div>
-  <div
-    className="center"
-  >
-    <div
-      style={
-        Object {
-          "alignItems": "center",
-          "display": "flex",
-          "flexDirection": "column",
-          "justifyContent": "center",
-          "width": "50%",
-        }
-      }
-    >
-      <h2
-        style={
-          Object {
-            "marginTop": "10px",
-            "textTransform": "uppercase",
-          }
-        }
-      >
-        line
-      </h2>
-      <div
-        className="lineProgress"
-      >
-        <div
-          className="lineBar"
-          style={
-            Object {
-              "width": "0%",
-            }
-          }
-        />
-      </div>
-      <h2
-        style={
-          Object {
-            "marginTop": "10px",
-            "textTransform": "uppercase",
-          }
-        }
-      >
-        circle
-      </h2>
-      <svg
-        className="circleProgress"
-      />
     </div>
   </div>
 </div>
