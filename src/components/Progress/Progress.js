@@ -62,12 +62,9 @@ const Progress = ({
     }
 
     return (
-      <>
-        {progressText}
-        <svg ref={setCircleRef} className={classes}>
-          {renderCircle()}
-        </svg>
-      </>
+      <svg ref={setCircleRef} className={classes}>
+        {renderCircle()}
+      </svg>
     )
   }
 
@@ -84,12 +81,9 @@ const Progress = ({
       width = { width: `${value}%` }
     }
     return (
-      <>
-        {progressText}
-        <div className={classes} {...otherProps}>
-          <div className={barClasses} style={width} />
-        </div>
-      </>
+      <div className={classes} {...otherProps}>
+        <div className={barClasses} style={width} />
+      </div>
     )
   }
 
@@ -102,15 +96,14 @@ const Progress = ({
     inQueue,
   }
   const feedbackOptions = [error, success, inQueue].filter(Boolean)
-  const variantsRender = {
-    linear: renderProgressLine,
-    circle: renderProgressCircle,
-  }
 
   return feedbackOptions.length ? (
     <ResultIndicator {...feedbackProps} />
   ) : (
-    variantsRender[variant]()
+    <>
+      {progressText}
+      {variant === 'linear' ? renderProgressLine() : renderProgressCircle()}
+    </>
   )
 }
 

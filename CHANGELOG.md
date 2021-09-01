@@ -42,7 +42,7 @@
 - Added -webkit-auto-fill in InputBase
 - Added random id generator for menus' id and conditional rendering for Menu
 - Added tiny mode for progress and user feedback icons for success, error, in queue
-- Added random id suffix for portal's containerId
+- Added ResultIndicator for user feedback
 
 ## 1.0.0 - 06-09-2020
 
