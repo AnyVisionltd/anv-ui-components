@@ -48,9 +48,6 @@ const ProgressWithIndicator = ({
 
 ProgressWithIndicator.defaultProps = {
   className: '',
-  variant: 'linear',
-  value: 0,
-  indeterminate: false,
 }
 
 ProgressWithIndicator.propTypes = {
