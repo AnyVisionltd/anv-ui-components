@@ -1,0 +1,116 @@
+@import '~@anyvision/style-guide';
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+
+  .selectedContainer {
+    cursor: default;
+    outline: none;
+    position: relative;
+    border-radius: av-radius(tidy);
+    padding: av-space() av-space() 0;
+    height: av-size(sz-56);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border: 1px solid av-color(primary, av-opacity(disabled));
+
+    label {
+      text-transform: capitalize;
+      position: absolute;
+      top: 25%;
+      transform: translateY(-50%);
+      font-size: av-font-size(tiny);
+      transition: 0.2s ease;
+      color: av-color(content, av-opacity(disabled));
+      cursor: text;
+    }
+
+    .placeholder {
+      @extend %av-body1;
+      color: av-color(content, av-opacity(medium));
+    }
+
+    .selectedValues {
+      @extend %av-body1;
+      color: av-color(content);
+    }
+
+    .inputBase {
+      border: none;
+      font-family: inherit;
+      @extend %av-body1;
+      color: av-color(content);
+      padding: 0;
+      font-size: av-font-size();
+    }
+
+    .icons {
+      position: absolute;
+      top: 50%;
+      right: av-space();
+      transform: translateY(-50%);
+      display: flex;
+      justify-content: center;
+
+      > svg {
+        color: av-color(content);
+        cursor: pointer;
+        height: av-size(sz-16);
+        width: av-size(sz-16);
+        transition: all 0.3s linear;
+        fill: av-color(content);
+
+        &:not(:last-of-type) {
+          margin-right: av-space(micro);
+        }
+
+        &.rotated {
+          transform: rotate(180deg);
+        }
+      }
+    }
+
+    .multipleDelete {
+      font-family: inherit;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      display: flex;
+      background-color: av-color(primary);
+      padding: 2px av-space(tiny);
+      border-radius: av-radius(curvy);
+      font-size: av-font-size(micro);
+      color: av-color(purewhite);
+      margin-right: av-space(tiny);
+
+      span {
+        margin-left: av-space(micro);
+        font-size: av-font-size(tiny);
+        fill: av-color(purewhite);
+      }
+    }
+  }
+
+  .menuContainer {
+    width: 100%;
+    list-style: none;
+    list-style-type: none;
+    border-radius: av-radius(tidy);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid av-color(primary, av-opacity(disabled));
+    border-top: none;
+    transition: all 0.3s linear;
+  }
+}

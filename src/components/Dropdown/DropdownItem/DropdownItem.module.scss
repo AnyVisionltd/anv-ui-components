@@ -1,0 +1,39 @@
+@import '~@anyvision/style-guide';
+
+.menuItem {
+  cursor: pointer;
+  max-width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: av-space(tiny) av-space();
+  transition: all 0.3s linear;
+
+  p {
+    @extend %av-body1;
+    color: av-color(content);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &:not(:last-of-type) {
+    background-image: linear-gradient(
+      90deg,
+      av-color(purewhite) 0%,
+      av-color(content, av-opacity(divider))
+    );
+    border-image-slice: 1;
+    background-position: 50% 100%, 0% 0%;
+    background-repeat: no-repeat;
+    background-size: 95% 1px, 100% 100%;
+  }
+
+  &:hover {
+    background-color: av-color(primary, av-opacity(disabled));
+  }
+
+  &:active {
+    background-color: av-color(primary, av-opacity(disabled));
+  }
+}

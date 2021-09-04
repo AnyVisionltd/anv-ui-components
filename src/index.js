@@ -26,5 +26,6 @@ export { Banner } from './components/Banner'
 export { Progress } from './components/Progress'
 export { Tabs } from './components/Tabs'
 export { RangeSlider } from './components/RangeSlider'
+export { Dropdown } from './components/Dropdown'
 
 export { useFormProvider } from './components/FormProvider/useFormProvider'
