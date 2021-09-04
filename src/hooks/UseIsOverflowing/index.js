@@ -1,1 +1,1 @@
-export { default as UseIsOverflowing } from './UseIsOverflowing'
+export { default as useIsOverflowing } from './UseIsOverflowing'

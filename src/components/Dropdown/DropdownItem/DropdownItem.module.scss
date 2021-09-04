@@ -6,8 +6,10 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: av-space(tiny) av-space();
+  padding: av-space(micro) av-space();
   transition: all 0.3s linear;
+  // FIX= height of item is not fixed when using max-height for list
+  min-height: av-size(sz-48);
 
   p {
     @extend %av-body1;
@@ -20,20 +22,30 @@
   &:not(:last-of-type) {
     background-image: linear-gradient(
       90deg,
-      av-color(purewhite) 0%,
-      av-color(content, av-opacity(divider))
+      av-color(primary, av-opacity(disabled)) 0%,
+      av-color(primary, av-opacity(medium)) 20%,
+      av-color(primary, av-opacity(disabled)) 80%
     );
-    border-image-slice: 1;
-    background-position: 50% 100%, 0% 0%;
+    background-position: 50% 100%, 100% 100%;
     background-repeat: no-repeat;
-    background-size: 95% 1px, 100% 100%;
+    background-size: 90% 1px, 100% 100%;
   }
 
+  &:active,
   &:hover {
-    background-color: av-color(primary, av-opacity(disabled));
+    background-color: av-color(primary, av-opacity(divider));
   }
 
-  &:active {
+  &.isSelected {
     background-color: av-color(primary, av-opacity(disabled));
+    background-image: none;
+  }
+
+  &.isFocusedByKeyboard {
+    background-color: av-color(content, av-opacity(divider));
+  }
+
+  .checkbox {
+    min-width: av-size(sz-32);
   }
 }

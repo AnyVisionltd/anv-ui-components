@@ -7,27 +7,41 @@ import styles from './DropdownItem.module.scss'
 const DropdownItem = ({
   index,
   option,
-  isActive,
-  isActiveByKeyboard,
+  isFocusedByKeyboard,
   onClick,
-  onOptionHover,
   multiple,
-  isChosen,
+  isSelected,
+  menuRef,
 }) => {
-  const ref = useRef()
-  const classes = classNames(styles.menuItem, { [styles.isChosen]: isChosen })
+  const labelRef = useRef(null)
+  const classes = classNames(styles.menuItem, {
+    [styles.isSelected]: isSelected,
+    [styles.isFocusedByKeyboard]: isFocusedByKeyboard,
+  })
+
+  useEffect(() => {
+    const menu = menuRef?.current
+    const item = labelRef?.current
+    if (isFocusedByKeyboard && menu && item) {
+      menu.scrollTop =
+        item.offsetTop -
+        menu.offsetTop +
+        item.clientHeight -
+        (2 / 3) * menu.offsetHeight
+    }
+  }, [labelRef, menuRef, isFocusedByKeyboard])
 
   return (
-    <Tooltip content={option.value} show={useIsOverflowing(ref)}>
-      <li className={classes} ref={ref} onClick={onClick}>
+    <Tooltip content={option.value} show={useIsOverflowing(labelRef)}>
+      <li className={classes} onClick={onClick}>
         {multiple && (
           <Checkbox
-            checked={isChosen}
+            checked={isSelected}
             onClick={onClick}
             className={styles.checkbox}
           />
-        )}{' '}
-        <p>{option.value}</p>
+        )}
+        <p ref={labelRef}>{option.value}</p>
       </li>
     </Tooltip>
   )

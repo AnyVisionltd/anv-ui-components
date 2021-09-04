@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useLayoutEffect } from 'react'
 
 function checkOverflow(element) {
-  console.log(element)
   if (!element) {
     return false
   }
@@ -16,14 +15,12 @@ function checkOverflow(element) {
 }
 
 function useIsOverflowing(ref) {
-  const [nodeRef, setNodeRef] = useState(ref.current)
-  const [isOverflowing, setIsOverflowing] = useState()
+  const [isOverflowing, setIsOverflowing] = useState(checkOverflow(ref.current))
 
-  useEffect(() => {
-    if (!ref.current || nodeRef) return
-    setNodeRef(ref.current)
+  useLayoutEffect(() => {
+    if (!ref.current || isOverflowing) return
     setIsOverflowing(checkOverflow(ref.current))
-  }, [ref, nodeRef])
+  }, [ref, isOverflowing])
 
   return isOverflowing
 }
