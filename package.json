@@ -16,6 +16,9 @@
   "dependencies": {
     "@anyvision/anv-icons": "1.0.0-beta.8",
     "@anyvision/style-guide": "1.0.4-beta.9",
+    "@date-io/moment": "^1.3.13",
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/pickers": "^3.3.10",
     "@popperjs/core": "^2.6.0",
     "classnames": "^2.2.6",
     "jest-environment-jsdom-sixteen": "^1.0.3",
