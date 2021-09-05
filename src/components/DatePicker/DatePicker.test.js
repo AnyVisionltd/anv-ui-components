@@ -1,5 +1,6 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
+import moment from 'moment'
 import DatePicker from './DatePicker'
 
 describe('<DatePicker />', () => {
@@ -12,8 +13,8 @@ describe('<DatePicker />', () => {
     const handleOnChange = jest.fn()
     const { getByRole } = render(<DatePicker onChange={handleOnChange} />)
     const input = getByRole('textbox')
-    fireEvent.change(input, { target: { value: '10/10/2010' } })
+    fireEvent.change(input, { target: { value: new Date() } })
     expect(handleOnChange).toBeCalled()
-    expect(input.value).toBe('10/10/2010')
+    expect(input.value).toBe(moment().format('DD/MM/yyyy'))
   })
 })

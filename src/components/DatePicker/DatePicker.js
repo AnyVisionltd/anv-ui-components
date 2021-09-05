@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+import classNames from 'classnames'
 import MomentUtils from '@date-io/moment'
 import {
   MuiPickersUtilsProvider,
@@ -13,14 +14,22 @@ import { TextField } from '../TextField'
 import { IconButton } from '../IconButton'
 import './DatePicker.scss'
 
-const DatePicker = props => {
+const DatePicker = ({
+  onChange,
+  disabled,
+  disablePast,
+  disableFuture,
+  format,
+  maxDate,
+  minDate,
+  label,
+  defaultValue,
+}) => {
   const textFieldRef = useRef()
   const [isOpen, setIsOpen] = useState(false)
   const [isFocus, setIsFocus] = useState(false)
   const [date, setDate] = useState(
-    props.defaultValue
-      ? moment(props.defaultValue).format(props.format)
-      : moment().format(props.format),
+    defaultValue ? moment(defaultValue).format(format) : new Date(),
   )
 
   /**
@@ -43,10 +52,8 @@ const DatePicker = props => {
     <TextField
       trailingIcon={
         <IconButton
-          className='bt-datepicker-icon'
-          onClick={() =>
-            !props.readOnly && !props.disabled && setIsOpen(prev => !prev)
-          }
+          className={classNames('bt-datepicker-icon', { disabled })}
+          onClick={() => !props.disabled && setIsOpen(prev => !prev)}
           size='medium'
         >
           <Calendar />
@@ -77,7 +84,7 @@ const DatePicker = props => {
    */
   const handleDateChange = useCallback(date => {
     setDate(date)
-    props.onDateChange && props.onDateChange(moment(date).format(props.format))
+    onChange && onChange(moment(date).format(format))
   })
 
   /**
@@ -94,7 +101,8 @@ const DatePicker = props => {
       <ThemeProvider theme={theme}>
         <KeyboardDatePicker
           autoOk
-          format={props.format}
+          format={'DD/MM/yyyy'}
+          label={label}
           value={date}
           onChange={handleDateChange}
           TextFieldComponent={renderInput}
@@ -103,11 +111,16 @@ const DatePicker = props => {
           variant='inline'
           open={isOpen}
           onClose={handleCloseDatePicker}
+          disabled={disabled}
+          disablePast={disablePast}
+          disableFuture={disableFuture}
+          format={format}
+          maxDate={maxDate}
+          minDate={minDate}
           PopoverProps={{
             anchorEl: () => textFieldRef.current,
             anchorOrigin: { horizontal: 138, vertical: 48 },
           }}
-          {...props}
         />
       </ThemeProvider>
     </MuiPickersUtilsProvider>
@@ -117,9 +130,9 @@ const DatePicker = props => {
 DatePicker.propTypes = {
   /** If true, the input will be disabled. */
   disabled: PropTypes.bool,
-  /** If true, the you won't be able to chose past dates. */
+  /** If true, you won't be able to choose past dates. */
   disablePast: PropTypes.bool,
-  /** If true, the you won't be able to chose future dates. */
+  /** If true, you won't be able to choose future dates. */
   disableFuture: PropTypes.bool,
   /** Date format. */
   format: PropTypes.string,
@@ -138,7 +151,7 @@ DatePicker.propTypes = {
   /**
    * Callback when date change
    */
-  onDateChange: PropTypes.func,
+  onChange: PropTypes.func,
   /**
    * TextField label
    */
@@ -150,7 +163,7 @@ DatePicker.defaultProps = {
   disableFuture: false,
   disablePast: false,
   format: 'DD/MM/yyyy',
-  onDateChange: () => {},
+  onChange: () => {},
   label: 'Date',
 }
 
