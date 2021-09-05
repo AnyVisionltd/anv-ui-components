@@ -6,6 +6,8 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers'
+import { createTheme } from '@material-ui/core/styles'
+import { ThemeProvider } from '@material-ui/styles'
 import { Calendar } from '@anyvision/anv-icons'
 import { TextField } from '../TextField'
 import { IconButton } from '../IconButton'
@@ -15,7 +17,9 @@ const DatePicker = props => {
   const textFieldRef = useRef()
   const [isOpen, setIsOpen] = useState(false)
   const [isFocus, setIsFocus] = useState(false)
-  const [date, setDate] = useState(props.defaultValue || new Date())
+  const [date, setDate] = useState(
+    moment(props.defaultValue).format(props.format) || new Date(),
+  )
 
   useEffect(() => {
     if (isFocus) {
@@ -31,7 +35,7 @@ const DatePicker = props => {
     <TextField
       trailingIcon={
         <IconButton
-          className='abx-datepicker-icon'
+          className='bt-datepicker-icon'
           onClick={() =>
             !props.readOnly && !props.disabled && setIsOpen(prev => !prev)
           }
@@ -62,9 +66,15 @@ const DatePicker = props => {
     props.onDateChange && props.onDateChange(moment(date).format(props.format))
   })
 
+  const theme = createTheme({
+    typography: {
+      fontFamily: ['Poppins'],
+    },
+  })
+
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
-      <div className='abx-date-picker'>
+      <ThemeProvider theme={theme}>
         <KeyboardDatePicker
           autoOk
           format={props.format}
@@ -82,7 +92,7 @@ const DatePicker = props => {
           }}
           {...props}
         />
-      </div>
+      </ThemeProvider>
     </MuiPickersUtilsProvider>
   )
 }
