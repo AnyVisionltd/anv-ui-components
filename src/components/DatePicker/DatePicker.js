@@ -18,9 +18,14 @@ const DatePicker = props => {
   const [isOpen, setIsOpen] = useState(false)
   const [isFocus, setIsFocus] = useState(false)
   const [date, setDate] = useState(
-    moment(props.defaultValue).format(props.format) || new Date(),
+    props.defaultValue
+      ? moment(props.defaultValue).format(props.format)
+      : moment().format(props.format),
   )
 
+  /**
+   * Keeps the input on focus on the first _ char.
+   */
   useEffect(() => {
     if (isFocus) {
       textFieldRef.current.focus()
@@ -31,6 +36,9 @@ const DatePicker = props => {
     }
   }, [textFieldRef, date, isFocus])
 
+  /**
+   * Render custom input - TextField
+   */
   const renderInput = props => (
     <TextField
       trailingIcon={
@@ -44,7 +52,7 @@ const DatePicker = props => {
           <Calendar />
         </IconButton>
       }
-      label='Date'
+      label={props.label}
       onClick={props.onClick}
       defaultValue={props.value}
       value={props.value}
@@ -56,16 +64,25 @@ const DatePicker = props => {
     />
   )
 
+  /**
+   * on close datepicker dialog - close & remove focus from input
+   */
   const handleCloseDatePicker = () => {
     setIsOpen(false)
     setIsFocus(false)
   }
 
+  /**
+   * change date & fire onChange event
+   */
   const handleDateChange = useCallback(date => {
     setDate(date)
     props.onDateChange && props.onDateChange(moment(date).format(props.format))
   })
 
+  /**
+   * Override material ui theme
+   */
   const theme = createTheme({
     typography: {
       fontFamily: ['Poppins'],
@@ -122,6 +139,10 @@ DatePicker.propTypes = {
    * Callback when date change
    */
   onDateChange: PropTypes.func,
+  /**
+   * TextField label
+   */
+  label: PropTypes.string,
 }
 
 DatePicker.defaultProps = {
@@ -130,6 +151,7 @@ DatePicker.defaultProps = {
   disablePast: false,
   format: 'DD/MM/yyyy',
   onDateChange: () => {},
+  label: 'Date',
 }
 
 export default DatePicker
