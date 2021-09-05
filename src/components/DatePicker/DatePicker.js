@@ -1,22 +1,21 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect, useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 import MomentUtils from '@date-io/moment'
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers'
-import { TextField } from '../TextField'
 import { Calendar } from '@anyvision/anv-icons'
-import './DatePicker.scss'
+import { TextField } from '../TextField'
 import { IconButton } from '../IconButton'
+import './DatePicker.scss'
 
 const DatePicker = props => {
   const textFieldRef = useRef()
   const [isOpen, setIsOpen] = useState(false)
   const [isFocus, setIsFocus] = useState(false)
-  const [selectedDate, handleDateChange] = useState(
-    props.defaultValue || new Date(),
-  )
+  const [date, setDate] = useState(props.defaultValue || new Date())
 
   useEffect(() => {
     if (isFocus) {
@@ -26,7 +25,7 @@ const DatePicker = props => {
         .findIndex(char => char === '_')
       textFieldRef.current.setSelectionRange(pos, pos)
     }
-  }, [textFieldRef, selectedDate, isFocus])
+  }, [textFieldRef, date, isFocus])
 
   const renderInput = props => (
     <TextField
@@ -58,14 +57,19 @@ const DatePicker = props => {
     setIsFocus(false)
   }
 
+  const handleDateChange = useCallback(date => {
+    setDate(date)
+    props.onDateChange && props.onDateChange(moment(date).format(props.format))
+  })
+
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <div className='abx-date-picker'>
         <KeyboardDatePicker
           autoOk
           format={props.format}
-          value={selectedDate}
-          onChange={date => handleDateChange(date)}
+          value={date}
+          onChange={handleDateChange}
           TextFieldComponent={renderInput}
           okLabel={null}
           cancelLabel={null}
@@ -104,6 +108,10 @@ DatePicker.propTypes = {
    * Min selectable date.
    */
   minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  /**
+   * Callback when date change
+   */
+  onDateChange: PropTypes.func,
 }
 
 DatePicker.defaultProps = {
@@ -111,6 +119,7 @@ DatePicker.defaultProps = {
   disableFuture: false,
   disablePast: false,
   format: 'DD/MM/yyyy',
+  onDateChange: () => {},
 }
 
 export default DatePicker
