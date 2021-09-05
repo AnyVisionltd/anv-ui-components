@@ -13,7 +13,7 @@ export const Basic = () => {
   const [value, setValue] = useState(moment().format('DD/MM/yyyy'))
   return (
     <div>
-      <DatePicker onDateChange={setValue} />
+      <DatePicker onChange={setValue} />
       <p>Selected date: {value}</p>
     </div>
   )
