@@ -14,7 +14,7 @@ export const Basic = () => {
   return (
     <div>
       <DatePicker onDateChange={setValue} />
-      <p>Selected date: {JSON.stringify(value)}</p>
+      <p>Selected date: {value}</p>
     </div>
   )
 }
