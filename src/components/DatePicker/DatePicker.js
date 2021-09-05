@@ -85,7 +85,7 @@ const DatePicker = ({
   const handleDateChange = useCallback(date => {
     setDate(date)
     onChange && onChange(moment(date).format(format))
-  })
+  }, [])
 
   /**
    * Override material ui theme
@@ -101,7 +101,6 @@ const DatePicker = ({
       <ThemeProvider theme={theme}>
         <KeyboardDatePicker
           autoOk
-          format={'DD/MM/yyyy'}
           label={label}
           value={date}
           onChange={handleDateChange}
