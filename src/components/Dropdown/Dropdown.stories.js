@@ -37,12 +37,12 @@ const cameras = [
 
 export const Basic = () => (
   <div style={containerStyle}>
-    <Dropdown options={items} multiple label='Fruits' />
+    <Dropdown options={cameras} label='Cameras' defaultValues={[cameras[0]]} />
   </div>
 )
 
-export const NotMulti = () => (
+export const Multiple = () => (
   <div style={containerStyle}>
-    <Dropdown options={cameras} label='Cameras' defaultValues={[cameras[0]]} />
+    <Dropdown options={items} multiple label='Fruits' />
   </div>
 )

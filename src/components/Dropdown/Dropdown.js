@@ -218,9 +218,8 @@ const Dropdown = ({
               ref={inputRef}
               style={{ width: determineInputWidth() }}
               onKeyPress={() =>
-                (inputRef.current.style.width = `${
-                  filteredValue.length + 10
-                }ch`)
+                multiple &&
+                (inputRef.current.style.width = `${filteredValue.length + 5}ch`)
               }
             />
           )}
