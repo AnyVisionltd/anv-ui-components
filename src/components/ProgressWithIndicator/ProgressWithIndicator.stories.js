@@ -157,7 +157,7 @@ export const ExampleTiny = () => {
   const renderTinyProgress = keyIndex => (
     <ProgressWithIndicator
       key={keyIndex}
-      tiny
+      isTiny
       value={value}
       errorMessage={results[keyIndex]?.message}
       successMessage={results[keyIndex]?.message}

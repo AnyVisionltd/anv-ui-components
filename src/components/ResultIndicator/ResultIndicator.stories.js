@@ -23,9 +23,9 @@ export const Basic = () => {
       <ResultIndicator success />
       <ResultIndicator inQueue />
       <div style={{ display: 'flex' }}>
-        <ResultIndicator tiny error errorMessage='Fail' />
-        <ResultIndicator tiny success successMessage='Success' />
-        <ResultIndicator tiny inQueue />
+        <ResultIndicator isTiny error errorMessage='Fail' />
+        <ResultIndicator isTiny success successMessage='Success' />
+        <ResultIndicator isTiny inQueue />
       </div>
     </div>
   )

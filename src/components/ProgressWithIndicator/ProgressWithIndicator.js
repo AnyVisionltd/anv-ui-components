@@ -11,7 +11,7 @@ const ProgressWithIndicator = ({
   value,
   variant,
   className,
-  tiny,
+  isTiny,
   success,
   error,
   errorMessage,
@@ -21,7 +21,7 @@ const ProgressWithIndicator = ({
 }) => {
   const progressProps = { value, variant, className, ...otherProps }
   const feedbackProps = {
-    tiny,
+    isTiny,
     error,
     success,
     errorMessage,
@@ -32,7 +32,7 @@ const ProgressWithIndicator = ({
 
   const progressText = (
     <h5 className={styles.progressText}>
-      {!tiny && getTranslation('processing')} {value}%
+      {!isTiny && getTranslation('processing')} {value}%
     </h5>
   )
 
@@ -58,7 +58,7 @@ ProgressWithIndicator.propTypes = {
   /** Progress value between - <code>0-100</code>. */
   value: propTypes.number,
   /** Determines if text with `processing` or not. */
-  tiny: propTypes.bool,
+  isTiny: propTypes.bool,
   /** Determines if the action was done successfully. */
   success: propTypes.bool,
   /** Determines if the action fails. */

@@ -13,7 +13,7 @@ import styles from './ResultIndicator.module.scss'
 const getTranslation = word => languageService.getTranslation(word)
 
 const ResultIndicator = ({
-  tiny,
+  isTiny,
   error,
   success,
   errorMessage,
@@ -23,7 +23,7 @@ const ResultIndicator = ({
   const renderInQueue = () => (
     <Tooltip content={getTranslation('inQueue')}>
       <div className={styles.inQueueContainer}>
-        <Hourglass /> {!tiny && getTranslation('inQueue')}
+        <Hourglass /> {!isTiny && getTranslation('inQueue')}
       </div>
     </Tooltip>
   )
@@ -40,11 +40,11 @@ const ResultIndicator = ({
         <div className={classes}>
           {success ? (
             <>
-              <CheckCircleFilled /> {!tiny && getTranslation('done')}
+              <CheckCircleFilled /> {!isTiny && getTranslation('done')}
             </>
           ) : (
             <>
-              <TimesCircleFilled /> {!tiny && getTranslation('failed')}
+              <TimesCircleFilled /> {!isTiny && getTranslation('failed')}
             </>
           )}
         </div>
@@ -65,7 +65,7 @@ ResultIndicator.propTypes = {
   /** For css customization. */
   className: propTypes.string,
   /** Determines if text with `processing` or not. */
-  tiny: propTypes.bool,
+  isTiny: propTypes.bool,
   /** Determines if the action was done successfully. */
   success: propTypes.bool,
   /** Determines if the action fails. */
