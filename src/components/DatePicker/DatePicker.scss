@@ -1,0 +1,46 @@
+@import '~@anyvision/style-guide';
+@import '../../styles/mixin/ripple';
+
+// top toolbar
+.MuiToolbar-root.MuiToolbar-regular.MuiPickersToolbar-toolbar.MuiPickersDatePickerRoot-toolbar.MuiToolbar-gutters {
+  background-color: av-color(primary);
+}
+
+// hover toolbar label
+.MuiButtonBase-root.MuiButton-root.MuiButton-text.MuiPickersToolbarButton-toolbarBtn {
+  padding: 0.2rem 0.5rem;
+  &:hover {
+    background-color: av-color(purewhite, av-opacity(divider));
+  }
+}
+
+// year selected
+.MuiTypography-root.MuiPickersYear-root.MuiPickersYear-yearSelected.MuiTypography-h5.MuiTypography-colorPrimary {
+  color: av-color(primary);
+}
+
+// day selected bg
+.MuiButtonBase-root.MuiIconButton-root.MuiPickersDay-day.MuiPickersDay-daySelected {
+  background-color: av-color(primary);
+  &.MuiPickersDay-current {
+    color: av-color(purewhite);
+  }
+}
+
+// day selected label
+.MuiButtonBase-root.MuiIconButton-root.MuiPickersDay-day.MuiPickersDay-current {
+  color: av-color(primary);
+}
+
+// calendar days
+.MuiButtonBase-root.MuiIconButton-root.MuiPickersDay-day {
+  &:hover {
+    background-color: av-color(primary, av-opacity(divider));
+  }
+}
+
+.abx-datepicker-icon {
+  border-radius: 50%;
+  color: av-color(content);
+  background-color: av-color(content, av-opacity(divider));
+}
