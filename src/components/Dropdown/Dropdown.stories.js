@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import Dropdown from './Dropdown'
 
@@ -30,19 +30,33 @@ const items = [
   { value: 'Kiwi', id: 12 },
 ]
 
-const cameras = [
-  { value: 'Automatic', id: 1 },
-  { value: 'pipeeng-1-21-312-31-23-12321312-32123123' },
+const genders = [
+  { value: 'Male', id: 1 },
+  { value: 'Female', id: 2 },
 ]
 
 export const Basic = () => (
   <div style={containerStyle}>
-    <Dropdown options={cameras} label='Cameras' defaultValues={[cameras[0]]} />
+    <Dropdown options={genders} label='Gender' defaultValues={[genders[0]]} />
   </div>
 )
 
-export const Multiple = () => (
-  <div style={containerStyle}>
-    <Dropdown options={items} multiple label='Fruits' />
-  </div>
-)
+export const Multiple = () => {
+  const [values, setValues] = useState([])
+
+  const handleChange = newValues => {
+    console.log(newValues)
+    setValues(newValues)
+  }
+
+  return (
+    <div style={containerStyle}>
+      <Dropdown
+        options={items}
+        multiple
+        label='Fruits'
+        onChange={handleChange}
+      />
+    </div>
+  )
+}

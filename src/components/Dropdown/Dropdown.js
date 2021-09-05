@@ -5,6 +5,7 @@ import { ArrowUp, TimesThick } from '@anyvision/anv-icons'
 import keymap from '../../utils/enums/keymap'
 import { InputBase } from '../../index'
 import { DropdownItem } from './DropdownItem'
+import { EmptyDropdownMenu } from './EmptyDropdownMenu'
 import { useClickOutsideListener } from '../../hooks'
 import styles from './Dropdown.module.scss'
 
@@ -21,6 +22,8 @@ const Dropdown = ({
   onMenuOpen,
   onMenuClose,
   multiple,
+  maxItems,
+  noOptionsMessage,
 }) => {
   const [isTypeMode, setIsTypeMode] = useState(false)
   const [filteredValue, setFilteredValue] = useState('')
@@ -31,20 +34,39 @@ const Dropdown = ({
   const containerRef = useRef(null)
   const menuRef = useRef(null)
   const inputRef = useRef(null)
+  const valuesContainerRef = useRef(null)
+
+  const openMenu = () => {
+    if (showMenu) return
+    setShowMenu(true)
+    onMenuOpen()
+  }
 
   const closeMenu = () => {
-    showMenu && setShowMenu(false)
+    if (!showMenu) return
+    setShowMenu(false)
+    setShownOptions([...options])
     onMenuClose()
   }
+
+  const toggleMenu = () => (showMenu ? closeMenu() : openMenu())
+
   const getIntoTypeMode = () => {
     setIsTypeMode(true)
-    setShowMenu(true)
+    openMenu()
   }
+
   const getOffTypeMode = () => {
     isTypeMode && setIsTypeMode(false)
     filteredValue.length && setFilteredValue('')
   }
+
   const resetFocusedOptionIndex = () => setFocusedOptionIndex(-1)
+
+  const resetFilteredValue = () => {
+    setFilteredValue('')
+    setShownOptions([...options])
+  }
 
   useClickOutsideListener(() => {
     closeMenu()
@@ -84,22 +106,26 @@ const Dropdown = ({
 
   const handleItemClick = clickedOption => {
     if (!clickedOption) return
-    // if multiple and if not multiple
-    const { id } = clickedOption
-    const isFoundInDropdown = selectedOptions.find(option => option.id === id)
+    const { [keyValue]: key } = clickedOption
+    const isFoundInDropdown = selectedOptions.find(
+      option => option[keyValue] === key,
+    )
+    let newOptions
     if (multiple) {
       if (isFoundInDropdown) {
-        setSelectedOptions(selectedOptions.filter(option => option.id !== id))
+        newOptions = selectedOptions.filter(option => option[keyValue] !== key)
       } else {
-        setSelectedOptions([...selectedOptions, clickedOption])
+        newOptions = [...selectedOptions, clickedOption]
       }
     } else {
       if (isFoundInDropdown) {
-        setSelectedOptions([])
+        newOptions = []
       } else {
-        setSelectedOptions([clickedOption])
+        newOptions = [clickedOption]
       }
     }
+    setSelectedOptions(newOptions)
+    onChange(newOptions)
 
     if (!multiple) {
       getOffTypeMode()
@@ -108,12 +134,19 @@ const Dropdown = ({
       resetFocusedOptionIndex()
     }
     !multiple && getOffTypeMode()
-    // setShownOptions(options)
   }
 
   const handleRemoveOption = optionIndex => {
-    selectedOptions.splice(optionIndex, 1)
-    setSelectedOptions([...selectedOptions])
+    const newOptions = [...selectedOptions]
+    newOptions.splice(optionIndex, 1)
+    setSelectedOptions([...newOptions])
+    onChange(newOptions)
+  }
+
+  const popLastValue = () => {
+    const newOptions = selectedOptions.slice(0, selectedOptions.length - 1)
+    setSelectedOptions(newOptions)
+    onChange(newOptions)
   }
 
   const selectOption = optionIndex => handleItemClick(shownOptions[optionIndex])
@@ -122,11 +155,18 @@ const Dropdown = ({
     switch (e.keyCode) {
       case keymap.ENTER:
         selectOption(focusedOptionIndex)
+        resetFilteredValue()
         break
       case keymap.ESCAPE:
         closeMenu()
         getOffTypeMode()
         resetFocusedOptionIndex()
+        break
+      case keymap.BACKSPACE:
+        if (filteredValue) return
+        if (multiple && selectedOptions.length) {
+          popLastValue()
+        }
         break
       case keymap.ARROW_UP:
         focusOption('up')
@@ -150,9 +190,8 @@ const Dropdown = ({
       )
     }
 
-    let content
     if (multiple) {
-      content = selectedOptions.map(({ value }, index) => (
+      return selectedOptions.map(({ value }, index) => (
         <button
           className={styles.selectedItem}
           key={index}
@@ -165,22 +204,20 @@ const Dropdown = ({
         </button>
       ))
     } else {
-      content = selectedOptions[0].value
+      return (
+        <p className={styles.selectedValue} onClick={getIntoTypeMode}>
+          {selectedOptions[0][displayValue]}
+        </p>
+      )
     }
-
-    return (
-      <div className={styles.selectedValues} onClick={getIntoTypeMode}>
-        {content}
-      </div>
-    )
   }
 
   const renderDeleteButton = () => (
     <button
-      className={styles.multipleDelete}
+      className={styles.deleteButton}
       onClick={() => setSelectedOptions([])}
     >
-      {selectedOptions.length}{' '}
+      {selectedOptions.length}
       <span>
         <TimesThick />
       </span>
@@ -195,67 +232,79 @@ const Dropdown = ({
   }
 
   const determineInputWidth = () => {
-    if (!multiple) return '240px'
-    return selectedOptions.length === 0 ? '240px' : ''
+    const containerWidth = valuesContainerRef.current.offsetWidth
+    if (!multiple) return `${containerWidth}px`
+    return selectedOptions.length === 0 ? `${containerWidth}px` : ''
   }
 
   const renderHeaderContainer = () => {
     return (
       <div className={styles.selectedContainer} onKeyDown={handleKeyDown}>
         <label>{label}</label>
-        {selectedOptions.length > 0 && multiple && renderDeleteButton()}
-        <div className={styles.valuesContainer} onClick={getIntoTypeMode}>
-          {renderValues()}
-          {isTypeMode && (
-            <InputBase
-              autoFocus
-              value={filteredValue}
-              onChange={handleFilterChange}
-              className={styles.inputBase}
-              onBlur={getOffTypeMode}
-              onKeyDown={handleKeyDown}
-              placeholder={determineInputPlaceholder()}
-              ref={inputRef}
-              style={{ width: determineInputWidth() }}
-              onKeyPress={() =>
-                multiple &&
-                (inputRef.current.style.width = `${filteredValue.length + 5}ch`)
-              }
-            />
-          )}
+        <div
+          className={styles.selectedContentContainer}
+          onClick={getIntoTypeMode}
+        >
+          {selectedOptions.length > 0 && multiple && renderDeleteButton()}
+          <div className={styles.valuesContainer} ref={valuesContainerRef}>
+            {renderValues()}
+            {isTypeMode && (
+              <InputBase
+                autoFocus
+                value={filteredValue}
+                onChange={handleFilterChange}
+                className={styles.inputBase}
+                onBlur={getOffTypeMode}
+                onKeyDown={handleKeyDown}
+                placeholder={determineInputPlaceholder()}
+                ref={inputRef}
+                style={{ width: determineInputWidth() }}
+                onKeyPress={() =>
+                  multiple &&
+                  (inputRef.current.style.width = `${
+                    filteredValue.length + 5
+                  }ch`)
+                }
+              />
+            )}
+          </div>
         </div>
         <div className={styles.icons}>
           <ArrowUp
             className={classNames({ [styles.rotated]: showMenu })}
-            onClick={() => setShowMenu(!showMenu)}
+            onClick={toggleMenu}
           />
         </div>
       </div>
     )
   }
 
-  const renderOptions = () => {
-    // Like monday combobox option
-    // Add handle key press for the edit.
-    return (
-      <ul className={styles.menuContainer} ref={menuRef}>
-        {shownOptions.map((option, index) => (
+  const renderOptions = () => (
+    <ul className={styles.menuContainer} ref={menuRef}>
+      {!shownOptions.length ? (
+        <EmptyDropdownMenu
+          noOptionsMessage={noOptionsMessage}
+          searchValue={filteredValue}
+        />
+      ) : (
+        shownOptions.map((option, index) => (
           <DropdownItem
             option={option}
+            displayValue={displayValue}
+            disabled={option.disabled === true}
             multiple={multiple}
-            key={option.id}
+            key={option[keyValue]}
             onClick={() => handleItemClick(option)}
             isSelected={selectedOptions.some(
-              selected => selected.id === option.id,
+              selected => selected[keyValue] === option[keyValue],
             )}
             isFocusedByKeyboard={isTypeMode && index === focusedOptionIndex}
-            index={index}
             menuRef={menuRef}
           />
-        ))}
-      </ul>
-    )
-  }
+        ))
+      )}
+    </ul>
+  )
 
   return (
     <div className={classNames(styles.container, className)} ref={containerRef}>
@@ -274,6 +323,7 @@ Dropdown.defaultProps = {
   keyValue: 'id',
   onMenuClose: () => {},
   onMenuOpen: () => {},
+  onChange: () => {},
 }
 
 Dropdown.propTypes = {
@@ -288,7 +338,7 @@ Dropdown.propTypes = {
   /** Set if multi selection is enabled. */
   multiple: propTypes.bool,
   /** Set max number of items to choose, if used, set multiple to true. */
-  maxAmount: propTypes.number,
+  maxItems: propTypes.number,
   /** Called when selected value has changed. */
   onChange: propTypes.func,
   /** Custom style for container' className. */
@@ -303,6 +353,10 @@ Dropdown.propTypes = {
   onMenuOpen: propTypes.func,
   /** Called when menu is closed. */
   onMenuClose: propTypes.func,
+  /** Custom option renderer function. */
+  optionRenderer: propTypes.oneOfType([propTypes.func, propTypes.object]),
+  /** Text / component to display when there are no options */
+  noOptionsMessage: propTypes.oneOfType([propTypes.string, propTypes.func]),
 }
 
 export default memo(Dropdown)

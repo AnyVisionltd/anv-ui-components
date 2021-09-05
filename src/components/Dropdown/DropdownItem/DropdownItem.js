@@ -5,8 +5,8 @@ import useIsOverflowing from '../../../hooks/UseIsOverflowing/UseIsOverflowing'
 import styles from './DropdownItem.module.scss'
 
 const DropdownItem = ({
-  index,
   option,
+  displayValue,
   isFocusedByKeyboard,
   onClick,
   multiple,
@@ -20,9 +20,10 @@ const DropdownItem = ({
   })
 
   useEffect(() => {
+    if (!isFocusedByKeyboard) return
     const menu = menuRef?.current
     const item = labelRef?.current
-    if (isFocusedByKeyboard && menu && item) {
+    if (menu && item) {
       menu.scrollTop =
         item.offsetTop -
         menu.offsetTop +
@@ -41,7 +42,7 @@ const DropdownItem = ({
             className={styles.checkbox}
           />
         )}
-        <p ref={labelRef}>{option.value}</p>
+        <p ref={labelRef}>{option[displayValue]}</p>
       </li>
     </Tooltip>
   )

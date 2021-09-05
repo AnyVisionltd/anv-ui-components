@@ -1,9 +1,22 @@
 @import '~@anyvision/style-guide';
 
+%noSpacingStyle {
+  border: 0;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+}
+
+%hiddenTextOverflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .container {
   display: flex;
   flex-direction: column;
-  width: 320px;
+  width: av-size(sz-320);
   box-sizing: border-box;
 
   > *,
@@ -26,6 +39,7 @@
     align-items: center;
     border: 1px solid av-color(primary, av-opacity(disabled));
     transition: all 0.3s linear;
+    overflow: hidden;
 
     &:hover {
       background-color: av-color(primary, av-opacity(divider));
@@ -41,71 +55,62 @@
       cursor: text;
     }
 
-    // .selectedContentContainer{
-    //   position: relative;
-    //   display: flex;
-    //   flex: 1 1 0;
-    //   position: relative;
-    //   box-sizing: border-box;
-    // }
+    .selectedContentContainer {
+      @extend %av-scrollbar;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      box-sizing: border-box;
+      flex: 1 1 0;
+      padding-top: av-space();
+      overflow: auto;
+    }
 
     .placeholder {
       @extend %av-body1;
       color: av-color(content, av-opacity(medium));
-      flex: 0.8;
+      flex: 1;
     }
 
     .valuesContainer {
-      padding-top: av-space();
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
       display: inline-flex;
       flex-direction: row;
-      flex: 1 1 0;
       align-items: center;
       justify-content: stretch;
       overflow: auto;
-      @extend %av-scrollbar;
+      flex-wrap: wrap;
+      flex: 1 1 0;
 
-      .selectedValues {
+      .selectedValue {
         @extend %av-body1;
+        @extend %hiddenTextOverflow;
         color: av-color(content);
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: flex;
-        flex-wrap: wrap;
+        display: block;
       }
 
       .inputBase {
-        font-family: inherit;
+        @extend %noSpacingStyle;
         @extend %av-body1;
+        font-family: inherit;
         color: av-color(content);
-        border: 0;
-        margin: 0;
-        outline: 0;
-        padding: 0;
         display: inline-flex;
         align-items: baseline;
         justify-content: flex-start;
+        box-sizing: border-box;
         width: min-content;
         height: fit-content;
 
         input {
+          @extend %noSpacingStyle;
+          box-sizing: border-box;
           width: 100%;
           cursor: text;
-          border: 0;
-          margin: 0;
-          outline: 0;
-          padding: 0;
           min-width: av-space(tiny);
 
           &::placeholder {
             @extend %av-body1;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            @extend %hiddenTextOverflow;
+            display: block;
           }
         }
       }
@@ -139,7 +144,7 @@
     }
 
     .selectedItem,
-    .multipleDelete {
+    .deleteButton {
       font-family: inherit;
       border: none;
       outline: none;
@@ -152,6 +157,7 @@
       color: av-color(purewhite);
       margin-right: av-space(tiny);
       align-items: center;
+      margin-top: 2px;
 
       span {
         display: flex;
@@ -169,10 +175,6 @@
           padding: 2px;
         }
       }
-    }
-
-    .multipleDelete {
-      margin-top: av-space();
     }
   }
 
