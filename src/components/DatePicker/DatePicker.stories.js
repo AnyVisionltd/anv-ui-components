@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import DatePicker from '.'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import moment from 'moment'
@@ -9,11 +9,12 @@ export default {
   decorators: [centerDecorator],
 }
 
-console.log(moment().add(1, 'days'))
 export const Basic = () => {
+  const [value, setValue] = useState(moment().format('DD/MM/yyyy'))
   return (
     <div>
-      <DatePicker />
+      <DatePicker onDateChange={setValue} />
+      <p>Selected date: {JSON.stringify(value)}</p>
     </div>
   )
 }
