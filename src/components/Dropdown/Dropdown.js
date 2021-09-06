@@ -7,6 +7,8 @@ import { InputBase } from '../../index'
 import { DropdownItem } from './DropdownItem'
 import { EmptyDropdownMenu } from './EmptyDropdownMenu'
 import { useClickOutsideListener } from '../../hooks'
+import IconButton from '../IconButton/IconButton'
+import { ReactComponent as CancelFilledIcon } from '../../assets/svg/CancelFilled.svg'
 import styles from './Dropdown.module.scss'
 
 const Dropdown = ({
@@ -18,12 +20,14 @@ const Dropdown = ({
   onChange,
   placeholder,
   label,
-  disabled,
+  isDisabled,
   onMenuOpen,
   onMenuClose,
+  onExceedMaxSelected,
   multiple,
-  maxItems,
+  maxSelected,
   noOptionsMessage,
+  isSearchable,
 }) => {
   const [isTypeMode, setIsTypeMode] = useState(false)
   const [filteredValue, setFilteredValue] = useState('')
@@ -52,7 +56,7 @@ const Dropdown = ({
   const toggleMenu = () => (showMenu ? closeMenu() : openMenu())
 
   const getIntoTypeMode = () => {
-    setIsTypeMode(true)
+    isSearchable && setIsTypeMode(true)
     openMenu()
   }
 
@@ -106,6 +110,9 @@ const Dropdown = ({
 
   const handleItemClick = clickedOption => {
     if (!clickedOption) return
+    if (maxSelected && maxSelected === selectedOptions.length) {
+      return onExceedMaxSelected()
+    }
     const { [keyValue]: key } = clickedOption
     const isFoundInDropdown = selectedOptions.find(
       option => option[keyValue] === key,
@@ -149,6 +156,11 @@ const Dropdown = ({
     onChange(newOptions)
   }
 
+  const emptySelectedOptions = () => {
+    setSelectedOptions([])
+    onChange([])
+  }
+
   const selectOption = optionIndex => handleItemClick(shownOptions[optionIndex])
 
   const handleKeyDown = e => {
@@ -177,6 +189,20 @@ const Dropdown = ({
       default:
         break
     }
+  }
+
+  const renderClearInputButton = () => {
+    if (!filteredValue.length) return
+    return (
+      <IconButton
+        variant='ghost'
+        onClick={() => {}}
+        aria-label='clear input'
+        disabled={isDisabled}
+      >
+        <CancelFilledIcon className={styles.clearIcon} />
+      </IconButton>
+    )
   }
 
   const renderValues = () => {
@@ -213,10 +239,7 @@ const Dropdown = ({
   }
 
   const renderDeleteButton = () => (
-    <button
-      className={styles.deleteButton}
-      onClick={() => setSelectedOptions([])}
-    >
+    <button className={styles.deleteButton} onClick={emptySelectedOptions}>
       {selectedOptions.length}
       <span>
         <TimesThick />
@@ -257,6 +280,7 @@ const Dropdown = ({
                 onBlur={getOffTypeMode}
                 onKeyDown={handleKeyDown}
                 placeholder={determineInputPlaceholder()}
+                trailingIcon={renderClearInputButton}
                 ref={inputRef}
                 style={{ width: determineInputWidth() }}
                 onKeyPress={() =>
@@ -321,9 +345,14 @@ Dropdown.defaultProps = {
   label: 'Label',
   displayValue: 'value',
   keyValue: 'id',
+  multiple: false,
+  isSearchable: true,
+  isDisabled: false,
+  noOptionsMessage: 'No results found',
   onMenuClose: () => {},
   onMenuOpen: () => {},
   onChange: () => {},
+  onExceedMaxSelected: () => {},
 }
 
 Dropdown.propTypes = {
@@ -338,9 +367,13 @@ Dropdown.propTypes = {
   /** Set if multi selection is enabled. */
   multiple: propTypes.bool,
   /** Set max number of items to choose, if used, set multiple to true. */
-  maxItems: propTypes.number,
+  maxSelected: propTypes.number,
+  /** Called when max selected options is exceeded. */
+  onExceedMaxSelected: propTypes.func,
   /** Called when selected value has changed. */
   onChange: propTypes.func,
+  /** Whether to enable search functionality. */
+  isSearchable: propTypes.bool,
   /** Custom style for container' className. */
   className: propTypes.string,
   /** Placeholder to show when no value is selected. */
@@ -348,14 +381,14 @@ Dropdown.propTypes = {
   /** Label to add information about  the dropdown. */
   label: propTypes.string,
   /** Set dropdown to disabled if true. */
-  disabled: propTypes.bool,
+  isDisabled: propTypes.bool,
   /** Called when menu is opened. */
   onMenuOpen: propTypes.func,
   /** Called when menu is closed. */
   onMenuClose: propTypes.func,
   /** Custom option renderer function. */
   optionRenderer: propTypes.oneOfType([propTypes.func, propTypes.object]),
-  /** Text / component to display when there are no options */
+  /** Text / component to display when there are no options. */
   noOptionsMessage: propTypes.oneOfType([propTypes.string, propTypes.func]),
 }
 

@@ -42,12 +42,9 @@ export const Basic = () => (
 )
 
 export const Multiple = () => {
-  const [values, setValues] = useState([])
+  const [, setValues] = useState([])
 
-  const handleChange = newValues => {
-    console.log(newValues)
-    setValues(newValues)
-  }
+  const handleChange = newValues => setValues(newValues)
 
   return (
     <div style={containerStyle}>
