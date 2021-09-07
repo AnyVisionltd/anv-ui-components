@@ -1,4 +1,4 @@
-import React, { useState, useRef, memo } from 'react'
+import React, { useState, useRef, memo, useEffect } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { ArrowUp, TimesThick } from '@anyvision/anv-icons'
@@ -7,9 +7,14 @@ import { InputBase } from '../../index'
 import { DropdownItem } from './DropdownItem'
 import { EmptyDropdownMenu } from './EmptyDropdownMenu'
 import { useClickOutsideListener } from '../../hooks'
-import IconButton from '../IconButton/IconButton'
 import { ReactComponent as CancelFilledIcon } from '../../assets/svg/CancelFilled.svg'
+import languageService from '../../services/language'
 import styles from './Dropdown.module.scss'
+
+// var(--sz-56, 56px)
+// const defaultSelectedHeight = +styles.defaultSelectedHeight.split(' ')[1].slice(0, 2)
+const defaultSelectedHeight = 56
+const getTranslation = path => languageService.getTranslation(`${path}`)
 
 const Dropdown = ({
   options,
@@ -28,6 +33,7 @@ const Dropdown = ({
   maxSelected,
   noOptionsMessage,
   isSearchable,
+  isSelectedShownInHeader,
 }) => {
   const [isTypeMode, setIsTypeMode] = useState(false)
   const [filteredValue, setFilteredValue] = useState('')
@@ -38,6 +44,7 @@ const Dropdown = ({
   const containerRef = useRef(null)
   const menuRef = useRef(null)
   const inputRef = useRef(null)
+  const selectedContainerRef = useRef(null)
   const valuesContainerRef = useRef(null)
 
   const openMenu = () => {
@@ -57,7 +64,7 @@ const Dropdown = ({
 
   const getIntoTypeMode = () => {
     isSearchable && setIsTypeMode(true)
-    openMenu()
+    !showMenu && openMenu()
   }
 
   const getOffTypeMode = () => {
@@ -72,11 +79,25 @@ const Dropdown = ({
     setShownOptions([...options])
   }
 
+  const isOverflown = element =>
+    element && element.scrollHeight > defaultSelectedHeight
+
   useClickOutsideListener(() => {
     closeMenu()
     getOffTypeMode()
     resetFocusedOptionIndex()
   }, containerRef)
+
+  useEffect(() => {
+    if (!multiple || !isSelectedShownInHeader) return
+    if (selectedOptions.length && isOverflown(selectedContainerRef.current)) {
+      selectedContainerRef.current.style.height = 'auto'
+      selectedContainerRef.current.style.paddingBottom = '8px'
+    } else {
+      selectedContainerRef.current.style.height = styles.defaultSelectedHeight
+      selectedContainerRef.current.style.paddingBottom = '2px'
+    }
+  }, [selectedOptions, multiple, isSelectedShownInHeader])
 
   const focusOption = direction => {
     if (!showMenu || !shownOptions.length) return
@@ -136,11 +157,9 @@ const Dropdown = ({
 
     if (!multiple) {
       getOffTypeMode()
-      setShownOptions(options)
       closeMenu()
       resetFocusedOptionIndex()
     }
-    !multiple && getOffTypeMode()
   }
 
   const handleRemoveOption = optionIndex => {
@@ -166,6 +185,7 @@ const Dropdown = ({
   const handleKeyDown = e => {
     switch (e.keyCode) {
       case keymap.ENTER:
+        if (focusedOptionIndex === -1) return
         selectOption(focusedOptionIndex)
         resetFilteredValue()
         break
@@ -191,22 +211,8 @@ const Dropdown = ({
     }
   }
 
-  const renderClearInputButton = () => {
-    if (!filteredValue.length) return
-    return (
-      <IconButton
-        variant='ghost'
-        onClick={() => {}}
-        aria-label='clear input'
-        disabled={isDisabled}
-      >
-        <CancelFilledIcon className={styles.clearIcon} />
-      </IconButton>
-    )
-  }
-
   const renderValues = () => {
-    if (isTypeMode && !multiple) return null
+    if (isTypeMode && (!multiple || !isSelectedShownInHeader)) return null
     if (!selectedOptions.length) {
       if (isTypeMode) return null
       return (
@@ -216,10 +222,12 @@ const Dropdown = ({
       )
     }
 
-    if (multiple) {
+    if (multiple && isSelectedShownInHeader) {
       return selectedOptions.map(({ value }, index) => (
         <button
-          className={styles.selectedItem}
+          className={classNames(styles.selectedItem, {
+            [styles.spacingTop]: isSelectedShownInHeader && multiple,
+          })}
           key={index}
           onClick={() => handleRemoveOption(index)}
         >
@@ -232,14 +240,21 @@ const Dropdown = ({
     } else {
       return (
         <p className={styles.selectedValue} onClick={getIntoTypeMode}>
-          {selectedOptions[0][displayValue]}
+          {!multiple
+            ? selectedOptions[0][displayValue]
+            : `${selectedOptions.length} ${getTranslation('itemsSelected')}`}
         </p>
       )
     }
   }
 
   const renderDeleteButton = () => (
-    <button className={styles.deleteButton} onClick={emptySelectedOptions}>
+    <button
+      className={classNames(styles.deleteButton, {
+        [styles.spacingTop]: isSelectedShownInHeader && multiple,
+      })}
+      onClick={emptySelectedOptions}
+    >
       {selectedOptions.length}
       <span>
         <TimesThick />
@@ -251,6 +266,7 @@ const Dropdown = ({
     if (!multiple) {
       return selectedOptions.length ? selectedOptions[0].value : placeholder
     }
+    if (!isSelectedShownInHeader) return placeholder
     return selectedOptions.length ? undefined : placeholder
   }
 
@@ -260,48 +276,51 @@ const Dropdown = ({
     return selectedOptions.length === 0 ? `${containerWidth}px` : ''
   }
 
-  const renderHeaderContainer = () => {
-    return (
-      <div className={styles.selectedContainer} onKeyDown={handleKeyDown}>
-        <label>{label}</label>
-        <div
-          className={styles.selectedContentContainer}
-          onClick={getIntoTypeMode}
-        >
-          {selectedOptions.length > 0 && multiple && renderDeleteButton()}
-          <div className={styles.valuesContainer} ref={valuesContainerRef}>
-            {renderValues()}
-            {isTypeMode && (
-              <InputBase
-                autoFocus
-                value={filteredValue}
-                onChange={handleFilterChange}
-                className={styles.inputBase}
-                onBlur={getOffTypeMode}
-                onKeyDown={handleKeyDown}
-                placeholder={determineInputPlaceholder()}
-                trailingIcon={renderClearInputButton}
-                ref={inputRef}
-                style={{ width: determineInputWidth() }}
-                onKeyPress={() =>
-                  multiple &&
-                  (inputRef.current.style.width = `${
-                    filteredValue.length + 5
-                  }ch`)
-                }
-              />
-            )}
-          </div>
-        </div>
-        <div className={styles.icons}>
-          <ArrowUp
-            className={classNames({ [styles.rotated]: showMenu })}
-            onClick={toggleMenu}
-          />
+  const handleInputKeyPress = () =>
+    (inputRef.current.style.width = `${
+      (filteredValue.length
+        ? filteredValue.length
+        : inputRef.current.placeholder.length) + 5
+    }ch`)
+
+  const renderHeaderContainer = () => (
+    <div className={styles.selectedContainer} ref={selectedContainerRef}>
+      <label>{label}</label>
+      <div
+        className={styles.selectedContentContainer}
+        onClick={getIntoTypeMode}
+      >
+        {selectedOptions.length > 0 && multiple && renderDeleteButton()}
+        <div className={styles.valuesContainer} ref={valuesContainerRef}>
+          {renderValues()}
+          {isTypeMode && (
+            <InputBase
+              autoFocus
+              value={filteredValue}
+              onChange={handleFilterChange}
+              className={styles.inputBase}
+              onBlur={getOffTypeMode}
+              onKeyDown={handleKeyDown}
+              placeholder={determineInputPlaceholder()}
+              ref={inputRef}
+              style={{ width: determineInputWidth() }}
+              onKeyPress={handleInputKeyPress}
+              onKeyUp={handleInputKeyPress}
+            />
+          )}
         </div>
       </div>
-    )
-  }
+      <div className={styles.icons}>
+        {filteredValue.length > 0 && (
+          <CancelFilledIcon onClick={resetFilteredValue} />
+        )}
+        <ArrowUp
+          className={classNames({ [styles.rotated]: showMenu })}
+          onClick={toggleMenu}
+        />
+      </div>
+    </div>
+  )
 
   const renderOptions = () => (
     <ul className={styles.menuContainer} ref={menuRef}>
@@ -348,6 +367,7 @@ Dropdown.defaultProps = {
   multiple: false,
   isSearchable: true,
   isDisabled: false,
+  isSelectedShownInHeader: true,
   noOptionsMessage: 'No results found',
   onMenuClose: () => {},
   onMenuOpen: () => {},
@@ -372,6 +392,8 @@ Dropdown.propTypes = {
   onExceedMaxSelected: propTypes.func,
   /** Called when selected value has changed. */
   onChange: propTypes.func,
+  /** Whether to show multiple selected options in header. */
+  isSelectedShownInHeader: propTypes.bool,
   /** Whether to enable search functionality. */
   isSearchable: propTypes.bool,
   /** Custom style for container' className. */

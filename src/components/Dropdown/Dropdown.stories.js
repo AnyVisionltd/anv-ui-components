@@ -53,6 +53,25 @@ export const Multiple = () => {
         multiple
         label='Fruits'
         onChange={handleChange}
+        isSelectedShownInHeader
+      />
+    </div>
+  )
+}
+
+export const MultipleWithoutSelectedInHeader = () => {
+  const [, setValues] = useState([])
+
+  const handleChange = newValues => setValues(newValues)
+
+  return (
+    <div style={containerStyle}>
+      <Dropdown
+        options={items}
+        multiple
+        label='Fruits'
+        onChange={handleChange}
+        isSelectedShownInHeader={false}
       />
     </div>
   )

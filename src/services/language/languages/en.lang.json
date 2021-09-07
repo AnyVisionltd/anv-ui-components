@@ -13,6 +13,7 @@
     "areYouSure": "Are You Sure?",
     "none": "None",
     "noResultsFound": "No results found",
-    "noResultsMessage": "Try adjusting your search or filter to find what your’e looking for."
+    "noResultsMessage": "Try adjusting your search or filter to find what your’e looking for.",
+    "itemsSelected": "Items Selected"
   }
 }

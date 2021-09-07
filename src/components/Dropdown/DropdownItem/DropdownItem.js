@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, memo } from 'react'
 import { Tooltip, Checkbox } from '../../../index'
 import classNames from 'classnames'
 import useIsOverflowing from '../../../hooks/UseIsOverflowing/UseIsOverflowing'
@@ -48,4 +48,4 @@ const DropdownItem = ({
   )
 }
 
-export default DropdownItem
+export default memo(DropdownItem)

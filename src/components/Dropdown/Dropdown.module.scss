@@ -13,10 +13,13 @@
   text-overflow: ellipsis;
 }
 
+$default-selected-height: av-size(sz-56);
+
 .container {
   display: flex;
   flex-direction: column;
   width: av-size(sz-320);
+  // width: 540px;
   box-sizing: border-box;
 
   > *,
@@ -32,8 +35,9 @@
     outline: none;
     position: relative;
     border-radius: av-radius(tidy);
-    padding: 0 av-space() 0;
-    height: av-size(sz-56);
+    padding: 0 av-space() 2px;
+    height: $default-selected-height;
+    min-height: $default-selected-height;
     width: 100%;
     display: flex;
     align-items: center;
@@ -62,7 +66,6 @@
       box-sizing: border-box;
       flex: 1 1 0;
       padding-top: av-space();
-      overflow: auto;
     }
 
     .placeholder {
@@ -76,11 +79,9 @@
       flex-direction: row;
       align-items: center;
       justify-content: stretch;
-      overflow: auto;
+      overflow-y: auto;
       flex-wrap: wrap;
       flex: 1 1 0;
-      overflow-x: auto;
-      width: 100%;
       @extend %av-scrollbar;
 
       .selectedValue {
@@ -103,12 +104,26 @@
         height: fit-content;
         flex-grow: 1;
 
+        .trailingIconInput {
+          align-self: center;
+        }
+
+        svg {
+          color: av-color(content);
+          cursor: pointer;
+          height: av-size(sz-16);
+          width: av-size(sz-16);
+          transition: all 0.3s linear;
+          fill: av-color(content);
+        }
+
         input {
           @extend %noSpacingStyle;
+          @extend %av-body1;
           box-sizing: border-box;
-          width: 100%;
           cursor: text;
           min-width: av-space(tiny);
+          flex: 1;
 
           &::placeholder {
             @extend %av-body1;
@@ -160,7 +175,6 @@
       color: av-color(purewhite);
       margin-right: av-space(tiny);
       align-items: center;
-      margin-top: 2px;
 
       span {
         display: flex;
@@ -177,6 +191,10 @@
           border-radius: av-radius(circle);
           padding: 2px;
         }
+      }
+
+      &.spacingTop {
+        margin-top: 3px;
       }
     }
   }
@@ -198,4 +216,8 @@
     overflow-y: auto;
     max-height: av-size(sz-240);
   }
+}
+
+:export {
+  defaultSelectedHeight: $default-selected-height;
 }
