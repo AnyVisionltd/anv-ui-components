@@ -24,15 +24,15 @@ const genders = [
 ]
 
 describe('<Dropdown/>', () => {
-  describe('Single selected option dropdown', () => {
+  describe('single selected option dropdown', () => {
     it('should render correctly', () => {
       const { container } = render(<Dropdown />)
       const labelNode = container.querySelector('label')
       expect(labelNode).toBeTruthy()
       const pNode = container.querySelector('p')
       expect(pNode).toBeTruthy()
-      const svgNode = container.querySelector('svg')
-      expect(svgNode).toBeTruthy()
+      const btnNode = container.querySelector('button')
+      expect(btnNode).toBeTruthy()
       const inputNode = container.querySelector('input')
       expect(inputNode).not.toBeTruthy()
     })
@@ -54,8 +54,8 @@ describe('<Dropdown/>', () => {
     })
   })
 
-  describe('Multi value dropdown', () => {
-    it('should have the correct default values` length with isSelectedShownInHeader set to false', () => {
+  describe('multi value dropdown', () => {
+    it('should have the correct default values` length with isSelectedShownInHeader is set to false', () => {
       render(
         <Dropdown
           options={fruits}
@@ -73,7 +73,7 @@ describe('<Dropdown/>', () => {
       expect(selectedValueText).toBeTruthy()
     })
 
-    it('should have the correct default values` length with isSelectedShownInHeader set to true', () => {
+    it('should have the correct default values` length with isSelectedShownInHeader is set to true', () => {
       render(
         <Dropdown
           options={fruits}
@@ -85,9 +85,31 @@ describe('<Dropdown/>', () => {
       )
 
       const buttons = screen.getAllByRole('button')
-      // 1 for delete button
-      const expected = fruits.length + 1
+      // +2 for delete button and toggle
+      const expected = fruits.length + 2
       expect(buttons.length).toBe(expected)
+    })
+  })
+
+  describe('testing dropdown`s isSearchable', () => {
+    it('input is shown when container is clicked in default', () => {
+      const { container } = render(<Dropdown />)
+      const inputNodeFirstTime = container.querySelector('input')
+      expect(inputNodeFirstTime).not.toBeInTheDocument()
+      const pNode = container.querySelector('p')
+      fireEvent.click(pNode)
+      const inputNodeSecondTime = container.querySelector('input')
+      expect(inputNodeSecondTime).toBeInTheDocument()
+    })
+
+    it('input is not shown when isSearchable is set to false', () => {
+      const { container } = render(<Dropdown isSearchable={false} />)
+      const inputNodeFirstTime = container.querySelector('input')
+      expect(inputNodeFirstTime).not.toBeInTheDocument()
+      const pNode = container.querySelector('p')
+      fireEvent.click(pNode)
+      const inputNodeSecondTime = container.querySelector('input')
+      expect(inputNodeSecondTime).not.toBeInTheDocument()
     })
   })
 
@@ -106,7 +128,7 @@ describe('<Dropdown/>', () => {
       expect(onMenuClose).toHaveBeenCalled()
     })
 
-    it('should call onChange when one of the buttons (either delete button or options buttons) is clicked', () => {
+    it('should call onChange when one of the buttons (either delete button or options` buttons) is clicked', () => {
       const onChange = jest.fn()
       render(
         <Dropdown
@@ -121,11 +143,27 @@ describe('<Dropdown/>', () => {
       const buttons = screen.getAllByRole('button')
       const someOptionButton = buttons[1]
       fireEvent.click(someOptionButton)
-      expect(onChange).toHaveBeenCalled()
+      expect(onChange).toHaveBeenCalledTimes(1)
 
       const deleteButton = buttons[0]
       fireEvent.click(deleteButton)
-      expect(onChange).toHaveBeenCalled()
+      expect(onChange).toHaveBeenCalledTimes(2)
+    })
+  })
+
+  describe('testing keyValue and displayValue props', () => {
+    it('should display the right displayValue although the default is `value`', () => {
+      const arr = [{ item: 'test', myId: '1' }]
+      const { getByText } = render(
+        <Dropdown
+          options={arr}
+          defaultValues={[arr[0]]}
+          keyValue='myId'
+          displayValue='item'
+        />,
+      )
+      const selectedValueText = getByText(arr[0].item)
+      expect(selectedValueText).toBeTruthy()
     })
   })
 })

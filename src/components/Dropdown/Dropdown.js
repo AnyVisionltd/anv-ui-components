@@ -1,9 +1,9 @@
-import React, { useState, useRef, memo, useEffect } from 'react'
+import React, { useState, useRef, memo, useEffect, useCallback } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { ArrowUp, TimesThick } from '@anyvision/anv-icons'
 import keymap from '../../utils/enums/keymap'
-import { InputBase } from '../../index'
+import { InputBase, IconButton } from '../../index'
 import { DropdownItem } from './DropdownItem'
 import { EmptyDropdownMenu } from './EmptyDropdownMenu'
 import { useClickOutsideListener } from '../../hooks'
@@ -47,6 +47,15 @@ const Dropdown = ({
   const selectedContainerRef = useRef(null)
   const valuesContainerRef = useRef(null)
 
+  useEffect(() => {
+    const detectTarget = e => console.log(e.target)
+    document.addEventListener('click', detectTarget)
+    return () => document.removeEventListener('click', detectTarget)
+  }, [])
+
+  const resetToOriginalOptions = () =>
+    shownOptions.length !== options.length && setShownOptions(options)
+
   const openMenu = () => {
     if (showMenu) return
     setShowMenu(true)
@@ -56,7 +65,7 @@ const Dropdown = ({
   const closeMenu = () => {
     if (!showMenu) return
     setShowMenu(false)
-    setShownOptions([...options])
+    resetToOriginalOptions()
     onMenuClose()
   }
 
@@ -76,11 +85,14 @@ const Dropdown = ({
 
   const resetFilteredValue = () => {
     setFilteredValue('')
-    setShownOptions([...options])
+    resetToOriginalOptions()
   }
 
-  const isOverflown = element =>
-    element && element.scrollHeight > defaultSelectedHeight
+  const isOverflown = useCallback(element => {
+    // var(--sz-56, 56px)
+    // const defaultSelectedHeight = +styles.defaultSelectedHeight.split(' ')[1].slice(0, 2)
+    return element && element.scrollHeight > defaultSelectedHeight
+  }, [])
 
   useClickOutsideListener(() => {
     closeMenu()
@@ -97,7 +109,7 @@ const Dropdown = ({
       selectedContainerRef.current.style.height = styles.defaultSelectedHeight
       selectedContainerRef.current.style.paddingBottom = '2px'
     }
-  }, [selectedOptions, multiple, isSelectedShownInHeader])
+  }, [selectedOptions, multiple, isSelectedShownInHeader, isOverflown])
 
   const focusOption = direction => {
     if (!showMenu || !shownOptions.length) return
@@ -119,7 +131,7 @@ const Dropdown = ({
     setFilteredValue(value)
 
     if (!value || !value.trim().length) {
-      setShownOptions(options)
+      resetToOriginalOptions()
       return
     }
 
@@ -223,7 +235,7 @@ const Dropdown = ({
     }
 
     if (multiple && isSelectedShownInHeader) {
-      return selectedOptions.map(({ value }, index) => (
+      return selectedOptions.map(({ [displayValue]: value }, index) => (
         <button
           className={classNames(styles.selectedItem, {
             [styles.spacingTop]: isSelectedShownInHeader && multiple,
@@ -312,12 +324,27 @@ const Dropdown = ({
       </div>
       <div className={styles.icons}>
         {filteredValue.length > 0 && (
-          <CancelFilledIcon onClick={resetFilteredValue} />
+          <IconButton
+            variant='ghost'
+            onClick={resetFilteredValue}
+            aria-label='clear input'
+            disabled={isDisabled}
+            className={styles.iconButton}
+          >
+            <CancelFilledIcon />
+          </IconButton>
         )}
-        <ArrowUp
-          className={classNames({ [styles.rotated]: showMenu })}
+        <IconButton
+          variant='ghost'
           onClick={toggleMenu}
-        />
+          aria-label='toggle menu'
+          disabled={isDisabled}
+          className={classNames(styles.iconButton, {
+            [styles.rotated]: showMenu,
+          })}
+        >
+          <ArrowUp />
+        </IconButton>
       </div>
     </div>
   )

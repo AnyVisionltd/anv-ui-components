@@ -19,8 +19,8 @@ $default-selected-height: av-size(sz-56);
   display: flex;
   flex-direction: column;
   width: av-size(sz-320);
-  // width: 540px;
   box-sizing: border-box;
+  position: relative;
 
   > *,
   *::after,
@@ -143,13 +143,19 @@ $default-selected-height: av-size(sz-56);
       box-sizing: border-box;
       margin-left: av-space(micro);
 
-      > svg {
-        color: av-color(content);
-        cursor: pointer;
-        height: av-size(sz-16);
+      .iconButton {
         width: av-size(sz-16);
+        height: av-size(sz-16);
+        color: av-color(content);
         transition: all 0.3s linear;
-        fill: av-color(content);
+
+        > svg {
+          color: av-color(content);
+          cursor: pointer;
+          height: av-size(sz-16);
+          width: av-size(sz-16);
+          fill: av-color(content);
+        }
 
         &:not(:last-of-type) {
           margin-right: av-space(micro);
@@ -199,11 +205,10 @@ $default-selected-height: av-size(sz-56);
     }
   }
 
-  .clearIcon {
-    fill: av-color(content);
-  }
-
   .menuContainer {
+    position: absolute;
+    left: 0;
+    top: 100%;
     width: 100%;
     list-style-type: none;
     border-radius: av-radius(tidy);

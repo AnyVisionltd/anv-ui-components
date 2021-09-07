@@ -16,18 +16,18 @@ const containerStyle = {
 }
 
 const items = [
-  { value: 'Banana', id: 1 },
-  { value: 'Apple', id: 2 },
-  { value: 'Mango', id: 3 },
-  { value: 'Blueberry', id: 4 },
-  { value: 'Cucumber', id: 5 },
-  { value: 'Olives', id: 6 },
-  { value: 'Parsley', id: 7 },
-  { value: 'Berries', id: 8 },
-  { value: 'Raspberry', id: 9 },
-  { value: 'Strawberry', id: 10 },
-  { value: 'Watermelon', id: 11 },
-  { value: 'Kiwi', id: 12 },
+  { myValue: 'Banana', id: 1 },
+  { myValue: 'Apple', id: 2 },
+  { myValue: 'Mango', id: 3 },
+  { myValue: 'Blueberry', id: 4 },
+  { myValue: 'Cucumber', id: 5 },
+  { myValue: 'Olives', id: 6 },
+  { myValue: 'Parsley', id: 7 },
+  { myValue: 'Berries', id: 8 },
+  { myValue: 'Raspberry', id: 9 },
+  { myValue: 'Strawberry', id: 10 },
+  { myValue: 'Watermelon', id: 11 },
+  { myValue: 'Kiwi', id: 12 },
 ]
 
 const genders = [
@@ -54,6 +54,7 @@ export const Multiple = () => {
         label='Fruits'
         onChange={handleChange}
         isSelectedShownInHeader
+        displayValue='myValue'
       />
     </div>
   )
@@ -72,6 +73,7 @@ export const MultipleWithoutSelectedInHeader = () => {
         label='Fruits'
         onChange={handleChange}
         isSelectedShownInHeader={false}
+        displayValue='myValue'
       />
     </div>
   )
