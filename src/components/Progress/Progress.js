@@ -76,7 +76,7 @@ const Progress = ({
 Progress.defaultProps = {
   className: '',
   variant: 'linear',
-  value: false,
+  value: 0,
   indeterminate: false,
 }
 

@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom'
 import propTypes from 'prop-types'
 
 const Portal = ({ children, containerId, className }) => {
-  const target = useRef(document.getElementById(containerId))
+  const target = useRef(null)
 
   useEffect(
     () => () => {
