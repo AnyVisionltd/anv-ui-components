@@ -15,10 +15,12 @@ function checkOverflow(element) {
 }
 
 function useIsOverflowing(ref) {
-  const [isOverflowing, setIsOverflowing] = useState(checkOverflow(ref.current))
+  const [isOverflowing, setIsOverflowing] = useState(
+    checkOverflow(ref?.current),
+  )
 
   useLayoutEffect(() => {
-    if (!ref.current || isOverflowing) return
+    if (!ref?.current || isOverflowing) return
     setIsOverflowing(checkOverflow(ref.current))
   }, [ref, isOverflowing])
 

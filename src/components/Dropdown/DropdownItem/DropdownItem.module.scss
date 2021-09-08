@@ -8,7 +8,6 @@
   align-items: center;
   padding: av-space(micro) av-space();
   transition: all 0.3s linear;
-  // FIX= height of item is not fixed when using max-height for list
   min-height: av-size(sz-48);
 
   p {

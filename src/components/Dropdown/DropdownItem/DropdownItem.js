@@ -12,6 +12,7 @@ const DropdownItem = ({
   multiple,
   isSelected,
   menuRef,
+  valueRender,
 }) => {
   const labelRef = useRef(null)
   const classes = classNames(styles.menuItem, {
@@ -42,6 +43,7 @@ const DropdownItem = ({
             className={styles.checkbox}
           />
         )}
+        {/* {valueRender ? valueRender(option[displayValue]) : <p ref={labelRef}>{option[displayValue]}</p>} */}
         <p ref={labelRef}>{option[displayValue]}</p>
       </li>
     </Tooltip>

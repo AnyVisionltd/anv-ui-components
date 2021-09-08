@@ -117,14 +117,14 @@ describe('<Dropdown/>', () => {
     it('should open menu when clicking on selectedCotainer', () => {
       const onMenuOpen = jest.fn()
       const onMenuClose = jest.fn()
-      const { container } = render(
+      const { getByRole } = render(
         <Dropdown onMenuOpen={onMenuOpen} onMenuClose={onMenuClose} />,
       )
-      const toggleMenuIcon = container.querySelector('svg')
-      fireEvent.click(toggleMenuIcon)
+      const toggleMenuBtn = getByRole('button')
+      fireEvent.click(toggleMenuBtn)
       expect(onMenuOpen).toHaveBeenCalled()
       // Now menu is open so we can close
-      fireEvent.click(toggleMenuIcon)
+      fireEvent.click(toggleMenuBtn)
       expect(onMenuClose).toHaveBeenCalled()
     })
 
@@ -148,6 +148,18 @@ describe('<Dropdown/>', () => {
       const deleteButton = buttons[0]
       fireEvent.click(deleteButton)
       expect(onChange).toHaveBeenCalledTimes(2)
+    })
+  })
+
+  describe('testing Dropdown`s isDisabled', () => {
+    it('should not open menu when clicking on container', () => {
+      const onMenuOpen = jest.fn()
+      const { container } = render(
+        <Dropdown onMenuOpen={onMenuOpen} isDisabled />,
+      )
+      const toggleMenuButton = container.querySelector('button')
+      fireEvent.click(toggleMenuButton)
+      expect(onMenuOpen).not.toHaveBeenCalled()
     })
   })
 

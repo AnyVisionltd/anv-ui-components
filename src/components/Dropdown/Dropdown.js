@@ -1,13 +1,12 @@
 import React, { useState, useRef, memo, useEffect, useCallback } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import { ArrowUp, TimesThick } from '@anyvision/anv-icons'
+import { ArrowUp, TimesThick, TimesCircleFilled } from '@anyvision/anv-icons'
 import keymap from '../../utils/enums/keymap'
 import { InputBase, IconButton } from '../../index'
 import { DropdownItem } from './DropdownItem'
 import { EmptyDropdownMenu } from './EmptyDropdownMenu'
 import { useClickOutsideListener } from '../../hooks'
-import { ReactComponent as CancelFilledIcon } from '../../assets/svg/CancelFilled.svg'
 import languageService from '../../services/language'
 import styles from './Dropdown.module.scss'
 
@@ -22,6 +21,7 @@ const Dropdown = ({
   displayValue,
   keyValue,
   className,
+  style,
   onChange,
   placeholder,
   label,
@@ -34,6 +34,7 @@ const Dropdown = ({
   noOptionsMessage,
   isSearchable,
   isSelectedShownInHeader,
+  valueRender,
 }) => {
   const [isTypeMode, setIsTypeMode] = useState(false)
   const [filteredValue, setFilteredValue] = useState('')
@@ -47,17 +48,11 @@ const Dropdown = ({
   const selectedContainerRef = useRef(null)
   const valuesContainerRef = useRef(null)
 
-  useEffect(() => {
-    const detectTarget = e => console.log(e.target)
-    document.addEventListener('click', detectTarget)
-    return () => document.removeEventListener('click', detectTarget)
-  }, [])
-
   const resetToOriginalOptions = () =>
     shownOptions.length !== options.length && setShownOptions(options)
 
   const openMenu = () => {
-    if (showMenu) return
+    if (showMenu || isDisabled) return
     setShowMenu(true)
     onMenuOpen()
   }
@@ -72,6 +67,7 @@ const Dropdown = ({
   const toggleMenu = () => (showMenu ? closeMenu() : openMenu())
 
   const getIntoTypeMode = () => {
+    if (isDisabled) return
     isSearchable && setIsTypeMode(true)
     !showMenu && openMenu()
   }
@@ -88,11 +84,10 @@ const Dropdown = ({
     resetToOriginalOptions()
   }
 
-  const isOverflown = useCallback(element => {
-    // var(--sz-56, 56px)
-    // const defaultSelectedHeight = +styles.defaultSelectedHeight.split(' ')[1].slice(0, 2)
-    return element && element.scrollHeight > defaultSelectedHeight
-  }, [])
+  const isOverflown = useCallback(
+    element => element && element.scrollHeight > defaultSelectedHeight,
+    [],
+  )
 
   useClickOutsideListener(() => {
     closeMenu()
@@ -323,17 +318,16 @@ const Dropdown = ({
         </div>
       </div>
       <div className={styles.icons}>
-        {filteredValue.length > 0 && (
-          <IconButton
-            variant='ghost'
-            onClick={resetFilteredValue}
-            aria-label='clear input'
-            disabled={isDisabled}
-            className={styles.iconButton}
-          >
-            <CancelFilledIcon />
-          </IconButton>
-        )}
+        <IconButton
+          variant='ghost'
+          onClick={resetFilteredValue}
+          aria-label='clear input'
+          disabled={isDisabled}
+          className={styles.iconButton}
+          style={{ visibility: filteredValue.length ? 'visible' : 'hidden' }}
+        >
+          <TimesCircleFilled />
+        </IconButton>
         <IconButton
           variant='ghost'
           onClick={toggleMenu}
@@ -370,6 +364,7 @@ const Dropdown = ({
             )}
             isFocusedByKeyboard={isTypeMode && index === focusedOptionIndex}
             menuRef={menuRef}
+            valueRender={valueRender}
           />
         ))
       )}
@@ -377,7 +372,15 @@ const Dropdown = ({
   )
 
   return (
-    <div className={classNames(styles.container, className)} ref={containerRef}>
+    <div
+      className={classNames(
+        styles.container,
+        isDisabled && styles.isDisabled,
+        className,
+      )}
+      ref={containerRef}
+      style={style}
+    >
       {renderHeaderContainer()}
       {showMenu && renderOptions()}
     </div>
@@ -394,7 +397,7 @@ Dropdown.defaultProps = {
   multiple: false,
   isSearchable: true,
   isDisabled: false,
-  isSelectedShownInHeader: true,
+  isSelectedShownInHeader: false,
   noOptionsMessage: 'No results found',
   onMenuClose: () => {},
   onMenuOpen: () => {},
@@ -425,6 +428,8 @@ Dropdown.propTypes = {
   isSearchable: propTypes.bool,
   /** Custom style for container' className. */
   className: propTypes.string,
+  /** Custom style for container' className. */
+  style: propTypes.object,
   /** Placeholder to show when no value is selected. */
   placeholder: propTypes.string,
   /** Label to add information about  the dropdown. */
@@ -435,8 +440,10 @@ Dropdown.propTypes = {
   onMenuOpen: propTypes.func,
   /** Called when menu is closed. */
   onMenuClose: propTypes.func,
+  /** Custom value renderer function. */
+  valueRender: propTypes.func,
   /** Custom option renderer function. */
-  optionRenderer: propTypes.oneOfType([propTypes.func, propTypes.object]),
+  optionRender: propTypes.oneOfType([propTypes.func, propTypes.object]),
   /** Text / component to display when there are no options. */
   noOptionsMessage: propTypes.oneOfType([propTypes.string, propTypes.func]),
 }
