@@ -18,6 +18,7 @@ const DropdownItem = ({
   const classes = classNames(styles.menuItem, {
     [styles.isSelected]: isSelected,
     [styles.isFocusedByKeyboard]: isFocusedByKeyboard,
+    [styles.isDisabled]: !!option.disabled,
   })
 
   useEffect(() => {
@@ -43,8 +44,11 @@ const DropdownItem = ({
             className={styles.checkbox}
           />
         )}
-        {/* {valueRender ? valueRender(option[displayValue]) : <p ref={labelRef}>{option[displayValue]}</p>} */}
-        <p ref={labelRef}>{option[displayValue]}</p>
+        <div ref={labelRef} className={styles.content}>
+          {valueRender
+            ? valueRender(option[displayValue])
+            : option[displayValue]}
+        </div>
       </li>
     </Tooltip>
   )

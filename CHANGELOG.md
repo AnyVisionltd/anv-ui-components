@@ -41,6 +41,8 @@
 - New RangeSlider component
 - Added -webkit-auto-fill in InputBase
 - Added random id generator for menus' id and conditional rendering for Menu
+- Added ResultIndicator for user feedback
+- Added ProgressWithIndicator
 
 ## 1.0.0 - 06-09-2020
 

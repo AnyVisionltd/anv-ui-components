@@ -14,6 +14,11 @@
     "none": "None",
     "noResultsFound": "No results found",
     "noResultsMessage": "Try adjusting your search or filter to find what your’e looking for.",
-    "itemsSelected": "Items Selected"
+    "itemsSelected": "Items Selected",
+    "done": "Done",
+    "failed": "Failed",
+    "processing": "Processsing",
+    "inQueue": "In queue",
+    "completed": "Completed"
   }
 }

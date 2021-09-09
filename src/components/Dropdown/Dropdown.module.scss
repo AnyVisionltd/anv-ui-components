@@ -228,7 +228,3 @@ $default-selected-height: av-size(sz-56);
     max-height: av-size(sz-240);
   }
 }
-
-:export {
-  defaultSelectedHeight: $default-selected-height;
-}

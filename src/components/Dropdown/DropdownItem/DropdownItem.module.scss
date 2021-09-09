@@ -10,12 +10,27 @@
   transition: all 0.3s linear;
   min-height: av-size(sz-48);
 
-  p {
+  .content {
     @extend %av-body1;
     color: av-color(content);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  &.isDisabled {
+    opacity: av-opacity(disabled);
+    cursor: default;
+
+    &:not(:last-of-type) {
+      background-image: linear-gradient(
+        90deg,
+        av-color(primary, av-opacity(medium)) 0%,
+        av-color(primary) 20%,
+        av-color(primary, av-opacity(medium)) 80%
+      );
+      filter: brightness(av-opacity(medium));
+    }
   }
 
   &:not(:last-of-type) {

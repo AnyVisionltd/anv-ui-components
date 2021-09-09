@@ -10,8 +10,6 @@ import { useClickOutsideListener } from '../../hooks'
 import languageService from '../../services/language'
 import styles from './Dropdown.module.scss'
 
-// var(--sz-56, 56px)
-// const defaultSelectedHeight = +styles.defaultSelectedHeight.split(' ')[1].slice(0, 2)
 const defaultSelectedHeight = 56
 const getTranslation = path => languageService.getTranslation(`${path}`)
 
@@ -137,7 +135,7 @@ const Dropdown = ({
   }
 
   const handleItemClick = clickedOption => {
-    if (!clickedOption) return
+    if (!clickedOption || clickedOption.disabled) return
     if (maxSelected && maxSelected === selectedOptions.length) {
       return onExceedMaxSelected()
     }
@@ -442,8 +440,6 @@ Dropdown.propTypes = {
   onMenuClose: propTypes.func,
   /** Custom value renderer function. */
   valueRender: propTypes.func,
-  /** Custom option renderer function. */
-  optionRender: propTypes.oneOfType([propTypes.func, propTypes.object]),
   /** Text / component to display when there are no options. */
   noOptionsMessage: propTypes.oneOfType([propTypes.string, propTypes.func]),
 }
