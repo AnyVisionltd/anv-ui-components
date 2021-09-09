@@ -398,7 +398,7 @@ Dropdown.defaultProps = {
   isSearchable: true,
   isDisabled: false,
   isSelectedShownInHeader: false,
-  noOptionsMessage: 'No results found',
+  noOptionsMessage: getTranslation('noResultsFound'),
   onMenuClose: () => {},
   onMenuOpen: () => {},
   onChange: () => {},
