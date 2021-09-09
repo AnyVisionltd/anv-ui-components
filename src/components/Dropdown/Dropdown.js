@@ -389,8 +389,8 @@ const Dropdown = ({
 Dropdown.defaultProps = {
   options: [],
   defaultValues: [],
-  placeholder: 'Select Option',
-  label: 'Label',
+  placeholder: getTranslation('selectOption'),
+  label: getTranslation('label'),
   displayValue: 'value',
   keyValue: 'id',
   multiple: false,

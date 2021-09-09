@@ -35,7 +35,7 @@ const DropdownItem = ({
   }, [labelRef, menuRef, isFocusedByKeyboard])
 
   return (
-    <Tooltip content={option.value} show={useIsOverflowing(labelRef)}>
+    <Tooltip content={option[displayValue]} show={useIsOverflowing(labelRef)}>
       <li className={classes} onClick={onClick}>
         {multiple && (
           <Checkbox
