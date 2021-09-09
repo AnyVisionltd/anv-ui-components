@@ -94,7 +94,8 @@ const Dropdown = ({
   }, containerRef)
 
   useEffect(() => {
-    if (!multiple || !isSelectedShownInHeader) return
+    if (!multiple || !isSelectedShownInHeader || !selectedContainerRef.current)
+      return
     if (selectedOptions.length && isOverflown(selectedContainerRef.current)) {
       selectedContainerRef.current.style.height = 'auto'
       selectedContainerRef.current.style.paddingBottom = '8px'

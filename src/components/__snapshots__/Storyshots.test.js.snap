@@ -167,6 +167,495 @@ exports[`Storyshots Animations/Slide Basic 1`] = `
 </div>
 `;
 
+exports[`Storyshots Content/ Dropdown Basic 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "height": "100%",
+          "justifyContent": "center",
+          "marginBottom": "200px",
+        }
+      }
+    >
+      <div
+        className="container"
+      >
+        <div
+          className="selectedContainer"
+        >
+          <label>
+            Gender
+          </label>
+          <div
+            className="selectedContentContainer"
+            onClick={[Function]}
+          >
+            <div
+              className="valuesContainer"
+            >
+              <p
+                className="selectedValue"
+                onClick={[Function]}
+              >
+                Male
+              </p>
+            </div>
+          </div>
+          <div
+            className="icons"
+          >
+            <button
+              aria-label="clear input"
+              className="button medium ghost iconButton small ghost iconButton"
+              disabled={false}
+              onClick={[Function]}
+              style={
+                Object {
+                  "visibility": "hidden",
+                }
+              }
+              type="button"
+            >
+              <svg
+                data-name="times circle filled"
+                height="1em"
+                viewBox="0 0 24 24"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.5 20A7.5 7.5 0 017.2 7.2a7.5 7.5 0 1110.6 10.6 7.444 7.444 0 01-5.3 2.2zm0-6.442l2.468 2.469a.789.789 0 00.3.183.755.755 0 00.234.037.742.742 0 00.529-.22.752.752 0 00.22-.53.744.744 0 00-.22-.529L13.56 12.5l2.468-2.469a.749.749 0 000-1.06.747.747 0 00-1.06 0l-2.468 2.47-2.47-2.469a.747.747 0 00-1.06 0 .754.754 0 000 1.06l2.47 2.468-2.47 2.47a.742.742 0 00-.218.529.747.747 0 00.749.75.742.742 0 00.529-.22l2.47-2.469z"
+                  data-name="Subtraction 5"
+                />
+              </svg>
+            </button>
+            <button
+              aria-label="toggle menu"
+              className="button medium ghost iconButton small ghost iconButton"
+              disabled={false}
+              onClick={[Function]}
+              type="button"
+            >
+              <svg
+                data-name="Arrow up"
+                height="1em"
+                viewBox="0 0 24 24"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.337 15.216a1.138 1.138 0 001.605 0l4.086-4.03 4.03 4.03a1.139 1.139 0 101.605-1.616l-4.826-4.827a1.138 1.138 0 00-1.616 0L6.337 13.6a1.138 1.138 0 000 1.616z"
+                  data-name="Arrow up"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Content/ Dropdown Disabled 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "height": "100%",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <div
+        className="container isDisabled"
+      >
+        <div
+          className="selectedContainer"
+        >
+          <label>
+            Gender
+          </label>
+          <div
+            className="selectedContentContainer"
+            onClick={[Function]}
+          >
+            <div
+              className="valuesContainer"
+            >
+              <p
+                className="selectedValue"
+                onClick={[Function]}
+              >
+                Male
+              </p>
+            </div>
+          </div>
+          <div
+            className="icons"
+          >
+            <button
+              aria-label="clear input"
+              className="button medium ghost iconButton small ghost iconButton"
+              disabled={true}
+              onClick={[Function]}
+              style={
+                Object {
+                  "visibility": "hidden",
+                }
+              }
+              type="button"
+            >
+              <svg
+                data-name="times circle filled"
+                height="1em"
+                viewBox="0 0 24 24"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.5 20A7.5 7.5 0 017.2 7.2a7.5 7.5 0 1110.6 10.6 7.444 7.444 0 01-5.3 2.2zm0-6.442l2.468 2.469a.789.789 0 00.3.183.755.755 0 00.234.037.742.742 0 00.529-.22.752.752 0 00.22-.53.744.744 0 00-.22-.529L13.56 12.5l2.468-2.469a.749.749 0 000-1.06.747.747 0 00-1.06 0l-2.468 2.47-2.47-2.469a.747.747 0 00-1.06 0 .754.754 0 000 1.06l2.47 2.468-2.47 2.47a.742.742 0 00-.218.529.747.747 0 00.749.75.742.742 0 00.529-.22l2.47-2.469z"
+                  data-name="Subtraction 5"
+                />
+              </svg>
+            </button>
+            <button
+              aria-label="toggle menu"
+              className="button medium ghost iconButton small ghost iconButton"
+              disabled={true}
+              onClick={[Function]}
+              type="button"
+            >
+              <svg
+                data-name="Arrow up"
+                height="1em"
+                viewBox="0 0 24 24"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.337 15.216a1.138 1.138 0 001.605 0l4.086-4.03 4.03 4.03a1.139 1.139 0 101.605-1.616l-4.826-4.827a1.138 1.138 0 00-1.616 0L6.337 13.6a1.138 1.138 0 000 1.616z"
+                  data-name="Arrow up"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Content/ Dropdown Multiple 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "height": "100%",
+          "justifyContent": "center",
+          "marginBottom": "240px",
+        }
+      }
+    >
+      <div
+        className="container"
+        style={
+          Object {
+            "width": "420px",
+          }
+        }
+      >
+        <div
+          className="selectedContainer"
+        >
+          <label>
+            Fruits
+          </label>
+          <div
+            className="selectedContentContainer"
+            onClick={[Function]}
+          >
+            <div
+              className="valuesContainer"
+            >
+              <p
+                className="placeholder"
+                onClick={[Function]}
+              >
+                Select Option
+              </p>
+            </div>
+          </div>
+          <div
+            className="icons"
+          >
+            <button
+              aria-label="clear input"
+              className="button medium ghost iconButton small ghost iconButton"
+              disabled={false}
+              onClick={[Function]}
+              style={
+                Object {
+                  "visibility": "hidden",
+                }
+              }
+              type="button"
+            >
+              <svg
+                data-name="times circle filled"
+                height="1em"
+                viewBox="0 0 24 24"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.5 20A7.5 7.5 0 017.2 7.2a7.5 7.5 0 1110.6 10.6 7.444 7.444 0 01-5.3 2.2zm0-6.442l2.468 2.469a.789.789 0 00.3.183.755.755 0 00.234.037.742.742 0 00.529-.22.752.752 0 00.22-.53.744.744 0 00-.22-.529L13.56 12.5l2.468-2.469a.749.749 0 000-1.06.747.747 0 00-1.06 0l-2.468 2.47-2.47-2.469a.747.747 0 00-1.06 0 .754.754 0 000 1.06l2.47 2.468-2.47 2.47a.742.742 0 00-.218.529.747.747 0 00.749.75.742.742 0 00.529-.22l2.47-2.469z"
+                  data-name="Subtraction 5"
+                />
+              </svg>
+            </button>
+            <button
+              aria-label="toggle menu"
+              className="button medium ghost iconButton small ghost iconButton"
+              disabled={false}
+              onClick={[Function]}
+              type="button"
+            >
+              <svg
+                data-name="Arrow up"
+                height="1em"
+                viewBox="0 0 24 24"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.337 15.216a1.138 1.138 0 001.605 0l4.086-4.03 4.03 4.03a1.139 1.139 0 101.605-1.616l-4.826-4.827a1.138 1.138 0 00-1.616 0L6.337 13.6a1.138 1.138 0 000 1.616z"
+                  data-name="Arrow up"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Content/ Dropdown Multiple With Selected In Header 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "height": "100%",
+          "justifyContent": "center",
+          "marginBottom": "240px",
+        }
+      }
+    >
+      <div
+        className="container"
+        style={
+          Object {
+            "width": "450px",
+          }
+        }
+      >
+        <div
+          className="selectedContainer"
+        >
+          <label>
+            Fruits
+          </label>
+          <div
+            className="selectedContentContainer"
+            onClick={[Function]}
+          >
+            <div
+              className="valuesContainer"
+            >
+              <p
+                className="placeholder"
+                onClick={[Function]}
+              >
+                Select Option
+              </p>
+            </div>
+          </div>
+          <div
+            className="icons"
+          >
+            <button
+              aria-label="clear input"
+              className="button medium ghost iconButton small ghost iconButton"
+              disabled={false}
+              onClick={[Function]}
+              style={
+                Object {
+                  "visibility": "hidden",
+                }
+              }
+              type="button"
+            >
+              <svg
+                data-name="times circle filled"
+                height="1em"
+                viewBox="0 0 24 24"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.5 20A7.5 7.5 0 017.2 7.2a7.5 7.5 0 1110.6 10.6 7.444 7.444 0 01-5.3 2.2zm0-6.442l2.468 2.469a.789.789 0 00.3.183.755.755 0 00.234.037.742.742 0 00.529-.22.752.752 0 00.22-.53.744.744 0 00-.22-.529L13.56 12.5l2.468-2.469a.749.749 0 000-1.06.747.747 0 00-1.06 0l-2.468 2.47-2.47-2.469a.747.747 0 00-1.06 0 .754.754 0 000 1.06l2.47 2.468-2.47 2.47a.742.742 0 00-.218.529.747.747 0 00.749.75.742.742 0 00.529-.22l2.47-2.469z"
+                  data-name="Subtraction 5"
+                />
+              </svg>
+            </button>
+            <button
+              aria-label="toggle menu"
+              className="button medium ghost iconButton small ghost iconButton"
+              disabled={false}
+              onClick={[Function]}
+              type="button"
+            >
+              <svg
+                data-name="Arrow up"
+                height="1em"
+                viewBox="0 0 24 24"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.337 15.216a1.138 1.138 0 001.605 0l4.086-4.03 4.03 4.03a1.139 1.139 0 101.605-1.616l-4.826-4.827a1.138 1.138 0 00-1.616 0L6.337 13.6a1.138 1.138 0 000 1.616z"
+                  data-name="Arrow up"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Content/ Dropdown Value Render 1`] = `
+<div>
+  <div
+    className="center"
+  >
+    <div
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "height": "100%",
+          "justifyContent": "center",
+          "marginBottom": "240px",
+        }
+      }
+    >
+      <div
+        className="container"
+      >
+        <div
+          className="selectedContainer"
+        >
+          <label>
+            Fruits
+          </label>
+          <div
+            className="selectedContentContainer"
+            onClick={[Function]}
+          >
+            <div
+              className="valuesContainer"
+            >
+              <p
+                className="placeholder"
+                onClick={[Function]}
+              >
+                Select Option
+              </p>
+            </div>
+          </div>
+          <div
+            className="icons"
+          >
+            <button
+              aria-label="clear input"
+              className="button medium ghost iconButton small ghost iconButton"
+              disabled={false}
+              onClick={[Function]}
+              style={
+                Object {
+                  "visibility": "hidden",
+                }
+              }
+              type="button"
+            >
+              <svg
+                data-name="times circle filled"
+                height="1em"
+                viewBox="0 0 24 24"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.5 20A7.5 7.5 0 017.2 7.2a7.5 7.5 0 1110.6 10.6 7.444 7.444 0 01-5.3 2.2zm0-6.442l2.468 2.469a.789.789 0 00.3.183.755.755 0 00.234.037.742.742 0 00.529-.22.752.752 0 00.22-.53.744.744 0 00-.22-.529L13.56 12.5l2.468-2.469a.749.749 0 000-1.06.747.747 0 00-1.06 0l-2.468 2.47-2.47-2.469a.747.747 0 00-1.06 0 .754.754 0 000 1.06l2.47 2.468-2.47 2.47a.742.742 0 00-.218.529.747.747 0 00.749.75.742.742 0 00.529-.22l2.47-2.469z"
+                  data-name="Subtraction 5"
+                />
+              </svg>
+            </button>
+            <button
+              aria-label="toggle menu"
+              className="button medium ghost iconButton small ghost iconButton"
+              disabled={false}
+              onClick={[Function]}
+              type="button"
+            >
+              <svg
+                data-name="Arrow up"
+                height="1em"
+                viewBox="0 0 24 24"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.337 15.216a1.138 1.138 0 001.605 0l4.086-4.03 4.03 4.03a1.139 1.139 0 101.605-1.616l-4.826-4.827a1.138 1.138 0 00-1.616 0L6.337 13.6a1.138 1.138 0 000 1.616z"
+                  data-name="Arrow up"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Content/Chip Default 1`] = `
 <div>
   <div
