@@ -27,5 +27,7 @@ export { Progress } from './components/Progress'
 export { Tabs } from './components/Tabs'
 export { RangeSlider } from './components/RangeSlider'
 export { DatePicker } from './components/DatePicker'
+export { ResultIndicator } from './components/ResultIndicator'
+export { ProgressWithIndicator } from './components/ProgressWithIndicator'
 
 export { useFormProvider } from './components/FormProvider/useFormProvider'

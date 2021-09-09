@@ -1,0 +1,12 @@
+@import '~@anyvision/style-guide';
+
+.progressText {
+  text-transform: uppercase;
+  align-self: start;
+  text-align: left;
+  color: av-color(primary);
+  margin-bottom: 0;
+  white-space: nowrap;
+  letter-spacing: 1.1px;
+  text-shadow: -0.01ex 0 currentColor, 0.01ex 0 currentColor;
+}
