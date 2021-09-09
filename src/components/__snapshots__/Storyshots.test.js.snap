@@ -10999,7 +10999,7 @@ exports[`Storyshots User Inputs/Date & Time/DatePicker Basic 1`] = `
                 }
               }
               cancelLabel={null}
-              defaultValue="05/09/2021"
+              defaultValue="09/09/2021"
               disabled={false}
               helperText=""
               inputRef={
@@ -11012,7 +11012,7 @@ exports[`Storyshots User Inputs/Date & Time/DatePicker Basic 1`] = `
               onFocus={[Function]}
               readOnly={false}
               type="text"
-              value="05/09/2021"
+              value="09/09/2021"
             />
             <div
               className="trailingIcon trailingIcon"
@@ -11040,7 +11040,7 @@ exports[`Storyshots User Inputs/Date & Time/DatePicker Basic 1`] = `
       </div>
       <p>
         Selected date: 
-        05/09/2021
+        09/09/2021
       </p>
     </div>
   </div>
