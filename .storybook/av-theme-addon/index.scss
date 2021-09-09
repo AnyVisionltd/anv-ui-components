@@ -1,5 +1,10 @@
 @import '~@anyvision/style-guide';
 
+@font-face {
+  font-family: 'Poppins';
+  src: local('Poppins'), url(/styles/fonts/Poppins-Regular.ttf) format("truetype");
+}
+
 .light {
   color: av-color(decorative);
 }

@@ -26,6 +26,7 @@ export { Banner } from './components/Banner'
 export { Progress } from './components/Progress'
 export { Tabs } from './components/Tabs'
 export { RangeSlider } from './components/RangeSlider'
+export { DatePicker } from './components/DatePicker'
 export { ResultIndicator } from './components/ResultIndicator'
 export { ProgressWithIndicator } from './components/ProgressWithIndicator'
 
