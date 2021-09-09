@@ -44,7 +44,12 @@ export const Basic = () => {
 
   return (
     <div style={{ ...containerStyle, marginBottom: '200px' }}>
-      <Dropdown options={genders} label='Gender' defaultValues={[genders[0]]} />
+      <Dropdown
+        options={genders}
+        label='Gender'
+        defaultValues={[genders[0]]}
+        onChange={handleChange}
+      />
     </div>
   )
 }
@@ -95,6 +100,7 @@ export const ValueRender = () => {
     <div style={{ ...containerStyle, marginBottom: '240px' }}>
       <Dropdown
         multiple
+        onChange={handleChange}
         options={items}
         label='Fruits'
         displayValue='myValue'
