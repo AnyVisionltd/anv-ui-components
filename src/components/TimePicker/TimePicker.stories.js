@@ -10,11 +10,11 @@ export default {
 }
 
 export const Basic = () => {
-  const [value, setValue] = useState(moment().format('HH:mm'))
+  const [value, setValue] = useState(moment())
   return (
     <div>
-      <TimePicker onChange={setValue} />
-      <p>Selected time: {value}</p>
+      <TimePicker onChange={setValue} value={value} disabled />
+      <p>Selected time: {value.format('HH:mm')}</p>
     </div>
   )
 }

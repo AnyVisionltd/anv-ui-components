@@ -10,11 +10,11 @@ export default {
 }
 
 export const Basic = () => {
-  const [value, setValue] = useState(moment().format('DD/MM/yyyy'))
+  const [value, setValue] = useState(moment().add(7, 'days'))
   return (
     <div>
-      <DatePicker onChange={setValue} />
-      <p>Selected date: {value}</p>
+      <DatePicker onChange={setValue} value={value} />
+      <p>Selected date: {value.format('DD/MM/yyyy')}</p>
     </div>
   )
 }

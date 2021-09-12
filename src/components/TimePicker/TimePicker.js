@@ -14,13 +14,11 @@ import { TextField } from '../TextField'
 import { IconButton } from '../IconButton'
 import './TimePicker.scss'
 
-const TimePicker = ({ onChange, disabled, format, label, defaultValue }) => {
+const TimePicker = ({ onChange, disabled, format, label, value }) => {
   const textFieldRef = useRef()
   const [isOpen, setIsOpen] = useState(false)
   const [isFocus, setIsFocus] = useState(false)
-  const [date, setDate] = useState(
-    defaultValue ? moment(defaultValue).format(format) : new Date(),
-  )
+  const [date, setDate] = useState(value || moment())
 
   /**
    * Keeps the input on focus on the first _ char.
@@ -52,7 +50,6 @@ const TimePicker = ({ onChange, disabled, format, label, defaultValue }) => {
       label={props.label}
       onClick={props.onClick}
       defaultValue={props.value}
-      value={props.value}
       onChange={props.onChange}
       ref={textFieldRef}
       onFocus={() => setIsFocus(true)}
@@ -74,7 +71,7 @@ const TimePicker = ({ onChange, disabled, format, label, defaultValue }) => {
    */
   const handleDateChange = useCallback(date => {
     setDate(date)
-    onChange && onChange(moment(date).format(format))
+    onChange && onChange(date)
   }, [])
 
   /**
@@ -104,8 +101,6 @@ const TimePicker = ({ onChange, disabled, format, label, defaultValue }) => {
           open={isOpen}
           ampm={false}
           label={label}
-          okLabel={null}
-          cancelLabel={null}
           variant='inline'
           disabled={disabled}
           format={format}
@@ -128,15 +123,15 @@ TimePicker.propTypes = {
   /** Date format. */
   format: PropTypes.string,
   /**
-   * Default date.
+   * Controlled time value.
    */
-  defaultvalue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /**
-   * Callback when date change
+   * Callback when time change.
    */
   onChange: PropTypes.func,
   /**
-   * TextField label
+   * TextField label.
    */
   label: PropTypes.string,
 }

@@ -23,14 +23,12 @@ const DatePicker = ({
   maxDate,
   minDate,
   label,
-  defaultValue,
+  value,
 }) => {
   const textFieldRef = useRef()
   const [isOpen, setIsOpen] = useState(false)
   const [isFocus, setIsFocus] = useState(false)
-  const [date, setDate] = useState(
-    defaultValue ? moment(defaultValue).format(format) : new Date(),
-  )
+  const [date, setDate] = useState(value || moment())
 
   /**
    * Keeps the input on focus on the first _ char.
@@ -62,7 +60,6 @@ const DatePicker = ({
       label={props.label}
       onClick={props.onClick}
       defaultValue={props.value}
-      value={props.value}
       onChange={props.onChange}
       ref={textFieldRef}
       onFocus={() => setIsFocus(true)}
@@ -84,7 +81,7 @@ const DatePicker = ({
    */
   const handleDateChange = useCallback(date => {
     setDate(date)
-    onChange && onChange(moment(date).format(format))
+    onChange && onChange(date)
   }, [])
 
   /**
@@ -136,9 +133,9 @@ DatePicker.propTypes = {
   /** Date format. */
   format: PropTypes.string,
   /**
-   * Default date.
+   * Controlled date value.
    */
-  defaultvalue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /**
    * Max selectable date.
    */
@@ -148,11 +145,11 @@ DatePicker.propTypes = {
    */
   minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /**
-   * Callback when date change
+   * Callback when date change.
    */
   onChange: PropTypes.func,
   /**
-   * TextField label
+   * TextField label.
    */
   label: PropTypes.string,
 }

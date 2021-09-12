@@ -9,6 +9,12 @@ describe('<DatePicker />', () => {
     expect(container).toBeTruthy()
   })
 
+  it('Should be disabled', () => {
+    const { getByRole } = render(<DatePicker disabled />)
+    const node = getByRole('textbox')
+    expect(node.disabled).toBe(true)
+  })
+
   it('Should call onChange', () => {
     const handleOnChange = jest.fn()
     const { getByRole } = render(<DatePicker onChange={handleOnChange} />)
