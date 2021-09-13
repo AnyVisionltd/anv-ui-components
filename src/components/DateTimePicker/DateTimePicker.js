@@ -23,14 +23,12 @@ const DateTimePicker = ({
   maxDate,
   minDate,
   label,
-  defaultValue,
+  value,
 }) => {
   const textFieldRef = useRef()
   const [isOpen, setIsOpen] = useState(false)
   const [isFocus, setIsFocus] = useState(false)
-  const [date, setDate] = useState(
-    defaultValue ? moment(defaultValue).format(format) : new Date(),
-  )
+  const [date, setDate] = useState(value || moment())
 
   /**
    * Keeps the input on focus on the first _ char.
@@ -150,7 +148,7 @@ DateTimePicker.propTypes = {
   /**
    * Controlled date&time value.
    */
-  defaultvalue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /**
    * Max selectable date.
    */
