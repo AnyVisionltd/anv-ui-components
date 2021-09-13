@@ -10999,7 +10999,7 @@ exports[`Storyshots User Inputs/Date & Time/DatePicker Basic 1`] = `
                 }
               }
               cancelLabel={null}
-              defaultValue="12/09/2021"
+              defaultValue="13/09/2021"
               disabled={false}
               helperText=""
               inputRef={
@@ -11012,7 +11012,7 @@ exports[`Storyshots User Inputs/Date & Time/DatePicker Basic 1`] = `
               onFocus={[Function]}
               readOnly={false}
               type="text"
-              value="12/09/2021"
+              value="13/09/2021"
             />
             <div
               className="trailingIcon trailingIcon"
@@ -11040,7 +11040,7 @@ exports[`Storyshots User Inputs/Date & Time/DatePicker Basic 1`] = `
       </div>
       <p>
         Selected date: 
-        12/09/2021
+        13/09/2021
       </p>
     </div>
   </div>
@@ -11084,7 +11084,7 @@ exports[`Storyshots User Inputs/Date & Time/DateTimePicker Basic 1`] = `
                 }
               }
               cancelLabel={null}
-              defaultValue="12/09/2021 19:32"
+              defaultValue="13/09/2021 09:11"
               disabled={false}
               helperText=""
               inputRef={
@@ -11097,7 +11097,7 @@ exports[`Storyshots User Inputs/Date & Time/DateTimePicker Basic 1`] = `
               onFocus={[Function]}
               readOnly={false}
               type="text"
-              value="12/09/2021 19:32"
+              value="13/09/2021 09:11"
             />
             <div
               className="trailingIcon trailingIcon"
@@ -11125,7 +11125,7 @@ exports[`Storyshots User Inputs/Date & Time/DateTimePicker Basic 1`] = `
       </div>
       <p>
         Selected time: 
-        12/09/2021 19:32
+        13/09/2021 09:11
       </p>
     </div>
   </div>
