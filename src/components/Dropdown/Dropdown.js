@@ -202,7 +202,7 @@ const Dropdown = ({
         break
       case keymap.BACKSPACE:
         if (filteredValue) return
-        if (multiple && selectedOptions.length) {
+        if (multiple && isSelectedShownInHeader && selectedOptions.length) {
           popLastValue()
         }
         break
@@ -268,6 +268,32 @@ const Dropdown = ({
     </button>
   )
 
+  const renderButtons = () => (
+    <div className={styles.icons}>
+      <IconButton
+        variant='ghost'
+        onClick={resetFilteredValue}
+        aria-label='clear input'
+        disabled={isDisabled}
+        className={styles.iconButton}
+        style={{ visibility: filteredValue.length ? 'visible' : 'hidden' }}
+      >
+        <TimesCircleFilled />
+      </IconButton>
+      <IconButton
+        variant='ghost'
+        onClick={toggleMenu}
+        aria-label='toggle menu'
+        disabled={isDisabled}
+        className={classNames(styles.iconButton, {
+          [styles.rotated]: showMenu,
+        })}
+      >
+        <ArrowUp />
+      </IconButton>
+    </div>
+  )
+
   const determineInputPlaceholder = () => {
     if (!multiple) {
       return selectedOptions.length ? selectedOptions[0].value : placeholder
@@ -316,29 +342,7 @@ const Dropdown = ({
           )}
         </div>
       </div>
-      <div className={styles.icons}>
-        <IconButton
-          variant='ghost'
-          onClick={resetFilteredValue}
-          aria-label='clear input'
-          disabled={isDisabled}
-          className={styles.iconButton}
-          style={{ visibility: filteredValue.length ? 'visible' : 'hidden' }}
-        >
-          <TimesCircleFilled />
-        </IconButton>
-        <IconButton
-          variant='ghost'
-          onClick={toggleMenu}
-          aria-label='toggle menu'
-          disabled={isDisabled}
-          className={classNames(styles.iconButton, {
-            [styles.rotated]: showMenu,
-          })}
-        >
-          <ArrowUp />
-        </IconButton>
-      </div>
+      {renderButtons()}
     </div>
   )
 
@@ -354,7 +358,6 @@ const Dropdown = ({
           <DropdownItem
             option={option}
             displayValue={displayValue}
-            disabled={option.disabled === true}
             multiple={multiple}
             key={option[keyValue]}
             onClick={() => handleItemClick(option)}

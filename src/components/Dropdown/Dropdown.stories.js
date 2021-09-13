@@ -14,6 +14,7 @@ const containerStyle = {
   justifyContent: 'center',
   alignItems: 'center',
   height: '100%',
+  marginBottom: '240px',
 }
 
 const items = [
@@ -59,7 +60,7 @@ export const Multiple = () => {
   const handleChange = newValues => setValues(newValues)
 
   return (
-    <div style={{ ...containerStyle, marginBottom: '240px' }}>
+    <div style={containerStyle}>
       <Dropdown
         style={{ width: '420px' }}
         options={items}
@@ -78,7 +79,7 @@ export const MultipleWithSelectedInHeader = () => {
   const handleChange = newValues => setValues(newValues)
 
   return (
-    <div style={{ ...containerStyle, marginBottom: '240px' }}>
+    <div style={containerStyle}>
       <Dropdown
         style={{ width: '450px' }}
         options={items}
@@ -97,7 +98,7 @@ export const ValueRender = () => {
   const handleChange = newValues => setValues(newValues)
 
   return (
-    <div style={{ ...containerStyle, marginBottom: '240px' }}>
+    <div style={containerStyle}>
       <Dropdown
         multiple
         onChange={handleChange}
