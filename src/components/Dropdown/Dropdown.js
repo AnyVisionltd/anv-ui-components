@@ -298,7 +298,9 @@ const Dropdown = ({
 
   const determineInputPlaceholder = () => {
     if (!multiple) {
-      return selectedOptions.length ? selectedOptions[0].value : placeholder
+      return selectedOptions.length
+        ? selectedOptions[0][displayValue]
+        : placeholder
     }
     if (!isSelectedShownInHeader) return placeholder
     return selectedOptions.length ? undefined : placeholder
