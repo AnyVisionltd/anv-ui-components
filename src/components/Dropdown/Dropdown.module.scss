@@ -48,7 +48,7 @@ $default-selected-height: av-size(sz-56);
     display: flex;
     align-items: center;
     border: 1px solid av-color(primary, av-opacity(disabled));
-    transition: all 0.3s linear;
+    transition: all 0.2s linear;
     overflow: hidden;
 
     &:hover {
@@ -119,12 +119,12 @@ $default-selected-height: av-size(sz-56);
           cursor: pointer;
           height: av-size(sz-16);
           width: av-size(sz-16);
-          transition: all 0.3s linear;
+          transition: all 0.05s linear;
           fill: av-color(content);
         }
 
         &.spacingTop input {
-          padding-top: 3px;
+          padding-top: av-space(micro);
         }
 
         input {
@@ -178,6 +178,7 @@ $default-selected-height: av-size(sz-56);
 
     .selectedItem,
     .deleteButton {
+      @extend %av-caption;
       font-family: inherit;
       border: none;
       outline: none;
@@ -188,7 +189,7 @@ $default-selected-height: av-size(sz-56);
       border-radius: av-radius(curvy);
       font-size: av-font-size(micro);
       color: av-color(purewhite);
-      margin-right: av-space(tiny);
+      margin-right: av-space(micro);
       align-items: center;
 
       span {
@@ -209,8 +210,12 @@ $default-selected-height: av-size(sz-56);
       }
 
       &.spacingTop {
-        margin-top: 3px;
+        margin-top: av-space(micro);
       }
+    }
+
+    .deleteButton {
+      margin-right: av-space(tiny);
     }
   }
 

@@ -165,6 +165,8 @@ const Dropdown = ({
       getOffTypeMode()
       closeMenu()
       resetFocusedOptionIndex()
+    } else {
+      resetToOriginalOptions()
     }
   }
 
