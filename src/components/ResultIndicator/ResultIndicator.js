@@ -53,7 +53,7 @@ const ResultIndicator = props => {
   const tooltipContentMap = {
     success: successMessage,
     error: errorMessage,
-    stopped: getTranslation('inQueue'),
+    stopped: getTranslation('stopped'),
   }
 
   const determineIndicator = obj => {
