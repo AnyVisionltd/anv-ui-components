@@ -330,7 +330,9 @@ const Dropdown = ({
               autoFocus
               value={filteredValue}
               onChange={handleFilterChange}
-              className={styles.inputBase}
+              className={classNames(styles.inputBase, {
+                [styles.spacingTop]: isSelectedShownInHeader && multiple,
+              })}
               onBlur={getOffTypeMode}
               onKeyDown={handleKeyDown}
               placeholder={determineInputPlaceholder()}

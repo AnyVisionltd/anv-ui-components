@@ -71,7 +71,7 @@ DropdownItem.propTypes = {
   /** Custom value renderer function. */
   valueRender: propTypes.func,
   /** Menu element. */
-  menuRef: propTypes.element,
+  menuRef: propTypes.shape({ current: propTypes.instanceOf(Element) }),
 }
 
 export default memo(DropdownItem)

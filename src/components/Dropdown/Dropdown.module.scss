@@ -123,6 +123,10 @@ $default-selected-height: av-size(sz-56);
           fill: av-color(content);
         }
 
+        &.spacingTop input {
+          padding-top: 3px;
+        }
+
         input {
           @extend %noSpacingStyle;
           @extend %av-body1;
@@ -150,16 +154,15 @@ $default-selected-height: av-size(sz-56);
       margin-left: av-space(micro);
 
       .iconButton {
-        width: av-size(sz-16);
-        height: av-size(sz-16);
+        width: av-size(sz-24);
+        height: av-size(sz-24);
         color: av-color(content);
-        transition: all 0.3s linear;
 
         > svg {
           color: av-color(content);
           cursor: pointer;
-          height: av-size(sz-16);
-          width: av-size(sz-16);
+          height: av-size(sz-24);
+          width: av-size(sz-24);
           fill: av-color(content);
         }
 
@@ -199,9 +202,9 @@ $default-selected-height: av-size(sz-56);
           font-size: av-font-size(tiny);
           fill: av-color(purewhite);
           cursor: pointer;
-          background-color: av-color(secondary, av-opacity(disabled));
           border-radius: av-radius(circle);
           padding: 2px;
+          margin-right: 2px;
         }
       }
 
@@ -230,5 +233,5 @@ $default-selected-height: av-size(sz-56);
 }
 
 :export {
-  defaultSelectedHeight: $default-selected-height
+  defaultSelectedHeight: $default-selected-height;
 }

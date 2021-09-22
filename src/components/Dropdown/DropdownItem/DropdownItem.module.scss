@@ -21,28 +21,6 @@
   &.isDisabled {
     opacity: av-opacity(disabled);
     cursor: default;
-
-    &:not(:last-of-type) {
-      background-image: linear-gradient(
-        90deg,
-        av-color(primary, av-opacity(medium)) 0%,
-        av-color(primary) 20%,
-        av-color(primary, av-opacity(medium)) 80%
-      );
-      filter: brightness(av-opacity(medium));
-    }
-  }
-
-  &:not(:last-of-type) {
-    background-image: linear-gradient(
-      90deg,
-      av-color(primary, av-opacity(disabled)) 0%,
-      av-color(primary, av-opacity(medium)) 20%,
-      av-color(primary, av-opacity(disabled)) 80%
-    );
-    background-position: 50% 100%, 100% 100%;
-    background-repeat: no-repeat;
-    background-size: 90% 1px, 100% 100%;
   }
 
   &:active,
