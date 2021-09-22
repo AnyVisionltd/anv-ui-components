@@ -29,7 +29,7 @@
 %icon {
   width: av-size(sz-24);
   height: av-size(sz-24);
-  fill: currentColor;
+  fill: currentColor !important;
 }
 
 .inQueueContainer {
@@ -62,6 +62,14 @@
 
     &:hover {
       background-color: av-color(error, av-opacity(disabled));
+    }
+  }
+
+  &.stopped {
+    color: av-color(alert);
+
+    &:hover {
+      background-color: av-color(alert, av-opacity(disabled));
     }
   }
 

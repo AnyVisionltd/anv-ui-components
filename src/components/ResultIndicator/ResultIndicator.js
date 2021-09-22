@@ -8,18 +8,22 @@ import {
 } from '@anyvision/anv-icons'
 import { Tooltip } from '../Tooltip'
 import languageService from '../../services/language'
+import { ReactComponent as StopCircleOutlined } from '../../assets/svg/StopCircleOutlined.svg'
 import styles from './ResultIndicator.module.scss'
 
 const getTranslation = word => languageService.getTranslation(word)
 
-const ResultIndicator = ({
-  isTiny,
-  error,
-  success,
-  errorMessage,
-  successMessage,
-  inQueue,
-}) => {
+const ResultIndicator = props => {
+  const {
+    isTiny,
+    error,
+    success,
+    errorMessage,
+    successMessage,
+    inQueue,
+    stopped,
+  } = props
+
   const renderInQueue = () => (
     <Tooltip content={getTranslation('inQueue')}>
       <div className={styles.inQueueContainer}>
@@ -28,26 +32,47 @@ const ResultIndicator = ({
     </Tooltip>
   )
 
+  const indicatorsMap = {
+    success: (
+      <>
+        <CheckCircleFilled /> {!isTiny && getTranslation('done')}
+      </>
+    ),
+    error: (
+      <>
+        <TimesCircleFilled /> {!isTiny && getTranslation('failed')}
+      </>
+    ),
+    stopped: (
+      <>
+        <StopCircleOutlined /> {!isTiny && getTranslation('stopped')}
+      </>
+    ),
+  }
+
+  const tooltipContentMap = {
+    success: successMessage,
+    error: errorMessage,
+    stopped: getTranslation('inQueue'),
+  }
+
+  const determineIndicator = obj => {
+    for (let value in obj) {
+      if (props[value]) return obj[value]
+    }
+  }
+
   const renderResult = () => {
     const classes = classNames(
       styles.resultContainer,
       success && styles.success,
       error && styles.error,
+      stopped && styles.stopped,
     )
 
     return (
-      <Tooltip content={success ? successMessage : errorMessage}>
-        <div className={classes}>
-          {success ? (
-            <>
-              <CheckCircleFilled /> {!isTiny && getTranslation('done')}
-            </>
-          ) : (
-            <>
-              <TimesCircleFilled /> {!isTiny && getTranslation('failed')}
-            </>
-          )}
-        </div>
+      <Tooltip content={determineIndicator(tooltipContentMap)}>
+        <div className={classes}>{determineIndicator(indicatorsMap)}</div>
       </Tooltip>
     )
   }
@@ -70,6 +95,8 @@ ResultIndicator.propTypes = {
   success: propTypes.bool,
   /** Determines if the action fails. */
   error: propTypes.bool,
+  /** Determines if the action stopped. */
+  stopped: propTypes.bool,
   /** Message to show when action fails.*/
   errorMessage: propTypes.string,
   /** Message to show when action succeeds.*/
