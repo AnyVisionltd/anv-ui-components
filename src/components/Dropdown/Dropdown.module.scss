@@ -124,7 +124,7 @@ $default-selected-height: av-size(sz-56);
         }
 
         &.spacingTop input {
-          padding-top: av-space(micro);
+          margin-top: av-space(micro);
         }
 
         input {
@@ -187,7 +187,6 @@ $default-selected-height: av-size(sz-56);
       background-color: av-color(primary);
       padding: 2px 0 2px av-space(tiny);
       border-radius: av-radius(curvy);
-      font-size: av-font-size(micro);
       color: av-color(purewhite);
       margin-right: av-space(micro);
       align-items: center;
