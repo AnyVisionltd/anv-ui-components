@@ -2105,6 +2105,29 @@ exports[`Storyshots Icons/Icons All 1`] = `
         >
           <svg
             className="icon"
+            data-name="arrows circle"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M19.119 15.159h-4.077a.9.9 0 100 1.8H17.2A7.2 7.2 0 014.8 12 .9.9 0 103 12a9 9 0 0015.192 6.507V20.1a.9.9 0 101.8 0v-4.05a.9.9 0 00-.873-.891zM12 3a9 9 0 00-6.192 2.493V3.9a.9.9 0 00-1.8 0v4.05a.9.9 0 00.9.9h4.05a.9.9 0 100-1.8H6.8A7.2 7.2 0 0119.2 12a.9.9 0 001.8 0 9 9 0 00-9-9z"
+            />
+          </svg>
+          <span
+            className="name childrenStyle"
+            onMouseEnter={[Function]}
+          >
+            ArrowsCircle
+          </span>
+        </div>
+        <div
+          className="iconCard"
+          onClick={[Function]}
+        >
+          <svg
+            className="icon"
             height="1em"
             viewBox="0 0 24 24"
             width="1em"
@@ -3194,7 +3217,6 @@ exports[`Storyshots Icons/Icons All 1`] = `
             <path
               d="M9.617 17.04a.642.642 0 01-.063-.653 3.194 3.194 0 011.284-1.483 2.087 2.087 0 01-.457-1.286 2.113 2.113 0 014.225 0 2.075 2.075 0 01-.455 1.285 3.224 3.224 0 011.291 1.483.643.643 0 01-.34.841.676.676 0 01-.252.051.643.643 0 01-.591-.391 1.913 1.913 0 00-3.524 0 .65.65 0 01-.513.409.571.571 0 01-.086.006.642.642 0 01-.519-.262zm2.293-4.021a.837.837 0 10.587-.24.828.828 0 00-.587.24zm4.257 2.761a.756.756 0 01.658-.846 2.256 2.256 0 00-.18-4.392.754.754 0 01-.589-.5 3.759 3.759 0 00-7.315 1.2.752.752 0 01-.751.756 1.513 1.513 0 00-.512 2.933.752.752 0 11-.478 1.41 3.008 3.008 0 01.283-5.753 5.264 5.264 0 0110.046-1.429v.045a3.76 3.76 0 01-.129 7.234h-.187a.678.678 0 01-.094.006.76.76 0 01-.752-.664z"
               data-name="Union 93"
-              fill="#021d3d"
             />
           </svg>
           <span
@@ -7184,6 +7206,29 @@ exports[`Storyshots Icons/Icons All 1`] = `
         >
           <svg
             className="icon"
+            height="1em"
+            viewBox="0 0 15.002 15.002"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 7.498a7.5 7.5 0 117.5 7.5 7.5 7.5 0 01-7.5-7.5zm1.5 0a6 6 0 106-6 6 6 0 00-6 6zm3.5 2.5v-5h5v5z"
+              data-name="Union 94"
+            />
+          </svg>
+          <span
+            className="name childrenStyle"
+            onMouseEnter={[Function]}
+          >
+            Stop
+          </span>
+        </div>
+        <div
+          className="iconCard"
+          onClick={[Function]}
+        >
+          <svg
+            className="icon"
             data-name="Storage Box"
             height="1em"
             viewBox="0 0 24 24"
@@ -10999,7 +11044,7 @@ exports[`Storyshots User Inputs/Date & Time/DatePicker Basic 1`] = `
                 }
               }
               cancelLabel={null}
-              defaultValue="09/09/2021"
+              defaultValue="23/09/2021"
               disabled={false}
               helperText=""
               inputRef={
@@ -11012,7 +11057,7 @@ exports[`Storyshots User Inputs/Date & Time/DatePicker Basic 1`] = `
               onFocus={[Function]}
               readOnly={false}
               type="text"
-              value="09/09/2021"
+              value="23/09/2021"
             />
             <div
               className="trailingIcon trailingIcon"
@@ -11040,7 +11085,7 @@ exports[`Storyshots User Inputs/Date & Time/DatePicker Basic 1`] = `
       </div>
       <p>
         Selected date: 
-        09/09/2021
+        23/09/2021
       </p>
     </div>
   </div>
