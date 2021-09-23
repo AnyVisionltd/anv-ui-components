@@ -157,6 +157,7 @@ $default-selected-height: av-size(sz-56);
         width: av-size(sz-24);
         height: av-size(sz-24);
         color: av-color(content);
+        transition: all 0.1s linear;
 
         > svg {
           color: av-color(content);

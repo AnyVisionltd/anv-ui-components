@@ -288,7 +288,7 @@ const Dropdown = ({
         aria-label='toggle menu'
         disabled={isDisabled}
         className={classNames(styles.iconButton, {
-          [styles.rotated]: showMenu,
+          [styles.rotated]: !showMenu,
         })}
       >
         <ArrowUp />
