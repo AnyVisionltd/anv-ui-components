@@ -237,7 +237,7 @@ exports[`Storyshots Content/ Dropdown Basic 1`] = `
             </button>
             <button
               aria-label="toggle menu"
-              className="button medium ghost iconButton small ghost iconButton"
+              className="button medium ghost iconButton small ghost iconButton rotated"
               disabled={false}
               onClick={[Function]}
               type="button"
@@ -333,7 +333,7 @@ exports[`Storyshots Content/ Dropdown Disabled 1`] = `
             </button>
             <button
               aria-label="toggle menu"
-              className="button medium ghost iconButton small ghost iconButton"
+              className="button medium ghost iconButton small ghost iconButton rotated"
               disabled={true}
               onClick={[Function]}
               type="button"
@@ -434,7 +434,7 @@ exports[`Storyshots Content/ Dropdown Multiple 1`] = `
             </button>
             <button
               aria-label="toggle menu"
-              className="button medium ghost iconButton small ghost iconButton"
+              className="button medium ghost iconButton small ghost iconButton rotated"
               disabled={false}
               onClick={[Function]}
               type="button"
@@ -535,7 +535,7 @@ exports[`Storyshots Content/ Dropdown Multiple With Selected In Header 1`] = `
             </button>
             <button
               aria-label="toggle menu"
-              className="button medium ghost iconButton small ghost iconButton"
+              className="button medium ghost iconButton small ghost iconButton rotated"
               disabled={false}
               onClick={[Function]}
               type="button"
@@ -631,7 +631,7 @@ exports[`Storyshots Content/ Dropdown Value Render 1`] = `
             </button>
             <button
               aria-label="toggle menu"
-              className="button medium ghost iconButton small ghost iconButton"
+              className="button medium ghost iconButton small ghost iconButton rotated"
               disabled={false}
               onClick={[Function]}
               type="button"
@@ -11489,7 +11489,7 @@ exports[`Storyshots User Inputs/Date & Time/DatePicker Basic 1`] = `
                 }
               }
               cancelLabel={null}
-              defaultValue="22/09/2021"
+              defaultValue="23/09/2021"
               disabled={false}
               helperText=""
               inputRef={
@@ -11502,7 +11502,7 @@ exports[`Storyshots User Inputs/Date & Time/DatePicker Basic 1`] = `
               onFocus={[Function]}
               readOnly={false}
               type="text"
-              value="22/09/2021"
+              value="23/09/2021"
             />
             <div
               className="trailingIcon trailingIcon"
@@ -11530,7 +11530,7 @@ exports[`Storyshots User Inputs/Date & Time/DatePicker Basic 1`] = `
       </div>
       <p>
         Selected date: 
-        22/09/2021
+        23/09/2021
       </p>
     </div>
   </div>
