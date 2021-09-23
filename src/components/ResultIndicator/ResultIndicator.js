@@ -5,6 +5,7 @@ import {
   CheckCircleFilled,
   TimesCircleFilled,
   Hourglass,
+  Stop,
 } from '@anyvision/anv-icons'
 import { Tooltip } from '../Tooltip'
 import languageService from '../../services/language'
@@ -32,35 +33,29 @@ const ResultIndicator = props => {
     </Tooltip>
   )
 
-  const indicatorsMap = useMemo(
-    () => ({
-      success: (
-        <>
-          <CheckCircleFilled /> {!isTiny && getTranslation('done')}
-        </>
-      ),
-      error: (
-        <>
-          <TimesCircleFilled /> {!isTiny && getTranslation('failed')}
-        </>
-      ),
-      stopped: (
-        <>
-          <StopCircleOutlined /> {!isTiny && getTranslation('stopped')}
-        </>
-      ),
-    }),
-    [isTiny],
-  )
+  const indicatorsMap = {
+    success: (
+      <>
+        <CheckCircleFilled /> {!isTiny && getTranslation('done')}
+      </>
+    ),
+    error: (
+      <>
+        <TimesCircleFilled /> {!isTiny && getTranslation('failed')}
+      </>
+    ),
+    stopped: (
+      <>
+        <StopCircleOutlined /> {!isTiny && getTranslation('stopped')}
+      </>
+    ),
+  }
 
-  const tooltipContentMap = useMemo(
-    () => ({
-      success: successMessage,
-      error: errorMessage,
-      stopped: getTranslation('stopped'),
-    }),
-    [errorMessage, successMessage],
-  )
+  const tooltipContentMap = {
+    success: successMessage,
+    error: errorMessage,
+    stopped: getTranslation('stopped'),
+  }
 
   const determineIndicator = obj => {
     for (let indicator in obj) {
