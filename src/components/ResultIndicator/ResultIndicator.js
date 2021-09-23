@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import {
@@ -23,7 +23,7 @@ const ResultIndicator = props => {
     inQueue,
     stopped,
   } = props
-
+  // one big object map, including inqueue
   const renderInQueue = () => (
     <Tooltip content={getTranslation('inQueue')}>
       <div className={styles.inQueueContainer}>
@@ -32,33 +32,39 @@ const ResultIndicator = props => {
     </Tooltip>
   )
 
-  const indicatorsMap = {
-    success: (
-      <>
-        <CheckCircleFilled /> {!isTiny && getTranslation('done')}
-      </>
-    ),
-    error: (
-      <>
-        <TimesCircleFilled /> {!isTiny && getTranslation('failed')}
-      </>
-    ),
-    stopped: (
-      <>
-        <StopCircleOutlined /> {!isTiny && getTranslation('stopped')}
-      </>
-    ),
-  }
+  const indicatorsMap = useMemo(
+    () => ({
+      success: (
+        <>
+          <CheckCircleFilled /> {!isTiny && getTranslation('done')}
+        </>
+      ),
+      error: (
+        <>
+          <TimesCircleFilled /> {!isTiny && getTranslation('failed')}
+        </>
+      ),
+      stopped: (
+        <>
+          <StopCircleOutlined /> {!isTiny && getTranslation('stopped')}
+        </>
+      ),
+    }),
+    [isTiny],
+  )
 
-  const tooltipContentMap = {
-    success: successMessage,
-    error: errorMessage,
-    stopped: getTranslation('stopped'),
-  }
+  const tooltipContentMap = useMemo(
+    () => ({
+      success: successMessage,
+      error: errorMessage,
+      stopped: getTranslation('stopped'),
+    }),
+    [errorMessage, successMessage],
+  )
 
   const determineIndicator = obj => {
-    for (let value in obj) {
-      if (props[value]) return obj[value]
+    for (let indicator in obj) {
+      if (props[indicator]) return obj[indicator]
     }
   }
 
