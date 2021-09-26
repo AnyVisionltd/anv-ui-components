@@ -29,6 +29,7 @@ const RangeSlider = ({
   disabled,
   isToggleTooltip,
   measureUnitText,
+  containerClassName,
   ...otherProps
 }) => {
   const [showTooltip, setShowTooltip] = useState(false)
@@ -219,7 +220,13 @@ const RangeSlider = ({
     ) : null
 
   return (
-    <div className={classNames(styles.container, disabled && styles.disabled)}>
+    <div
+      className={classNames(
+        styles.container,
+        disabled && styles.disabled,
+        containerClassName,
+      )}
+    >
       <div className={styles.rangeContainer}>
         <input
           type='range'
@@ -252,6 +259,7 @@ RangeSlider.defaultProps = {
   disabled: false,
   isToggleTooltip: false,
   measureUnitText: '',
+  containerClassName: '',
 }
 
 RangeSlider.propTypes = {
@@ -272,6 +280,8 @@ RangeSlider.propTypes = {
   isToggleTooltip: propTypes.bool,
   /** Possibly add units of measurement for labels and hover value, like hours, minutes, meters etc. */
   measureUnitText: propTypes.string,
+  /** For css customization. */
+  containerClassName: propTypes.string,
 }
 
 export default RangeSlider
