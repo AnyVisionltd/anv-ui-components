@@ -259,7 +259,6 @@ RangeSlider.defaultProps = {
   disabled: false,
   isToggleTooltip: false,
   measureUnitText: '',
-  containerClassName: '',
 }
 
 RangeSlider.propTypes = {
