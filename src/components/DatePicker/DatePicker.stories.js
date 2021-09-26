@@ -10,13 +10,12 @@ export default {
 }
 
 export const Basic = () => {
-  const [value, setValue] = useState(moment().format('DD/MM/yyyy'))
+  const defaultDate = new Date(Date.UTC(2021, 8, 23))
+  const [value, setValue] = useState(moment(defaultDate).format('DD/MM/yyyy'))
+
   return (
     <div>
-      <DatePicker
-        onChange={setValue}
-        defaultValue={new Date(Date.UTC(2021, 8, 23))}
-      />
+      <DatePicker onChange={setValue} defaultValue={defaultDate} />
       <p>Selected date: {value}</p>
     </div>
   )
