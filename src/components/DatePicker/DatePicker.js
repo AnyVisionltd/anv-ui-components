@@ -28,9 +28,7 @@ const DatePicker = ({
   const textFieldRef = useRef()
   const [isOpen, setIsOpen] = useState(false)
   const [isFocus, setIsFocus] = useState(false)
-  const [date, setDate] = useState(
-    defaultValue ? moment(defaultValue).format(format) : new Date(),
-  )
+  const [date, setDate] = useState(defaultValue || new Date())
 
   /**
    * Keeps the input on focus on the first _ char.
