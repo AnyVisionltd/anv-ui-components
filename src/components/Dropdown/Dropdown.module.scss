@@ -234,6 +234,8 @@ $default-selected-height: av-size(sz-56);
     @extend %av-scrollbar;
     overflow-y: auto;
     max-height: av-size(sz-240);
+    z-index: av-z-index(important);
+    background-color: av-color(surface);
   }
 }
 

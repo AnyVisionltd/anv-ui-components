@@ -153,7 +153,7 @@ const Dropdown = ({
       }
     } else {
       if (isFoundInDropdown) {
-        newOptions = []
+        return
       } else {
         newOptions = [clickedOption]
       }
