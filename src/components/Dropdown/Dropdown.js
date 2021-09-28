@@ -321,7 +321,9 @@ const Dropdown = ({
 
   const renderHeaderContainer = () => (
     <div className={styles.selectedContainer} ref={selectedContainerRef}>
-      <label>{label}</label>
+      <label className={classNames({ [styles.labelColor]: showMenu })}>
+        {label}
+      </label>
       <div
         className={styles.selectedContentContainer}
         onClick={getIntoTypeMode}
