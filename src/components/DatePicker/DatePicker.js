@@ -150,8 +150,6 @@ DatePicker.propTypes = {
   maxDate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** Min selectable date. */
   minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /** Addidional props for DatePicker/TextField component. */
-  otherProps: PropTypes.object,
 }
 
 DatePicker.defaultProps = {
@@ -162,7 +160,6 @@ DatePicker.defaultProps = {
   onChange: () => {},
   label: 'Date',
   errorMessage: '',
-  otherProps: {},
 }
 
 export default DatePicker
