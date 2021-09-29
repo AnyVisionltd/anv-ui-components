@@ -25,6 +25,7 @@ const DatePicker = ({
   label,
   value,
   errorMessage,
+  ...otherProps
 }) => {
   const textFieldRef = useRef()
   const [isOpen, setIsOpen] = useState(false)
@@ -69,6 +70,7 @@ const DatePicker = ({
       disabled={props.disabled}
       error={props.error}
       message={(props.error && errorMessage) || props.helperText}
+      {...props.otherProps}
     />
   )
 
@@ -121,6 +123,7 @@ const DatePicker = ({
             anchorOrigin: { horizontal: 138, vertical: 48 },
           }}
           autoOk
+          {...otherProps}
         />
       </ThemeProvider>
     </MuiPickersUtilsProvider>
@@ -148,6 +151,8 @@ DatePicker.propTypes = {
   maxDate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** Min selectable date. */
   minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  /** Addidional props for DatePicker/TextField component. */
+  otherProps: PropTypes.object,
 }
 
 DatePicker.defaultProps = {
@@ -158,6 +163,7 @@ DatePicker.defaultProps = {
   onChange: () => {},
   label: 'Date',
   errorMessage: '',
+  otherProps: {},
 }
 
 export default DatePicker
