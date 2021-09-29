@@ -43,6 +43,7 @@ export default {
           'number',
           'any',
           'instanceOf',
+          'elementType',
         ],
       },
     }),
