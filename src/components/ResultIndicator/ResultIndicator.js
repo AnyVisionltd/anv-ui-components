@@ -9,7 +9,6 @@ import {
 } from '@anyvision/anv-icons'
 import { Tooltip } from '../Tooltip'
 import languageService from '../../services/language'
-import { ReactComponent as Somestop } from '../../assets/svg/Union_94.svg'
 import styles from './ResultIndicator.module.scss'
 
 const getTranslation = word => languageService.getTranslation(word)
@@ -54,7 +53,7 @@ const ResultIndicator = props => {
           content={getTranslation('stopped')}
           className={classNames(styles.resultContainer, styles.stopped)}
         >
-          <Somestop /> {!isTiny && getTranslation('stopped')}
+          <Stop /> {!isTiny && getTranslation('stopped')}
         </IndicatorContainer>
       ),
     }),
