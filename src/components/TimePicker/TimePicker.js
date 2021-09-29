@@ -141,7 +141,7 @@ TimePicker.propTypes = {
   /** Time format. */
   format: PropTypes.string,
   /** Custom error message. */
-  errorMessage: '',
+  errorMessage: PropTypes.string,
 }
 
 TimePicker.defaultProps = {

@@ -11120,13 +11120,13 @@ exports[`Storyshots User Inputs/Date & Time/TimePicker Basic 1`] = `
           className="inputBase text inputBase bottom"
         >
           <input
-            defaultValue="18:33"
+            defaultValue="18:35"
             disabled={false}
             onChange={[Function]}
             onFocus={[Function]}
             readOnly={false}
             type="text"
-            value="18:33"
+            value="18:35"
           />
           <div
             className="trailingIcon trailingIcon"
