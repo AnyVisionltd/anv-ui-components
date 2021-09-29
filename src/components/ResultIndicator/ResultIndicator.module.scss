@@ -65,6 +65,14 @@
     }
   }
 
+  &.stopped {
+    color: av-color(alert);
+
+    &:hover {
+      background-color: av-color(alert, av-opacity(disabled));
+    }
+  }
+
   svg {
     @extend %icon;
   }

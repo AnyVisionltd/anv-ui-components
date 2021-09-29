@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
-import TimePicker from '.'
+import React from 'react'
+import TimePicker from './TimePicker'
 import { centerDecorator } from '../../utils/storybook/decorators'
-import moment from 'moment'
 
 export default {
   title: 'User Inputs/Date & Time/TimePicker',
@@ -9,12 +8,4 @@ export default {
   decorators: [centerDecorator],
 }
 
-export const Basic = () => {
-  const [value, setValue] = useState(moment())
-  return (
-    <div>
-      <TimePicker onChange={setValue} value={value} disabled />
-      <p>Selected time: {value.format('HH:mm')}</p>
-    </div>
-  )
-}
+export const Basic = () => <TimePicker />

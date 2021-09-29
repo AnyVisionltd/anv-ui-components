@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import classNames from 'classnames'
@@ -14,7 +14,15 @@ import { TextField } from '../TextField'
 import { IconButton } from '../IconButton'
 import './TimePicker.scss'
 
-const TimePicker = ({ onChange, disabled, format, label, value }) => {
+const TimePicker = ({
+  onChange,
+  disabled,
+  format,
+  label,
+  value,
+  errorMessage,
+  ...otherProps
+}) => {
   const textFieldRef = useRef()
   const [isOpen, setIsOpen] = useState(false)
   const [isFocus, setIsFocus] = useState(false)
@@ -40,7 +48,7 @@ const TimePicker = ({ onChange, disabled, format, label, value }) => {
     <TextField
       trailingIcon={
         <IconButton
-          className={classNames('bt-timeicker-icon', { disabled })}
+          className={classNames('bt-timepicker-icon', { disabled })}
           onClick={() => !props.disabled && setIsOpen(prev => !prev)}
           size='medium'
         >
@@ -48,13 +56,16 @@ const TimePicker = ({ onChange, disabled, format, label, value }) => {
         </IconButton>
       }
       label={props.label}
-      onClick={props.onClick}
       defaultValue={props.value}
       onChange={props.onChange}
       ref={textFieldRef}
       onFocus={() => setIsFocus(true)}
       format={props.format}
-      {...props}
+      value={props.value}
+      disabled={props.disabled}
+      error={props.error}
+      message={(props.error && errorMessage) || props.helperText}
+      {...props.otherProps}
     />
   )
 
@@ -69,10 +80,10 @@ const TimePicker = ({ onChange, disabled, format, label, value }) => {
   /**
    * change date & fire onChange event
    */
-  const handleDateChange = useCallback(date => {
+  const handleDateChange = date => {
     setDate(date)
     onChange && onChange(date)
-  }, [])
+  }
 
   /**
    * Override material ui theme
@@ -96,21 +107,22 @@ const TimePicker = ({ onChange, disabled, format, label, value }) => {
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <ThemeProvider theme={theme}>
         <KeyboardTimePicker
-          autoOk
-          value={date}
+          onChange={handleDateChange}
+          TextFieldComponent={renderInput}
+          onClose={handleCloseTimePicker}
           open={isOpen}
-          ampm={false}
-          label={label}
           variant='inline'
           disabled={disabled}
+          value={date}
+          ampm={false}
+          label={label}
           format={format}
           PopoverProps={{
             anchorEl: () => textFieldRef.current,
             anchorOrigin: { horizontal: 138, vertical: 48 },
           }}
-          onChange={handleDateChange}
-          onClose={handleCloseTimePicker}
-          TextFieldComponent={renderInput}
+          autoOk
+          {...otherProps}
         />
       </ThemeProvider>
     </MuiPickersUtilsProvider>
@@ -118,22 +130,18 @@ const TimePicker = ({ onChange, disabled, format, label, value }) => {
 }
 
 TimePicker.propTypes = {
+  /** Controlled time value.*/
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  /** Callback when time change.*/
+  onChange: PropTypes.func,
+  /*** TextField label.*/
+  label: PropTypes.string,
   /** If true, the input will be disabled. */
   disabled: PropTypes.bool,
-  /** Date format. */
+  /** Time format. */
   format: PropTypes.string,
-  /**
-   * Controlled time value.
-   */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /**
-   * Callback when time change.
-   */
-  onChange: PropTypes.func,
-  /**
-   * TextField label.
-   */
-  label: PropTypes.string,
+  /** Custom error message. */
+  errorMessage: '',
 }
 
 TimePicker.defaultProps = {
@@ -141,6 +149,7 @@ TimePicker.defaultProps = {
   format: 'HH:mm',
   onChange: () => {},
   label: 'Time',
+  errorMessage: '',
 }
 
 export default TimePicker

@@ -17,6 +17,7 @@ const ProgressWithIndicator = ({
   errorMessage,
   successMessage,
   inQueue,
+  stopped,
   ...otherProps
 }) => {
   const progressProps = { value, variant, className, ...otherProps }
@@ -28,7 +29,7 @@ const ProgressWithIndicator = ({
     successMessage,
     inQueue,
   }
-  const feedbackOptions = [error, success, inQueue].filter(Boolean)
+  const feedbackOptions = [error, success, stopped, inQueue].filter(Boolean)
 
   const progressText = (
     <h5 className={styles.progressText}>
@@ -63,6 +64,8 @@ ProgressWithIndicator.propTypes = {
   success: propTypes.bool,
   /** Determines if the action fails. */
   error: propTypes.bool,
+  /** Determines if the action stopped. */
+  stopped: propTypes.bool,
   /** Message to show when action fails.*/
   errorMessage: propTypes.string,
   /** Message to show when action succeeds.*/
