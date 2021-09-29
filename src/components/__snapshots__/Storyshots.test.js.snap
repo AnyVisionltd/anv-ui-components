@@ -189,7 +189,9 @@ exports[`Storyshots Content/ Dropdown Basic 1`] = `
         <div
           className="selectedContainer"
         >
-          <label>
+          <label
+            className=""
+          >
             Gender
           </label>
           <div
@@ -285,7 +287,9 @@ exports[`Storyshots Content/ Dropdown Disabled 1`] = `
         <div
           className="selectedContainer"
         >
-          <label>
+          <label
+            className=""
+          >
             Gender
           </label>
           <div
@@ -386,7 +390,9 @@ exports[`Storyshots Content/ Dropdown Multiple 1`] = `
         <div
           className="selectedContainer"
         >
-          <label>
+          <label
+            className=""
+          >
             Fruits
           </label>
           <div
@@ -487,7 +493,9 @@ exports[`Storyshots Content/ Dropdown Multiple With Selected In Header 1`] = `
         <div
           className="selectedContainer"
         >
-          <label>
+          <label
+            className=""
+          >
             Fruits
           </label>
           <div
@@ -583,7 +591,9 @@ exports[`Storyshots Content/ Dropdown Value Render 1`] = `
         <div
           className="selectedContainer"
         >
-          <label>
+          <label
+            className=""
+          >
             Fruits
           </label>
           <div
