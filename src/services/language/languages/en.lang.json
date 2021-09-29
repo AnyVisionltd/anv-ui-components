@@ -18,6 +18,7 @@
     "failed": "Failed",
     "processing": "Processsing",
     "inQueue": "In queue",
-    "completed": "Completed"
+    "completed": "Completed",
+    "stopped": "Stopped"
   }
 }
