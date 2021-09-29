@@ -1,5 +1,5 @@
 import React from 'react'
-import DatePicker from '.'
+import DatePicker from './DatePicker'
 import { centerDecorator } from '../../utils/storybook/decorators'
 
 export default {
