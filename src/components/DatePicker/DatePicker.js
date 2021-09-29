@@ -60,7 +60,6 @@ const DatePicker = ({
         </IconButton>
       }
       label={props.label}
-      onClick={props.onClick}
       defaultValue={props.value}
       onChange={props.onChange}
       ref={textFieldRef}
