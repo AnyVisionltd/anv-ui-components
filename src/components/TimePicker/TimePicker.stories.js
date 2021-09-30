@@ -1,6 +1,6 @@
 import React from 'react'
-import TimePicker from './TimePicker'
 import { centerDecorator } from '../../utils/storybook/decorators'
+import TimePicker from './TimePicker'
 
 export default {
   title: 'User Inputs/Date & Time/TimePicker',
