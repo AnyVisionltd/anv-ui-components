@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import DatePicker from '../DatePicker'
+import DatePicker from '../DatePicker/DatePicker'
 import styles from './DateRangePicker.module.scss'
-import moment from 'moment'
 
 const DateRangePicker = ({
   className,
@@ -12,49 +11,63 @@ const DateRangePicker = ({
   end,
   disabled,
   format,
+  startLabel,
+  endLabel,
+  startErrMsg,
+  endErrMsg,
+  ...otherProps
 }) => {
-  const [startDate, setStartDate] = useState(start || moment())
-  const [endDate, setEndDate] = useState(end || moment().add(1, 'days'))
-
-  useEffect(() => {
-    onChange({ startDate, endDate })
-  }, [startDate, endDate])
+  const handleDateChange = date => {
+    onChange(date)
+  }
 
   return (
     <div className={classNames(styles.dateRangePicker, className)}>
       <DatePicker
-        label='From'
-        value={startDate}
-        onChange={setStartDate}
-        maxDate={endDate || ''}
+        label={startLabel}
+        value={start}
+        onChange={start => handleDateChange({ start, end })}
+        maxDate={end || ''}
         disabled={disabled}
         format={format}
+        errorMessage={startErrMsg}
+        {...otherProps}
       />
       <DatePicker
-        label='To'
-        value={endDate}
-        onChange={setEndDate}
-        minDate={startDate || ''}
+        label={endLabel}
+        value={end}
+        onChange={end => handleDateChange({ start, end })}
+        minDate={start || ''}
         disabled={disabled}
         format={format}
+        errorMessage={endErrMsg}
+        {...otherProps}
       />
     </div>
   )
 }
 
 DateRangePicker.propTypes = {
-  /** Dates format. */
-  format: PropTypes.string,
   /** Start date. */
   start: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** End date. */
   end: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /** For css customization. */
-  className: PropTypes.string,
-  /** Callback when date range changes. Returned object {startDate,endDate} */
+  /** Callback when date range changes. Returned object { start, end } */
   onChange: PropTypes.func,
   /** If true, the inputs will be disabled. */
   disabled: PropTypes.bool,
+  /** Start date label. */
+  startLabel: PropTypes.string,
+  /** End date label. */
+  endLabel: PropTypes.string,
+  /** Custom error message - start date. */
+  startErrMsg: PropTypes.string,
+  /** Custom error message - end date. */
+  endErrMsg: PropTypes.string,
+  /** Dates format. */
+  format: PropTypes.string,
+  /** For css customization. */
+  className: PropTypes.string,
 }
 
 DateRangePicker.defaultProps = {
@@ -62,6 +75,8 @@ DateRangePicker.defaultProps = {
   className: '',
   disabled: false,
   format: 'DD/MM/yyyy',
+  startLabel: 'From',
+  endLabel: 'To',
 }
 
 export default DateRangePicker
