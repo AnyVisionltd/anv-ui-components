@@ -43,6 +43,8 @@
 - Added random id generator for menus' id and conditional rendering for Menu
 - Added ResultIndicator for user feedback
 - Added ProgressWithIndicator
+- Added DatePicker component
+- Added DateRangePicker component
 
 ## 1.0.0 - 06-09-2020
 
