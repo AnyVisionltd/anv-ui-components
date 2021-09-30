@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import DateRangePicker from './DateRangePicker'
-import { centerDecorator } from '../../utils/storybook/decorators'
 import moment from 'moment'
+import { centerDecorator } from '../../utils/storybook/decorators'
+import DateRangePicker from './DateRangePicker'
 
 export default {
   title: 'User Inputs/Date & Time/DateRangePicker',

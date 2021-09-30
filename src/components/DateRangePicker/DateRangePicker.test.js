@@ -1,6 +1,5 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
-import moment from 'moment'
+import { render } from '@testing-library/react'
 import DateRangePicker from './DateRangePicker'
 
 describe('<DateRangePicker />', () => {
