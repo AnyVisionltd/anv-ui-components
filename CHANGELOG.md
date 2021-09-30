@@ -42,7 +42,7 @@
 - Added -webkit-auto-fill in InputBase
 - Added random id generator for menus' id and conditional rendering for Menu
 - Added ResultIndicator for user feedback
-- Added ProgressWithIndicato
+- Added ProgressWithIndicator
 - Added DatePicker component
 - Added DateRangePicker component
 
