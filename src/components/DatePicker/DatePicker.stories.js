@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
-import DatePicker from '.'
+import React from 'react'
+import DatePicker from './DatePicker'
 import { centerDecorator } from '../../utils/storybook/decorators'
-import moment from 'moment'
 
 export default {
   title: 'User Inputs/Date & Time/DatePicker',
@@ -9,12 +8,4 @@ export default {
   decorators: [centerDecorator],
 }
 
-export const Basic = () => {
-  const [value, setValue] = useState(moment().format('DD/MM/yyyy'))
-  return (
-    <div>
-      <DatePicker onChange={setValue} />
-      <p>Selected date: {value}</p>
-    </div>
-  )
-}
+export const Basic = () => <DatePicker />
