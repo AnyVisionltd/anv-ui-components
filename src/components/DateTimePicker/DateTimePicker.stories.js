@@ -8,4 +8,4 @@ export default {
   decorators: [centerDecorator],
 }
 
-export const Basic = () => <DateTimePicker disableFuture />
+export const Basic = () => <DateTimePicker />
