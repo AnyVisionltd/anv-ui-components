@@ -28,6 +28,7 @@ export { Tabs } from './components/Tabs'
 export { RangeSlider } from './components/RangeSlider'
 export { DatePicker } from './components/DatePicker'
 export { TimePicker } from './components/TimePicker'
+export { DateRangePicker } from './components/DateRangePicker'
 export { ResultIndicator } from './components/ResultIndicator'
 export { ProgressWithIndicator } from './components/ProgressWithIndicator'
 
