@@ -13,39 +13,33 @@ const DateRangePicker = ({
   format,
   startLabel,
   endLabel,
-  startErrMsg,
-  endErrMsg,
+  startErrorMessage,
+  endErrorMessage,
   ...otherProps
-}) => {
-  const handleDateChange = date => {
-    onChange(date)
-  }
-
-  return (
-    <div className={classNames(styles.dateRangePicker, className)}>
-      <DatePicker
-        label={startLabel}
-        value={start}
-        onChange={start => handleDateChange({ start, end })}
-        maxDate={end || ''}
-        disabled={disabled}
-        format={format}
-        errorMessage={startErrMsg}
-        {...otherProps}
-      />
-      <DatePicker
-        label={endLabel}
-        value={end}
-        onChange={end => handleDateChange({ start, end })}
-        minDate={start || ''}
-        disabled={disabled}
-        format={format}
-        errorMessage={endErrMsg}
-        {...otherProps}
-      />
-    </div>
-  )
-}
+}) => (
+  <div className={classNames(styles.dateRangePicker, className)}>
+    <DatePicker
+      label={startLabel}
+      value={start}
+      onChange={start => onChange({ start, end })}
+      maxDate={end || ''}
+      disabled={disabled}
+      format={format}
+      errorMessage={startErrorMessage}
+      {...otherProps}
+    />
+    <DatePicker
+      label={endLabel}
+      value={end}
+      onChange={end => onChange({ start, end })}
+      minDate={start || ''}
+      disabled={disabled}
+      format={format}
+      errorMessage={endErrorMessage}
+      {...otherProps}
+    />
+  </div>
+)
 
 DateRangePicker.propTypes = {
   /** Start date. */
@@ -53,7 +47,7 @@ DateRangePicker.propTypes = {
   /** End date. */
   end: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** Callback when date range changes. Returned object { start, end } */
-  onChange: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
   /** If true, the inputs will be disabled. */
   disabled: PropTypes.bool,
   /** Start date label. */
@@ -61,9 +55,9 @@ DateRangePicker.propTypes = {
   /** End date label. */
   endLabel: PropTypes.string,
   /** Custom error message - start date. */
-  startErrMsg: PropTypes.string,
+  startErrorMessage: PropTypes.string,
   /** Custom error message - end date. */
-  endErrMsg: PropTypes.string,
+  endErrorMessage: PropTypes.string,
   /** Dates format. */
   format: PropTypes.string,
   /** For css customization. */
