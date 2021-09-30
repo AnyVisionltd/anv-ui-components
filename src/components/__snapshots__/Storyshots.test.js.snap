@@ -11214,7 +11214,8 @@ exports[`Storyshots User Inputs/Date & Time/DateRangePicker Basic 1`] = `
       >
         Selected range: 
         30/09/2021
-         - 
+         -
+         
         01/10/2021
       </p>
     </div>
