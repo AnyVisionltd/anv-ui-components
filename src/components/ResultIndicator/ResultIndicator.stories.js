@@ -21,10 +21,12 @@ export const Basic = () => {
     <div style={containerStyle}>
       <ResultIndicator error />
       <ResultIndicator success />
+      <ResultIndicator stopped />
       <ResultIndicator inQueue />
       <div style={{ display: 'flex' }}>
         <ResultIndicator isTiny error errorMessage='Fail' />
         <ResultIndicator isTiny success successMessage='Success' />
+        <ResultIndicator isTiny stopped />
         <ResultIndicator isTiny inQueue />
       </div>
     </div>
