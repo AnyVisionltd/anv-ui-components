@@ -24,6 +24,8 @@ const DateTimePicker = ({
   minDate,
   label,
   value,
+  errorMessage,
+  ...otherProps
 }) => {
   const textFieldRef = useRef()
   const [isOpen, setIsOpen] = useState(false)
@@ -58,13 +60,15 @@ const DateTimePicker = ({
         </IconButton>
       }
       label={props.label}
-      onClick={props.onClick}
       defaultValue={props.value}
       onChange={props.onChange}
       ref={textFieldRef}
       onFocus={() => setIsFocus(true)}
       format={props.format}
-      {...props}
+      value={props.value}
+      disabled={props.disabled}
+      error={props.error}
+      message={(props.error && errorMessage) || props.helperText}
     />
   )
 
@@ -79,10 +83,10 @@ const DateTimePicker = ({
   /**
    * change date & fire onChange event
    */
-  const handleDateChange = useCallback(date => {
+  const handleDateChange = date => {
     setDate(date)
     onChange && onChange(date)
-  }, [])
+  }
 
   /**
    * Override material ui theme
@@ -128,8 +132,9 @@ const DateTimePicker = ({
           minDate={minDate}
           PopoverProps={{
             anchorEl: () => textFieldRef.current,
-            anchorOrigin: { horizontal: 143, vertical: 48 },
+            anchorOrigin: { horizontal: 138, vertical: 48 },
           }}
+          {...otherProps}
         />
       </ThemeProvider>
     </MuiPickersUtilsProvider>
@@ -137,34 +142,26 @@ const DateTimePicker = ({
 }
 
 DateTimePicker.propTypes = {
+  /** Controlled date&time value.*/
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  /** Callback when date change.*/
+  onChange: PropTypes.func,
+  /** TextField label.*/
+  label: PropTypes.string,
   /** If true, the input will be disabled. */
   disabled: PropTypes.bool,
+  /** Custom error message. */
+  errorMessage: PropTypes.string,
+  /** Date format. */
+  format: PropTypes.string,
   /** If true, you won't be able to choose past dates. */
   disablePast: PropTypes.bool,
   /** If true, you won't be able to choose future dates. */
   disableFuture: PropTypes.bool,
-  /** Date format. */
-  format: PropTypes.string,
-  /**
-   * Controlled date&time value.
-   */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /**
-   * Max selectable date.
-   */
+  /** Max selectable date.*/
   maxDate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /**
-   * Min selectable date.
-   */
+  /** Min selectable date.*/
   minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /**
-   * Callback when date change.
-   */
-  onChange: PropTypes.func,
-  /**
-   * TextField label.
-   */
-  label: PropTypes.string,
 }
 
 DateTimePicker.defaultProps = {
@@ -174,6 +171,7 @@ DateTimePicker.defaultProps = {
   format: 'DD/MM/yyyy HH:mm',
   onChange: () => {},
   label: 'Date & Time',
+  errorMessage: '',
 }
 
 export default DateTimePicker
