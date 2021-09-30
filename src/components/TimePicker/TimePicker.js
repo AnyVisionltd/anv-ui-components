@@ -65,7 +65,6 @@ const TimePicker = ({
       disabled={props.disabled}
       error={props.error}
       message={(props.error && errorMessage) || props.helperText}
-      {...props.otherProps}
     />
   )
 
