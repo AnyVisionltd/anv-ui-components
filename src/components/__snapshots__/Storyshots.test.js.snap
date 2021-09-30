@@ -11063,13 +11063,13 @@ exports[`Storyshots User Inputs/Date & Time/DatePicker Basic 1`] = `
           className="inputBase text inputBase bottom"
         >
           <input
-            defaultValue="29/09/2021"
+            defaultValue="30/09/2021"
             disabled={false}
             onChange={[Function]}
             onFocus={[Function]}
             readOnly={false}
             type="text"
-            value="29/09/2021"
+            value="30/09/2021"
           />
           <div
             className="trailingIcon trailingIcon"
@@ -11120,13 +11120,13 @@ exports[`Storyshots User Inputs/Date & Time/TimePicker Basic 1`] = `
           className="inputBase text inputBase bottom"
         >
           <input
-            defaultValue="18:35"
+            defaultValue="10:45"
             disabled={false}
             onChange={[Function]}
             onFocus={[Function]}
             readOnly={false}
             type="text"
-            value="18:35"
+            value="10:45"
           />
           <div
             className="trailingIcon trailingIcon"
