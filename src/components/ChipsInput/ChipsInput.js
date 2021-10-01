@@ -357,7 +357,7 @@ ChipsInput.defaultProps = {
  */
 ChipsInput.propTypes = {
   /** Chips array for controlled ChipsInput */
-  chips: propTypes.func,
+  chips: propTypes.array,
   /** Function to render icon for chip */
   renderChipIcon: propTypes.func,
   /** Chips that are going to appear on the ChipInput:<br />
