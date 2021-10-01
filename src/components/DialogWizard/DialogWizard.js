@@ -145,6 +145,7 @@ DialogWizard.defaultProps = {
   isOpen: false,
   onClose: () => {},
   onNextClick: () => {},
+  onFinish: () => {},
   disableBackdropClick: false,
   disableEscapeKeyDown: false,
   steps: [],
