@@ -1,0 +1,277 @@
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  useMemo,
+  useLayoutEffect,
+} from 'react'
+import propTypes from 'prop-types'
+import classNames from 'classnames'
+import keymap from '../../utils/enums/keymap'
+import styles from './RangeSlider.module.scss'
+
+const keyboardButtons = [
+  keymap.ARROW_DOWN,
+  keymap.ARROW_UP,
+  keymap.ARROW_LEFT,
+  keymap.ARROW_RIGHT,
+  keymap.PAGE_UP,
+  keymap.PAGE_DOWN,
+]
+
+const RangeSlider = ({
+  min,
+  max,
+  value,
+  onChange,
+  step,
+  disabled,
+  isToggleTooltip,
+  measureUnitText,
+  ...otherProps
+}) => {
+  const [showTooltip, setShowTooltip] = useState(false)
+  const [hoverValue, setHoverValue] = useState(null)
+  const [hoverPos, setHoverPos] = useState(null)
+  const sliderRef = useRef(null)
+  const tooltipRef = useRef(null)
+
+  const SLIDER_SETTINGS = useMemo(
+    () => ({
+      fill: styles.fill,
+      background: styles.bg,
+      thumbSize: 24,
+      width: null,
+      get fixRangeRatio() {
+        return (this.thumbSize * 0.5) / this.width
+      },
+    }),
+    [],
+  )
+
+  useLayoutEffect(() => {
+    if (!sliderRef.current) return
+    if (SLIDER_SETTINGS.width) return
+    SLIDER_SETTINGS.width = sliderRef.current.offsetWidth
+  }, [SLIDER_SETTINGS])
+
+  // Get relative position in the slider, between 0 - 1
+  const getPositionInSlider = useCallback(
+    val => (Number(val) - min) / (max - min),
+    [min, max],
+  )
+
+  // Get value of slider from the relative position in percentage
+  const getValueInSlider = useCallback(
+    percentage => (percentage * (max - min)) / 100 + min,
+    [min, max],
+  )
+
+  // Returns the correct ratio based on the total width times the fixRangeRatio
+  const getFixRange = useCallback(
+    () => (max - min) * SLIDER_SETTINGS.fixRangeRatio,
+    [min, max, SLIDER_SETTINGS.fixRangeRatio],
+  )
+
+  // If min value is not divisible by a step bigger than 1, for example min = 3, step = 2
+  const fixModuloFromMin = useCallback(() => min % step, [min, step])
+
+  // If step is integer that is not 1. For example, values of step 2 => 0, 2, 4, 6, 8
+  const roundValueBasedOnStep = useCallback(
+    value => step * Math.round(value / step) + fixModuloFromMin(),
+    [step, fixModuloFromMin],
+  )
+
+  // Counts number of decimals for float steps like 0.1, 0.01, 1.5
+  const countDecimals = useCallback(() => {
+    const text = step.toString()
+    const index = text.indexOf('.')
+    return index === -1 ? 0 : text.length - index - 1
+  }, [step])
+
+  useEffect(() => {
+    if (!tooltipRef.current) return
+    if (isToggleTooltip && !showTooltip) return
+    const tooltipPos = hoverPos ?? 100 * getPositionInSlider(value)
+    tooltipRef.current.style.left = `${tooltipPos}%`
+  }, [showTooltip, hoverPos, isToggleTooltip, value, getPositionInSlider])
+
+  useEffect(() => {
+    if (!sliderRef.current) return
+    const percentage = 100 * getPositionInSlider(value)
+    const bg = `linear-gradient(90deg, ${
+      SLIDER_SETTINGS.fill
+    } ${percentage}%, ${SLIDER_SETTINGS.background} ${percentage + 0.1}%)`
+    sliderRef.current.style.background = bg
+  }, [
+    value,
+    getPositionInSlider,
+    SLIDER_SETTINGS.fill,
+    SLIDER_SETTINGS.background,
+  ])
+
+  /**
+   * The problem stems from the fact that the range thumb is 24px size
+   * and therefore there is a deviation percentage of thumbSizeRadius / sliderWidth.
+   * For example, 24 * 0.5 / 480 = 2.5%. So if pos is in the lower half reduce 0 - 2.5%,
+   * and if in the upper half add 0 - 2.5%
+   * @function fixThumbRangeDeviation
+   * @param {number} hoverVal the almost accurate hover value
+   * @returns {number} returns the accurate value
+   */
+  const fixThumbRangeDeviation = hoverVal => {
+    const pos = getPositionInSlider(hoverVal)
+    let fixedValue = hoverVal
+
+    const posFromCenter = (pos - 0.5) / 0.5
+    const adjustment = posFromCenter * getFixRange()
+    fixedValue += adjustment
+
+    if (step > 1) {
+      fixedValue = roundValueBasedOnStep(fixedValue)
+    }
+
+    if (fixedValue > max) {
+      fixedValue = max
+    } else if (fixedValue < min) {
+      fixedValue = min
+    }
+
+    return fixedValue
+  }
+
+  /**
+   * Calculates the middle of the range thumb. If relative position is less than
+   * half, it adds 0 - 2.5% to current pos, else - it subtracts 0 - 2.5%.
+   * This function is about position of the thumb, the first function is about hover value.
+   * @function posTooltipMiddleThumb
+   * @param {number} val the value of the slider
+   * @returns {number} the middle position of the range thumb
+   */
+  const posTooltipMiddleThumb = val => {
+    const pos = getPositionInSlider(val)
+    const posFromCenter = (pos - 0.5) / 0.5
+    const adjustment = posFromCenter * getFixRange()
+    return Number(val) - adjustment
+  }
+
+  const calculatePercentage = e => {
+    const mouseX = Number(e.nativeEvent.offsetX)
+    const curHoverPos = (mouseX / e.target.clientWidth) * 100
+    const curHoverVal = getValueInSlider(curHoverPos)
+    if (curHoverVal > max || curHoverVal < min) return
+
+    setHoverPos(curHoverPos)
+    const stepDecimalCount = countDecimals()
+    const updatedVal = fixThumbRangeDeviation(curHoverVal)
+    setHoverValue(updatedVal.toFixed(stepDecimalCount))
+  }
+
+  const posTooltipToHover = e => {
+    if (disabled) return
+    calculatePercentage(e)
+    isToggleTooltip && setShowTooltip(true)
+  }
+
+  const hideTooltip = () => showTooltip && setShowTooltip(false)
+
+  const posTooltipToValue = () => {
+    if (disabled) return
+    if (isToggleTooltip) return hideTooltip()
+    const middleValue = posTooltipMiddleThumb(value)
+    setHoverPos(100 * getPositionInSlider(middleValue))
+    setHoverValue(value)
+  }
+
+  // KeyDown is called while user presses the arrows and KeyUp is called when the press
+  // is done, so the input value will be updated and won't be one step ahead.
+  const handleKeyPress = e => {
+    if (keyboardButtons.includes(e.keyCode)) {
+      posTooltipToValue()
+    }
+  }
+
+  const renderLabels = () => {
+    const minLabel = classNames(styles.label, styles.minLabel)
+    const maxLabel = classNames(styles.label, styles.maxLabel)
+
+    return (
+      <>
+        <span className={minLabel}>
+          {min}
+          {measureUnitText}
+        </span>
+        <span className={maxLabel}>
+          {max}
+          {measureUnitText}
+        </span>
+      </>
+    )
+  }
+
+  const renderTooltip = () =>
+    !isToggleTooltip || showTooltip ? (
+      <div ref={tooltipRef} className={styles.tooltip}>
+        {hoverValue ?? value}
+        {measureUnitText}
+      </div>
+    ) : null
+
+  return (
+    <div className={classNames(styles.container, disabled && styles.disabled)}>
+      <div className={styles.rangeContainer}>
+        <input
+          type='range'
+          onMouseMove={posTooltipToHover}
+          onMouseOut={posTooltipToValue}
+          onKeyUp={handleKeyPress}
+          onKeyDown={handleKeyPress}
+          ref={sliderRef}
+          min={min}
+          max={max}
+          value={value}
+          onChange={onChange}
+          step={step}
+          disabled={disabled}
+          {...otherProps}
+        />
+        {renderLabels()}
+        {renderTooltip()}
+      </div>
+    </div>
+  )
+}
+
+RangeSlider.defaultProps = {
+  min: 0,
+  max: 100,
+  value: 50,
+  onChange: () => {},
+  step: 1,
+  disabled: false,
+  isToggleTooltip: false,
+  measureUnitText: '',
+}
+
+RangeSlider.propTypes = {
+  /** The min value of the range. */
+  min: propTypes.number,
+  /** The max value of the range. */
+  max: propTypes.number,
+  /** Value of the slider */
+  value: propTypes.oneOfType([propTypes.string, propTypes.number]),
+  /** Callback when the component's state is changed. */
+  onChange: propTypes.func,
+  /** The step by which the value is incremented / decremented. */
+  step: propTypes.number,
+  /** Determines the disabled mode of the RangeSlider, if true - disabled. */
+  disabled: propTypes.bool,
+  /** Determines if tooltip is toggleable or not, if false - the tooltip is always shown,
+   *  else - tooltip is shown only when user hovers over the slider. */
+  isToggleTooltip: propTypes.bool,
+  /** Possibly add units of measurement for labels and hover value, like hours, minutes, meters etc. */
+  measureUnitText: propTypes.string,
+}
+
+export default RangeSlider

@@ -12,6 +12,7 @@ import { SkeletonLoader } from '../../../SkeletonLoader'
 import { ConfirmationDialog } from '../../ConfirmationDialog'
 import styles from './TableRow.module.scss'
 import { Tooltip } from '../../../Tooltip'
+import { generateId } from '../../../../utils'
 
 const TableRow = ({
   row,
@@ -62,7 +63,7 @@ const TableRow = ({
   }
 
   const handleActionsClick = event => {
-    setActionsAnchorElement(actionsAnchorElement ? null : event.currentTarget)
+    !actionsAnchorElement && setActionsAnchorElement(event.currentTarget)
   }
 
   const renderActions = row => {
@@ -77,6 +78,7 @@ const TableRow = ({
           isOpen={!!actionsAnchorElement}
           preferOpenDirection='left-start'
           onClose={handleActionsClose}
+          menuContainerId={`menu-${generateId()}`}
         >
           {activeRowActions.map(
             ({ label, icon, hidden, onClick, confirmDialogBody }, index) => (

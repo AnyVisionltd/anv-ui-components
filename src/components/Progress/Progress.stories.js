@@ -13,6 +13,12 @@ const containerStyle = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
+  justifyContent: 'center',
+}
+
+const textStyle = {
+  marginTop: '10px',
+  textTransform: 'uppercase',
 }
 
 export const Basic = () => {
@@ -29,9 +35,9 @@ export const Basic = () => {
 
   return (
     <div style={containerStyle}>
-      <h2>line</h2>
+      <h2 style={textStyle}>line</h2>
       <Progress value={value} />
-      <h2>circle</h2>
+      <h2 style={textStyle}>circle</h2>
       <Progress variant={'circle'} value={value} />
     </div>
   )
@@ -39,9 +45,9 @@ export const Basic = () => {
 
 export const Indeterminate = () => (
   <div style={containerStyle}>
-    <h2>line</h2>
+    <h2 style={textStyle}>line</h2>
     <Progress indeterminate />
-    <h2>circle</h2>
+    <h2 style={textStyle}>circle</h2>
     <Progress indeterminate variant={'circle'} />
   </div>
 )

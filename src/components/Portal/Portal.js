@@ -1,18 +1,19 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import propTypes from 'prop-types'
 
 const Portal = ({ children, containerId, className }) => {
-  const target = useRef(document.getElementById(containerId))
+  const target = useRef(null)
 
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       if (target.current) {
         target.current.remove()
         target.current = null
       }
-    }
-  }, [])
+    },
+    [],
+  )
 
   if (!target.current) {
     target.current = document.createElement('div')

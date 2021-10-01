@@ -199,7 +199,10 @@ const Menu = React.forwardRef((props, ref) => {
     <Portal containerId={menuContainerId}>{renderMenu()}</Portal>
   )
 
-  return !isSubMenu ? renderMenuInPortal() : renderMenu()
+  return (
+    (isMenuOpen || isSubMenu) &&
+    (!isSubMenu ? renderMenuInPortal() : renderMenu())
+  )
 })
 
 Menu.defaultProps = {
