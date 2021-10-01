@@ -42,7 +42,8 @@
     "test-jenkins": "CI=true npm test",
     "storybook": "start-storybook -p 9009",
     "build-storybook": "build-storybook",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "prepare": "husky install"
   },
   "browserslist": {
     "production": [
