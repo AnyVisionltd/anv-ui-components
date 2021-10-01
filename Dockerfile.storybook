@@ -1,5 +1,5 @@
 # Stage 0, "build-stage", based on Node.js, to build and compile the frontend
-FROM nikolaik/python-nodejs:python3.9-nodejs16-alpine as build-stage
+FROM nikolaik/python-nodejs:python3.9-nodejs14-alpine as build-stage
 
 ENV APP_DIR /home/node/anv-ui-components
 WORKDIR $APP_DIR
