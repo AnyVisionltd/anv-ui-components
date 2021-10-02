@@ -10083,6 +10083,24 @@ exports[`Storyshots User Feedback/ResultIndicator Basic 1`] = `
         Done
       </div>
       <div
+        className="resultContainer stopped childrenStyle"
+        onMouseEnter={[Function]}
+      >
+        <svg
+          height="1em"
+          viewBox="0 0 15.002 15.002"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0 7.498a7.5 7.5 0 117.5 7.5 7.5 7.5 0 01-7.5-7.5zm1.5 0a6 6 0 106-6 6 6 0 00-6 6zm3.5 2.5v-5h5v5z"
+            data-name="Union 94"
+          />
+        </svg>
+         
+        Stopped
+      </div>
+      <div
         className="inQueueContainer childrenStyle"
         onMouseEnter={[Function]}
       >
@@ -10139,6 +10157,23 @@ exports[`Storyshots User Feedback/ResultIndicator Basic 1`] = `
             <path
               d="M12 19.5a7.5 7.5 0 117.5-7.5 7.51 7.51 0 01-7.5 7.5zm-2.99-8.182a.908.908 0 00-.17.018.752.752 0 00-.314 1.3l1.76 1.771a.753.753 0 00.512.213h.021a.76.76 0 00.527-.213l3.75-3.75a.76.76 0 00.225-.533.753.753 0 00-1.281-.533l-3.221 3.227-1.236-1.242a.746.746 0 00-.571-.258z"
               data-name="Subtraction 28"
+            />
+          </svg>
+           
+        </div>
+        <div
+          className="resultContainer stopped childrenStyle"
+          onMouseEnter={[Function]}
+        >
+          <svg
+            height="1em"
+            viewBox="0 0 15.002 15.002"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 7.498a7.5 7.5 0 117.5 7.5 7.5 7.5 0 01-7.5-7.5zm1.5 0a6 6 0 106-6 6 6 0 00-6 6zm3.5 2.5v-5h5v5z"
+              data-name="Union 94"
             />
           </svg>
            
@@ -11512,80 +11547,176 @@ exports[`Storyshots User Inputs/Date & Time/DatePicker Basic 1`] = `
   <div
     className="center"
   >
+    <div
+      className="container"
+    >
+      <div
+        className="textField outline text medium notEmpty withLabel"
+        onClick={[Function]}
+      >
+        <label
+          className="label"
+        >
+          Date
+        </label>
+        <div
+          className="inputBase text inputBase bottom"
+        >
+          <input
+            defaultValue="30/09/2021"
+            disabled={false}
+            onChange={[Function]}
+            onFocus={[Function]}
+            readOnly={false}
+            type="text"
+            value="30/09/2021"
+          />
+          <div
+            className="trailingIcon trailingIcon"
+          >
+            <button
+              className="button medium fill iconButton medium fill bt-datepicker-icon"
+              disabled={false}
+              onClick={[Function]}
+              type="button"
+            >
+              <svg
+                height="1em"
+                viewBox="0 0 24 24"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M17.25 6h-1.5v-.75a.75.75 0 10-1.5 0V6h-4.5v-.75a.75.75 0 10-1.5 0V6h-1.5A2.25 2.25 0 004.5 8.25v9a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25v-9A2.25 2.25 0 0017.25 6zM18 17.25a.75.75 0 01-.75.75H6.75a.75.75 0 01-.75-.75V12h12zm0-6.75H6V8.25a.75.75 0 01.75-.75h1.5v.75a.75.75 0 001.5 0V7.5h4.5v.75a.75.75 0 001.5 0V7.5h1.5a.75.75 0 01.75.75z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots User Inputs/Date & Time/DateRangePicker Basic 1`] = `
+<div>
+  <div
+    className="center"
+  >
     <div>
       <div
-        className="container"
+        className="dateRangePicker"
       >
         <div
-          className="textField outline text medium notEmpty withLabel"
-          onClick={[Function]}
+          className="container"
         >
-          <label
-            className="label"
-          >
-            Date
-          </label>
           <div
-            className="inputBase text inputBase bottom"
+            className="textField outline text medium notEmpty withLabel"
+            onClick={[Function]}
           >
-            <input
-              InputProps={
-                Object {
-                  "endAdornment": <WithStyles(ForwardRef(InputAdornment))
-                    position="end"
-                  >
-                    <WithStyles(ForwardRef(IconButton))
-                      disabled={false}
-                      onClick={[Function]}
-                    >
-                      <KeyboardIcon />
-                    </WithStyles(ForwardRef(IconButton))>
-                  </WithStyles(ForwardRef(InputAdornment))>,
-                }
-              }
-              cancelLabel={null}
-              defaultValue="23/09/2021"
-              disabled={false}
-              helperText=""
-              inputRef={
-                Object {
-                  "current": undefined,
-                }
-              }
-              okLabel={null}
-              onChange={[Function]}
-              onFocus={[Function]}
-              readOnly={false}
-              type="text"
-              value="23/09/2021"
-            />
-            <div
-              className="trailingIcon trailingIcon"
+            <label
+              className="label"
             >
-              <button
-                className="button medium fill iconButton medium fill bt-datepicker-icon"
+              From
+            </label>
+            <div
+              className="inputBase text inputBase bottom"
+            >
+              <input
+                defaultValue="30/09/2021"
                 disabled={false}
-                onClick={[Function]}
-                type="button"
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={false}
+                type="text"
+                value="30/09/2021"
+              />
+              <div
+                className="trailingIcon trailingIcon"
               >
-                <svg
-                  height="1em"
-                  viewBox="0 0 24 24"
-                  width="1em"
-                  xmlns="http://www.w3.org/2000/svg"
+                <button
+                  className="button medium fill iconButton medium fill bt-datepicker-icon"
+                  disabled={false}
+                  onClick={[Function]}
+                  type="button"
                 >
-                  <path
-                    d="M17.25 6h-1.5v-.75a.75.75 0 10-1.5 0V6h-4.5v-.75a.75.75 0 10-1.5 0V6h-1.5A2.25 2.25 0 004.5 8.25v9a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25v-9A2.25 2.25 0 0017.25 6zM18 17.25a.75.75 0 01-.75.75H6.75a.75.75 0 01-.75-.75V12h12zm0-6.75H6V8.25a.75.75 0 01.75-.75h1.5v.75a.75.75 0 001.5 0V7.5h4.5v.75a.75.75 0 001.5 0V7.5h1.5a.75.75 0 01.75.75z"
-                  />
-                </svg>
-              </button>
+                  <svg
+                    height="1em"
+                    viewBox="0 0 24 24"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M17.25 6h-1.5v-.75a.75.75 0 10-1.5 0V6h-4.5v-.75a.75.75 0 10-1.5 0V6h-1.5A2.25 2.25 0 004.5 8.25v9a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25v-9A2.25 2.25 0 0017.25 6zM18 17.25a.75.75 0 01-.75.75H6.75a.75.75 0 01-.75-.75V12h12zm0-6.75H6V8.25a.75.75 0 01.75-.75h1.5v.75a.75.75 0 001.5 0V7.5h4.5v.75a.75.75 0 001.5 0V7.5h1.5a.75.75 0 01.75.75z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="container"
+        >
+          <div
+            className="textField outline text medium notEmpty withLabel"
+            onClick={[Function]}
+          >
+            <label
+              className="label"
+            >
+              To
+            </label>
+            <div
+              className="inputBase text inputBase bottom"
+            >
+              <input
+                defaultValue="01/10/2021"
+                disabled={false}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={false}
+                type="text"
+                value="01/10/2021"
+              />
+              <div
+                className="trailingIcon trailingIcon"
+              >
+                <button
+                  className="button medium fill iconButton medium fill bt-datepicker-icon"
+                  disabled={false}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <svg
+                    height="1em"
+                    viewBox="0 0 24 24"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M17.25 6h-1.5v-.75a.75.75 0 10-1.5 0V6h-4.5v-.75a.75.75 0 10-1.5 0V6h-1.5A2.25 2.25 0 004.5 8.25v9a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25v-9A2.25 2.25 0 0017.25 6zM18 17.25a.75.75 0 01-.75.75H6.75a.75.75 0 01-.75-.75V12h12zm0-6.75H6V8.25a.75.75 0 01.75-.75h1.5v.75a.75.75 0 001.5 0V7.5h4.5v.75a.75.75 0 001.5 0V7.5h1.5a.75.75 0 01.75.75z"
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <p>
-        Selected date: 
-        23/09/2021
+      <p
+        style={
+          Object {
+            "textAlign": "center",
+          }
+        }
+      >
+        Selected range: 
+        30/09/2021
+         -
+         
+        01/10/2021
       </p>
     </div>
   </div>

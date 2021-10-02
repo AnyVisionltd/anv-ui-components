@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import {
   CheckCircleFilled,
   TimesCircleFilled,
   Hourglass,
+  Stop,
 } from '@anyvision/anv-icons'
 import { Tooltip } from '../Tooltip'
 import languageService from '../../services/language'
@@ -12,47 +13,61 @@ import styles from './ResultIndicator.module.scss'
 
 const getTranslation = word => languageService.getTranslation(word)
 
-const ResultIndicator = ({
-  isTiny,
-  error,
-  success,
-  errorMessage,
-  successMessage,
-  inQueue,
-}) => {
-  const renderInQueue = () => (
-    <Tooltip content={getTranslation('inQueue')}>
-      <div className={styles.inQueueContainer}>
-        <Hourglass /> {!isTiny && getTranslation('inQueue')}
-      </div>
-    </Tooltip>
+const IndicatorContainer = ({ children, content, className }) => (
+  <Tooltip content={content}>
+    <div className={className}>{children}</div>
+  </Tooltip>
+)
+
+const ResultIndicator = props => {
+  const { isTiny, errorMessage, successMessage } = props
+
+  const indicatorsMap = useMemo(
+    () => ({
+      inQueue: (
+        <IndicatorContainer
+          content={getTranslation('inQueue')}
+          className={styles.inQueueContainer}
+        >
+          <Hourglass /> {!isTiny && getTranslation('inQueue')}
+        </IndicatorContainer>
+      ),
+      success: (
+        <IndicatorContainer
+          content={successMessage}
+          className={classNames(styles.resultContainer, styles.success)}
+        >
+          <CheckCircleFilled /> {!isTiny && getTranslation('done')}
+        </IndicatorContainer>
+      ),
+      error: (
+        <IndicatorContainer
+          content={errorMessage}
+          className={classNames(styles.resultContainer, styles.error)}
+        >
+          <TimesCircleFilled /> {!isTiny && getTranslation('failed')}
+        </IndicatorContainer>
+      ),
+      stopped: (
+        <IndicatorContainer
+          content={getTranslation('stopped')}
+          className={classNames(styles.resultContainer, styles.stopped)}
+        >
+          <Stop /> {!isTiny && getTranslation('stopped')}
+        </IndicatorContainer>
+      ),
+    }),
+    [errorMessage, isTiny, successMessage],
   )
 
-  const renderResult = () => {
-    const classes = classNames(
-      styles.resultContainer,
-      success && styles.success,
-      error && styles.error,
-    )
-
-    return (
-      <Tooltip content={success ? successMessage : errorMessage}>
-        <div className={classes}>
-          {success ? (
-            <>
-              <CheckCircleFilled /> {!isTiny && getTranslation('done')}
-            </>
-          ) : (
-            <>
-              <TimesCircleFilled /> {!isTiny && getTranslation('failed')}
-            </>
-          )}
-        </div>
-      </Tooltip>
-    )
+  const renderIndicator = () => {
+    for (let indicator in indicatorsMap) {
+      if (props[indicator]) return indicatorsMap[indicator]
+    }
+    return null
   }
 
-  return inQueue ? renderInQueue() : renderResult()
+  return renderIndicator()
 }
 
 ResultIndicator.defaultProps = {
@@ -70,6 +85,8 @@ ResultIndicator.propTypes = {
   success: propTypes.bool,
   /** Determines if the action fails. */
   error: propTypes.bool,
+  /** Determines if the action stopped. */
+  stopped: propTypes.bool,
   /** Message to show when action fails.*/
   errorMessage: propTypes.string,
   /** Message to show when action succeeds.*/

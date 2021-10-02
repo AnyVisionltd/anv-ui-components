@@ -63,6 +63,7 @@ $default-selected-height: av-size(sz-56);
       font-size: av-font-size(tiny);
       color: av-color(content, av-opacity(disabled));
       cursor: text;
+      transition: all 0.2s ease;
     }
 
     .labelColor {

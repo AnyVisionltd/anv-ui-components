@@ -20,6 +20,7 @@
     "processing": "Processsing",
     "inQueue": "In queue",
     "completed": "Completed",
+    "stopped": "Stopped",
     "selectOption": "Select Option",
     "label": "Label"
   }
