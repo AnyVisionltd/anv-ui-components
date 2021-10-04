@@ -11071,13 +11071,13 @@ exports[`Storyshots User Inputs/Date & Time/DatePicker Basic 1`] = `
           className="inputBase text inputBase bottom"
         >
           <input
-            defaultValue="03/10/2021"
+            defaultValue="04/10/2021"
             disabled={false}
             onChange={[Function]}
             onFocus={[Function]}
             readOnly={false}
             type="text"
-            value="03/10/2021"
+            value="04/10/2021"
           />
           <div
             className="trailingIcon trailingIcon"
@@ -11132,13 +11132,13 @@ exports[`Storyshots User Inputs/Date & Time/DateRangePicker Basic 1`] = `
               className="inputBase text inputBase bottom"
             >
               <input
-                defaultValue="03/10/2021"
+                defaultValue="04/10/2021"
                 disabled={false}
                 onChange={[Function]}
                 onFocus={[Function]}
                 readOnly={false}
                 type="text"
-                value="03/10/2021"
+                value="04/10/2021"
               />
               <div
                 className="trailingIcon trailingIcon"
@@ -11180,13 +11180,13 @@ exports[`Storyshots User Inputs/Date & Time/DateRangePicker Basic 1`] = `
               className="inputBase text inputBase bottom"
             >
               <input
-                defaultValue="04/10/2021"
+                defaultValue="05/10/2021"
                 disabled={false}
                 onChange={[Function]}
                 onFocus={[Function]}
                 readOnly={false}
                 type="text"
-                value="04/10/2021"
+                value="05/10/2021"
               />
               <div
                 className="trailingIcon trailingIcon"
@@ -11221,10 +11221,10 @@ exports[`Storyshots User Inputs/Date & Time/DateRangePicker Basic 1`] = `
         }
       >
         Selected range: 
-        03/10/2021
+        04/10/2021
          -
          
-        04/10/2021
+        05/10/2021
       </p>
     </div>
   </div>
