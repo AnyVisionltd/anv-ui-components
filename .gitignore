@@ -14,4 +14,4 @@ npm-debug.log*
 /storybook-static
 .eslintcache
 
-/src/components/__snapshots__
+/src/components/__snapshots__/
