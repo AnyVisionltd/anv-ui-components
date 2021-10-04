@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import classNames from 'classnames'
@@ -12,7 +12,26 @@ import { ThemeProvider } from '@material-ui/styles'
 import { Calendar } from '@anyvision/anv-icons'
 import { TextField } from '../TextField'
 import { IconButton } from '../IconButton'
+import languageService from '../../services/language'
 import './DateTimePicker.scss'
+
+const MATERIAL_UI_THEME = {
+  typography: {
+    fontFamily: ['Poppins'],
+    body1: {
+      fontSize: '14px',
+    },
+    body2: {
+      fontSize: '14px',
+    },
+    h3: {
+      fontSize: '24px',
+    },
+    h4: {
+      fontSize: '24px',
+    },
+  },
+}
 
 const DateTimePicker = ({
   onChange,
@@ -52,7 +71,9 @@ const DateTimePicker = ({
     <TextField
       trailingIcon={
         <IconButton
-          className={classNames('bt-datetimepicker-icon', { disabled })}
+          className={classNames('datetimepicker-icon', {
+            disabled: props.disabled,
+          })}
           onClick={() => !props.disabled && setIsOpen(prev => !prev)}
           size='medium'
         >
@@ -85,29 +106,13 @@ const DateTimePicker = ({
    */
   const handleDateChange = date => {
     setDate(date)
-    onChange && onChange(date)
+    onChange(date)
   }
 
   /**
    * Override material ui theme
    */
-  const theme = createTheme({
-    typography: {
-      fontFamily: ['Poppins'],
-      body1: {
-        fontSize: '14px',
-      },
-      body2: {
-        fontSize: '14px',
-      },
-      h3: {
-        fontSize: '24px',
-      },
-      h4: {
-        fontSize: '24px',
-      },
-    },
-  })
+  const theme = createTheme(MATERIAL_UI_THEME)
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -142,11 +147,11 @@ const DateTimePicker = ({
 }
 
 DateTimePicker.propTypes = {
-  /** Controlled date&time value.*/
+  /** Controlled date&time value. */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /** Callback when date change.*/
+  /** Callback when date change. */
   onChange: PropTypes.func,
-  /** TextField label.*/
+  /** TextField label. */
   label: PropTypes.string,
   /** If true, the input will be disabled. */
   disabled: PropTypes.bool,
@@ -158,9 +163,9 @@ DateTimePicker.propTypes = {
   disablePast: PropTypes.bool,
   /** If true, you won't be able to choose future dates. */
   disableFuture: PropTypes.bool,
-  /** Max selectable date.*/
+  /** Max selectable date. */
   maxDate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /** Min selectable date.*/
+  /** Min selectable date. */
   minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 }
 
@@ -170,7 +175,7 @@ DateTimePicker.defaultProps = {
   disablePast: false,
   format: 'DD/MM/yyyy HH:mm',
   onChange: () => {},
-  label: 'Date & Time',
+  label: languageService.getTranslation('dateAndTime'),
   errorMessage: '',
 }
 
