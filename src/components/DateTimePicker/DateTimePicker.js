@@ -7,8 +7,7 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDateTimePicker,
 } from '@material-ui/pickers'
-import { createTheme } from '@material-ui/core/styles'
-import { ThemeProvider } from '@material-ui/styles'
+import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 import { Calendar } from '@anyvision/anv-icons'
 import { TextField } from '../TextField'
 import { IconButton } from '../IconButton'
