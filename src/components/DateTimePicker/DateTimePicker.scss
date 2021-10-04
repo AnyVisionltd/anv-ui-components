@@ -4,12 +4,16 @@
 .MuiToolbar-root.MuiToolbar-regular.MuiPickersToolbar-toolbar.MuiPickerDTToolbar-toolbar.MuiToolbar-gutters {
   background-color: av-color(primary);
 }
+
 // tabs
 .MuiPaper-root.MuiPaper-elevation1.MuiPaper-rounded {
   box-shadow: none;
+
   .MuiTabs-root.MuiPickerDTTabs-tabs {
     background-color: av-color(primary);
+
     .MuiTabs-scroller.MuiTabs-fixed {
+
       span.MuiTabs-indicator {
         height: 4px;
         background-color: av-color(accent);
@@ -20,13 +24,16 @@
 
 // clock
 .MuiPickersClock-container {
+
   .MuiPickersClock-clock {
     background-color: av-color(primary, av-opacity(divider));
-    .MuiPickersClock-pin,
-    .MuiPickersClockPointer-pointer {
+
+    .MuiPickersClock-pin,.MuiPickersClockPointer-pointer {
       background-color: av-color(primary);
+
       .MuiPickersClockPointer-thumb {
         border-color: av-color(primary);
+
         &.MuiPickersClockPointer-noPoint {
           background-color: av-color(primary);
         }
@@ -35,11 +42,35 @@
   }
 }
 
-// hover toolbar label
-.MuiButtonBase-root.MuiButton-root.MuiButton-text.MuiPickersToolbarButton-toolbarBtn {
-  &:hover {
-    background-color: av-color(purewhite, av-opacity(divider));
+.MuiButtonBase-root {
+
+  // hover toolbar label
+  &.MuiButton-root.MuiButton-text.MuiPickersToolbarButton-toolbarBtn {
+    &:hover {
+      background-color: av-color(purewhite, av-opacity(divider));
+    }
   }
+
+  // day selected bg
+  &.MuiIconButton-root.MuiPickersDay-day.MuiPickersDay-daySelected {
+    background-color: av-color(primary);
+    &.MuiPickersDay-current {
+      color: av-color(purewhite);
+    }
+  }
+
+  // day selected label
+  &.MuiIconButton-root.MuiPickersDay-day.MuiPickersDay-current {
+    color: av-color(primary);
+}
+
+  // calendar days
+  &.MuiIconButton-root.MuiPickersDay-day {
+    &:hover {
+    background-color: av-color(primary, av-opacity(divider));
+  }
+}
+
 }
 
 // year selected
@@ -48,27 +79,7 @@
   font-size: av-font-size(base);
 }
 
-// day selected bg
-.MuiButtonBase-root.MuiIconButton-root.MuiPickersDay-day.MuiPickersDay-daySelected {
-  background-color: av-color(primary);
-  &.MuiPickersDay-current {
-    color: av-color(purewhite);
-  }
-}
-
-// day selected label
-.MuiButtonBase-root.MuiIconButton-root.MuiPickersDay-day.MuiPickersDay-current {
-  color: av-color(primary);
-}
-
-// calendar days
-.MuiButtonBase-root.MuiIconButton-root.MuiPickersDay-day {
-  &:hover {
-    background-color: av-color(primary, av-opacity(divider));
-  }
-}
-
-.bt-datetimepicker-icon {
+.datetimepicker-icon {
   border-radius: 50%;
   color: av-color(content);
   background-color: av-color(content, av-opacity(divider));
