@@ -28,6 +28,7 @@ const ProgressWithIndicator = ({
     errorMessage,
     successMessage,
     inQueue,
+    stopped,
   }
   const feedbackOptions = [error, success, stopped, inQueue].filter(Boolean)
 
