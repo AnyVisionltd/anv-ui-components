@@ -23,6 +23,7 @@ const TableBody = ({
   ...otherProps
 }) => {
   const listRef = useRef()
+  const containerRef = useRef()
 
   const {
     state,
@@ -82,13 +83,26 @@ const TableBody = ({
     let isSelected = items.some(rowId => rowId === selectField)
     return excludeMode ? !isSelected : isSelected
   }
+
+  const calcItemsToFillHeight = () => {
+    const height = containerRef.current.offsetHeight
+    return Math.floor(height / rowHeight)
+  }
+
   const loadingRender = () => {
     if (!isLoading) {
       return
     }
 
-    return Array.from({ length: 5 }, (_, index) => (
-      <TableRow columns={columns} isLoading={true} key={index} />
+    const itemsToLoad = state.totalItems ? 5 : calcItemsToFillHeight()
+
+    return Array.from({ length: itemsToLoad }, (_, index) => (
+      <TableRow
+        columns={columns}
+        isLoading={true}
+        key={index}
+        rowHeight={rowHeight}
+      />
     ))
   }
 
@@ -106,21 +120,25 @@ const TableBody = ({
 
   const classes = classNames(styles.tableBody, className)
 
-  return state.totalItems ? (
-    <div className={classes} {...otherProps}>
-      <InfiniteList
-        rowHeight={rowHeight}
-        totalItems={+totalItems}
-        rowRender={renderRow}
-        items={tableData}
-        customLoader={loadingRender}
-        isLoading={isLoading}
-        loadMoreItems={loadMoreData}
-        ref={listRef}
-      />
+  return (
+    <div className={classes} {...otherProps} ref={containerRef}>
+      {state.totalItems ? (
+        <InfiniteList
+          rowHeight={rowHeight}
+          totalItems={+totalItems}
+          rowRender={renderRow}
+          items={tableData}
+          customLoader={loadingRender}
+          isLoading={isLoading}
+          loadMoreItems={loadMoreData}
+          ref={listRef}
+        />
+      ) : isLoading && selfControlled ? (
+        loadingRender()
+      ) : (
+        renderNoResults()
+      )}
     </div>
-  ) : (
-    renderNoResults()
   )
 }
 
