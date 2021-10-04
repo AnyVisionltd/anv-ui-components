@@ -19,6 +19,7 @@
     "processing": "Processsing",
     "inQueue": "In queue",
     "completed": "Completed",
-    "stopped": "Stopped"
+    "stopped": "Stopped",
+    "dateAndTime": "Date & Time"
   }
 }
