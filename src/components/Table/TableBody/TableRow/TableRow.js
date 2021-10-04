@@ -220,7 +220,11 @@ const TableRow = ({
   }
 
   const renderLoadingRow = () => (
-    <div role={'row'} className={styles.tableRow}>
+    <div
+      role={'row'}
+      className={styles.tableRow}
+      style={{ height: `${rowHeight}px` }}
+    >
       <div role='cell' className={styles.selectionCell}>
         <SkeletonLoader className={styles.circleSkeleton} />
       </div>
