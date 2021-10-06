@@ -12,7 +12,7 @@ import { ThemeProvider } from '@material-ui/styles'
 import { Calendar } from '@anyvision/anv-icons'
 import { TextField } from '../TextField'
 import { IconButton } from '../IconButton'
-import './DatePicker.module.scss'
+import './DatePicker.scss'
 
 const DatePicker = ({
   onChange,
