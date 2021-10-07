@@ -136,7 +136,7 @@ const DateTimePicker = ({
           minDate={minDate}
           PopoverProps={{
             anchorEl: () => textFieldRef.current,
-            anchorOrigin: { horizontal: 138, vertical: 48 },
+            anchorOrigin: { horizontal: 143, vertical: 48 },
           }}
           {...otherProps}
         />
