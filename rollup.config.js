@@ -36,7 +36,12 @@ export default {
           'isFragment',
         ],
         'node_modules/prop-types/index.js': [
-          'func, oneOfType, object, string, element, arrayOf',
+          'func',
+          'oneOfType',
+          'object',
+          'string',
+          'element',
+          'arrayOf',
           'node',
           'bool',
           'oneOf',
