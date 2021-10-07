@@ -12,7 +12,7 @@ import { ThemeProvider } from '@material-ui/styles'
 import { Calendar } from '@anyvision/anv-icons'
 import { TextField } from '../TextField'
 import { IconButton } from '../IconButton'
-import './DatePicker.scss'
+import styles from './DatePicker.module.scss'
 
 const DatePicker = ({
   onChange,
@@ -52,7 +52,7 @@ const DatePicker = ({
     <TextField
       trailingIcon={
         <IconButton
-          className={classNames('bt-datepicker-icon', { disabled })}
+          className={classNames(styles.datepickerIcon, { disabled })}
           onClick={() => !props.disabled && setIsOpen(prev => !prev)}
           size='medium'
         >
