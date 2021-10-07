@@ -7,12 +7,29 @@ import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
 } from '@material-ui/pickers'
-import { createTheme } from '@material-ui/core/styles'
-import { ThemeProvider } from '@material-ui/styles'
+import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 import { Calendar } from '@anyvision/anv-icons'
 import { TextField } from '../TextField'
 import { IconButton } from '../IconButton'
-import './TimePicker.scss'
+import './TimePicker.module.scss'
+
+const MATERIAL_UI_THEME = {
+  typography: {
+    fontFamily: ['Poppins'],
+    body1: {
+      fontSize: '14px',
+    },
+    body2: {
+      fontSize: '14px',
+    },
+    h3: {
+      fontSize: '24px',
+    },
+    h4: {
+      fontSize: '24px',
+    },
+  },
+}
 
 const TimePicker = ({
   onChange,
@@ -48,7 +65,9 @@ const TimePicker = ({
     <TextField
       trailingIcon={
         <IconButton
-          className={classNames('bt-timepicker-icon', { disabled })}
+          className={classNames('datepicker-icon', {
+            disabled: props.disabled,
+          })}
           onClick={() => !props.disabled && setIsOpen(prev => !prev)}
           size='medium'
         >
@@ -81,26 +100,13 @@ const TimePicker = ({
    */
   const handleDateChange = date => {
     setDate(date)
-    onChange && onChange(date)
+    onChange(date)
   }
 
   /**
    * Override material ui theme
    */
-  const theme = createTheme({
-    typography: {
-      fontFamily: ['Poppins'],
-      body1: {
-        fontSize: '14px',
-      },
-      body2: {
-        fontSize: '12px',
-      },
-      h2: {
-        fontSize: '24px',
-      },
-    },
-  })
+  const theme = createTheme(MATERIAL_UI_THEME)
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -129,11 +135,11 @@ const TimePicker = ({
 }
 
 TimePicker.propTypes = {
-  /** Controlled time value.*/
+  /** Controlled time value. */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /** Callback when time change.*/
+  /** Callback when time change. */
   onChange: PropTypes.func,
-  /*** TextField label.*/
+  /** TextField label. */
   label: PropTypes.string,
   /** If true, the input will be disabled. */
   disabled: PropTypes.bool,
