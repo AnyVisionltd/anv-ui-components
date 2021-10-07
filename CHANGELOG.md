@@ -45,6 +45,7 @@
 - Added ProgressWithIndicator
 - Added DatePicker component
 - Added DateRangePicker component
+- Added DateTimePicker component
 
 ## 1.0.0 - 06-09-2020
 

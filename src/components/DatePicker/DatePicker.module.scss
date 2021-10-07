@@ -1,15 +1,15 @@
 @import '~@anyvision/style-guide';
 
-.datepickerIcon {
-  border-radius: 50%;
-  color: av-color(content);
-  background-color: av-color(content, av-opacity(divider));
-  &.disabled {
-    pointer-events: none;
-  }
-}
-
 :global {
+  .datepicker-icon {
+    border-radius: 50%;
+    color: av-color(content);
+    background-color: av-color(content, av-opacity(divider));
+    &.disabled {
+      pointer-events: none;
+    }
+  }
+
   // top toolbar
   .MuiToolbar-root.MuiToolbar-regular.MuiPickersToolbar-toolbar.MuiPickersDatePickerRoot-toolbar.MuiToolbar-gutters {
     background-color: av-color(primary);
