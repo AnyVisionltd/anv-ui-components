@@ -5,15 +5,34 @@ import classNames from 'classnames'
 import MomentUtils from '@date-io/moment'
 import {
   MuiPickersUtilsProvider,
-  KeyboardDatePicker,
+  KeyboardDateTimePicker,
 } from '@material-ui/pickers'
 import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 import { Calendar } from '@anyvision/anv-icons'
 import { TextField } from '../TextField'
 import { IconButton } from '../IconButton'
-import './DatePicker.module.scss'
+import languageService from '../../services/language'
+import './DateTimePicker.module.scss'
 
-const DatePicker = ({
+const MATERIAL_UI_THEME = {
+  typography: {
+    fontFamily: ['Poppins'],
+    body1: {
+      fontSize: '14px',
+    },
+    body2: {
+      fontSize: '14px',
+    },
+    h3: {
+      fontSize: '24px',
+    },
+    h4: {
+      fontSize: '24px',
+    },
+  },
+}
+
+const DateTimePicker = ({
   onChange,
   disabled,
   disablePast,
@@ -86,42 +105,39 @@ const DatePicker = ({
    */
   const handleDateChange = date => {
     setDate(date)
-    onChange && onChange(date)
+    onChange(date)
   }
 
   /**
    * Override material ui theme
    */
-  const theme = createTheme({
-    typography: {
-      fontFamily: ['Poppins'],
-    },
-  })
+  const theme = createTheme(MATERIAL_UI_THEME)
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <ThemeProvider theme={theme}>
-        <KeyboardDatePicker
+        <KeyboardDateTimePicker
+          autoOk
+          ampm={false}
+          label={label}
+          value={date}
           onChange={handleDateChange}
           TextFieldComponent={renderInput}
-          onClose={handleCloseDatePicker}
-          open={isOpen}
+          okLabel={null}
+          cancelLabel={null}
           variant='inline'
+          open={isOpen}
+          onClose={handleCloseDatePicker}
           disabled={disabled}
           disablePast={disablePast}
           disableFuture={disableFuture}
-          value={date}
-          label={label}
           format={format}
           maxDate={maxDate}
           minDate={minDate}
-          okLabel={null}
-          cancelLabel={null}
           PopoverProps={{
             anchorEl: () => textFieldRef.current,
             anchorOrigin: { horizontal: 138, vertical: 48 },
           }}
-          autoOk
           {...otherProps}
         />
       </ThemeProvider>
@@ -129,8 +145,8 @@ const DatePicker = ({
   )
 }
 
-DatePicker.propTypes = {
-  /** Date value. */
+DateTimePicker.propTypes = {
+  /** Controlled date&time value. */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** Callback when date change. */
   onChange: PropTypes.func,
@@ -152,14 +168,14 @@ DatePicker.propTypes = {
   minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 }
 
-DatePicker.defaultProps = {
+DateTimePicker.defaultProps = {
   disabled: false,
   disableFuture: false,
   disablePast: false,
-  format: 'DD/MM/yyyy',
+  format: 'DD/MM/yyyy HH:mm',
   onChange: () => {},
-  label: 'Date',
+  label: languageService.getTranslation('dateAndTime'),
   errorMessage: '',
 }
 
-export default DatePicker
+export default DateTimePicker
