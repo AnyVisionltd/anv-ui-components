@@ -10,11 +10,14 @@
   .MuiPickersClock-container {
     .MuiPickersClock-clock {
       background-color: av-color(primary, av-opacity(divider));
+
       .MuiPickersClock-pin,
       .MuiPickersClockPointer-pointer {
         background-color: av-color(primary);
+
         .MuiPickersClockPointer-thumb {
           border-color: av-color(primary);
+
           &.MuiPickersClockPointer-noPoint {
             background-color: av-color(primary);
           }
