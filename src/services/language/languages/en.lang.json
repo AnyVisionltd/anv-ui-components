@@ -21,6 +21,7 @@
     "completed": "Completed",
     "stopped": "Stopped",
     "dateAndTime": "Date & Time",
-    "time": "Time"
+    "time": "Time",
+    "date": "Date"
   }
 }

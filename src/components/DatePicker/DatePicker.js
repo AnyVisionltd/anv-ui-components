@@ -11,6 +11,7 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 import { Calendar } from '@anyvision/anv-icons'
 import { TextField } from '../TextField'
 import { IconButton } from '../IconButton'
+import languageService from '../../services/language'
 import './DatePicker.module.scss'
 
 const DatePicker = ({
@@ -158,7 +159,7 @@ DatePicker.defaultProps = {
   disablePast: false,
   format: 'DD/MM/yyyy',
   onChange: () => {},
-  label: 'Date',
+  label: languageService.getTranslation('date'),
   errorMessage: '',
 }
 
