@@ -11,6 +11,7 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 import { Calendar } from '@anyvision/anv-icons'
 import { TextField } from '../TextField'
 import { IconButton } from '../IconButton'
+import languageService from '../../services/language'
 import './TimePicker.module.scss'
 
 const MATERIAL_UI_THEME = {
@@ -22,10 +23,7 @@ const MATERIAL_UI_THEME = {
     body2: {
       fontSize: '14px',
     },
-    h3: {
-      fontSize: '24px',
-    },
-    h4: {
+    h2: {
       fontSize: '24px',
     },
   },
@@ -153,7 +151,7 @@ TimePicker.defaultProps = {
   disabled: false,
   format: 'HH:mm',
   onChange: () => {},
-  label: 'Time',
+  label: languageService.getTranslation('time'),
   errorMessage: '',
 }
 
