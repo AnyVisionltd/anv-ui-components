@@ -1,13 +1,5 @@
 # Stage 0, "build-stage", based on Node.js, to build and compile the frontend
-FROM node:alpine as build-stage
-
-RUN apk update \
-    && apk add --no-cache \
-        ca-certificates curl wget lsof \
-        busybox-extras \
-        nethogs \
-        unzip wget python gcc \
-        libc-dev bash make g++
+FROM nikolaik/python-nodejs:python3.9-nodejs14-alpine as build-stage
 
 ENV APP_DIR /home/node/anv-ui-components
 WORKDIR $APP_DIR
@@ -15,10 +7,12 @@ WORKDIR $APP_DIR
 COPY ./ ./
 
 ## Copy Artifact certificate for login + install + build
-COPY .npmrc .npmrc
-RUN npm config set @anyvision:registry https://anyvision.jfrog.io/anyvision/api/npm/npm/
+COPY .npmrc /.npmrc
+RUN npm config set registry https://anyvision.jfrog.io/anyvision/api/npm/npm/
 RUN npm --verbose ci
+
 RUN rm .npmrc
+
 RUN PYTHON=/usr/bin/python
 RUN npm run build-storybook
 
