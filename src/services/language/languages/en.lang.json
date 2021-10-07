@@ -20,6 +20,7 @@
     "inQueue": "In queue",
     "completed": "Completed",
     "stopped": "Stopped",
-    "dateAndTime": "Date & Time"
+    "dateAndTime": "Date & Time",
+    "time": "Time"
   }
 }
