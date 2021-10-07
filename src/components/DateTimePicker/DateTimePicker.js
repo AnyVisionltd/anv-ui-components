@@ -12,7 +12,7 @@ import { Calendar } from '@anyvision/anv-icons'
 import { TextField } from '../TextField'
 import { IconButton } from '../IconButton'
 import languageService from '../../services/language'
-import './DateTimePicker.scss'
+import './DateTimePicker.module.scss'
 
 const MATERIAL_UI_THEME = {
   typography: {
@@ -70,7 +70,7 @@ const DateTimePicker = ({
     <TextField
       trailingIcon={
         <IconButton
-          className={classNames('datetimepicker-icon', {
+          className={classNames('datepicker-icon', {
             disabled: props.disabled,
           })}
           onClick={() => !props.disabled && setIsOpen(prev => !prev)}

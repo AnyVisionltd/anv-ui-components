@@ -7,12 +7,11 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers'
-import { createTheme } from '@material-ui/core/styles'
-import { ThemeProvider } from '@material-ui/styles'
+import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 import { Calendar } from '@anyvision/anv-icons'
 import { TextField } from '../TextField'
 import { IconButton } from '../IconButton'
-import styles from './DatePicker.module.scss'
+import './DatePicker.module.scss'
 
 const DatePicker = ({
   onChange,
@@ -52,7 +51,9 @@ const DatePicker = ({
     <TextField
       trailingIcon={
         <IconButton
-          className={classNames(styles.datepickerIcon, { disabled })}
+          className={classNames('datepicker-icon', {
+            disabled: props.disabled,
+          })}
           onClick={() => !props.disabled && setIsOpen(prev => !prev)}
           size='medium'
         >

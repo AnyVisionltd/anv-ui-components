@@ -1,0 +1,44 @@
+@import '~@anyvision/style-guide';
+
+:global {
+  // top toolbar
+  .MuiToolbar-root.MuiToolbar-regular.MuiPickersToolbar-toolbar.MuiPickerDTToolbar-toolbar.MuiToolbar-gutters {
+    background-color: av-color(primary) !important;
+  }
+
+  // tabs
+  .MuiPaper-root.MuiPaper-elevation1.MuiPaper-rounded {
+    box-shadow: none;
+
+    .MuiTabs-root.MuiPickerDTTabs-tabs {
+      background-color: av-color(primary);
+
+      .MuiTabs-scroller.MuiTabs-fixed {
+        span.MuiTabs-indicator {
+          height: 4px;
+          background-color: av-color(accent);
+        }
+      }
+    }
+  }
+
+  // clock
+  .MuiPickersClock-container {
+    .MuiPickersClock-clock {
+      background-color: av-color(primary, av-opacity(divider));
+
+      .MuiPickersClock-pin,
+      .MuiPickersClockPointer-pointer {
+        background-color: av-color(primary);
+
+        .MuiPickersClockPointer-thumb {
+          border-color: av-color(primary);
+
+          &.MuiPickersClockPointer-noPoint {
+            background-color: av-color(primary);
+          }
+        }
+      }
+    }
+  }
+}
