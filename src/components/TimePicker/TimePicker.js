@@ -5,14 +5,14 @@ import classNames from 'classnames'
 import MomentUtils from '@date-io/moment'
 import {
   MuiPickersUtilsProvider,
-  KeyboardDateTimePicker,
+  KeyboardTimePicker,
 } from '@material-ui/pickers'
 import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 import { Calendar } from '@anyvision/anv-icons'
 import { TextField } from '../TextField'
 import { IconButton } from '../IconButton'
 import languageService from '../../services/language'
-import './DateTimePicker.module.scss'
+import './TimePicker.module.scss'
 
 const MATERIAL_UI_THEME = {
   typography: {
@@ -23,23 +23,16 @@ const MATERIAL_UI_THEME = {
     body2: {
       fontSize: '14px',
     },
-    h3: {
-      fontSize: '24px',
-    },
-    h4: {
+    h2: {
       fontSize: '24px',
     },
   },
 }
 
-const DateTimePicker = ({
+const TimePicker = ({
   onChange,
   disabled,
-  disablePast,
-  disableFuture,
   format,
-  maxDate,
-  minDate,
   label,
   value,
   errorMessage,
@@ -93,9 +86,9 @@ const DateTimePicker = ({
   )
 
   /**
-   * on close datepicker dialog - close & remove focus from input
+   * on close TimePicker dialog - close & remove focus from input
    */
-  const handleCloseDatePicker = () => {
+  const handleCloseTimePicker = () => {
     setIsOpen(false)
     setIsFocus(false)
   }
@@ -116,28 +109,22 @@ const DateTimePicker = ({
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <ThemeProvider theme={theme}>
-        <KeyboardDateTimePicker
-          autoOk
-          ampm={false}
-          label={label}
-          value={date}
+        <KeyboardTimePicker
           onChange={handleDateChange}
           TextFieldComponent={renderInput}
-          okLabel={null}
-          cancelLabel={null}
-          variant='inline'
+          onClose={handleCloseTimePicker}
           open={isOpen}
-          onClose={handleCloseDatePicker}
+          variant='inline'
           disabled={disabled}
-          disablePast={disablePast}
-          disableFuture={disableFuture}
+          value={date}
+          ampm={false}
+          label={label}
           format={format}
-          maxDate={maxDate}
-          minDate={minDate}
           PopoverProps={{
             anchorEl: () => textFieldRef.current,
-            anchorOrigin: { horizontal: 143, vertical: 48 },
+            anchorOrigin: { horizontal: 138, vertical: 48 },
           }}
+          autoOk
           {...otherProps}
         />
       </ThemeProvider>
@@ -145,37 +132,27 @@ const DateTimePicker = ({
   )
 }
 
-DateTimePicker.propTypes = {
-  /** Controlled date&time value. */
+TimePicker.propTypes = {
+  /** Controlled time value. */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /** Callback when date change. */
+  /** Callback when time change. */
   onChange: PropTypes.func,
   /** TextField label. */
   label: PropTypes.string,
   /** If true, the input will be disabled. */
   disabled: PropTypes.bool,
+  /** Time format. */
+  format: PropTypes.string,
   /** Custom error message. */
   errorMessage: PropTypes.string,
-  /** Date format. */
-  format: PropTypes.string,
-  /** If true, you won't be able to choose past dates. */
-  disablePast: PropTypes.bool,
-  /** If true, you won't be able to choose future dates. */
-  disableFuture: PropTypes.bool,
-  /** Max selectable date. */
-  maxDate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /** Min selectable date. */
-  minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 }
 
-DateTimePicker.defaultProps = {
+TimePicker.defaultProps = {
   disabled: false,
-  disableFuture: false,
-  disablePast: false,
-  format: 'DD/MM/yyyy HH:mm',
+  format: 'HH:mm',
   onChange: () => {},
-  label: languageService.getTranslation('dateAndTime'),
+  label: languageService.getTranslation('time'),
   errorMessage: '',
 }
 
-export default DateTimePicker
+export default TimePicker
