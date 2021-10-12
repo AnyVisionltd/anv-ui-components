@@ -1,16 +1,16 @@
 import { useState, useLayoutEffect } from 'react'
 
-function checkOverflow(element) {
+const checkOverflow = element => {
   if (!element) {
     return false
   }
-  const isOverflowing =
+  return (
     element.clientWidth < element.scrollWidth ||
     element.clientHeight < element.scrollHeight
-  return isOverflowing
+  )
 }
 
-function useIsOverflowing(ref) {
+const useIsOverflowing = ref => {
   const [isOverflowing, setIsOverflowing] = useState(
     checkOverflow(ref?.current),
   )

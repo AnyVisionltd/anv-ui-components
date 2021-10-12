@@ -19,11 +19,10 @@ const Dropdown = ({
   displayValue,
   keyValue,
   className,
-  style,
   onChange,
   placeholder,
   label,
-  isDisabled,
+  disabled,
   onMenuOpen,
   onMenuClose,
   onExceedMaxSelected,
@@ -50,7 +49,7 @@ const Dropdown = ({
     shownOptions.length !== options.length && setShownOptions(options)
 
   const openMenu = () => {
-    if (showMenu || isDisabled) return
+    if (showMenu || disabled) return
     setShowMenu(true)
     onMenuOpen()
   }
@@ -65,7 +64,7 @@ const Dropdown = ({
   const toggleMenu = () => (showMenu ? closeMenu() : openMenu())
 
   const getIntoTypeMode = () => {
-    if (isDisabled) return
+    if (disabled) return
     isSearchable && setIsTypeMode(true)
     !showMenu && openMenu()
   }
@@ -151,23 +150,19 @@ const Dropdown = ({
       } else {
         newOptions = [...selectedOptions, clickedOption]
       }
+      resetToOriginalOptions()
     } else {
       if (isFoundInDropdown) {
         return
       } else {
         newOptions = [clickedOption]
+        getOffTypeMode()
+        closeMenu()
+        resetFocusedOptionIndex()
       }
     }
     setSelectedOptions(newOptions)
     onChange(newOptions)
-
-    if (!multiple) {
-      getOffTypeMode()
-      closeMenu()
-      resetFocusedOptionIndex()
-    } else {
-      resetToOriginalOptions()
-    }
   }
 
   const handleRemoveOption = optionIndex => {
@@ -250,7 +245,9 @@ const Dropdown = ({
         <p className={styles.selectedValue} onClick={getIntoTypeMode}>
           {!multiple
             ? selectedOptions[0][displayValue]
-            : `${selectedOptions.length} ${getTranslation('itemsSelected')}`}
+            : `${selectedOptions.length} ${getTranslation(
+                selectedOptions.length === 1 ? 'itemSelected' : 'itemsSelected',
+              )}`}
         </p>
       )
     }
@@ -276,7 +273,7 @@ const Dropdown = ({
         variant='ghost'
         onClick={resetFilteredValue}
         aria-label='clear input'
-        disabled={isDisabled}
+        disabled={disabled}
         className={styles.iconButton}
         style={{ visibility: filteredValue.length ? 'visible' : 'hidden' }}
       >
@@ -286,7 +283,7 @@ const Dropdown = ({
         variant='ghost'
         onClick={toggleMenu}
         aria-label='toggle menu'
-        disabled={isDisabled}
+        disabled={disabled}
         className={classNames(styles.iconButton, {
           [styles.rotated]: !showMenu,
         })}
@@ -385,11 +382,10 @@ const Dropdown = ({
     <div
       className={classNames(
         styles.container,
-        isDisabled && styles.isDisabled,
+        disabled && styles.isDisabled,
         className,
       )}
       ref={containerRef}
-      style={style}
     >
       {renderHeaderContainer()}
       {showMenu && renderOptions()}
@@ -406,7 +402,7 @@ Dropdown.defaultProps = {
   keyValue: 'id',
   multiple: false,
   isSearchable: true,
-  isDisabled: false,
+  disabled: false,
   isSelectedShownInHeader: false,
   noOptionsMessage: getTranslation('noResultsFound'),
   onMenuClose: () => {},
@@ -436,16 +432,14 @@ Dropdown.propTypes = {
   isSelectedShownInHeader: propTypes.bool,
   /** Whether to enable search functionality. */
   isSearchable: propTypes.bool,
-  /** Custom style for container' className. */
+  /** For css customization. */
   className: propTypes.string,
-  /** Custom style for container' className. */
-  style: propTypes.object,
   /** Placeholder to show when no value is selected. */
   placeholder: propTypes.string,
   /** Label to add information about  the dropdown. */
   label: propTypes.string,
   /** Set dropdown to disabled if true. */
-  isDisabled: propTypes.bool,
+  disabled: propTypes.bool,
   /** Called when menu is opened. */
   onMenuOpen: propTypes.func,
   /** Called when menu is closed. */

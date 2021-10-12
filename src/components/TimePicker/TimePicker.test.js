@@ -1,26 +1,26 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
 import moment from 'moment'
-import DatePicker from './DatePicker'
+import { render, fireEvent } from '@testing-library/react'
+import TimePicker from './TimePicker'
 
-describe('<DatePicker />', () => {
+describe('<TimePicker />', () => {
   it('Should render', () => {
-    const { container } = render(<DatePicker />)
+    const { container } = render(<TimePicker />)
     expect(container).toBeTruthy()
   })
 
   it('Should be disabled', () => {
-    const { getByRole } = render(<DatePicker disabled />)
+    const { getByRole } = render(<TimePicker disabled />)
     const node = getByRole('textbox')
     expect(node.disabled).toBe(true)
   })
 
   it('Should call onChange', () => {
     const handleOnChange = jest.fn()
-    const { getByRole } = render(<DatePicker onChange={handleOnChange} />)
+    const { getByRole } = render(<TimePicker onChange={handleOnChange} />)
     const input = getByRole('textbox')
     fireEvent.change(input, { target: { value: new Date() } })
     expect(handleOnChange).toBeCalled()
-    expect(input.value).toBe(moment().format('DD/MM/yyyy'))
+    expect(input.value).toBe(moment().format('HH:mm'))
   })
 })

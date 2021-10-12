@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { centerDecorator } from '../../utils/storybook/decorators'
-import { Chip } from '../../index'
+import { Chip } from '../Chip'
 import Dropdown from './Dropdown'
+import styles from '../../storybook/index.module.scss'
 
 export default {
-  title: 'Content/ Dropdown',
+  title: 'Content/Dropdown',
   component: Dropdown,
   decorators: [centerDecorator],
 }
@@ -62,7 +63,6 @@ export const Multiple = () => {
   return (
     <div style={containerStyle}>
       <Dropdown
-        style={{ width: '420px' }}
         options={items}
         multiple
         label='Fruits'
@@ -79,9 +79,9 @@ export const MultipleWithSelectedInHeader = () => {
   const handleChange = newValues => setValues(newValues)
 
   return (
-    <div style={containerStyle}>
+    <div style={{ ...containerStyle, width: '450px' }}>
       <Dropdown
-        style={{ width: '450px' }}
+        className={styles.fullWidth}
         options={items}
         multiple
         label='Fruits'
@@ -117,7 +117,7 @@ export const Disabled = () => (
       options={genders}
       label='Gender'
       defaultValues={[genders[0]]}
-      isDisabled
+      disabled
     />
   </div>
 )
