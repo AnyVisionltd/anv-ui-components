@@ -15,6 +15,7 @@ const Menu = React.forwardRef((props, ref) => {
   const {
     isOpen,
     variant,
+    size,
     className,
     anchorElement,
     children,
@@ -162,7 +163,12 @@ const Menu = React.forwardRef((props, ref) => {
     styles.menuContainer,
     isSubMenu && styles.subMenu,
   )
-  const menuClasses = classNames(styles.menu, styles[variant], className)
+  const menuClasses = classNames(
+    styles.menu,
+    styles[variant],
+    styles[size],
+    className,
+  )
 
   const sideToOpenTo = {
     top: 'bottom',
@@ -206,7 +212,7 @@ const Menu = React.forwardRef((props, ref) => {
 })
 
 Menu.defaultProps = {
-  variant: 'regular',
+  size: 'large',
   onClose: () => {},
   onClosed: () => {},
   onOpened: () => {},
@@ -218,8 +224,10 @@ Menu.defaultProps = {
 Menu.propTypes = {
   /** Should the menu appear on screen or not. */
   isOpen: propTypes.bool,
+  /** Determine the height of the menu's items. */
+  variant: propTypes.oneOf(['dense']),
   /** Determine the size of the menu's items. */
-  variant: propTypes.oneOf(['regular', 'dense']),
+  size: propTypes.oneOf(['large', 'medium', 'small']),
   /** Reference to the controlling element,
    *  used to attached the to the menu to the controller which causes it to open. */
   anchorElement: propTypes.oneOfType([

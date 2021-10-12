@@ -24,16 +24,37 @@
   border-radius: av-radius();
   padding: av-space(tiny) 0;
 
-  &.regular {
+  &.large {
     li {
-      height: 48px;
+      min-width: av-size(sz-144);
+      max-width: av-size(sz-320);
+      font-size: av-font-size();
+      height: av-size(sz-40);
+    }
+  }
+
+  &.medium {
+    li {
+      min-width: 124px;
+      max-width: 140px;
+      font-size: av-font-size(small);
+      height: av-size(sz-40);
+    }
+  }
+
+  &.small {
+    li {
+      min-width: 105px;
+      max-width: 120px;
+      font-size: av-font-size(tiny);
+      height: av-size(sz-32);
     }
   }
 
   &.dense {
     li {
       @extend %av-body2;
-      height: 32px;
+      height: av-size(sz-32);
     }
   }
 }
