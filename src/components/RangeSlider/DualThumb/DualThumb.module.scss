@@ -1,0 +1,7 @@
+@import '~@anyvision/style-guide';
+@import '../RangeSlider.module.scss';
+
+.dualThumbBar {
+  @include rangeBar;
+  position: relative;
+}

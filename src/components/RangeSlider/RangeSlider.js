@@ -9,6 +9,8 @@ import React, {
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import keymap from '../../utils/enums/keymap'
+import { SingleThumb } from './SingleThumb'
+import { DualThumb } from './DualThumb'
 import styles from './RangeSlider.module.scss'
 
 const keyboardButtons = [
@@ -18,6 +20,8 @@ const keyboardButtons = [
   keymap.ARROW_RIGHT,
   keymap.PAGE_UP,
   keymap.PAGE_DOWN,
+  keymap.END,
+  keymap.HOME,
 ]
 
 const RangeSlider = ({
@@ -35,8 +39,9 @@ const RangeSlider = ({
   const [showTooltip, setShowTooltip] = useState(false)
   const [hoverValue, setHoverValue] = useState(null)
   const [hoverPos, setHoverPos] = useState(null)
-  const sliderRef = useRef(null)
   const tooltipRef = useRef(null)
+  const containerRef = useRef(null)
+  const isDualThumb = Array.isArray(value)
 
   const SLIDER_SETTINGS = useMemo(
     () => ({
@@ -52,9 +57,9 @@ const RangeSlider = ({
   )
 
   useLayoutEffect(() => {
-    if (!sliderRef.current) return
+    if (!containerRef.current) return
     if (SLIDER_SETTINGS.width) return
-    SLIDER_SETTINGS.width = sliderRef.current.offsetWidth
+    SLIDER_SETTINGS.width = containerRef.current.offsetWidth
   }, [SLIDER_SETTINGS])
 
   // Get relative position in the slider, between 0 - 1
@@ -94,22 +99,16 @@ const RangeSlider = ({
   useEffect(() => {
     if (!tooltipRef.current) return
     if (isToggleTooltip && !showTooltip) return
+    if (isDualThumb && hoverPos === null) return
     const tooltipPos = hoverPos ?? 100 * getPositionInSlider(value)
     tooltipRef.current.style.left = `${tooltipPos}%`
-  }, [showTooltip, hoverPos, isToggleTooltip, value, getPositionInSlider])
-
-  useEffect(() => {
-    if (!sliderRef.current) return
-    const percentage = 100 * getPositionInSlider(value)
-    const bg = `linear-gradient(90deg, ${
-      SLIDER_SETTINGS.fill
-    } ${percentage}%, ${SLIDER_SETTINGS.background} ${percentage + 0.1}%)`
-    sliderRef.current.style.background = bg
   }, [
+    showTooltip,
+    hoverPos,
+    isToggleTooltip,
     value,
     getPositionInSlider,
-    SLIDER_SETTINGS.fill,
-    SLIDER_SETTINGS.background,
+    isDualThumb,
   ])
 
   /**
@@ -179,7 +178,7 @@ const RangeSlider = ({
 
   const posTooltipToValue = () => {
     if (disabled) return
-    if (isToggleTooltip) return hideTooltip()
+    if (isToggleTooltip || isDualThumb) return hideTooltip()
     const middleValue = posTooltipMiddleThumb(value)
     setHoverPos(100 * getPositionInSlider(middleValue))
     setHoverValue(value)
@@ -211,13 +210,50 @@ const RangeSlider = ({
     )
   }
 
-  const renderTooltip = () =>
+  const renderTooltip = (ref = tooltipRef, textValue = hoverValue, className) =>
     !isToggleTooltip || showTooltip ? (
-      <div ref={tooltipRef} className={styles.tooltip}>
-        {hoverValue ?? value}
+      <div ref={ref} className={classNames(styles.tooltip, className)}>
+        {textValue ?? value}
         {measureUnitText}
       </div>
     ) : null
+
+  const commonProps = {
+    SLIDER_SETTINGS,
+    getPositionInSlider,
+    min,
+    max,
+    onChange,
+    step,
+    disabled,
+    renderTooltip,
+  }
+
+  const renderSingleThumbRange = () => (
+    <SingleThumb
+      {...commonProps}
+      value={value}
+      isToggleTooltip={isToggleTooltip}
+      showTooltip={showTooltip}
+      tooltipRef={tooltipRef}
+      hoverPos={hoverPos}
+      onKeyUp={handleKeyPress}
+      onKeyDown={handleKeyPress}
+      {...otherProps}
+    />
+  )
+
+  const renderDualThumbsRange = () => (
+    <DualThumb
+      {...commonProps}
+      values={value}
+      getValueInSlider={getValueInSlider}
+      posTooltipMiddleThumb={posTooltipMiddleThumb}
+      fixThumbRangeDeviation={fixThumbRangeDeviation}
+      countDecimals={countDecimals}
+      {...otherProps}
+    />
+  )
 
   return (
     <div
@@ -227,24 +263,15 @@ const RangeSlider = ({
         containerClassName,
       )}
     >
-      <div className={styles.rangeContainer}>
-        <input
-          type='range'
-          onMouseMove={posTooltipToHover}
-          onMouseOut={posTooltipToValue}
-          onKeyUp={handleKeyPress}
-          onKeyDown={handleKeyPress}
-          ref={sliderRef}
-          min={min}
-          max={max}
-          value={value}
-          onChange={onChange}
-          step={step}
-          disabled={disabled}
-          {...otherProps}
-        />
+      <div
+        className={styles.rangeContainer}
+        ref={containerRef}
+        onMouseMove={posTooltipToHover}
+        onMouseOut={posTooltipToValue}
+      >
+        {!isDualThumb ? renderSingleThumbRange() : renderDualThumbsRange()}
         {renderLabels()}
-        {renderTooltip()}
+        {!isDualThumb && renderTooltip()}
       </div>
     </div>
   )
@@ -253,7 +280,6 @@ const RangeSlider = ({
 RangeSlider.defaultProps = {
   min: 0,
   max: 100,
-  value: 50,
   onChange: () => {},
   step: 1,
   disabled: false,
@@ -267,7 +293,11 @@ RangeSlider.propTypes = {
   /** The max value of the range. */
   max: propTypes.number,
   /** Value of the slider */
-  value: propTypes.oneOfType([propTypes.string, propTypes.number]),
+  value: propTypes.oneOfType([
+    propTypes.string,
+    propTypes.number,
+    propTypes.arrayOf(propTypes.number),
+  ]),
   /** Callback when the component's state is changed. */
   onChange: propTypes.func,
   /** The step by which the value is incremented / decremented. */

@@ -1,5 +1,68 @@
 @import '~@anyvision/style-guide';
 
+@mixin rangeThumb {
+  height: av-size(sz-24);
+  width: av-size(sz-24);
+  border-radius: av-radius(circle);
+  background: av-color(purewhite);
+  cursor: pointer;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  border: av-color(primary) solid 3px;
+  pointer-events: auto;
+
+  &:hover {
+    background: rgb(212, 212, 212);
+    transform: scale(1.1);
+  }
+
+  &:active {
+    box-shadow: 0 8px 16px 0.1px av-color(trueblack);
+  }
+}
+
+@mixin rangeBar {
+  border-radius: av-radius(tidy);
+  background-color: av-color(primary, av-opacity(disabled));
+  outline: none;
+  cursor: pointer;
+  height: 6px;
+  width: 100%;
+  max-width: 100vw;
+
+  &:disabled,
+  &.disabled {
+    cursor: default;
+    opacity: av-opacity(disabled);
+  }
+}
+
+@mixin singleThumbRange($includeBar) {
+  appearance: none;
+  -webkit-appearance: none;
+
+  @if $includeBar == true {
+    @include rangeBar;
+  }
+
+  @if $includeBar == false {
+    background-color: transparent;
+    width: 100%;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    @include rangeThumb;
+  }
+
+  &::-moz-range-thumb {
+    -moz-appearance: none;
+    @include rangeThumb;
+  }
+}
+
 .container {
   height: fit-content;
   width: 100%;
@@ -21,63 +84,6 @@
   align-items: center;
   position: relative;
   font-family: inherit;
-
-  input[type='range'] {
-    -webkit-appearance: none;
-    border-radius: av-radius(tidy);
-    background-color: av-color(primary, av-opacity(disabled));
-    outline: none;
-    cursor: pointer;
-    height: 6px;
-    width: 100%;
-    max-width: 100vw;
-
-    &::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      height: av-size(sz-24);
-      width: av-size(sz-24);
-      border-radius: av-radius(circle);
-      background: av-color(purewhite);
-      cursor: inherit;
-      -webkit-transition: all 0.15s ease-in-out;
-      transition: all 0.15s ease-in-out;
-      border: av-color(primary) solid 3px;
-
-      &:hover {
-        background: rgb(212, 212, 212);
-        transform: scale(1.1);
-      }
-
-      &:active {
-        box-shadow: 0 8px 16px 0.1px av-color(trueblack);
-      }
-    }
-
-    &::-moz-range-thumb {
-      -moz-appearance: none;
-      height: av-size(sz-24);
-      width: av-size(sz-24);
-      border-radius: av-radius(circle);
-      background: av-color(purewhite);
-      cursor: inherit;
-      transition: all 0.15s ease-in-out;
-      border: av-color(primary) solid 3px;
-
-      &:hover {
-        background: rgb(212, 212, 212);
-        transform: scale(1.1);
-      }
-
-      &:active {
-        box-shadow: 0 8px 16px 0.1px av-color(trueblack);
-      }
-    }
-
-    &:disabled {
-      cursor: default;
-      opacity: av-opacity(disabled);
-    }
-  }
 
   .label {
     position: absolute;

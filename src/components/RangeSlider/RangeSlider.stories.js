@@ -23,6 +23,22 @@ export const Basic = () => {
   )
 }
 
+export const DualThumbRange = () => {
+  const [value, setValue] = useState([20, 60])
+
+  return (
+    <div style={{ width: '480px' }}>
+      <RangeSlider
+        min={0}
+        max={100}
+        value={value}
+        onChange={newValue => setValue(newValue)}
+      />
+      <p>current values are {value.toString()}</p>
+    </div>
+  )
+}
+
 export const ToggledTooltip = () => {
   const [value, setValue] = useState(60)
 
