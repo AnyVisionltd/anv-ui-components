@@ -243,7 +243,7 @@ const RangeSlider = ({
     />
   )
 
-  const renderDualThumbsRange = () => (
+  const renderDualThumbRange = () => (
     <DualThumb
       {...commonProps}
       values={value}
@@ -269,7 +269,7 @@ const RangeSlider = ({
         onMouseMove={posTooltipToHover}
         onMouseOut={posTooltipToValue}
       >
-        {!isDualThumb ? renderSingleThumbRange() : renderDualThumbsRange()}
+        {!isDualThumb ? renderSingleThumbRange() : renderDualThumbRange()}
         {renderLabels()}
         {!isDualThumb && renderTooltip()}
       </div>
