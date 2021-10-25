@@ -33,10 +33,11 @@ const TableSSF = ({ onChange, additionalFilters, className }) => {
 
   const handleOnChange = useCallback(
     filters => {
+      if (JSON.stringify(filters) === JSON.stringify(state.filters)) return
       onChange(filters)
       setFilters(filters)
     },
-    [onChange, setFilters],
+    [onChange, setFilters, state.filters],
   )
 
   const classes = classNames(styles.TableSSF, className)
