@@ -48,6 +48,7 @@
 - Added DateTimePicker component
 - Added TimePicker component
 - New Dropdown component
+- Added DualThumb for RangeSlider
 
 ## 1.0.0 - 06-09-2020
 
