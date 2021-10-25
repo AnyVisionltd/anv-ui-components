@@ -340,6 +340,11 @@ export const Sizes = () => {
   const closeMediumMenu = () => setMediumAnchorElementOpened(null)
   const closeSmallMenu = () => setSmallAnchorElementOpened(null)
 
+  const renderMenuItems = () =>
+    Array.from({ length: 4 }, (_, index) => (
+      <Menu.Item key={index}>Item #{index + 1}</Menu.Item>
+    ))
+
   return (
     <div className={styles.menuExample}>
       <div className={styles.microMargin}>
@@ -357,10 +362,7 @@ export const Sizes = () => {
           isOpen={!!largeAnchorElementOpened}
           onClose={closeLargeMenu}
         >
-          <Menu.Item>Item #1</Menu.Item>
-          <Menu.Item>Item #2</Menu.Item>
-          <Menu.Item>Item #3</Menu.Item>
-          <Menu.Item>Item #4</Menu.Item>
+          {renderMenuItems()}
         </Menu>
       </div>
       <div className={styles.microMargin}>
@@ -379,10 +381,7 @@ export const Sizes = () => {
           onClose={closeMediumMenu}
           size='medium'
         >
-          <Menu.Item>Item #1</Menu.Item>
-          <Menu.Item>Item #2</Menu.Item>
-          <Menu.Item>Item #3</Menu.Item>
-          <Menu.Item>Item #4</Menu.Item>
+          {renderMenuItems()}
         </Menu>
       </div>
       <div className={styles.microMargin}>
@@ -401,10 +400,7 @@ export const Sizes = () => {
           onClose={closeSmallMenu}
           size='small'
         >
-          <Menu.Item>Item #1</Menu.Item>
-          <Menu.Item>Item #2</Menu.Item>
-          <Menu.Item>Item #3</Menu.Item>
-          <Menu.Item>Item #4</Menu.Item>
+          {renderMenuItems()}
         </Menu>
       </div>
     </div>
