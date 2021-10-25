@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
-import { getByRole, getByText } from '@testing-library/dom'
+import { getByRole, getByText, getAllByRole } from '@testing-library/dom'
 import RangeSlider from './RangeSlider'
 
 describe('<RangeSlider/>', () => {
@@ -80,6 +80,35 @@ describe('<RangeSlider/>', () => {
       })
       expect(onChange).toBeTruthy()
       expect(handleChange).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  describe('dualThumb range', () => {
+    it('should have two range sliders', () => {
+      const initialValue = [10, 50]
+      const { container } = render(<RangeSlider value={initialValue} />)
+
+      const rangeInputs = getAllByRole(container, 'slider')
+      expect(rangeInputs.length).toBe(2)
+    })
+
+    it('should change value when one of the range`s value input is increased', () => {
+      const handleChange = jest.fn()
+      const initialValue = [10, 50]
+      const { container } = render(
+        <RangeSlider onChange={handleChange} value={initialValue} />,
+      )
+
+      const rangeInputs = getAllByRole(container, 'slider')
+      const firstRangeInput = rangeInputs[0]
+      const value = 20
+      const onChange = fireEvent.change(firstRangeInput, {
+        target: { value },
+      })
+      expect(onChange).toBeTruthy()
+      expect(handleChange).toHaveBeenCalledTimes(1)
+      // Only the first value in the value array is changed
+      expect(handleChange).toHaveBeenCalledWith([value, initialValue[1]])
     })
   })
 })

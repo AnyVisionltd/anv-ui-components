@@ -6,15 +6,15 @@ const Thumb = ({
   value,
   position,
   renderTooltip,
-  posTooltipMiddleThumb,
+  posTooltipToValue,
   ...inputProps
 }) => {
   const tooltipRef = useRef()
 
   useEffect(() => {
     if (!tooltipRef.current) return
-    tooltipRef.current.style.left = `${posTooltipMiddleThumb(position)}%`
-  }, [position, posTooltipMiddleThumb])
+    tooltipRef.current.style.left = `${posTooltipToValue(value)}%`
+  }, [position, posTooltipToValue, value])
 
   return (
     <>

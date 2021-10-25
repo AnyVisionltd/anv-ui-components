@@ -1,7 +1,6 @@
 import React, {
   useState,
   useRef,
-  useEffect,
   useCallback,
   useMemo,
   useLayoutEffect,
@@ -39,7 +38,6 @@ const RangeSlider = ({
   const [showTooltip, setShowTooltip] = useState(false)
   const [hoverValue, setHoverValue] = useState(null)
   const [hoverPos, setHoverPos] = useState(null)
-  const tooltipRef = useRef(null)
   const containerRef = useRef(null)
   const isDualThumb = Array.isArray(value)
 
@@ -96,20 +94,32 @@ const RangeSlider = ({
     return index === -1 ? 0 : text.length - index - 1
   }, [step])
 
-  useEffect(() => {
-    if (!tooltipRef.current) return
-    if (isToggleTooltip && !showTooltip) return
-    if (isDualThumb && hoverPos === null) return
-    const tooltipPos = hoverPos ?? 100 * getPositionInSlider(value)
-    tooltipRef.current.style.left = `${tooltipPos}%`
-  }, [
-    showTooltip,
-    hoverPos,
-    isToggleTooltip,
-    value,
-    getPositionInSlider,
-    isDualThumb,
-  ])
+  /**
+   * Calculates the middle of the range thumb. If relative position is less than
+   * half, it adds 0 - 2.5% to current pos, else - it subtracts 0 - 2.5%.
+   * This function is about position of the thumb, the first function is about hover value.
+   * @function posTooltipMiddleThumb
+   * @param {number} val the value of the slider
+   * @returns {number} the middle position of the range thumb
+   */
+  const posTooltipMiddleThumb = useCallback(
+    val => {
+      const pos = getPositionInSlider(val)
+      const posFromCenter = (pos - 0.5) / 0.5
+      const adjustment = posFromCenter * getFixRange()
+      return Number(val) - adjustment
+    },
+    [getFixRange, getPositionInSlider],
+  )
+
+  // Positions the dual thumb tooltip in the middle of the thumb
+  const posDualThumbTooltip = useCallback(
+    val => {
+      const middleValue = posTooltipMiddleThumb(val)
+      return 100 * getPositionInSlider(middleValue)
+    },
+    [posTooltipMiddleThumb, getPositionInSlider],
+  )
 
   /**
    * The problem stems from the fact that the range thumb is 24px size
@@ -141,22 +151,7 @@ const RangeSlider = ({
     return fixedValue
   }
 
-  /**
-   * Calculates the middle of the range thumb. If relative position is less than
-   * half, it adds 0 - 2.5% to current pos, else - it subtracts 0 - 2.5%.
-   * This function is about position of the thumb, the first function is about hover value.
-   * @function posTooltipMiddleThumb
-   * @param {number} val the value of the slider
-   * @returns {number} the middle position of the range thumb
-   */
-  const posTooltipMiddleThumb = val => {
-    const pos = getPositionInSlider(val)
-    const posFromCenter = (pos - 0.5) / 0.5
-    const adjustment = posFromCenter * getFixRange()
-    return Number(val) - adjustment
-  }
-
-  const calculatePercentage = e => {
+  const posTooltipToHover = e => {
     const mouseX = Number(e.nativeEvent.offsetX)
     const curHoverPos = (mouseX / e.target.clientWidth) * 100
     const curHoverVal = getValueInSlider(curHoverPos)
@@ -168,20 +163,25 @@ const RangeSlider = ({
     setHoverValue(updatedVal.toFixed(stepDecimalCount))
   }
 
-  const posTooltipToHover = e => {
-    if (disabled) return
-    calculatePercentage(e)
-    isToggleTooltip && setShowTooltip(true)
-  }
-
   const hideTooltip = () => showTooltip && setShowTooltip(false)
 
   const posTooltipToValue = () => {
     if (disabled) return
-    if (isToggleTooltip || isDualThumb) return hideTooltip()
     const middleValue = posTooltipMiddleThumb(value)
     setHoverPos(100 * getPositionInSlider(middleValue))
     setHoverValue(value)
+  }
+
+  const onMouseMove = e => {
+    if (disabled) return
+    !showTooltip && setShowTooltip(true)
+    !isDualThumb && posTooltipToHover(e)
+  }
+
+  const onMouseOut = () => {
+    if (disabled) return
+    if (isToggleTooltip || isDualThumb) return hideTooltip()
+    posTooltipToValue()
   }
 
   // KeyDown is called while user presses the arrows and KeyUp is called when the press
@@ -210,13 +210,24 @@ const RangeSlider = ({
     )
   }
 
-  const renderTooltip = (ref = tooltipRef, textValue = hoverValue, className) =>
+  const renderSingleThumbTooltip = ref =>
     !isToggleTooltip || showTooltip ? (
-      <div ref={ref} className={classNames(styles.tooltip, className)}>
-        {textValue ?? value}
+      <div ref={ref} className={styles.tooltip}>
+        {hoverValue ?? value}
         {measureUnitText}
       </div>
     ) : null
+
+  const renderDualThumbTooltip = (ref, textValue) => (
+    <div
+      ref={ref}
+      className={styles.tooltip}
+      style={{ visibility: showTooltip ? 'visible' : 'hidden' }}
+    >
+      {textValue ?? value}
+      {measureUnitText}
+    </div>
+  )
 
   const commonProps = {
     SLIDER_SETTINGS,
@@ -226,7 +237,7 @@ const RangeSlider = ({
     onChange,
     step,
     disabled,
-    renderTooltip,
+    showTooltip,
   }
 
   const renderSingleThumbRange = () => (
@@ -234,11 +245,10 @@ const RangeSlider = ({
       {...commonProps}
       value={value}
       isToggleTooltip={isToggleTooltip}
-      showTooltip={showTooltip}
-      tooltipRef={tooltipRef}
       hoverPos={hoverPos}
       onKeyUp={handleKeyPress}
       onKeyDown={handleKeyPress}
+      renderTooltip={renderSingleThumbTooltip}
       {...otherProps}
     />
   )
@@ -249,8 +259,10 @@ const RangeSlider = ({
       values={value}
       getValueInSlider={getValueInSlider}
       posTooltipMiddleThumb={posTooltipMiddleThumb}
+      posTooltipToValue={posDualThumbTooltip}
       fixThumbRangeDeviation={fixThumbRangeDeviation}
       countDecimals={countDecimals}
+      renderTooltip={renderDualThumbTooltip}
       {...otherProps}
     />
   )
@@ -266,12 +278,11 @@ const RangeSlider = ({
       <div
         className={styles.rangeContainer}
         ref={containerRef}
-        onMouseMove={posTooltipToHover}
-        onMouseOut={posTooltipToValue}
+        onMouseMove={onMouseMove}
+        onMouseOut={onMouseOut}
       >
         {!isDualThumb ? renderSingleThumbRange() : renderDualThumbRange()}
         {renderLabels()}
-        {!isDualThumb && renderTooltip()}
       </div>
     </div>
   )

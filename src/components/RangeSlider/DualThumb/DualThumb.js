@@ -21,13 +21,14 @@ const DualThumb = ({
   values,
   renderTooltip,
   onChange,
-  onMouseMove,
-  onMouseOut,
   disabled,
   posTooltipMiddleThumb,
+  posTooltipToValue,
   fixThumbRangeDeviation,
   countDecimals,
   step,
+  min,
+  max,
   ...inputProps
 }) => {
   const barRef = useRef()
@@ -38,8 +39,8 @@ const DualThumb = ({
       position: getPositionInSlider(value) * 100,
     }))
 
-  // Add useState to determine active thumb
   const [handleThumbsMap, setHandleThumbsMap] = useState(handleValues())
+  const [activeThumb, setActiveThumb] = useState(thumbsMap.LOWER)
 
   useEffect(() => {
     if (!barRef.current) return
@@ -51,15 +52,10 @@ const DualThumb = ({
       ${fill} ${upperPos}%, ${background} ${upperPos}%,
       ${background} 100%)`
     barRef.current.style.background = bg
-  }, [
-    handleThumbsMap[thumbsMap.LOWER].position,
-    handleThumbsMap[thumbsMap.UPPER].position,
-    getPositionInSlider,
-    SLIDER_SETTINGS.fill,
-    SLIDER_SETTINGS.background,
-  ])
+  }, [handleThumbsMap, getPositionInSlider, SLIDER_SETTINGS])
 
   const updateValue = (keyIndex, value, pos) => {
+    if (value < min || value > max) return
     let curMap = [...handleThumbsMap]
     curMap[keyIndex] = {
       ...curMap[keyIndex],
@@ -68,13 +64,9 @@ const DualThumb = ({
     }
 
     if (curMap[thumbsMap.LOWER].value > curMap[thumbsMap.UPPER].value) {
-      const tempVal = curMap[thumbsMap.LOWER].value
-      curMap[thumbsMap.LOWER].value = curMap[thumbsMap.UPPER].value
-      curMap[thumbsMap.UPPER].value = tempVal
-
-      const tempPos = curMap[thumbsMap.LOWER].position
-      curMap[thumbsMap.LOWER].position = curMap[thumbsMap.UPPER].position
-      curMap[thumbsMap.UPPER].position = tempPos
+      const temp = thumbsMap.LOWER
+      thumbsMap.LOWER = thumbsMap.UPPER
+      thumbsMap.UPPER = temp
     }
 
     setHandleThumbsMap(curMap)
@@ -83,37 +75,44 @@ const DualThumb = ({
 
   const handleChange = e => {
     const keyIndex = e.target.name
+    setActiveThumb(keyIndex)
     const curValue = Number(e.target.value)
     updateValue(keyIndex, curValue)
   }
 
-  const changeThumbValue = thumbKey => changeType => {
-    const change = changeType === changeValuesMap.INC ? 1 : -1
-    updateValue(
-      thumbKey,
-      handleThumbsMap[thumbsMap.LOWER].value + change * step,
-    )
+  const changeThumbValue = (thumbKey, changeType) => {
+    const change = (changeType === changeValuesMap.INC ? 1 : -1) * step
+    updateValue(thumbKey, handleThumbsMap[thumbKey].value + change)
   }
 
   const handleKeyPress = e => {
-    const keyIndex = e.target.name
-    const changeHandler = changeThumbValue(keyIndex)
-
     switch (e.keyCode) {
       case keymap.ARROW_DOWN:
       case keymap.ARROW_LEFT:
       case keymap.PAGE_DOWN:
       case keymap.HOME:
-        changeHandler(changeValuesMap.DEC)
+        changeThumbValue(activeThumb, changeValuesMap.DEC)
+        break
       case keymap.ARROW_UP:
       case keymap.ARROW_RIGHT:
       case keymap.PAGE_UP:
       case keymap.END:
-        changeHandler(changeValuesMap.INC)
+        changeThumbValue(activeThumb, changeValuesMap.INC)
+        break
       default:
         break
     }
   }
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress)
+    document.addEventListener('keyup', handleKeyPress)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress)
+      document.removeEventListener('keyup', handleKeyPress)
+    }
+  })
 
   const handleBarClick = e => {
     const mouseX = Number(e.nativeEvent.offsetX)
@@ -130,9 +129,11 @@ const DualThumb = ({
     const updatedVal = Number(curVal.toFixed(stepDecimalCount))
 
     if (distanceFromLowerThumb <= distanceFromUpperThumb) {
+      setActiveThumb(thumbsMap.LOWER)
       const { keyName } = handleThumbsMap[thumbsMap.LOWER]
       updateValue(keyName, updatedVal, curPos)
     } else {
+      setActiveThumb(thumbsMap.UPPER)
       const { keyName } = handleThumbsMap[thumbsMap.UPPER]
       updateValue(keyName, updatedVal, curPos)
     }
@@ -150,14 +151,13 @@ const DualThumb = ({
           key={thumbProps.keyName}
           {...thumbProps}
           {...inputProps}
-          tabIndex={thumbProps.keyName === 1 ? '0' : '1'}
           step={step}
           onChange={handleChange}
           disabled={disabled}
           renderTooltip={renderTooltip}
-          posTooltipMiddleThumb={posTooltipMiddleThumb}
-          onKeyDown={handleKeyPress}
-          onKeyUp={handleKeyPress}
+          posTooltipToValue={posTooltipToValue}
+          min={min}
+          max={max}
         />
       ))}
     </>

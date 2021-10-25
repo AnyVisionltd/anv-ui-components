@@ -24,7 +24,7 @@ export const Basic = () => {
 }
 
 export const DualThumbRange = () => {
-  const [value, setValue] = useState([20, 60])
+  const [value, setValue] = useState([40, 65])
 
   return (
     <div style={{ width: '480px' }}>
@@ -34,7 +34,6 @@ export const DualThumbRange = () => {
         value={value}
         onChange={newValue => setValue(newValue)}
       />
-      <p>current values are {value.toString()}</p>
     </div>
   )
 }

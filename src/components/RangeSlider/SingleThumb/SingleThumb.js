@@ -4,7 +4,6 @@ import styles from './SingleThumb.module.scss'
 const SingleThumb = ({
   SLIDER_SETTINGS,
   getPositionInSlider,
-  tooltipRef,
   value,
   isToggleTooltip,
   showTooltip,
@@ -13,6 +12,7 @@ const SingleThumb = ({
   ...inputProps
 }) => {
   const sliderRef = useRef()
+  const tooltipRef = useRef()
 
   useEffect(() => {
     if (!sliderRef.current) return
@@ -28,14 +28,24 @@ const SingleThumb = ({
     SLIDER_SETTINGS.background,
   ])
 
+  useEffect(() => {
+    if (!tooltipRef.current) return
+    if (isToggleTooltip && !showTooltip) return
+    const tooltipPos = hoverPos ?? 100 * getPositionInSlider(value)
+    tooltipRef.current.style.left = `${tooltipPos}%`
+  }, [showTooltip, hoverPos, isToggleTooltip, value, getPositionInSlider])
+
   return (
-    <input
-      className={styles.singleThumbRange}
-      type='range'
-      value={value}
-      ref={sliderRef}
-      {...inputProps}
-    />
+    <>
+      <input
+        className={styles.singleThumbRange}
+        type='range'
+        value={value}
+        ref={sliderRef}
+        {...inputProps}
+      />
+      {renderTooltip(tooltipRef)}
+    </>
   )
 }
 

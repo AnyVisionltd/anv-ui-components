@@ -40,6 +40,7 @@
 @mixin singleThumbRange($includeBar) {
   appearance: none;
   -webkit-appearance: none;
+  outline: none;
 
   @if $includeBar == true {
     @include rangeBar;
@@ -84,6 +85,10 @@
   align-items: center;
   position: relative;
   font-family: inherit;
+
+  &:focus-within {
+    outline: none;
+  }
 
   .label {
     position: absolute;
