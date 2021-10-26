@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react'
+import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { Thumb } from './Thumb'
 import keymap from '../../../utils/enums/keymap'
@@ -9,10 +10,10 @@ const thumbsMap = {
   UPPER: 1,
 }
 
-const changeValuesMap = {
+const changeValuesMap = Object.freeze({
   INC: 'increase',
   DEC: 'decrease',
-}
+})
 
 const DualThumb = ({
   SLIDER_SETTINGS,
@@ -22,24 +23,23 @@ const DualThumb = ({
   renderTooltip,
   onChange,
   disabled,
-  posTooltipMiddleThumb,
   posTooltipToValue,
-  fixThumbRangeDeviation,
   countDecimals,
   step,
   min,
   max,
+  minGap,
   ...inputProps
 }) => {
   const barRef = useRef()
-  const handleValues = () =>
+  const handleDefaultValues = () =>
     values.map((value, index) => ({
       keyName: index,
       value,
       position: getPositionInSlider(value) * 100,
     }))
 
-  const [handleThumbsMap, setHandleThumbsMap] = useState(handleValues())
+  const [handleThumbsMap, setHandleThumbsMap] = useState(handleDefaultValues())
   const [activeThumb, setActiveThumb] = useState(thumbsMap.LOWER)
 
   useEffect(() => {
@@ -56,21 +56,32 @@ const DualThumb = ({
 
   const updateValue = (keyIndex, value, pos) => {
     if (value < min || value > max) return
-    let curMap = [...handleThumbsMap]
-    curMap[keyIndex] = {
-      ...curMap[keyIndex],
+    let currentThumbsMap = [...handleThumbsMap]
+    currentThumbsMap[keyIndex] = {
+      ...currentThumbsMap[keyIndex],
       value,
       position: pos ?? getPositionInSlider(value) * 100,
     }
 
-    if (curMap[thumbsMap.LOWER].value > curMap[thumbsMap.UPPER].value) {
+    if (
+      minGap &&
+      currentThumbsMap[thumbsMap.UPPER].value -
+        currentThumbsMap[thumbsMap.LOWER].value <
+        minGap
+    )
+      return
+
+    if (
+      currentThumbsMap[thumbsMap.LOWER].value >
+      currentThumbsMap[thumbsMap.UPPER].value
+    ) {
       const temp = thumbsMap.LOWER
       thumbsMap.LOWER = thumbsMap.UPPER
       thumbsMap.UPPER = temp
     }
 
-    setHandleThumbsMap(curMap)
-    onChange(curMap.map(({ value }) => value))
+    setHandleThumbsMap(currentThumbsMap)
+    onChange(currentThumbsMap.map(({ value }) => value).sort((a, b) => a - b))
   }
 
   const handleChange = e => {
@@ -162,6 +173,35 @@ const DualThumb = ({
       ))}
     </>
   )
+}
+
+DualThumb.propTypes = {
+  /** The min value of the range. */
+  min: propTypes.number,
+  /** The max value of the range. */
+  max: propTypes.number,
+  /** Callback when the component's state is changed. */
+  onChange: propTypes.func,
+  /** The step by which the value is incremented / decremented. */
+  step: propTypes.number,
+  /** Determines the disabled mode of the RangeSlider, if true - disabled. */
+  disabled: propTypes.bool,
+  /** Settings of the slider. */
+  SLIDER_SETTINGS: propTypes.object,
+  /** Value of the slider */
+  values: propTypes.arrayOf(propTypes.number),
+  /** Determines the minimum distance between the first thumb to the second. */
+  minGap: propTypes.number,
+  /** Function to get position in slider from value. */
+  getPositionInSlider: propTypes.func,
+  /** Function to get value in slider from position. */
+  getValueInSlider: propTypes.func,
+  /** Function to position tooltip in the middle of the slider thumb. */
+  posTooltipToValue: propTypes.func,
+  /** Function to count deciamls in case there is a step prop, that is a decimal number. */
+  countDecimals: propTypes.func,
+  /** Function to render tootltip for thumb. */
+  renderTooltip: propTypes.func,
 }
 
 export default DualThumb

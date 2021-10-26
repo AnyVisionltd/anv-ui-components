@@ -33,6 +33,7 @@ const RangeSlider = ({
   isToggleTooltip,
   measureUnitText,
   containerClassName,
+  minGap,
   ...otherProps
 }) => {
   const [showTooltip, setShowTooltip] = useState(false)
@@ -186,7 +187,7 @@ const RangeSlider = ({
 
   // KeyDown is called while user presses the arrows and KeyUp is called when the press
   // is done, so the input value will be updated and won't be one step ahead.
-  const handleKeyPress = e => {
+  const handleSingleThumbKeyPress = e => {
     if (keyboardButtons.includes(e.keyCode)) {
       posTooltipToValue()
     }
@@ -237,7 +238,6 @@ const RangeSlider = ({
     onChange,
     step,
     disabled,
-    showTooltip,
   }
 
   const renderSingleThumbRange = () => (
@@ -246,9 +246,10 @@ const RangeSlider = ({
       value={value}
       isToggleTooltip={isToggleTooltip}
       hoverPos={hoverPos}
-      onKeyUp={handleKeyPress}
-      onKeyDown={handleKeyPress}
+      onKeyUp={handleSingleThumbKeyPress}
+      onKeyDown={handleSingleThumbKeyPress}
       renderTooltip={renderSingleThumbTooltip}
+      showTooltip={showTooltip}
       {...otherProps}
     />
   )
@@ -258,11 +259,10 @@ const RangeSlider = ({
       {...commonProps}
       values={value}
       getValueInSlider={getValueInSlider}
-      posTooltipMiddleThumb={posTooltipMiddleThumb}
       posTooltipToValue={posDualThumbTooltip}
-      fixThumbRangeDeviation={fixThumbRangeDeviation}
       countDecimals={countDecimals}
       renderTooltip={renderDualThumbTooltip}
+      minGap={minGap}
       {...otherProps}
     />
   )
@@ -320,6 +320,8 @@ RangeSlider.propTypes = {
   isToggleTooltip: propTypes.bool,
   /** Possibly add units of measurement for labels and hover value, like hours, minutes, meters etc. */
   measureUnitText: propTypes.string,
+  /** Determines the minimum distance between the first thumb to the second. */
+  minGap: propTypes.number,
   /** For css customization. */
   containerClassName: propTypes.string,
 }

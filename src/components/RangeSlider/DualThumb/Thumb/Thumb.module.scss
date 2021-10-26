@@ -3,4 +3,9 @@
 
 .thumb {
   @include singleThumbRange(false);
+
+  &:disabled {
+    cursor: default;
+    opacity: av-opacity(disabled);
+  }
 }

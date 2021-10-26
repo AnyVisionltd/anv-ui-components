@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react'
+import propTypes from 'prop-types'
 import styles from './SingleThumb.module.scss'
 
 const SingleThumb = ({
@@ -47,6 +48,37 @@ const SingleThumb = ({
       {renderTooltip(tooltipRef)}
     </>
   )
+}
+
+SingleThumb.propTypes = {
+  /** The min value of the range. */
+  min: propTypes.number,
+  /** The max value of the range. */
+  max: propTypes.number,
+  /** Callback when the component's state is changed. */
+  onChange: propTypes.func,
+  /** The step by which the value is incremented / decremented. */
+  step: propTypes.number,
+  /** Determines the disabled mode of the RangeSlider, if true - disabled. */
+  disabled: propTypes.bool,
+  /** Settings of the slider. */
+  SLIDER_SETTINGS: propTypes.object,
+  /** Wether to show tooltip or not. */
+  showTooltip: propTypes.bool,
+  /** Function to get position in slider from value. */
+  getPositionInSlider: propTypes.func,
+  /** Value of the slider */
+  value: propTypes.oneOfType([propTypes.string, propTypes.number]),
+  /** Function to render tootltip for thumb. */
+  renderTooltip: propTypes.func,
+  /** Wether tooltip is always shown or not. */
+  isToggleTooltip: propTypes.bool,
+  /** Value of mouse position when user hoveres the slider. */
+  hoverPos: propTypes.number,
+  /** Function to handle keydown events. */
+  onKeyDown: propTypes.func,
+  /** Function to handle keyup events. */
+  onKeyUp: propTypes.func,
 }
 
 export default SingleThumb
