@@ -23,6 +23,37 @@ export const Basic = () => {
   )
 }
 
+export const DualThumbRange = () => {
+  const [value, setValue] = useState([40, 65])
+
+  return (
+    <div style={{ width: '480px' }}>
+      <RangeSlider
+        min={0}
+        max={100}
+        value={value}
+        onChange={newValue => setValue(newValue)}
+      />
+    </div>
+  )
+}
+
+export const DualThumbRangeWithMinimumGap = () => {
+  const [value, setValue] = useState([21, 36])
+
+  return (
+    <div style={{ width: '480px' }}>
+      <RangeSlider
+        min={0}
+        max={100}
+        minGap={15}
+        value={value}
+        onChange={newValue => setValue(newValue)}
+      />
+    </div>
+  )
+}
+
 export const ToggledTooltip = () => {
   const [value, setValue] = useState(60)
 
@@ -41,6 +72,7 @@ export const ToggledTooltip = () => {
 
 export const Disabled = () => {
   const [value, setValue] = useState(40)
+  const [value2, setValue2] = useState([10, 50])
 
   return (
     <div style={{ width: '480px' }}>
@@ -50,6 +82,21 @@ export const Disabled = () => {
         value={value}
         disabled
         onChange={e => setValue(e.target.value)}
+      />
+      <RangeSlider
+        min={0}
+        max={100}
+        value={value}
+        disabled
+        isToggleTooltip
+        onChange={e => setValue(e.target.value)}
+      />
+      <RangeSlider
+        min={0}
+        max={100}
+        value={value2}
+        disabled
+        onChange={newValue => setValue2(newValue)}
       />
     </div>
   )

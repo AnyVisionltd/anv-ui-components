@@ -1,0 +1,5 @@
+@import '../RangeSlider.module.scss';
+
+.dualThumbBar {
+  @include rangeBar;
+}
