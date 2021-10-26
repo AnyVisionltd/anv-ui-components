@@ -24,16 +24,34 @@
   border-radius: av-radius();
   padding: av-space(tiny) 0;
 
-  &.regular {
+  &.large {
     li {
-      height: 48px;
+      min-width: 124px;
+      font-size: av-font-size();
+      height: av-size(sz-48);
+    }
+  }
+
+  &.medium {
+    li {
+      min-width: 124px;
+      font-size: av-font-size(small);
+      height: av-size(sz-40);
+    }
+  }
+
+  &.small {
+    li {
+      min-width: 105px;
+      font-size: av-font-size(tiny);
+      height: av-size(sz-32);
     }
   }
 
   &.dense {
     li {
       @extend %av-body2;
-      height: 32px;
+      height: av-size(sz-32);
     }
   }
 }

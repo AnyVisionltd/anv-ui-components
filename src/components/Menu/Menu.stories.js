@@ -311,3 +311,98 @@ export const Variants = () => {
     </div>
   )
 }
+
+export const Sizes = () => {
+  const largeAnchorElement = useRef()
+  const mediumAnchorElement = useRef()
+  const smallAnchorElement = useRef()
+
+  const [largeAnchorElementOpened, setLargeAnchorElementOpened] = useState(null)
+  const [mediumAnchorElementOpened, setMediumAnchorElementOpened] = useState(
+    null,
+  )
+  const [smallAnchorElementOpened, setSmallAnchorElementOpened] = useState(null)
+
+  const openLargeMenu = () =>
+    largeAnchorElementOpened
+      ? setLargeAnchorElementOpened(null)
+      : setLargeAnchorElementOpened(largeAnchorElement.current)
+  const openMediumMenu = () =>
+    mediumAnchorElementOpened
+      ? setMediumAnchorElementOpened(null)
+      : setMediumAnchorElementOpened(mediumAnchorElement.current)
+  const openSmallMenu = () =>
+    smallAnchorElementOpened
+      ? setSmallAnchorElementOpened(null)
+      : setSmallAnchorElementOpened(smallAnchorElement.current)
+
+  const closeLargeMenu = () => setLargeAnchorElementOpened(null)
+  const closeMediumMenu = () => setMediumAnchorElementOpened(null)
+  const closeSmallMenu = () => setSmallAnchorElementOpened(null)
+
+  const renderMenuItems = () =>
+    Array.from({ length: 4 }, (_, index) => (
+      <Menu.Item key={index}>Item #{index + 1}</Menu.Item>
+    ))
+
+  return (
+    <div className={styles.menuExample}>
+      <div className={styles.microMargin}>
+        <Button
+          aria-controls='menu-story-large'
+          aria-haspopup='true'
+          onClick={openLargeMenu}
+          ref={largeAnchorElement}
+        >
+          Large
+        </Button>
+        <Menu
+          aria-labelledby='menu-story-large'
+          anchorElement={largeAnchorElementOpened}
+          isOpen={!!largeAnchorElementOpened}
+          onClose={closeLargeMenu}
+        >
+          {renderMenuItems()}
+        </Menu>
+      </div>
+      <div className={styles.microMargin}>
+        <Button
+          aria-controls='menu-story-medium'
+          aria-haspopup='true'
+          onClick={openMediumMenu}
+          ref={mediumAnchorElement}
+        >
+          Medium
+        </Button>
+        <Menu
+          aria-labelledby='menu-story-medium'
+          anchorElement={mediumAnchorElementOpened}
+          isOpen={!!mediumAnchorElementOpened}
+          onClose={closeMediumMenu}
+          size='medium'
+        >
+          {renderMenuItems()}
+        </Menu>
+      </div>
+      <div className={styles.microMargin}>
+        <Button
+          aria-controls='menu-story-small'
+          aria-haspopup='true'
+          onClick={openSmallMenu}
+          ref={smallAnchorElement}
+        >
+          Small
+        </Button>
+        <Menu
+          aria-labelledby='menu-story-small'
+          anchorElement={smallAnchorElementOpened}
+          isOpen={!!smallAnchorElementOpened}
+          onClose={closeSmallMenu}
+          size='small'
+        >
+          {renderMenuItems()}
+        </Menu>
+      </div>
+    </div>
+  )
+}
