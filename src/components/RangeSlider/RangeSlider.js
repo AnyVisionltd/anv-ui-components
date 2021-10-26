@@ -34,12 +34,14 @@ const RangeSlider = ({
   measureUnitText,
   containerClassName,
   minGap,
+  onReachingMinGap,
   ...otherProps
 }) => {
   const [showTooltip, setShowTooltip] = useState(false)
   const [hoverValue, setHoverValue] = useState(null)
   const [hoverPos, setHoverPos] = useState(null)
   const containerRef = useRef(null)
+  const rangeRef = useRef(null)
   const isDualThumb = Array.isArray(value)
 
   const SLIDER_SETTINGS = useMemo(
@@ -56,9 +58,9 @@ const RangeSlider = ({
   )
 
   useLayoutEffect(() => {
-    if (!containerRef.current) return
+    if (!rangeRef.current) return
     if (SLIDER_SETTINGS.width) return
-    SLIDER_SETTINGS.width = containerRef.current.offsetWidth
+    SLIDER_SETTINGS.width = rangeRef.current.offsetWidth
   }, [SLIDER_SETTINGS])
 
   // Get relative position in the slider, between 0 - 1
@@ -263,6 +265,8 @@ const RangeSlider = ({
       countDecimals={countDecimals}
       renderTooltip={renderDualThumbTooltip}
       minGap={minGap}
+      onReachingMinGap={onReachingMinGap}
+      containerRef={containerRef}
       {...otherProps}
     />
   )
@@ -274,10 +278,11 @@ const RangeSlider = ({
         disabled && styles.disabled,
         containerClassName,
       )}
+      ref={containerRef}
     >
       <div
         className={styles.rangeContainer}
-        ref={containerRef}
+        ref={rangeRef}
         onMouseMove={onMouseMove}
         onMouseOut={onMouseOut}
       >
@@ -296,6 +301,7 @@ RangeSlider.defaultProps = {
   disabled: false,
   isToggleTooltip: false,
   measureUnitText: '',
+  onReachingMinGap: () => {},
 }
 
 RangeSlider.propTypes = {
@@ -322,6 +328,8 @@ RangeSlider.propTypes = {
   measureUnitText: propTypes.string,
   /** Determines the minimum distance between the first thumb to the second. */
   minGap: propTypes.number,
+  /** Callback function that is called if the user reaches the minimum distance allowed. */
+  onReachingMinGap: propTypes.func,
   /** For css customization. */
   containerClassName: propTypes.string,
 }

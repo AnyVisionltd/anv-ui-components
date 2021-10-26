@@ -29,6 +29,8 @@ const DualThumb = ({
   min,
   max,
   minGap,
+  onReachingMinGap,
+  containerRef,
   ...inputProps
 }) => {
   const barRef = useRef()
@@ -68,8 +70,9 @@ const DualThumb = ({
       currentThumbsMap[thumbsMap.UPPER].value -
         currentThumbsMap[thumbsMap.LOWER].value <
         minGap
-    )
-      return
+    ) {
+      return onReachingMinGap()
+    }
 
     if (
       currentThumbsMap[thumbsMap.LOWER].value >
@@ -93,7 +96,9 @@ const DualThumb = ({
 
   const changeThumbValue = (thumbKey, changeType) => {
     const change = (changeType === changeValuesMap.INC ? 1 : -1) * step
-    updateValue(thumbKey, handleThumbsMap[thumbKey].value + change)
+    const value = handleThumbsMap[thumbKey].value + change
+    const valueWithFixedDecimals = Number(value.toFixed(countDecimals()))
+    updateValue(thumbKey, valueWithFixedDecimals)
   }
 
   const handleKeyPress = e => {
@@ -116,12 +121,12 @@ const DualThumb = ({
   }
 
   useEffect(() => {
-    document.addEventListener('keydown', handleKeyPress)
-    document.addEventListener('keyup', handleKeyPress)
+    containerRef.current?.addEventListener('keydown', handleKeyPress)
+    containerRef.current?.addEventListener('keyup', handleKeyPress)
 
     return () => {
-      document.removeEventListener('keydown', handleKeyPress)
-      document.removeEventListener('keyup', handleKeyPress)
+      containerRef.current?.removeEventListener('keydown', handleKeyPress)
+      containerRef.current?.removeEventListener('keyup', handleKeyPress)
     }
   })
 
@@ -192,6 +197,8 @@ DualThumb.propTypes = {
   values: propTypes.arrayOf(propTypes.number),
   /** Determines the minimum distance between the first thumb to the second. */
   minGap: propTypes.number,
+  /** Callback function that is called if the user reaches the minimum distance allowed. */
+  onReachingMinGap: propTypes.func,
   /** Function to get position in slider from value. */
   getPositionInSlider: propTypes.func,
   /** Function to get value in slider from position. */
@@ -202,6 +209,8 @@ DualThumb.propTypes = {
   countDecimals: propTypes.func,
   /** Function to render tootltip for thumb. */
   renderTooltip: propTypes.func,
+  /** Container element */
+  containerRef: propTypes.shape({ current: propTypes.instanceOf(Element) }),
 }
 
 export default DualThumb
