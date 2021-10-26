@@ -87,11 +87,11 @@ const DualThumb = ({
     onChange(currentThumbsMap.map(({ value }) => value).sort((a, b) => a - b))
   }
 
-  const handleChange = e => {
-    const keyIndex = e.target.name
+  const handleChange = ({ target }) => {
+    const { name: keyIndex, value } = target
     setActiveThumb(keyIndex)
-    const curValue = Number(e.target.value)
-    updateValue(keyIndex, curValue)
+    const currentValue = Number(value)
+    updateValue(keyIndex, currentValue)
   }
 
   const changeThumbValue = (thumbKey, changeType) => {
@@ -132,26 +132,26 @@ const DualThumb = ({
 
   const handleBarClick = e => {
     const mouseX = Number(e.nativeEvent.offsetX)
-    const curPos = (mouseX / e.target.clientWidth) * 100
+    const currentPos = (mouseX / e.target.clientWidth) * 100
     const distanceFromLowerThumb = Math.abs(
-      handleThumbsMap[thumbsMap.LOWER].position - curPos,
+      handleThumbsMap[thumbsMap.LOWER].position - currentPos,
     )
     const distanceFromUpperThumb = Math.abs(
-      handleThumbsMap[thumbsMap.UPPER].position - curPos,
+      handleThumbsMap[thumbsMap.UPPER].position - currentPos,
     )
 
     const stepDecimalCount = countDecimals()
-    const curVal = getValueInSlider(curPos)
+    const curVal = getValueInSlider(currentPos)
     const updatedVal = Number(curVal.toFixed(stepDecimalCount))
 
     if (distanceFromLowerThumb <= distanceFromUpperThumb) {
       setActiveThumb(thumbsMap.LOWER)
       const { keyName } = handleThumbsMap[thumbsMap.LOWER]
-      updateValue(keyName, updatedVal, curPos)
+      updateValue(keyName, updatedVal, currentPos)
     } else {
       setActiveThumb(thumbsMap.UPPER)
       const { keyName } = handleThumbsMap[thumbsMap.UPPER]
-      updateValue(keyName, updatedVal, curPos)
+      updateValue(keyName, updatedVal, currentPos)
     }
   }
 
