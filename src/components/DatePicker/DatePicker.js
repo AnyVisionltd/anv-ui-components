@@ -54,6 +54,7 @@ const DatePicker = ({
         <IconButton
           className={classNames('datepicker-icon', {
             disabled: props.disabled,
+            open: isOpen,
           })}
           onClick={() => !props.disabled && setIsOpen(prev => !prev)}
           size='medium'
