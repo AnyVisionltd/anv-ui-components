@@ -24,8 +24,6 @@ $default-selected-height: av-size(sz-56);
 
   &.isDisabled {
     opacity: av-opacity(disabled);
-    border: 1px solid av-color(primary);
-    border-radius: av-radius(tidy);
   }
 
   > *,
