@@ -1,12 +1,25 @@
 @import '~@anyvision/style-guide';
 
 :global {
+  %hover_open_bg {
+    background-color: av-color(content, av-opacity(ghost));
+  }
   .datepicker-icon {
     border-radius: 50%;
     color: av-color(content);
-    background-color: av-color(content, av-opacity(divider));
+    background-color: transparent;
+
     &.disabled {
       pointer-events: none;
+    }
+
+    &:hover,
+    &.open {
+      @extend %hover_open_bg;
+    }
+
+    &:focus {
+      background-color: av-color(content, av-opacity(disabled));
     }
   }
 
