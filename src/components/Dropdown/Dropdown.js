@@ -93,6 +93,11 @@ const Dropdown = ({
   }, containerRef)
 
   useEffect(() => {
+    setShownOptions([...options])
+    setSelectedOptions([...defaultValues])
+  }, [options, defaultValues])
+
+  useEffect(() => {
     if (!multiple || !isSelectedShownInHeader || !selectedContainerRef.current)
       return
     if (selectedOptions.length && isOverflown(selectedContainerRef.current)) {
