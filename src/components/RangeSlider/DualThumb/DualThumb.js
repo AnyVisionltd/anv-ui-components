@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect, useState, useCallback } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { Thumb } from './Thumb'
@@ -34,15 +34,42 @@ const DualThumb = ({
   ...inputProps
 }) => {
   const barRef = useRef()
-  const handleDefaultValues = () =>
-    values.map((value, index) => ({
-      keyName: index,
-      value,
-      position: getPositionInSlider(value) * 100,
-    }))
+  const handleDefaultValues = useCallback(
+    () =>
+      values.map((value, index) => ({
+        keyName: index,
+        value,
+        position: getPositionInSlider(value) * 100,
+      })),
+    [values, getPositionInSlider],
+  )
 
   const [handleThumbsMap, setHandleThumbsMap] = useState(handleDefaultValues())
   const [activeThumb, setActiveThumb] = useState(thumbsMap.LOWER)
+
+  useEffect(() => {
+    if (!handleThumbsMap) return
+    const currentValues = [
+      handleThumbsMap[thumbsMap.LOWER].value,
+      handleThumbsMap[thumbsMap.UPPER].value,
+    ]
+    if (JSON.stringify(currentValues) !== JSON.stringify(values)) {
+      const [lowerValue, upperValue] = values
+      setHandleThumbsMap(prevValues =>
+        prevValues.map(({ keyName, value, position }) => {
+          const newValue = keyName === thumbsMap.LOWER ? lowerValue : upperValue
+          if (value === newValue) {
+            return { keyName, value, position }
+          }
+          return {
+            keyName,
+            value: newValue,
+            position: getPositionInSlider(newValue) * 100,
+          }
+        }),
+      )
+    }
+  }, [values, handleThumbsMap, getPositionInSlider, handleDefaultValues])
 
   useEffect(() => {
     if (!barRef.current) return
@@ -121,12 +148,13 @@ const DualThumb = ({
   }
 
   useEffect(() => {
-    containerRef.current?.addEventListener('keydown', handleKeyPress)
-    containerRef.current?.addEventListener('keyup', handleKeyPress)
+    const container = containerRef.current
+    container?.addEventListener('keydown', handleKeyPress)
+    container?.addEventListener('keyup', handleKeyPress)
 
     return () => {
-      containerRef.current?.removeEventListener('keydown', handleKeyPress)
-      containerRef.current?.removeEventListener('keyup', handleKeyPress)
+      container?.removeEventListener('keydown', handleKeyPress)
+      container?.removeEventListener('keyup', handleKeyPress)
     }
   })
 
