@@ -6,7 +6,7 @@ import keymap from '../../utils/enums/keymap'
 import { InputBase, IconButton } from '../../index'
 import { DropdownItem } from './DropdownItem'
 import { EmptyDropdownMenu } from './EmptyDropdownMenu'
-import { useClickOutsideListener } from '../../hooks'
+import { useClickOutsideListener, usePrevious } from '../../hooks'
 import languageService from '../../services/language'
 import styles from './Dropdown.module.scss'
 
@@ -32,6 +32,7 @@ const Dropdown = ({
   isSearchable,
   isSelectedShownInHeader,
   valueRender,
+  canBeEmpty,
 }) => {
   const [isTypeMode, setIsTypeMode] = useState(false)
   const [filteredValue, setFilteredValue] = useState('')
@@ -92,10 +93,18 @@ const Dropdown = ({
     resetFocusedOptionIndex()
   }, containerRef)
 
+  const prevProps = usePrevious({ options, defaultValues })
+
   useEffect(() => {
-    setShownOptions([...options])
-    setSelectedOptions([...defaultValues])
-  }, [options, defaultValues])
+    if (
+      JSON.stringify(prevProps?.defaultValues) !== JSON.stringify(defaultValues)
+    ) {
+      setSelectedOptions([...defaultValues])
+    }
+    if (prevProps?.options?.length !== options.length) {
+      setShownOptions([...options])
+    }
+  }, [options, defaultValues, prevProps])
 
   useEffect(() => {
     if (!multiple || !isSelectedShownInHeader || !selectedContainerRef.current)
@@ -158,14 +167,19 @@ const Dropdown = ({
       resetToOriginalOptions()
     } else {
       if (isFoundInDropdown) {
-        return
+        if (canBeEmpty) {
+          newOptions = []
+        } else {
+          return
+        }
       } else {
         newOptions = [clickedOption]
-        getOffTypeMode()
-        closeMenu()
-        resetFocusedOptionIndex()
       }
+      getOffTypeMode()
+      closeMenu()
+      resetFocusedOptionIndex()
     }
+
     setSelectedOptions(newOptions)
     onChange(newOptions)
   }
@@ -414,6 +428,7 @@ Dropdown.defaultProps = {
   onMenuOpen: () => {},
   onChange: () => {},
   onExceedMaxSelected: () => {},
+  canBeEmpty: false,
 }
 
 Dropdown.propTypes = {
@@ -445,6 +460,8 @@ Dropdown.propTypes = {
   label: propTypes.string,
   /** Set dropdown to disabled if true. */
   disabled: propTypes.bool,
+  /** Wether dropdown can be empty or not. */
+  canBeEmpty: propTypes.bool,
   /** Called when menu is opened. */
   onMenuOpen: propTypes.func,
   /** Called when menu is closed. */
