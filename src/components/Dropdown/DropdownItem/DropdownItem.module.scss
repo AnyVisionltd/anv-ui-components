@@ -6,9 +6,9 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: av-space(micro) av-space();
+  padding: 0 av-space();
   transition: all 0.3s linear;
-  min-height: av-size(sz-48);
+  min-height: av-size(sz-56);
 
   .content {
     @extend %av-body1;

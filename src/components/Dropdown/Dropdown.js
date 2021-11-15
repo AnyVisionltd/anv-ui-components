@@ -3,15 +3,29 @@ import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { ArrowUp, TimesThick, TimesCircleFilled } from '@anyvision/anv-icons'
 import keymap from '../../utils/enums/keymap'
+import { findScrollerNodeBottom } from '../../utils'
 import { InputBase, IconButton } from '../../index'
 import { DropdownItem } from './DropdownItem'
 import { EmptyDropdownMenu } from './EmptyDropdownMenu'
-import { useClickOutsideListener, usePrevious } from '../../hooks'
+import {
+  useClickOutsideListener,
+  usePrevious,
+  useCombinedRefs,
+} from '../../hooks'
 import languageService from '../../services/language'
 import styles from './Dropdown.module.scss'
 
+const maxMenuHeight = 240
+const menuItemHeight = 56
 const defaultSelectedHeight = 56
 const getTranslation = path => languageService.getTranslation(`${path}`)
+
+const getMenuPlacement = ({ menuHeight, containerElement }) => {
+  if (!containerElement) return
+  const scrollerNodeBottom = findScrollerNodeBottom(containerElement)
+  const { bottom: containerBottom } = containerElement.getBoundingClientRect()
+  return scrollerNodeBottom - containerBottom < menuHeight
+}
 
 const Dropdown = ({
   options,
@@ -40,6 +54,7 @@ const Dropdown = ({
   const [selectedOptions, setSelectedOptions] = useState([...defaultValues])
   const [showMenu, setShowMenu] = useState(false)
   const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1)
+  const [isMenuPositionedUpwards, setIsMenuPositionedUpwards] = useState(null)
   const containerRef = useRef(null)
   const menuRef = useRef(null)
   const inputRef = useRef(null)
@@ -117,6 +132,24 @@ const Dropdown = ({
       selectedContainerRef.current.style.paddingBottom = '2px'
     }
   }, [selectedOptions, multiple, isSelectedShownInHeader, isOverflown])
+
+  const handleMenuPlacement = useCallback(
+    node => {
+      if (
+        isMenuPositionedUpwards === null ||
+        prevProps?.options?.length !== options.length
+      ) {
+        const menuHeight = Math.min(
+          maxMenuHeight,
+          options.length * menuItemHeight,
+        )
+        setIsMenuPositionedUpwards(
+          getMenuPlacement({ menuHeight, containerElement: node }),
+        )
+      }
+    },
+    [isMenuPositionedUpwards, options, prevProps],
+  )
 
   const focusOption = direction => {
     if (!showMenu || !shownOptions.length) return
@@ -371,7 +404,12 @@ const Dropdown = ({
   )
 
   const renderOptions = () => (
-    <ul className={styles.menuContainer} ref={menuRef}>
+    <ul
+      className={classNames(styles.menuContainer, {
+        [styles.isPositionedUpwards]: isMenuPositionedUpwards,
+      })}
+      ref={menuRef}
+    >
       {!shownOptions.length ? (
         <EmptyDropdownMenu
           noOptionsMessage={noOptionsMessage}
@@ -404,7 +442,7 @@ const Dropdown = ({
         disabled && styles.isDisabled,
         className,
       )}
-      ref={containerRef}
+      ref={useCombinedRefs(containerRef, handleMenuPlacement)}
     >
       {renderHeaderContainer()}
       {showMenu && renderOptions()}

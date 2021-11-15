@@ -21,6 +21,7 @@ $default-selected-height: av-size(sz-56);
   width: av-size(sz-320);
   box-sizing: border-box;
   position: relative;
+  height: fit-content;
 
   &.isDisabled {
     opacity: av-opacity(disabled);
@@ -239,6 +240,13 @@ $default-selected-height: av-size(sz-56);
     max-height: av-size(sz-240);
     z-index: av-z-index(important);
     background-color: av-color(surface);
+
+    &.isPositionedUpwards {
+      top: auto;
+      bottom: 100%;
+      border-top: 1px solid av-color(primary, av-opacity(disabled));
+      border-bottom: none;
+    }
   }
 }
 
