@@ -3,8 +3,10 @@ export const generateId = () => `_${Math.random().toString(36).substr(2, 9)}`
 
 export const findScrollerNodeBottom = node => {
   if (!node) return
-  let maxHeight = node.getBoundingClientRect().height
-  let scrollerNodeBottom = node.getBoundingClientRect().bottom
+  let {
+    height: maxHeight,
+    bottom: scrollerNodeBottom,
+  } = node.getBoundingClientRect()
 
   while (node !== null) {
     if (maxHeight > node.offsetHeight) return scrollerNodeBottom
