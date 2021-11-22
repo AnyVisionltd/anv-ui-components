@@ -7,6 +7,7 @@
 .marginFlexContainer {
   display: flex;
   align-items: center;
+
   > * {
     margin: av-space(micro);
   }
@@ -53,7 +54,23 @@
 }
 
 .infoColor {
-  color: av-color(info);
+  color: av-color(primary);
+}
+
+.alertFillColor {
+  fill: av-color(alert);
+}
+
+.successFillColor {
+  fill: av-color(success);
+}
+
+.errorFillColor {
+  fill: av-color(error);
+}
+
+.infoFillColor {
+  fill: av-color(primary);
 }
 
 .tinyText {
