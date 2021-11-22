@@ -44,8 +44,16 @@
   color: av-color(alert);
 }
 
+.successColor {
+  color: av-color(success);
+}
+
 .errorColor {
   color: av-color(error);
+}
+
+.infoColor {
+  color: av-color(info);
 }
 
 .tinyText {
