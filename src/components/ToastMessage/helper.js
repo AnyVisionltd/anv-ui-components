@@ -3,26 +3,26 @@ import {
   CheckCircleOutlined,
   InfoCircleOutlined,
   ErrorCircleOutlined,
-  TimesCircleFilled,
+  TimesCircleOutlined,
 } from '@anyvision/anv-icons'
 import styles from '../../storybook/index.module.scss'
 
 
 const map = {
   success: {
-    color: styles.successColor,
+    fillColor: styles.successFillColor,
     icon: <CheckCircleOutlined />,
   },
   info: {
-    color: styles.infoColor,
+    fillColor: styles.infoFillColor,
     icon: <InfoCircleOutlined />,
   },
   error: {
-    color: styles.errorColor,
-    icon: <TimesCircleFilled />,
+    fillColor: styles.errorFillColor,
+    icon: <TimesCircleOutlined />,
   },
   alert: {
-    color: styles.alertColor,
+    fillColor: styles.alertFillColor,
     icon: <ErrorCircleOutlined />,
   },
 }

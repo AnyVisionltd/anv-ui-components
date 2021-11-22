@@ -20,54 +20,57 @@ export const Default = () => {
       <ToastMessage
         isOpen={isOpen}
         onClose={useCallback(() => setIsOpen(false), [])}
-        message='This Is The Message'
+        message='The quick brown fox jumps over the big black lazy dog'
       />
     </>
   )
 }
 
-export const LeadingIcon = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  return (
-    <>
-      <Button onClick={() => setIsOpen(true)}>With Leading Icon</Button>
-      <ToastMessage
-        isOpen={isOpen}
-        onClose={useCallback(() => setIsOpen(false), [])}
-        message='This Is The Message'
-        leadingIcon={<SunIcon />}
-      />
-    </>
-  )
-}
-
-export const CloseIcon = () => {
-  const [isOpenDefault, setIsOpenDefault] = useState(false)
-  const [isOpenCustom, setIsOpenCustom] = useState(false)
-  const [isOpenWithout, setIsOpenWithout] = useState(false)
+export const ToastMessageTypes = () => {
+  const [isOpenSuccess, setIsOpenSuccess] = useState(false)
+  const [isOpenInfo, setIsOpenInfo] = useState(false)
+  const [isOpenAlert, setIsOpenAlert] = useState(false)
+  const [isOpenError, setIsOpenError] = useState(false)
   return (
     <>
       <div className={styles.marginFlexContainer}>
-        <Button onClick={() => setIsOpenDefault(true)}>Default Icon</Button>
-        <Button onClick={() => setIsOpenCustom(true)}>Custom Icon</Button>
-        <Button onClick={() => setIsOpenWithout(true)}>Without Icon</Button>
+        <Button className={styles.successColor} variant='outline' onClick={() => setIsOpenSuccess(true)}>
+          Success Message
+        </Button>
+        <Button className={styles.infoColor} variant='outline' onClick={() => setIsOpenInfo(true)}>
+          Info Message
+        </Button>
+        <Button className={styles.alertColor} variant='outline' onClick={() => setIsOpenAlert(true)}>
+          Alert Message
+        </Button>
+        <Button className={styles.errorColor} variant='outline' onClick={() => setIsOpenError(true)}>
+          Error Message
+        </Button>
+
       </div>
       <ToastMessage
-        isOpen={isOpenDefault}
-        onClose={useCallback(() => setIsOpenDefault(false), [])}
-        message='Default trailing icon'
+        isOpen={isOpenSuccess}
+        onClose={useCallback(() => setIsOpenSuccess(false), [])}
+        message='Success Toast Message'
+        type='success'
       />
       <ToastMessage
-        isOpen={isOpenCustom}
-        onClose={useCallback(() => setIsOpenCustom(false), [])}
-        message='Custom trailing icon'
-        closeIcon={<CheckIcon />}
+        isOpen={isOpenInfo}
+        onClose={useCallback(() => setIsOpenInfo(false), [])}
+        message='Info Toast Message'
+        type='info'
       />
       <ToastMessage
-        isOpen={isOpenWithout}
-        onClose={useCallback(() => setIsOpenWithout(false), [])}
-        message='Without trailing icon'
-        closeIcon={false}
+        isOpen={isOpenAlert}
+        onClose={useCallback(() => setIsOpenAlert(false), [])}
+        message='Alert Toast Message'
+        type='alert'
+      />
+      <ToastMessage
+        isOpen={isOpenError}
+        onClose={useCallback(() => setIsOpenError(false), [])}
+        message='Error Toast Message'
+        type='error'
       />
     </>
   )
