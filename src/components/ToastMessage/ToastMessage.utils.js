@@ -7,7 +7,6 @@ import {
 } from '@anyvision/anv-icons'
 import styles from '../../storybook/index.module.scss'
 
-
 const map = {
   success: {
     fillColor: styles.successFillColor,

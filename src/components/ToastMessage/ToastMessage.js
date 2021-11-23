@@ -4,10 +4,18 @@ import classNames from 'classnames'
 import { IconButton, Portal, Animations } from '../../index'
 import { ReactComponent as CloseIcon } from '../../assets/svg/Close.svg'
 import styles from './ToastMessage.module.scss'
-import toastMessageTypeMapper from './helper'
+import toastMessageTypeMapper from './ToastMessage.utils'
 
-const ToastMessage = ({ message, type, isUndo, undoCallback, closeIcon, isOpen, className, onClose }) => {
-
+const ToastMessage = ({
+  message,
+  type,
+  isUndo,
+  undoCallback,
+  closeIcon,
+  isOpen,
+  className,
+  onClose,
+}) => {
   // const timerHide = React.useRef()
   //
   // const setHideTimeout = useCallback(() => {
@@ -34,8 +42,13 @@ const ToastMessage = ({ message, type, isUndo, undoCallback, closeIcon, isOpen, 
 
   const toastMessageTheme = toastMessageTypeMapper(type)
 
-  const renderLeadingIcon = () => <span
-    className={classNames(styles.leadingIcon, toastMessageTheme.fillColor)}>{toastMessageTheme.icon}</span>
+  const renderLeadingIcon = () => (
+    <span
+      className={classNames(styles.leadingIcon, toastMessageTheme.fillColor)}
+    >
+      {toastMessageTheme.icon}
+    </span>
+  )
 
   const renderCloseIcon = () => {
     if (!closeIcon) {
@@ -52,7 +65,9 @@ const ToastMessage = ({ message, type, isUndo, undoCallback, closeIcon, isOpen, 
     )
   }
 
-  const classes = classNames(styles.toastMessage, className, { [styles[type]]: !!type })
+  const classes = classNames(styles.toastMessage, className, {
+    [styles[type]]: !!type,
+  })
 
   return (
     <Animations.Slide isOpen={isOpen}>
@@ -76,8 +91,7 @@ ToastMessage.defaultProps = {
   type: 'info',
   isUndo: false,
   closeIcon: <CloseIcon />,
-  onClose: () => {
-  },
+  onClose: () => {},
 }
 
 ToastMessage.propTypes = {
