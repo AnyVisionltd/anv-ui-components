@@ -9,7 +9,7 @@
   background-color: av-color(purewhite);
   align-items: center;
   border-radius: av-radius();
-  padding: 0 16px;
+  padding: 0 av-size(sz-16);
   justify-content: space-between;
 
   &.success {
@@ -39,10 +39,9 @@
 
 .portal {
   position: fixed;
-  left: av-space(grand);
-  bottom: av-space(grand);
+  left: av-space(loose);
+  bottom: av-space(loose);
   overflow: hidden;
-  width: 100%
 }
 
 .messageContainer {
@@ -68,5 +67,9 @@
   .closeIcon {
     color: av-color(trueblack);
     margin-left: av-space(tiny);
+  }
+
+  .undoButton {
+    font-weight: av-font-weight(bold);
   }
 }

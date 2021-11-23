@@ -1,21 +1,21 @@
 import React, { useEffect, useCallback } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import { IconButton, Portal, Animations } from '../../index'
+import { IconButton, Portal, Animations, Button } from '../../index'
 import { ReactComponent as CloseIcon } from '../../assets/svg/Close.svg'
 import styles from './ToastMessage.module.scss'
 import toastMessageTypeMapper from './ToastMessage.utils'
 
 const ToastMessage = ({
-  message,
-  type,
-  isUndo,
-  undoCallback,
-  closeIcon,
-  isOpen,
-  className,
-  onClose,
-}) => {
+                        message,
+                        type,
+                        isUndo,
+                        undoCallback,
+                        closeIcon,
+                        isOpen,
+                        className,
+                        onClose,
+                      }) => {
   // const timerHide = React.useRef()
   //
   // const setHideTimeout = useCallback(() => {
@@ -65,6 +65,14 @@ const ToastMessage = ({
     )
   }
 
+  const renderUndoButton = () => {
+    return (
+      isUndo &&
+      <Button className={classNames(styles.undoButton)} onClick={undoCallback} variant='ghost'
+              size='small'>undo</Button>
+    )
+  }
+
   const classes = classNames(styles.toastMessage, className, {
     [styles[type]]: !!type,
   })
@@ -78,7 +86,7 @@ const ToastMessage = ({
             <span>{message}</span>
           </div>
           <div className={styles.actionsContainer}>
-            {/*{action}*/}
+            {renderUndoButton()}
             {renderCloseIcon()}
           </div>
         </div>
@@ -91,7 +99,8 @@ ToastMessage.defaultProps = {
   type: 'info',
   isUndo: false,
   closeIcon: <CloseIcon />,
-  onClose: () => {},
+  onClose: () => {
+  },
 }
 
 ToastMessage.propTypes = {

@@ -76,22 +76,23 @@ export const ToastMessageTypes = () => {
   )
 }
 
-export const Action = () => {
+export const WithUndoButton = () => {
   const [isOpen, setIsOpen] = useState(false)
   return (
     <>
-      <Button onClick={() => setIsOpen(true)}>With Action</Button>
+      <Button onClick={() => setIsOpen(true)}>With Undo Button</Button>
       <ToastMessage
         isOpen={isOpen}
         onClose={useCallback(() => setIsOpen(false), [])}
-        message='This Is The Message'
-        action={
-          <Button variant='ghost' size='small'>
-            {' '}
-            undo{' '}
-          </Button>
-        }
+        message='This Is a Toast Message with undo button'
+        isUndo={true}
+        type='error'
+        undoCallback={undoCallback}
       />
     </>
   )
+}
+
+const undoCallback = () => {
+  alert('TEST undo callback - display an alert')
 }
