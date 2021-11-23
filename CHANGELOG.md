@@ -49,6 +49,13 @@
 - Added TimePicker component
 - New Dropdown component
 - Added DualThumb for RangeSlider
+- Added new `<ToastMessage />` component - `src/components/ToastMessage`
+
+### packages updates:
+- storybook 6.1.14 -> 6.1.21
+- 
+
+
 
 ## 1.0.0 - 06-09-2020
 
