@@ -11,6 +11,11 @@
   cursor: pointer;
   max-width: av-size(sz-320);
 
+  &.menuItemDisabled {
+    opacity: av-opacity(disabled);
+    cursor: not-allowed;
+  }
+
   .ellipsis {
     text-overflow: ellipsis;
     overflow: hidden;
