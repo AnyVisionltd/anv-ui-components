@@ -26,6 +26,9 @@
     "label": "Label",
     "dateAndTime": "Date & Time",
     "time": "Time",
-    "date": "Date"
+    "date": "Date",
+    "search": "Search",
+    "item": "Item",
+    "items": "Items"
   }
 }
