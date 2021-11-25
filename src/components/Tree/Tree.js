@@ -75,15 +75,15 @@ const Tree = ({
   const handleBulkSelect = () => {}
 
   const handleBulkExpandCollapse = useCallback(() => {
-    const newFlattenNodes = { ...flattenedNodes }
+    const newFlattenedNodes = { ...flattenedNodes }
 
-    Object.entries(newFlattenNodes).forEach(([key, node]) => {
+    Object.entries(newFlattenedNodes).forEach(([key, node]) => {
       if (Array.isArray(node.children)) {
         node.isExpanded = true
       }
     })
 
-    setFlattenedNodes(newFlattenNodes)
+    setFlattenedNodes(newFlattenedNodes)
   }, [flattenedNodes, setFlattenedNodes])
 
   const renderSearchInput = () => (

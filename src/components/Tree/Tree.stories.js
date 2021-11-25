@@ -3,7 +3,7 @@ import Tree from './Tree'
 import { centerDecorator } from '../../utils/storybook/decorators'
 
 export default {
-  title: 'User Inputs/Tree',
+  title: 'Content/Tree',
   component: Tree,
   decorators: [centerDecorator],
 }

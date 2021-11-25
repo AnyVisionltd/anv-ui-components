@@ -31,7 +31,7 @@ const useFlattenTreeData = ({ data, selectedKeys = [] }) => {
 
   const flattenTreeData = useCallback(
     (treeData, selectedKeysSet, layer = 0) => {
-      const flattenNodesMap = {}
+      const flattenedNodesMap = {}
 
       const flatten = (treeData, selectedKeysSet, layer) => {
         if (!Array.isArray(treeData) || treeData.length === 0) {
@@ -46,9 +46,9 @@ const useFlattenTreeData = ({ data, selectedKeys = [] }) => {
             selectedKeysSet.delete(key)
           }
 
-          const isParentSelected = flattenNodesMap[parentKey]?.isSelected
+          const isParentSelected = flattenedNodesMap[parentKey]?.isSelected
 
-          flattenNodesMap[key] = {
+          flattenedNodesMap[key] = {
             ...node,
             layer,
             isSelected: isParentSelected ? isParentSelected : isSelected,
@@ -60,7 +60,7 @@ const useFlattenTreeData = ({ data, selectedKeys = [] }) => {
       }
 
       flatten(treeData, selectedKeysSet, layer)
-      return flattenNodesMap
+      return flattenedNodesMap
     },
     [],
   )
