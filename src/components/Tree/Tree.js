@@ -136,6 +136,8 @@ const Tree = ({
       totalChildren = children.length,
     } = calculateAmountOfSelectedNodesAndChildren(key, flattenNodes)
 
+    console.log(label, totalSelected, totalChildren)
+
     const infoText = `${children.length} ${
       children.length === 1 ? singularNounLabel : pluralNounLabel
     } | ${totalSelected} ${getTranslation('selected')}`
@@ -150,7 +152,7 @@ const Tree = ({
         key={key}
       >
         <Checkbox
-          checked={totalSelected === totalChildren}
+          checked={isSelected || totalSelected === totalChildren}
           onChange={() => handleIsSelected(node)}
           className={styles.isSelectedCheckbox}
         />

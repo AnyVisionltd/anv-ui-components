@@ -17,9 +17,9 @@ const useFlattenTreeData = ({ data, selectedKeys = [] }) => {
       if (memo.has(nodeKey)) return memo.get(nodeKey)
       const { isSelected, children } = flattenNodes[nodeKey]
       if (children) {
-        const nodeMemoValue = {
+        const nodeCachedValue = {
           totalChildren: children.filter(
-            childNode => !Array.isArray(childNode.children),
+            nodeKey => !flattenNodes[nodeKey]?.children,
           ).length,
           totalSelected: 0,
         }
@@ -28,11 +28,11 @@ const useFlattenTreeData = ({ data, selectedKeys = [] }) => {
             totalChildren,
             totalSelected,
           } = calculateAmountOfSelectedNodesAndChildren(key)
-          nodeMemoValue.totalChildren += totalChildren
-          nodeMemoValue.totalSelected += totalSelected
+          nodeCachedValue.totalChildren += totalChildren
+          nodeCachedValue.totalSelected += totalSelected
         })
-        memo.set(nodeKey, nodeMemoValue)
-        return nodeMemoValue
+        memo.set(nodeKey, nodeCachedValue)
+        return nodeCachedValue
       } else {
         return { totalChildren: 0, totalSelected: isSelected ? 1 : 0 }
       }

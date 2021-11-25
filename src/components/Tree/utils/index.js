@@ -39,10 +39,8 @@ export const checkAllNodesAreSelected = (nodesTree, nodesMap) => {
   let areSelected = true
 
   const areAllNodesSelected = nodesTreeData => {
-    console.log(nodesTreeData)
     if (!Array.isArray(nodesTreeData) || !nodesTreeData.length) return
     nodesTreeData.forEach(node => {
-      console.log('node is ', node)
       if (!areSelected) return
       const { key, children } = node
       if (nodesMap[key]?.isSelected) {
