@@ -5,6 +5,12 @@
   background-color: av-color(secondary);
   padding: av-space(medium);
 
+  .checkbox {
+    span {
+      border: solid 2px av-color(purewhite, av-opacity(medium));
+    }
+  }
+
   .searchInput {
     width: 100%;
     height: av-size(sz-40);
@@ -27,6 +33,42 @@
     .searchIcon {
       fill: av-color(purewhite, av-opacity(divider));
       font-size: av-font-size(large);
+    }
+  }
+
+  .bulkActions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: av-space() 0;
+    padding: 0 av-space();
+
+    .bulkSelectContainer {
+      display: flex;
+      align-items: center;
+      padding: av-space(micro) 0;
+
+      .bulkSelectCheckbox {
+        span {
+          border: solid 2px av-color(purewhite, av-opacity(disabled));
+        }
+      }
+
+      .bulkSelectLabel {
+        @extend %av-body2;
+        color: av-color(purewhite);
+      }
+    }
+
+    .bulkExpand {
+      @extend %av-body2;
+      color: av-color(primary);
+      padding: av-space(micro);
+      cursor: pointer;
+
+      &:hover {
+        background: av-color(primary, av-opacity(divider));
+      }
     }
   }
 

@@ -1,5 +1,4 @@
 import { useCallback, useState } from 'react'
-import { getChildrenKeys } from '../utils'
 
 const useTreeVisibleData = ({ initialData, onSearch }) => {
   const setAllNodesAsVisible = useCallback((data, parentKey = null) => {
@@ -61,14 +60,21 @@ const useTreeVisibleData = ({ initialData, onSearch }) => {
 
     if (!searchKeyword) {
       setFilteredData(setAllNodesAsVisible(initialData))
-      onSearch({ shouldDisplayAll: true })
+      onSearch({
+        searchKeyword,
+        shouldDisplayAll: true,
+        displayedNodes: initialData,
+      })
       return
     }
 
     const filteredData = filterVisibleData(initialData, searchKeyword)
     setFilteredData(filteredData)
-    // const visibleKeys = getChildrenKeys(filteredData, 'visible')
-    onSearch({ shouldDisplayAll: false, data: filteredData })
+    onSearch({
+      searchKeyword,
+      shouldDisplayAll: false,
+      displayedNodes: filteredData,
+    })
   }
 
   return {

@@ -78,10 +78,9 @@ export const Basic = () => {
     <Tree
       nodes={treeNodes}
       selectedKeys={selectedKeys}
-      onLeafClick={setSelectedkeys}
-      onParentClick={setSelectedkeys}
+      onLeafClick={data => setSelectedkeys(data)}
+      onParentClick={data => setSelectedkeys(data)}
       isSearchable
-      onSearch={data => console.log(data)}
     />
   )
 }

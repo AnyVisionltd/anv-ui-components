@@ -29,6 +29,11 @@
     "date": "Date",
     "search": "Search",
     "item": "Item",
-    "items": "Items"
+    "items": "Items",
+    "selected": "Selected",
+    "expandAll": "Expand All",
+    "collapseAll": "Collapse All",
+    "selectAll": "Select All",
+    "selectNone": "Select None"
   }
 }

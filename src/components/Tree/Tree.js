@@ -1,11 +1,12 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 import { Search } from '@anyvision/anv-icons'
-import { Tooltip, Checkbox, InputBase } from '../../'
+import { Checkbox, InputBase } from '../../'
 import languageService from '../../services/language'
 import useTreeVisibleData from './useTreeVisibleData'
-import { getNodeParents, getChildrenKeys } from './utils'
+import useFlattenTreeData from './useFlattenTreeData'
+import { setNodesSelectedStatus } from './utils'
 import styles from './Tree.module.scss'
 
 const getTranslation = path => languageService.getTranslation(`${path}`)
@@ -15,15 +16,16 @@ const Tree = ({
   selectedKeys,
   className,
   isSearchable,
+  isBulkActionsEnabled,
   onSearch,
   placeholder,
   onParentClick,
   onLeafClick,
   renderLeaf,
-  rightSideRenderLeaf,
+  renderLeafRightSide,
+  displayLabels,
 }) => {
-  const [selectedNodes, setSelectedNodes] = useState({})
-  const [expandedNodes, setExpandedNodes] = useState({})
+  const [singularNounLabel, pluralNounLabel] = displayLabels
 
   const {
     searchQuery,
@@ -32,17 +34,28 @@ const Tree = ({
     setFilteredData,
   } = useTreeVisibleData({ initialData: nodes, onSearch })
 
-  console.log(filteredData)
+  const {
+    flattenNodes,
+    setFlattenNodes,
+    calculateAmountOfSelectedNodes,
+  } = useFlattenTreeData({
+    data: nodes,
+    selectedKeys,
+  })
 
-  const flattenTree = () => {}
-
-  const onSetSelectedCheckboxClick = ({ key, children }, isChild) => {
+  const handleIsSelected = (node, isChild) => {
+    const { key } = node
     const onClick = isChild ? onLeafClick : onParentClick
-    const isSelected = selectedKeys.includes(key)
-    const keysToToggle = isChild ? [key] : [key, ...getChildrenKeys(children)]
+    const isCurrentlySelected = flattenNodes[key].isSelected
+    const { keys: keysToToggle } = setNodesSelectedStatus(
+      [node],
+      flattenNodes,
+      !isCurrentlySelected,
+    )
+
     let newSelectedKeys
 
-    if (isSelected) {
+    if (isCurrentlySelected) {
       newSelectedKeys = selectedKeys.filter(key => !keysToToggle.includes(key))
     } else {
       newSelectedKeys = [...new Set([...selectedKeys, ...keysToToggle])]
@@ -51,15 +64,26 @@ const Tree = ({
     onClick(newSelectedKeys)
   }
 
-  const onToggleVisibilityCheckboxClick = ({ key }) => {
-    const newExpandedNodes = { ...expandedNodes }
-    if (newExpandedNodes[key]) {
-      delete newExpandedNodes[key]
-    } else {
-      newExpandedNodes[key] = key
-    }
-    setExpandedNodes(newExpandedNodes)
+  const handleIsExpanded = ({ key }) => {
+    setFlattenNodes(prevNodes => ({
+      ...prevNodes,
+      [key]: { ...prevNodes[key], isExpanded: !prevNodes[key].isExpanded },
+    }))
   }
+
+  const handleBulkSelect = () => {}
+
+  const handleBulkExpandCollapse = useCallback(() => {
+    const newFlattenNodes = { ...flattenNodes }
+
+    Object.entries(newFlattenNodes).forEach(([key, node]) => {
+      if (Array.isArray(node.children)) {
+        node.isExpanded = true
+      }
+    })
+
+    setFlattenNodes(newFlattenNodes)
+  }, [flattenNodes, setFlattenNodes])
 
   const renderSearchInput = () => (
     <InputBase
@@ -72,10 +96,34 @@ const Tree = ({
     />
   )
 
+  const renderBulkActions = () => (
+    <div className={styles.bulkActions}>
+      <div className={styles.bulkSelectContainer}>
+        <Checkbox
+          checked={false}
+          onChange={handleBulkSelect}
+          className={styles.checkbox}
+          id='bulk-select-tree'
+        />
+        <label htmlFor='bulk-select-tree' className={styles.bulkSelectLabel}>
+          {getTranslation('selectAll')}
+        </label>
+      </div>
+      <div className={styles.bulkExpand} onClick={handleBulkExpandCollapse}>
+        {getTranslation('expandAll')}
+      </div>
+    </div>
+  )
+
   const renderParentNode = (node, layer) => {
     const { key, label, children } = node
-    const isExpanded = !!expandedNodes[key]
-    const isSelected = selectedKeys.includes(key)
+    const isExpanded = flattenNodes[key]?.isExpanded
+    const isSelected = flattenNodes[key]?.isSelected
+    const infoText = `${children.length} ${
+      children.length === 1 ? singularNounLabel : pluralNounLabel
+    } | ${calculateAmountOfSelectedNodes(key, flattenNodes)} ${getTranslation(
+      'selected',
+    )}`
 
     return (
       <div
@@ -88,7 +136,7 @@ const Tree = ({
       >
         <Checkbox
           checked={isSelected}
-          onChange={() => onSetSelectedCheckboxClick(node)}
+          onChange={() => handleIsSelected(node)}
           className={styles.isSelectedCheckbox}
         />
         <p className={styles.parentLabel}>{label}</p>
@@ -97,12 +145,10 @@ const Tree = ({
             <Checkbox
               toggled
               checked={isExpanded}
-              onChange={() => onToggleVisibilityCheckboxClick(node)}
+              onChange={() => handleIsExpanded(node)}
               className={styles.checkbox}
             />
-            <p className={styles.parentInfoText}>
-              {children.length} Cameras | {children.length} Selected
-            </p>
+            <p className={styles.parentInfoText}>{infoText}</p>
           </div>
           {isExpanded && (
             <div className={styles.parentNodeChildrenList}>
@@ -116,7 +162,7 @@ const Tree = ({
 
   const renderLeafNode = node => {
     const { key, label } = node
-    const isSelected = selectedKeys.includes(key)
+    const isSelected = flattenNodes[key]?.isSelected
 
     return renderLeaf ? (
       renderLeaf(node)
@@ -125,11 +171,12 @@ const Tree = ({
         <div className={styles.leftSideLeaf}>
           <Checkbox
             checked={isSelected}
-            onChange={() => onSetSelectedCheckboxClick(node, true)}
+            onChange={() => handleIsSelected(node, true)}
+            className={styles.checkbox}
           />
           <p className={styles.leafLabel}>{label}</p>
         </div>
-        {rightSideRenderLeaf && rightSideRenderLeaf(node)}
+        {renderLeafRightSide && renderLeafRightSide(node)}
       </div>
     )
   }
@@ -144,6 +191,7 @@ const Tree = ({
   return (
     <div className={classNames(styles.tree, className)}>
       {isSearchable && renderSearchInput()}
+      {isBulkActionsEnabled && renderBulkActions()}
       <div className={styles.nodesContainer}>
         {filteredData.map(node => renderNode(node))}
       </div>
@@ -152,13 +200,15 @@ const Tree = ({
 }
 
 Tree.defaultProps = {
-  items: [],
+  nodes: [],
   selectedKeys: [],
   onSearch: () => {},
   onParentClick: () => {},
   onLeafClick: () => {},
   placeholder: getTranslation('search'),
   displayLabels: [getTranslation('item'), getTranslation('items')],
+  isSearchable: true,
+  isBulkActionsEnabled: true,
 }
 
 Tree.propTypes = {
@@ -171,9 +221,7 @@ Tree.propTypes = {
     }),
   ),
   /** Selected nodes in the tree, each item has his unique key. */
-  selectedKeys: propTypes.arrayOf(
-    propTypes.oneOf([propTypes.number, propTypes.string]),
-  ),
+  selectedKeys: propTypes.arrayOf(propTypes.any),
   /** For css customization. */
   className: propTypes.string,
   /** Enable search. */
@@ -189,7 +237,7 @@ Tree.propTypes = {
   /** Custom render for the whole leaf node row. */
   renderLeaf: propTypes.func,
   /** Custom render for the right side of leaf node. */
-  rightSideLeafRender: propTypes.func,
+  renderLeafRightSide: propTypes.func,
   /** Display labels that describe the name in singular [0] and plural [1] nouns, default is ['Item', 'Items']. */
   displayLabels: propTypes.arrayOf(propTypes.string),
 }
