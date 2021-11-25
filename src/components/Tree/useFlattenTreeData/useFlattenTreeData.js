@@ -1,33 +1,33 @@
 import { useState, useCallback, useEffect } from 'react'
 
 const useFlattenTreeData = ({ data, selectedKeys = [] }) => {
-  const [flattenNodes, setFlattenNodes] = useState({})
+  const [flattenedNodes, setFlattenedNodes] = useState({})
 
   const amountOfSelectedNodes = useCallback(() => {
-    if (!Object.keys(flattenNodes).length) {
+    if (!Object.keys(flattenedNodes).length) {
       return () => {}
     }
-    const memo = new Map()
+    const nodeKeysMap = new Map()
 
     const calculateAmountOfSelectedNodes = nodeKey => {
-      if (memo.has(nodeKey)) return memo.get(nodeKey)
-      const { isSelected, children } = flattenNodes[nodeKey]
+      if (nodeKeysMap.has(nodeKey)) return nodeKeysMap.get(nodeKey)
+      const { isSelected, children } = flattenedNodes[nodeKey]
       if (children) {
         let selectedAmount = 0
         children.forEach(({ key }) => {
           selectedAmount += calculateAmountOfSelectedNodes(key)
         })
-        memo.set(nodeKey, selectedAmount)
+        nodeKeysMap.set(nodeKey, selectedAmount)
         return selectedAmount
       } else {
         const amount = isSelected ? 1 : 0
-        memo.set(nodeKey, amount)
+        nodeKeysMap.set(nodeKey, amount)
         return amount
       }
     }
 
     return nodeKey => calculateAmountOfSelectedNodes(nodeKey)
-  }, [flattenNodes])
+  }, [flattenedNodes])
 
   const flattenTreeData = useCallback(
     (treeData, selectedKeysSet, layer = 0) => {
@@ -66,13 +66,13 @@ const useFlattenTreeData = ({ data, selectedKeys = [] }) => {
   )
 
   useEffect(() => {
-    setFlattenNodes(flattenTreeData(data, new Set(selectedKeys)))
+    setFlattenedNodes(flattenTreeData(data, new Set(selectedKeys)))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data])
 
   return {
-    flattenNodes,
-    setFlattenNodes,
+    flattenedNodes,
+    setFlattenedNodes,
     calculateAmountOfSelectedNodes: amountOfSelectedNodes(),
   }
 }

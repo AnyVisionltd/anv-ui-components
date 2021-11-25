@@ -35,8 +35,8 @@ const Tree = ({
   } = useTreeVisibleData({ initialData: nodes, onSearch })
 
   const {
-    flattenNodes,
-    setFlattenNodes,
+    flattenedNodes,
+    setFlattenedNodes,
     calculateAmountOfSelectedNodes,
   } = useFlattenTreeData({
     data: nodes,
@@ -46,17 +46,18 @@ const Tree = ({
   const handleIsSelected = (node, isChild) => {
     const { key } = node
     const onClick = isChild ? onLeafClick : onParentClick
-    const isCurrentlySelected = flattenNodes[key].isSelected
+    const isCurrentlySelected = flattenedNodes[key].isSelected
     const { keys: keysToToggle } = setNodesSelectedStatus(
       [node],
-      flattenNodes,
+      flattenedNodes,
       !isCurrentlySelected,
     )
 
     let newSelectedKeys
 
     if (isCurrentlySelected) {
-      newSelectedKeys = selectedKeys.filter(key => !keysToToggle.includes(key))
+      const keysToToggleSet = new Set(keysToToggle)
+      newSelectedKeys = selectedKeys.filter(key => !keysToToggleSet.has(key))
     } else {
       newSelectedKeys = [...new Set([...selectedKeys, ...keysToToggle])]
     }
@@ -65,7 +66,7 @@ const Tree = ({
   }
 
   const handleIsExpanded = ({ key }) => {
-    setFlattenNodes(prevNodes => ({
+    setFlattenedNodes(prevNodes => ({
       ...prevNodes,
       [key]: { ...prevNodes[key], isExpanded: !prevNodes[key].isExpanded },
     }))
@@ -74,7 +75,7 @@ const Tree = ({
   const handleBulkSelect = () => {}
 
   const handleBulkExpandCollapse = useCallback(() => {
-    const newFlattenNodes = { ...flattenNodes }
+    const newFlattenNodes = { ...flattenedNodes }
 
     Object.entries(newFlattenNodes).forEach(([key, node]) => {
       if (Array.isArray(node.children)) {
@@ -82,8 +83,8 @@ const Tree = ({
       }
     })
 
-    setFlattenNodes(newFlattenNodes)
-  }, [flattenNodes, setFlattenNodes])
+    setFlattenedNodes(newFlattenNodes)
+  }, [flattenedNodes, setFlattenedNodes])
 
   const renderSearchInput = () => (
     <InputBase
@@ -117,11 +118,11 @@ const Tree = ({
 
   const renderParentNode = (node, layer) => {
     const { key, label, children } = node
-    const isExpanded = flattenNodes[key]?.isExpanded
-    const isSelected = flattenNodes[key]?.isSelected
+    const isExpanded = flattenedNodes[key]?.isExpanded
+    const isSelected = flattenedNodes[key]?.isSelected
     const infoText = `${children.length} ${
       children.length === 1 ? singularNounLabel : pluralNounLabel
-    } | ${calculateAmountOfSelectedNodes(key, flattenNodes)} ${getTranslation(
+    } | ${calculateAmountOfSelectedNodes(key, flattenedNodes)} ${getTranslation(
       'selected',
     )}`
 
@@ -162,7 +163,7 @@ const Tree = ({
 
   const renderLeafNode = node => {
     const { key, label } = node
-    const isSelected = flattenNodes[key]?.isSelected
+    const isSelected = flattenedNodes[key]?.isSelected
 
     return renderLeaf ? (
       renderLeaf(node)
