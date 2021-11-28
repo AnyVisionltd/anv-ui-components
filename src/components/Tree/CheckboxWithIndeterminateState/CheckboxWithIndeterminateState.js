@@ -3,7 +3,7 @@ import { ReactComponent as CheckboxAdd } from '../../../assets/svg/CheckboxAdd.s
 import { ReactComponent as CheckboxIndeterminate } from '../../../assets/svg/CheckboxIndeterminate.svg'
 import { Checkbox } from '../../Checkbox'
 
-const CheckboxWithToggledState = props => {
+const CheckboxWithIndeterminateState = props => {
   const renderIcon = checked => {
     if (checked) {
       return <CheckboxIndeterminate />
@@ -11,7 +11,7 @@ const CheckboxWithToggledState = props => {
     return <CheckboxAdd />
   }
 
-  return <Checkbox {...props} renderIcon={renderIcon} toggled />
+  return <Checkbox {...props} renderIcon={renderIcon} indeterminate />
 }
 
-export default CheckboxWithToggledState
+export default CheckboxWithIndeterminateState

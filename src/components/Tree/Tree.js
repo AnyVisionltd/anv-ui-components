@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import propTypes from 'prop-types'
 import { Search } from '@anyvision/anv-icons'
 import { Checkbox, InputBase } from '../../'
-import { CheckboxWithToggledState } from './CheckboxWithToggledState'
+import { CheckboxWithIndeterminateState } from './CheckboxWithIndeterminateState'
 import languageService from '../../services/language'
 import useTreeVisibleData from './useTreeVisibleData'
 import useFlattenTreeData from './useFlattenTreeData'
@@ -144,7 +144,7 @@ const Tree = ({
         <p className={styles.parentLabel}>{label}</p>
         <div className={styles.parentNodeContent}>
           <div className={styles.parentNodeInfo}>
-            <CheckboxWithToggledState
+            <CheckboxWithIndeterminateState
               checked={isExpanded}
               onChange={() => handleIsExpanded(node)}
               className={styles.checkbox}

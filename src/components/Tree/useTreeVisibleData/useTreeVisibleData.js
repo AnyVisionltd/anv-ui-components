@@ -27,11 +27,12 @@ const useTreeVisibleData = ({ initialData, onSearch }) => {
               setAllNodesAsVisible(node.children, node.key)
             } else {
               filterVisibleData(node.children, searchKeyword)
-              node.children.forEach(child => {
+              for (const child of node.children) {
                 if (child.visible) {
                   node.visible = child.visible
+                  break
                 }
-              })
+              }
             }
           }
         })

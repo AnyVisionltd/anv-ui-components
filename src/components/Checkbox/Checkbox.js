@@ -9,7 +9,6 @@ import styles from './Checkbox.module.scss'
 const Checkbox = ({
   checked,
   indeterminate,
-  toggled,
   disabled,
   view,
   onChange,
@@ -24,7 +23,6 @@ const Checkbox = ({
     styles.checkbox,
     checked && styles.checked,
     indeterminate && styles.indeterminate,
-    toggled && styles.toggled,
     (disabled || isView) && styles.disabled,
     className,
   )
@@ -81,8 +79,6 @@ Checkbox.propTypes = {
   className: propTypes.string,
   /** Whether the checkbox is checked, or not. */
   checked: propTypes.bool,
-  /** Whether the checkbox is toggled, or not. */
-  toggled: propTypes.bool,
   /** Whether the checkbox is indeterminate, or not. */
   indeterminate: propTypes.bool,
   /** Form control ID - for label association. */
