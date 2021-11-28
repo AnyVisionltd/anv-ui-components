@@ -4,10 +4,11 @@ export const setNodesSelectedStatus = (nodesTree, nodesMap, isSelected) => {
   const setAllSelected = nodes => {
     nodes.forEach(node => {
       const { key, children } = node
-      nodesMap[key].isSelected = isSelected
-      keys.push(key)
       if (children) {
         setAllSelected(children)
+      } else {
+        nodesMap[key].isSelected = isSelected
+        keys.push(key)
       }
     })
   }
@@ -33,24 +34,4 @@ export const checkAllNodesAreExpanded = (nodesTree, nodesMap) => {
   areAllNodesExpanded(nodesTree)
 
   return areExpanded
-}
-
-export const checkAllNodesAreSelected = (nodesTree, nodesMap) => {
-  let areSelected = true
-
-  const areAllNodesSelected = nodesTreeData => {
-    if (!Array.isArray(nodesTreeData) || !nodesTreeData.length) return
-    nodesTreeData.forEach(node => {
-      if (!areSelected) return
-      const { key, children } = node
-      if (nodesMap[key]?.isSelected) {
-        return areAllNodesSelected(children, nodesMap)
-      } else {
-        areSelected = false
-      }
-    })
-  }
-  areAllNodesSelected(nodesTree)
-
-  return areSelected
 }

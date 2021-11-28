@@ -1,25 +1,25 @@
 import { useState, useCallback, useEffect } from 'react'
-import { checkAllNodesAreExpanded, checkAllNodesAreSelected } from '../utils'
+import { checkAllNodesAreExpanded } from '../utils'
+import { ALL_ROOTS_COMBINED_KEY } from '../Tree'
 
 const useFlattenTreeData = ({ data, selectedKeys = [] }) => {
-  const [flattenNodes, setFlattenNodes] = useState({})
+  const [flattenedNodes, setFlattenedNodes] = useState({})
   const [areAllNodesExpanded, setAreAllNodesExpanded] = useState(false)
-  const [areAllNodesSelected, setAreAllNodesSelected] = useState(false)
 
   const amountOfSelectedNodesAndTotalChildren = useCallback(() => {
-    if (!Object.keys(flattenNodes).length) {
+    if (!Object.keys(flattenedNodes).length) {
       return () => ({})
     }
 
-    const memo = new Map()
+    const nodeKeysMap = new Map()
 
     const calculateAmountOfSelectedNodesAndChildren = nodeKey => {
-      if (memo.has(nodeKey)) return memo.get(nodeKey)
-      const { isSelected, children } = flattenNodes[nodeKey]
+      if (nodeKeysMap.has(nodeKey)) return nodeKeysMap.get(nodeKey)
+      const { isSelected, children } = flattenedNodes[nodeKey]
       if (children) {
         const nodeCachedValue = {
           totalChildren: children.filter(
-            nodeKey => !flattenNodes[nodeKey]?.children,
+            ({ key }) => !flattenedNodes[key]?.isParentNode,
           ).length,
           totalSelected: 0,
         }
@@ -31,7 +31,7 @@ const useFlattenTreeData = ({ data, selectedKeys = [] }) => {
           nodeCachedValue.totalChildren += totalChildren
           nodeCachedValue.totalSelected += totalSelected
         })
-        memo.set(nodeKey, nodeCachedValue)
+        nodeKeysMap.set(nodeKey, nodeCachedValue)
         return nodeCachedValue
       } else {
         return { totalChildren: 0, totalSelected: isSelected ? 1 : 0 }
@@ -39,11 +39,15 @@ const useFlattenTreeData = ({ data, selectedKeys = [] }) => {
     }
 
     return nodeKey => calculateAmountOfSelectedNodesAndChildren(nodeKey)
-  }, [flattenNodes])
+  }, [flattenedNodes])
 
   const flattenTreeData = useCallback(
     (treeData, selectedKeysSet, layer = 0) => {
-      const flattenNodesMap = {}
+      const flattenedNodesMap = {}
+      flattenedNodesMap[ALL_ROOTS_COMBINED_KEY] = {
+        key: ALL_ROOTS_COMBINED_KEY,
+        children: [],
+      }
 
       const flatten = (treeData, selectedKeysSet, layer) => {
         if (!Array.isArray(treeData) || treeData.length === 0) {
@@ -52,15 +56,20 @@ const useFlattenTreeData = ({ data, selectedKeys = [] }) => {
 
         treeData.forEach(node => {
           const { key, children, parentKey } = node
+
+          if (layer === 0) {
+            flattenedNodesMap[ALL_ROOTS_COMBINED_KEY].children.push({ key })
+          }
+
           let isSelected = false
           if (selectedKeysSet.has(key)) {
             isSelected = true
             selectedKeysSet.delete(key)
           }
 
-          const isParentSelected = flattenNodesMap[parentKey]?.isSelected
+          const isParentSelected = flattenedNodesMap[parentKey]?.isSelected
 
-          flattenNodesMap[key] = {
+          flattenedNodesMap[key] = {
             ...node,
             children: children
               ? children.map(({ key }) => ({ key }))
@@ -75,34 +84,29 @@ const useFlattenTreeData = ({ data, selectedKeys = [] }) => {
       }
 
       flatten(treeData, selectedKeysSet, layer)
-      return flattenNodesMap
+      return flattenedNodesMap
     },
     [],
   )
 
   useEffect(() => {
-    setFlattenNodes(flattenTreeData(data, new Set(selectedKeys)))
+    setFlattenedNodes(flattenTreeData(data, new Set(selectedKeys)))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data])
 
   useEffect(() => {
-    console.log(data, flattenNodes)
-    if (!Object.keys(flattenNodes).length) return
-    const areAllExpanded = checkAllNodesAreExpanded(data, flattenNodes)
-    const areAllSelected = checkAllNodesAreSelected(data, flattenNodes)
+    if (!Object.keys(flattenedNodes).length) return
+    const areAllExpanded = checkAllNodesAreExpanded(data, flattenedNodes)
 
     areAllExpanded !== areAllNodesExpanded &&
       setAreAllNodesExpanded(areAllExpanded)
-    areAllSelected !== areAllNodesSelected &&
-      setAreAllNodesSelected(areAllSelected)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [flattenNodes])
+  }, [flattenedNodes])
 
   return {
-    flattenNodes,
-    setFlattenNodes,
+    flattenedNodes,
+    setFlattenedNodes,
     calculateAmountOfSelectedNodesAndChildren: amountOfSelectedNodesAndTotalChildren(),
-    areAllNodesSelected,
     areAllNodesExpanded,
   }
 }

@@ -7,6 +7,7 @@ const useTreeVisibleData = ({ initialData, onSearch }) => {
         node.visible = true
         node.parentKey = parentKey
         if (node.children) {
+          node.isParentNode = true
           setAllVisible(node.children, node.key)
         }
       })
@@ -23,15 +24,17 @@ const useTreeVisibleData = ({ initialData, onSearch }) => {
           node.visible = node.label.toLowerCase().startsWith(searchKeyword)
           node.parentKey = parentKey
           if (Array.isArray(node.children)) {
+            node.isParentNode = true
             if (node.visible) {
               setAllNodesAsVisible(node.children, node.key)
             } else {
               filterVisibleData(node.children, searchKeyword)
-              node.children.forEach(child => {
+              for (const child of node.children) {
                 if (child.visible) {
                   node.visible = child.visible
+                  break
                 }
-              })
+              }
             }
           }
         })
