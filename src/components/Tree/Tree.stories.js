@@ -3,7 +3,7 @@ import Tree from './Tree'
 import { centerDecorator } from '../../utils/storybook/decorators'
 
 export default {
-  title: 'User Inputs/Tree',
+  title: 'Content/Tree',
   component: Tree,
   decorators: [centerDecorator],
 }
@@ -97,7 +97,7 @@ export const Basic = () => {
   const [selectedKeys, setSelectedkeys] = useState(['1', '211', '212'])
 
   const onSelect = ({ added, removed }) => {
-    // Do what is needed to be done when new nodes are selcted / unselected
+    // Do what needs to be done when new nodes are selcted / unselected
     // And then if needed:
     const newSelectedKeys = [...selectedKeys]
     newSelectedKeys.filter(key => !removed.includes(key))
