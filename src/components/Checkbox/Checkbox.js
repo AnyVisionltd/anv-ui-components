@@ -4,7 +4,6 @@ import propTypes from 'prop-types'
 import { useFormProvider } from '../../index'
 import { ReactComponent as CheckboxChecked } from '../../assets/svg/Checked.svg'
 import { ReactComponent as CheckboxIndeterminate } from '../../assets/svg/CheckboxIndeterminate.svg'
-import { ReactComponent as CheckboxAdd } from '../../assets/svg/CheckboxAdd.svg'
 import styles from './Checkbox.module.scss'
 
 const Checkbox = ({
@@ -16,6 +15,7 @@ const Checkbox = ({
   onChange,
   className,
   id,
+  renderIcon,
   ...otherProps
 }) => {
   const { isView } = useFormProvider({ view })
@@ -30,12 +30,7 @@ const Checkbox = ({
   )
 
   const renderCheckboxIcon = () => {
-    if (toggled) {
-      if (checked) {
-        return <CheckboxIndeterminate />
-      }
-      return <CheckboxAdd />
-    }
+    if (renderIcon) return renderIcon(checked)
     if (checked) {
       return <CheckboxChecked />
     }
