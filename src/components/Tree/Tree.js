@@ -20,8 +20,8 @@ const Tree = ({
   isBulkActionsEnabled,
   onSearch,
   placeholder,
-  onParentClick,
-  onLeafClick,
+  onExpand,
+  onSelect,
   renderLeaf,
   renderLeafRightSide,
   displayLabels,
@@ -46,28 +46,21 @@ const Tree = ({
   })
 
   const {
-    totalChildren: allChildrenInTree,
-    totalSelected: allSelectedInTree,
+    totalChildren: totalChildrenInTree,
+    totalSelected: totalSelectedInTree,
   } = calculateAmountOfSelectedNodesAndChildren(ALL_ROOTS_COMBINED_KEY)
-  const areAllNodesSelected = allChildrenInTree === allSelectedInTree
+  const areAllNodesSelected = totalChildrenInTree === totalSelectedInTree
 
-  const handleIsSelected = (node, isCurrentlySelected, isChild) => {
-    const onClick = isChild ? onLeafClick : onParentClick
-    const { keys: keysToToggle } = setNodesSelectedStatus(
-      [node],
-      flattenedNodes,
+  const handleIsSelected = (node, isCurrentlySelected) => {
+    const newFlattenedNodes = { ...flattenedNodes }
+    const { keys: keysToToggle, nodesMap } = setNodesSelectedStatus(
+      Array.isArray(node) ? node : [node],
+      newFlattenedNodes,
       !isCurrentlySelected,
     )
 
-    let newSelectedKeys
-
-    if (isCurrentlySelected) {
-      newSelectedKeys = selectedKeys.filter(key => !keysToToggle.includes(key))
-    } else {
-      newSelectedKeys = [...new Set([...selectedKeys, ...keysToToggle])]
-    }
-
-    onClick(newSelectedKeys)
+    setFlattenedNodes(nodesMap)
+    onSelect(keysToToggle)
   }
 
   const handleIsExpanded = ({ key }) => {
@@ -76,17 +69,6 @@ const Tree = ({
       [key]: { ...prevNodes[key], isExpanded: !prevNodes[key].isExpanded },
     }))
   }
-
-  const handleBulkSelect = useCallback(() => {
-    const newFlattenedNodes = { ...flattenedNodes }
-    const newIsSelectedValue = areAllNodesSelected ? false : true
-
-    Object.values(newFlattenedNodes).forEach(node => {
-      node.isSelected = newIsSelectedValue
-    })
-
-    setFlattenedNodes(newFlattenedNodes)
-  }, [flattenedNodes, setFlattenedNodes, areAllNodesSelected])
 
   const handleBulkExpandCollapse = useCallback(() => {
     const newFlattenedNodes = { ...flattenedNodes }
@@ -117,7 +99,7 @@ const Tree = ({
       <div className={styles.bulkSelectContainer}>
         <Checkbox
           checked={areAllNodesSelected}
-          onChange={handleBulkSelect}
+          onChange={() => handleIsSelected(filteredData, areAllNodesSelected)}
           className={styles.checkbox}
           id='bulk-select-tree'
         />
@@ -190,7 +172,7 @@ const Tree = ({
         <div className={styles.leftSideLeaf}>
           <Checkbox
             checked={isSelected}
-            onChange={() => handleIsSelected(node, isSelected, true)}
+            onChange={() => handleIsSelected(node, isSelected)}
             className={styles.checkbox}
           />
           <p className={styles.leafLabel}>{label}</p>
@@ -222,8 +204,8 @@ Tree.defaultProps = {
   nodes: [],
   selectedKeys: [],
   onSearch: () => {},
-  onParentClick: () => {},
-  onLeafClick: () => {},
+  onSelect: () => {},
+  onExpand: () => {},
   placeholder: getTranslation('search'),
   displayLabels: [getTranslation('item'), getTranslation('items')],
   isSearchable: true,
@@ -251,10 +233,10 @@ Tree.propTypes = {
   placeholder: propTypes.string,
   /** Enable bulk actions functionality. */
   isBulkActionsEnabled: propTypes.bool,
-  /** Called when parent node is clicked. */
-  onParentClick: propTypes.func,
-  /** Called when leaf node is clicked. */
-  onLeafClick: propTypes.func,
+  /** Called when a tree parent node is displayed. */
+  onExpand: propTypes.func,
+  /** Callback function after selecting / unselecteing tree node or nodes. */
+  onSelect: propTypes.func,
   /** Custom render for the whole leaf node row. */
   renderLeaf: propTypes.func,
   /** Custom render for the right side of leaf node. */

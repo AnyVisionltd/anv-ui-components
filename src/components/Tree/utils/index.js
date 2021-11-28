@@ -1,5 +1,5 @@
 export const setNodesSelectedStatus = (nodesTree, nodesMap, isSelected) => {
-  const keys = []
+  const keys = { added: [], removed: [] }
 
   const setAllSelected = nodes => {
     nodes.forEach(node => {
@@ -7,8 +7,15 @@ export const setNodesSelectedStatus = (nodesTree, nodesMap, isSelected) => {
       if (children) {
         setAllSelected(children)
       } else {
+        const previousSelectedStatus = nodesMap[key].isSelected
         nodesMap[key].isSelected = isSelected
-        keys.push(key)
+        if (isSelected !== previousSelectedStatus) {
+          if (isSelected) {
+            keys.added.push(key)
+          } else {
+            keys.removed.push(key)
+          }
+        }
       }
     })
   }
