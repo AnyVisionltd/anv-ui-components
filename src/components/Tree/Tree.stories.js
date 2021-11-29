@@ -67,6 +67,28 @@ const treeNodes = [
           },
         ],
       },
+      {
+        label: 'England',
+        key: '23',
+        children: [
+          {
+            key: '231',
+            label: 'Manchseter',
+          },
+          {
+            key: '232',
+            label: 'London',
+          },
+          {
+            key: '233',
+            label: 'Norwich',
+          },
+          {
+            key: '234',
+            label: 'Westham',
+          },
+        ],
+      },
     ],
   },
 ]
@@ -74,12 +96,19 @@ const treeNodes = [
 export const Basic = () => {
   const [selectedKeys, setSelectedkeys] = useState(['1', '211', '212'])
 
+  const onSelect = ({ added, removed }) => {
+    // Do what needs to be done when new nodes are selcted / unselected
+    // And then if needed:
+    const newSelectedKeys = [...selectedKeys]
+    newSelectedKeys.filter(key => !removed.includes(key))
+    setSelectedkeys([...newSelectedKeys, ...added])
+  }
+
   return (
     <Tree
       nodes={treeNodes}
       selectedKeys={selectedKeys}
-      onLeafClick={data => setSelectedkeys(data)}
-      onParentClick={data => setSelectedkeys(data)}
+      onSelect={onSelect}
       isSearchable
     />
   )

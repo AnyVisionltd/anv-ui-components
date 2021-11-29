@@ -1,37 +1,53 @@
 import { useState, useCallback, useEffect } from 'react'
+import { checkAllNodesAreExpanded } from '../utils'
+import { ALL_ROOTS_COMBINED_KEY } from '../Tree'
 
 const useFlattenTreeData = ({ data, selectedKeys = [] }) => {
   const [flattenedNodes, setFlattenedNodes] = useState({})
+  const [areAllNodesExpanded, setAreAllNodesExpanded] = useState(false)
 
-  const amountOfSelectedNodes = useCallback(() => {
+  const amountOfSelectedNodesAndTotalChildren = useCallback(() => {
     if (!Object.keys(flattenedNodes).length) {
-      return () => {}
+      return () => ({})
     }
+
     const nodeKeysMap = new Map()
 
-    const calculateAmountOfSelectedNodes = nodeKey => {
+    const calculateAmountOfSelectedNodesAndChildren = nodeKey => {
       if (nodeKeysMap.has(nodeKey)) return nodeKeysMap.get(nodeKey)
       const { isSelected, children } = flattenedNodes[nodeKey]
       if (children) {
-        let selectedAmount = 0
+        const nodeCachedValue = {
+          totalChildren: children.filter(
+            ({ key }) => !flattenedNodes[key]?.isParentNode,
+          ).length,
+          totalSelected: 0,
+        }
         children.forEach(({ key }) => {
-          selectedAmount += calculateAmountOfSelectedNodes(key)
+          const {
+            totalChildren,
+            totalSelected,
+          } = calculateAmountOfSelectedNodesAndChildren(key)
+          nodeCachedValue.totalChildren += totalChildren
+          nodeCachedValue.totalSelected += totalSelected
         })
-        nodeKeysMap.set(nodeKey, selectedAmount)
-        return selectedAmount
+        nodeKeysMap.set(nodeKey, nodeCachedValue)
+        return nodeCachedValue
       } else {
-        const amount = isSelected ? 1 : 0
-        nodeKeysMap.set(nodeKey, amount)
-        return amount
+        return { totalChildren: 0, totalSelected: isSelected ? 1 : 0 }
       }
     }
 
-    return nodeKey => calculateAmountOfSelectedNodes(nodeKey)
+    return nodeKey => calculateAmountOfSelectedNodesAndChildren(nodeKey)
   }, [flattenedNodes])
 
   const flattenTreeData = useCallback(
     (treeData, selectedKeysSet, layer = 0) => {
       const flattenedNodesMap = {}
+      flattenedNodesMap[ALL_ROOTS_COMBINED_KEY] = {
+        key: ALL_ROOTS_COMBINED_KEY,
+        children: [],
+      }
 
       const flatten = (treeData, selectedKeysSet, layer) => {
         if (!Array.isArray(treeData) || treeData.length === 0) {
@@ -40,6 +56,11 @@ const useFlattenTreeData = ({ data, selectedKeys = [] }) => {
 
         treeData.forEach(node => {
           const { key, children, parentKey } = node
+
+          if (layer === 0) {
+            flattenedNodesMap[ALL_ROOTS_COMBINED_KEY].children.push({ key })
+          }
+
           let isSelected = false
           if (selectedKeysSet.has(key)) {
             isSelected = true
@@ -50,6 +71,9 @@ const useFlattenTreeData = ({ data, selectedKeys = [] }) => {
 
           flattenedNodesMap[key] = {
             ...node,
+            children: children
+              ? children.map(({ key }) => ({ key }))
+              : undefined,
             layer,
             isSelected: isParentSelected ? isParentSelected : isSelected,
             isExpanded: false,
@@ -70,10 +94,20 @@ const useFlattenTreeData = ({ data, selectedKeys = [] }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data])
 
+  useEffect(() => {
+    if (!Object.keys(flattenedNodes).length) return
+    const areAllExpanded = checkAllNodesAreExpanded(data, flattenedNodes)
+
+    areAllExpanded !== areAllNodesExpanded &&
+      setAreAllNodesExpanded(areAllExpanded)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [flattenedNodes])
+
   return {
     flattenedNodes,
     setFlattenedNodes,
-    calculateAmountOfSelectedNodes: amountOfSelectedNodes(),
+    calculateAmountOfSelectedNodesAndChildren: amountOfSelectedNodesAndTotalChildren(),
+    areAllNodesExpanded,
   }
 }
 
