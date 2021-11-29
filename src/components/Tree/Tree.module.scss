@@ -75,6 +75,7 @@
   .nodesContainer {
     display: flex;
     flex-direction: column;
+    height: av-size(sz-480);
 
     .parentNode {
       align-items: center;
@@ -82,14 +83,17 @@
       grid-template-rows: min-content min-content;
       grid-template-columns: auto 1fr;
       border-radius: av-radius(tidy);
-      margin-bottom: av-space();
       transition: all 0.3s ease-in-out;
       background-color: inherit;
       border: solid 1px transparent;
+      padding: 0 av-space();
+
+      &:hover {
+        background-color: av-color(purewhite, av-opacity(ghost));
+      }
 
       &.root {
-        background-color: av-color(purewhite, av-opacity(ghost));
-        padding: av-space(tiny) av-space();
+        padding-top: av-space(micro);
       }
 
       &.isHoverBackground {
@@ -136,12 +140,6 @@
             line-height: av-size(sz-16);
           }
         }
-
-        .parentNodeChildrenList {
-          display: flex;
-          flex-direction: column;
-          margin-left: av-space(medium);
-        }
       }
     }
 
@@ -149,6 +147,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      height: av-size(sz-48);
+      padding: 0 av-space();
 
       &:hover {
         background-color: av-color(purewhite, av-opacity(divider));

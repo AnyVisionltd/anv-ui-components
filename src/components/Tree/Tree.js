@@ -1,13 +1,18 @@
-import React, { useCallback } from 'react'
+import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 import { Search } from '@anyvision/anv-icons'
 import { Checkbox, InputBase } from '../../'
 import { CheckboxWithIndeterminateState } from './CheckboxWithIndeterminateState'
+import { VirtualizedTreeList } from './VirtualizedTreeList'
 import languageService from '../../services/language'
 import useTreeVisibleData from './useTreeVisibleData'
 import useFlattenTreeData from './useFlattenTreeData'
-import { setNodesSelectedStatus } from './utils'
+import {
+  setNodesSelectedStatus,
+  setNodesExpandedStatus,
+  checkAllNodesAreExpanded,
+} from './utils'
 import styles from './Tree.module.scss'
 
 const getTranslation = path => languageService.getTranslation(`${path}`)
@@ -27,6 +32,8 @@ const Tree = ({
   renderLeafRightSide,
   displayLabels,
 }) => {
+  const [treeInstance, setTreeInstance] = useState(null)
+  const [areAllNodesExpanded, setAreAllNodesExpanded] = useState(false)
   const [singularNounLabel, pluralNounLabel] = displayLabels
 
   const {
@@ -40,7 +47,6 @@ const Tree = ({
     flattenedNodes,
     setFlattenedNodes,
     calculateAmountOfSelectedNodesAndChildren,
-    areAllNodesExpanded,
   } = useFlattenTreeData({
     data: nodes,
     selectedKeys,
@@ -64,25 +70,30 @@ const Tree = ({
     onSelect(keysToToggle)
   }
 
-  const handleIsExpanded = ({ key }) => {
-    setFlattenedNodes(prevNodes => ({
-      ...prevNodes,
-      [key]: { ...prevNodes[key], isExpanded: !prevNodes[key].isExpanded },
-    }))
+  useEffect(() => {
+    const areAllExpanded = checkAllNodesAreExpanded(
+      filteredData,
+      treeInstance?.state?.records,
+    )
+
+    areAllExpanded !== areAllNodesExpanded &&
+      setAreAllNodesExpanded(areAllExpanded)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [flattenedNodes])
+
+  const handleBulkExpandCollapse = () => {
+    if (treeInstance) {
+      const allExpandedCollapsedNodesObj = setNodesExpandedStatus(
+        filteredData,
+        !areAllNodesExpanded,
+      )
+      treeInstance.state.recomputeTree({
+        opennessState: allExpandedCollapsedNodesObj,
+        refreshNodes: true,
+      })
+      setAreAllNodesExpanded(!areAllNodesExpanded)
+    }
   }
-
-  const handleBulkExpandCollapse = useCallback(() => {
-    const newFlattenedNodes = { ...flattenedNodes }
-    const newIsExpandedValue = areAllNodesExpanded ? false : true
-
-    Object.values(newFlattenedNodes).forEach(node => {
-      if (Array.isArray(node.children)) {
-        node.isExpanded = newIsExpandedValue
-      }
-    })
-
-    setFlattenedNodes(newFlattenedNodes)
-  }, [flattenedNodes, setFlattenedNodes, areAllNodesExpanded])
 
   const renderSearchInput = () => (
     <InputBase
@@ -114,48 +125,41 @@ const Tree = ({
     </div>
   )
 
-  const renderParentNode = (node, layer) => {
+  const renderParentNode = (node, layer, virtualizedListProps) => {
     const { key, label, children } = node
+    const { isOpen, handleExpand } = virtualizedListProps
     const {
       totalSelected = 0,
       totalChildren = children.length,
     } = calculateAmountOfSelectedNodesAndChildren(key)
-    const isExpanded = flattenedNodes[key]?.isExpanded
     const isSelected = totalSelected === totalChildren
 
-    const infoText = `${children.length} ${
-      children.length === 1 ? singularNounLabel : pluralNounLabel
+    const infoText = `${totalChildren} ${
+      totalChildren === 1 ? singularNounLabel : pluralNounLabel
     } | ${totalSelected} ${getTranslation('selected')}`
 
     return (
       <div
         className={classNames(styles.parentNode, {
           [styles.root]: layer === 0,
-          [styles.isHoverBackground]: !isExpanded,
-          [styles.isNotSelected]: !isSelected,
         })}
         key={key}
       >
         <Checkbox
           checked={isSelected}
           onChange={() => handleIsSelected(node, isSelected)}
-          className={styles.isSelectedCheckbox}
+          className={classNames(styles.isSelectedCheckbox, styles.checkbox)}
         />
         <p className={styles.parentLabel}>{label}</p>
         <div className={styles.parentNodeContent}>
           <div className={styles.parentNodeInfo}>
             <CheckboxWithIndeterminateState
-              checked={isExpanded}
-              onChange={() => handleIsExpanded(node)}
+              checked={isOpen}
+              onChange={handleExpand}
               className={styles.checkbox}
             />
             <p className={styles.parentInfoText}>{infoText}</p>
           </div>
-          {isExpanded && (
-            <div className={styles.parentNodeChildrenList}>
-              {children.map(nodeChild => renderNode(nodeChild, layer + 1))}
-            </div>
-          )}
         </div>
       </div>
     )
@@ -182,10 +186,10 @@ const Tree = ({
     )
   }
 
-  const renderNode = (node, layer = 0) => {
+  const renderNode = (node, layer = 0, virtualizedListProps) => {
     const { children, visible } = node
     if (!visible) return null
-    if (children) return renderParentNode(node, layer)
+    if (children) return renderParentNode(node, layer, virtualizedListProps)
     return renderLeafNode(node)
   }
 
@@ -194,7 +198,11 @@ const Tree = ({
       {isSearchable && renderSearchInput()}
       {isBulkActionsEnabled && renderBulkActions()}
       <div className={styles.nodesContainer}>
-        {filteredData.map(node => renderNode(node))}
+        <VirtualizedTreeList
+          setTreeInstance={setTreeInstance}
+          rootNode={{ ...filteredData }}
+          renderNode={renderNode}
+        />
       </div>
     </div>
   )

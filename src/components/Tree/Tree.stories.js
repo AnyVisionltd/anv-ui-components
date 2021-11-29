@@ -91,13 +91,91 @@ const treeNodes = [
       },
     ],
   },
+  {
+    key: '3',
+    label: 'Seas and Oceans',
+    children: [
+      {
+        label: 'Pacific Ocean',
+        key: '31',
+      },
+      {
+        label: 'Atlantic Ocean',
+        key: '32',
+      },
+      {
+        label: 'Kinneret',
+        key: '33',
+      },
+      {
+        label: 'Dead Sea',
+        key: '34',
+      },
+    ],
+  },
+  {
+    key: '4',
+    label: 'Movies',
+    children: [
+      {
+        label: 'Fast and Furious',
+        key: '41',
+        children: [
+          {
+            key: '411',
+            label: 'Fast and Furious 1',
+          },
+          {
+            key: '412',
+            label: 'Fast and Furious 2',
+          },
+          {
+            key: '413',
+            label: 'Fast and Furious 3',
+          },
+          {
+            key: '414',
+            label: 'Fast and Furious 4',
+          },
+        ],
+      },
+      {
+        label: 'Avatar',
+        key: '42',
+      },
+      {
+        label: 'Titanic',
+        key: '43',
+      },
+      {
+        label: 'Superman',
+        key: '44',
+      },
+      {
+        label: 'Spiderman',
+        key: '45',
+      },
+      {
+        label: 'Avengers',
+        key: '46',
+      },
+      {
+        label: 'James Bond',
+        key: '47',
+      },
+      {
+        label: 'Shrek',
+        key: '48',
+      },
+    ],
+  },
 ]
 
 export const Basic = () => {
   const [selectedKeys, setSelectedkeys] = useState(['1', '211', '212'])
 
   const onSelect = ({ added, removed }) => {
-    // Do what needs to be done when new nodes are selcted / unselected
+    // Do what needs to be done when new nodes are selected / unselected
     // And then if needed:
     const newSelectedKeys = [...selectedKeys]
     newSelectedKeys.filter(key => !removed.includes(key))

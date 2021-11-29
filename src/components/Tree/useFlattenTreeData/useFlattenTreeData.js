@@ -1,10 +1,8 @@
 import { useState, useCallback, useEffect } from 'react'
-import { checkAllNodesAreExpanded } from '../utils'
 import { ALL_ROOTS_COMBINED_KEY } from '../Tree'
 
 const useFlattenTreeData = ({ data, selectedKeys = [] }) => {
   const [flattenedNodes, setFlattenedNodes] = useState({})
-  const [areAllNodesExpanded, setAreAllNodesExpanded] = useState(false)
 
   const amountOfSelectedNodesAndTotalChildren = useCallback(() => {
     if (!Object.keys(flattenedNodes).length) {
@@ -94,20 +92,10 @@ const useFlattenTreeData = ({ data, selectedKeys = [] }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data])
 
-  useEffect(() => {
-    if (!Object.keys(flattenedNodes).length) return
-    const areAllExpanded = checkAllNodesAreExpanded(data, flattenedNodes)
-
-    areAllExpanded !== areAllNodesExpanded &&
-      setAreAllNodesExpanded(areAllExpanded)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [flattenedNodes])
-
   return {
     flattenedNodes,
     setFlattenedNodes,
     calculateAmountOfSelectedNodesAndChildren: amountOfSelectedNodesAndTotalChildren(),
-    areAllNodesExpanded,
   }
 }
 
