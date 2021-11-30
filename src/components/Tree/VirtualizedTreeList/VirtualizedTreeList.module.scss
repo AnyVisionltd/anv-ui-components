@@ -1,0 +1,9 @@
+@import '~@anyvision/style-guide';
+
+.virtualizedTree {
+  @extend %av-scrollbar;
+
+  &::-webkit-scrollbar-thumb {
+    background-color: av-color(purewhite, av-opacity(medium));
+  }
+}
