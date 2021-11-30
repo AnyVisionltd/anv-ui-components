@@ -5,9 +5,9 @@ import AutoSizer from 'react-virtualized-auto-sizer'
 import styles from './VirtualizedTreeList.module.scss'
 
 const TREE_NODE_PADDING = 24
-const CONTAINER_RIGHT_PADDING = 16
+const SCROLLBAR_WIDTH = 16
 const LEAF_NODE_HEIGHT = 48
-const PARENT_NODE_HEIGHT = 82
+const PARENT_NODE_HEIGHT = 78
 
 const Node = ({
   data,
@@ -24,7 +24,7 @@ const Node = ({
   const paddingLeft = 2 * TREE_NODE_PADDING * nestingLevel
   const additionalStyle = {
     paddingLeft,
-    maxWidth: maxContainerWidth - paddingLeft - CONTAINER_RIGHT_PADDING,
+    maxWidth: maxContainerWidth - paddingLeft - SCROLLBAR_WIDTH,
   }
 
   return (
@@ -46,7 +46,7 @@ const buildTreeWalker = rootNode =>
       node,
     }))
 
-    while (stack.length !== 0) {
+    while (stack.length) {
       const { node, nestingLevel } = stack.shift()
       const { isParentNode, key, label, children, visible } = node
 
@@ -96,7 +96,6 @@ const VirtualizedTreeList = ({ setTreeInstance, rootNode, renderNode }) => (
 )
 
 VirtualizedTreeList.defaultProps = {
-  rootNode: {},
   renderNode: () => {},
   setTreeInstance: () => {},
 }

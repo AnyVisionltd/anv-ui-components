@@ -4,6 +4,6 @@
   @extend %av-scrollbar;
 
   &::-webkit-scrollbar-thumb {
-    background-color: av-color(purewhite, av-opacity(medium));
+    background-color: av-color(purewhite, av-opacity(divider));
   }
 }
