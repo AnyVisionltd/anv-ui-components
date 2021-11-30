@@ -46,7 +46,7 @@ const buildTreeWalker = rootNode =>
       node,
     }))
 
-    while (stack.length !== 0) {
+    while (stack.length) {
       const { node, nestingLevel } = stack.shift()
       const { isParentNode, key, label, children, visible } = node
 
@@ -96,7 +96,6 @@ const VirtualizedTreeList = ({ setTreeInstance, rootNode, renderNode }) => (
 )
 
 VirtualizedTreeList.defaultProps = {
-  rootNode: {},
   renderNode: () => {},
   setTreeInstance: () => {},
 }
