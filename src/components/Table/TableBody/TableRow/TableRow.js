@@ -26,6 +26,7 @@ const TableRow = ({
   toggleSelectedItem,
   columnManagement,
   selectionEnabled,
+  menuClassName,
 }) => {
   const [actionsAnchorElement, setActionsAnchorElement] = useState(null)
   const [isHover, setIsHover] = useState(false)
@@ -74,6 +75,7 @@ const TableRow = ({
     return (
       <>
         <Menu
+          className={menuClassName}
           anchorElement={actionsAnchorElement}
           isOpen={!!actionsAnchorElement}
           preferOpenDirection='left-start'
@@ -273,6 +275,7 @@ TableRow.propTypes = {
   onRowClick: propTypes.func,
   selectionEnabled: propTypes.bool,
   isSelectionActive: propTypes.bool,
+  menuClassName: propTypes.string,
 }
 
 export default memo(TableRow)
