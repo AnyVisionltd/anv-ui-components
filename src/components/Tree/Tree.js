@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 import { Search } from '@anyvision/anv-icons'
@@ -33,7 +33,6 @@ const Tree = ({
   renderLeaf,
   renderLeafRightSide,
   displayLabels,
-  showRootNodeMenu,
   rootNodeActions,
 }) => {
   const [treeInstance, setTreeInstance] = useState(null)
@@ -45,10 +44,6 @@ const Tree = ({
     handleSearch,
     filteredData,
     resetSearchData,
-    searchInputRef,
-    specificNodeSearchData,
-    setSpecificNodeSearchData,
-    handleSpecificNodeSearchData,
   } = useTreeVisibleData({ initialData: nodes, onSearch, treeInstance })
 
   const {
@@ -103,21 +98,8 @@ const Tree = ({
     }
   }
 
-  const menuActions = useMemo(
-    () => [
-      {
-        label: getTranslation('search'),
-        onClick: handleSpecificNodeSearchData,
-        icon: <Search />,
-      },
-      ...rootNodeActions,
-    ],
-    [rootNodeActions, handleSpecificNodeSearchData],
-  )
-
   const isTreeEmpty = () => {
     if (!searchQuery) return false
-    if (specificNodeSearchData) return !specificNodeSearchData.visible
     return !filteredData.some(node => node.visible)
   }
 
@@ -129,8 +111,6 @@ const Tree = ({
       trailingIconClassName={styles.searchIcon}
       onChange={handleSearch}
       value={searchQuery}
-      ref={searchInputRef}
-      onBlur={() => !!specificNodeSearchData && setSpecificNodeSearchData(null)}
     />
   )
 
@@ -214,20 +194,18 @@ const Tree = ({
   const renderNode = (node, layer, virtualizedListProps) => {
     const { children, visible } = node
     if (!visible) return null
-    if (children) {
-      if (layer === 0 && showRootNodeMenu) {
-        return (
-          <RootNode
-            renderNode={rootNodeProps =>
-              renderParentNode(node, virtualizedListProps, rootNodeProps)
-            }
-            menuActions={menuActions}
-          />
-        )
-      }
-      return renderParentNode(node, virtualizedListProps)
+    if (!children) return renderLeafNode(node)
+    if (layer === 0 && rootNodeActions.length) {
+      return (
+        <RootNode
+          renderNode={rootNodeProps =>
+            renderParentNode(node, virtualizedListProps, rootNodeProps)
+          }
+          menuActions={rootNodeActions}
+        />
+      )
     }
-    return renderLeafNode(node)
+    return renderParentNode(node, virtualizedListProps)
   }
 
   return (
@@ -238,11 +216,7 @@ const Tree = ({
         {isTreeEmpty() && <EmptyTreeSearch onClearSearch={resetSearchData} />}
         <VirtualizedTreeList
           setTreeInstance={setTreeInstance}
-          rootNode={
-            !!specificNodeSearchData
-              ? { specificNodeSearchData }
-              : { ...filteredData }
-          }
+          rootNode={{ ...filteredData }}
           renderNode={renderNode}
         />
       </div>
@@ -260,7 +234,6 @@ Tree.defaultProps = {
   displayLabels: [getTranslation('item'), getTranslation('items')],
   isSearchable: true,
   isBulkActionsEnabled: true,
-  showRootNodeMenu: true,
   rootNodeActions: [],
 }
 
@@ -295,9 +268,6 @@ Tree.propTypes = {
   renderLeafRightSide: propTypes.func,
   /** Display labels that describe the name in singular [0] and plural [1] nouns, default is ['Item', 'Items']. */
   displayLabels: propTypes.arrayOf(propTypes.string),
-  /** Wether to show rootNode menu or not, default is true,
-   *  and each root node has a targeted search action that searches items inside the root. */
-  showRootNodeMenu: propTypes.bool,
   /** If passed, menu will be rendered for each main root node in the tree, in addition to search action. */
   rootNodeActions: propTypes.arrayOf(
     propTypes.shape({

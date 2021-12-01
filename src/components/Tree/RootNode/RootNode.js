@@ -15,7 +15,7 @@ const RootNode = ({ renderNode, menuActions }) => {
   const renderActions = node => {
     if (!menuActions) return
     const activeNodeActions = menuActions.filter(
-      ({ hidden }) => !hidden || !hidden(node),
+      ({ hidden }) => !hidden?.(node),
     )
     return (
       <>

@@ -1,4 +1,4 @@
-import { useCallback, useState, useRef } from 'react'
+import { useCallback, useState } from 'react'
 
 const useTreeVisibleData = ({ initialData, onSearch, treeInstance }) => {
   const setAllNodesAsVisible = useCallback((data, parentKey = null) => {
@@ -45,41 +45,20 @@ const useTreeVisibleData = ({ initialData, onSearch, treeInstance }) => {
     [setAllNodesAsVisible],
   )
 
-  const searchInputRef = useRef()
   const [searchQuery, setSearchQuery] = useState('')
   const [filteredData, setFilteredData] = useState(
     filterVisibleData(initialData, searchQuery.trim().toLowerCase()),
   )
-  const [specificNodeSearchData, setSpecificNodeSearchData] = useState(null)
-
-  const handleSpecificNodeSearchData = useCallback(
-    node => {
-      setSpecificNodeSearchData(node)
-      searchInputRef.current?.focus()
-      treeInstance?.state.recomputeTree({
-        opennessState: { [node.key]: true },
-        refreshNodes: true,
-      })
-    },
-    [treeInstance],
-  )
 
   const handleResetSearchData = useCallback(() => {
     setSearchQuery('')
-    if (!!specificNodeSearchData) {
-      setAllNodesAsVisible([specificNodeSearchData])
-    } else {
-      setAllNodesAsVisible(filteredData)
-    }
-  }, [filteredData, setAllNodesAsVisible, specificNodeSearchData])
+    setAllNodesAsVisible(filteredData)
+  }, [filteredData, setAllNodesAsVisible])
 
   const handleSearch = ({ target: { value } }) => {
     setSearchQuery(value)
     onSearch(value)
     const searchKeyword = value.trim().toLowerCase()
-
-    if (!!specificNodeSearchData)
-      return filterVisibleData([specificNodeSearchData], searchKeyword)
 
     if (!searchKeyword) {
       setFilteredData(setAllNodesAsVisible(initialData))
@@ -97,10 +76,6 @@ const useTreeVisibleData = ({ initialData, onSearch, treeInstance }) => {
     filteredData,
     resetSearchData: handleResetSearchData,
     handleSearch,
-    searchInputRef,
-    specificNodeSearchData,
-    setSpecificNodeSearchData,
-    handleSpecificNodeSearchData,
   }
 }
 
