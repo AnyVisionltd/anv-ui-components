@@ -5,6 +5,7 @@ import { Search } from '@anyvision/anv-icons'
 import { Checkbox, InputBase } from '../../'
 import { CheckboxWithIndeterminateState } from './CheckboxWithIndeterminateState'
 import { VirtualizedTreeList } from './VirtualizedTreeList'
+import { EmptyTreeSearch } from './EmptyTreeSearch'
 import languageService from '../../services/language'
 import useTreeVisibleData from './useTreeVisibleData'
 import useFlattenTreeData from './useFlattenTreeData'
@@ -43,7 +44,7 @@ const Tree = ({
     searchQuery,
     handleSearch,
     filteredData,
-    setFilteredData,
+    resetSearchData,
     searchInputRef,
     specificNodeSearchData,
     setSpecificNodeSearchData,
@@ -113,6 +114,12 @@ const Tree = ({
     ],
     [rootNodeActions, handleSpecificNodeSearchData],
   )
+
+  const isTreeEmpty = () => {
+    if (!searchQuery) return false
+    if (specificNodeSearchData) return !specificNodeSearchData.visible
+    return !filteredData.some(node => node.visible)
+  }
 
   const renderSearchInput = () => (
     <InputBase
@@ -214,7 +221,6 @@ const Tree = ({
             renderNode={rootNodeProps =>
               renderParentNode(node, virtualizedListProps, rootNodeProps)
             }
-            showMenu={showRootNodeMenu}
             menuActions={menuActions}
           />
         )
@@ -229,6 +235,7 @@ const Tree = ({
       {isSearchable && renderSearchInput()}
       {isBulkActionsEnabled && renderBulkActions()}
       <div className={styles.nodesContainer}>
+        {isTreeEmpty() && <EmptyTreeSearch onClearSearch={resetSearchData} />}
         <VirtualizedTreeList
           setTreeInstance={setTreeInstance}
           rootNode={

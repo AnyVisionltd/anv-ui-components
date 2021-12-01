@@ -64,12 +64,14 @@ const useTreeVisibleData = ({ initialData, onSearch, treeInstance }) => {
     [treeInstance],
   )
 
-  const handleSetFilteredData = useCallback(
-    data => {
-      setFilteredData(filterVisibleData(data, searchQuery.trim().toLowerCase()))
-    },
-    [filterVisibleData, searchQuery],
-  )
+  const handleResetSearchData = useCallback(() => {
+    setSearchQuery('')
+    if (!!specificNodeSearchData) {
+      setAllNodesAsVisible([specificNodeSearchData])
+    } else {
+      setAllNodesAsVisible(filteredData)
+    }
+  }, [filteredData, setAllNodesAsVisible, specificNodeSearchData])
 
   const handleSearch = ({ target: { value } }) => {
     setSearchQuery(value)
@@ -81,17 +83,19 @@ const useTreeVisibleData = ({ initialData, onSearch, treeInstance }) => {
 
     if (!searchKeyword) {
       setFilteredData(setAllNodesAsVisible(initialData))
-      return
+    } else {
+      setFilteredData(filterVisibleData(initialData, searchKeyword))
     }
 
-    const filteredData = filterVisibleData(initialData, searchKeyword)
-    setFilteredData(filteredData)
+    treeInstance.recomputeTree({
+      refreshNodes: true,
+    })
   }
 
   return {
     searchQuery,
     filteredData,
-    setFilteredData: handleSetFilteredData,
+    resetSearchData: handleResetSearchData,
     handleSearch,
     searchInputRef,
     specificNodeSearchData,
