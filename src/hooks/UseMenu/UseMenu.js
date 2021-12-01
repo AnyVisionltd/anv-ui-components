@@ -5,16 +5,13 @@ const useMenu = ({ onCloseMenu, onOpenMenu } = {}) => {
 
   const onClose = () => {
     setAnchorElement(null)
-    onCloseMenu && onCloseMenu()
+    onCloseMenu?.()
   }
 
   const onAnchorClick = event => {
     event.stopPropagation()
-    // eslint-disable-next-line no-unused-expressions
-    anchorElement
-      ? setAnchorElement(null)
-      : setAnchorElement(event.currentTarget)
-    onOpenMenu && onOpenMenu()
+    setAnchorElement(anchorElement ? null : event.currentTarget)
+    onOpenMenu?.()
   }
 
   return {

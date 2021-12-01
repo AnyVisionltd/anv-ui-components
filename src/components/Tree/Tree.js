@@ -188,20 +188,18 @@ const Tree = ({
   const renderNode = (node, layer, virtualizedListProps) => {
     const { children, visible } = node
     if (!visible) return null
-    if (children) {
-      if (layer === 0 && rootNodeActions.length) {
-        return (
-          <RootNode
-            renderNode={rootNodeProps =>
-              renderParentNode(node, virtualizedListProps, rootNodeProps)
-            }
-            menuActions={rootNodeActions}
-          />
-        )
-      }
-      return renderParentNode(node, virtualizedListProps)
+    if (!children) return renderLeafNode(node)
+    if (layer === 0 && rootNodeActions.length) {
+      return (
+        <RootNode
+          renderNode={rootNodeProps =>
+            renderParentNode(node, virtualizedListProps, rootNodeProps)
+          }
+          menuActions={rootNodeActions}
+        />
+      )
     }
-    return renderLeafNode(node)
+    return renderParentNode(node, virtualizedListProps)
   }
 
   return (
