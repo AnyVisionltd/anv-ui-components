@@ -80,7 +80,7 @@ describe('<Tree/>', () => {
     expect(onSearch).toBeCalled()
   })
 
-  test('no results indication should appear when user types a search query that doesnt match any item in tree', async () => {
+  test('no results indication should appear when user types a search query that doesn`t match any item in tree', async () => {
     const { getByRole, getByText } = render(<Tree nodes={treeNodes} />)
 
     const searchInput = getByRole('textbox')
@@ -106,7 +106,6 @@ describe('<Tree/>', () => {
     const { getAllByRole } = render(<Tree selectedKeys={selectedKeys} />)
     const checkboxes = getAllByRole('checkbox')
     const bulkSelectCheckbox = checkboxes[0]
-    console.log(bulkSelectCheckbox)
 
     await waitFor(() => expect(bulkSelectCheckbox.checked).toBe(true))
   })
