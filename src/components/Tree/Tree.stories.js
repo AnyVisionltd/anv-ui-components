@@ -212,7 +212,6 @@ export const Basic = () => {
       nodes={treeNodes}
       selectedKeys={selectedKeys}
       onSelect={onSelect}
-      isSearchable
       rootNodeActions={rootNodeActions}
     />
   )
