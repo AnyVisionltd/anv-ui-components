@@ -8,6 +8,7 @@ import { VirtualizedTreeList } from './VirtualizedTreeList'
 import languageService from '../../services/language'
 import useTreeVisibleData from './useTreeVisibleData'
 import useFlattenTreeData from './useFlattenTreeData'
+import { RootNode } from './RootNode'
 import {
   setNodesSelectedStatus,
   setNodesExpandedStatus,
@@ -31,6 +32,7 @@ const Tree = ({
   renderLeaf,
   renderLeafRightSide,
   displayLabels,
+  rootNodeActions,
 }) => {
   const [treeInstance, setTreeInstance] = useState(null)
   const [areAllNodesExpanded, setAreAllNodesExpanded] = useState(false)
@@ -41,7 +43,7 @@ const Tree = ({
     handleSearch,
     filteredData,
     setFilteredData,
-  } = useTreeVisibleData({ initialData: nodes, onSearch })
+  } = useTreeVisibleData({ initialData: nodes, onSearch, treeInstance })
 
   const {
     flattenedNodes,
@@ -125,9 +127,10 @@ const Tree = ({
     </div>
   )
 
-  const renderParentNode = (node, layer, virtualizedListProps) => {
+  const renderParentNode = (node, virtualizedListProps, rootNodeProps = {}) => {
     const { key, label, children } = node
     const { isOpen, handleExpand } = virtualizedListProps
+    const { renderActions } = rootNodeProps
     const {
       totalSelected = 0,
       totalChildren = children.length,
@@ -139,12 +142,7 @@ const Tree = ({
     } | ${totalSelected} ${getTranslation('selected')}`
 
     return (
-      <div
-        className={classNames(styles.parentNode, {
-          [styles.root]: layer === 0,
-        })}
-        key={key}
-      >
+      <div className={styles.parentNode} key={key}>
         <Checkbox
           checked={isSelected}
           onChange={() => handleIsSelected(node, isSelected)}
@@ -161,6 +159,7 @@ const Tree = ({
             <p className={styles.parentInfoText}>{infoText}</p>
           </div>
         </div>
+        {!!renderActions && renderActions(node)}
       </div>
     )
   }
@@ -186,11 +185,21 @@ const Tree = ({
     )
   }
 
-  const renderNode = (node, layer = 0, virtualizedListProps) => {
+  const renderNode = (node, layer, virtualizedListProps) => {
     const { children, visible } = node
     if (!visible) return null
-    if (children) return renderParentNode(node, layer, virtualizedListProps)
-    return renderLeafNode(node)
+    if (!children) return renderLeafNode(node)
+    if (layer === 0 && rootNodeActions.length) {
+      return (
+        <RootNode
+          renderNode={rootNodeProps =>
+            renderParentNode(node, virtualizedListProps, rootNodeProps)
+          }
+          menuActions={rootNodeActions}
+        />
+      )
+    }
+    return renderParentNode(node, virtualizedListProps)
   }
 
   return (
@@ -218,6 +227,7 @@ Tree.defaultProps = {
   displayLabels: [getTranslation('item'), getTranslation('items')],
   isSearchable: true,
   isBulkActionsEnabled: true,
+  rootNodeActions: [],
 }
 
 Tree.propTypes = {
@@ -251,6 +261,19 @@ Tree.propTypes = {
   renderLeafRightSide: propTypes.func,
   /** Display labels that describe the name in singular [0] and plural [1] nouns, default is ['Item', 'Items']. */
   displayLabels: propTypes.arrayOf(propTypes.string),
+  /** If passed, menu will be rendered for each main root node in the tree, in addition to search action. */
+  rootNodeActions: propTypes.arrayOf(
+    propTypes.shape({
+      /** The label to render inside the <Menu.Items/>. */
+      label: propTypes.string,
+      /** The icon to render before the label. */
+      icon: propTypes.node,
+      /** The callback when click the <Menu.Items/> */
+      onClick: propTypes.func,
+      /** A callback function that returns a bool value that determines if the specific root's action should be rendered */
+      hidden: propTypes.func,
+    }),
+  ),
 }
 
 export default Tree

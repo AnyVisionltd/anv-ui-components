@@ -16,6 +16,11 @@
     height: av-size(sz-40);
     margin-bottom: av-space();
     border: solid 1px av-color(purewhite, av-opacity(divider));
+    transition: all 0.3s ease-in-out;
+
+    &:focus-within {
+      border-color: av-color(primary, av-opacity(medium));
+    }
 
     input {
       width: 100%;
@@ -87,13 +92,14 @@
       background-color: inherit;
       border: solid 1px transparent;
       padding: 0 av-space();
+      position: relative;
 
       &:hover {
         background-color: av-color(purewhite, av-opacity(ghost));
-      }
 
-      &.root {
-        padding-top: av-space(micro);
+        > div[class*='actionsCell'] {
+          opacity: 1;
+        }
       }
 
       &.isHoverBackground {
@@ -149,6 +155,7 @@
       justify-content: space-between;
       height: av-size(sz-48);
       padding: 0 av-space();
+      transition: all 0.3s ease-in-out;
 
       &:hover {
         background-color: av-color(purewhite, av-opacity(divider));

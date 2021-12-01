@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 
-const useTreeVisibleData = ({ initialData, onSearch }) => {
+const useTreeVisibleData = ({ initialData, onSearch, treeInstance }) => {
   const setAllNodesAsVisible = useCallback((data, parentKey = null) => {
     const setAllVisible = nodes => {
       nodes.forEach(node => {
@@ -59,24 +59,17 @@ const useTreeVisibleData = ({ initialData, onSearch }) => {
 
   const handleSearch = ({ target: { value } }) => {
     setSearchQuery(value)
+    onSearch(value)
     const searchKeyword = value.trim().toLowerCase()
 
     if (!searchKeyword) {
       setFilteredData(setAllNodesAsVisible(initialData))
-      onSearch({
-        searchKeyword,
-        shouldDisplayAll: true,
-        displayedNodes: initialData,
-      })
-      return
+    } else {
+      setFilteredData(filterVisibleData(initialData, searchKeyword))
     }
 
-    const filteredData = filterVisibleData(initialData, searchKeyword)
-    setFilteredData(filteredData)
-    onSearch({
-      searchKeyword,
-      shouldDisplayAll: false,
-      displayedNodes: filteredData,
+    treeInstance.recomputeTree({
+      refreshNodes: true,
     })
   }
 

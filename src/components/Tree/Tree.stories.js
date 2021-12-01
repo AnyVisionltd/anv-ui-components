@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
-import Tree from './Tree'
+import React, { useState, useMemo } from 'react'
+import { action } from '@storybook/addon-actions'
+import { PencilEdit, Search, ListAdd } from '@anyvision/anv-icons'
 import { centerDecorator } from '../../utils/storybook/decorators'
+import Tree from './Tree'
 
 export default {
   title: 'Content/Tree',
@@ -182,12 +184,36 @@ export const Basic = () => {
     setSelectedkeys([...newSelectedKeys, ...added])
   }
 
+  const rootNodeActions = useMemo(
+    () => [
+      {
+        label: 'Search',
+        onClick: action('Search action clicked'),
+        icon: <Search />,
+      },
+      {
+        label: 'Edit',
+        onClick: action('Edit action clicked'),
+        icon: <PencilEdit />,
+        hidden: node => node.label === 'Movies',
+      },
+      {
+        label: 'Create',
+        onClick: action('Create action clicked'),
+        icon: <ListAdd />,
+        hidden: node => node.children.length > 3,
+      },
+    ],
+    [],
+  )
+
   return (
     <Tree
       nodes={treeNodes}
       selectedKeys={selectedKeys}
       onSelect={onSelect}
       isSearchable
+      rootNodeActions={rootNodeActions}
     />
   )
 }

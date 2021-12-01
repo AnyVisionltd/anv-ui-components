@@ -1,0 +1,21 @@
+@import '~@anyvision/style-guide';
+
+.menu {
+  background: av-color(primary);
+  color: av-color(purewhite);
+}
+
+.actionsCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: av-space(tiny);
+  top: av-space(tiny);
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+
+  .actionButton {
+    color: av-color(purewhite);
+  }
+}
