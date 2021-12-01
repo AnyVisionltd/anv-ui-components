@@ -229,7 +229,6 @@ Tree.defaultProps = {
   displayLabels: [getTranslation('item'), getTranslation('items')],
   isSearchable: true,
   isBulkActionsEnabled: true,
-  showRootNodeMenu: true,
   rootNodeActions: [],
 }
 
