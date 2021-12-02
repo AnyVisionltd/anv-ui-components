@@ -12,6 +12,8 @@
   svg {
     margin-bottom: av-space();
     fill: av-color(purewhite, av-opacity(medium));
+    height: av-size(sz-96);
+    width: av-size(sz-96);
   }
 
   .noResultsText {
