@@ -6,46 +6,35 @@ import { ReactComponent as CloseIcon } from '../../assets/svg/Close.svg'
 import styles from './ToastMessage.module.scss'
 import toastMessageTypeMapper from './ToastMessage.utils'
 
-const ToastMessage = ({
-                        message,
-                        type,
-                        isUndo,
-                        undoCallback,
-                        closeIcon,
-                        isOpen,
-                        className,
-                        onClose,
-                      }) => {
-  // const timerHide = React.useRef()
-  //
-  // const setHideTimeout = useCallback(() => {
-  //   if (hideTimeout === null) {
-  //     return
-  //   }
-  //
-  //   clearTimeout(timerHide.current)
-  //   timerHide.current = setTimeout(() => {
-  //     onClose()
-  //   }, hideTimeout)
-  // }, [hideTimeout, onClose])
+const ToastMessage = ({ message, type, isUndo, undoCallback, closeIcon, isOpen, className, onClose, hideTimeout }) => {
+  const timerHide = React.useRef()
 
-  // useEffect(() => {
-  //   if (isOpen) {
-  //     onOpen()
-  //     // setHideTimeout()
-  //   }
-  //
-  //   return () => {
-  //     clearTimeout(timerHide.current)
-  //   }
-  // }, [isOpen, hideTimeout, setHideTimeout, onOpen])
+  const setHideTimeout = useCallback(() => {
+    if (hideTimeout === null) {
+      return
+    }
+
+    clearTimeout(timerHide.current)
+    timerHide.current = setTimeout(() => {
+      onClose()
+    }, hideTimeout)
+  }, [hideTimeout, onClose])
+
+  useEffect(() => {
+    if (isOpen) {
+      setHideTimeout()
+    }
+
+    return () => {
+      clearTimeout(timerHide.current)
+    }
+  }, [isOpen, hideTimeout, setHideTimeout])
+
 
   const toastMessageTheme = toastMessageTypeMapper(type)
 
   const renderLeadingIcon = () => (
-    <span
-      className={classNames(styles.leadingIcon, toastMessageTheme.fillColor)}
-    >
+    <span className={classNames(styles.leadingIcon, toastMessageTheme.fillColor)}>
       {toastMessageTheme.icon}
     </span>
   )
@@ -80,7 +69,8 @@ const ToastMessage = ({
   return (
     <Animations.Slide isOpen={isOpen}>
       <Portal containerId='toastMessage-portal' className={styles.portal}>
-        <div className={classes}>
+        <div className={classes} onMouseEnter={() => clearTimeout(timerHide.current)}
+             onMouseLeave={setHideTimeout}>
           <div className={styles.messageContainer}>
             {renderLeadingIcon()}
             <span>{message}</span>
@@ -99,8 +89,8 @@ ToastMessage.defaultProps = {
   type: 'info',
   isUndo: false,
   closeIcon: <CloseIcon />,
-  onClose: () => {
-  },
+  onClose: () => {},
+  hideTimeout: 5000,
 }
 
 ToastMessage.propTypes = {
@@ -124,6 +114,15 @@ ToastMessage.propTypes = {
   onClose: propTypes.func,
   /** For css customization. */
   className: propTypes.string,
+  /**
+   * The number of milliseconds to wait before automatically calling
+   * the <code>onClose</code> function.
+   * Timeout pause on hover and reset by leaving the snackbar.
+   * <code>onClose</code> should then set the state of the
+   * <code>isOpen</code> prop to hide the Snackbar.g
+   * Disable this behavior by <code>null</code> value.
+   * */
+  hideTimeout: propTypes.number,
 }
 
 export default ToastMessage

@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent, waitFor } from '@testing-library/react'
+import { render, fireEvent, waitFor, screen } from '@testing-library/react'
 import ToastMessage from './ToastMessage'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
 
@@ -37,13 +37,6 @@ describe('<ToastMessage />', () => {
       )
       expect(container).toMatchSnapshot()
     })
-
-    it('should render action', () => {
-      const { container } = render(
-        <ToastMessage message='test message' isOpen action='action' />,
-      )
-      expect(container).toMatchSnapshot()
-    })
   })
 
   describe('Closing events', () => {
@@ -55,6 +48,59 @@ describe('<ToastMessage />', () => {
       const node = getByRole('button')
       fireEvent.click(node)
       expect(onClose).toHaveBeenCalledTimes(1)
+    })
+
+    it('should fire onClose after hideTimeout', async () => {
+      const onClose = jest.fn()
+      render(
+        <ToastMessage
+          message='test message'
+          isOpen
+          onClose={onClose}
+          hideTimeout={1}
+        />,
+      )
+      await waitFor(() => expect(onClose).toHaveBeenCalledTimes(1))
+    })
+
+    it('should NOT fire onClose after hideTimeout', async () => {
+      const onClose = jest.fn()
+      const { container } = render(
+        <ToastMessage
+          message='test message'
+          isOpen
+          onClose={onClose}
+          hideTimeout={1}
+        />,
+      )
+      const node = container.firstChild.firstChild
+      fireEvent.mouseEnter(node)
+      await waitFor(() => expect(onClose).toHaveBeenCalledTimes(0))
+      fireEvent.mouseLeave(node)
+      await waitFor(() => expect(onClose).toHaveBeenCalledTimes(1))
+    })
+  })
+
+  describe('Undo Button functionality', () => {
+    it('should render undo button', () => {
+      const { container } = render(
+        <ToastMessage message='test message' isOpen isUndo={true} />,
+      )
+      const node = screen.getByText('undo')
+      expect(node).toBeTruthy()
+    })
+
+    it('should render undo button and call undo callback', async () => {
+      const undoCallback = () => {
+        alert('TEST undo callback - display an alert')
+      }
+      const alertMock = jest.spyOn(window, 'alert').mockImplementation()
+      const { container } = render(
+        <ToastMessage message='test message' isOpen isUndo={true} undoCallback={undoCallback} />,
+      )
+      const node = screen.getByText('undo')
+      fireEvent.click(node)
+      await waitFor(() => expect(alertMock).toHaveBeenCalledTimes(1))
     })
   })
 })

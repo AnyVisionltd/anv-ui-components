@@ -20,7 +20,7 @@ export const Default = () => {
       <ToastMessage
         isOpen={isOpen}
         onClose={useCallback(() => setIsOpen(false), [])}
-        message='The quick brown fox jumps over the big black lazy dog'
+        message='Li Europan lingues es membres del sam familie. Lor separat existentie es un myth...'
       />
     </>
   )
