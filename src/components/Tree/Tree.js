@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 import { Search } from '@anyvision/anv-icons'
@@ -34,6 +34,8 @@ const Tree = ({
   renderLeafRightSide,
   displayLabels,
   rootNodeActions,
+  loadMoreData,
+  maxNestingLevel,
 }) => {
   const [treeInstance, setTreeInstance] = useState(null)
   const [areAllNodesExpanded, setAreAllNodesExpanded] = useState(false)
@@ -44,15 +46,18 @@ const Tree = ({
     handleSearch,
     filteredData,
     resetSearchData,
+    handleAddNewNodes,
   } = useTreeVisibleData({ initialData: nodes, onSearch, treeInstance })
 
   const {
     flattenedNodes,
     setFlattenedNodes,
     calculateAmountOfSelectedNodesAndChildren,
+    handleAddNewFlattenedNodes,
   } = useFlattenTreeData({
     data: nodes,
     selectedKeys,
+    maxNestingLevel,
   })
 
   const {
@@ -97,6 +102,18 @@ const Tree = ({
       setAreAllNodesExpanded(!areAllNodesExpanded)
     }
   }
+
+  const handleLoadMoreData = useCallback(() => {
+    const newNodes = loadMoreData()
+    if (newNodes instanceof Promise) {
+      // newNodes.then(result => {
+      //   handleAddNewNodes(result)
+      //   handleAddNewFlattenedNodes(result)
+      // })
+    } else {
+      handleAddNewNodes(newNodes)
+    }
+  }, [handleAddNewFlattenedNodes, handleAddNewNodes, loadMoreData])
 
   const isTreeEmpty = () => {
     if (!searchQuery) return false
@@ -218,6 +235,8 @@ const Tree = ({
           setTreeInstance={setTreeInstance}
           rootNode={{ ...filteredData }}
           renderNode={renderNode}
+          loadMoreData={handleLoadMoreData}
+          isSearching={!!searchQuery.length}
         />
       </div>
     </div>
@@ -235,6 +254,8 @@ Tree.defaultProps = {
   isSearchable: true,
   isBulkActionsEnabled: true,
   rootNodeActions: [],
+  loadMoreData: () => {},
+  maxNestingLevel: -1,
 }
 
 Tree.propTypes = {
@@ -281,6 +302,10 @@ Tree.propTypes = {
       hidden: propTypes.func,
     }),
   ),
+  /** A callback that is called when more data needs to be fetched. */
+  loadMoreData: propTypes.func,
+  /** Maximum nesting level of a tree to improve performance, default is -1, meaning that maxNestingLevel is undefined. */
+  maxNestingLevel: propTypes.number,
 }
 
 export default Tree

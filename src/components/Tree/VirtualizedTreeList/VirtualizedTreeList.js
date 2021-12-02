@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import propTypes from 'prop-types'
 import { VariableSizeTree as TreeList } from 'react-vtree'
 import AutoSizer from 'react-virtualized-auto-sizer'
+import { throttle } from '../../../utils'
 import styles from './VirtualizedTreeList.module.scss'
 
 const TREE_NODE_PADDING = 24
@@ -75,29 +76,61 @@ const buildTreeWalker = rootNode =>
     }
   }
 
-const VirtualizedTreeList = ({ setTreeInstance, rootNode, renderNode }) => (
-  <AutoSizer>
-    {({ height, width }) => (
-      <TreeList
-        className={styles.virtualizedTree}
-        ref={setTreeInstance}
-        itemData={{
-          renderNode,
-          maxContainerWidth: width,
-        }}
-        treeWalker={buildTreeWalker(rootNode)}
-        height={height}
-        width={width}
-      >
-        {Node}
-      </TreeList>
-    )}
-  </AutoSizer>
-)
+const VirtualizedTreeList = ({
+  setTreeInstance,
+  rootNode,
+  renderNode,
+  loadMoreData,
+  isSearching,
+}) => {
+  const innerRef = useRef()
+  const throttledLoadMoreData = useRef(throttle(loadMoreData))
+
+  const handleInfiniteScroll = (
+    { scrollOffset, scrollDirection },
+    listHeight,
+  ) => {
+    const virtualizedListHeight = innerRef.current.offsetHeight
+    if (
+      scrollDirection === 'backward' ||
+      listHeight > virtualizedListHeight ||
+      isSearching
+    )
+      return
+    if (virtualizedListHeight - 2 * listHeight <= scrollOffset) {
+      throttledLoadMoreData.current()
+    }
+  }
+
+  return (
+    <AutoSizer>
+      {({ height, width }) => (
+        <TreeList
+          className={styles.virtualizedTree}
+          ref={setTreeInstance}
+          itemData={{
+            renderNode,
+            maxContainerWidth: width,
+          }}
+          treeWalker={buildTreeWalker(rootNode)}
+          height={height}
+          width={width}
+          innerRef={innerRef}
+          onScroll={scrollPosition =>
+            handleInfiniteScroll(scrollPosition, height)
+          }
+        >
+          {Node}
+        </TreeList>
+      )}
+    </AutoSizer>
+  )
+}
 
 VirtualizedTreeList.defaultProps = {
   renderNode: () => {},
   setTreeInstance: () => {},
+  loadMoreData: () => {},
 }
 
 VirtualizedTreeList.propTypes = {
@@ -113,6 +146,10 @@ VirtualizedTreeList.propTypes = {
   renderNode: propTypes.func,
   /** Set ref to the list component, so it can be accessible in Tree component. */
   setTreeInstance: propTypes.func,
+  /** A callback that is called when more data needs to be fetched. */
+  loadMoreData: propTypes.func,
+  /** Wether user is searching or not. */
+  isSearching: propTypes.bool,
 }
 
 export default VirtualizedTreeList

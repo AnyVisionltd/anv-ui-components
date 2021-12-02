@@ -50,6 +50,17 @@ const useTreeVisibleData = ({ initialData, onSearch, treeInstance }) => {
     filterVisibleData(initialData, searchQuery.trim().toLowerCase()),
   )
 
+  const handleAddNewNodes = useCallback(
+    nodesData => {
+      setFilteredData(prev =>
+        prev.concat(
+          filterVisibleData(nodesData, searchQuery.trim().toLowerCase()),
+        ),
+      )
+    },
+    [filterVisibleData, searchQuery],
+  )
+
   const handleResetSearchData = useCallback(() => {
     setSearchQuery('')
     setAllNodesAsVisible(filteredData)
@@ -76,6 +87,7 @@ const useTreeVisibleData = ({ initialData, onSearch, treeInstance }) => {
     filteredData,
     resetSearchData: handleResetSearchData,
     handleSearch,
+    handleAddNewNodes,
   }
 }
 

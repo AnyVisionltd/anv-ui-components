@@ -18,3 +18,14 @@ export const findScrollerNodeBottom = node => {
 
   return scrollerNodeBottom
 }
+
+export const throttle = (callback, limitMs = 700) => {
+  var wait = false
+  return () => {
+    if (!wait) {
+      callback()
+      wait = true
+      setTimeout(() => (wait = false), limitMs)
+    }
+  }
+}
