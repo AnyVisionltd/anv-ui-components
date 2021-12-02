@@ -34,6 +34,8 @@
     "expandAll": "Expand All",
     "collapseAll": "Collapse All",
     "selectAll": "Select All",
-    "selectNone": "Select None"
+    "selectNone": "Select None",
+    "clearSearch": "Clear Search",
+    "listIsEmpty": "List Is Empty"
   }
 }

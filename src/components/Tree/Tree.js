@@ -5,6 +5,7 @@ import { Search } from '@anyvision/anv-icons'
 import { Checkbox, InputBase } from '../../'
 import { CheckboxWithIndeterminateState } from './CheckboxWithIndeterminateState'
 import { VirtualizedTreeList } from './VirtualizedTreeList'
+import { EmptyTreeSearch } from './EmptyTreeSearch'
 import languageService from '../../services/language'
 import useTreeVisibleData from './useTreeVisibleData'
 import useFlattenTreeData from './useFlattenTreeData'
@@ -13,6 +14,7 @@ import {
   setNodesSelectedStatus,
   setNodesExpandedStatus,
   checkAllNodesAreExpanded,
+  emptyListTypes,
 } from './utils'
 import styles from './Tree.module.scss'
 
@@ -33,6 +35,7 @@ const Tree = ({
   renderLeafRightSide,
   displayLabels,
   rootNodeActions,
+  noItemsMessage,
 }) => {
   const [treeInstance, setTreeInstance] = useState(null)
   const [areAllNodesExpanded, setAreAllNodesExpanded] = useState(false)
@@ -42,7 +45,7 @@ const Tree = ({
     searchQuery,
     handleSearch,
     filteredData,
-    setFilteredData,
+    resetSearchData,
   } = useTreeVisibleData({ initialData: nodes, onSearch, treeInstance })
 
   const {
@@ -95,6 +98,12 @@ const Tree = ({
       })
       setAreAllNodesExpanded(!areAllNodesExpanded)
     }
+  }
+
+  const isTreeEmpty = () => {
+    if (!nodes.length) return true
+    if (!searchQuery) return false
+    return !filteredData.some(node => node.visible)
   }
 
   const renderSearchInput = () => (
@@ -202,11 +211,24 @@ const Tree = ({
     return renderParentNode(node, virtualizedListProps)
   }
 
+  const isEmpty = isTreeEmpty()
+
   return (
     <div className={classNames(styles.tree, className)}>
       {isSearchable && renderSearchInput()}
-      {isBulkActionsEnabled && renderBulkActions()}
+      {isBulkActionsEnabled && !isEmpty && renderBulkActions()}
       <div className={styles.nodesContainer}>
+        {isEmpty && (
+          <EmptyTreeSearch
+            type={
+              nodes.length
+                ? emptyListTypes.NO_RESULTS_FOUND
+                : emptyListTypes.NO_ITEMS_IN_LIST
+            }
+            onClearSearch={resetSearchData}
+            noItemsMessage={noItemsMessage}
+          />
+        )}
         <VirtualizedTreeList
           setTreeInstance={setTreeInstance}
           rootNode={{ ...filteredData }}
@@ -228,6 +250,7 @@ Tree.defaultProps = {
   isSearchable: true,
   isBulkActionsEnabled: true,
   rootNodeActions: [],
+  noItemsMessage: getTranslation('listIsEmpty'),
 }
 
 Tree.propTypes = {
@@ -274,6 +297,8 @@ Tree.propTypes = {
       hidden: propTypes.func,
     }),
   ),
+  /** Text to display when there are no items in tree. */
+  noItemsMessage: propTypes.string,
 }
 
 export default Tree
