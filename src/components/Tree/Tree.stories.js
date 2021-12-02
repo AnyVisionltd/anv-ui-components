@@ -234,7 +234,7 @@ export const Basic = () => {
   const loadMoreNodes = () =>
     new Promise(resolve => {
       setTimeout(() => {
-        resolve([...createTestRootNodes(10)])
+        resolve([...createTestRootNodes(15)])
       }, 500)
     })
 

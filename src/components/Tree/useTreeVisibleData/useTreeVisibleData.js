@@ -76,9 +76,9 @@ const useTreeVisibleData = ({ initialData, onSearch, treeInstance }) => {
     const searchKeyword = value.trim().toLowerCase()
 
     if (!searchKeyword) {
-      setFilteredData(setAllNodesAsVisible(initialData))
+      setFilteredData(setAllNodesAsVisible(filteredData))
     } else {
-      setFilteredData(filterVisibleData(initialData, searchKeyword))
+      setFilteredData(filterVisibleData(filteredData, searchKeyword))
     }
 
     treeInstance.recomputeTree({

@@ -116,9 +116,9 @@ const VirtualizedTreeList = ({
           height={height}
           width={width}
           innerRef={innerRef}
-          // onScroll={scrollPosition =>
-          //   handleInfiniteScroll(scrollPosition, height)
-          // }
+          onScroll={scrollPosition =>
+            handleInfiniteScroll(scrollPosition, height)
+          }
         >
           {Node}
         </TreeList>

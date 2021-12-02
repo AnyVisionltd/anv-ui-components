@@ -50,41 +50,47 @@ const useFlattenTreeData = ({ data, selectedKeys = [], maxNestingLevel }) => {
     [flattenedNodes, maxNestingLevel],
   )
 
-  const calculateAmountOfSelectedNodesAndChildren = (nodeKey, isUpdate) => {
-    if (!Object.keys(flattenedNodes).length) return {}
-    if (!isUpdate && nodeKeysMap.current.has(nodeKey))
-      return nodeKeysMap.current.get(nodeKey)
-    const { isSelected, children, layer } = flattenedNodes[nodeKey]
-    if (children) {
-      const nodeCachedValue = {
-        totalChildren: getTotalNodeChildren(children, layer),
-        totalSelected: 0,
+  const calculateAmountOfSelectedNodesAndChildren = useCallback(
+    (nodeKey, isUpdate) => {
+      if (!Object.keys(flattenedNodes).length) return {}
+      if (!isUpdate && nodeKeysMap.current.has(nodeKey))
+        return nodeKeysMap.current.get(nodeKey)
+      const { isSelected, children, layer } = flattenedNodes[nodeKey] || {}
+      if (children) {
+        const nodeCachedValue = {
+          totalChildren: getTotalNodeChildren(children, layer),
+          totalSelected: 0,
+        }
+        children.forEach(({ key }) => {
+          const {
+            totalChildren,
+            totalSelected,
+          } = calculateAmountOfSelectedNodesAndChildren(key, isUpdate)
+          nodeCachedValue.totalChildren += totalChildren
+          nodeCachedValue.totalSelected += totalSelected
+        })
+        nodeKeysMap.current.set(nodeKey, nodeCachedValue)
+        return nodeCachedValue
+      } else {
+        return { totalChildren: 0, totalSelected: isSelected ? 1 : 0 }
       }
-      children.forEach(({ key }) => {
-        const {
-          totalChildren,
-          totalSelected,
-        } = calculateAmountOfSelectedNodesAndChildren(key, isUpdate)
-        nodeCachedValue.totalChildren += totalChildren
-        nodeCachedValue.totalSelected += totalSelected
-      })
-      nodeKeysMap.current.set(nodeKey, nodeCachedValue)
-      return nodeCachedValue
-    } else {
-      return { totalChildren: 0, totalSelected: isSelected ? 1 : 0 }
-    }
-  }
+    },
+    [flattenedNodes, getTotalNodeChildren],
+  )
 
-  const updateAmountOfSelectedNodesAndChildren = nodeKey => {
-    calculateAmountOfSelectedNodesAndChildren(nodeKey, true)
-    let { parentKey } = flattenedNodes[nodeKey]
-    while (parentKey) {
-      nodeKeysMap.current.delete(parentKey)
-      calculateAmountOfSelectedNodesAndChildren(parentKey)
-      const { parentKey: nextParentKey } = flattenedNodes[parentKey]
-      parentKey = nextParentKey
-    }
-  }
+  const updateAmountOfSelectedNodesAndChildren = useCallback(
+    nodeKey => {
+      calculateAmountOfSelectedNodesAndChildren(nodeKey, true)
+      let { parentKey } = flattenedNodes[nodeKey]
+      while (parentKey) {
+        nodeKeysMap.current.delete(parentKey)
+        calculateAmountOfSelectedNodesAndChildren(parentKey)
+        const { parentKey: nextParentKey } = flattenedNodes[parentKey]
+        parentKey = nextParentKey
+      }
+    },
+    [calculateAmountOfSelectedNodesAndChildren, flattenedNodes],
+  )
 
   const handleAddNewFlattenedNodes = useCallback(
     newNodesData => {

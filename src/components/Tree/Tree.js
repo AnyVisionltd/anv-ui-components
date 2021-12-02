@@ -109,11 +109,13 @@ const Tree = ({
 
   const handleLoadMoreData = useCallback(() => {
     const newNodes = loadMoreData()
+    console.log(newNodes)
     if (newNodes instanceof Promise) {
-      // newNodes.then(result => {
-      //   handleAddNewNodes(result)
-      //   handleAddNewFlattenedNodes(result)
-      // })
+      newNodes.then(result => {
+        console.log('the result is ', result)
+        handleAddNewNodes(result)
+        handleAddNewFlattenedNodes(result)
+      })
     } else {
       handleAddNewNodes(newNodes)
     }
