@@ -1,8 +1,9 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import { ALL_ROOTS_COMBINED_KEY } from '../Tree'
 
 const useFlattenTreeData = ({ data, selectedKeys = [], maxNestingLevel }) => {
   const [flattenedNodes, setFlattenedNodes] = useState({})
+  const nodeKeysMap = useRef(new Map())
 
   const flatten = useCallback(
     (treeData, nodesMap, selectedKeysSet = new Set(), layer = 0) => {
@@ -39,45 +40,51 @@ const useFlattenTreeData = ({ data, selectedKeys = [], maxNestingLevel }) => {
     [],
   )
 
-  const amountOfSelectedNodesAndTotalChildren = useCallback(() => {
-    if (!Object.keys(flattenedNodes).length) {
-      return () => ({})
-    }
-
-    const nodeKeysMap = new Map()
-
-    const getTotalNodeChildren = (children, nodeNesingLevel) => {
+  const getTotalNodeChildren = useCallback(
+    (children, nodeNesingLevel) => {
       // It means that the current parentNode has only leaves so no need to filter
       if (maxNestingLevel - nodeNesingLevel === 1) return children.length
       return children.filter(({ key }) => !flattenedNodes[key]?.isParentNode)
         .length
-    }
+    },
+    [flattenedNodes, maxNestingLevel],
+  )
 
-    const calculateAmountOfSelectedNodesAndChildren = nodeKey => {
-      if (nodeKeysMap.has(nodeKey)) return nodeKeysMap.get(nodeKey)
-      const { isSelected, children, layer } = flattenedNodes[nodeKey] || {}
-      if (children) {
-        const nodeCachedValue = {
-          totalChildren: getTotalNodeChildren(children, layer),
-          totalSelected: 0,
-        }
-        children.forEach(({ key }) => {
-          const {
-            totalChildren,
-            totalSelected,
-          } = calculateAmountOfSelectedNodesAndChildren(key)
-          nodeCachedValue.totalChildren += totalChildren
-          nodeCachedValue.totalSelected += totalSelected
-        })
-        nodeKeysMap.set(nodeKey, nodeCachedValue)
-        return nodeCachedValue
-      } else {
-        return { totalChildren: 0, totalSelected: isSelected ? 1 : 0 }
+  const calculateAmountOfSelectedNodesAndChildren = (nodeKey, isUpdate) => {
+    if (!Object.keys(flattenedNodes).length) return {}
+    if (!isUpdate && nodeKeysMap.current.has(nodeKey))
+      return nodeKeysMap.current.get(nodeKey)
+    const { isSelected, children, layer } = flattenedNodes[nodeKey]
+    if (children) {
+      const nodeCachedValue = {
+        totalChildren: getTotalNodeChildren(children, layer),
+        totalSelected: 0,
       }
+      children.forEach(({ key }) => {
+        const {
+          totalChildren,
+          totalSelected,
+        } = calculateAmountOfSelectedNodesAndChildren(key, isUpdate)
+        nodeCachedValue.totalChildren += totalChildren
+        nodeCachedValue.totalSelected += totalSelected
+      })
+      nodeKeysMap.current.set(nodeKey, nodeCachedValue)
+      return nodeCachedValue
+    } else {
+      return { totalChildren: 0, totalSelected: isSelected ? 1 : 0 }
     }
+  }
 
-    return nodeKey => calculateAmountOfSelectedNodesAndChildren(nodeKey)
-  }, [flattenedNodes, maxNestingLevel])
+  const updateAmountOfSelectedNodesAndChildren = nodeKey => {
+    calculateAmountOfSelectedNodesAndChildren(nodeKey, true)
+    let { parentKey } = flattenedNodes[nodeKey]
+    while (parentKey) {
+      nodeKeysMap.current.delete(parentKey)
+      calculateAmountOfSelectedNodesAndChildren(parentKey)
+      const { parentKey: nextParentKey } = flattenedNodes[parentKey]
+      parentKey = nextParentKey
+    }
+  }
 
   const handleAddNewFlattenedNodes = useCallback(
     newNodesData => {
@@ -126,7 +133,8 @@ const useFlattenTreeData = ({ data, selectedKeys = [], maxNestingLevel }) => {
   return {
     flattenedNodes,
     setFlattenedNodes,
-    calculateAmountOfSelectedNodesAndChildren: amountOfSelectedNodesAndTotalChildren(),
+    calculateAmountOfSelectedNodesAndChildren,
+    updateAmountOfSelectedNodesAndChildren,
     handleAddNewFlattenedNodes,
   }
 }

@@ -31,7 +31,7 @@ const createTestNode = () => {
   return node
 }
 
-const createTestRootNodes = (amount = 20) => {
+const createTestRootNodes = (amount = 25) => {
   const arr = []
   for (let i = 0; i < amount; i++) {
     arr.push(createTestNode())
@@ -234,7 +234,7 @@ export const Basic = () => {
   const loadMoreNodes = () =>
     new Promise(resolve => {
       setTimeout(() => {
-        resolve([...createTestRootNodes(5)])
+        resolve([...createTestRootNodes(10)])
       }, 500)
     })
 

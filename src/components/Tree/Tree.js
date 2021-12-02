@@ -53,6 +53,7 @@ const Tree = ({
     flattenedNodes,
     setFlattenedNodes,
     calculateAmountOfSelectedNodesAndChildren,
+    updateAmountOfSelectedNodesAndChildren,
     handleAddNewFlattenedNodes,
   } = useFlattenTreeData({
     data: nodes,
@@ -75,6 +76,9 @@ const Tree = ({
     )
 
     setFlattenedNodes(nodesMap)
+    updateAmountOfSelectedNodesAndChildren(
+      Array.isArray(node) ? ALL_ROOTS_COMBINED_KEY : node.key,
+    )
     onSelect(keysToToggle)
   }
 
