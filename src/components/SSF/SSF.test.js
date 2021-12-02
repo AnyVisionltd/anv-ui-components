@@ -2,7 +2,7 @@ import React from 'react'
 import { render, fireEvent, act } from '@testing-library/react'
 import SmartFilter from './SSF'
 import { ReactComponent as ArrowSolidRight } from '../../assets/svg/ArrowSolidRight.svg'
-import { screen } from '@testing-library/dom'
+import { screen, waitFor } from '@testing-library/dom'
 import keymap from '../../utils/enums/keymap'
 
 const fields = [
@@ -78,8 +78,9 @@ describe('<SSF />', () => {
       let menuItems = getAllByRole('menuitem')
       expect(menuItems).toHaveLength(3)
       fireEvent.click(menuItems[2])
+
       // input value should be changed after menu item selection
-      expect(input.value).toEqual(`${fields[2].label}: `)
+      await waitFor(() => expect(input.value).toEqual(`${fields[2].label}: `))
       fireEvent.change(input, { target: { value: `${input.value}asda` } })
       // value should not be changed for field of type number if input is not a number
       expect(input.value).toEqual(`${fields[2].label}: `)
@@ -88,19 +89,19 @@ describe('<SSF />', () => {
     })
   })
 
-  describe('events', () => {
+  describe('events', async () => {
     it('onChange should return an array with chip objects containing chip field and value', async () => {
       const mockRegularChip = 'Normal Chip'
       const mockFieldChip = 'Example Field'
       const onChange = chipsArr => {
-        chipsArr.forEach((chip, index) => {
+        chipsArr.forEach(async (chip, index) => {
           expect(typeof chip).toEqual('object')
           if (index === 0) {
             expect(chip.field).toBeUndefined()
             expect(chip.value).toEqual(mockRegularChip)
           } else if (index === 1) {
             expect(chip.value).toEqual(mockFieldChip)
-            expect(chip.field).toEqual(fields[2].field)
+            await waitFor(() => expect(chip.field).toEqual(fields[2].field))
           }
         })
       }

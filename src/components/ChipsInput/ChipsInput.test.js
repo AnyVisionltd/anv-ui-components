@@ -85,7 +85,7 @@ describe('<ChipsInput />', () => {
   })
 
   describe('autocomplete', () => {
-    it('should render autocomplete', () => {
+    it('should render autocomplete', async () => {
       const autocomplete = [{ label: 'first', value: '1' }]
       const onChange = jest.fn()
       render(<ChipsInput onChange={onChange} autocomplete={autocomplete} />)
@@ -95,7 +95,7 @@ describe('<ChipsInput />', () => {
       expect(firstAutocompleteItem).toBeTruthy()
       user.click(firstAutocompleteItem)
       screen.getAllByText('first')
-      expect(screen.getByTestId('chip')).toBeTruthy()
+      await waitFor(() => expect(screen.getByTestId('chip')).toBeTruthy())
     })
   })
 
