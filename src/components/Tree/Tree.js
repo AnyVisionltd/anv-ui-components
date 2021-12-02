@@ -5,7 +5,7 @@ import { Search } from '@anyvision/anv-icons'
 import { Checkbox, InputBase } from '../../'
 import { CheckboxWithIndeterminateState } from './CheckboxWithIndeterminateState'
 import { VirtualizedTreeList } from './VirtualizedTreeList'
-import { EmptyTreeSearch, emptyListTypes } from './EmptyTreeSearch'
+import { EmptyTreeSearch } from './EmptyTreeSearch'
 import languageService from '../../services/language'
 import useTreeVisibleData from './useTreeVisibleData'
 import useFlattenTreeData from './useFlattenTreeData'
@@ -14,6 +14,7 @@ import {
   setNodesSelectedStatus,
   setNodesExpandedStatus,
   checkAllNodesAreExpanded,
+  emptyListTypes,
 } from './utils'
 import styles from './Tree.module.scss'
 

@@ -3,12 +3,8 @@ import propTypes from 'prop-types'
 import { NoResults, ErrorCircleOutlined } from '@anyvision/anv-icons'
 import languageService from '../../../services/language'
 import { Button } from '../../Button'
+import { emptyListTypes } from '../utils'
 import styles from './EmptyTreeSearch.module.scss'
-
-export const emptyListTypes = Object.freeze({
-  NO_ITEMS_IN_LIST: 0,
-  NO_RESULTS_FOUND: 1,
-})
 
 const getTranslation = path => languageService.getTranslation(`${path}`)
 

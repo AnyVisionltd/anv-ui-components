@@ -1,3 +1,8 @@
+export const emptyListTypes = Object.freeze({
+  NO_ITEMS_IN_LIST: 0,
+  NO_RESULTS_FOUND: 1,
+})
+
 export const setNodesSelectedStatus = (nodesTree, nodesMap, isSelected) => {
   const keys = { added: [], removed: [] }
 
