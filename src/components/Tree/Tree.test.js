@@ -103,7 +103,9 @@ describe('<Tree/>', () => {
   test('all nodes should be selected if selectedKeys are for all keys', async () => {
     // Choosing the keys of the main roots of tree so their children will be selected too
     const selectedKeys = treeNodes.map(({ key }) => key)
-    const { getAllByRole } = render(<Tree selectedKeys={selectedKeys} />)
+    const { getAllByRole } = render(
+      <Tree selectedKeys={selectedKeys} nodes={treeNodes} />,
+    )
     const checkboxes = getAllByRole('checkbox')
     const bulkSelectCheckbox = checkboxes[0]
 
