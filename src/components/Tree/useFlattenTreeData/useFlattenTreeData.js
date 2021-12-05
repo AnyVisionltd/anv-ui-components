@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from 'react'
-import { ALL_ROOTS_COMBINED_KEY } from '../Tree'
+import { ALL_ROOTS_COMBINED_KEY } from '../utils'
 
 const useFlattenTreeData = ({ data, selectedKeys = [], maxNestingLevel }) => {
   const [flattenedNodes, setFlattenedNodes] = useState({})

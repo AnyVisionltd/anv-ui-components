@@ -1,5 +1,13 @@
+export const ALL_ROOTS_COMBINED_KEY = 'ALL_ROOTS_COMBINED_KEY'
+
+export const emptyListTypes = Object.freeze({
+  NO_ITEMS_IN_LIST: 0,
+  NO_RESULTS_FOUND: 1,
+})
+
 export const setNodesSelectedStatus = (nodesTree, nodesMap, isSelected) => {
   const keys = { added: [], removed: [] }
+  const currentUsedArr = isSelected ? keys.added : keys.removed
 
   const setAllSelected = nodes => {
     nodes.forEach(node => {
@@ -10,11 +18,7 @@ export const setNodesSelectedStatus = (nodesTree, nodesMap, isSelected) => {
         const previousSelectedStatus = nodesMap[key].isSelected
         nodesMap[key].isSelected = isSelected
         if (isSelected !== previousSelectedStatus) {
-          if (isSelected) {
-            keys.added.push(key)
-          } else {
-            keys.removed.push(key)
-          }
+          currentUsedArr.push(key)
         }
       }
     })

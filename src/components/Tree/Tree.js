@@ -14,11 +14,12 @@ import {
   setNodesSelectedStatus,
   setNodesExpandedStatus,
   checkAllNodesAreExpanded,
+  emptyListTypes,
+  ALL_ROOTS_COMBINED_KEY,
 } from './utils'
 import styles from './Tree.module.scss'
 
 const getTranslation = path => languageService.getTranslation(`${path}`)
-export const ALL_ROOTS_COMBINED_KEY = 'ALL_ROOTS_COMBINED_KEY'
 
 const Tree = ({
   nodes,
@@ -36,6 +37,7 @@ const Tree = ({
   rootNodeActions,
   loadMoreData,
   maxNestingLevel,
+  noItemsMessage,
 }) => {
   const [treeInstance, setTreeInstance] = useState(null)
   const [areAllNodesExpanded, setAreAllNodesExpanded] = useState(false)
@@ -107,21 +109,15 @@ const Tree = ({
     }
   }
 
-  const handleLoadMoreData = useCallback(() => {
-    const newNodes = loadMoreData()
-    console.log(newNodes)
-    if (newNodes instanceof Promise) {
-      newNodes.then(result => {
-        console.log('the result is ', result)
-        handleAddNewNodes(result)
-        handleAddNewFlattenedNodes(result)
-      })
-    } else {
-      handleAddNewNodes(newNodes)
-    }
+  const handleLoadMoreData = useCallback(async () => {
+    const newNodes = await loadMoreData()
+    if (!newNodes) return
+    handleAddNewNodes(newNodes)
+    handleAddNewFlattenedNodes(newNodes)
   }, [handleAddNewFlattenedNodes, handleAddNewNodes, loadMoreData])
 
   const isTreeEmpty = () => {
+    if (!nodes.length) return true
     if (!searchQuery) return false
     return !filteredData.some(node => node.visible)
   }
@@ -231,12 +227,24 @@ const Tree = ({
     return renderParentNode(node, virtualizedListProps)
   }
 
+  const isEmpty = isTreeEmpty()
+
   return (
     <div className={classNames(styles.tree, className)}>
       {isSearchable && renderSearchInput()}
-      {isBulkActionsEnabled && renderBulkActions()}
+      {isBulkActionsEnabled && !isEmpty && renderBulkActions()}
       <div className={styles.nodesContainer}>
-        {isTreeEmpty() && <EmptyTreeSearch onClearSearch={resetSearchData} />}
+        {isEmpty && (
+          <EmptyTreeSearch
+            type={
+              nodes.length
+                ? emptyListTypes.NO_RESULTS_FOUND
+                : emptyListTypes.NO_ITEMS_IN_LIST
+            }
+            onClearSearch={resetSearchData}
+            noItemsMessage={noItemsMessage}
+          />
+        )}
         <VirtualizedTreeList
           setTreeInstance={setTreeInstance}
           rootNode={{ ...filteredData }}
@@ -262,6 +270,7 @@ Tree.defaultProps = {
   rootNodeActions: [],
   loadMoreData: () => {},
   maxNestingLevel: -1,
+  noItemsMessage: getTranslation('listIsEmpty'),
 }
 
 Tree.propTypes = {
@@ -312,6 +321,8 @@ Tree.propTypes = {
   loadMoreData: propTypes.func,
   /** Maximum nesting level of a tree to improve performance, default is -1, meaning that maxNestingLevel is undefined. */
   maxNestingLevel: propTypes.number,
+  /** Text to display when there are no items in tree. */
+  noItemsMessage: propTypes.string,
 }
 
 export default Tree

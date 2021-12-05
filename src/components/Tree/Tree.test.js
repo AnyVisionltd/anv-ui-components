@@ -57,62 +57,70 @@ describe('<Tree/>', () => {
     expect(checkboxes.length).toBe(expectedCheckboxesAmount)
   })
 
-  test('`select all` checkbox should be checked when all nodes are selected', () => {
-    const onSelect = jest.fn()
-    const { getAllByRole } = render(
-      <Tree nodes={treeNodes} onSelect={onSelect} />,
-    )
+  describe('select functionality', () => {
+    test('`select all` checkbox should be checked when all nodes are selected', () => {
+      const onSelect = jest.fn()
+      const { getAllByRole } = render(
+        <Tree nodes={treeNodes} onSelect={onSelect} />,
+      )
 
-    const checkboxes = getAllByRole('checkbox')
-    const bulkSelectCheckbox = checkboxes[0]
+      const checkboxes = getAllByRole('checkbox')
+      const bulkSelectCheckbox = checkboxes[0]
 
-    userEvent.click(bulkSelectCheckbox)
-    expect(onSelect).toBeCalled()
+      userEvent.click(bulkSelectCheckbox)
+      expect(onSelect).toBeCalled()
+    })
+
+    test('all nodes should be selected if selectedKeys are for all keys', async () => {
+      // Choosing the keys of the main roots of tree so their children will be selected too
+      const selectedKeys = treeNodes.map(({ key }) => key)
+      const { getAllByRole } = render(
+        <Tree selectedKeys={selectedKeys} nodes={treeNodes} />,
+      )
+      const checkboxes = getAllByRole('checkbox')
+      const bulkSelectCheckbox = checkboxes[0]
+
+      await waitFor(() => expect(bulkSelectCheckbox.checked).toBe(true))
+    })
   })
 
-  test('On search should be called when user types in search field', () => {
-    const onSearch = jest.fn()
-    const { getByRole } = render(<Tree nodes={treeNodes} onSearch={onSearch} />)
+  describe('search functionality', () => {
+    test('On search should be called when user types in search field', () => {
+      const onSearch = jest.fn()
+      const { getByRole } = render(
+        <Tree nodes={treeNodes} onSearch={onSearch} />,
+      )
 
-    const searchInput = getByRole('textbox')
+      const searchInput = getByRole('textbox')
 
-    fireEvent.change(searchInput, { target: { value: 'something' } })
-    expect(onSearch).toBeCalled()
-  })
+      fireEvent.change(searchInput, { target: { value: 'something' } })
+      expect(onSearch).toBeCalled()
+    })
 
-  test('no results indication should appear when user types a search query that doesn`t match any item in tree', async () => {
-    const { getByRole, getByText } = render(<Tree nodes={treeNodes} />)
+    test('no results indication should appear when user types a search query that doesn`t match any item in tree', async () => {
+      const { getByRole, getByText } = render(<Tree nodes={treeNodes} />)
 
-    const searchInput = getByRole('textbox')
+      const searchInput = getByRole('textbox')
 
-    await act(async () =>
-      fireEvent.change(searchInput, {
-        target: {
-          value: 'something that mismatches all current items in tree',
-        },
-      }),
-    )
-    await waitFor(() =>
-      expect(getByText(getTranslation('noResultsFound'))).toBeInTheDocument(),
-    )
-    await waitFor(() =>
-      expect(getByText(getTranslation('clearSearch'))).toBeInTheDocument(),
-    )
-  })
+      await act(async () =>
+        fireEvent.change(searchInput, {
+          target: {
+            value: 'something that mismatches all current items in tree',
+          },
+        }),
+      )
+      await waitFor(() =>
+        expect(getByText(getTranslation('noResultsFound'))).toBeInTheDocument(),
+      )
+      await waitFor(() =>
+        expect(getByText(getTranslation('clearSearch'))).toBeInTheDocument(),
+      )
+    })
 
-  test('all nodes should be selected if selectedKeys are for all keys', async () => {
-    // Choosing the keys of the main roots of tree so their children will be selected too
-    const selectedKeys = treeNodes.map(({ key }) => key)
-    const { getAllByRole } = render(<Tree selectedKeys={selectedKeys} />)
-    const checkboxes = getAllByRole('checkbox')
-    const bulkSelectCheckbox = checkboxes[0]
-
-    await waitFor(() => expect(bulkSelectCheckbox.checked).toBe(true))
-  })
-
-  test('search input should not appear when isSearchable is false', () => {
-    const { getByRole } = render(<Tree isSearchable={false} />)
-    expect(() => getByRole('textbox')).toThrow()
+    test('search input should not appear when isSearchable is false', () => {
+      const { getByRole } = render(<Tree isSearchable={false} />)
+      expect(() => getByRole('textbox')).toThrow()
+    })
   })
 
   test('bulk actions area should not appear when isBulkActionEnabled is false', () => {

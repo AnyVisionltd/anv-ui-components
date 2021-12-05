@@ -2,6 +2,7 @@
 
 .tree {
   width: av-size(sz-480);
+  height: 100%;
   background-color: av-color(secondary);
   padding: av-space(medium);
 
@@ -79,8 +80,9 @@
 
   .nodesContainer {
     display: flex;
+    flex: 1;
     flex-direction: column;
-    height: av-size(sz-480);
+    min-height: av-size(sz-480);
 
     .parentNode {
       align-items: center;

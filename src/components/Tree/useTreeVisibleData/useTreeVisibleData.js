@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { ALL_ROOTS_COMBINED_KEY } from '../Tree'
+import { ALL_ROOTS_COMBINED_KEY } from '../utils'
 
 const useTreeVisibleData = ({ initialData, onSearch, treeInstance }) => {
   const setAllNodesAsVisible = useCallback(
@@ -10,7 +10,7 @@ const useTreeVisibleData = ({ initialData, onSearch, treeInstance }) => {
           node.parentKey = parentKey
           if (node.children) {
             node.isParentNode = true
-            setAllVisible(node.children, node.key)
+            setAllNodesAsVisible(node.children, node.key)
           }
         })
       }
@@ -81,7 +81,7 @@ const useTreeVisibleData = ({ initialData, onSearch, treeInstance }) => {
       setFilteredData(filterVisibleData(filteredData, searchKeyword))
     }
 
-    treeInstance.recomputeTree({
+    treeInstance?.state?.recomputeTree({
       refreshNodes: true,
     })
   }

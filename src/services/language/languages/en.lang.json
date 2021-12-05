@@ -35,6 +35,7 @@
     "collapseAll": "Collapse All",
     "selectAll": "Select All",
     "selectNone": "Select None",
-    "clearSearch": "Clear Search"
+    "clearSearch": "Clear Search",
+    "listIsEmpty": "List Is Empty"
   }
 }
