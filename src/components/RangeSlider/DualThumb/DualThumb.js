@@ -198,7 +198,7 @@ const DualThumb = ({
           {...inputProps}
           step={step}
           onChange={handleChange}
-          onMouseUp={e => onMouseUp(e, thumbProps.keyName)}
+          onMouseUp={e => onMouseUp?.(e, thumbProps.keyName)}
           disabled={disabled}
           renderTooltip={renderTooltip}
           posTooltipToValue={posTooltipToValue}
