@@ -46,6 +46,7 @@ const RootNode = ({ renderNode, menuActions }) => {
           style={cellStyle}
         >
           <IconButton
+            disabled={activeNodeActions.length === 0}
             className={styles.actionButton}
             variant='ghost'
             onClick={onAnchorClick}
