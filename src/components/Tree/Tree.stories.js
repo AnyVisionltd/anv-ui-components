@@ -224,8 +224,9 @@ export const Basic = () => {
   ])
 
   const onSelect = ({ added, removed }) => {
-    // Do what needs to be done when new nodes are selected / unselected
-    // And then if needed:
+    // onSelect returns the status of the nodes that were either added as selected or removed.
+    // So do what needs to be done when new nodes are selected / unselected, like add or remove a marker of the camera from the map.
+    // And then, if needed, set the selectedKeys state :
     const newSelectedKeys = [...selectedKeys]
     newSelectedKeys.filter(key => !removed.includes(key))
     setSelectedkeys([...newSelectedKeys, ...added])
@@ -277,8 +278,9 @@ export const NestedTree = () => {
   const [selectedKeys, setSelectedkeys] = useState(['1', '2', '33', '42'])
 
   const onSelect = ({ added, removed }) => {
-    // Do what needs to be done when new nodes are selected / unselected
-    // And then if needed:
+    // onSelect returns the status of the nodes that were either added as selected or removed.
+    // So do what needs to be done when new nodes are selected / unselected, like add or remove a marker of the camera from the map.
+    // And then, if needed, set the selectedKeys state :
     const newSelectedKeys = [...selectedKeys]
     newSelectedKeys.filter(key => !removed.includes(key))
     setSelectedkeys([...newSelectedKeys, ...added])

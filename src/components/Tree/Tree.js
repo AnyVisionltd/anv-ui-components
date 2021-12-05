@@ -319,7 +319,8 @@ Tree.propTypes = {
   ),
   /** A callback that is called when more data needs to be fetched. */
   loadMoreData: propTypes.func,
-  /** Maximum nesting level of a tree to improve performance, default is -1, meaning that maxNestingLevel is undefined. */
+  /** Maximum nesting level of a tree - used to stop at a specified level in order to improve performance.
+   * Default is -1, meaning that maxNestingLevel is undefined. */
   maxNestingLevel: propTypes.number,
   /** Text to display when there are no items in tree. */
   noItemsMessage: propTypes.string,
