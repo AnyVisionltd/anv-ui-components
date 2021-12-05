@@ -44,7 +44,6 @@ const TableRow = ({
   }
 
   const handleMenuItemClick = (e, row, onClick, confirmDialogBody) => {
-    e.stopPropagation()
     const body =
       confirmDialogBody && typeof confirmDialogBody === 'function'
         ? confirmDialogBody(row)

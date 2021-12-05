@@ -25,6 +25,7 @@ const MenuItem = forwardRef(
     )
 
     const handleOnClick = event => {
+      event.stopPropagation()
       if (disabled) {
         return
       }

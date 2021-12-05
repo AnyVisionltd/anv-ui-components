@@ -3,14 +3,12 @@ $ripple-transition-duration: 0.3s;
 
 @mixin av-ripple($color: currentColor, $toBackground: false) {
   &:not([disabled]):not(.disabled) {
+    overflow: hidden;
     &::before,
     &::after {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      inset: 0;
       opacity: 0;
       border-radius: inherit;
       pointer-events: none;
@@ -26,10 +24,17 @@ $ripple-transition-duration: 0.3s;
     }
 
     &::after {
+      left: 50%;
+      top: 50%;
       background: radial-gradient(circle at center, $color 1%, transparent 1%)
         center/10000% 10000% no-repeat;
-      transition: opacity 0.8s ease-in-out,
-        background-size $ripple-transition-duration ease-in-out;
+      width: 0;
+      height: 0;
+      opacity: 1;
+      border-radius: 100%;
+      transition: width 500ms ease-in-out, height 500ms ease-in-out,
+        margin-left 500ms ease-in-out, margin-top 500ms ease-in-out;
+      opacity: av-opacity(disabled);
     }
 
     &:hover::before {
@@ -45,9 +50,10 @@ $ripple-transition-duration: 0.3s;
     }
 
     &:active::after {
-      opacity: av-opacity(disabled);
-      background-size: 100% 100%;
-      transition: background-size 0s ease-in-out;
+      width: av-size(sz-480);
+      height: av-size(sz-480);
+      margin-left: calc(#{av-size(sz-240)} * -1);
+      margin-top: calc(#{av-size(sz-240)} * -1);
     }
   }
 }
