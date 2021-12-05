@@ -1,11 +1,17 @@
 @import '~@anyvision/style-guide';
 
+:root {
+  --box-shadow-vertical-length: -6px;
+  --svg-size: 2.5em;
+  --undo-button-margin: 10px;
+}
+
 .toastMessage {
   display: flex;
   @include av-elevation(temporary);
   min-width: av-size(sz-320);
   max-width: av-size(sz-480);
-  height: 72px;
+  height: calc(#{av-size(sz-64)} + #{av-size(sz-8)});
   background-color: av-color(purewhite);
   align-items: center;
   border-radius: av-radius();
@@ -14,22 +20,22 @@
   font-size: av-font-size(small);
 
   &.success {
-    box-shadow: inset 0 -6px 0 0 av-color(success, av-opacity(divider));
+    box-shadow: inset 0 var(--box-shadow-vertical-length) 0 0 av-color(success, av-opacity(divider));
     border: solid 1px av-color(success);
   }
 
   &.alert {
-    box-shadow: inset 0 -6px 0 0 av-color(alert, av-opacity(divider));
+    box-shadow: inset 0 var(--box-shadow-vertical-length) 0 0 av-color(alert, av-opacity(divider));
     border: solid 1px av-color(alert);
   }
 
   &.info {
-    box-shadow: inset 0 -6px 0 0 av-color(primary, av-opacity(divider));
+    box-shadow: inset 0 var(--box-shadow-vertical-length) 0 0 av-color(primary, av-opacity(divider));
     border: solid 1px av-color(primary);
   }
 
   &.error {
-    box-shadow: inset 0 -6px 0 0 av-color(error, av-opacity(divider));
+    box-shadow: inset 0 var(--box-shadow-vertical-length) 0 0 av-color(error, av-opacity(divider));
     border: solid 1px av-color(error);
   }
 }
@@ -56,8 +62,8 @@
     align-items: center;
 
     & > svg {
-      height: 2.5em;
-      width: 2.5em;
+      height: var(--svg-size);
+      width: var(--svg-size);
     }
   }
 }
@@ -72,6 +78,6 @@
 
   .undoButton {
     font-weight: av-font-weight(bold);
-    margin: 0 10px;
+    margin: 0 var(--undo-button-margin);
   }
 }

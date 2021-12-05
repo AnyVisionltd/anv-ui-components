@@ -1,10 +1,8 @@
 import React, { useState, useCallback } from 'react'
 import ToastMessage from './ToastMessage'
-import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
-import { ReactComponent as CheckIcon } from '../../assets/svg/Check.svg'
 import { centerDecorator } from '../../utils/storybook/decorators'
-import styles from '../../storybook/index.module.scss'
 import { Button } from '../Button'
+import styles from '../../storybook/index.module.scss'
 
 export default {
   title: 'User Feedback/ToastMessage',
@@ -82,7 +80,7 @@ export const WithUndoButton = () => {
     <>
       <Button onClick={() => setIsOpen(true)}>With Undo Button</Button>
       <ToastMessage
-        isOpen={isOpen}
+        isOpen
         onClose={useCallback(() => setIsOpen(false), [])}
         message='This Is a Toast Message with undo button'
         isUndo={true}

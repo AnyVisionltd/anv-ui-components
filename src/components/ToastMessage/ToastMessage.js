@@ -1,16 +1,17 @@
-import React, { useEffect, useCallback } from 'react'
+import React, { useEffect, useCallback, useRef } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
+import { TimesThick } from '@anyvision/anv-icons'
+import languageService from '../../services/language'
 import { IconButton, Portal, Animations, Button } from '../../index'
-import { ReactComponent as CloseIcon } from '../../assets/svg/Close.svg'
-import styles from './ToastMessage.module.scss'
 import toastMessageTypeMapper from './ToastMessage.utils'
+import styles from './ToastMessage.module.scss'
 
 const ToastMessage = ({ message, type, isUndo, undoCallback, closeIcon, isOpen, className, onClose, hideTimeout }) => {
-  const timerHide = React.useRef()
+  const timerHide = useRef()
 
   const setHideTimeout = useCallback(() => {
-    if (hideTimeout === null) {
+    if (!hideTimeout) {
       return
     }
 
@@ -54,13 +55,10 @@ const ToastMessage = ({ message, type, isUndo, undoCallback, closeIcon, isOpen, 
     )
   }
 
-  const renderUndoButton = () => {
-    return (
+  const renderUndoButton = () =>
       isUndo &&
-      <Button className={classNames(styles.undoButton)} onClick={undoCallback} variant='ghost'
-              size='small'>undo</Button>
-    )
-  }
+      <Button className={styles.undoButton} onClick={undoCallback} variant='ghost'
+              size='small'>{ languageService.getTranslation('undo') }</Button>
 
   const classes = classNames(styles.toastMessage, className, {
     [styles[type]]: !!type,
@@ -88,7 +86,7 @@ const ToastMessage = ({ message, type, isUndo, undoCallback, closeIcon, isOpen, 
 ToastMessage.defaultProps = {
   type: 'info',
   isUndo: false,
-  closeIcon: <CloseIcon />,
+  closeIcon: <TimesThick />,
   onClose: () => {},
   hideTimeout: 5000,
 }

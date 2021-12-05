@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, fireEvent, waitFor, screen } from '@testing-library/react'
 import ToastMessage from './ToastMessage'
-import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
+import { SunBrightens } from '@anyvision/anv-icons'
 
 describe('<ToastMessage />', () => {
   describe('Render Snapshots', () => {
@@ -19,14 +19,14 @@ describe('<ToastMessage />', () => {
 
     it('should render leadingIcon', () => {
       const { container } = render(
-        <ToastMessage message='test message' isOpen leadingIcon={<SunIcon />} />,
+        <ToastMessage message='test message' isOpen leadingIcon={<SunBrightens />} />,
       )
       expect(container).toMatchSnapshot()
     })
 
     it('should render custom closeIcon', () => {
       const { container } = render(
-        <ToastMessage message='test message' isOpen closeIcon={<SunIcon />} />,
+        <ToastMessage message='test message' isOpen closeIcon={<SunBrightens />} />,
       )
       expect(container).toMatchSnapshot()
     })
