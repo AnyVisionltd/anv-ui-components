@@ -20,6 +20,7 @@ const TableBody = ({
   rowActions,
   onRowClick,
   className,
+  menuClassName,
   ...otherProps
 }) => {
   const listRef = useRef()
@@ -72,6 +73,7 @@ const TableBody = ({
         row={row}
         rowHeight={rowHeight}
         onRowClick={onRowClick}
+        menuClassName={menuClassName}
       />
     )
   }
@@ -185,6 +187,8 @@ TableBody.propTypes = {
   onRowClick: propTypes.func,
   /** For css customization. */
   className: propTypes.string,
+  /** For Menu customization */
+  menuClassName: propTypes.string,
 }
 
 export default TableBody
