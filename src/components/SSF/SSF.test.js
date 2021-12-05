@@ -89,12 +89,12 @@ describe('<SSF />', () => {
     })
   })
 
-  describe('events', async () => {
+  describe('events', () => {
     it('onChange should return an array with chip objects containing chip field and value', async () => {
       const mockRegularChip = 'Normal Chip'
       const mockFieldChip = 'Example Field'
       const onChange = chipsArr => {
-        chipsArr.forEach(async (chip, index) => {
+        chipsArr.forEach((chip, index) => {
           expect(typeof chip).toEqual('object')
           if (index === 0) {
             expect(chip.field).toBeUndefined()
