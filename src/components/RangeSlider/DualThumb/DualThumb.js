@@ -22,6 +22,7 @@ const DualThumb = ({
   values,
   renderTooltip,
   onChange,
+  onMouseUp,
   disabled,
   posTooltipToValue,
   countDecimals,
@@ -197,6 +198,7 @@ const DualThumb = ({
           {...inputProps}
           step={step}
           onChange={handleChange}
+          onMouseUp={e => onMouseUp?.(e, thumbProps.keyName)}
           disabled={disabled}
           renderTooltip={renderTooltip}
           posTooltipToValue={posTooltipToValue}
@@ -215,6 +217,8 @@ DualThumb.propTypes = {
   max: propTypes.number,
   /** Callback when the component's state is changed. */
   onChange: propTypes.func,
+  /** Callback when the component's active thumb being released. */
+  onMouseUp: propTypes.func,
   /** The step by which the value is incremented / decremented. */
   step: propTypes.number,
   /** Determines the disabled mode of the RangeSlider, if true - disabled. */
