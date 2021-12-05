@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, waitFor } from '@testing-library/react'
 import user from '@testing-library/user-event'
 import { screen } from '@testing-library/dom'
 import keymap from '../../utils/enums/keymap'
@@ -39,6 +39,7 @@ describe('<ChipsInput />', () => {
       render(<ChipsInput onInputChange={onInputChange} />)
       changeInput('a')
       changeInput('b')
+      await waitFor(() => {})
       // 3 because onInputChange fire on first render + add & clear for each submit
       expect(onInputChange).toBeCalledTimes(3)
       expect(onInputChange.mock.calls[1][0]).toEqual('a')

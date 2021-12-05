@@ -78,7 +78,6 @@ describe('<SSF />', () => {
       let menuItems = getAllByRole('menuitem')
       expect(menuItems).toHaveLength(3)
       fireEvent.click(menuItems[2])
-
       // input value should be changed after menu item selection
       expect(input.value).toEqual(`${fields[2].label}: `)
       fireEvent.change(input, { target: { value: `${input.value}asda` } })
