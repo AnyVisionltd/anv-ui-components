@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 import { Search } from '@anyvision/anv-icons'
@@ -15,11 +15,11 @@ import {
   setNodesExpandedStatus,
   checkAllNodesAreExpanded,
   emptyListTypes,
+  ALL_ROOTS_COMBINED_KEY,
 } from './utils'
 import styles from './Tree.module.scss'
 
 const getTranslation = path => languageService.getTranslation(`${path}`)
-export const ALL_ROOTS_COMBINED_KEY = 'ALL_ROOTS_COMBINED_KEY'
 
 const Tree = ({
   nodes,
@@ -35,6 +35,8 @@ const Tree = ({
   renderLeafRightSide,
   displayLabels,
   rootNodeActions,
+  loadMoreData,
+  maxNestingLevel,
   noItemsMessage,
 }) => {
   const [treeInstance, setTreeInstance] = useState(null)
@@ -46,15 +48,19 @@ const Tree = ({
     handleSearch,
     filteredData,
     resetSearchData,
+    handleAddNewNodes,
   } = useTreeVisibleData({ initialData: nodes, onSearch, treeInstance })
 
   const {
     flattenedNodes,
     setFlattenedNodes,
     calculateAmountOfSelectedNodesAndChildren,
+    updateAmountOfSelectedNodesAndChildren,
+    handleAddNewFlattenedNodes,
   } = useFlattenTreeData({
     data: nodes,
     selectedKeys,
+    maxNestingLevel,
   })
 
   const {
@@ -72,6 +78,9 @@ const Tree = ({
     )
 
     setFlattenedNodes(nodesMap)
+    updateAmountOfSelectedNodesAndChildren(
+      Array.isArray(node) ? ALL_ROOTS_COMBINED_KEY : node.key,
+    )
     onSelect(keysToToggle)
   }
 
@@ -99,6 +108,13 @@ const Tree = ({
       setAreAllNodesExpanded(!areAllNodesExpanded)
     }
   }
+
+  const handleLoadMoreData = useCallback(async () => {
+    const newNodes = await loadMoreData()
+    if (!newNodes) return
+    handleAddNewNodes(newNodes)
+    handleAddNewFlattenedNodes(newNodes)
+  }, [handleAddNewFlattenedNodes, handleAddNewNodes, loadMoreData])
 
   const isTreeEmpty = () => {
     if (!nodes.length) return true
@@ -233,6 +249,8 @@ const Tree = ({
           setTreeInstance={setTreeInstance}
           rootNode={{ ...filteredData }}
           renderNode={renderNode}
+          loadMoreData={handleLoadMoreData}
+          isSearching={!!searchQuery.length}
         />
       </div>
     </div>
@@ -250,6 +268,8 @@ Tree.defaultProps = {
   isSearchable: true,
   isBulkActionsEnabled: true,
   rootNodeActions: [],
+  loadMoreData: () => {},
+  maxNestingLevel: -1,
   noItemsMessage: getTranslation('listIsEmpty'),
 }
 
@@ -297,6 +317,11 @@ Tree.propTypes = {
       hidden: propTypes.func,
     }),
   ),
+  /** A callback that is called when more data needs to be fetched. */
+  loadMoreData: propTypes.func,
+  /** Maximum nesting level of a tree - used to stop at a specified level in order to improve performance.
+   * Default is -1, meaning that maxNestingLevel is undefined. */
+  maxNestingLevel: propTypes.number,
   /** Text to display when there are no items in tree. */
   noItemsMessage: propTypes.string,
 }

@@ -10,6 +10,35 @@ export default {
   decorators: [centerDecorator],
 }
 
+let nodeId = 100
+const createTestNode = () => {
+  const node = {
+    label: `test-${nodeId}`,
+    key: `test-${nodeId}`,
+    children: [],
+  }
+
+  for (let i = 0; i < 10; i++) {
+    nodeId += 1
+    const label = `test-${nodeId}`
+    node.children.push({
+      label,
+      key: label,
+    })
+  }
+
+  nodeId += 1
+  return node
+}
+
+const createTestRootNodes = (amount = 25) => {
+  const arr = []
+  for (let i = 0; i < amount; i++) {
+    arr.push(createTestNode())
+  }
+  return arr
+}
+
 const treeNodes = [
   {
     key: '1',
@@ -44,6 +73,20 @@ const treeNodes = [
           {
             key: '211',
             label: 'Berlin',
+            children: [
+              {
+                key: '2111',
+                label: 'Berlin 1',
+              },
+              {
+                key: '2112',
+                label: 'Berlin 2',
+              },
+              {
+                key: '2113',
+                label: 'Berlin 3',
+              },
+            ],
           },
           {
             key: '212',
@@ -174,15 +217,27 @@ const treeNodes = [
 ]
 
 export const Basic = () => {
-  const [selectedKeys, setSelectedkeys] = useState(['1', '211', '212'])
+  const [selectedKeys, setSelectedkeys] = useState([
+    'test-100',
+    'test-200',
+    'test-254',
+  ])
 
   const onSelect = ({ added, removed }) => {
-    // Do what needs to be done when new nodes are selected / unselected
-    // And then if needed:
+    // onSelect returns the status of the nodes that were either added as selected or removed.
+    // So do what needs to be done when new nodes are selected / unselected, like add or remove a marker of the camera from the map.
+    // And then, if needed, set the selectedKeys state :
     const newSelectedKeys = [...selectedKeys]
     newSelectedKeys.filter(key => !removed.includes(key))
     setSelectedkeys([...newSelectedKeys, ...added])
   }
+
+  const loadMoreNodes = () =>
+    new Promise(resolve => {
+      setTimeout(() => {
+        resolve([...createTestRootNodes(15)])
+      }, 500)
+    })
 
   const rootNodeActions = useMemo(
     () => [
@@ -209,11 +264,34 @@ export const Basic = () => {
 
   return (
     <Tree
+      nodes={[...createTestRootNodes()]}
+      selectedKeys={selectedKeys}
+      onSelect={onSelect}
+      rootNodeActions={rootNodeActions}
+      loadMoreData={loadMoreNodes}
+      maxNestingLevel={1}
+    />
+  )
+}
+
+export const NestedTree = () => {
+  const [selectedKeys, setSelectedkeys] = useState(['1', '2', '33', '42'])
+
+  const onSelect = ({ added, removed }) => {
+    // onSelect returns the status of the nodes that were either added as selected or removed.
+    // So do what needs to be done when new nodes are selected / unselected, like add or remove a marker of the camera from the map.
+    // And then, if needed, set the selectedKeys state :
+    const newSelectedKeys = [...selectedKeys]
+    newSelectedKeys.filter(key => !removed.includes(key))
+    setSelectedkeys([...newSelectedKeys, ...added])
+  }
+
+  return (
+    <Tree
       nodes={treeNodes}
       selectedKeys={selectedKeys}
       onSelect={onSelect}
-      isSearchable
-      rootNodeActions={rootNodeActions}
+      maxNestingLevel={3}
     />
   )
 }

@@ -80,6 +80,7 @@
 
   .nodesContainer {
     display: flex;
+    flex: 1;
     flex-direction: column;
     min-height: av-size(sz-480);
 
