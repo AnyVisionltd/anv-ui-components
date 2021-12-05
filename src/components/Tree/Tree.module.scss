@@ -1,0 +1,177 @@
+@import '~@anyvision/style-guide';
+
+.tree {
+  width: av-size(sz-480);
+  height: 100%;
+  background-color: av-color(secondary);
+  padding: av-space(medium);
+
+  .checkbox {
+    span {
+      border: solid 2px av-color(purewhite, av-opacity(medium));
+    }
+  }
+
+  .searchInput {
+    width: 100%;
+    height: av-size(sz-40);
+    margin-bottom: av-space();
+    border: solid 1px av-color(purewhite, av-opacity(divider));
+    transition: all 0.3s ease-in-out;
+
+    &:focus-within {
+      border-color: av-color(primary, av-opacity(medium));
+    }
+
+    input {
+      width: 100%;
+      height: 100%;
+      caret-color: av-color(purewhite, av-opacity(divider));
+      padding: av-space(tiny);
+      color: av-color(purewhite, av-opacity(medium));
+
+      &::placeholder {
+        @extend %av-body2;
+        color: av-color(purewhite, av-opacity(medium));
+      }
+    }
+
+    .searchIcon {
+      fill: av-color(purewhite, av-opacity(divider));
+      font-size: av-font-size(large);
+    }
+  }
+
+  .bulkActions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: av-space() 0;
+    padding: 0 av-space();
+
+    .bulkSelectContainer {
+      display: flex;
+      align-items: center;
+      padding: av-space(micro) 0;
+
+      .bulkSelectCheckbox {
+        span {
+          border: solid 2px av-color(purewhite, av-opacity(disabled));
+        }
+      }
+
+      .bulkSelectLabel {
+        @extend %av-body2;
+        color: av-color(purewhite);
+      }
+    }
+
+    .bulkExpand {
+      @extend %av-body2;
+      color: av-color(primary);
+      padding: av-space(micro);
+      cursor: pointer;
+
+      &:hover {
+        background: av-color(primary, av-opacity(divider));
+      }
+    }
+  }
+
+  .nodesContainer {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: av-size(sz-480);
+
+    .parentNode {
+      align-items: center;
+      display: grid;
+      grid-template-rows: min-content min-content;
+      grid-template-columns: auto 1fr;
+      border-radius: av-radius(tidy);
+      transition: all 0.3s ease-in-out;
+      background-color: inherit;
+      border: solid 1px transparent;
+      padding: 0 av-space();
+      position: relative;
+
+      &:hover {
+        background-color: av-color(purewhite, av-opacity(ghost));
+
+        > div[class*='actionsCell'] {
+          opacity: 1;
+        }
+      }
+
+      &.isHoverBackground {
+        &:hover {
+          background-color: av-color(purewhite, av-opacity(divider));
+        }
+      }
+
+      &.isNotSelected {
+        border: solid 1px av-color(trueblack, av-opacity(divider));
+        background-color: rgba(1, 10, 20, 0.12);
+      }
+
+      .isSelectedCheckbox {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+      }
+
+      .parentLabel {
+        grid-column: 2 / -1;
+        grid-row: 1 / 2;
+        @extend %av-subtitle2;
+        color: av-color(purewhite);
+        line-height: av-size(sz-24);
+        margin: 0;
+      }
+
+      .parentNodeContent {
+        grid-column: 2 / -1;
+        grid-row: 2 / -1;
+        margin-left: calc(-1 * #{av-space(tiny)});
+        display: flex;
+        flex-direction: column;
+
+        .parentNodeInfo {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          height: min-content;
+
+          .parentInfoText {
+            @extend %av-body2;
+            color: av-color(purewhite, av-opacity(medium));
+            line-height: av-size(sz-16);
+          }
+        }
+      }
+    }
+
+    .leafNode {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: av-size(sz-48);
+      padding: 0 av-space();
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        background-color: av-color(purewhite, av-opacity(divider));
+      }
+
+      .leftSideLeaf {
+        display: flex;
+        align-items: center;
+
+        .leafLabel {
+          @extend %av-body2;
+          color: av-color(purewhite);
+        }
+      }
+    }
+  }
+}

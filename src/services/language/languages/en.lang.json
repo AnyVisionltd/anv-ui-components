@@ -26,6 +26,16 @@
     "label": "Label",
     "dateAndTime": "Date & Time",
     "time": "Time",
-    "date": "Date"
+    "date": "Date",
+    "search": "Search",
+    "item": "Item",
+    "items": "Items",
+    "selected": "Selected",
+    "expandAll": "Expand All",
+    "collapseAll": "Collapse All",
+    "selectAll": "Select All",
+    "selectNone": "Select None",
+    "clearSearch": "Clear Search",
+    "listIsEmpty": "List Is Empty"
   }
 }

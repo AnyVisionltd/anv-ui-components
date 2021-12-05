@@ -33,5 +33,6 @@ export { DateRangePicker } from './components/DateRangePicker'
 export { ResultIndicator } from './components/ResultIndicator'
 export { ProgressWithIndicator } from './components/ProgressWithIndicator'
 export { Dropdown } from './components/Dropdown'
+export { Tree } from './components/Tree'
 
 export { useFormProvider } from './components/FormProvider/useFormProvider'
