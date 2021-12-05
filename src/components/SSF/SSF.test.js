@@ -2,7 +2,7 @@ import React from 'react'
 import { render, fireEvent, act } from '@testing-library/react'
 import SmartFilter from './SSF'
 import { ReactComponent as ArrowSolidRight } from '../../assets/svg/ArrowSolidRight.svg'
-import { screen, waitFor } from '@testing-library/dom'
+import { screen } from '@testing-library/dom'
 import keymap from '../../utils/enums/keymap'
 
 const fields = [
@@ -80,7 +80,7 @@ describe('<SSF />', () => {
       fireEvent.click(menuItems[2])
 
       // input value should be changed after menu item selection
-      await waitFor(() => expect(input.value).toEqual(`${fields[2].label}: `))
+      expect(input.value).toEqual(`${fields[2].label}: `)
       fireEvent.change(input, { target: { value: `${input.value}asda` } })
       // value should not be changed for field of type number if input is not a number
       expect(input.value).toEqual(`${fields[2].label}: `)
@@ -101,7 +101,7 @@ describe('<SSF />', () => {
             expect(chip.value).toEqual(mockRegularChip)
           } else if (index === 1) {
             expect(chip.value).toEqual(mockFieldChip)
-            await waitFor(() => expect(chip.field).toEqual(fields[2].field))
+            expect(chip.field).toEqual(fields[2].field)
           }
         })
       }

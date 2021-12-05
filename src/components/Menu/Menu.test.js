@@ -136,7 +136,6 @@ describe('<Menu />', () => {
 
     it('Arrow Down key should focus the first > second > anchor > first <Menu.Item/>', async () => {
       const { getAllByRole } = render(<MenuWithAnchor />)
-      await waitFor(() => {})
       const anchor = screen.getByRole('button')
       fireEvent.click(anchor)
       const [firstMenuItem, secondMenuItem] = getAllByRole('menuitem')
@@ -152,7 +151,6 @@ describe('<Menu />', () => {
 
     it('Arrow Up key should focus the last <Menu.Item/>', async () => {
       const { getAllByRole } = render(<MenuWithAnchor />)
-      await waitFor(() => {})
       const anchor = screen.getByRole('button')
       fireEvent.click(anchor)
       const [firstMenuItem, secondMenuItem] = getAllByRole('menuitem')

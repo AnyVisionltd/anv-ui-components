@@ -29,9 +29,7 @@ const MenuItem = forwardRef(
       if (disabled) {
         return
       }
-      setTimeout(() => {
-        onClick(event)
-      }, 300)
+      onClick(event)
     }
 
     const handleOnKeyDown = event => {

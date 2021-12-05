@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent, waitFor } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import user from '@testing-library/user-event'
 import { screen } from '@testing-library/dom'
 import keymap from '../../utils/enums/keymap'
@@ -39,7 +39,6 @@ describe('<ChipsInput />', () => {
       render(<ChipsInput onInputChange={onInputChange} />)
       changeInput('a')
       changeInput('b')
-      await waitFor(() => {})
       // 3 because onInputChange fire on first render + add & clear for each submit
       expect(onInputChange).toBeCalledTimes(3)
       expect(onInputChange.mock.calls[1][0]).toEqual('a')
@@ -85,7 +84,7 @@ describe('<ChipsInput />', () => {
   })
 
   describe('autocomplete', () => {
-    it('should render autocomplete', async () => {
+    it('should render autocomplete', () => {
       const autocomplete = [{ label: 'first', value: '1' }]
       const onChange = jest.fn()
       render(<ChipsInput onChange={onChange} autocomplete={autocomplete} />)
@@ -95,7 +94,7 @@ describe('<ChipsInput />', () => {
       expect(firstAutocompleteItem).toBeTruthy()
       user.click(firstAutocompleteItem)
       screen.getAllByText('first')
-      await waitFor(() => expect(screen.getByTestId('chip')).toBeTruthy())
+      expect(screen.getByTestId('chip')).toBeTruthy()
     })
   })
 

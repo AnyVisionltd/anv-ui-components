@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent, waitFor } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import { ReactComponent as SvgIcon } from '../../../jest/assets/svgIcon.svg'
 import TextField from './TextField'
 
@@ -50,12 +50,12 @@ describe('<TextField />', () => {
     expect(node).toBeTruthy()
   })
 
-  it('should call onClick', async () => {
+  it('should call onClick', () => {
     const handleClick = jest.fn()
     const { getByRole } = render(<TextField onClick={handleClick} />)
     const node = getByRole('textbox')
     fireEvent.click(node)
-    await waitFor(() => expect(handleClick).toBeCalled())
+    expect(handleClick).toBeCalled()
   })
 
   it('should call onChange', () => {
@@ -73,7 +73,7 @@ describe('<TextField />', () => {
       { value: 'Tomatoes', label: 'Tomatoes' },
     ]
 
-    it('should call onMenuItemClick', async () => {
+    it('should call onMenuItemClick', () => {
       const handleClick = jest.fn()
       const { getByDisplayValue, getByText } = render(
         <TextField
@@ -88,7 +88,7 @@ describe('<TextField />', () => {
       const node = getByText('Olives')
       expect(node).toBeTruthy()
       fireEvent.click(node)
-      await waitFor(() => expect(handleClick).toBeCalled())
+      expect(handleClick).toBeCalled()
     })
   })
 })
