@@ -1,0 +1,28 @@
+@import '~@anyvision/style-guide';
+
+.noResults {
+  display: flex;
+  align-items: center;
+  margin-top: calc(#{av-space(giant)} + #{av-space(medium)});
+  flex-direction: column;
+  justify-content: center;
+  color: av-color(purewhite);
+  z-index: av-z-index(popup);
+
+  svg {
+    margin-bottom: av-space();
+    fill: av-color(purewhite, av-opacity(medium));
+    height: av-size(sz-96);
+    width: av-size(sz-96);
+  }
+
+  .noResultsText {
+    @extend %av-subtitle1;
+    margin-bottom: av-space(tiny);
+  }
+
+  .clearButton {
+    @extend %av-subtitle2;
+    text-transform: capitalize;
+  }
+}

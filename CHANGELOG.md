@@ -49,6 +49,7 @@
 - Added TimePicker component
 - New Dropdown component
 - Added DualThumb for RangeSlider
+- New Tree component
 - Added new `<ToastMessage />` component - `src/components/ToastMessage`
 
 ### packages updates:

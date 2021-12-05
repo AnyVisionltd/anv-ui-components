@@ -11,6 +11,11 @@
   cursor: pointer;
   max-width: av-size(sz-320);
 
+  &.menuItemDisabled {
+    opacity: av-opacity(disabled);
+    cursor: not-allowed;
+  }
+
   .ellipsis {
     text-overflow: ellipsis;
     overflow: hidden;
@@ -20,7 +25,7 @@
   .menuLeadingComponent {
     display: flex;
     align-items: center;
-    margin-right: av-space();
+    margin-right: av-space(tiny);
     svg {
       height: 24px;
       width: 24px;

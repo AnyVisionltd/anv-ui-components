@@ -14,6 +14,7 @@ const Checkbox = ({
   onChange,
   className,
   id,
+  renderIcon,
   ...otherProps
 }) => {
   const { isView } = useFormProvider({ view })
@@ -27,6 +28,7 @@ const Checkbox = ({
   )
 
   const renderCheckboxIcon = () => {
+    if (renderIcon) return renderIcon(checked)
     if (checked) {
       return <CheckboxChecked />
     }

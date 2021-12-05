@@ -9,7 +9,7 @@ export const findScrollerNodeBottom = node => {
   } = node.getBoundingClientRect()
 
   while (node !== null) {
-    if (maxHeight > node.offsetHeight) return scrollerNodeBottom
+    if (maxHeight >= node.offsetHeight) return scrollerNodeBottom
     const { bottom, height } = node.getBoundingClientRect()
     maxHeight = height
     scrollerNodeBottom = bottom
@@ -17,4 +17,15 @@ export const findScrollerNodeBottom = node => {
   }
 
   return scrollerNodeBottom
+}
+
+export const throttle = (callback, waitMs = 700) => {
+  let wait = false
+  return () => {
+    if (!wait) {
+      callback()
+      wait = true
+      setTimeout(() => (wait = false), waitMs)
+    }
+  }
 }

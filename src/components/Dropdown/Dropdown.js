@@ -22,8 +22,10 @@ const getTranslation = path => languageService.getTranslation(`${path}`)
 
 const getMenuPlacement = ({ menuHeight, containerElement }) => {
   if (!containerElement) return
-  const scrollerNodeBottom = findScrollerNodeBottom(containerElement)
   const { bottom: containerBottom } = containerElement.getBoundingClientRect()
+  if (document.body.clientHeight - containerBottom > menuHeight) return false
+
+  const scrollerNodeBottom = findScrollerNodeBottom(containerElement)
   return scrollerNodeBottom - containerBottom < menuHeight
 }
 

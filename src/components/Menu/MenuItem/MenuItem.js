@@ -21,6 +21,7 @@ const MenuItem = forwardRef(
       styles.menuItem,
       isSubMenu && styles.subMenuItem,
       className,
+      disabled && styles.menuItemDisabled,
     )
 
     const handleOnClick = event => {
