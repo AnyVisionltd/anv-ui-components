@@ -32,19 +32,34 @@ export const ToastMessageTypes = () => {
   return (
     <>
       <div className={styles.marginFlexContainer}>
-        <Button className={styles.successColor} variant='outline' onClick={() => setIsOpenSuccess(true)}>
+        <Button
+          className={styles.successColor}
+          variant='outline'
+          onClick={() => setIsOpenSuccess(true)}
+        >
           Success Message
         </Button>
-        <Button className={styles.infoColor} variant='outline' onClick={() => setIsOpenInfo(true)}>
+        <Button
+          className={styles.infoColor}
+          variant='outline'
+          onClick={() => setIsOpenInfo(true)}
+        >
           Info Message
         </Button>
-        <Button className={styles.alertColor} variant='outline' onClick={() => setIsOpenAlert(true)}>
+        <Button
+          className={styles.alertColor}
+          variant='outline'
+          onClick={() => setIsOpenAlert(true)}
+        >
           Alert Message
         </Button>
-        <Button className={styles.errorColor} variant='outline' onClick={() => setIsOpenError(true)}>
+        <Button
+          className={styles.errorColor}
+          variant='outline'
+          onClick={() => setIsOpenError(true)}
+        >
           Error Message
         </Button>
-
       </div>
       <ToastMessage
         isOpen={isOpenSuccess}
@@ -80,7 +95,7 @@ export const WithUndoButton = () => {
     <>
       <Button onClick={() => setIsOpen(true)}>With Undo Button</Button>
       <ToastMessage
-        isOpen
+        isOpen={isOpen}
         onClose={useCallback(() => setIsOpen(false), [])}
         message='This Is a Toast Message with undo button'
         isUndo={true}
