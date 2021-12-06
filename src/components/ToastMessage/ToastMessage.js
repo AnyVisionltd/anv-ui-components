@@ -60,9 +60,7 @@ const ToastMessage = ({ message, type, isUndo, undoCallback, closeIcon, isOpen, 
       <Button className={styles.undoButton} onClick={undoCallback} variant='ghost'
               size='small'>{ languageService.getTranslation('undo') }</Button>
 
-  const classes = classNames(styles.toastMessage, className, {
-    [styles[type]]: !!type,
-  })
+  const classes = classNames(styles.toastMessage, className, styles[type])
 
   return (
     <Animations.Slide isOpen={isOpen}>
