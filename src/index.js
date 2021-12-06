@@ -34,5 +34,6 @@ export { ResultIndicator } from './components/ResultIndicator'
 export { ProgressWithIndicator } from './components/ProgressWithIndicator'
 export { Dropdown } from './components/Dropdown'
 export { Tree } from './components/Tree'
+export { ToastMessage } from './components/ToastMessage'
 
 export { useFormProvider } from './components/FormProvider/useFormProvider'

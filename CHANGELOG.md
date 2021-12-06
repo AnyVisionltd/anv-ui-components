@@ -50,6 +50,8 @@
 - New Dropdown component
 - Added DualThumb for RangeSlider
 - New Tree component
+- Added new `<ToastMessage />` component - `src/components/ToastMessage`
+
 
 ## 1.0.0 - 06-09-2020
 
