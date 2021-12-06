@@ -2,8 +2,6 @@
 
 :root {
   --box-shadow-vertical-length: -6px;
-  --svg-size: 2.5em;
-  --undo-button-margin: 10px;
 }
 
 .toastMessage {
@@ -11,7 +9,7 @@
   @include av-elevation(temporary);
   min-width: av-size(sz-320);
   max-width: av-size(sz-480);
-  height: calc(#{av-size(sz-64)} + #{av-size(sz-8)});
+  height: av-size(sz-64);
   background-color: av-color(purewhite);
   align-items: center;
   border-radius: av-radius();
@@ -62,8 +60,8 @@
     align-items: center;
 
     & > svg {
-      height: var(--svg-size);
-      width: var(--svg-size);
+      height: av-size(sz-40);
+      width: av-size(sz-40);
     }
   }
 }
@@ -78,6 +76,6 @@
 
   .undoButton {
     font-weight: av-font-weight(bold);
-    margin: 0 var(--undo-button-margin);
+    margin: 0 av-space(tiny);
   }
 }

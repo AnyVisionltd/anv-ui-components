@@ -36,6 +36,7 @@
     "selectAll": "Select All",
     "selectNone": "Select None",
     "clearSearch": "Clear Search",
-    "listIsEmpty": "List Is Empty"
+    "listIsEmpty": "List Is Empty",
+    "undo": "Undo"
   }
 }
