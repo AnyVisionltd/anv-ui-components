@@ -26,8 +26,6 @@ const map = {
   },
 }
 
-const toastMessageTypeMapper = type => {
-  return map[type]
-}
+const toastMessageTypeMapper = type => map[type]
 
 export default toastMessageTypeMapper
