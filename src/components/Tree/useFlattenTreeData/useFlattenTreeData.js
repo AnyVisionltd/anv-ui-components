@@ -144,7 +144,7 @@ const useFlattenTreeData = ({ data, selectedKeys = [], maxNestingLevel }) => {
   )
 
   useEffect(() => {
-    if (Object.keys(flattenedNodes).length) return
+    if (Object.keys(flattenedNodes).length || !data.length) return
     flattenTreeData(data, new Set(selectedKeys))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data])
