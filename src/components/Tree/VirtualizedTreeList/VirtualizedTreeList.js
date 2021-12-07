@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useMemo } from 'react'
 import propTypes from 'prop-types'
 import { VariableSizeTree as TreeList } from 'react-vtree'
 import AutoSizer from 'react-virtualized-auto-sizer'
@@ -40,7 +40,7 @@ const Node = ({
   )
 }
 
-const buildTreeWalker = rootNode =>
+const buildTreeWalker = ({ rootNode, childrenKey, idKey, labelKey }) =>
   function* treeWalker(refresh) {
     const stack = Object.values(rootNode).map(node => ({
       nestingLevel: 0,
@@ -49,7 +49,13 @@ const buildTreeWalker = rootNode =>
 
     while (stack.length) {
       const { node, nestingLevel } = stack.shift()
-      const { isParentNode, key, label, children, visible } = node
+      const {
+        isParentNode,
+        [idKey]: key,
+        [labelKey]: label,
+        [childrenKey]: children,
+        visible,
+      } = node
 
       if (!visible) continue
 
@@ -82,9 +88,12 @@ const VirtualizedTreeList = ({
   renderNode,
   loadMoreData,
   isSearching,
+  ...keyValues
 }) => {
   const innerRef = useRef()
-  const throttledLoadMoreData = useRef(throttle(loadMoreData))
+  const throttledLoadMoreData = useMemo(() => throttle(loadMoreData), [
+    loadMoreData,
+  ])
 
   const handleInfiniteScroll = (
     { scrollOffset, scrollDirection },
@@ -98,7 +107,7 @@ const VirtualizedTreeList = ({
     )
       return
     if (virtualizedListHeight - 2 * listHeight <= scrollOffset) {
-      throttledLoadMoreData.current()
+      throttledLoadMoreData()
     }
   }
 
@@ -112,7 +121,7 @@ const VirtualizedTreeList = ({
             renderNode,
             maxContainerWidth: width,
           }}
-          treeWalker={buildTreeWalker(rootNode)}
+          treeWalker={buildTreeWalker({ rootNode, ...keyValues })}
           height={height}
           width={width}
           innerRef={innerRef}

@@ -1,7 +1,14 @@
 import { useState, useCallback, useEffect, useRef } from 'react'
 import { ALL_ROOTS_COMBINED_KEY } from '../utils'
 
-const useFlattenTreeData = ({ data, selectedKeys = [], maxNestingLevel }) => {
+const useFlattenTreeData = ({
+  data,
+  selectedKeys = [],
+  maxNestingLevel,
+  childrenKey,
+  labelKey,
+  idKey,
+}) => {
   const [flattenedNodes, setFlattenedNodes] = useState({})
   const nodeKeysMap = useRef(new Map())
   const isSelectedKeysUpdatedAfterMount = useRef(false)
@@ -13,10 +20,10 @@ const useFlattenTreeData = ({ data, selectedKeys = [], maxNestingLevel }) => {
       }
 
       treeData.forEach(node => {
-        const { key, children, parentKey } = node
+        const { [idKey]: key, [childrenKey]: children, parentKey } = node
 
         if (layer === 0) {
-          nodesMap[ALL_ROOTS_COMBINED_KEY].children.push({ key })
+          nodesMap[ALL_ROOTS_COMBINED_KEY][childrenKey].push({ [idKey]: key })
         }
 
         let isSelected = false
@@ -29,26 +36,28 @@ const useFlattenTreeData = ({ data, selectedKeys = [], maxNestingLevel }) => {
 
         nodesMap[key] = {
           ...node,
-          children: children ? children.map(({ key }) => ({ key })) : undefined,
+          [childrenKey]: children
+            ? children.map(({ [idKey]: key }) => ({ [idKey]: key }))
+            : undefined,
           layer,
           isSelected: isParentSelected ? isParentSelected : isSelected,
-          isExpanded: false,
         }
         // eslint-disable-next-line no-unused-vars
         flatten(children, nodesMap, selectedKeysSet, layer + 1)
       })
     },
-    [],
+    [childrenKey, idKey],
   )
 
   const getTotalNodeChildren = useCallback(
     (children, nodeNesingLevel) => {
       // It means that the current parentNode has only leaves so no need to filter
       if (maxNestingLevel - nodeNesingLevel === 1) return children.length
-      return children.filter(({ key }) => !flattenedNodes[key]?.isParentNode)
-        .length
+      return children.filter(
+        ({ [idKey]: key }) => !flattenedNodes[key]?.isParentNode,
+      ).length
     },
-    [flattenedNodes, maxNestingLevel],
+    [flattenedNodes, maxNestingLevel, idKey],
   )
 
   const calculateAmountOfSelectedNodesAndChildren = useCallback(
@@ -56,13 +65,14 @@ const useFlattenTreeData = ({ data, selectedKeys = [], maxNestingLevel }) => {
       if (!Object.keys(flattenedNodes).length) return {}
       if (!isUpdate && nodeKeysMap.current.has(nodeKey))
         return nodeKeysMap.current.get(nodeKey)
-      const { isSelected, children, layer } = flattenedNodes[nodeKey] || {}
+      const { isSelected, [childrenKey]: children, layer } =
+        flattenedNodes[nodeKey] || {}
       if (children) {
         const nodeCachedValue = {
           totalChildren: getTotalNodeChildren(children, layer),
           totalSelected: 0,
         }
-        children.forEach(({ key }) => {
+        children.forEach(({ [idKey]: key }) => {
           const {
             totalChildren,
             totalSelected,
@@ -76,7 +86,7 @@ const useFlattenTreeData = ({ data, selectedKeys = [], maxNestingLevel }) => {
         return { totalChildren: 0, totalSelected: isSelected ? 1 : 0 }
       }
     },
-    [flattenedNodes, getTotalNodeChildren],
+    [childrenKey, flattenedNodes, getTotalNodeChildren, idKey],
   )
 
   const updateAmountOfSelectedNodesAndChildren = useCallback(
@@ -97,8 +107,8 @@ const useFlattenTreeData = ({ data, selectedKeys = [], maxNestingLevel }) => {
     newNodesData => {
       const newFlattenedNodes = {}
       newFlattenedNodes[ALL_ROOTS_COMBINED_KEY] = {
-        key: ALL_ROOTS_COMBINED_KEY,
-        children: [],
+        [idKey]: ALL_ROOTS_COMBINED_KEY,
+        [childrenKey]: [],
       }
 
       flatten(newNodesData, newFlattenedNodes)
@@ -106,15 +116,15 @@ const useFlattenTreeData = ({ data, selectedKeys = [], maxNestingLevel }) => {
         ...prev,
         ...newFlattenedNodes,
         [ALL_ROOTS_COMBINED_KEY]: {
-          key: ALL_ROOTS_COMBINED_KEY,
-          children: [
-            ...prev[ALL_ROOTS_COMBINED_KEY].children,
-            ...newFlattenedNodes[ALL_ROOTS_COMBINED_KEY].children,
+          [idKey]: ALL_ROOTS_COMBINED_KEY,
+          [childrenKey]: [
+            ...prev[ALL_ROOTS_COMBINED_KEY][childrenKey],
+            ...newFlattenedNodes[ALL_ROOTS_COMBINED_KEY][childrenKey],
           ],
         },
       }))
     },
-    [flatten],
+    [childrenKey, flatten, idKey],
   )
 
   const handleSetSelectedNodesFromKeysArr = useCallback(
@@ -133,18 +143,18 @@ const useFlattenTreeData = ({ data, selectedKeys = [], maxNestingLevel }) => {
     (treeData, selectedKeysSet, layer = 0) => {
       const flattenedNodesMap = {}
       flattenedNodesMap[ALL_ROOTS_COMBINED_KEY] = {
-        key: ALL_ROOTS_COMBINED_KEY,
-        children: [],
+        [idKey]: ALL_ROOTS_COMBINED_KEY,
+        [childrenKey]: [],
       }
 
       flatten(treeData, flattenedNodesMap, selectedKeysSet, layer)
       setFlattenedNodes(flattenedNodesMap)
     },
-    [flatten],
+    [childrenKey, flatten, idKey],
   )
 
   useEffect(() => {
-    if (Object.keys(flattenedNodes).length) return
+    if (Object.keys(flattenedNodes).length || !data.length) return
     flattenTreeData(data, new Set(selectedKeys))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data])

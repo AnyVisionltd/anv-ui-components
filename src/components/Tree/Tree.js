@@ -25,6 +25,7 @@ const Tree = ({
   nodes,
   selectedKeys,
   className,
+  nodesContainerClassName,
   isSearchable,
   isBulkActionsEnabled,
   onSearch,
@@ -38,10 +39,14 @@ const Tree = ({
   loadMoreData,
   maxNestingLevel,
   noItemsMessage,
+  childrenKey,
+  labelKey,
+  idKey,
 }) => {
   const [treeInstance, setTreeInstance] = useState(null)
   const [areAllNodesExpanded, setAreAllNodesExpanded] = useState(false)
   const [singularNounLabel, pluralNounLabel] = displayLabels
+  const keyValues = { childrenKey, labelKey, idKey }
 
   const {
     searchQuery,
@@ -49,7 +54,12 @@ const Tree = ({
     filteredData,
     resetSearchData,
     handleAddNewNodes,
-  } = useTreeVisibleData({ initialData: nodes, onSearch, treeInstance })
+  } = useTreeVisibleData({
+    initialData: nodes,
+    onSearch,
+    treeInstance,
+    ...keyValues,
+  })
 
   const {
     flattenedNodes,
@@ -61,6 +71,7 @@ const Tree = ({
     data: nodes,
     selectedKeys,
     maxNestingLevel,
+    ...keyValues,
   })
 
   const {
@@ -71,24 +82,36 @@ const Tree = ({
 
   const handleIsSelected = (node, isCurrentlySelected) => {
     const newFlattenedNodes = { ...flattenedNodes }
-    const { keys: keysToToggle, nodesMap } = setNodesSelectedStatus(
-      Array.isArray(node) ? node : [node],
-      newFlattenedNodes,
-      !isCurrentlySelected,
-    )
+    const { keys: keysToToggle, nodesMap } = setNodesSelectedStatus({
+      nodesTree: Array.isArray(node) ? node : [node],
+      nodesMap: newFlattenedNodes,
+      isSelected: !isCurrentlySelected,
+      childrenKey,
+      idKey,
+    })
 
     setFlattenedNodes(nodesMap)
     updateAmountOfSelectedNodesAndChildren(
-      Array.isArray(node) ? ALL_ROOTS_COMBINED_KEY : node.key,
+      Array.isArray(node) ? ALL_ROOTS_COMBINED_KEY : node[idKey],
     )
     onSelect(keysToToggle)
   }
 
   useEffect(() => {
-    const areAllExpanded = checkAllNodesAreExpanded(
-      filteredData,
-      treeInstance?.state?.records,
-    )
+    if (filteredData.length < nodes.length) {
+      const newAddedNodes = nodes.slice(filteredData.length)
+      handleAddNewNodes(newAddedNodes)
+      handleAddNewFlattenedNodes(newAddedNodes)
+    }
+  }, [filteredData, handleAddNewFlattenedNodes, handleAddNewNodes, nodes])
+
+  useEffect(() => {
+    const areAllExpanded = checkAllNodesAreExpanded({
+      nodesTree: filteredData,
+      nodesVirualizedMap: treeInstance?.state?.records,
+      idKey,
+      childrenKey,
+    })
 
     areAllExpanded !== areAllNodesExpanded &&
       setAreAllNodesExpanded(areAllExpanded)
@@ -97,10 +120,12 @@ const Tree = ({
 
   const handleBulkExpandCollapse = () => {
     if (treeInstance) {
-      const allExpandedCollapsedNodesObj = setNodesExpandedStatus(
-        filteredData,
-        !areAllNodesExpanded,
-      )
+      const allExpandedCollapsedNodesObj = setNodesExpandedStatus({
+        nodesTree: filteredData,
+        isOpen: !areAllNodesExpanded,
+        childrenKey,
+        idKey,
+      })
       treeInstance.state.recomputeTree({
         opennessState: allExpandedCollapsedNodesObj,
         refreshNodes: true,
@@ -153,7 +178,7 @@ const Tree = ({
   )
 
   const renderParentNode = (node, virtualizedListProps, rootNodeProps = {}) => {
-    const { key, label, children } = node
+    const { [idKey]: key, [labelKey]: label, [childrenKey]: children } = node
     const { isOpen, handleExpand } = virtualizedListProps
     const { renderActions } = rootNodeProps
     const {
@@ -190,7 +215,7 @@ const Tree = ({
   }
 
   const renderLeafNode = node => {
-    const { key, label } = node
+    const { [idKey]: key, [labelKey]: label } = node
     const isSelected = flattenedNodes[key]?.isSelected
 
     return renderLeaf ? (
@@ -211,7 +236,7 @@ const Tree = ({
   }
 
   const renderNode = (node, layer, virtualizedListProps) => {
-    const { children, visible } = node
+    const { [childrenKey]: children, visible } = node
     if (!visible) return null
     if (!children) return renderLeafNode(node)
     if (layer === 0 && rootNodeActions.length) {
@@ -233,7 +258,9 @@ const Tree = ({
     <div className={classNames(styles.tree, className)}>
       {isSearchable && renderSearchInput()}
       {isBulkActionsEnabled && !isEmpty && renderBulkActions()}
-      <div className={styles.nodesContainer}>
+      <div
+        className={classNames(styles.nodesContainer, nodesContainerClassName)}
+      >
         {isEmpty && (
           <EmptyTreeSearch
             type={
@@ -251,6 +278,7 @@ const Tree = ({
           renderNode={renderNode}
           loadMoreData={handleLoadMoreData}
           isSearching={!!searchQuery.length}
+          {...keyValues}
         />
       </div>
     </div>
@@ -271,21 +299,26 @@ Tree.defaultProps = {
   loadMoreData: () => {},
   maxNestingLevel: -1,
   noItemsMessage: getTranslation('listIsEmpty'),
+  childrenKey: 'children',
+  labelKey: 'label',
+  idKey: 'key',
 }
 
 Tree.propTypes = {
   /** Nodes of the tree. If a node has children, it's a parent node, else it's a leaf node. */
-  nodes: propTypes.arrayOf(
-    propTypes.shape({
-      key: propTypes.any.isRequired,
-      label: propTypes.string.isRequired,
-      children: propTypes.array,
-    }),
-  ),
+  nodes: propTypes.array,
   /** Selected nodes in the tree, each item has his unique key. */
   selectedKeys: propTypes.arrayOf(propTypes.any),
+  /** The key value of the node's children property. Default is 'children'. */
+  childrenKey: propTypes.string,
+  /** The key value of the node's unique id property. Default is 'key'. */
+  idKey: propTypes.string,
+  /** The key value of the node's name property. Default is 'label'. */
+  labelKey: propTypes.string,
   /** For css customization. */
   className: propTypes.string,
+  /** For css customization. */
+  nodesContainerClassName: propTypes.string,
   /** Enable search. */
   isSearchable: propTypes.bool,
   /** Called when user types in the search input. */

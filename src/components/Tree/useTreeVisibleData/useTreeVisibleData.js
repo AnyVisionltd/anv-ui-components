@@ -1,16 +1,23 @@
 import { useCallback, useState } from 'react'
 import { ALL_ROOTS_COMBINED_KEY } from '../utils'
 
-const useTreeVisibleData = ({ initialData, onSearch, treeInstance }) => {
+const useTreeVisibleData = ({
+  initialData,
+  onSearch,
+  treeInstance,
+  childrenKey,
+  labelKey,
+  idKey,
+}) => {
   const setAllNodesAsVisible = useCallback(
     (data, parentKey = ALL_ROOTS_COMBINED_KEY) => {
       const setAllVisible = nodes => {
         nodes.forEach(node => {
           node.visible = true
           node.parentKey = parentKey
-          if (node.children) {
+          if (node[childrenKey]) {
             node.isParentNode = true
-            setAllNodesAsVisible(node.children, node.key)
+            setAllNodesAsVisible(node[childrenKey], node[idKey])
           }
         })
       }
@@ -18,22 +25,22 @@ const useTreeVisibleData = ({ initialData, onSearch, treeInstance }) => {
       setAllVisible(data)
       return data
     },
-    [],
+    [childrenKey, idKey],
   )
 
   const filterVisibleData = useCallback(
     (data, searchKeyword, parentKey = ALL_ROOTS_COMBINED_KEY) => {
       const setVisible = nodes =>
         nodes.forEach(node => {
-          node.visible = node.label.toLowerCase().startsWith(searchKeyword)
+          node.visible = node[labelKey].toLowerCase().startsWith(searchKeyword)
           node.parentKey = parentKey
-          if (Array.isArray(node.children)) {
+          if (Array.isArray(node[childrenKey])) {
             node.isParentNode = true
             if (node.visible) {
-              setAllNodesAsVisible(node.children, node.key)
+              setAllNodesAsVisible(node[childrenKey], node[idKey])
             } else {
-              filterVisibleData(node.children, searchKeyword, node.key)
-              for (const child of node.children) {
+              filterVisibleData(node[childrenKey], searchKeyword, node[idKey])
+              for (const child of node[childrenKey]) {
                 if (child.visible) {
                   node.visible = child.visible
                   break
@@ -46,7 +53,7 @@ const useTreeVisibleData = ({ initialData, onSearch, treeInstance }) => {
       setVisible(data)
       return data
     },
-    [setAllNodesAsVisible],
+    [childrenKey, idKey, labelKey, setAllNodesAsVisible],
   )
 
   const [searchQuery, setSearchQuery] = useState('')
