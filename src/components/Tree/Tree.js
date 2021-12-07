@@ -97,6 +97,14 @@ const Tree = ({
   }
 
   useEffect(() => {
+    if (filteredData.length < nodes.length) {
+      const newAddedNodes = nodes.slice(filteredData.length)
+      handleAddNewNodes(newAddedNodes)
+      handleAddNewFlattenedNodes(newAddedNodes)
+    }
+  }, [filteredData, handleAddNewFlattenedNodes, handleAddNewNodes, nodes])
+
+  useEffect(() => {
     const areAllExpanded = checkAllNodesAreExpanded({
       nodesTree: filteredData,
       nodesVirualizedMap: treeInstance?.state?.records,

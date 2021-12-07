@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react'
+import { useCallback, useState } from 'react'
 import { ALL_ROOTS_COMBINED_KEY } from '../utils'
 
 const useTreeVisibleData = ({
@@ -92,14 +92,6 @@ const useTreeVisibleData = ({
       refreshNodes: true,
     })
   }
-
-  useEffect(() => {
-    if (filteredData.length < initialData.length) {
-      setFilteredData(
-        filterVisibleData(initialData, searchQuery.trim().toLowerCase()),
-      )
-    }
-  }, [filterVisibleData, filteredData, initialData, searchQuery])
 
   return {
     searchQuery,
