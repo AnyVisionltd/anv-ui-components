@@ -25,6 +25,7 @@ const Tree = ({
   nodes,
   selectedKeys,
   className,
+  nodesContainerClassName,
   isSearchable,
   isBulkActionsEnabled,
   onSearch,
@@ -257,7 +258,9 @@ const Tree = ({
     <div className={classNames(styles.tree, className)}>
       {isSearchable && renderSearchInput()}
       {isBulkActionsEnabled && !isEmpty && renderBulkActions()}
-      <div className={styles.nodesContainer}>
+      <div
+        className={classNames(styles.nodesContainer, nodesContainerClassName)}
+      >
         {isEmpty && (
           <EmptyTreeSearch
             type={
@@ -314,6 +317,8 @@ Tree.propTypes = {
   labelKey: propTypes.string,
   /** For css customization. */
   className: propTypes.string,
+  /** For css customization. */
+  nodesContainerClassName: propTypes.string,
   /** Enable search. */
   isSearchable: propTypes.bool,
   /** Called when user types in the search input. */
