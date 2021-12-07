@@ -40,7 +40,7 @@ const Node = ({
   )
 }
 
-const buildTreeWalker = rootNode =>
+const buildTreeWalker = ({ rootNode, childrenKey, idKey, labelKey }) =>
   function* treeWalker(refresh) {
     const stack = Object.values(rootNode).map(node => ({
       nestingLevel: 0,
@@ -49,7 +49,13 @@ const buildTreeWalker = rootNode =>
 
     while (stack.length) {
       const { node, nestingLevel } = stack.shift()
-      const { isParentNode, key, label, children, visible } = node
+      const {
+        isParentNode,
+        [idKey]: key,
+        [labelKey]: label,
+        [childrenKey]: children,
+        visible,
+      } = node
 
       if (!visible) continue
 
@@ -82,6 +88,7 @@ const VirtualizedTreeList = ({
   renderNode,
   loadMoreData,
   isSearching,
+  ...keyValues
 }) => {
   const innerRef = useRef()
   const throttledLoadMoreData = useRef(throttle(loadMoreData))
@@ -112,7 +119,7 @@ const VirtualizedTreeList = ({
             renderNode,
             maxContainerWidth: width,
           }}
-          treeWalker={buildTreeWalker(rootNode)}
+          treeWalker={buildTreeWalker({ rootNode, ...keyValues })}
           height={height}
           width={width}
           innerRef={innerRef}
