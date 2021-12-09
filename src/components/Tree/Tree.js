@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState, useCallback, forwardRef, useImperativeHandle } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 import { Search } from '@anyvision/anv-icons'
@@ -16,15 +16,17 @@ import {
   checkAllNodesAreExpanded,
   emptyListTypes,
   ALL_ROOTS_COMBINED_KEY,
+  getNodeParents
 } from './utils'
 import styles from './Tree.module.scss'
 
 const getTranslation = path => languageService.getTranslation(`${path}`)
 
-const Tree = ({
+const Tree = forwardRef(({
   nodes,
   selectedKeys,
   className,
+  nodesContainerClassName,
   isSearchable,
   isBulkActionsEnabled,
   onSearch,
@@ -41,7 +43,7 @@ const Tree = ({
   childrenKey,
   labelKey,
   idKey,
-}) => {
+}, ref) => {
   const [treeInstance, setTreeInstance] = useState(null)
   const [areAllNodesExpanded, setAreAllNodesExpanded] = useState(false)
   const [singularNounLabel, pluralNounLabel] = displayLabels
@@ -53,6 +55,7 @@ const Tree = ({
     filteredData,
     resetSearchData,
     handleAddNewNodes,
+    handleSetNodeNewProperties
   } = useTreeVisibleData({
     initialData: nodes,
     onSearch,
@@ -66,12 +69,22 @@ const Tree = ({
     calculateAmountOfSelectedNodesAndChildren,
     updateAmountOfSelectedNodesAndChildren,
     handleAddNewFlattenedNodes,
+    handleSetSelectedNodesFromKeysArr
   } = useFlattenTreeData({
     data: nodes,
     selectedKeys,
     maxNestingLevel,
     ...keyValues,
   })
+
+  useImperativeHandle(ref, () => ({
+    nodesMap: Object.freeze({ ...flattenedNodes }),
+    setSelectedKeys: selectedKeysArr => handleSetSelectedNodesFromKeysArr(selectedKeysArr),
+    setNodeProperties: (nodeKey, newProperties) => {
+      const nodePathArr = getNodeParents(nodeKey, flattenedNodes)
+      handleSetNodeNewProperties(nodeKey, newProperties, nodePathArr)
+    }
+  }), [flattenedNodes, handleSetNodeNewProperties, handleSetSelectedNodesFromKeysArr])
 
   const {
     totalChildren: totalChildrenInTree,
@@ -95,6 +108,14 @@ const Tree = ({
     )
     onSelect(keysToToggle)
   }
+
+  useEffect(() => {
+    if (filteredData.length < nodes.length) {
+      const newAddedNodes = nodes.slice(filteredData.length)
+      handleAddNewNodes(newAddedNodes)
+      handleAddNewFlattenedNodes(newAddedNodes)
+    }
+  }, [filteredData, handleAddNewFlattenedNodes, handleAddNewNodes, nodes])
 
   useEffect(() => {
     const areAllExpanded = checkAllNodesAreExpanded({
@@ -249,7 +270,9 @@ const Tree = ({
     <div className={classNames(styles.tree, className)}>
       {isSearchable && renderSearchInput()}
       {isBulkActionsEnabled && !isEmpty && renderBulkActions()}
-      <div className={styles.nodesContainer}>
+      <div
+        className={classNames(styles.nodesContainer, nodesContainerClassName)}
+      >
         {isEmpty && (
           <EmptyTreeSearch
             type={
@@ -272,7 +295,7 @@ const Tree = ({
       </div>
     </div>
   )
-}
+})
 
 Tree.defaultProps = {
   nodes: [],
@@ -306,6 +329,8 @@ Tree.propTypes = {
   labelKey: propTypes.string,
   /** For css customization. */
   className: propTypes.string,
+  /** For css customization. */
+  nodesContainerClassName: propTypes.string,
   /** Enable search. */
   isSearchable: propTypes.bool,
   /** Called when user types in the search input. */

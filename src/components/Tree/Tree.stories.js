@@ -217,6 +217,12 @@ const treeNodes = [
 ]
 
 export const Basic = () => {
+  // treeInstance allows to access tree properties and use functions to change
+  // tree properties:
+  // 1. Access tree nodes' map: treeInstance.nodesMap
+  // 2. Change selectedKeys in tree when they are changed from outside source, like reset to default: treeInstance.setSelectedKeys(selectedKeys)
+  // 3. Change node's properties in case new data is received from sockets, etc: treeInstance.setNodeProperties(nodeKey, {...newProperties})
+  const [treeInstance, setTreeInstance] = useState(null)
   const [selectedKeys, setSelectedkeys] = useState([
     'test-100',
     'test-200',
@@ -236,7 +242,7 @@ export const Basic = () => {
     new Promise(resolve => {
       setTimeout(() => {
         resolve([...createTestRootNodes(15)])
-      }, 500)
+      }, 100)
     })
 
   const rootNodeActions = useMemo(
@@ -270,6 +276,7 @@ export const Basic = () => {
       rootNodeActions={rootNodeActions}
       loadMoreData={loadMoreNodes}
       maxNestingLevel={1}
+      ref={setTreeInstance}
     />
   )
 }
@@ -294,4 +301,44 @@ export const NestedTree = () => {
       maxNestingLevel={3}
     />
   )
+}
+
+export const InfiniteTree = () => {
+  const [nodes, setNodes] = useState(treeNodes)
+  const [params, setParams] = useState({ limit: 50, offset: 0 })
+
+  const loadMoreNodes = () => {
+    if (params.offset > 0) return
+
+    const newNodes = [
+      {
+        key: '5',
+        label: 'Celebrities',
+        children: [
+          { label: 'Brad Pit', key: '51' },
+          { label: 'Cristiano Ronaldo', key: '52' },
+        ],
+      },
+      {
+        key: '6',
+        label: 'Organs',
+        children: [
+          { label: 'Heart', key: '61' },
+          { label: 'Brain', key: '62' },
+        ],
+      },
+    ]
+
+    // First way
+    setParams(prevParams => ({
+      ...prevParams,
+      offset: prevParams.offset + newNodes.length,
+    }))
+    setNodes(prevNodes => [...prevNodes, ...newNodes])
+
+    // Second way
+    // return newNodes
+  }
+
+  return <Tree nodes={nodes} maxNestingLevel={3} loadMoreData={loadMoreNodes} />
 }

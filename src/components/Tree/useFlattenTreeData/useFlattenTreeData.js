@@ -172,6 +172,7 @@ const useFlattenTreeData = ({
     calculateAmountOfSelectedNodesAndChildren,
     updateAmountOfSelectedNodesAndChildren,
     handleAddNewFlattenedNodes,
+    handleSetSelectedNodesFromKeysArr
   }
 }
 
