@@ -15,8 +15,6 @@ export const setNodesSelectedStatus = ({
   const keys = { added: [], removed: [] }
   const currentUsedArr = isSelected ? keys.added : keys.removed
 
-  console.log({ nodesTree, nodesMap, isSelected, childrenKey, idKey })
-
   const setAllSelected = nodes => {
     nodes.forEach(node => {
       const { [idKey]: key, [childrenKey]: children } = node
