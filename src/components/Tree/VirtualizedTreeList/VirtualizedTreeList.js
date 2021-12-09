@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useMemo } from 'react'
 import propTypes from 'prop-types'
 import { VariableSizeTree as TreeList } from 'react-vtree'
 import AutoSizer from 'react-virtualized-auto-sizer'
@@ -91,7 +91,9 @@ const VirtualizedTreeList = ({
   ...keyValues
 }) => {
   const innerRef = useRef()
-  const throttledLoadMoreData = useRef(throttle(loadMoreData))
+  const throttledLoadMoreData = useMemo(() => throttle(loadMoreData), [
+    loadMoreData,
+  ])
 
   const handleInfiniteScroll = (
     { scrollOffset, scrollDirection },
@@ -105,7 +107,7 @@ const VirtualizedTreeList = ({
     )
       return
     if (virtualizedListHeight - 2 * listHeight <= scrollOffset) {
-      throttledLoadMoreData.current()
+      throttledLoadMoreData()
     }
   }
 
