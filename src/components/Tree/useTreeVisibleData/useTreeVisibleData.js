@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { ALL_ROOTS_COMBINED_KEY } from '../utils'
+import { ALL_ROOTS_COMBINED_KEY, setNodeValueInTreeFromPath } from '../utils'
 
 const useTreeVisibleData = ({
   initialData,
@@ -61,6 +61,18 @@ const useTreeVisibleData = ({
     filterVisibleData(initialData, searchQuery.trim().toLowerCase()),
   )
 
+  const handleSetNodeNewProperties = useCallback((nodeKey, newProperties, nodePathArr) => {
+    const newTreeData = setNodeValueInTreeFromPath({
+      pathsArr: [...nodePathArr, nodeKey],
+      treeData: [...filteredData],
+      newProperties,
+      childrenKey,
+      idKey
+    })
+
+    setFilteredData(newTreeData)
+  }, [childrenKey, filteredData, idKey])
+
   const handleAddNewNodes = useCallback(
     nodesData => {
       setFilteredData(prev =>
@@ -99,6 +111,7 @@ const useTreeVisibleData = ({
     resetSearchData: handleResetSearchData,
     handleSearch,
     handleAddNewNodes,
+    handleSetNodeNewProperties
   }
 }
 

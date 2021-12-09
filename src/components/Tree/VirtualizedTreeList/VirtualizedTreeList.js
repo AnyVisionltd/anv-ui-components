@@ -106,7 +106,7 @@ const VirtualizedTreeList = ({
       isSearching
     )
       return
-    if (virtualizedListHeight - 2 * listHeight <= scrollOffset) {
+    if (virtualizedListHeight - listHeight <= scrollOffset) {
       throttledLoadMoreData()
     }
   }
@@ -144,13 +144,7 @@ VirtualizedTreeList.defaultProps = {
 
 VirtualizedTreeList.propTypes = {
   /** Tree structure needed for rendering the tree list. */
-  rootNode: propTypes.objectOf(
-    propTypes.shape({
-      key: propTypes.any.isRequired,
-      label: propTypes.string.isRequired,
-      children: propTypes.array,
-    }),
-  ).isRequired,
+  rootNode: propTypes.object.isRequired,
   /** Render function for the nodes of the tree. */
   renderNode: propTypes.func,
   /** Set ref to the list component, so it can be accessible in Tree component. */
