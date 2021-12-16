@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useMemo } from 'react'
 import { action } from '@storybook/addon-actions'
 import { PencilEdit, Search, ListAdd } from '@anyvision/anv-icons'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import Tree from './Tree'
+import styles from '../../storybook/index.module.scss'
 
 export default {
   title: 'Content/Tree',
@@ -277,6 +279,8 @@ export const Basic = () => {
       loadMoreData={loadMoreNodes}
       maxNestingLevel={1}
       ref={setTreeInstance}
+      className={styles.tree}
+      nodesContainerClassName={styles.nodesContainer}
     />
   )
 }
@@ -299,6 +303,8 @@ export const NestedTree = () => {
       selectedKeys={selectedKeys}
       onSelect={onSelect}
       maxNestingLevel={3}
+      className={styles.tree}
+      nodesContainerClassName={styles.nodesContainer}
     />
   )
 }
@@ -340,5 +346,13 @@ export const InfiniteTree = () => {
     // return newNodes
   }
 
-  return <Tree nodes={nodes} maxNestingLevel={3} loadMoreData={loadMoreNodes} />
+  return (
+    <Tree
+      nodes={nodes}
+      maxNestingLevel={3}
+      loadMoreData={loadMoreNodes}
+      className={styles.tree}
+      nodesContainerClassName={styles.nodesContainer}
+    />
+  )
 }

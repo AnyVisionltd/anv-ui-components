@@ -71,7 +71,7 @@ const buildTreeWalker = ({ rootNode, childrenKey, idKey, labelKey }) =>
           }
         : key
 
-      if (Array.isArray(children) && isOpened) {
+      if (isParentNode && isOpened) {
         for (let i = children.length - 1; i >= 0; i--) {
           stack.unshift({
             nestingLevel: nestingLevel + 1,

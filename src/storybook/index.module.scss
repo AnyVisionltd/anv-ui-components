@@ -94,3 +94,11 @@ div.fullWidth {
   padding: av-space();
   border-radius: av-radius();
 }
+
+.tree {
+  height: 100%;
+
+  .nodesContainer {
+    height: av-size(sz-480);
+  }
+}
