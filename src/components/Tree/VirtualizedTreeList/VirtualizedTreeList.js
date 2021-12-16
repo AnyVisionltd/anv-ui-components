@@ -1,9 +1,13 @@
-import React, { useRef, useMemo } from 'react'
+import React, { useRef, useMemo, forwardRef } from 'react'
 import propTypes from 'prop-types'
 import { VariableSizeTree as TreeList } from 'react-vtree'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import { throttle } from '../../../utils'
 import styles from './VirtualizedTreeList.module.scss'
+
+if (typeof ResizeObserver === 'undefined') {
+  global.ResizeObserver = require('resize-observer-polyfill').default
+}
 
 const TREE_NODE_PADDING = 24
 const SCROLLBAR_WIDTH = 16
@@ -16,8 +20,9 @@ const Node = ({
   style,
   toggle,
   treeData: { renderNode, maxContainerWidth },
+  forwardedRef,
 }) => {
-  const { nestingLevel } = data
+  const { nestingLevel, id } = data
   const content = renderNode(data, nestingLevel, {
     isOpen,
     handleExpand: toggle,
@@ -28,16 +33,60 @@ const Node = ({
     maxWidth: maxContainerWidth - paddingLeft - SCROLLBAR_WIDTH,
   }
 
+  // data-parentNodeId = parentKey
+  // data-totalItems = total
+
   return (
     <div
       style={{
         ...style,
         ...additionalStyle,
       }}
+      ref={forwardedRef}
+      data-itemindex={id}
     >
       {content}
     </div>
   )
+}
+
+const RefForwardedNode = forwardRef((props, ref) => (
+  <Node {...props} onWheel={handleOnWheel} forwardedRef={ref} />
+))
+
+const outerElementType = forwardRef((props, ref) => (
+  <div ref={ref} onWheel={event => handleOnWheel(event, props)} {...props} />
+))
+
+function getVisibleElements(element, currentScrollPosition) {
+  //let allListItemsInDom = element.children[0].children;
+  // var siblings = allListItemsInDom;
+  var visibleItems = []
+  let el = element.children[0].children[0]
+  do {
+    if (isVisibleInView(el, currentScrollPosition, element.clientHeight))
+      visibleItems.push(el.getAttribute('data-itemindex'))
+  } while ((el = el.nextSibling))
+  return visibleItems
+}
+
+function isVisibleInView(element, scrollStart, clientHeight) {
+  const elementTop = parseInt(element.style.top, 10)
+  console.log('element top ', elementTop)
+  if (
+    elementTop > scrollStart &&
+    elementTop + element.clientHeight < scrollStart + clientHeight
+  ) {
+    return true
+  } else return false
+}
+function handleOnWheel({ currentTarget, deltaY, clientY }) {
+  let currentScrollPosition = currentTarget.scrollTop
+  console.log('current scroll position is ', currentScrollPosition)
+  console.log(currentTarget)
+  let visibleElements = getVisibleElements(currentTarget, currentScrollPosition)
+  console.log(visibleElements)
+  if (Math.abs(deltaY) < 3) console.log(visibleElements.toString())
 }
 
 const buildTreeWalker = ({ rootNode, childrenKey, idKey, labelKey }) =>
@@ -128,8 +177,9 @@ const VirtualizedTreeList = ({
           onScroll={scrollPosition =>
             handleInfiniteScroll(scrollPosition, height)
           }
+          outerElementType={outerElementType}
         >
-          {Node}
+          {RefForwardedNode}
         </TreeList>
       )}
     </AutoSizer>

@@ -31,7 +31,8 @@
     "react-virtualized-auto-sizer": "^1.0.4",
     "react-vtree": "^2.0.4",
     "react-window": "^1.8.6",
-    "react-window-infinite-loader": "^1.0.5"
+    "react-window-infinite-loader": "^1.0.5",
+    "resize-observer-polyfill": "^1.5.1"
   },
   "scripts": {
     "build": "rollup -c",
