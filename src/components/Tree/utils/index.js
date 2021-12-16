@@ -15,8 +15,6 @@ export const setNodesSelectedStatus = ({
   const keys = { added: [], removed: [] }
   const currentUsedArr = isSelected ? keys.added : keys.removed
 
-  console.log({ nodesTree, nodesMap, isSelected, childrenKey, idKey })
-
   const setAllSelected = nodes => {
     nodes.forEach(node => {
       const { [idKey]: key, [childrenKey]: children } = node
@@ -82,4 +80,33 @@ export const checkAllNodesAreExpanded = ({
   areAllNodesExpanded(nodesTree)
 
   return areExpanded
+}
+
+export const getNodeParents = (nodeKey, nodesMap) => {
+  const parents = []
+  const traverse = node => {
+    if (node.parentKey !== ALL_ROOTS_COMBINED_KEY) {
+      traverse(nodesMap[node.parentKey])
+      parents.push(node.parentKey)
+    }
+  }
+
+  traverse(nodesMap[nodeKey])
+  return parents
+}
+
+export const setNodeValueInTreeFromPath = ({ pathsArr, treeData, newProperties, idKey, childrenKey }) => {
+  const traverseTree = (data, paths) => {
+    const nodeKey = paths[0]
+    return data.map(childNode => {
+      if (childNode[idKey] === nodeKey) {
+        if (paths.length === 1) {
+          return { ...childNode, ...newProperties }
+        }
+        return { ...childNode, [childrenKey]: traverseTree(childNode[childrenKey], paths.slice(1))}
+      }
+      return childNode
+    })
+  }
+  return traverseTree(treeData, pathsArr)
 }

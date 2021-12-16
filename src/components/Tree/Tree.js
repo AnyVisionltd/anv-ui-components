@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState, useCallback, useImperativeHandle, forwardRef } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 import { Search } from '@anyvision/anv-icons'
-import { Checkbox, InputBase } from '../../'
+import { Checkbox, InputBase, Tooltip } from '../../'
 import { CheckboxWithIndeterminateState } from './CheckboxWithIndeterminateState'
 import { VirtualizedTreeList } from './VirtualizedTreeList'
 import { EmptyTreeSearch } from './EmptyTreeSearch'
@@ -16,12 +16,13 @@ import {
   checkAllNodesAreExpanded,
   emptyListTypes,
   ALL_ROOTS_COMBINED_KEY,
+  getNodeParents
 } from './utils'
 import styles from './Tree.module.scss'
 
 const getTranslation = path => languageService.getTranslation(`${path}`)
 
-const Tree = ({
+const Tree = forwardRef(({
   nodes,
   selectedKeys,
   className,
@@ -42,7 +43,7 @@ const Tree = ({
   childrenKey,
   labelKey,
   idKey,
-}) => {
+}, ref) => {
   const [treeInstance, setTreeInstance] = useState(null)
   const [areAllNodesExpanded, setAreAllNodesExpanded] = useState(false)
   const [singularNounLabel, pluralNounLabel] = displayLabels
@@ -54,6 +55,7 @@ const Tree = ({
     filteredData,
     resetSearchData,
     handleAddNewNodes,
+    handleSetNodeNewProperties
   } = useTreeVisibleData({
     initialData: nodes,
     onSearch,
@@ -67,12 +69,26 @@ const Tree = ({
     calculateAmountOfSelectedNodesAndChildren,
     updateAmountOfSelectedNodesAndChildren,
     handleAddNewFlattenedNodes,
+    handleSetSelectedNodesFromKeysArr
   } = useFlattenTreeData({
     data: nodes,
     selectedKeys,
     maxNestingLevel,
     ...keyValues,
   })
+
+  useImperativeHandle(ref, () => ({
+    get nodesMap() {
+      const { ALL_ROOTS_COMBINED_KEY, ...restNodes } = flattenedNodes
+      return Object.freeze(restNodes)
+    },
+    setSelectedKeys: (keysToAdd, keysToRemove) => handleSetSelectedNodesFromKeysArr(keysToAdd, keysToRemove),
+    setNodeProperties: (nodeKey, newProperties) => {
+      if (!flattenedNodes[nodeKey]) return
+      const nodePathArr = getNodeParents(nodeKey, flattenedNodes)
+      handleSetNodeNewProperties(nodeKey, newProperties, nodePathArr)
+    }
+  }), [flattenedNodes, handleSetNodeNewProperties, handleSetSelectedNodesFromKeysArr])
 
   const {
     totalChildren: totalChildrenInTree,
@@ -185,7 +201,7 @@ const Tree = ({
       totalSelected = 0,
       totalChildren = children.length,
     } = calculateAmountOfSelectedNodesAndChildren(key)
-    const isSelected = totalSelected === totalChildren
+    const isSelected = !!totalChildren && totalSelected === totalChildren
 
     const infoText = `${totalChildren} ${
       totalChildren === 1 ? singularNounLabel : pluralNounLabel
@@ -194,14 +210,18 @@ const Tree = ({
     return (
       <div className={styles.parentNode} key={key}>
         <Checkbox
+          disabled={!totalChildren}
           checked={isSelected}
           onChange={() => handleIsSelected(node, isSelected)}
           className={classNames(styles.isSelectedCheckbox, styles.checkbox)}
         />
-        <p className={styles.parentLabel}>{label}</p>
+        <Tooltip content={label} overflowOnly>
+          <p className={styles.parentLabel}>{label}</p>
+        </Tooltip>
         <div className={styles.parentNodeContent}>
           <div className={styles.parentNodeInfo}>
             <CheckboxWithIndeterminateState
+              disabled={!totalChildren}
               checked={isOpen}
               onChange={handleExpand}
               className={styles.checkbox}
@@ -227,8 +247,10 @@ const Tree = ({
             checked={isSelected}
             onChange={() => handleIsSelected(node, isSelected)}
             className={styles.checkbox}
-          />
-          <p className={styles.leafLabel}>{label}</p>
+            />
+          <Tooltip content={label} overflowOnly>
+            <p className={styles.leafLabel}>{label}</p>
+          </Tooltip>
         </div>
         {renderLeafRightSide && renderLeafRightSide(node)}
       </div>
@@ -256,7 +278,7 @@ const Tree = ({
 
   return (
     <div className={classNames(styles.tree, className)}>
-      {isSearchable && renderSearchInput()}
+      {isSearchable && !!nodes.length && renderSearchInput()}
       {isBulkActionsEnabled && !isEmpty && renderBulkActions()}
       <div
         className={classNames(styles.nodesContainer, nodesContainerClassName)}
@@ -283,7 +305,7 @@ const Tree = ({
       </div>
     </div>
   )
-}
+})
 
 Tree.defaultProps = {
   nodes: [],

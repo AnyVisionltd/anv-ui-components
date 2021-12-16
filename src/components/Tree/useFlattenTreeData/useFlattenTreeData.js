@@ -128,13 +128,18 @@ const useFlattenTreeData = ({
   )
 
   const handleSetSelectedNodesFromKeysArr = useCallback(
-    selectedKeysArr => {
+    (keysToAdd, keysToRemove= []) => {
       if (!Object.keys(flattenedNodes).length) return
-      selectedKeysArr.forEach(
+      keysToRemove.forEach(
+        key =>
+          (flattenedNodes[key] = { ...flattenedNodes[key], isSelected: false }),
+      )
+      keysToAdd.forEach(
         key =>
           (flattenedNodes[key] = { ...flattenedNodes[key], isSelected: true }),
       )
       calculateAmountOfSelectedNodesAndChildren(ALL_ROOTS_COMBINED_KEY, true)
+      setFlattenedNodes(prev => ({ ...prev }))
     },
     [calculateAmountOfSelectedNodesAndChildren, flattenedNodes],
   )
