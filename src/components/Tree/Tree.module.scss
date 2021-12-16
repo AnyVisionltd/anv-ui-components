@@ -1,5 +1,12 @@
 @import '~@anyvision/style-guide';
 
+%hiddenTextOverflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+}
+
 .tree {
   width: av-size(sz-480);
   height: 100%;
@@ -7,6 +14,7 @@
   padding: av-space(medium);
 
   .checkbox {
+    min-width: av-size(sz-32);
     span {
       border: solid 2px av-color(purewhite, av-opacity(medium));
     }
@@ -48,6 +56,7 @@
     align-items: center;
     margin: av-space() 0;
     padding: 0 av-space();
+    height: av-size(sz-40);
 
     .bulkSelectContainer {
       display: flex;
@@ -83,6 +92,7 @@
     flex: 1;
     flex-direction: column;
     min-height: av-size(sz-480);
+    max-height: calc(100% - 2 * #{av-size(sz-48)});
 
     .parentNode {
       align-items: center;
@@ -124,6 +134,7 @@
         grid-column: 2 / -1;
         grid-row: 1 / 2;
         @extend %av-subtitle2;
+        @extend %hiddenTextOverflow;
         color: av-color(purewhite);
         line-height: av-size(sz-24);
         margin: 0;
@@ -158,6 +169,7 @@
       height: av-size(sz-48);
       padding: 0 av-space();
       transition: all 0.3s ease-in-out;
+      gap: av-space(tiny);
 
       &:hover {
         background-color: av-color(purewhite, av-opacity(divider));
@@ -166,11 +178,16 @@
       .leftSideLeaf {
         display: flex;
         align-items: center;
+        @extend %hiddenTextOverflow;
 
         .leafLabel {
           @extend %av-body2;
           color: av-color(purewhite);
         }
+      }
+
+      &:nth-child(2) {
+        flex: 1;
       }
     }
   }
