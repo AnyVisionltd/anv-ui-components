@@ -12,9 +12,10 @@ const useTreeVisibleData = ({
   const setAllNodesAsVisible = useCallback(
     (data, parentKey = ALL_ROOTS_COMBINED_KEY) => {
       const setAllVisible = nodes => {
-        nodes.forEach(node => {
+        nodes.forEach((node, index) => {
           node.visible = true
           node.parentKey = parentKey
+          node.index = index
           if (node[childrenKey]) {
             node.isParentNode = true
             setAllNodesAsVisible(node[childrenKey], node[idKey])
@@ -31,9 +32,10 @@ const useTreeVisibleData = ({
   const filterVisibleData = useCallback(
     (data, searchKeyword, parentKey = ALL_ROOTS_COMBINED_KEY) => {
       const setVisible = nodes =>
-        nodes.forEach(node => {
+        nodes.forEach((node, index) => {
           node.visible = node[labelKey].toLowerCase().startsWith(searchKeyword)
           node.parentKey = parentKey
+          node.index = index
           if (Array.isArray(node[childrenKey])) {
             node.isParentNode = true
             if (node.visible) {
@@ -61,17 +63,20 @@ const useTreeVisibleData = ({
     filterVisibleData(initialData, searchQuery.trim().toLowerCase()),
   )
 
-  const handleSetNodeNewProperties = useCallback((nodeKey, newProperties, nodePathArr) => {
-    const newTreeData = setNodeValueInTreeFromPath({
-      pathsArr: [...nodePathArr, nodeKey],
-      treeData: [...filteredData],
-      newProperties,
-      childrenKey,
-      idKey
-    })
+  const handleSetNodeNewProperties = useCallback(
+    (nodeKey, newProperties, nodePathArr) => {
+      const newTreeData = setNodeValueInTreeFromPath({
+        pathsArr: [...nodePathArr, nodeKey],
+        treeData: [...filteredData],
+        newProperties,
+        childrenKey,
+        idKey,
+      })
 
-    setFilteredData(newTreeData)
-  }, [childrenKey, filteredData, idKey])
+      setFilteredData(newTreeData)
+    },
+    [childrenKey, filteredData, idKey],
+  )
 
   const handleAddNewNodes = useCallback(
     nodesData => {
@@ -111,7 +116,7 @@ const useTreeVisibleData = ({
     resetSearchData: handleResetSearchData,
     handleSearch,
     handleAddNewNodes,
-    handleSetNodeNewProperties
+    handleSetNodeNewProperties,
   }
 }
 

@@ -19,6 +19,8 @@ export const Base = () => (
   <div className={styles.colors}>
     <div className={styles.primary}>Primary</div>
     <div className={styles.secondary}>Secondary</div>
+    <div className={styles.blueLight}>Blue Light</div>
+    <div className={styles.blueFloat}>Blue Float</div>
     <div className={styles.accent}>Accent</div>
     <div className={styles.decorative}>Decorative</div>
     <div className={styles.content}>Content</div>
