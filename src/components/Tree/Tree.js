@@ -4,6 +4,7 @@ import React, {
   useCallback,
   useImperativeHandle,
   forwardRef,
+  useRef,
 } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
@@ -16,6 +17,7 @@ import languageService from '../../services/language'
 import useTreeVisibleData from './useTreeVisibleData'
 import useFlattenTreeData from './useFlattenTreeData'
 import { RootNode } from './RootNode'
+import { TreeSkeletonLoading } from './TreeSkeletonLoading'
 import {
   setNodesSelectedStatus,
   setNodesExpandedStatus,
@@ -51,11 +53,13 @@ const Tree = forwardRef(
       childrenKey,
       labelKey,
       idKey,
+      isLoading,
     },
     ref,
   ) => {
     const [treeInstance, setTreeInstance] = useState(null)
     const [areAllNodesExpanded, setAreAllNodesExpanded] = useState(false)
+    const nodesContainerRef = useRef()
     const [singularNounLabel, pluralNounLabel] = displayLabels
     const keyValues = { childrenKey, labelKey, idKey }
 
@@ -212,13 +216,34 @@ const Tree = forwardRef(
       </div>
     )
 
+    const getParentNodeClasses = (nestingLevel, isOpen) => {
+      const containerClasses = classNames(styles.parentNodeContainer, {
+        [styles.rootNodeContainer]: nestingLevel === 0,
+      })
+      const wrapperClasses = classNames(styles.parentNodeWrapper, {
+        [styles.rootNodeWrapper]: nestingLevel === 0,
+        [styles.isNotExpanded]: !isOpen,
+      })
+      return { containerClasses, wrapperClasses }
+    }
+
+    const getParentNodeInfo = (totalChildren, totalSelected) =>
+      `${totalChildren} ${
+        totalChildren === 1 ? singularNounLabel : pluralNounLabel
+      } | ${totalSelected} ${getTranslation('selected')}`
+
     const renderParentNode = (
       node,
       virtualizedListProps,
       rootNodeProps = {},
     ) => {
-      const { [idKey]: key, [labelKey]: label, [childrenKey]: children } = node
-      const { isOpen, handleExpand } = virtualizedListProps
+      const {
+        [idKey]: key,
+        [labelKey]: label,
+        [childrenKey]: children,
+        nestingLevel,
+      } = node
+      const { isOpen, handleExpand, style } = virtualizedListProps
       const { renderActions } = rootNodeProps
       const {
         totalSelected = 0,
@@ -226,30 +251,40 @@ const Tree = forwardRef(
       } = calculateAmountOfSelectedNodesAndChildren(key)
       const isSelected = !!totalChildren && totalSelected === totalChildren
 
-      const infoText = `${totalChildren} ${
-        totalChildren === 1 ? singularNounLabel : pluralNounLabel
-      } | ${totalSelected} ${getTranslation('selected')}`
+      const infoText = getParentNodeInfo(totalChildren, totalSelected)
+
+      const { containerClasses, wrapperClasses } = getParentNodeClasses(
+        nestingLevel,
+        isOpen,
+      )
 
       return (
-        <div className={styles.parentNode} key={key}>
-          <Checkbox
-            disabled={!totalChildren}
-            checked={isSelected}
-            onChange={() => handleIsSelected(node, isSelected)}
-            className={classNames(styles.isSelectedCheckbox, styles.checkbox)}
-          />
-          <Tooltip content={label} overflowOnly>
-            <p className={styles.parentLabel}>{label}</p>
-          </Tooltip>
-          <div className={styles.parentNodeContent}>
-            <div className={styles.parentNodeInfo}>
-              <CheckboxWithIndeterminateState
+        <div className={containerClasses}>
+          <div className={wrapperClasses}>
+            <div style={style} className={styles.parentNode} key={key}>
+              <Checkbox
                 disabled={!totalChildren}
-                checked={isOpen}
-                onChange={handleExpand}
-                className={styles.checkbox}
+                checked={isSelected}
+                onChange={() => handleIsSelected(node, isSelected)}
+                className={classNames(
+                  styles.isSelectedCheckbox,
+                  styles.checkbox,
+                )}
               />
-              <p className={styles.parentInfoText}>{infoText}</p>
+              <Tooltip content={label} overflowOnly>
+                <p className={styles.parentLabel}>{label}</p>
+              </Tooltip>
+              <div className={styles.parentNodeContent}>
+                <div className={styles.parentNodeInfo}>
+                  <CheckboxWithIndeterminateState
+                    disabled={!totalChildren}
+                    checked={isOpen}
+                    onChange={handleExpand}
+                    className={styles.checkbox}
+                  />
+                  <p className={styles.parentInfoText}>{infoText}</p>
+                </div>
+              </div>
             </div>
           </div>
           {!!renderActions && renderActions(node)}
@@ -257,33 +292,53 @@ const Tree = forwardRef(
       )
     }
 
-    const renderLeafNode = node => {
+    const getLeafNodeClasses = isLastLeaf => {
+      const containerClasses = classNames(styles.leafNodeContainer, {
+        [styles.lastLeafNodeContainer]: isLastLeaf,
+      })
+      const leafNodeClasses = classNames(styles.leafNode, {
+        [styles.lastLeafNode]: isLastLeaf,
+      })
+      return { containerClasses, leafNodeClasses }
+    }
+
+    const renderLeafNode = (node, virtualizedListProps = {}) => {
       const { [idKey]: key, [labelKey]: label } = node
+      const { style, isLastLeaf } = virtualizedListProps
       const isSelected = flattenedNodes[key]?.isSelected
 
-      return renderLeaf ? (
-        renderLeaf(node)
-      ) : (
-        <div className={styles.leafNode} key={key}>
-          <div className={styles.leftSideLeaf}>
-            <Checkbox
-              checked={isSelected}
-              onChange={() => handleIsSelected(node, isSelected)}
-              className={styles.checkbox}
-            />
-            <Tooltip content={label} overflowOnly>
-              <p className={styles.leafLabel}>{label}</p>
-            </Tooltip>
+      const { containerClasses, leafNodeClasses } = getLeafNodeClasses(
+        isLastLeaf,
+      )
+
+      return (
+        <div className={containerClasses}>
+          <div style={style} className={styles.leafNodeWrapper}>
+            {renderLeaf ? (
+              renderLeaf(node)
+            ) : (
+              <div className={leafNodeClasses} key={key}>
+                <div className={styles.leftSideLeaf}>
+                  <Checkbox
+                    checked={isSelected}
+                    onChange={() => handleIsSelected(node, isSelected)}
+                    className={styles.checkbox}
+                  />
+                  <Tooltip content={label} overflowOnly>
+                    <p className={styles.leafLabel}>{label}</p>
+                  </Tooltip>
+                </div>
+                {renderLeafRightSide && renderLeafRightSide(node)}
+              </div>
+            )}
           </div>
-          {renderLeafRightSide && renderLeafRightSide(node)}
         </div>
       )
     }
 
     const renderNode = (node, layer, virtualizedListProps) => {
-      const { [childrenKey]: children, visible } = node
-      if (!visible) return null
-      if (!children) return renderLeafNode(node)
+      const { [childrenKey]: children } = node
+      if (!children) return renderLeafNode(node, virtualizedListProps)
       if (layer === 0 && rootNodeActions.length) {
         return (
           <RootNode
@@ -297,6 +352,42 @@ const Tree = forwardRef(
       return renderParentNode(node, virtualizedListProps)
     }
 
+    const renderEmptyTree = () => (
+      <EmptyTreeSearch
+        type={
+          nodes.length
+            ? emptyListTypes.NO_RESULTS_FOUND
+            : emptyListTypes.NO_ITEMS_IN_LIST
+        }
+        onClearSearch={resetSearchData}
+        noItemsMessage={noItemsMessage}
+      />
+    )
+
+    const renderVirtualizedTreeList = () => (
+      <VirtualizedTreeList
+        setTreeInstance={setTreeInstance}
+        rootNode={{ ...filteredData }}
+        renderNode={renderNode}
+        loadMoreData={handleLoadMoreData}
+        isSearching={!!searchQuery.length}
+        nodesMap={flattenedNodes}
+        onExpand={onExpand}
+        {...keyValues}
+      />
+    )
+
+    const renderTreeSkeleton = () => (
+      <TreeSkeletonLoading containerRef={nodesContainerRef} />
+    )
+
+    const renderTree = () => (
+      <>
+        {isEmpty && renderEmptyTree()}
+        {renderVirtualizedTreeList()}
+      </>
+    )
+
     const isEmpty = isTreeEmpty()
 
     return (
@@ -304,27 +395,10 @@ const Tree = forwardRef(
         {isSearchable && !!nodes.length && renderSearchInput()}
         {isBulkActionsEnabled && !isEmpty && renderBulkActions()}
         <div
+          ref={nodesContainerRef}
           className={classNames(styles.nodesContainer, nodesContainerClassName)}
         >
-          {isEmpty && (
-            <EmptyTreeSearch
-              type={
-                nodes.length
-                  ? emptyListTypes.NO_RESULTS_FOUND
-                  : emptyListTypes.NO_ITEMS_IN_LIST
-              }
-              onClearSearch={resetSearchData}
-              noItemsMessage={noItemsMessage}
-            />
-          )}
-          <VirtualizedTreeList
-            setTreeInstance={setTreeInstance}
-            rootNode={{ ...filteredData }}
-            renderNode={renderNode}
-            loadMoreData={handleLoadMoreData}
-            isSearching={!!searchQuery.length}
-            {...keyValues}
-          />
+          {isLoading ? renderTreeSkeleton() : renderTree()}
         </div>
       </div>
     )
@@ -403,6 +477,8 @@ Tree.propTypes = {
   maxNestingLevel: propTypes.number,
   /** Text to display when there are no items in tree. */
   noItemsMessage: propTypes.string,
+  /** Tree loading status. */
+  isLoading: propTypes.bool,
 }
 
 export default Tree

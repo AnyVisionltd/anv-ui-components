@@ -1,5 +1,12 @@
 export const ALL_ROOTS_COMBINED_KEY = 'ALL_ROOTS_COMBINED_KEY'
 
+export const TREE_NODE_PADDING = 24
+export const LEAF_NODE_HEIGHT = 48
+export const PARENT_NODE_WRAPPER_HEIGHT = 80
+export const PARENT_NODE_HEIGHT = 72
+
+export const DEFAULT_AMOUNT_LOADING_NODES = 6
+
 export const emptyListTypes = Object.freeze({
   NO_ITEMS_IN_LIST: 0,
   NO_RESULTS_FOUND: 1,
@@ -95,7 +102,13 @@ export const getNodeParents = (nodeKey, nodesMap) => {
   return parents
 }
 
-export const setNodeValueInTreeFromPath = ({ pathsArr, treeData, newProperties, idKey, childrenKey }) => {
+export const setNodeValueInTreeFromPath = ({
+  pathsArr,
+  treeData,
+  newProperties,
+  idKey,
+  childrenKey,
+}) => {
   const traverseTree = (data, paths) => {
     const nodeKey = paths[0]
     return data.map(childNode => {
@@ -103,7 +116,10 @@ export const setNodeValueInTreeFromPath = ({ pathsArr, treeData, newProperties, 
         if (paths.length === 1) {
           return { ...childNode, ...newProperties }
         }
-        return { ...childNode, [childrenKey]: traverseTree(childNode[childrenKey], paths.slice(1))}
+        return {
+          ...childNode,
+          [childrenKey]: traverseTree(childNode[childrenKey], paths.slice(1)),
+        }
       }
       return childNode
     })

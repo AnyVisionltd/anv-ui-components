@@ -222,7 +222,7 @@ export const Basic = () => {
   // treeInstance allows to access tree properties and use functions to change
   // tree properties:
   // 1. Access tree nodes' map: treeInstance.nodesMap
-  // 2. Change selectedKeys in tree when they are changed from outside source, like reset to default: treeInstance.setSelectedKeys(selectedKeys)
+  // 2. Change selectedKeys in tree when they are changed from outside source, like reset to default: treeInstance.setSelectedKeys(keysToAdd, keysToRemove)
   // 3. Change node's properties in case new data is received from sockets, etc: treeInstance.setNodeProperties(nodeKey, {...newProperties})
   const [treeInstance, setTreeInstance] = useState(null)
   const [selectedKeys, setSelectedkeys] = useState([

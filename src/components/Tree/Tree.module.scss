@@ -1,5 +1,14 @@
 @import '~@anyvision/style-guide';
 
+$searchInputHeight: av-size(sz-40);
+$bulkExpandSelectHeight: av-size(sz-32);
+
+$parentNodeWrapperHeight: av-size(sz-80);
+$parentNodeHeight: calc(#{$parentNodeWrapperHeight} - #{av-space(tiny)});
+
+$nodeBackground: av-color(purewhite, av-opacity(ghost));
+$nodeBackgroundHover: av-color(purewhite, av-opacity(divider));
+
 %hiddenTextOverflow {
   white-space: nowrap;
   overflow: hidden;
@@ -7,13 +16,22 @@
   word-wrap: break-word;
 }
 
-$searchInputHeight: av-size(sz-40);
-$bulkExpandSelectHeight: av-size(sz-40);
+%borderBottomImage {
+  background-image: linear-gradient(
+    90deg,
+    av-color(purewhite, av-opacity(divider)) 0%,
+    av-color(purewhite, av-opacity(disabled)) 20%,
+    av-color(purewhite, av-opacity(divider)) 80%
+  );
+  background-position: 50% 100%, 100% 100%;
+  background-repeat: no-repeat;
+  background-size: 90% 1px, 100% 100%;
+}
 
 .tree {
   width: av-size(sz-480);
   height: 100%;
-  background-color: av-color(secondary);
+  background-color: av-color(blue-light);
   padding: av-space(medium);
 
   .checkbox {
@@ -57,8 +75,7 @@ $bulkExpandSelectHeight: av-size(sz-40);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: av-space() 0;
-    padding: 0 av-space();
+    margin: av-space(tiny) 0;
     height: $bulkExpandSelectHeight;
 
     .bulkSelectContainer {
@@ -95,38 +112,52 @@ $bulkExpandSelectHeight: av-size(sz-40);
     flex: 1;
     flex-direction: column;
     // Reduce the height of the other 2 elements for auto-sizer-react-window and considering paddingBottom
-    max-height: calc(100% - #{$searchInputHeight} - #{$bulkExpandSelectHeight} - #{av-space()});
+    max-height: calc(
+      100% - #{$searchInputHeight} - #{$bulkExpandSelectHeight} - #{av-space()}
+    );
 
-    .parentNode {
-      align-items: center;
-      display: grid;
-      grid-template-rows: min-content min-content;
-      grid-template-columns: auto 1fr;
-      border-radius: av-radius(tidy);
-      transition: all 0.3s ease-in-out;
-      background-color: inherit;
-      border: solid 1px transparent;
-      padding: 0 av-space();
+    .parentNodeContainer {
+      height: $parentNodeHeight;
       position: relative;
+      display: flex;
+      flex-direction: column-reverse;
+
+      &.rootNodeContainer {
+        height: $parentNodeWrapperHeight;
+      }
 
       &:hover {
-        background-color: av-color(purewhite, av-opacity(ghost));
-
         > div[class*='actionsCell'] {
           opacity: 1;
+          z-index: av-z-index(popup);
         }
       }
+    }
 
-      &.isHoverBackground {
-        &:hover {
-          background-color: av-color(purewhite, av-opacity(divider));
+    .parentNodeWrapper {
+      background-color: $nodeBackground;
+
+      &.rootNodeWrapper {
+        border-radius: av-radius(tidy);
+
+        &.isNotExpanded {
+          &:hover {
+            background-color: $nodeBackgroundHover;
+          }
         }
       }
+    }
 
-      &.isNotSelected {
-        border: solid 1px av-color(trueblack, av-opacity(divider));
-        background-color: rgba(1, 10, 20, 0.12);
-      }
+    .parentNode {
+      height: $parentNodeHeight;
+      align-items: center;
+      display: grid;
+      justify-content: center;
+      grid-template-rows: auto auto;
+      grid-template-columns: auto 1fr;
+      transition: all 0.3s ease-in-out;
+      background-color: inherit;
+      padding-right: av-space();
 
       .isSelectedCheckbox {
         grid-column: 1 / 2;
@@ -149,12 +180,13 @@ $bulkExpandSelectHeight: av-size(sz-40);
         margin-left: calc(-1 * #{av-space(tiny)});
         display: flex;
         flex-direction: column;
+        padding: 0;
 
         .parentNodeInfo {
           display: flex;
           justify-content: flex-start;
           align-items: center;
-          height: min-content;
+          height: av-size(sz-32);
 
           .parentInfoText {
             @extend %av-body2;
@@ -165,17 +197,34 @@ $bulkExpandSelectHeight: av-size(sz-40);
       }
     }
 
+    .leafNodeContainer {
+      background-color: $nodeBackground;
+      height: av-size(sz-48);
+      width: 100%;
+
+      &.lastLeafNodeContainer {
+        border-bottom-left-radius: av-radius(tidy);
+        border-bottom-right-radius: av-radius(tidy);
+      }
+    }
+
+    .leafNodeWrapper {
+      background-color: inherit;
+      height: 100%;
+    }
+
     .leafNode {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: av-size(sz-48);
-      padding: 0 av-space();
+      height: 100%;
       transition: all 0.3s ease-in-out;
       gap: av-space(tiny);
+      padding-right: av-space();
+      @extend %borderBottomImage;
 
-      &:hover {
-        background-color: av-color(purewhite, av-opacity(divider));
+      &.lastLeafNode {
+        background-image: none;
       }
 
       .leftSideLeaf {
