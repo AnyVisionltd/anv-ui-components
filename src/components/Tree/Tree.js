@@ -41,6 +41,7 @@ const Tree = forwardRef(
       isBulkActionsEnabled,
       onSearch,
       placeholder,
+      onExpand,
       onSelect,
       renderLeaf,
       renderLeafRightSide,
@@ -226,6 +227,11 @@ const Tree = forwardRef(
       return { containerClasses, wrapperClasses }
     }
 
+    const getParentNodeInfo = (totalChildren, totalSelected) =>
+      `${totalChildren} ${
+        totalChildren === 1 ? singularNounLabel : pluralNounLabel
+      } | ${totalSelected} ${getTranslation('selected')}`
+
     const renderParentNode = (
       node,
       virtualizedListProps,
@@ -245,9 +251,7 @@ const Tree = forwardRef(
       } = calculateAmountOfSelectedNodesAndChildren(key)
       const isSelected = !!totalChildren && totalSelected === totalChildren
 
-      const infoText = `${totalChildren} ${
-        totalChildren === 1 ? singularNounLabel : pluralNounLabel
-      } | ${totalSelected} ${getTranslation('selected')}`
+      const infoText = getParentNodeInfo(totalChildren, totalSelected)
 
       const { containerClasses, wrapperClasses } = getParentNodeClasses(
         nestingLevel,
@@ -307,24 +311,26 @@ const Tree = forwardRef(
         isLastLeaf,
       )
 
-      return renderLeaf ? (
-        renderLeaf(node)
-      ) : (
+      return (
         <div className={containerClasses}>
           <div style={style} className={styles.leafNodeWrapper}>
-            <div className={leafNodeClasses} key={key}>
-              <div className={styles.leftSideLeaf}>
-                <Checkbox
-                  checked={isSelected}
-                  onChange={() => handleIsSelected(node, isSelected)}
-                  className={styles.checkbox}
-                />
-                <Tooltip content={label} overflowOnly>
-                  <p className={styles.leafLabel}>{label}</p>
-                </Tooltip>
+            {renderLeaf ? (
+              renderLeaf(node)
+            ) : (
+              <div className={leafNodeClasses} key={key}>
+                <div className={styles.leftSideLeaf}>
+                  <Checkbox
+                    checked={isSelected}
+                    onChange={() => handleIsSelected(node, isSelected)}
+                    className={styles.checkbox}
+                  />
+                  <Tooltip content={label} overflowOnly>
+                    <p className={styles.leafLabel}>{label}</p>
+                  </Tooltip>
+                </div>
+                {renderLeafRightSide && renderLeafRightSide(node)}
               </div>
-              {renderLeafRightSide && renderLeafRightSide(node)}
-            </div>
+            )}
           </div>
         </div>
       )
@@ -366,8 +372,20 @@ const Tree = forwardRef(
         loadMoreData={handleLoadMoreData}
         isSearching={!!searchQuery.length}
         nodesMap={flattenedNodes}
+        onExpand={onExpand}
         {...keyValues}
       />
+    )
+
+    const renderTreeSkeleton = () => (
+      <TreeSkeletonLoading containerRef={nodesContainerRef} />
+    )
+
+    const renderTree = () => (
+      <>
+        {isEmpty && renderEmptyTree()}
+        {renderVirtualizedTreeList()}
+      </>
     )
 
     const isEmpty = isTreeEmpty()
@@ -380,14 +398,7 @@ const Tree = forwardRef(
           ref={nodesContainerRef}
           className={classNames(styles.nodesContainer, nodesContainerClassName)}
         >
-          {isLoading ? (
-            <TreeSkeletonLoading containerRef={nodesContainerRef} />
-          ) : (
-            <>
-              {isEmpty && renderEmptyTree()}
-              {renderVirtualizedTreeList()}
-            </>
-          )}
+          {isLoading ? renderTreeSkeleton() : renderTree()}
         </div>
       </div>
     )
@@ -399,6 +410,7 @@ Tree.defaultProps = {
   selectedKeys: [],
   onSearch: () => {},
   onSelect: () => {},
+  onExpand: () => {},
   placeholder: getTranslation('search'),
   displayLabels: [getTranslation('item'), getTranslation('items')],
   isSearchable: true,
@@ -435,6 +447,8 @@ Tree.propTypes = {
   placeholder: propTypes.string,
   /** Enable bulk actions functionality. */
   isBulkActionsEnabled: propTypes.bool,
+  /** Called when a tree parent node is displayed. */
+  onExpand: propTypes.func,
   /** Callback function after selecting / unselecteing tree node or nodes. */
   onSelect: propTypes.func,
   /** Custom render for the whole leaf node row. */

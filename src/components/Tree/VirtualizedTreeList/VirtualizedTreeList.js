@@ -16,9 +16,16 @@ const Node = ({
   isOpen,
   style,
   toggle,
-  treeData: { renderNode, maxContainerWidth, nodesMap, childrenKey },
+  treeData: {
+    renderNode,
+    maxContainerWidth,
+    nodesMap,
+    childrenKey,
+    idKey,
+    onExpand,
+  },
 }) => {
-  const { nestingLevel, parentKey, isLeaf, index } = data
+  const { nestingLevel, parentKey, isLeaf, index, [idKey]: key } = data
   const paddingLeft = 2 * TREE_NODE_PADDING * nestingLevel
   const additionalStyle = {
     paddingLeft,
@@ -27,9 +34,14 @@ const Node = ({
   const isLastLeafOfParent =
     isLeaf && nodesMap[parentKey]?.[childrenKey].length - 1 === index
 
+  const handleExpand = () => {
+    !isOpen && onExpand(key)
+    toggle()
+  }
+
   const content = renderNode(data, nestingLevel, {
     isOpen,
-    handleExpand: toggle,
+    handleExpand,
     isLastLeaf: isLastLeafOfParent,
     style: additionalStyle,
   })
@@ -91,6 +103,7 @@ const VirtualizedTreeList = ({
   loadMoreData,
   isSearching,
   nodesMap,
+  onExpand,
   ...keyValues
 }) => {
   const innerRef = useRef()
@@ -124,6 +137,7 @@ const VirtualizedTreeList = ({
             renderNode,
             maxContainerWidth: width,
             nodesMap,
+            onExpand,
             ...keyValues,
           }}
           treeWalker={buildTreeWalker({ rootNode, ...keyValues })}
@@ -145,6 +159,7 @@ VirtualizedTreeList.defaultProps = {
   renderNode: () => {},
   setTreeInstance: () => {},
   loadMoreData: () => {},
+  onExpand: () => {},
 }
 
 VirtualizedTreeList.propTypes = {
@@ -160,6 +175,14 @@ VirtualizedTreeList.propTypes = {
   loadMoreData: propTypes.func,
   /** Wether user is searching or not. */
   isSearching: propTypes.bool,
+  /** Called when a tree parent node is displayed. */
+  onExpand: propTypes.func,
+  /** The key value of the node's children property. Default is 'children'. */
+  childrenKey: propTypes.string,
+  /** The key value of the node's unique id property. Default is 'key'. */
+  idKey: propTypes.string,
+  /** The key value of the node's name property. Default is 'label'. */
+  labelKey: propTypes.string,
 }
 
 export default VirtualizedTreeList

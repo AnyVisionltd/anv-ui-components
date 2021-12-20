@@ -1,5 +1,14 @@
 @import '~@anyvision/style-guide';
 
+$searchInputHeight: av-size(sz-40);
+$bulkExpandSelectHeight: av-size(sz-32);
+
+$parentNodeWrapperHeight: av-size(sz-80);
+$parentNodeHeight: calc(#{$parentNodeWrapperHeight} - #{av-space(tiny)});
+
+$nodeBackground: av-color(purewhite, av-opacity(ghost));
+$nodeBackgroundHover: av-color(purewhite, av-opacity(divider));
+
 %hiddenTextOverflow {
   white-space: nowrap;
   overflow: hidden;
@@ -18,15 +27,6 @@
   background-repeat: no-repeat;
   background-size: 90% 1px, 100% 100%;
 }
-
-$searchInputHeight: av-size(sz-40);
-$bulkExpandSelectHeight: av-size(sz-32);
-
-$parentNodeWrapperHeight: av-size(sz-80);
-$parentNodeHeight: calc(#{$parentNodeWrapperHeight} - #{av-space(tiny)});
-
-$nodeBg: av-color(purewhite, av-opacity(ghost));
-$nodeBgHover: av-color(purewhite, av-opacity(divider));
 
 .tree {
   width: av-size(sz-480);
@@ -135,14 +135,14 @@ $nodeBgHover: av-color(purewhite, av-opacity(divider));
     }
 
     .parentNodeWrapper {
-      background-color: $nodeBg;
+      background-color: $nodeBackground;
 
       &.rootNodeWrapper {
         border-radius: av-radius(tidy);
 
         &.isNotExpanded {
           &:hover {
-            background-color: $nodeBgHover;
+            background-color: $nodeBackgroundHover;
           }
         }
       }
@@ -198,7 +198,7 @@ $nodeBgHover: av-color(purewhite, av-opacity(divider));
     }
 
     .leafNodeContainer {
-      background-color: $nodeBg;
+      background-color: $nodeBackground;
       height: av-size(sz-48);
       width: 100%;
 
