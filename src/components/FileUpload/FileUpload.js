@@ -14,6 +14,7 @@ const FileUpload = ({
 
   const openFolderProp = isUploadFolder && {
     webkitdirectory: '',
+    directory: '',
   }
 
   const uploadClick = (childrenOnClick, childrenOnClickArgs) => {
