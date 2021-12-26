@@ -35,7 +35,7 @@ const Button = forwardRef(
       <button
         className={classes}
         onClick={onClick}
-        disabled={disabled}
+        disabled={disabled || isLoading}
         ref={ref}
         type={type}
         {...otherProps}
