@@ -35,6 +35,12 @@ export const disable = () => (
   </div>
 )
 
+export const loading = () => (
+  <div className={styles.marginFlexContainer}>
+    <Button loading />
+  </div>
+)
+
 export const withIcon = () => <Button leadingIcon={<SunIcon />}>leading</Button>
 
 export const withClassName = () => (

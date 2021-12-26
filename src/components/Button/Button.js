@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
+import Spinner from '../Spinner'
 import styles from './Button.module.scss'
 
 /**
@@ -18,6 +19,7 @@ const Button = forwardRef(
       type,
       className,
       children,
+      loading,
       ...otherProps
     },
     ref,
@@ -38,10 +40,16 @@ const Button = forwardRef(
         type={type}
         {...otherProps}
       >
-        {leadingIcon && (
-          <span className={styles.leadingIcon}>{leadingIcon}</span>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <>
+            {leadingIcon && (
+              <span className={styles.leadingIcon}>{leadingIcon}</span>
+            )}
+            {children}
+          </>
         )}
-        {children}
       </button>
     )
   },
@@ -53,6 +61,7 @@ Button.defaultProps = {
   disabled: false,
   onClick: () => {},
   type: 'button',
+  loading: false,
 }
 
 Button.propTypes = {
@@ -72,6 +81,8 @@ Button.propTypes = {
   className: propTypes.string,
   /** The component content. */
   children: propTypes.node.isRequired,
+  /** Loading indicator */
+  loading: propTypes.bool,
 }
 
 export default Button

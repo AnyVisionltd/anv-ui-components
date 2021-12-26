@@ -102,3 +102,14 @@ div.fullWidth {
     height: av-size(sz-480);
   }
 }
+
+.spinnerBg {
+  background-color: av-color(primary);
+  padding: av-space();
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: av-space();
+  color: av-color(purewhite);
+}
