@@ -8,7 +8,7 @@ const Spinner = ({ size }) => (
 )
 
 Spinner.propTypes = {
-  /** The size of the spinner. */
+  /** The size of the spinner.  */
   size: PropTypes.oneOf(['small', 'medium', 'large', 'giant']),
 }
 
