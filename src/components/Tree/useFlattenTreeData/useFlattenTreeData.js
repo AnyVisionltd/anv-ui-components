@@ -130,6 +130,7 @@ const useFlattenTreeData = ({
   const handleSetSelectedNodesFromKeysArr = useCallback(
     (keysToAdd, keysToRemove = []) => {
       if (!Object.keys(flattenedNodes).length) return
+      isSelectedKeysUpdatedAfterMount.current = true
       keysToRemove.forEach(
         key =>
           (flattenedNodes[key] = { ...flattenedNodes[key], isSelected: false }),
@@ -166,7 +167,6 @@ const useFlattenTreeData = ({
 
   useEffect(() => {
     if (!isSelectedKeysUpdatedAfterMount.current && selectedKeys.length) {
-      isSelectedKeysUpdatedAfterMount.current = true
       handleSetSelectedNodesFromKeysArr(selectedKeys)
     }
   }, [handleSetSelectedNodesFromKeysArr, selectedKeys])
