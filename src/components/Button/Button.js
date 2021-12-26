@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
-import Spinner from '../Spinner'
+import { Spinner } from '../Spinner'
 import styles from './Button.module.scss'
 
 /**
