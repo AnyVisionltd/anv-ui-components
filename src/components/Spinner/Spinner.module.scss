@@ -6,11 +6,11 @@
   width: 4px;
   height: 4px;
   background-color: av-color(purewhite);
-  border-radius: 50%;
+  border-radius: av-radius(circle);
 }
 
 .spinner {
-  border-radius: 50%;
+  border-radius: av-radius(circle);
   width: av-size(sz-16);
   height: av-size(sz-16);
   position: relative;
