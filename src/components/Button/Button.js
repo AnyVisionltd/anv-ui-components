@@ -19,7 +19,7 @@ const Button = forwardRef(
       type,
       className,
       children,
-      loading,
+      isLoading,
       ...otherProps
     },
     ref,
@@ -40,15 +40,14 @@ const Button = forwardRef(
         type={type}
         {...otherProps}
       >
-        {loading ? (
-          <Spinner />
-        ) : (
-          <>
-            {leadingIcon && (
-              <span className={styles.leadingIcon}>{leadingIcon}</span>
-            )}
-            {children}
-          </>
+        {leadingIcon && (
+          <span className={styles.leadingIcon}>{leadingIcon}</span>
+        )}
+        {children}
+        {isLoading && (
+          <div className={styles.loading}>
+            <Spinner />
+          </div>
         )}
       </button>
     )
@@ -61,7 +60,7 @@ Button.defaultProps = {
   disabled: false,
   onClick: () => {},
   type: 'button',
-  loading: false,
+  isLoading: false,
 }
 
 Button.propTypes = {
@@ -82,7 +81,7 @@ Button.propTypes = {
   /** The component content. */
   children: propTypes.node.isRequired,
   /** Loading indicator */
-  loading: propTypes.bool,
+  isLoading: propTypes.bool,
 }
 
 export default Button

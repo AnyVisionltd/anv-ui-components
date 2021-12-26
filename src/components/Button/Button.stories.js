@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
 import Button from './Button'
+import { Switch } from '../Switch'
 import styles from '../../storybook/index.module.scss'
 import { centerDecorator } from '../../utils/storybook/decorators'
 
@@ -35,11 +36,19 @@ export const disable = () => (
   </div>
 )
 
-export const loading = () => (
-  <div className={styles.marginFlexContainer}>
-    <Button loading />
-  </div>
-)
+export const Loading = () => {
+  const [isLoading, setIsloading] = useState(false)
+
+  return (
+    <div className={styles.marginFlexContainer}>
+      <Switch
+        checked={isLoading}
+        onChange={() => setIsloading(prev => !prev)}
+      />
+      <Button isLoading={isLoading}>Loading</Button>
+    </div>
+  )
+}
 
 export const withIcon = () => <Button leadingIcon={<SunIcon />}>leading</Button>
 
