@@ -115,6 +115,8 @@ $nodeBackgroundHover: av-color(purewhite, av-opacity(divider));
     max-height: calc(
       100% - #{$searchInputHeight} - #{$bulkExpandSelectHeight} - #{av-space()}
     );
+    min-height: av-size(sz-320);
+    height: 100%;
 
     .parentNodeContainer {
       height: $parentNodeHeight;
