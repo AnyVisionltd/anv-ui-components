@@ -16,6 +16,7 @@
   justify-content: center;
   flex-wrap: nowrap;
   white-space: nowrap;
+  overflow: hidden;
 
   &:disabled {
     opacity: av-opacity(disabled);
