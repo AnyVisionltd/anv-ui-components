@@ -7,56 +7,61 @@ export const PARENT_NODE_HEIGHT = 72
 
 export const DEFAULT_AMOUNT_LOADING_NODES = 6
 
+export const SEPARATOR_SIGN = '$$'
+
 export const emptyListTypes = Object.freeze({
   NO_ITEMS_IN_LIST: 0,
   NO_RESULTS_FOUND: 1,
 })
+
+export const getUniqueKey = (parentKey, nodeKey) => `${parentKey}${SEPARATOR_SIGN}${nodeKey}`
 
 export const setNodesSelectedStatus = ({
   nodesTree,
   nodesMap,
   isSelected,
   childrenKey,
-  idKey,
+  isChildrenUniqueKeysOverlap
 }) => {
-  const keys = { added: [], removed: [] }
-  const currentUsedArr = isSelected ? keys.added : keys.removed
+  const keys = isChildrenUniqueKeysOverlap ? 
+    { added: {}, removed: {} } : 
+    { added: [], removed: [] }
+  const currentUsedArrObj = isSelected ? keys.added : keys.removed
 
   const setAllSelected = nodes => {
     nodes.forEach(node => {
-      const { [idKey]: key, [childrenKey]: children } = node
+      let { uniqueKey, [childrenKey]: children } = node
       if (children) {
         setAllSelected(children)
       } else {
-        const previousSelectedStatus = nodesMap[key].isSelected
-        nodesMap[key].isSelected = isSelected
+        const previousSelectedStatus = nodesMap[uniqueKey].isSelected
+        nodesMap[uniqueKey].isSelected = isSelected
         if (isSelected !== previousSelectedStatus) {
-          currentUsedArr.push(key)
+          currentUsedArrObj.push(uniqueKey)
         }
       }
     })
   }
 
   setAllSelected(nodesTree)
+  console.log(keys)
   return { nodesMap, keys }
 }
 
 export const setNodesExpandedStatus = ({
   nodesTree,
   isOpen,
-  idKey,
   childrenKey,
 }) =>
   nodesTree.reduce(
-    (parentNodesObj, { [idKey]: key, [childrenKey]: children }) => {
+    (parentNodesObj, { uniqueKey, [childrenKey]: children }) => {
       if (!children) return parentNodesObj
-      parentNodesObj[key] = isOpen
+      parentNodesObj[uniqueKey] = isOpen
       return {
         ...parentNodesObj,
         ...setNodesExpandedStatus({
           nodesTree: children,
           isOpen,
-          idKey,
           childrenKey,
         }),
       }
@@ -67,7 +72,6 @@ export const setNodesExpandedStatus = ({
 export const checkAllNodesAreExpanded = ({
   nodesTree,
   nodesVirualizedMap,
-  idKey,
   childrenKey,
 }) => {
   if (!nodesVirualizedMap) return false
@@ -75,9 +79,10 @@ export const checkAllNodesAreExpanded = ({
 
   const areAllNodesExpanded = nodesTreeData => {
     nodesTreeData.forEach(node => {
-      const { [idKey]: key, [childrenKey]: children } = node
+      console.log('mpded os ', node)
+      const { uniqueKey, [childrenKey]: children } = node
       if (!children || !areExpanded) return
-      if (nodesVirualizedMap[key]?.isOpen) {
+      if (nodesVirualizedMap[uniqueKey]?.isOpen) {
         return areAllNodesExpanded(children)
       } else {
         areExpanded = false
@@ -125,4 +130,29 @@ export const setNodeValueInTreeFromPath = ({
     })
   }
   return traverseTree(treeData, pathsArr)
+}
+
+export const convertArrayPropertiesOfObjectToSets = selectedKeysObject => (
+  Object.keys(selectedKeysObject).reduce((acc, rootKey) => (
+    { ...acc, [rootKey]: new Set(selectedKeysObject[rootKey]) }
+  ), 
+  {})
+)
+
+export const isKeyInSet = (key, set) => {
+  if (set.has(key)) {
+    set.delete(key)
+    return true
+  }
+  return false
+}
+
+export const determineIsNodeSelected = ({
+  selectedKeysSetOrObj,
+  key,
+  parentKey
+}) => {
+  if (selectedKeysSetOrObj instanceof Set) return isKeyInSet(key, selectedKeysSetOrObj)
+  if (selectedKeysSetOrObj[parentKey] instanceof Set) return isKeyInSet(key, selectedKeysSetOrObj[parentKey])
+  return false
 }

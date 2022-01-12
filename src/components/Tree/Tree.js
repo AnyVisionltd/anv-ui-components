@@ -54,6 +54,8 @@ const Tree = forwardRef(
       labelKey,
       idKey,
       isLoading,
+      isChildrenUniqueKeysOverlap,
+      isReturnSelectedKeysWhenOnSelect
     },
     ref,
   ) => {
@@ -74,6 +76,7 @@ const Tree = forwardRef(
       initialData: nodes,
       onSearch,
       treeInstance,
+      isChildrenUniqueKeysOverlap,
       ...keyValues,
     })
 
@@ -88,6 +91,7 @@ const Tree = forwardRef(
       data: nodes,
       selectedKeys,
       maxNestingLevel,
+      isChildrenUniqueKeysOverlap,
       ...keyValues,
     })
 
@@ -120,19 +124,24 @@ const Tree = forwardRef(
     const areAllNodesSelected = totalChildrenInTree === totalSelectedInTree
 
     const handleIsSelected = (node, isCurrentlySelected) => {
-      const newFlattenedNodes = { ...flattenedNodes }
       const { keys: keysToToggle, nodesMap } = setNodesSelectedStatus({
         nodesTree: Array.isArray(node) ? node : [node],
-        nodesMap: newFlattenedNodes,
+        nodesMap: { ...flattenedNodes },
         isSelected: !isCurrentlySelected,
         childrenKey,
-        idKey,
+        isChildrenUniqueKeysOverlap
       })
 
       setFlattenedNodes(nodesMap)
       updateAmountOfSelectedNodesAndChildren(
-        Array.isArray(node) ? ALL_ROOTS_COMBINED_KEY : node[idKey],
+        Array.isArray(node) ? ALL_ROOTS_COMBINED_KEY : node.uniqueKey,
       )
+      // Add isReturn
+
+      // if (isReturnSelectedKeysWhenOnSelect) {
+        
+      // }
+
       onSelect(keysToToggle)
     }
 
@@ -148,7 +157,6 @@ const Tree = forwardRef(
       const areAllExpanded = checkAllNodesAreExpanded({
         nodesTree: filteredData,
         nodesVirualizedMap: treeInstance?.state?.records,
-        idKey,
         childrenKey,
       })
 
@@ -163,7 +171,6 @@ const Tree = forwardRef(
           nodesTree: filteredData,
           isOpen: !areAllNodesExpanded,
           childrenKey,
-          idKey,
         })
         treeInstance.state.recomputeTree({
           opennessState: allExpandedCollapsedNodesObj,
@@ -238,9 +245,9 @@ const Tree = forwardRef(
       rootNodeProps = {},
     ) => {
       const {
-        [idKey]: key,
         [labelKey]: label,
         [childrenKey]: children,
+        uniqueKey,
         nestingLevel,
       } = node
       const { isOpen, handleExpand, style } = virtualizedListProps
@@ -248,7 +255,7 @@ const Tree = forwardRef(
       const {
         totalSelected = 0,
         totalChildren = children.length,
-      } = calculateAmountOfSelectedNodesAndChildren(key)
+      } = calculateAmountOfSelectedNodesAndChildren(uniqueKey)
       const isSelected = !!totalChildren && totalSelected === totalChildren
 
       const infoText = getParentNodeInfo(totalChildren, totalSelected)
@@ -259,9 +266,9 @@ const Tree = forwardRef(
       )
 
       return (
-        <div className={containerClasses}>
+        <div className={containerClasses} key={uniqueKey}>
           <div className={wrapperClasses}>
-            <div style={style} className={styles.parentNode} key={key}>
+            <div style={style} className={styles.parentNode}>
               <Checkbox
                 disabled={!totalChildren}
                 checked={isSelected}
@@ -303,21 +310,21 @@ const Tree = forwardRef(
     }
 
     const renderLeafNode = (node, virtualizedListProps = {}) => {
-      const { [idKey]: key, [labelKey]: label } = node
+      const { uniqueKey, [labelKey]: label } = node
       const { style, isLastLeaf } = virtualizedListProps
-      const isSelected = flattenedNodes[key]?.isSelected
+      const isSelected = flattenedNodes[uniqueKey]?.isSelected
 
       const { containerClasses, leafNodeClasses } = getLeafNodeClasses(
         isLastLeaf,
       )
 
       return (
-        <div className={containerClasses}>
+        <div className={containerClasses} key={uniqueKey}>
           <div style={style} className={styles.leafNodeWrapper}>
             {renderLeaf ? (
               renderLeaf(node)
             ) : (
-              <div className={leafNodeClasses} key={key}>
+              <div className={leafNodeClasses}>
                 <div className={styles.leftSideLeaf}>
                   <Checkbox
                     checked={isSelected}
@@ -390,6 +397,8 @@ const Tree = forwardRef(
 
     const isEmpty = isTreeEmpty()
 
+    console.log(treeInstance?.state)
+
     return (
       <div className={classNames(styles.tree, className)}>
         {isSearchable && !!nodes.length && renderSearchInput()}
@@ -428,7 +437,7 @@ Tree.propTypes = {
   /** Nodes of the tree. If a node has children, it's a parent node, else it's a leaf node. */
   nodes: propTypes.array,
   /** Selected nodes in the tree, each item has his unique key. */
-  selectedKeys: propTypes.arrayOf(propTypes.any),
+  selectedKeys: propTypes.oneOfType([propTypes.array, propTypes.object]),
   /** The key value of the node's children property. Default is 'children'. */
   childrenKey: propTypes.string,
   /** The key value of the node's unique id property. Default is 'key'. */
@@ -479,6 +488,10 @@ Tree.propTypes = {
   noItemsMessage: propTypes.string,
   /** Tree loading status. */
   isLoading: propTypes.bool,
+  /** Whether the tree roots can have the same child node without causing unique key conflicts.  */
+  isChildrenUniqueKeysOverlap: propTypes.bool,
+  /** If there is no need to make changes with selected/added nodes, set the prop to true to get the selectedKeys structure.  */
+  isReturnSelectedKeysWhenOnSelect: propTypes.bool,
 }
 
 export default Tree
