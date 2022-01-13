@@ -25,6 +25,7 @@ import {
   emptyListTypes,
   ALL_ROOTS_COMBINED_KEY,
   getNodeParents,
+  organizeSelectedKeys,
 } from './utils'
 import styles from './Tree.module.scss'
 
@@ -54,6 +55,8 @@ const Tree = forwardRef(
       labelKey,
       idKey,
       isLoading,
+      isChildrenUniqueKeysOverlap,
+      isReturnSelectedKeysWhenOnSelect,
     },
     ref,
   ) => {
@@ -74,6 +77,7 @@ const Tree = forwardRef(
       initialData: nodes,
       onSearch,
       treeInstance,
+      isChildrenUniqueKeysOverlap,
       ...keyValues,
     })
 
@@ -84,10 +88,12 @@ const Tree = forwardRef(
       updateAmountOfSelectedNodesAndChildren,
       handleAddNewFlattenedNodes,
       handleSetSelectedNodesFromKeysArr,
+      handleSetSelectedNodesFromKeysObject,
     } = useFlattenTreeData({
       data: nodes,
       selectedKeys,
       maxNestingLevel,
+      isChildrenUniqueKeysOverlap,
       ...keyValues,
     })
 
@@ -98,8 +104,11 @@ const Tree = forwardRef(
           const { ALL_ROOTS_COMBINED_KEY, ...restNodes } = flattenedNodes
           return Object.freeze(restNodes)
         },
-        setSelectedKeys: (keysToAdd, keysToRemove) =>
-          handleSetSelectedNodesFromKeysArr(keysToAdd, keysToRemove),
+        setSelectedKeys: (keysToAdd, keysToRemove) => {
+          if (isChildrenUniqueKeysOverlap)
+            handleSetSelectedNodesFromKeysObject(keysToAdd, keysToRemove)
+          else handleSetSelectedNodesFromKeysArr(keysToAdd, keysToRemove)
+        },
         setNodeProperties: (nodeKey, newProperties) => {
           if (!flattenedNodes[nodeKey]) return
           const nodePathArr = getNodeParents(nodeKey, flattenedNodes)
@@ -110,6 +119,8 @@ const Tree = forwardRef(
         flattenedNodes,
         handleSetNodeNewProperties,
         handleSetSelectedNodesFromKeysArr,
+        handleSetSelectedNodesFromKeysObject,
+        isChildrenUniqueKeysOverlap,
       ],
     )
 
@@ -120,20 +131,30 @@ const Tree = forwardRef(
     const areAllNodesSelected = totalChildrenInTree === totalSelectedInTree
 
     const handleIsSelected = (node, isCurrentlySelected) => {
-      const newFlattenedNodes = { ...flattenedNodes }
       const { keys: keysToToggle, nodesMap } = setNodesSelectedStatus({
         nodesTree: Array.isArray(node) ? node : [node],
-        nodesMap: newFlattenedNodes,
+        nodesMap: { ...flattenedNodes },
         isSelected: !isCurrentlySelected,
         childrenKey,
         idKey,
+        isChildrenUniqueKeysOverlap,
       })
 
       setFlattenedNodes(nodesMap)
       updateAmountOfSelectedNodesAndChildren(
-        Array.isArray(node) ? ALL_ROOTS_COMBINED_KEY : node[idKey],
+        Array.isArray(node) ? ALL_ROOTS_COMBINED_KEY : node.uniqueKey,
       )
-      onSelect(keysToToggle)
+
+      if (isReturnSelectedKeysWhenOnSelect) {
+        const newSelectedKeys = organizeSelectedKeys({
+          isChildrenUniqueKeysOverlap,
+          keysToToggle,
+          selectedKeys,
+        })
+        onSelect(newSelectedKeys, keysToToggle)
+      } else {
+        onSelect(keysToToggle)
+      }
     }
 
     useEffect(() => {
@@ -148,7 +169,6 @@ const Tree = forwardRef(
       const areAllExpanded = checkAllNodesAreExpanded({
         nodesTree: filteredData,
         nodesVirualizedMap: treeInstance?.state?.records,
-        idKey,
         childrenKey,
       })
 
@@ -163,7 +183,6 @@ const Tree = forwardRef(
           nodesTree: filteredData,
           isOpen: !areAllNodesExpanded,
           childrenKey,
-          idKey,
         })
         treeInstance.state.recomputeTree({
           opennessState: allExpandedCollapsedNodesObj,
@@ -238,9 +257,9 @@ const Tree = forwardRef(
       rootNodeProps = {},
     ) => {
       const {
-        [idKey]: key,
         [labelKey]: label,
         [childrenKey]: children,
+        uniqueKey,
         nestingLevel,
       } = node
       const { isOpen, handleExpand, style } = virtualizedListProps
@@ -248,7 +267,7 @@ const Tree = forwardRef(
       const {
         totalSelected = 0,
         totalChildren = children.length,
-      } = calculateAmountOfSelectedNodesAndChildren(key)
+      } = calculateAmountOfSelectedNodesAndChildren(uniqueKey)
       const isSelected = !!totalChildren && totalSelected === totalChildren
 
       const infoText = getParentNodeInfo(totalChildren, totalSelected)
@@ -259,9 +278,9 @@ const Tree = forwardRef(
       )
 
       return (
-        <div className={containerClasses}>
+        <div className={containerClasses} key={uniqueKey}>
           <div className={wrapperClasses}>
-            <div style={style} className={styles.parentNode} key={key}>
+            <div style={style} className={styles.parentNode}>
               <Checkbox
                 disabled={!totalChildren}
                 checked={isSelected}
@@ -303,21 +322,21 @@ const Tree = forwardRef(
     }
 
     const renderLeafNode = (node, virtualizedListProps = {}) => {
-      const { [idKey]: key, [labelKey]: label } = node
+      const { uniqueKey, [labelKey]: label } = node
       const { style, isLastLeaf } = virtualizedListProps
-      const isSelected = flattenedNodes[key]?.isSelected
+      const isSelected = flattenedNodes[uniqueKey]?.isSelected
 
       const { containerClasses, leafNodeClasses } = getLeafNodeClasses(
         isLastLeaf,
       )
 
       return (
-        <div className={containerClasses}>
+        <div className={containerClasses} key={uniqueKey}>
           <div style={style} className={styles.leafNodeWrapper}>
             {renderLeaf ? (
               renderLeaf(node)
             ) : (
-              <div className={leafNodeClasses} key={key}>
+              <div className={leafNodeClasses}>
                 <div className={styles.leftSideLeaf}>
                   <Checkbox
                     checked={isSelected}
@@ -428,7 +447,7 @@ Tree.propTypes = {
   /** Nodes of the tree. If a node has children, it's a parent node, else it's a leaf node. */
   nodes: propTypes.array,
   /** Selected nodes in the tree, each item has his unique key. */
-  selectedKeys: propTypes.arrayOf(propTypes.any),
+  selectedKeys: propTypes.oneOfType([propTypes.array, propTypes.object]),
   /** The key value of the node's children property. Default is 'children'. */
   childrenKey: propTypes.string,
   /** The key value of the node's unique id property. Default is 'key'. */
@@ -479,6 +498,11 @@ Tree.propTypes = {
   noItemsMessage: propTypes.string,
   /** Tree loading status. */
   isLoading: propTypes.bool,
+  /** Whether the tree roots can have the same child node without causing unique key conflicts.  */
+  isChildrenUniqueKeysOverlap: propTypes.bool,
+  /** If there is no need to make changes with selected/added nodes, set this prop to true
+   * in order to get the new selectedKeys structure.  */
+  isReturnSelectedKeysWhenOnSelect: propTypes.bool,
 }
 
 export default Tree

@@ -1,5 +1,9 @@
 import { useCallback, useState } from 'react'
-import { ALL_ROOTS_COMBINED_KEY, setNodeValueInTreeFromPath } from '../utils'
+import {
+  ALL_ROOTS_COMBINED_KEY,
+  getUniqueKey,
+  setNodeValueInTreeFromPath,
+} from '../utils'
 
 const useTreeVisibleData = ({
   initialData,
@@ -8,6 +12,7 @@ const useTreeVisibleData = ({
   childrenKey,
   labelKey,
   idKey,
+  isChildrenUniqueKeysOverlap,
 }) => {
   const setAllNodesAsVisible = useCallback(
     (data, parentKey = ALL_ROOTS_COMBINED_KEY) => {
@@ -16,9 +21,18 @@ const useTreeVisibleData = ({
           node.visible = true
           node.parentKey = parentKey
           node.index = index
+          node.uniqueKey = node.uniqueKey || node[idKey]
+
+          if (
+            isChildrenUniqueKeysOverlap &&
+            parentKey !== ALL_ROOTS_COMBINED_KEY
+          ) {
+            node.uniqueKey = getUniqueKey(parentKey, node[idKey])
+          }
+
           if (node[childrenKey]) {
             node.isParentNode = true
-            setAllNodesAsVisible(node[childrenKey], node[idKey])
+            setAllNodesAsVisible(node[childrenKey], node.uniqueKey)
           }
         })
       }
@@ -26,7 +40,7 @@ const useTreeVisibleData = ({
       setAllVisible(data)
       return data
     },
-    [childrenKey, idKey],
+    [childrenKey, idKey, isChildrenUniqueKeysOverlap],
   )
 
   const filterVisibleData = useCallback(
@@ -36,12 +50,25 @@ const useTreeVisibleData = ({
           node.visible = node[labelKey].toLowerCase().startsWith(searchKeyword)
           node.parentKey = parentKey
           node.index = index
+          node.uniqueKey = node.uniqueKey || node[idKey]
+
+          if (
+            isChildrenUniqueKeysOverlap &&
+            parentKey !== ALL_ROOTS_COMBINED_KEY
+          ) {
+            node.uniqueKey = getUniqueKey(parentKey, node[idKey])
+          }
+
           if (Array.isArray(node[childrenKey])) {
             node.isParentNode = true
             if (node.visible) {
-              setAllNodesAsVisible(node[childrenKey], node[idKey])
+              setAllNodesAsVisible(node[childrenKey], node.uniqueKey)
             } else {
-              filterVisibleData(node[childrenKey], searchKeyword, node[idKey])
+              filterVisibleData(
+                node[childrenKey],
+                searchKeyword,
+                node.uniqueKey,
+              )
               for (const child of node[childrenKey]) {
                 if (child.visible) {
                   node.visible = child.visible
@@ -55,7 +82,13 @@ const useTreeVisibleData = ({
       setVisible(data)
       return data
     },
-    [childrenKey, idKey, labelKey, setAllNodesAsVisible],
+    [
+      childrenKey,
+      idKey,
+      isChildrenUniqueKeysOverlap,
+      labelKey,
+      setAllNodesAsVisible,
+    ],
   )
 
   const [searchQuery, setSearchQuery] = useState('')
@@ -70,12 +103,11 @@ const useTreeVisibleData = ({
         treeData: [...filteredData],
         newProperties,
         childrenKey,
-        idKey,
       })
 
       setFilteredData(newTreeData)
     },
-    [childrenKey, filteredData, idKey],
+    [childrenKey, filteredData],
   )
 
   const handleAddNewNodes = useCallback(

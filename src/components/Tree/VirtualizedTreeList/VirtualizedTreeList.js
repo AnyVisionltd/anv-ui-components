@@ -54,7 +54,7 @@ const determineDefaultHeight = (isParentNode, layer) => {
   return layer === 0 ? PARENT_NODE_WRAPPER_HEIGHT : PARENT_NODE_HEIGHT
 }
 
-const buildTreeWalker = ({ rootNode, childrenKey, idKey, labelKey }) =>
+const buildTreeWalker = ({ rootNode, childrenKey, labelKey }) =>
   function* treeWalker(refresh) {
     const stack = Object.values(rootNode).map(node => ({
       nestingLevel: 0,
@@ -65,10 +65,10 @@ const buildTreeWalker = ({ rootNode, childrenKey, idKey, labelKey }) =>
       const { node, nestingLevel } = stack.shift()
       const {
         isParentNode,
-        [idKey]: key,
         [labelKey]: label,
         [childrenKey]: children,
         visible,
+        uniqueKey,
       } = node
 
       if (!visible) continue
@@ -77,13 +77,13 @@ const buildTreeWalker = ({ rootNode, childrenKey, idKey, labelKey }) =>
         ? {
             defaultHeight: determineDefaultHeight(isParentNode, nestingLevel),
             isOpenByDefault: false,
-            id: key,
+            id: uniqueKey,
             name: label,
             isLeaf: !isParentNode,
             nestingLevel,
             ...node,
           }
-        : key
+        : uniqueKey
 
       if (isParentNode && isOpened) {
         for (let i = children.length - 1; i >= 0; i--) {

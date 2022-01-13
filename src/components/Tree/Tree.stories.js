@@ -218,6 +218,75 @@ const treeNodes = [
   },
 ]
 
+const treeNodesWithOverlappingKeys = [
+  {
+    key: '1',
+    label: 'Camera Group 1',
+    children: [
+      {
+        label: 'Camera 1',
+        key: '101',
+      },
+      {
+        label: 'Camera 2',
+        key: '102',
+      },
+      {
+        label: 'Camera 3',
+        key: '103',
+      },
+      {
+        label: 'Camera 4',
+        key: '104',
+      },
+    ],
+  },
+  {
+    key: '2',
+    label: 'Camera Group 2',
+    children: [
+      {
+        label: 'Camera 1',
+        key: '101',
+      },
+      {
+        label: 'Camera 2',
+        key: '102',
+      },
+      {
+        label: 'Camera 3',
+        key: '103',
+      },
+      {
+        label: 'Camera 5',
+        key: '105',
+      },
+    ],
+  },
+  {
+    key: '3',
+    label: 'Camera Group 3',
+    children: [
+      {
+        label: 'Camera 1',
+        key: '101',
+      },
+      {
+        label: 'Camera 6',
+        key: '106',
+      },
+      {
+        label: 'Camera 7',
+        key: '107',
+      },
+      {
+        label: 'Camera 8',
+        key: '108',
+      },
+    ],
+  },
+]
+
 export const Basic = () => {
   // treeInstance allows to access tree properties and use functions to change
   // tree properties:
@@ -353,6 +422,40 @@ export const InfiniteTree = () => {
       loadMoreData={loadMoreNodes}
       className={styles.tree}
       nodesContainerClassName={styles.nodesContainer}
+    />
+  )
+}
+
+// export const Basic = () => {
+export const UniqueKeyOverlap = () => {
+  const [selectedKeys, setSelectedkeys] = useState({
+    1: ['101', '102', '103'],
+    2: ['101', '102'],
+    3: ['101', '108'],
+  })
+  const [treeInstance, setTreeInstance] = useState(null)
+
+  // If there is no need to do something with added/removed keys,
+  // use isReturnSelectedKeysWhenOnSelect so the new selected keys will be returned.
+  // However, added/removed keys is still passed as a paramater if needed.
+  const onSelect = newSelectedKeys => setSelectedkeys(newSelectedKeys)
+
+  const onSetSelectedKeys = () =>
+    treeInstance.setSelectedKeys({ 1: ['104'] }, { 3: ['108'] })
+  const onSetNodeProperties = () =>
+    treeInstance.setNodeProperties('1$$104', { label: 'New name' })
+
+  return (
+    <Tree
+      nodes={treeNodesWithOverlappingKeys}
+      selectedKeys={selectedKeys}
+      onSelect={onSelect}
+      ref={setTreeInstance}
+      maxNestingLevel={1}
+      className={styles.tree}
+      nodesContainerClassName={styles.nodesContainer}
+      isChildrenUniqueKeysOverlap
+      isReturnSelectedKeysWhenOnSelect
     />
   )
 }
