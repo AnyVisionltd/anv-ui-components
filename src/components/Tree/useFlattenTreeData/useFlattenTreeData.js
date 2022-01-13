@@ -1,5 +1,11 @@
 import { useState, useCallback, useEffect, useRef } from 'react'
-import { ALL_ROOTS_COMBINED_KEY, convertArrayPropertiesOfObjectToSets, determineIsNodeSelected } from '../utils'
+import {
+  addRemoveKeysInSelectedArr,
+  addRemoveKeysInSelectedObj,
+  ALL_ROOTS_COMBINED_KEY,
+  convertArrayPropertiesOfObjectToSets,
+  determineIsNodeSelected,
+} from '../utils'
 
 const useFlattenTreeData = ({
   data,
@@ -35,11 +41,13 @@ const useFlattenTreeData = ({
             ? children.map(({ uniqueKey }) => ({ uniqueKey }))
             : undefined,
           layer,
-          isSelected: isParentSelected || determineIsNodeSelected({
-            selectedKeysSetOrObj,
-            key: node[idKey],
-            parentKey
-          }),
+          isSelected:
+            isParentSelected ||
+            determineIsNodeSelected({
+              selectedKeysSetOrObj,
+              key: node[idKey],
+              parentKey,
+            }),
         }
         flatten(children, nodesMap, selectedKeysSetOrObj, layer + 1)
       })
@@ -131,14 +139,36 @@ const useFlattenTreeData = ({
     (keysToAdd, keysToRemove = []) => {
       if (!Object.keys(flattenedNodes).length) return
       isSelectedKeysUpdatedAfterMount.current = true
-      keysToRemove.forEach(
-        key =>
-          (flattenedNodes[key] = { ...flattenedNodes[key], isSelected: false }),
-      )
-      keysToAdd.forEach(
-        key =>
-          (flattenedNodes[key] = { ...flattenedNodes[key], isSelected: true }),
-      )
+      addRemoveKeysInSelectedArr({
+        keysArr: keysToAdd,
+        flattenedNodes,
+        isSelected: true,
+      })
+      addRemoveKeysInSelectedArr({
+        keysArr: keysToRemove,
+        flattenedNodes,
+        isSelected: false,
+      })
+      calculateAmountOfSelectedNodesAndChildren(ALL_ROOTS_COMBINED_KEY, true)
+      setFlattenedNodes(prev => ({ ...prev }))
+    },
+    [calculateAmountOfSelectedNodesAndChildren, flattenedNodes],
+  )
+
+  const handleSetSelectedNodesFromKeysObject = useCallback(
+    (keysToAdd, keysToRemove = {}) => {
+      if (!Object.keys(flattenedNodes).length) return
+      isSelectedKeysUpdatedAfterMount.current = true
+      addRemoveKeysInSelectedObj({
+        keysObject: keysToAdd,
+        flattenedNodes,
+        isSelected: true,
+      })
+      addRemoveKeysInSelectedObj({
+        keysObject: keysToRemove,
+        flattenedNodes,
+        isSelected: false,
+      })
       calculateAmountOfSelectedNodesAndChildren(ALL_ROOTS_COMBINED_KEY, true)
       setFlattenedNodes(prev => ({ ...prev }))
     },
@@ -162,18 +192,25 @@ const useFlattenTreeData = ({
 
   useEffect(() => {
     if (Object.keys(flattenedNodes).length || !data.length) return
-    const selectedKeysParam = isChildrenUniqueKeysOverlap ?
-      convertArrayPropertiesOfObjectToSets(selectedKeys) :
-      new Set(selectedKeys)
+    const selectedKeysParam = isChildrenUniqueKeysOverlap
+      ? convertArrayPropertiesOfObjectToSets(selectedKeys)
+      : new Set(selectedKeys)
     flattenTreeData(data, selectedKeysParam)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data])
 
   useEffect(() => {
     if (!isSelectedKeysUpdatedAfterMount.current && selectedKeys.length) {
-      handleSetSelectedNodesFromKeysArr(selectedKeys)
+      if (isChildrenUniqueKeysOverlap)
+        handleSetSelectedNodesFromKeysObject(selectedKeys)
+      else handleSetSelectedNodesFromKeysArr(selectedKeys)
     }
-  }, [handleSetSelectedNodesFromKeysArr, selectedKeys])
+  }, [
+    handleSetSelectedNodesFromKeysArr,
+    handleSetSelectedNodesFromKeysObject,
+    isChildrenUniqueKeysOverlap,
+    selectedKeys,
+  ])
 
   return {
     flattenedNodes,
@@ -181,6 +218,8 @@ const useFlattenTreeData = ({
     calculateAmountOfSelectedNodesAndChildren,
     updateAmountOfSelectedNodesAndChildren,
     handleAddNewFlattenedNodes,
+    handleSetSelectedNodesFromKeysArr,
+    handleSetSelectedNodesFromKeysObject,
   }
 }
 

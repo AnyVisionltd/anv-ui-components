@@ -14,60 +14,59 @@ export const emptyListTypes = Object.freeze({
   NO_RESULTS_FOUND: 1,
 })
 
-export const getUniqueKey = (parentKey, nodeKey) => `${parentKey}${SEPARATOR_SIGN}${nodeKey}`
+export const getUniqueKey = (parentKey, nodeKey) =>
+  `${parentKey}${SEPARATOR_SIGN}${nodeKey}`
 
 export const setNodesSelectedStatus = ({
   nodesTree,
   nodesMap,
   isSelected,
   childrenKey,
-  isChildrenUniqueKeysOverlap
+  idKey,
+  isChildrenUniqueKeysOverlap,
 }) => {
-  const keys = isChildrenUniqueKeysOverlap ? 
-    { added: {}, removed: {} } : 
-    { added: [], removed: [] }
+  const keys = isChildrenUniqueKeysOverlap
+    ? { added: {}, removed: {} }
+    : { added: [], removed: [] }
   const currentUsedArrObj = isSelected ? keys.added : keys.removed
 
   const setAllSelected = nodes => {
     nodes.forEach(node => {
-      let { uniqueKey, [childrenKey]: children } = node
+      let { uniqueKey, [childrenKey]: children, [idKey]: key, parentKey } = node
       if (children) {
         setAllSelected(children)
       } else {
         const previousSelectedStatus = nodesMap[uniqueKey].isSelected
         nodesMap[uniqueKey].isSelected = isSelected
         if (isSelected !== previousSelectedStatus) {
-          currentUsedArrObj.push(uniqueKey)
+          if (isChildrenUniqueKeysOverlap) {
+            currentUsedArrObj[parentKey] = currentUsedArrObj[parentKey] || []
+            currentUsedArrObj[parentKey].push(key)
+          } else {
+            currentUsedArrObj.push(key)
+          }
         }
       }
     })
   }
 
   setAllSelected(nodesTree)
-  console.log(keys)
   return { nodesMap, keys }
 }
 
-export const setNodesExpandedStatus = ({
-  nodesTree,
-  isOpen,
-  childrenKey,
-}) =>
-  nodesTree.reduce(
-    (parentNodesObj, { uniqueKey, [childrenKey]: children }) => {
-      if (!children) return parentNodesObj
-      parentNodesObj[uniqueKey] = isOpen
-      return {
-        ...parentNodesObj,
-        ...setNodesExpandedStatus({
-          nodesTree: children,
-          isOpen,
-          childrenKey,
-        }),
-      }
-    },
-    {},
-  )
+export const setNodesExpandedStatus = ({ nodesTree, isOpen, childrenKey }) =>
+  nodesTree.reduce((parentNodesObj, { uniqueKey, [childrenKey]: children }) => {
+    if (!children) return parentNodesObj
+    parentNodesObj[uniqueKey] = isOpen
+    return {
+      ...parentNodesObj,
+      ...setNodesExpandedStatus({
+        nodesTree: children,
+        isOpen,
+        childrenKey,
+      }),
+    }
+  }, {})
 
 export const checkAllNodesAreExpanded = ({
   nodesTree,
@@ -79,7 +78,6 @@ export const checkAllNodesAreExpanded = ({
 
   const areAllNodesExpanded = nodesTreeData => {
     nodesTreeData.forEach(node => {
-      console.log('mpded os ', node)
       const { uniqueKey, [childrenKey]: children } = node
       if (!children || !areExpanded) return
       if (nodesVirualizedMap[uniqueKey]?.isOpen) {
@@ -111,13 +109,12 @@ export const setNodeValueInTreeFromPath = ({
   pathsArr,
   treeData,
   newProperties,
-  idKey,
   childrenKey,
 }) => {
   const traverseTree = (data, paths) => {
     const nodeKey = paths[0]
     return data.map(childNode => {
-      if (childNode[idKey] === nodeKey) {
+      if (childNode.uniqueKey === nodeKey) {
         if (paths.length === 1) {
           return { ...childNode, ...newProperties }
         }
@@ -132,12 +129,14 @@ export const setNodeValueInTreeFromPath = ({
   return traverseTree(treeData, pathsArr)
 }
 
-export const convertArrayPropertiesOfObjectToSets = selectedKeysObject => (
-  Object.keys(selectedKeysObject).reduce((acc, rootKey) => (
-    { ...acc, [rootKey]: new Set(selectedKeysObject[rootKey]) }
-  ), 
-  {})
-)
+export const convertArrayPropertiesOfObjectToSets = selectedKeysObject =>
+  Object.keys(selectedKeysObject).reduce(
+    (acc, rootKey) => ({
+      ...acc,
+      [rootKey]: new Set(selectedKeysObject[rootKey]),
+    }),
+    {},
+  )
 
 export const isKeyInSet = (key, set) => {
   if (set.has(key)) {
@@ -150,9 +149,76 @@ export const isKeyInSet = (key, set) => {
 export const determineIsNodeSelected = ({
   selectedKeysSetOrObj,
   key,
-  parentKey
+  parentKey,
 }) => {
-  if (selectedKeysSetOrObj instanceof Set) return isKeyInSet(key, selectedKeysSetOrObj)
-  if (selectedKeysSetOrObj[parentKey] instanceof Set) return isKeyInSet(key, selectedKeysSetOrObj[parentKey])
+  if (selectedKeysSetOrObj instanceof Set)
+    return isKeyInSet(key, selectedKeysSetOrObj)
+  if (selectedKeysSetOrObj[parentKey] instanceof Set)
+    return isKeyInSet(key, selectedKeysSetOrObj[parentKey])
   return false
+}
+
+const handleUniqueKeysOnSelect = (selectedKeys, { removed, added }) => {
+  const newSelectedKeys = [...selectedKeys]
+  const removedKeysSet = new Set(removed)
+  newSelectedKeys.filter(key => !removedKeysSet.has(key))
+  return [...newSelectedKeys, ...added]
+}
+
+const handleOverlappingKeysOnSelect = (selectedKeys, { removed, added }) => {
+  const newSelectedKeys = { ...selectedKeys }
+  const removedKeysObjectWithSets = convertArrayPropertiesOfObjectToSets(
+    removed,
+  )
+  Object.entries(removedKeysObjectWithSets).forEach(
+    ([parentKey, newRemovedKeys]) => {
+      newSelectedKeys[parentKey] = newSelectedKeys[parentKey].filter(
+        key => !newRemovedKeys.has(key),
+      )
+    },
+  )
+  Object.entries(added).forEach(([parentKey, newAddedKeys]) => {
+    newSelectedKeys[parentKey] = [
+      ...newSelectedKeys[parentKey],
+      ...newAddedKeys,
+    ]
+  })
+  return newSelectedKeys
+}
+
+export const organizeSelectedKeys = ({
+  isChildrenUniqueKeysOverlap,
+  keysToToggle,
+  selectedKeys,
+}) => {
+  if (!isChildrenUniqueKeysOverlap)
+    return handleUniqueKeysOnSelect(selectedKeys, keysToToggle)
+  return handleOverlappingKeysOnSelect(selectedKeys, keysToToggle)
+}
+
+export const addRemoveKeysInSelectedArr = ({
+  keysArr,
+  flattenedNodes,
+  isSelected,
+}) => {
+  keysArr.forEach(key => {
+    if (flattenedNodes[key]) {
+      flattenedNodes[key] = { ...flattenedNodes[key], isSelected }
+    }
+  })
+}
+
+export const addRemoveKeysInSelectedObj = ({
+  keysObject,
+  flattenedNodes,
+  isSelected,
+}) => {
+  Object.entries(keysObject).forEach(([rootNodeKey, keys]) => {
+    keys.forEach(key => {
+      const uniqueKey = `${rootNodeKey}${SEPARATOR_SIGN}${key}`
+      if (flattenedNodes[uniqueKey]) {
+        flattenedNodes[uniqueKey] = { ...flattenedNodes[uniqueKey], isSelected }
+      }
+    })
+  })
 }

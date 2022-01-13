@@ -25,6 +25,7 @@ import {
   emptyListTypes,
   ALL_ROOTS_COMBINED_KEY,
   getNodeParents,
+  organizeSelectedKeys,
 } from './utils'
 import styles from './Tree.module.scss'
 
@@ -55,7 +56,7 @@ const Tree = forwardRef(
       idKey,
       isLoading,
       isChildrenUniqueKeysOverlap,
-      isReturnSelectedKeysWhenOnSelect
+      isReturnSelectedKeysWhenOnSelect,
     },
     ref,
   ) => {
@@ -87,6 +88,7 @@ const Tree = forwardRef(
       updateAmountOfSelectedNodesAndChildren,
       handleAddNewFlattenedNodes,
       handleSetSelectedNodesFromKeysArr,
+      handleSetSelectedNodesFromKeysObject,
     } = useFlattenTreeData({
       data: nodes,
       selectedKeys,
@@ -102,8 +104,11 @@ const Tree = forwardRef(
           const { ALL_ROOTS_COMBINED_KEY, ...restNodes } = flattenedNodes
           return Object.freeze(restNodes)
         },
-        setSelectedKeys: (keysToAdd, keysToRemove) =>
-          handleSetSelectedNodesFromKeysArr(keysToAdd, keysToRemove),
+        setSelectedKeys: (keysToAdd, keysToRemove) => {
+          if (isChildrenUniqueKeysOverlap)
+            handleSetSelectedNodesFromKeysObject(keysToAdd, keysToRemove)
+          else handleSetSelectedNodesFromKeysArr(keysToAdd, keysToRemove)
+        },
         setNodeProperties: (nodeKey, newProperties) => {
           if (!flattenedNodes[nodeKey]) return
           const nodePathArr = getNodeParents(nodeKey, flattenedNodes)
@@ -114,6 +119,8 @@ const Tree = forwardRef(
         flattenedNodes,
         handleSetNodeNewProperties,
         handleSetSelectedNodesFromKeysArr,
+        handleSetSelectedNodesFromKeysObject,
+        isChildrenUniqueKeysOverlap,
       ],
     )
 
@@ -129,20 +136,25 @@ const Tree = forwardRef(
         nodesMap: { ...flattenedNodes },
         isSelected: !isCurrentlySelected,
         childrenKey,
-        isChildrenUniqueKeysOverlap
+        idKey,
+        isChildrenUniqueKeysOverlap,
       })
 
       setFlattenedNodes(nodesMap)
       updateAmountOfSelectedNodesAndChildren(
         Array.isArray(node) ? ALL_ROOTS_COMBINED_KEY : node.uniqueKey,
       )
-      // Add isReturn
 
-      // if (isReturnSelectedKeysWhenOnSelect) {
-        
-      // }
-
-      onSelect(keysToToggle)
+      if (isReturnSelectedKeysWhenOnSelect) {
+        const newSelectedKeys = organizeSelectedKeys({
+          isChildrenUniqueKeysOverlap,
+          keysToToggle,
+          selectedKeys,
+        })
+        onSelect(newSelectedKeys, keysToToggle)
+      } else {
+        onSelect(keysToToggle)
+      }
     }
 
     useEffect(() => {
@@ -397,8 +409,6 @@ const Tree = forwardRef(
 
     const isEmpty = isTreeEmpty()
 
-    console.log(treeInstance?.state)
-
     return (
       <div className={classNames(styles.tree, className)}>
         {isSearchable && !!nodes.length && renderSearchInput()}
@@ -490,7 +500,8 @@ Tree.propTypes = {
   isLoading: propTypes.bool,
   /** Whether the tree roots can have the same child node without causing unique key conflicts.  */
   isChildrenUniqueKeysOverlap: propTypes.bool,
-  /** If there is no need to make changes with selected/added nodes, set the prop to true to get the selectedKeys structure.  */
+  /** If there is no need to make changes with selected/added nodes, set this prop to true
+   * in order to get the new selectedKeys structure.  */
   isReturnSelectedKeysWhenOnSelect: propTypes.bool,
 }
 
