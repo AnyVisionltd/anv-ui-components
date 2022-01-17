@@ -43,12 +43,13 @@ const DateTimePicker = ({
   label,
   value,
   errorMessage,
+  isNullValue,
   ...otherProps
 }) => {
   const textFieldRef = useRef()
   const [isOpen, setIsOpen] = useState(false)
   const [isFocus, setIsFocus] = useState(false)
-  const [date, setDate] = useState(value || moment())
+  const [date, setDate] = useState(isNullValue ? value : value || moment())
 
   /**
    * Keeps the input on focus on the first _ char.
@@ -166,6 +167,8 @@ DateTimePicker.propTypes = {
   maxDate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** Min selectable date. */
   minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  /** If true, allow value to be null */
+  isNullValue: PropTypes.bool,
 }
 
 DateTimePicker.defaultProps = {
@@ -176,6 +179,7 @@ DateTimePicker.defaultProps = {
   onChange: () => {},
   label: languageService.getTranslation('dateAndTime'),
   errorMessage: '',
+  isNullValue: false,
 }
 
 export default DateTimePicker
