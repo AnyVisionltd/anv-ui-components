@@ -1,5 +1,4 @@
 export const getVideoDurationToShow = timeInSeconds => {
-  console.log('timeInSeconds', timeInSeconds)
   const dateObj = new Date(timeInSeconds * 1000)
   const hours = dateObj.getUTCHours()
   const minutes = dateObj.getUTCMinutes()
@@ -22,8 +21,6 @@ export const getVideoDurationToShow = timeInSeconds => {
   } else {
     timeStr += `${seconds}`
   }
-
-  console.log('timeInSeconds', timeStr)
 
   return timeStr
 }
