@@ -10,6 +10,8 @@ import classNames from 'classnames'
 import keymap from '../../utils/enums/keymap'
 import { SingleThumb } from './SingleThumb'
 import { DualThumb } from './DualThumb'
+import languageService from '../../services/language'
+import { getVideoDurationToShow } from '../../utils/date'
 import styles from './RangeSlider.module.scss'
 
 const keyboardButtons = [
@@ -35,6 +37,7 @@ const RangeSlider = ({
   containerClassName,
   minGap,
   onReachingMinGap,
+  isDuration,
   ...otherProps
 }) => {
   const [showTooltip, setShowTooltip] = useState(false)
@@ -202,12 +205,12 @@ const RangeSlider = ({
     return (
       <>
         <span className={minLabel}>
-          {min}
-          {measureUnitText}
+          {isDuration && `${languageService.getTranslation('start')} `}
+          {isDuration ? getVideoDurationToShow(min) : min}
         </span>
         <span className={maxLabel}>
-          {max}
-          {measureUnitText}
+          {isDuration && `${languageService.getTranslation('end')} `}
+          {isDuration ? getVideoDurationToShow(max) : max}
         </span>
       </>
     )
@@ -216,7 +219,9 @@ const RangeSlider = ({
   const renderSingleThumbTooltip = ref =>
     !isToggleTooltip || showTooltip ? (
       <div ref={ref} className={styles.tooltip}>
-        {hoverValue ?? value}
+        {isDuration
+          ? getVideoDurationToShow(hoverValue ?? value)
+          : hoverValue ?? value}
         {measureUnitText}
       </div>
     ) : null
@@ -227,7 +232,9 @@ const RangeSlider = ({
       className={styles.tooltip}
       style={{ visibility: showTooltip ? 'visible' : 'hidden' }}
     >
-      {textValue ?? value}
+      {isDuration
+        ? getVideoDurationToShow(textValue ?? value)
+        : textValue ?? value}
       {measureUnitText}
     </div>
   )
@@ -302,6 +309,7 @@ RangeSlider.defaultProps = {
   isToggleTooltip: false,
   measureUnitText: '',
   onReachingMinGap: () => {},
+  isDuration: false,
 }
 
 RangeSlider.propTypes = {
@@ -332,6 +340,8 @@ RangeSlider.propTypes = {
   onReachingMinGap: propTypes.func,
   /** For css customization. */
   containerClassName: propTypes.string,
+  /** convert the slider to handle duration (in seconds) */
+  isDuration: propTypes.bool,
 }
 
 export default RangeSlider
