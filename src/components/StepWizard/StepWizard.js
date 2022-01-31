@@ -1,31 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
-import { Dialog, Button } from '../../index'
-import { IconButton } from '../../index'
+import { IconButton, Button, Dialog } from '../../index'
 import { ReactComponent as BackIcon } from '../../assets/svg/LongArrow.svg'
 import languageService from '../../services/language'
-import styles from './DialogWizard.module.scss'
+import styles from './StepWizard.module.scss'
 
-const DialogWizard = ({
+const StepWizard = ({
   className,
-  onClose,
   onNextClick,
-  isDialogOpen,
   headerTitle,
   footerMessage,
   steps,
   currentStep,
-  overlayContent,
-  overlayClassName,
   finishText,
   nextText,
-  cancelText,
   disabled,
   banner,
   onFinish,
   classes,
-  ...otherProps
 }) => {
   const [step, setStep] = useState(currentStep || 1)
 
@@ -84,21 +77,9 @@ const DialogWizard = ({
     )
   }
 
-  const handleClose = () => {
-    if (!currentStep) {
-      setStep(1)
-    }
-    onClose()
-  }
-
   return (
-    <Dialog
-      className={className}
-      isOpen={isDialogOpen}
-      onClose={handleClose}
-      {...otherProps}
-    >
-      <Dialog.Header className={classes.header}>
+    <div className={classNames(styles.stepWizardContainer, className)}>
+      <StepWizard.Header className={classes.header} closeIcon={false}>
         <div className={styles.header}>
           <div className={styles.headerLeftSide}>
             {renderBackIcon()}
@@ -106,7 +87,7 @@ const DialogWizard = ({
           </div>
           {renderSteps()}
         </div>
-      </Dialog.Header>
+      </StepWizard.Header>
       <div className={styles.progress}>
         <div
           className={styles.innerProgress}
@@ -115,39 +96,28 @@ const DialogWizard = ({
       </div>
       {banner}
       <div className={styles.content}>
-        <Dialog.Body>{steps.length && steps[step - 1]}</Dialog.Body>
-        <Dialog.Footer className={classes.footer}>
+        <StepWizard.Body>{steps.length && steps[step - 1]}</StepWizard.Body>
+        <StepWizard.Footer className={classes.footer}>
           <div className={styles.footer}>
             {footerMessage}
             <div className={styles.buttons}>
-              {cancelText && (
-                <Button variant={'ghost'} onClick={handleClose}>
-                  {cancelText}
-                </Button>
-              )}
               <Button onClick={handleNextClick} disabled={disabled}>
                 {step === steps.length ? finishText : nextText}
               </Button>
             </div>
           </div>
-        </Dialog.Footer>
-        {overlayContent && (
-          <div className={classNames(styles.overlay, overlayClassName)}>
-            {overlayContent}
-          </div>
-        )}
+        </StepWizard.Footer>
       </div>
-    </Dialog>
+    </div>
   )
 }
 
-DialogWizard.defaultProps = {
+StepWizard.defaultProps = {
   isOpen: false,
   onClose: () => {},
-  onNextClick: () => {},
   onFinish: () => {},
+  onNextClick: () => {},
   disableBackdropClick: false,
-  disableEscapeKeyDown: false,
   steps: [],
   cancelText: languageService.getTranslation('cancel'),
   nextText: languageService.getTranslation('next'),
@@ -156,19 +126,11 @@ DialogWizard.defaultProps = {
   classes: {},
 }
 
-DialogWizard.propTypes = {
+StepWizard.propTypes = {
   /** For css customization */
   className: propTypes.string,
-  /** Should the dialog appear on screen or not */
-  isOpen: propTypes.bool.isRequired,
-  /** A callback triggered whenever the wizard is closed */
-  onClose: propTypes.func,
   /** A callback triggered whenever the wizard is finished */
   onFinish: propTypes.func,
-  /** Disable onClose firing when backdrop is clicked */
-  disableBackdropClick: propTypes.bool,
-  /** Disable onClose firing when escape button is clicked */
-  disableEscapeKeyDown: propTypes.bool,
   /** footer message can be a string or an element */
   footerMessage: propTypes.oneOfType([propTypes.string, propTypes.element]),
   /** header title can be a string or an element */
@@ -177,10 +139,6 @@ DialogWizard.propTypes = {
   steps: propTypes.arrayOf(propTypes.element),
   /** current step, default is 1, if step is not provided the wizard is self controlled*/
   currentStep: propTypes.number,
-  /** overlay content element*/
-  overlayContent: propTypes.element,
-  /** css customization for ovarlay */
-  overlayClassName: propTypes.string,
   /** text for done button */
   finishText: propTypes.string,
   /** text for next button */
@@ -198,4 +156,10 @@ DialogWizard.propTypes = {
   }),
 }
 
-export default DialogWizard
+const { Header, Body, Footer } = Dialog || {}
+
+StepWizard.Header = Header
+StepWizard.Body = Body
+StepWizard.Footer = Footer
+
+export default StepWizard
