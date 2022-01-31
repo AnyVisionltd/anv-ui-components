@@ -96,7 +96,7 @@ const StepWizard = ({
       </div>
       {banner}
       <div className={styles.content}>
-        <StepWizard.Body>{steps.length && steps[step - 1]}</StepWizard.Body>
+        <StepWizard.Body className={classes.body}>{steps.length && steps[step - 1]}</StepWizard.Body>
         <StepWizard.Footer className={classes.footer}>
           <div className={styles.footer}>
             {footerMessage}
@@ -152,6 +152,7 @@ StepWizard.propTypes = {
   /** styles object for various parts of the component */
   classes: propTypes.shape({
     header: propTypes.string,
+    body: propTypes.string,
     footer: propTypes.string,
   }),
 }
