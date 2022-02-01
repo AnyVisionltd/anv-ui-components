@@ -27,6 +27,8 @@
     "dateAndTime": "Date & Time",
     "time": "Time",
     "date": "Date",
+    "start": "Start",
+    "end": "End",
     "search": "Search",
     "item": "Item",
     "items": "Items",
