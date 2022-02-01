@@ -205,24 +205,32 @@ const RangeSlider = ({
     return (
       <>
         <span className={minLabel}>
-          {isDuration && `${languageService.getTranslation('start')} `}
-          {isDuration ? getVideoDurationToShow(min) : min}
+          {isDuration
+            ? `${languageService.getTranslation(
+                'start',
+              )} ${getVideoDurationToShow(min)}`
+            : min}
         </span>
         <span className={maxLabel}>
-          {isDuration && `${languageService.getTranslation('end')} `}
-          {isDuration ? getVideoDurationToShow(max) : max}
+          {isDuration
+            ? `${languageService.getTranslation(
+                'end',
+              )} ${getVideoDurationToShow(max)}`
+            : max}
         </span>
       </>
     )
   }
 
+  const renderTooltipText = textValue => {
+    const currentValue = textValue ?? value
+    return isDuration ? getVideoDurationToShow(currentValue) : currentValue
+  }
+
   const renderSingleThumbTooltip = ref =>
     !isToggleTooltip || showTooltip ? (
       <div ref={ref} className={styles.tooltip}>
-        {isDuration
-          ? getVideoDurationToShow(hoverValue ?? value)
-          : hoverValue ?? value}
-        {measureUnitText}
+        {renderTooltipText(hoverValue)}
       </div>
     ) : null
 
@@ -232,9 +240,7 @@ const RangeSlider = ({
       className={styles.tooltip}
       style={{ visibility: showTooltip ? 'visible' : 'hidden' }}
     >
-      {isDuration
-        ? getVideoDurationToShow(textValue ?? value)
-        : textValue ?? value}
+      {renderTooltipText(textValue)}
       {measureUnitText}
     </div>
   )

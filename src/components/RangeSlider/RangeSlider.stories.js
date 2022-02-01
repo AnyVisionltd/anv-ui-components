@@ -195,7 +195,7 @@ export const RangeWithDurationUnit = () => {
         step={step}
         value={value}
         onChange={e => setValue(e.target.value)}
-        isDuration={true}
+        isDuration
       />
     </div>
   )
@@ -215,7 +215,7 @@ export const DualThumbRangeWithDurationUnit = () => {
         step={step}
         value={value}
         onChange={newValue => setValue(newValue)}
-        isDuration={true}
+        isDuration
       />
     </div>
   )
