@@ -145,7 +145,6 @@ const Dropdown = ({
           maxMenuHeight,
           options.length * menuItemHeight,
         )
-        console.log(maxMenuHeight, options.length * menuItemHeight)
         setIsMenuPositionedUpwards(
           getMenuPlacement({ menuHeight, containerElement: node }),
         )
