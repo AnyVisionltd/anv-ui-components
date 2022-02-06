@@ -180,3 +180,43 @@ export const DifferentMeasureUnits = () => {
     </div>
   )
 }
+
+export const RangeWithDurationUnit = () => {
+  const min = 0
+  const max = 240
+  const step = Math.floor((max - min) / 100)
+  const [value, setValue] = useState(step * 50)
+
+  return (
+    <div style={{ width: '480px' }}>
+      <RangeSlider
+        min={0}
+        max={240}
+        step={step}
+        value={value}
+        onChange={e => setValue(e.target.value)}
+        isDuration
+      />
+    </div>
+  )
+}
+
+export const DualThumbRangeWithDurationUnit = () => {
+  const min = 0
+  const max = 240
+  const step = Math.floor((max - min) / 100)
+  const [value, setValue] = useState([step * 40, step * 80])
+
+  return (
+    <div style={{ width: '480px' }}>
+      <RangeSlider
+        min={0}
+        max={240}
+        step={step}
+        value={value}
+        onChange={newValue => setValue(newValue)}
+        isDuration
+      />
+    </div>
+  )
+}
