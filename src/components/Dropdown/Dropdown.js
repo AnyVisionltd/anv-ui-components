@@ -371,7 +371,12 @@ const Dropdown = ({
     }ch`)
 
   const renderHeaderContainer = () => (
-    <div className={styles.selectedContainer} ref={selectedContainerRef}>
+    <div
+      className={classNames(styles.selectedContainer, {
+        [styles.isMenuOpen]: showMenu,
+      })}
+      ref={selectedContainerRef}
+    >
       <label className={classNames({ [styles.labelColor]: showMenu })}>
         {label}
       </label>
