@@ -46,12 +46,18 @@ $default-selected-height: av-size(sz-56);
     width: 100%;
     display: flex;
     align-items: center;
-    border: 1px solid av-color(primary, av-opacity(disabled));
+    border: solid 1px av-color(content, av-opacity(divider));
     transition: all 0.2s linear;
     overflow: hidden;
 
     &:hover {
-      background-color: av-color(primary, av-opacity(divider));
+      box-shadow: inset 0 0 0 2px av-color(content, av-opacity(disabled));
+      border: solid 1px transparent;
+    }
+
+    &.isMenuOpen {
+      box-shadow: inset 0 0 0 2px av-color(primary);
+      border: solid 1px transparent;
     }
 
     label {
@@ -229,10 +235,10 @@ $default-selected-height: av-size(sz-56);
     top: 100%;
     width: 100%;
     list-style-type: none;
-    border-radius: av-radius(tidy);
+    border-bottom-left-radius: av-radius(tidy);
+    border-bottom-right-radius: av-radius(tidy);
     display: flex;
     flex-direction: column;
-    border: 1px solid av-color(primary, av-opacity(disabled));
     border-top: none;
     transition: all 0.3s linear;
     @extend %av-scrollbar;
@@ -240,12 +246,19 @@ $default-selected-height: av-size(sz-56);
     max-height: av-size(sz-240);
     z-index: av-z-index(important);
     background-color: av-color(surface);
+    box-shadow: inset 1px 0 av-color(primary), inset -1px -1px av-color(primary);
+    border: solid 1px transparent;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
 
     &.isPositionedUpwards {
       top: auto;
       bottom: 100%;
-      border-top: 1px solid av-color(primary, av-opacity(disabled));
-      border-bottom: none;
+      box-shadow: inset 1px 0 av-color(primary),
+        inset -1px 1px av-color(primary);
+      border-radius: none;
+      border-top-left-radius: av-radius(tidy);
+      border-top-right-radius: av-radius(tidy);
     }
   }
 }
