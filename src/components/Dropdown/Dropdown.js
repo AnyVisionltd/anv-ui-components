@@ -145,6 +145,7 @@ const Dropdown = ({
           maxMenuHeight,
           options.length * menuItemHeight,
         )
+        console.log(maxMenuHeight, options.length * menuItemHeight)
         setIsMenuPositionedUpwards(
           getMenuPlacement({ menuHeight, containerElement: node }),
         )
@@ -371,7 +372,12 @@ const Dropdown = ({
     }ch`)
 
   const renderHeaderContainer = () => (
-    <div className={styles.selectedContainer} ref={selectedContainerRef}>
+    <div
+      className={classNames(styles.selectedContainer, {
+        [styles.isMenuOpen]: showMenu,
+      })}
+      ref={selectedContainerRef}
+    >
       <label className={classNames({ [styles.labelColor]: showMenu })}>
         {label}
       </label>
