@@ -52,6 +52,14 @@ const DateTimePicker = ({
   const [date, setDate] = useState(isNullValue ? value : value || moment())
 
   /**
+   * Update date state from parent
+   */
+  useEffect(() => {
+    if (value && new Date(value).getTime() !== new Date(date).getTime())
+      setDate(value)
+  }, [value, date, setDate])
+
+  /**
    * Keeps the input on focus on the first _ char.
    */
   useEffect(() => {
