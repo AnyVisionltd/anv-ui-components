@@ -66,6 +66,12 @@ const Dropdown = ({
   const valuesContainerRef = useRef(null)
   const [selectedValueElement, setSelectedValueElement] = useState(null)
 
+  const selectedElementContent = !multiple
+    ? selectedOptions?.[0]?.[displayValue]
+    : `${selectedOptions.length} ${getTranslation(
+        selectedOptions.length === 1 ? 'itemSelected' : 'itemsSelected',
+      )}`
+
   const resetToOriginalOptions = () =>
     shownOptions.length !== options.length && setShownOptions(options)
 
@@ -304,11 +310,7 @@ const Dropdown = ({
           onClick={getIntoTypeMode}
           ref={setSelectedValueElement}
         >
-          {!multiple
-            ? selectedOptions[0][displayValue]
-            : `${selectedOptions.length} ${getTranslation(
-                selectedOptions.length === 1 ? 'itemSelected' : 'itemsSelected',
-              )}`}
+          {selectedElementContent}
         </p>
       )
     }
@@ -459,7 +461,7 @@ const Dropdown = ({
       ref={useCombinedRefs(containerRef, handleMenuPlacement)}
     >
       <Tooltip
-        content={selectedOptions?.[0]?.[displayValue]}
+        content={selectedElementContent}
         show={useIsOverflowing({
           current: selectedValueElement,
         })}
