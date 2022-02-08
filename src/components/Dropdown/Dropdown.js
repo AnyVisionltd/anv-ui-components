@@ -11,8 +11,10 @@ import {
   useClickOutsideListener,
   usePrevious,
   useCombinedRefs,
+  useIsOverflowing,
 } from '../../hooks'
 import languageService from '../../services/language'
+import { Tooltip } from '../Tooltip'
 import styles from './Dropdown.module.scss'
 
 const maxMenuHeight = 240
@@ -62,6 +64,13 @@ const Dropdown = ({
   const inputRef = useRef(null)
   const selectedContainerRef = useRef(null)
   const valuesContainerRef = useRef(null)
+  const [selectedValueElement, setSelectedValueElement] = useState(null)
+
+  const selectedElementContent = !multiple
+    ? selectedOptions?.[0]?.[displayValue]
+    : `${selectedOptions.length} ${getTranslation(
+        selectedOptions.length === 1 ? 'itemSelected' : 'itemsSelected',
+      )}`
 
   const resetToOriginalOptions = () =>
     shownOptions.length !== options.length && setShownOptions(options)
@@ -296,12 +305,12 @@ const Dropdown = ({
       ))
     } else {
       return (
-        <p className={styles.selectedValue} onClick={getIntoTypeMode}>
-          {!multiple
-            ? selectedOptions[0][displayValue]
-            : `${selectedOptions.length} ${getTranslation(
-                selectedOptions.length === 1 ? 'itemSelected' : 'itemsSelected',
-              )}`}
+        <p
+          className={styles.selectedValue}
+          onClick={getIntoTypeMode}
+          ref={setSelectedValueElement}
+        >
+          {selectedElementContent}
         </p>
       )
     }
@@ -451,7 +460,14 @@ const Dropdown = ({
       )}
       ref={useCombinedRefs(containerRef, handleMenuPlacement)}
     >
-      {renderHeaderContainer()}
+      <Tooltip
+        content={selectedElementContent}
+        show={useIsOverflowing({
+          current: selectedValueElement,
+        })}
+      >
+        {renderHeaderContainer()}
+      </Tooltip>
       {showMenu && renderOptions()}
     </div>
   )
