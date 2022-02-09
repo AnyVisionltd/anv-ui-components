@@ -16,11 +16,12 @@ describe('<DateTimePicker />', () => {
   })
 
   it('Should call onChange', () => {
+    const mockDateTime = '09/02/2022 20:07'
     const handleOnChange = jest.fn()
     const { getByRole } = render(<DateTimePicker onChange={handleOnChange} />)
     const input = getByRole('textbox')
-    fireEvent.change(input, { target: { value: moment() } })
+    fireEvent.change(input, { target: { value: mockDateTime } })
     expect(handleOnChange).toBeCalled()
-    expect(input.value).toBe(moment().format('DD/MM/yyyy HH:mm'))
+    expect(input.value).toBe(mockDateTime)
   })
 })

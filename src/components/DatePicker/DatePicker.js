@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import classNames from 'classnames'
@@ -13,6 +13,32 @@ import { TextField } from '../TextField'
 import { IconButton } from '../IconButton'
 import languageService from '../../services/language'
 import './DatePicker.module.scss'
+
+const DatePickerTextField = props => (
+  <TextField
+    trailingIcon={
+      <IconButton
+        className={classNames('datepicker-icon', {
+          disabled: props.disabled,
+          open: props.isOpen,
+        })}
+        onClick={() => !props.disabled && props.setIsOpen(prev => !prev)}
+        size='medium'
+      >
+        <Calendar />
+      </IconButton>
+    }
+    label={props.label}
+    defaultValue={props.value}
+    onChange={props.onChange}
+    ref={props.textFieldRef}
+    format={props.format}
+    value={props.value}
+    disabled={props.disabled}
+    error={props.error}
+    message={(props.error && props.errorMessage) || props.helperText}
+  />
+)
 
 const DatePicker = ({
   onChange,
@@ -29,84 +55,28 @@ const DatePicker = ({
 }) => {
   const textFieldRef = useRef()
   const [isOpen, setIsOpen] = useState(false)
-  const [isFocus, setIsFocus] = useState(false)
   const [date, setDate] = useState(value || moment())
 
-  /**
-   * Keeps the input on focus on the first _ char.
-   */
-  useEffect(() => {
-    if (isFocus) {
-      textFieldRef.current.focus()
-      const pos = textFieldRef.current.value
-        .split('')
-        .findIndex(char => char === '_')
-      textFieldRef.current.setSelectionRange(pos, pos)
-    }
-  }, [textFieldRef, date, isFocus])
-
-  /**
-   * Render custom input - TextField
-   */
-  const renderInput = props => (
-    <TextField
-      trailingIcon={
-        <IconButton
-          className={classNames('datepicker-icon', {
-            disabled: props.disabled,
-            open: isOpen,
-          })}
-          onClick={() => !props.disabled && setIsOpen(prev => !prev)}
-          size='medium'
-        >
-          <Calendar />
-        </IconButton>
-      }
-      label={props.label}
-      defaultValue={props.value}
-      onChange={props.onChange}
-      ref={textFieldRef}
-      onFocus={() => setIsFocus(true)}
-      format={props.format}
-      value={props.value}
-      disabled={props.disabled}
-      error={props.error}
-      message={(props.error && errorMessage) || props.helperText}
-    />
-  )
-
-  /**
-   * on close datepicker dialog - close & remove focus from input
-   */
-  const handleCloseDatePicker = () => {
-    setIsOpen(false)
-    setIsFocus(false)
-  }
-
-  /**
-   * change date & fire onChange event
-   */
   const handleDateChange = date => {
     setDate(date)
     onChange && onChange(date)
   }
 
-  /**
-   * Override material ui theme
-   */
   const theme = createTheme({
     typography: {
       fontFamily: ['Poppins'],
     },
   })
 
+  const additionalProps = { isOpen, setIsOpen, errorMessage, textFieldRef }
+
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <ThemeProvider theme={theme}>
         <KeyboardDatePicker
           onChange={handleDateChange}
-          TextFieldComponent={renderInput}
-          onClose={handleCloseDatePicker}
+          TextFieldComponent={DatePickerTextField}
+          onClose={() => setIsOpen(false)}
           open={isOpen}
           variant='inline'
           disabled={disabled}
@@ -125,6 +95,7 @@ const DatePicker = ({
           }}
           autoOk
           {...otherProps}
+          {...additionalProps}
         />
       </ThemeProvider>
     </MuiPickersUtilsProvider>

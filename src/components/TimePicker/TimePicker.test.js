@@ -16,11 +16,12 @@ describe('<TimePicker />', () => {
   })
 
   it('Should call onChange', () => {
+    const mockTime = '20:06'
     const handleOnChange = jest.fn()
     const { getByRole } = render(<TimePicker onChange={handleOnChange} />)
     const input = getByRole('textbox')
-    fireEvent.change(input, { target: { value: new Date() } })
+    fireEvent.change(input, { target: { value: mockTime } })
     expect(handleOnChange).toBeCalled()
-    expect(input.value).toBe(moment().format('HH:mm'))
+    expect(input.value).toBe(mockTime)
   })
 })

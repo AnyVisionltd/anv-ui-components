@@ -32,6 +32,31 @@ const MATERIAL_UI_THEME = {
   },
 }
 
+const DateTimePickerTextField = props => (
+  <TextField
+    trailingIcon={
+      <IconButton
+        className={classNames('datepicker-icon', {
+          disabled: props.disabled,
+        })}
+        onClick={() => !props.disabled && props.setIsOpen(prev => !prev)}
+        size='medium'
+      >
+        <Calendar />
+      </IconButton>
+    }
+    label={props.label}
+    defaultValue={props.value}
+    onChange={props.onChange}
+    ref={props.textFieldRef}
+    format={props.format}
+    value={props.value}
+    disabled={props.disabled}
+    error={props.error}
+    message={(props.error && props.errorMessage) || props.helperText}
+  />
+)
+
 const DateTimePicker = ({
   onChange,
   disabled,
@@ -48,79 +73,21 @@ const DateTimePicker = ({
 }) => {
   const textFieldRef = useRef()
   const [isOpen, setIsOpen] = useState(false)
-  const [isFocus, setIsFocus] = useState(false)
   const [date, setDate] = useState(isNullValue ? value : value || moment())
 
-  /**
-   * Update date state from parent
-   */
   useEffect(() => {
     if (value && new Date(value).getTime() !== new Date(date).getTime())
       setDate(value)
   }, [value, date, setDate])
 
-  /**
-   * Keeps the input on focus on the first _ char.
-   */
-  useEffect(() => {
-    if (isFocus) {
-      textFieldRef.current.focus()
-      const pos = textFieldRef.current.value
-        .split('')
-        .findIndex(char => char === '_')
-      textFieldRef.current.setSelectionRange(pos, pos)
-    }
-  }, [textFieldRef, date, isFocus])
-
-  /**
-   * Render custom input - TextField
-   */
-  const renderInput = props => (
-    <TextField
-      trailingIcon={
-        <IconButton
-          className={classNames('datepicker-icon', {
-            disabled: props.disabled,
-          })}
-          onClick={() => !props.disabled && setIsOpen(prev => !prev)}
-          size='medium'
-        >
-          <Calendar />
-        </IconButton>
-      }
-      label={props.label}
-      defaultValue={props.value}
-      onChange={props.onChange}
-      ref={textFieldRef}
-      onFocus={() => setIsFocus(true)}
-      format={props.format}
-      value={props.value}
-      disabled={props.disabled}
-      error={props.error}
-      message={(props.error && errorMessage) || props.helperText}
-    />
-  )
-
-  /**
-   * on close datepicker dialog - close & remove focus from input
-   */
-  const handleCloseDatePicker = () => {
-    setIsOpen(false)
-    setIsFocus(false)
-  }
-
-  /**
-   * change date & fire onChange event
-   */
   const handleDateChange = date => {
     setDate(date)
     onChange(date)
   }
 
-  /**
-   * Override material ui theme
-   */
   const theme = createTheme(MATERIAL_UI_THEME)
+
+  const additionalProps = { isOpen, setIsOpen, errorMessage, textFieldRef }
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -131,12 +98,12 @@ const DateTimePicker = ({
           label={label}
           value={date}
           onChange={handleDateChange}
-          TextFieldComponent={renderInput}
+          TextFieldComponent={DateTimePickerTextField}
           okLabel={null}
           cancelLabel={null}
           variant='inline'
           open={isOpen}
-          onClose={handleCloseDatePicker}
+          onClose={() => setIsOpen(false)}
           disabled={disabled}
           disablePast={disablePast}
           disableFuture={disableFuture}
@@ -148,6 +115,7 @@ const DateTimePicker = ({
             anchorOrigin: { horizontal: 143, vertical: 48 },
           }}
           {...otherProps}
+          {...additionalProps}
         />
       </ThemeProvider>
     </MuiPickersUtilsProvider>
