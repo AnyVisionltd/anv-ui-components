@@ -1,5 +1,4 @@
 import React from 'react'
-import moment from 'moment'
 import { render, fireEvent } from '@testing-library/react'
 import TimePicker from './TimePicker'
 
