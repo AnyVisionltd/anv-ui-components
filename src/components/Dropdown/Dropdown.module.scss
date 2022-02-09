@@ -36,7 +36,7 @@ $default-selected-height: av-size(sz-56);
   }
 
   .selectedContainer {
-    cursor: default;
+    cursor: pointer;
     outline: none;
     position: relative;
     border-radius: av-radius(tidy);
