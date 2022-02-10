@@ -1,17 +1,14 @@
 import React, { useRef, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import classNames from 'classnames'
 import MomentUtils from '@date-io/moment'
 import {
   MuiPickersUtilsProvider,
   KeyboardDateTimePicker,
 } from '@material-ui/pickers'
 import { createTheme, ThemeProvider } from '@material-ui/core/styles'
-import { Calendar } from '@anyvision/anv-icons'
-import { TextField } from '../TextField'
-import { IconButton } from '../IconButton'
 import languageService from '../../services/language'
+import { DateTimeTextField } from '../DatePicker'
 import './DateTimePicker.module.scss'
 
 const MATERIAL_UI_THEME = {
@@ -32,32 +29,7 @@ const MATERIAL_UI_THEME = {
   },
 }
 
-const DateTimePickerTextField = props => (
-  <TextField
-    trailingIcon={
-      <IconButton
-        className={classNames('datepicker-icon', {
-          disabled: props.disabled,
-        })}
-        onClick={() => !props.disabled && props.setIsOpen(prev => !prev)}
-        size='medium'
-      >
-        <Calendar />
-      </IconButton>
-    }
-    type='date-time-picker'
-    label={props.label}
-    defaultValue={props.value}
-    onChange={props.onChange}
-    ref={props.textFieldRef}
-    format={props.format}
-    value={props.value}
-    disabled={props.disabled}
-    error={props.error}
-    message={(props.error && props.errorMessage) || props.helperText}
-    onBlur={props.onBlur}
-  />
-)
+const theme = createTheme(MATERIAL_UI_THEME)
 
 const DateTimePicker = ({
   onChange,
@@ -93,8 +65,6 @@ const DateTimePicker = ({
     onClose?.()
   }
 
-  const theme = createTheme(MATERIAL_UI_THEME)
-
   const additionalTextFieldProps = {
     isOpen,
     setIsOpen,
@@ -111,7 +81,7 @@ const DateTimePicker = ({
           label={label}
           value={date}
           onChange={handleDateChange}
-          TextFieldComponent={DateTimePickerTextField}
+          TextFieldComponent={DateTimeTextField}
           okLabel={null}
           cancelLabel={null}
           variant='inline'

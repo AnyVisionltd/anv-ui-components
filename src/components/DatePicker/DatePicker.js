@@ -1,46 +1,21 @@
 import React, { useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import classNames from 'classnames'
 import MomentUtils from '@date-io/moment'
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers'
 import { createTheme, ThemeProvider } from '@material-ui/core/styles'
-import { Calendar } from '@anyvision/anv-icons'
-import { TextField } from '../TextField'
-import { IconButton } from '../IconButton'
 import languageService from '../../services/language'
+import DateTimeTextField from './DateTimeTextField/DateTimeTextField'
 import './DatePicker.module.scss'
 
-const DatePickerTextField = props => (
-  <TextField
-    trailingIcon={
-      <IconButton
-        className={classNames('datepicker-icon', {
-          disabled: props.disabled,
-          open: props.isOpen,
-        })}
-        onClick={() => !props.disabled && props.setIsOpen(prev => !prev)}
-        size='medium'
-      >
-        <Calendar />
-      </IconButton>
-    }
-    type='date-time-picker'
-    label={props.label}
-    defaultValue={props.value}
-    onChange={props.onChange}
-    ref={props.textFieldRef}
-    format={props.format}
-    value={props.value}
-    disabled={props.disabled}
-    error={props.error}
-    message={(props.error && props.errorMessage) || props.helperText}
-    onBlur={props.onBlur}
-  />
-)
+const theme = createTheme({
+  typography: {
+    fontFamily: ['Poppins'],
+  },
+})
 
 const DatePicker = ({
   onChange,
@@ -70,12 +45,6 @@ const DatePicker = ({
     onClose?.()
   }
 
-  const theme = createTheme({
-    typography: {
-      fontFamily: ['Poppins'],
-    },
-  })
-
   const additionalTextFieldProps = {
     isOpen,
     setIsOpen,
@@ -88,7 +57,7 @@ const DatePicker = ({
       <ThemeProvider theme={theme}>
         <KeyboardDatePicker
           onChange={handleDateChange}
-          TextFieldComponent={DatePickerTextField}
+          TextFieldComponent={DateTimeTextField}
           onClose={handleOnClose}
           open={isOpen}
           variant='inline'

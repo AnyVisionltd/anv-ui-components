@@ -321,7 +321,7 @@ TextField.defaultProps = {
   menuProps: {},
 }
 
-TextField.propTypes = {
+export const textFieldPropTypes = {
   type: propTypes.string,
   /** The variant of the textField. */
   variant: propTypes.oneOf(['fill', 'outline']),
@@ -377,5 +377,7 @@ TextField.propTypes = {
   /** props to be propagated to menu component*/
   menuProps: propTypes.object,
 }
+
+TextField.propTypes = textFieldPropTypes
 
 export default memo(TextField)

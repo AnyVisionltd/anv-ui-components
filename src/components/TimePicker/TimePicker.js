@@ -1,16 +1,13 @@
 import React, { useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import classNames from 'classnames'
 import MomentUtils from '@date-io/moment'
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
 } from '@material-ui/pickers'
 import { createTheme, ThemeProvider } from '@material-ui/core/styles'
-import { Calendar } from '@anyvision/anv-icons'
-import { TextField } from '../TextField'
-import { IconButton } from '../IconButton'
+import { DateTimeTextField } from '../DatePicker'
 import languageService from '../../services/language'
 import './TimePicker.module.scss'
 
@@ -29,32 +26,7 @@ const MATERIAL_UI_THEME = {
   },
 }
 
-const TimePickerTextField = props => (
-  <TextField
-    trailingIcon={
-      <IconButton
-        className={classNames('datepicker-icon', {
-          disabled: props.disabled,
-        })}
-        onClick={() => !props.disabled && props.setIsOpen(prev => !prev)}
-        size='medium'
-      >
-        <Calendar />
-      </IconButton>
-    }
-    type='date-time-picker'
-    label={props.label}
-    defaultValue={props.value}
-    onChange={props.onChange}
-    ref={props.textFieldRef}
-    format={props.format}
-    value={props.value}
-    disabled={props.disabled}
-    error={props.error}
-    message={(props.error && props.errorMessage) || props.helperText}
-    onBlur={props.onBlur}
-  />
-)
+const theme = createTheme(MATERIAL_UI_THEME)
 
 const TimePicker = ({
   onChange,
@@ -80,8 +52,6 @@ const TimePicker = ({
     onClose?.()
   }
 
-  const theme = createTheme(MATERIAL_UI_THEME)
-
   const additionalTextFieldProps = {
     isOpen,
     setIsOpen,
@@ -94,7 +64,7 @@ const TimePicker = ({
       <ThemeProvider theme={theme}>
         <KeyboardTimePicker
           onChange={handleDateChange}
-          TextFieldComponent={TimePickerTextField}
+          TextFieldComponent={DateTimeTextField}
           onClose={handleOnClose}
           open={isOpen}
           variant='inline'
