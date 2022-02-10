@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import { PropTypes } from 'prop-types'
+import PropTypes from 'prop-types'
 import { Calendar } from '@anyvision/anv-icons'
 import { IconButton, TextField } from '../../../'
 import './DateTimeTextField.module.scss'

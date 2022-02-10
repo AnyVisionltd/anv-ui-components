@@ -9,6 +9,7 @@ import {
 import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 import languageService from '../../services/language'
 import { DateTimeTextField } from '../DatePicker'
+import { useDebounce } from '../../hooks/UseDebounce'
 import './DateTimePicker.module.scss'
 
 const MATERIAL_UI_THEME = {
@@ -44,11 +45,13 @@ const DateTimePicker = ({
   errorMessage,
   isNullValue,
   onClose,
+  debounceTime,
   ...otherProps
 }) => {
   const textFieldRef = useRef()
   const [isOpen, setIsOpen] = useState(false)
   const [date, setDate] = useState(isNullValue ? value : value || moment())
+  const { set } = useDebounce(debounceTime)
 
   useEffect(() => {
     if (value && new Date(value).getTime() !== new Date(date).getTime())
@@ -57,7 +60,9 @@ const DateTimePicker = ({
 
   const handleDateChange = date => {
     setDate(date)
-    onChange(date)
+
+    if (debounceTime) set(() => onChange(date))
+    else onChange(date)
   }
 
   const handleOnClose = () => {
@@ -128,6 +133,8 @@ DateTimePicker.propTypes = {
   minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** If true, allow value to be null */
   isNullValue: PropTypes.bool,
+  /** Debounce for onChange event. */
+  debounceTime: PropTypes.number,
 }
 
 DateTimePicker.defaultProps = {
