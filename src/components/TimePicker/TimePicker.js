@@ -9,6 +9,7 @@ import {
 import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 import { DateTimeTextField } from '../DatePicker'
 import languageService from '../../services/language'
+import { useDebounce } from '../../hooks/UseDebounce'
 import './TimePicker.module.scss'
 
 const MATERIAL_UI_THEME = {
@@ -36,15 +37,19 @@ const TimePicker = ({
   value,
   errorMessage,
   onClose,
+  debounceTime,
   ...otherProps
 }) => {
   const textFieldRef = useRef()
   const [isOpen, setIsOpen] = useState(false)
   const [date, setDate] = useState(value || moment())
+  const { set } = useDebounce(debounceTime)
 
   const handleDateChange = date => {
     setDate(date)
-    onChange(date)
+
+    if (debounceTime) set(() => onChange(date))
+    else onChange(date)
   }
 
   const handleOnClose = () => {
@@ -99,6 +104,8 @@ TimePicker.propTypes = {
   format: PropTypes.string,
   /** Custom error message. */
   errorMessage: PropTypes.string,
+  /** Debounce for onChange event. */
+  debounceTime: PropTypes.number,
 }
 
 TimePicker.defaultProps = {
