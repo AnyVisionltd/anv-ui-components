@@ -28,6 +28,7 @@ const DatePickerTextField = props => (
         <Calendar />
       </IconButton>
     }
+    type='date-time-picker'
     label={props.label}
     defaultValue={props.value}
     onChange={props.onChange}
@@ -37,6 +38,7 @@ const DatePickerTextField = props => (
     disabled={props.disabled}
     error={props.error}
     message={(props.error && props.errorMessage) || props.helperText}
+    onBlur={props.onBlur}
   />
 )
 
@@ -51,6 +53,7 @@ const DatePicker = ({
   label,
   value,
   errorMessage,
+  onClose,
   ...otherProps
 }) => {
   const textFieldRef = useRef()
@@ -59,7 +62,12 @@ const DatePicker = ({
 
   const handleDateChange = date => {
     setDate(date)
-    onChange && onChange(date)
+    onChange?.(date)
+  }
+
+  const handleOnClose = () => {
+    setIsOpen(false)
+    onClose?.()
   }
 
   const theme = createTheme({
@@ -68,7 +76,12 @@ const DatePicker = ({
     },
   })
 
-  const additionalProps = { isOpen, setIsOpen, errorMessage, textFieldRef }
+  const additionalTextFieldProps = {
+    isOpen,
+    setIsOpen,
+    errorMessage,
+    textFieldRef,
+  }
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -76,7 +89,7 @@ const DatePicker = ({
         <KeyboardDatePicker
           onChange={handleDateChange}
           TextFieldComponent={DatePickerTextField}
-          onClose={() => setIsOpen(false)}
+          onClose={handleOnClose}
           open={isOpen}
           variant='inline'
           disabled={disabled}
@@ -95,7 +108,7 @@ const DatePicker = ({
           }}
           autoOk
           {...otherProps}
-          {...additionalProps}
+          {...additionalTextFieldProps}
         />
       </ThemeProvider>
     </MuiPickersUtilsProvider>

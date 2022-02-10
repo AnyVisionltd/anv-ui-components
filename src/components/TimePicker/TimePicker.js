@@ -42,6 +42,7 @@ const TimePickerTextField = props => (
         <Calendar />
       </IconButton>
     }
+    type='date-time-picker'
     label={props.label}
     defaultValue={props.value}
     onChange={props.onChange}
@@ -51,6 +52,7 @@ const TimePickerTextField = props => (
     disabled={props.disabled}
     error={props.error}
     message={(props.error && props.errorMessage) || props.helperText}
+    onBlur={props.onBlur}
   />
 )
 
@@ -61,6 +63,7 @@ const TimePicker = ({
   label,
   value,
   errorMessage,
+  onClose,
   ...otherProps
 }) => {
   const textFieldRef = useRef()
@@ -72,9 +75,19 @@ const TimePicker = ({
     onChange(date)
   }
 
+  const handleOnClose = () => {
+    setIsOpen(false)
+    onClose?.()
+  }
+
   const theme = createTheme(MATERIAL_UI_THEME)
 
-  const additionalProps = { isOpen, setIsOpen, errorMessage, textFieldRef }
+  const additionalTextFieldProps = {
+    isOpen,
+    setIsOpen,
+    errorMessage,
+    textFieldRef,
+  }
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -82,7 +95,7 @@ const TimePicker = ({
         <KeyboardTimePicker
           onChange={handleDateChange}
           TextFieldComponent={TimePickerTextField}
-          onClose={() => setIsOpen(false)}
+          onClose={handleOnClose}
           open={isOpen}
           variant='inline'
           disabled={disabled}
@@ -96,7 +109,7 @@ const TimePicker = ({
           }}
           autoOk
           {...otherProps}
-          {...additionalProps}
+          {...additionalTextFieldProps}
         />
       </ThemeProvider>
     </MuiPickersUtilsProvider>

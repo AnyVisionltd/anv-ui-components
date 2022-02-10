@@ -16,7 +16,10 @@ const types = {
   text: 'text',
   password: 'password',
   number: 'number',
+  dateTimePicker: 'date-time-picker',
 }
+
+const dateSelectors = ['/', '-', ':']
 
 const getTranslation = path => languageService.getTranslation(`${path}`)
 
@@ -126,14 +129,29 @@ const TextField = React.forwardRef((props, ref) => {
     if (
       type !== types.options &&
       type !== types.number &&
-      caretStart !== undefined &&
-      inputRef &&
-      inputRef.current
+      caretStart !== undefined
     ) {
-      inputRef.current.setSelectionRange(caretStart, caretEnd)
+      inputRef.current?.setSelectionRange(caretStart, caretEnd)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value])
+
+  const handleDateInputSelection = inputValue => {
+    const currentSelectedCharacter = inputValue[cursorRef.current.caretStart]
+    if (dateSelectors.includes(currentSelectedCharacter)) {
+      cursorRef.current.caretStart += 1
+      cursorRef.current.caretEnd += 1
+    }
+  }
+
+  const handleInputSelection = ({
+    target: { selectionStart, selectionEnd, value },
+  }) => {
+    const prevCaretStart = cursorRef.current.caretStart
+    cursorRef.current = { caretStart: selectionStart, caretEnd: selectionEnd }
+    if (type === types.dateTimePicker && prevCaretStart < selectionStart)
+      handleDateInputSelection(value)
+  }
 
   const onInputChange = e => {
     e.persist()
@@ -141,9 +159,7 @@ const TextField = React.forwardRef((props, ref) => {
       target: { value },
     } = e
     setEmpty(!value)
-    const caretStart = e.target.selectionStart
-    const caretEnd = e.target.selectionEnd
-    cursorRef.current = { caretStart, caretEnd }
+    handleInputSelection(e)
     onChange(e)
   }
 

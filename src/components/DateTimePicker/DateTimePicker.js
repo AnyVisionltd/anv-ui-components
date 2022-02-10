@@ -45,6 +45,7 @@ const DateTimePickerTextField = props => (
         <Calendar />
       </IconButton>
     }
+    type='date-time-picker'
     label={props.label}
     defaultValue={props.value}
     onChange={props.onChange}
@@ -54,6 +55,7 @@ const DateTimePickerTextField = props => (
     disabled={props.disabled}
     error={props.error}
     message={(props.error && props.errorMessage) || props.helperText}
+    onBlur={props.onBlur}
   />
 )
 
@@ -69,6 +71,7 @@ const DateTimePicker = ({
   value,
   errorMessage,
   isNullValue,
+  onClose,
   ...otherProps
 }) => {
   const textFieldRef = useRef()
@@ -85,9 +88,19 @@ const DateTimePicker = ({
     onChange(date)
   }
 
+  const handleOnClose = () => {
+    setIsOpen(false)
+    onClose?.()
+  }
+
   const theme = createTheme(MATERIAL_UI_THEME)
 
-  const additionalProps = { isOpen, setIsOpen, errorMessage, textFieldRef }
+  const additionalTextFieldProps = {
+    isOpen,
+    setIsOpen,
+    errorMessage,
+    textFieldRef,
+  }
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -103,7 +116,7 @@ const DateTimePicker = ({
           cancelLabel={null}
           variant='inline'
           open={isOpen}
-          onClose={() => setIsOpen(false)}
+          onClose={handleOnClose}
           disabled={disabled}
           disablePast={disablePast}
           disableFuture={disableFuture}
@@ -115,7 +128,7 @@ const DateTimePicker = ({
             anchorOrigin: { horizontal: 143, vertical: 48 },
           }}
           {...otherProps}
-          {...additionalProps}
+          {...additionalTextFieldProps}
         />
       </ThemeProvider>
     </MuiPickersUtilsProvider>
