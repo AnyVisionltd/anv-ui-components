@@ -12,11 +12,15 @@ import styles from './TableHeader.module.scss'
 import { useTableData } from '../UseTableData'
 
 const getTranslation = path => languageService.getTranslation(`${path}`)
+const MIN_SELECTION_COUNT = 0
 
 const TableHeader = ({
   columns,
   onHeaderCellClick,
   className,
+  resultLabel,
+  showSelectionLabel,
+  selectionLabel,
   ...otherProps
 }) => {
   const {
@@ -34,6 +38,7 @@ const TableHeader = ({
     columnManagement,
     totalItems,
   } = state
+  const totalSelected = selection?.items?.length ?? MIN_SELECTION_COUNT
   const { sortBy, sortable: contextSortable } = sort
   const { isActive: columnManagementIsActive } = columnManagement
   const tableData = useTableData()
@@ -149,11 +154,12 @@ const TableHeader = ({
     )
 
   const classes = classNames(styles.tableHeader, className)
-
   return (
     <div>
       <div className={styles.results}>
-        {totalItems} {getTranslation('results')}
+        {totalItems} {resultLabel ?? getTranslation('results')}
+        {Boolean(showSelectionLabel) &&
+          ` (${totalSelected} ${selectionLabel ?? getTranslation('selected')})`}
       </div>
       <div role='row' className={classes} {...otherProps}>
         {renderSelection()}
@@ -167,6 +173,7 @@ const TableHeader = ({
 
 TableHeader.defaultProps = {
   onHeaderCellClick: () => {},
+  showSelectionLabel: false,
 }
 
 TableHeader.propTypes = {
@@ -203,6 +210,9 @@ TableHeader.propTypes = {
       hide: propTypes.bool,
       width: propTypes.string,
       trailingIcon: propTypes.element,
+      resultLabel: propTypes.string,
+      showSelectionLabel: propTypes.bool,
+      selectionLabel: propTypes.string,
     }),
   ).isRequired,
   /** Callback fire when header cell click with cell field. */
