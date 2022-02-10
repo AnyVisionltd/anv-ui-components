@@ -1,16 +1,13 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import classNames from 'classnames'
 import MomentUtils from '@date-io/moment'
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
 } from '@material-ui/pickers'
 import { createTheme, ThemeProvider } from '@material-ui/core/styles'
-import { Calendar } from '@anyvision/anv-icons'
-import { TextField } from '../TextField'
-import { IconButton } from '../IconButton'
+import { DateTimeTextField } from '../DatePicker'
 import languageService from '../../services/language'
 import './TimePicker.module.scss'
 
@@ -29,6 +26,8 @@ const MATERIAL_UI_THEME = {
   },
 }
 
+const theme = createTheme(MATERIAL_UI_THEME)
+
 const TimePicker = ({
   onChange,
   disabled,
@@ -36,83 +35,37 @@ const TimePicker = ({
   label,
   value,
   errorMessage,
+  onClose,
   ...otherProps
 }) => {
   const textFieldRef = useRef()
   const [isOpen, setIsOpen] = useState(false)
-  const [isFocus, setIsFocus] = useState(false)
   const [date, setDate] = useState(value || moment())
 
-  /**
-   * Keeps the input on focus on the first _ char.
-   */
-  useEffect(() => {
-    if (isFocus) {
-      textFieldRef.current.focus()
-      const pos = textFieldRef.current.value
-        .split('')
-        .findIndex(char => char === '_')
-      textFieldRef.current.setSelectionRange(pos, pos)
-    }
-  }, [textFieldRef, date, isFocus])
-
-  /**
-   * Render custom input - TextField
-   */
-  const renderInput = props => (
-    <TextField
-      trailingIcon={
-        <IconButton
-          className={classNames('datepicker-icon', {
-            disabled: props.disabled,
-          })}
-          onClick={() => !props.disabled && setIsOpen(prev => !prev)}
-          size='medium'
-        >
-          <Calendar />
-        </IconButton>
-      }
-      label={props.label}
-      defaultValue={props.value}
-      onChange={props.onChange}
-      ref={textFieldRef}
-      onFocus={() => setIsFocus(true)}
-      format={props.format}
-      value={props.value}
-      disabled={props.disabled}
-      error={props.error}
-      message={(props.error && errorMessage) || props.helperText}
-    />
-  )
-
-  /**
-   * on close TimePicker dialog - close & remove focus from input
-   */
-  const handleCloseTimePicker = () => {
-    setIsOpen(false)
-    setIsFocus(false)
-  }
-
-  /**
-   * change date & fire onChange event
-   */
   const handleDateChange = date => {
     setDate(date)
     onChange(date)
   }
 
-  /**
-   * Override material ui theme
-   */
-  const theme = createTheme(MATERIAL_UI_THEME)
+  const handleOnClose = () => {
+    setIsOpen(false)
+    onClose?.()
+  }
+
+  const additionalTextFieldProps = {
+    isOpen,
+    setIsOpen,
+    errorMessage,
+    textFieldRef,
+  }
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <ThemeProvider theme={theme}>
         <KeyboardTimePicker
           onChange={handleDateChange}
-          TextFieldComponent={renderInput}
-          onClose={handleCloseTimePicker}
+          TextFieldComponent={DateTimeTextField}
+          onClose={handleOnClose}
           open={isOpen}
           variant='inline'
           disabled={disabled}
@@ -126,6 +79,7 @@ const TimePicker = ({
           }}
           autoOk
           {...otherProps}
+          {...additionalTextFieldProps}
         />
       </ThemeProvider>
     </MuiPickersUtilsProvider>
