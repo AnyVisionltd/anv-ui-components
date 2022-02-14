@@ -192,6 +192,7 @@ TableHeader.propTypes = {
    *  <code>hide</code>         		- hide the column. <br />
    *  <code>width</code>    			  - set the column width by flex basis. <br />
    *  <code>triggerRowClick</code>  - set if cell is clickable, default true. <br />
+   *  <code>filterFunction</code>  - an optional custom function to filter row values of a specific column. (rowValue, searchValue) => bool <br />
    **/
   columns: propTypes.arrayOf(
     propTypes.shape({
@@ -213,6 +214,7 @@ TableHeader.propTypes = {
       resultLabel: propTypes.string,
       showSelectionLabel: propTypes.bool,
       selectionLabel: propTypes.string,
+      filterFunction: propTypes.func,
     }),
   ).isRequired,
   /** Callback fire when header cell click with cell field. */
