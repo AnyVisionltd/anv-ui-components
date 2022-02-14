@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { FixedSizeList as List } from 'react-window'
+import propTypes from 'prop-types'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import styles from './DropdownVirtualizedList.module.scss'
 
@@ -49,6 +50,19 @@ const DropdownVirtualizedList = ({
       )}
     </AutoSizer>
   )
+}
+
+DropdownVirtualizedList.propTypes = {
+  /** Height of menu list. */
+  menuHeight: propTypes.number,
+  /** Options array. */
+  options: propTypes.array,
+  /** Height of row in list. */
+  rowHeight: propTypes.number,
+  /** Render function for a row in list. */
+  renderRow: propTypes.func,
+  /** Currently focused option by user. */
+  focusedOptionIndex: propTypes.number,
 }
 
 export default DropdownVirtualizedList
