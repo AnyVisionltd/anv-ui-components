@@ -27,9 +27,8 @@ import { Tooltip } from '../Tooltip'
 import styles from './Dropdown.module.scss'
 
 const maxMenuHeight = 240
-const menuItemHeight = 56
-const defaultSelectedHeight = 56
 const rowHeight = 56
+const defaultSelectedHeight = 56
 const getTranslation = path => languageService.getTranslation(`${path}`)
 
 const getMenuPlacement = ({ menuHeight, containerElement }) => {
@@ -80,17 +79,17 @@ const Dropdown = forwardRef(
     const valuesContainerRef = useRef(null)
     const [selectedValueElement, setSelectedValueElement] = useState(null)
 
-    const selectedOptionsSet = new Set(
-      selectedOptions.map(({ [keyValue]: id }) => id),
-    )
+    const selectedOptionsSet = new Set([
+      ...selectedOptions.map(({ [keyValue]: id }) => id),
+    ])
     const menuHeight = Math.min(shownOptions.length * rowHeight, maxMenuHeight)
 
     useImperativeHandle(
       ref,
       () => ({
-        setOptions: options => {
+        setOptions: newOptions => {
           setFilteredValue('')
-          setShownOptions([...options])
+          setShownOptions([...newOptions])
         },
       }),
       [],
@@ -185,16 +184,12 @@ const Dropdown = forwardRef(
           isMenuPositionedUpwards === null ||
           prevProps?.options?.length !== options.length
         ) {
-          const menuHeight = Math.min(
-            maxMenuHeight,
-            options.length * menuItemHeight,
-          )
           setIsMenuPositionedUpwards(
             getMenuPlacement({ menuHeight, containerElement: node }),
           )
         }
       },
-      [isMenuPositionedUpwards, options, prevProps],
+      [isMenuPositionedUpwards, prevProps, menuHeight, options],
     )
 
     const focusOption = direction => {
