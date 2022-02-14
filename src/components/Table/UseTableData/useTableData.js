@@ -21,6 +21,9 @@ const useTableData = () => {
       return data.filter(row => {
         return filters.every(({ field, value, filterFunction }) => {
           if (field) {
+            if (columnsMap[field].filterFunction) {
+              return columnsMap[field].filterFunction(row[field], value)
+            }
             if (row[field]) {
               return row[field]
                 .toString()
@@ -40,6 +43,9 @@ const useTableData = () => {
                 (columnsMap[cellField].type === types.NUMBER ||
                   columnsMap[cellField].type === types.STRING)
               ) {
+                if (columnsMap[cellField].filterFunction) {
+                  return columnsMap[cellField].filterFunction(cellValue, value)
+                }
                 return (
                   cellValue &&
                   cellValue
