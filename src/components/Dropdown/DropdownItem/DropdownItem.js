@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, memo } from 'react'
+import React, { useRef, memo } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { Tooltip, Checkbox } from '../../../index'
@@ -12,7 +12,6 @@ const DropdownItem = ({
   onClick,
   multiple,
   isSelected,
-  menuRef,
   valueRender,
 }) => {
   const labelRef = useRef(null)
@@ -21,19 +20,6 @@ const DropdownItem = ({
     [styles.isFocusedByKeyboard]: isFocusedByKeyboard,
     [styles.isDisabled]: !!option.disabled,
   })
-
-  useEffect(() => {
-    if (!isFocusedByKeyboard) return
-    const menu = menuRef?.current
-    const item = labelRef?.current
-    if (menu && item) {
-      menu.scrollTop =
-        item.offsetTop -
-        menu.offsetTop +
-        item.clientHeight -
-        (1 / 3) * menu.offsetHeight
-    }
-  }, [labelRef, menuRef, isFocusedByKeyboard])
 
   return (
     <Tooltip content={option[displayValue]} show={useIsOverflowing(labelRef)}>
