@@ -1,4 +1,11 @@
-import React, { useState, useRef, memo, useEffect, useCallback } from 'react'
+import React, {
+  useImperativeHandle,
+  useState,
+  useRef,
+  memo,
+  useEffect,
+  useCallback,
+} from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { ArrowUp, TimesThick, TimesCircleFilled } from '@anyvision/anv-icons'
@@ -15,6 +22,7 @@ import {
 } from '../../hooks'
 import languageService from '../../services/language'
 import { Tooltip } from '../Tooltip'
+import { DropdownVirtualizedList } from './DropdownVirtualizedList'
 import styles from './Dropdown.module.scss'
 
 const maxMenuHeight = 240
@@ -31,447 +39,485 @@ const getMenuPlacement = ({ menuHeight, containerElement }) => {
   return scrollerNodeBottom - containerBottom < menuHeight
 }
 
-const Dropdown = ({
-  options,
-  defaultValues,
-  displayValue,
-  keyValue,
-  className,
-  onChange,
-  placeholder,
-  label,
-  disabled,
-  onMenuOpen,
-  onMenuClose,
-  onExceedMaxSelected,
-  multiple,
-  maxSelected,
-  noOptionsMessage,
-  isSearchable,
-  isSelectedShownInHeader,
-  valueRender,
-  canBeEmpty,
-}) => {
-  const [isTypeMode, setIsTypeMode] = useState(false)
-  const [filteredValue, setFilteredValue] = useState('')
-  const [shownOptions, setShownOptions] = useState([...options])
-  const [selectedOptions, setSelectedOptions] = useState([...defaultValues])
-  const [showMenu, setShowMenu] = useState(false)
-  const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1)
-  const [isMenuPositionedUpwards, setIsMenuPositionedUpwards] = useState(null)
-  const containerRef = useRef(null)
-  const menuRef = useRef(null)
-  const inputRef = useRef(null)
-  const selectedContainerRef = useRef(null)
-  const valuesContainerRef = useRef(null)
-  const [selectedValueElement, setSelectedValueElement] = useState(null)
-
-  const selectedElementContent = !multiple
-    ? selectedOptions?.[0]?.[displayValue]
-    : `${selectedOptions.length} ${getTranslation(
-        selectedOptions.length === 1 ? 'itemSelected' : 'itemsSelected',
-      )}`
-
-  const resetToOriginalOptions = () =>
-    shownOptions.length !== options.length && setShownOptions(options)
-
-  const openMenu = () => {
-    if (showMenu || disabled) return
-    setShowMenu(true)
-    onMenuOpen()
-  }
-
-  const closeMenu = () => {
-    if (!showMenu) return
-    setShowMenu(false)
-    resetToOriginalOptions()
-    onMenuClose()
-  }
-
-  const toggleMenu = () => (showMenu ? closeMenu() : openMenu())
-
-  const getIntoTypeMode = () => {
-    if (disabled) return
-    isSearchable && setIsTypeMode(true)
-    !showMenu && openMenu()
-  }
-
-  const getOffTypeMode = () => {
-    isTypeMode && setIsTypeMode(false)
-    filteredValue.length && setFilteredValue('')
-  }
-
-  const resetFocusedOptionIndex = () => setFocusedOptionIndex(-1)
-
-  const resetFilteredValue = () => {
-    setFilteredValue('')
-    resetToOriginalOptions()
-  }
-
-  const isOverflown = useCallback(
-    element => element && element.scrollHeight > defaultSelectedHeight,
-    [],
-  )
-
-  useClickOutsideListener(() => {
-    closeMenu()
-    getOffTypeMode()
-    resetFocusedOptionIndex()
-  }, containerRef)
-
-  const prevProps = usePrevious({ options, defaultValues })
-
-  useEffect(() => {
-    if (
-      JSON.stringify(prevProps?.defaultValues) !== JSON.stringify(defaultValues)
-    ) {
-      setSelectedOptions([...defaultValues])
-    }
-    if (prevProps?.options?.length !== options.length) {
-      setShownOptions([...options])
-    }
-  }, [options, defaultValues, prevProps])
-
-  useEffect(() => {
-    if (!multiple || !isSelectedShownInHeader || !selectedContainerRef.current)
-      return
-    if (selectedOptions.length && isOverflown(selectedContainerRef.current)) {
-      selectedContainerRef.current.style.height = 'auto'
-      selectedContainerRef.current.style.paddingBottom = '8px'
-    } else {
-      selectedContainerRef.current.style.height = styles.defaultSelectedHeight
-      selectedContainerRef.current.style.paddingBottom = '2px'
-    }
-  }, [selectedOptions, multiple, isSelectedShownInHeader, isOverflown])
-
-  const handleMenuPlacement = useCallback(
-    node => {
-      if (
-        isMenuPositionedUpwards === null ||
-        prevProps?.options?.length !== options.length
-      ) {
-        const menuHeight = Math.min(
-          maxMenuHeight,
-          options.length * menuItemHeight,
-        )
-        setIsMenuPositionedUpwards(
-          getMenuPlacement({ menuHeight, containerElement: node }),
-        )
-      }
+const Dropdown = React.forwardRef(
+  (
+    {
+      options,
+      defaultValues,
+      displayValue,
+      keyValue,
+      className,
+      onChange,
+      placeholder,
+      label,
+      disabled,
+      onMenuOpen,
+      onMenuClose,
+      onExceedMaxSelected,
+      multiple,
+      maxSelected,
+      noOptionsMessage,
+      isSearchable,
+      isSelectedShownInHeader,
+      valueRender,
+      canBeEmpty,
     },
-    [isMenuPositionedUpwards, options, prevProps],
-  )
+    ref,
+  ) => {
+    const [isTypeMode, setIsTypeMode] = useState(false)
+    const [filteredValue, setFilteredValue] = useState('')
+    const [shownOptions, setShownOptions] = useState([...options])
+    const [selectedOptions, setSelectedOptions] = useState([...defaultValues])
+    const [showMenu, setShowMenu] = useState(false)
+    const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1)
+    const [isMenuPositionedUpwards, setIsMenuPositionedUpwards] = useState(null)
+    const containerRef = useRef(null)
+    const menuRef = useRef(null)
+    const inputRef = useRef(null)
+    const selectedContainerRef = useRef(null)
+    const valuesContainerRef = useRef(null)
+    const [selectedValueElement, setSelectedValueElement] = useState(null)
 
-  const focusOption = direction => {
-    if (!showMenu || !shownOptions.length) return
-    if (direction === 'up') {
-      const curFocusedOption = focusedOptionIndex - 1
-      setFocusedOptionIndex(
-        curFocusedOption < 0 ? shownOptions.length - 1 : curFocusedOption,
-      )
-    } else if (direction === 'down') {
-      const curFocusedOption = focusedOptionIndex + 1
-      setFocusedOptionIndex(
-        curFocusedOption >= shownOptions.length ? 0 : curFocusedOption,
-      )
-    }
-  }
-
-  const handleFilterChange = e => {
-    const value = e.target.value
-    setFilteredValue(value)
-
-    if (!value || !value.trim().length) {
-      resetToOriginalOptions()
-      return
-    }
-
-    const filteredOptions = options.filter(option =>
-      option[displayValue].toLowerCase().startsWith(value.toLowerCase()),
+    const selectedOptionsSet = new Set([
+      ...selectedOptions.map(({ [keyValue]: id }) => id),
+    ])
+    const menuHeight = Math.min(
+      shownOptions.length * menuItemHeight,
+      maxMenuHeight,
     )
-    setShownOptions(filteredOptions)
-  }
 
-  const handleItemClick = clickedOption => {
-    if (!clickedOption || clickedOption.disabled) return
-    if (maxSelected && maxSelected === selectedOptions.length) {
-      return onExceedMaxSelected()
-    }
-    const { [keyValue]: key } = clickedOption
-    const isFoundInDropdown = selectedOptions.find(
-      option => option[keyValue] === key,
+    useImperativeHandle(
+      ref,
+      () => ({
+        setOptions: newOptions => {
+          setFilteredValue('')
+          setShownOptions([...newOptions])
+        },
+      }),
+      [],
     )
-    let newOptions
-    if (multiple) {
-      if (isFoundInDropdown) {
-        newOptions = selectedOptions.filter(option => option[keyValue] !== key)
-      } else {
-        newOptions = [...selectedOptions, clickedOption]
-      }
+
+    const selectedElementContent = !multiple
+      ? selectedOptions?.[0]?.[displayValue]
+      : `${selectedOptions.length} ${getTranslation(
+          selectedOptions.length === 1 ? 'itemSelected' : 'itemsSelected',
+        )}`
+
+    const resetToOriginalOptions = () =>
+      shownOptions.length !== options.length && setShownOptions(options)
+
+    const openMenu = () => {
+      if (showMenu || disabled) return
+      setShowMenu(true)
+      onMenuOpen()
+    }
+
+    const closeMenu = () => {
+      if (!showMenu) return
+      setShowMenu(false)
       resetToOriginalOptions()
-    } else {
-      if (isFoundInDropdown) {
-        if (canBeEmpty) {
-          newOptions = []
-        } else {
-          return
-        }
-      } else {
-        newOptions = [clickedOption]
-      }
-      getOffTypeMode()
+      onMenuClose()
+    }
+
+    const toggleMenu = () => (showMenu ? closeMenu() : openMenu())
+
+    const getIntoTypeMode = () => {
+      if (disabled) return
+      isSearchable && setIsTypeMode(true)
+      !showMenu && openMenu()
+    }
+
+    const getOffTypeMode = () => {
+      isTypeMode && setIsTypeMode(false)
+      filteredValue.length && setFilteredValue('')
+    }
+
+    const resetFocusedOptionIndex = () => setFocusedOptionIndex(-1)
+
+    const resetFilteredValue = () => {
+      setFilteredValue('')
+      resetToOriginalOptions()
+    }
+
+    const isOverflown = useCallback(
+      element => element && element.scrollHeight > defaultSelectedHeight,
+      [],
+    )
+
+    useClickOutsideListener(() => {
       closeMenu()
+      getOffTypeMode()
       resetFocusedOptionIndex()
-    }
+    }, containerRef)
 
-    setSelectedOptions(newOptions)
-    onChange(newOptions)
-  }
+    const prevProps = usePrevious({ options, defaultValues })
 
-  const handleRemoveOption = optionIndex => {
-    const newOptions = [...selectedOptions]
-    newOptions.splice(optionIndex, 1)
-    setSelectedOptions([...newOptions])
-    onChange(newOptions)
-  }
+    useEffect(() => {
+      if (
+        JSON.stringify(prevProps?.defaultValues) !==
+        JSON.stringify(defaultValues)
+      ) {
+        setSelectedOptions([...defaultValues])
+      }
+      if (prevProps?.options?.length !== options.length) {
+        setShownOptions([...options])
+      }
+    }, [options, defaultValues, prevProps])
 
-  const popLastValue = () => {
-    const newOptions = selectedOptions.slice(0, selectedOptions.length - 1)
-    setSelectedOptions(newOptions)
-    onChange(newOptions)
-  }
+    useEffect(() => {
+      if (
+        !multiple ||
+        !isSelectedShownInHeader ||
+        !selectedContainerRef.current
+      )
+        return
+      if (selectedOptions.length && isOverflown(selectedContainerRef.current)) {
+        selectedContainerRef.current.style.height = 'auto'
+        selectedContainerRef.current.style.paddingBottom = '8px'
+      } else {
+        selectedContainerRef.current.style.height = styles.defaultSelectedHeight
+        selectedContainerRef.current.style.paddingBottom = '2px'
+      }
+    }, [selectedOptions, multiple, isSelectedShownInHeader, isOverflown])
 
-  const emptySelectedOptions = () => {
-    setSelectedOptions([])
-    onChange([])
-  }
-
-  const selectOption = optionIndex => handleItemClick(shownOptions[optionIndex])
-
-  const handleKeyDown = e => {
-    switch (e.keyCode) {
-      case keymap.ENTER:
-        if (focusedOptionIndex === -1) return
-        selectOption(focusedOptionIndex)
-        resetFilteredValue()
-        break
-      case keymap.ESCAPE:
-        closeMenu()
-        getOffTypeMode()
-        resetFocusedOptionIndex()
-        break
-      case keymap.BACKSPACE:
-        if (filteredValue) return
-        if (multiple && isSelectedShownInHeader && selectedOptions.length) {
-          popLastValue()
+    const handleMenuPlacement = useCallback(
+      node => {
+        if (
+          isMenuPositionedUpwards === null ||
+          prevProps?.options?.length !== options.length
+        ) {
+          const menuHeight = Math.min(
+            maxMenuHeight,
+            options.length * menuItemHeight,
+          )
+          setIsMenuPositionedUpwards(
+            getMenuPlacement({ menuHeight, containerElement: node }),
+          )
         }
-        break
-      case keymap.ARROW_UP:
-        focusOption('up')
-        break
-      case keymap.ARROW_DOWN:
-        focusOption('down')
-        break
-      default:
-        break
-    }
-  }
+      },
+      [isMenuPositionedUpwards, options, prevProps],
+    )
 
-  const renderValues = () => {
-    if (isTypeMode && (!multiple || !isSelectedShownInHeader)) return null
-    if (!selectedOptions.length) {
-      if (isTypeMode) return null
-      return (
-        <p className={styles.placeholder} onClick={getIntoTypeMode}>
-          {placeholder}
-        </p>
+    const focusOption = direction => {
+      if (!showMenu || !shownOptions.length) return
+      if (direction === 'up') {
+        const curFocusedOption = focusedOptionIndex - 1
+        setFocusedOptionIndex(
+          curFocusedOption < 0 ? shownOptions.length - 1 : curFocusedOption,
+        )
+      } else if (direction === 'down') {
+        const curFocusedOption = focusedOptionIndex + 1
+        setFocusedOptionIndex(
+          curFocusedOption >= shownOptions.length ? 0 : curFocusedOption,
+        )
+      }
+    }
+
+    const handleFilterChange = e => {
+      const value = e.target.value
+      setFilteredValue(value)
+
+      if (!value || !value.trim().length) {
+        resetToOriginalOptions()
+        return
+      }
+
+      const filteredOptions = options.filter(option =>
+        option[displayValue].toLowerCase().startsWith(value.toLowerCase()),
       )
+      setShownOptions(filteredOptions)
     }
 
-    if (multiple && isSelectedShownInHeader) {
-      return selectedOptions.map(({ [displayValue]: value }, index) => (
-        <button
-          className={classNames(styles.selectedItem, {
-            [styles.spacingTop]: isSelectedShownInHeader && multiple,
-          })}
-          key={index}
-          onClick={() => handleRemoveOption(index)}
-        >
-          {value}
-          <span>
-            <TimesThick />
-          </span>
-        </button>
-      ))
-    } else {
-      return (
-        <p
-          className={styles.selectedValue}
-          onClick={getIntoTypeMode}
-          ref={setSelectedValueElement}
-        >
-          {selectedElementContent}
-        </p>
+    const handleItemClick = clickedOption => {
+      if (!clickedOption || clickedOption.disabled) return
+      if (maxSelected && maxSelected === selectedOptions.length) {
+        return onExceedMaxSelected()
+      }
+      const { [keyValue]: key } = clickedOption
+      const isFoundInDropdown = selectedOptions.find(
+        option => option[keyValue] === key,
       )
+      let newOptions
+      if (multiple) {
+        if (isFoundInDropdown) {
+          newOptions = selectedOptions.filter(
+            option => option[keyValue] !== key,
+          )
+        } else {
+          newOptions = [...selectedOptions, clickedOption]
+        }
+        resetToOriginalOptions()
+      } else {
+        if (isFoundInDropdown) {
+          if (canBeEmpty) {
+            newOptions = []
+          } else {
+            return
+          }
+        } else {
+          newOptions = [clickedOption]
+        }
+        getOffTypeMode()
+        closeMenu()
+        resetFocusedOptionIndex()
+      }
+
+      setSelectedOptions(newOptions)
+      onChange(newOptions)
     }
-  }
 
-  const renderDeleteButton = () => (
-    <button
-      className={classNames(styles.deleteButton, {
-        [styles.spacingTop]: isSelectedShownInHeader && multiple,
-      })}
-      onClick={emptySelectedOptions}
-    >
-      {selectedOptions.length}
-      <span>
-        <TimesThick />
-      </span>
-    </button>
-  )
-
-  const renderButtons = () => (
-    <div className={styles.icons}>
-      <IconButton
-        variant='ghost'
-        onClick={resetFilteredValue}
-        aria-label='clear input'
-        disabled={disabled}
-        className={styles.iconButton}
-        style={{ visibility: filteredValue.length ? 'visible' : 'hidden' }}
-      >
-        <TimesCircleFilled />
-      </IconButton>
-      <IconButton
-        variant='ghost'
-        onClick={toggleMenu}
-        aria-label='toggle menu'
-        disabled={disabled}
-        className={classNames(styles.iconButton, {
-          [styles.rotated]: !showMenu,
-        })}
-      >
-        <ArrowUp />
-      </IconButton>
-    </div>
-  )
-
-  const determineInputPlaceholder = () => {
-    if (!multiple) {
-      return selectedOptions.length
-        ? selectedOptions[0][displayValue]
-        : placeholder
+    const handleRemoveOption = optionIndex => {
+      const newOptions = [...selectedOptions]
+      newOptions.splice(optionIndex, 1)
+      setSelectedOptions([...newOptions])
+      onChange(newOptions)
     }
-    if (!isSelectedShownInHeader) return placeholder
-    return selectedOptions.length ? undefined : placeholder
-  }
 
-  const determineInputWidth = () => {
-    const containerWidth = valuesContainerRef.current.offsetWidth
-    if (!multiple) return `${containerWidth}px`
-    return selectedOptions.length === 0 ? `${containerWidth}px` : ''
-  }
+    const popLastValue = () => {
+      const newOptions = selectedOptions.slice(0, selectedOptions.length - 1)
+      setSelectedOptions(newOptions)
+      onChange(newOptions)
+    }
 
-  const handleInputKeyPress = () =>
-    (inputRef.current.style.width = `${
-      (filteredValue.length
-        ? filteredValue.length
-        : inputRef.current.placeholder.length) + 5
-    }ch`)
+    const emptySelectedOptions = () => {
+      setSelectedOptions([])
+      onChange([])
+    }
 
-  const renderHeaderContainer = () => (
-    <div
-      className={classNames(styles.selectedContainer, {
-        [styles.isMenuOpen]: showMenu,
-      })}
-      ref={selectedContainerRef}
-    >
-      <label className={classNames({ [styles.labelColor]: showMenu })}>
-        {label}
-      </label>
-      <div
-        className={styles.selectedContentContainer}
-        onClick={getIntoTypeMode}
-      >
-        {selectedOptions.length > 0 && multiple && renderDeleteButton()}
-        <div className={styles.valuesContainer} ref={valuesContainerRef}>
-          {renderValues()}
-          {isTypeMode && (
-            <InputBase
-              autoFocus
-              value={filteredValue}
-              onChange={handleFilterChange}
-              className={classNames(styles.inputBase, {
-                [styles.spacingTop]: isSelectedShownInHeader && multiple,
-              })}
-              onBlur={getOffTypeMode}
-              onKeyDown={handleKeyDown}
-              placeholder={determineInputPlaceholder()}
-              ref={inputRef}
-              style={{ width: determineInputWidth() }}
-              onKeyPress={handleInputKeyPress}
-              onKeyUp={handleInputKeyPress}
-            />
-          )}
-        </div>
-      </div>
-      {renderButtons()}
-    </div>
-  )
+    const selectOption = optionIndex =>
+      handleItemClick(shownOptions[optionIndex])
 
-  const renderOptions = () => (
-    <ul
-      className={classNames(styles.menuContainer, {
-        [styles.isPositionedUpwards]: isMenuPositionedUpwards,
-      })}
-      ref={menuRef}
-    >
-      {!shownOptions.length ? (
-        <EmptyDropdownMenu
-          noOptionsMessage={noOptionsMessage}
-          searchValue={filteredValue}
-        />
-      ) : (
-        shownOptions.map((option, index) => (
-          <DropdownItem
-            option={option}
-            displayValue={displayValue}
-            multiple={multiple}
-            key={option[keyValue]}
-            onClick={() => handleItemClick(option)}
-            isSelected={selectedOptions.some(
-              selected => selected[keyValue] === option[keyValue],
-            )}
-            isFocusedByKeyboard={isTypeMode && index === focusedOptionIndex}
-            menuRef={menuRef}
-            valueRender={valueRender}
-          />
+    const handleKeyDown = e => {
+      switch (e.keyCode) {
+        case keymap.ENTER:
+          if (focusedOptionIndex === -1) return
+          selectOption(focusedOptionIndex)
+          resetFilteredValue()
+          break
+        case keymap.ESCAPE:
+          closeMenu()
+          getOffTypeMode()
+          resetFocusedOptionIndex()
+          break
+        case keymap.BACKSPACE:
+          if (filteredValue) return
+          if (multiple && isSelectedShownInHeader && selectedOptions.length) {
+            popLastValue()
+          }
+          break
+        case keymap.ARROW_UP:
+          focusOption('up')
+          break
+        case keymap.ARROW_DOWN:
+          focusOption('down')
+          break
+        default:
+          break
+      }
+    }
+
+    const renderValues = () => {
+      if (isTypeMode && (!multiple || !isSelectedShownInHeader)) return null
+      if (!selectedOptions.length) {
+        if (isTypeMode) return null
+        return (
+          <p className={styles.placeholder} onClick={getIntoTypeMode}>
+            {placeholder}
+          </p>
+        )
+      }
+
+      if (multiple && isSelectedShownInHeader) {
+        return selectedOptions.map(({ [displayValue]: value }, index) => (
+          <button
+            className={classNames(styles.selectedItem, {
+              [styles.spacingTop]: isSelectedShownInHeader && multiple,
+            })}
+            key={index}
+            onClick={() => handleRemoveOption(index)}
+          >
+            {value}
+            <span>
+              <TimesThick />
+            </span>
+          </button>
         ))
-      )}
-    </ul>
-  )
+      } else {
+        return (
+          <p
+            className={styles.selectedValue}
+            onClick={getIntoTypeMode}
+            ref={setSelectedValueElement}
+          >
+            {selectedElementContent}
+          </p>
+        )
+      }
+    }
 
-  return (
-    <div
-      className={classNames(
-        styles.container,
-        disabled && styles.isDisabled,
-        className,
-      )}
-      ref={useCombinedRefs(containerRef, handleMenuPlacement)}
-    >
-      <Tooltip
-        content={selectedElementContent}
-        show={useIsOverflowing({
-          current: selectedValueElement,
+    const renderDeleteButton = () => (
+      <button
+        className={classNames(styles.deleteButton, {
+          [styles.spacingTop]: isSelectedShownInHeader && multiple,
         })}
+        onClick={emptySelectedOptions}
       >
-        {renderHeaderContainer()}
-      </Tooltip>
-      {showMenu && renderOptions()}
-    </div>
-  )
-}
+        {selectedOptions.length}
+        <span>
+          <TimesThick />
+        </span>
+      </button>
+    )
+
+    const renderButtons = () => (
+      <div className={styles.icons}>
+        <IconButton
+          variant='ghost'
+          onClick={resetFilteredValue}
+          aria-label='clear input'
+          disabled={disabled}
+          className={styles.iconButton}
+          style={{ visibility: filteredValue.length ? 'visible' : 'hidden' }}
+        >
+          <TimesCircleFilled />
+        </IconButton>
+        <IconButton
+          variant='ghost'
+          onClick={toggleMenu}
+          aria-label='toggle menu'
+          disabled={disabled}
+          className={classNames(styles.iconButton, {
+            [styles.rotated]: !showMenu,
+          })}
+        >
+          <ArrowUp />
+        </IconButton>
+      </div>
+    )
+
+    const determineInputPlaceholder = () => {
+      if (!multiple) {
+        return selectedOptions.length
+          ? selectedOptions[0][displayValue]
+          : placeholder
+      }
+      if (!isSelectedShownInHeader) return placeholder
+      return selectedOptions.length ? undefined : placeholder
+    }
+
+    const determineInputWidth = () => {
+      const containerWidth = valuesContainerRef.current.offsetWidth
+      if (!multiple) return `${containerWidth}px`
+      return selectedOptions.length === 0 ? `${containerWidth}px` : ''
+    }
+
+    const handleInputKeyPress = () =>
+      (inputRef.current.style.width = `${
+        (filteredValue.length
+          ? filteredValue.length
+          : inputRef.current.placeholder.length) + 5
+      }ch`)
+
+    const renderHeaderContainer = () => (
+      <div
+        className={classNames(styles.selectedContainer, {
+          [styles.isMenuOpen]: showMenu,
+        })}
+        ref={selectedContainerRef}
+      >
+        <label className={classNames({ [styles.labelColor]: showMenu })}>
+          {label}
+        </label>
+        <div
+          className={styles.selectedContentContainer}
+          onClick={getIntoTypeMode}
+        >
+          {selectedOptions.length > 0 && multiple && renderDeleteButton()}
+          <div className={styles.valuesContainer} ref={valuesContainerRef}>
+            {renderValues()}
+            {isTypeMode && (
+              <InputBase
+                autoFocus
+                value={filteredValue}
+                onChange={handleFilterChange}
+                className={classNames(styles.inputBase, {
+                  [styles.spacingTop]: isSelectedShownInHeader && multiple,
+                })}
+                onBlur={getOffTypeMode}
+                onKeyDown={handleKeyDown}
+                placeholder={determineInputPlaceholder()}
+                ref={inputRef}
+                style={{ width: determineInputWidth() }}
+                onKeyPress={handleInputKeyPress}
+                onKeyUp={handleInputKeyPress}
+              />
+            )}
+          </div>
+        </div>
+        {renderButtons()}
+      </div>
+    )
+
+    const renderOption = (option, index) => (
+      <DropdownItem
+        option={option}
+        displayValue={displayValue}
+        multiple={multiple}
+        key={option[keyValue]}
+        onClick={() => handleItemClick(option)}
+        isSelected={selectedOptionsSet.has(option[keyValue])}
+        isFocusedByKeyboard={isTypeMode && index === focusedOptionIndex}
+        valueRender={valueRender}
+      />
+    )
+
+    const renderOptions = () => (
+      <div
+        className={classNames(styles.menuContainer, {
+          [styles.isPositionedUpwards]: isMenuPositionedUpwards,
+        })}
+        ref={menuRef}
+        style={{ height: shownOptions.length ? `${menuHeight}px` : undefined }}
+      >
+        {!shownOptions.length ? (
+          <EmptyDropdownMenu
+            noOptionsMessage={noOptionsMessage}
+            searchValue={filteredValue}
+          />
+        ) : (
+          <DropdownVirtualizedList
+            menuHeight={menuHeight}
+            options={shownOptions}
+            rowHeight={menuItemHeight}
+            renderRow={renderOption}
+            focusedOptionIndex={focusedOptionIndex}
+          />
+        )}
+      </div>
+    )
+
+    return (
+      <div
+        className={classNames(
+          styles.container,
+          disabled && styles.isDisabled,
+          className,
+        )}
+        ref={useCombinedRefs(containerRef, handleMenuPlacement)}
+      >
+        <Tooltip
+          content={selectedElementContent}
+          show={useIsOverflowing({
+            current: selectedValueElement,
+          })}
+        >
+          {renderHeaderContainer()}
+        </Tooltip>
+        {showMenu && renderOptions()}
+      </div>
+    )
+  },
+)
 
 Dropdown.defaultProps = {
   options: [],
