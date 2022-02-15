@@ -1,18 +1,22 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import classNames from 'classnames'
 import MomentUtils from '@date-io/moment'
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers'
 import { createTheme, ThemeProvider } from '@material-ui/core/styles'
-import { Calendar } from '@anyvision/anv-icons'
-import { TextField } from '../TextField'
-import { IconButton } from '../IconButton'
 import languageService from '../../services/language'
+import DateTimeTextField from './DateTimeTextField/DateTimeTextField'
+import { useDebounce } from '../../hooks/UseDebounce'
 import './DatePicker.module.scss'
+
+const theme = createTheme({
+  typography: {
+    fontFamily: ['Poppins'],
+  },
+})
 
 const DatePicker = ({
   onChange,
@@ -25,88 +29,41 @@ const DatePicker = ({
   label,
   value,
   errorMessage,
+  onClose,
+  debounceTime,
   ...otherProps
 }) => {
   const textFieldRef = useRef()
   const [isOpen, setIsOpen] = useState(false)
-  const [isFocus, setIsFocus] = useState(false)
   const [date, setDate] = useState(value || moment())
+  const { set } = useDebounce(debounceTime)
 
-  /**
-   * Keeps the input on focus on the first _ char.
-   */
-  useEffect(() => {
-    if (isFocus) {
-      textFieldRef.current.focus()
-      const pos = textFieldRef.current.value
-        .split('')
-        .findIndex(char => char === '_')
-      textFieldRef.current.setSelectionRange(pos, pos)
-    }
-  }, [textFieldRef, date, isFocus])
-
-  /**
-   * Render custom input - TextField
-   */
-  const renderInput = props => (
-    <TextField
-      trailingIcon={
-        <IconButton
-          className={classNames('datepicker-icon', {
-            disabled: props.disabled,
-            open: isOpen,
-          })}
-          onClick={() => !props.disabled && setIsOpen(prev => !prev)}
-          size='medium'
-        >
-          <Calendar />
-        </IconButton>
-      }
-      label={props.label}
-      defaultValue={props.value}
-      onChange={props.onChange}
-      ref={textFieldRef}
-      onFocus={() => setIsFocus(true)}
-      format={props.format}
-      value={props.value}
-      disabled={props.disabled}
-      error={props.error}
-      message={(props.error && errorMessage) || props.helperText}
-    />
-  )
-
-  /**
-   * on close datepicker dialog - close & remove focus from input
-   */
-  const handleCloseDatePicker = () => {
-    setIsOpen(false)
-    setIsFocus(false)
-  }
-
-  /**
-   * change date & fire onChange event
-   */
   const handleDateChange = date => {
     setDate(date)
-    onChange && onChange(date)
+
+    if (debounceTime) set(() => onChange(date))
+    else onChange(date)
   }
 
-  /**
-   * Override material ui theme
-   */
-  const theme = createTheme({
-    typography: {
-      fontFamily: ['Poppins'],
-    },
-  })
+  const handleOnClose = () => {
+    setIsOpen(false)
+    onClose?.()
+  }
+
+  const additionalTextFieldProps = {
+    isOpen,
+    setIsOpen,
+    errorMessage,
+    textFieldRef,
+  }
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <ThemeProvider theme={theme}>
         <KeyboardDatePicker
           onChange={handleDateChange}
-          TextFieldComponent={renderInput}
-          onClose={handleCloseDatePicker}
+          TextFieldComponent={DateTimeTextField}
+          onClose={handleOnClose}
           open={isOpen}
           variant='inline'
           disabled={disabled}
@@ -125,6 +82,7 @@ const DatePicker = ({
           }}
           autoOk
           {...otherProps}
+          {...additionalTextFieldProps}
         />
       </ThemeProvider>
     </MuiPickersUtilsProvider>
@@ -152,6 +110,8 @@ DatePicker.propTypes = {
   maxDate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** Min selectable date. */
   minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  /** Debounce for onChange event. */
+  debounceTime: PropTypes.number,
 }
 
 DatePicker.defaultProps = {

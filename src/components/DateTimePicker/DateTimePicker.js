@@ -1,17 +1,15 @@
 import React, { useRef, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import classNames from 'classnames'
 import MomentUtils from '@date-io/moment'
 import {
   MuiPickersUtilsProvider,
   KeyboardDateTimePicker,
 } from '@material-ui/pickers'
 import { createTheme, ThemeProvider } from '@material-ui/core/styles'
-import { Calendar } from '@anyvision/anv-icons'
-import { TextField } from '../TextField'
-import { IconButton } from '../IconButton'
 import languageService from '../../services/language'
+import { DateTimeTextField } from '../DatePicker'
+import { useDebounce } from '../../hooks/UseDebounce'
 import './DateTimePicker.module.scss'
 
 const MATERIAL_UI_THEME = {
@@ -32,6 +30,8 @@ const MATERIAL_UI_THEME = {
   },
 }
 
+const theme = createTheme(MATERIAL_UI_THEME)
+
 const DateTimePicker = ({
   onChange,
   disabled,
@@ -44,83 +44,38 @@ const DateTimePicker = ({
   value,
   errorMessage,
   isNullValue,
+  onClose,
+  debounceTime,
   ...otherProps
 }) => {
   const textFieldRef = useRef()
   const [isOpen, setIsOpen] = useState(false)
-  const [isFocus, setIsFocus] = useState(false)
   const [date, setDate] = useState(isNullValue ? value : value || moment())
+  const { set } = useDebounce(debounceTime)
 
-  /**
-   * Update date state from parent
-   */
   useEffect(() => {
     if (value && new Date(value).getTime() !== new Date(date).getTime())
       setDate(value)
   }, [value, date, setDate])
 
-  /**
-   * Keeps the input on focus on the first _ char.
-   */
-  useEffect(() => {
-    if (isFocus) {
-      textFieldRef.current.focus()
-      const pos = textFieldRef.current.value
-        .split('')
-        .findIndex(char => char === '_')
-      textFieldRef.current.setSelectionRange(pos, pos)
-    }
-  }, [textFieldRef, date, isFocus])
-
-  /**
-   * Render custom input - TextField
-   */
-  const renderInput = props => (
-    <TextField
-      trailingIcon={
-        <IconButton
-          className={classNames('datepicker-icon', {
-            disabled: props.disabled,
-          })}
-          onClick={() => !props.disabled && setIsOpen(prev => !prev)}
-          size='medium'
-        >
-          <Calendar />
-        </IconButton>
-      }
-      label={props.label}
-      defaultValue={props.value}
-      onChange={props.onChange}
-      ref={textFieldRef}
-      onFocus={() => setIsFocus(true)}
-      format={props.format}
-      value={props.value}
-      disabled={props.disabled}
-      error={props.error}
-      message={(props.error && errorMessage) || props.helperText}
-    />
-  )
-
-  /**
-   * on close datepicker dialog - close & remove focus from input
-   */
-  const handleCloseDatePicker = () => {
-    setIsOpen(false)
-    setIsFocus(false)
-  }
-
-  /**
-   * change date & fire onChange event
-   */
   const handleDateChange = date => {
     setDate(date)
-    onChange(date)
+
+    if (debounceTime) set(() => onChange(date))
+    else onChange(date)
   }
 
-  /**
-   * Override material ui theme
-   */
-  const theme = createTheme(MATERIAL_UI_THEME)
+  const handleOnClose = () => {
+    setIsOpen(false)
+    onClose?.()
+  }
+
+  const additionalTextFieldProps = {
+    isOpen,
+    setIsOpen,
+    errorMessage,
+    textFieldRef,
+  }
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -131,12 +86,12 @@ const DateTimePicker = ({
           label={label}
           value={date}
           onChange={handleDateChange}
-          TextFieldComponent={renderInput}
+          TextFieldComponent={DateTimeTextField}
           okLabel={null}
           cancelLabel={null}
           variant='inline'
           open={isOpen}
-          onClose={handleCloseDatePicker}
+          onClose={handleOnClose}
           disabled={disabled}
           disablePast={disablePast}
           disableFuture={disableFuture}
@@ -148,6 +103,7 @@ const DateTimePicker = ({
             anchorOrigin: { horizontal: 143, vertical: 48 },
           }}
           {...otherProps}
+          {...additionalTextFieldProps}
         />
       </ThemeProvider>
     </MuiPickersUtilsProvider>
@@ -177,6 +133,8 @@ DateTimePicker.propTypes = {
   minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** If true, allow value to be null */
   isNullValue: PropTypes.bool,
+  /** Debounce for onChange event. */
+  debounceTime: PropTypes.number,
 }
 
 DateTimePicker.defaultProps = {
