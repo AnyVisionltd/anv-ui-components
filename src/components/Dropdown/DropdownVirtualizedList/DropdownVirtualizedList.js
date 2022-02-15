@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, memo } from 'react'
 import { FixedSizeList as List } from 'react-window'
 import propTypes from 'prop-types'
 import AutoSizer from 'react-virtualized-auto-sizer'
@@ -6,14 +6,13 @@ import styles from './DropdownVirtualizedList.module.scss'
 
 const BORDER_WIDTH = 1
 
-const Option = ({ data, index, style }) => {
+const Option = memo(({ data, index, style }) => {
   const { options, renderRow, width } = data
-  console.log(width)
   const content = renderRow(options[index], index)
   const rowStyle = { ...style, maxWidth: width - 2 * BORDER_WIDTH }
 
   return <div style={rowStyle}>{content}</div>
-}
+})
 
 const DropdownVirtualizedList = ({
   menuHeight,
