@@ -2,6 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { Calendar } from '@anyvision/anv-icons'
+import { ReactComponent as ErrorCircleIcon } from '../../../assets/svg/ErrorCircleOutlined.svg'
 import { IconButton, TextField } from '../../../'
 import './DateTimeTextField.module.scss'
 import { textFieldPropTypes } from '../../TextField/TextField'
@@ -19,9 +20,11 @@ const DateTimeTextField = ({
   errorMessage,
   helperText,
   ...inputProps
-}) => (
-  <TextField
-    trailingIcon={
+}) => {
+  const renderTrailingIcon = ({ isFocused }) => {
+    if (error && !isFocused && !isOpen) return <ErrorCircleIcon />
+
+    return (
       <IconButton
         className={classNames('datepicker-icon', {
           disabled: disabled,
@@ -32,20 +35,26 @@ const DateTimeTextField = ({
       >
         <Calendar />
       </IconButton>
-    }
-    type='date-time-picker'
-    label={label}
-    defaultValue={value}
-    onChange={onChange}
-    ref={textFieldRef}
-    format={format}
-    value={value}
-    disabled={disabled}
-    error={error}
-    message={(error && errorMessage) || helperText}
-    {...inputProps}
-  />
-)
+    )
+  }
+
+  return (
+    <TextField
+      trailingIcon={renderTrailingIcon}
+      type='date-time-picker'
+      label={label}
+      defaultValue={value}
+      onChange={onChange}
+      ref={textFieldRef}
+      format={format}
+      value={value}
+      disabled={disabled}
+      error={error}
+      message={(error && errorMessage) || helperText}
+      {...inputProps}
+    />
+  )
+}
 
 DateTimeTextField.propTypes = {
   ...textFieldPropTypes,

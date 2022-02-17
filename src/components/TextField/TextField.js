@@ -48,6 +48,7 @@ const TextField = React.forwardRef((props, ref) => {
     label,
     style,
     menuProps,
+    trailingIcon,
     ...otherProps
   } = props
 
@@ -79,11 +80,21 @@ const TextField = React.forwardRef((props, ref) => {
     [disabled, readOnly],
   )
 
-  const setFocusOut = useCallback(() => {
-    if (!disabled && !readOnly) {
-      setActive(false)
-    }
-  }, [disabled, readOnly])
+  const setFocusOut = useCallback(
+    e => {
+      if (
+        isFunction(textFieldRef.current.contains) &&
+        textFieldRef.current.contains(e.target)
+      ) {
+        return
+      }
+
+      if (!disabled && !readOnly) {
+        setActive(false)
+      }
+    },
+    [disabled, readOnly],
+  )
 
   useEffect(() => {
     const ref = textFieldRef && textFieldRef.current
@@ -164,14 +175,13 @@ const TextField = React.forwardRef((props, ref) => {
   }
 
   const renderTrailingIcon = () => {
+    if (typeof trailingIcon === 'function')
+      return trailingIcon({ isFocused: active })
+
     if (type === types.options) {
       return <ArrowSolidDown className={styles.optionsIcon} />
     }
-    return error && type !== types.password ? (
-      <ErrorCircleIcon />
-    ) : (
-      otherProps.trailingIcon
-    )
+    return error && type !== types.password ? <ErrorCircleIcon /> : trailingIcon
   }
 
   const handleMenuClose = () => {

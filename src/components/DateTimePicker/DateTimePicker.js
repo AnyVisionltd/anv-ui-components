@@ -75,6 +75,7 @@ const DateTimePicker = ({
     setIsOpen,
     errorMessage,
     textFieldRef,
+    placeholder: format,
   }
 
   return (
