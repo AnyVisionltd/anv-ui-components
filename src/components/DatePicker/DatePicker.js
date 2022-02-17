@@ -55,6 +55,7 @@ const DatePicker = ({
     setIsOpen,
     errorMessage,
     textFieldRef,
+    placeholder: format,
   }
 
   return (

@@ -62,6 +62,7 @@ const TimePicker = ({
     setIsOpen,
     errorMessage,
     textFieldRef,
+    placeholder: format,
   }
 
   return (
