@@ -36,5 +36,6 @@ export { Dropdown } from './components/Dropdown'
 export { Tree } from './components/Tree'
 export { ToastMessage } from './components/ToastMessage'
 export { Spinner } from './components/Spinner'
+export { StaticInfoTable } from './components/StaticInfoTable'
 
 export { useFormProvider } from './components/FormProvider/useFormProvider'

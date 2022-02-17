@@ -52,6 +52,7 @@
 - New Tree component
 - Added new `<ToastMessage />` component - `src/components/ToastMessage`
 - Added Spinner component
+- Added StaticInfoTable component
 
 ## 1.0.0 - 06-09-2020
 

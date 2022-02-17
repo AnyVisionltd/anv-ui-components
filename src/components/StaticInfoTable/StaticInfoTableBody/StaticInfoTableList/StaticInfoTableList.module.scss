@@ -1,0 +1,6 @@
+@import '~@anyvision/style-guide';
+
+.staticInfoTableList {
+  @extend %av-scrollbar;
+  padding-right: av-space();
+}

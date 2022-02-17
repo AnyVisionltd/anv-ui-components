@@ -1,0 +1,11 @@
+@import '~@anyvision/style-guide';
+
+.staticInfoTableBody {
+  padding: av-space(micro) 0;
+  max-height: 300px;
+
+  &.tableList {
+    @extend %av-scrollbar;
+    overflow-y: auto;
+  }
+}
