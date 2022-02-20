@@ -89,6 +89,7 @@ const Tree = forwardRef(
       handleAddNewFlattenedNodes,
       handleSetSelectedNodesFromKeysArr,
       handleSetSelectedNodesFromKeysObject,
+      isSelectedKeysUpdatedAfterMount,
     } = useFlattenTreeData({
       data: nodes,
       selectedKeys,
@@ -176,6 +177,39 @@ const Tree = forwardRef(
         setAreAllNodesExpanded(areAllExpanded)
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [flattenedNodes])
+
+    useEffect(() => {
+      if (
+        totalSelectedInTree &&
+        !selectedKeys.length &&
+        Object.keys(flattenedNodes).length &&
+        Object.keys(filteredData).length &&
+        isSelectedKeysUpdatedAfterMount.current
+      ) {
+        const { nodesMap } = setNodesSelectedStatus({
+          nodesTree: filteredData,
+          nodesMap: { ...flattenedNodes },
+          isSelected: false,
+          childrenKey,
+          idKey,
+          isChildrenUniqueKeysOverlap,
+        })
+
+        setFlattenedNodes(nodesMap)
+        updateAmountOfSelectedNodesAndChildren(ALL_ROOTS_COMBINED_KEY)
+      }
+    }, [
+      childrenKey,
+      filteredData,
+      flattenedNodes,
+      idKey,
+      isChildrenUniqueKeysOverlap,
+      isSelectedKeysUpdatedAfterMount,
+      selectedKeys,
+      setFlattenedNodes,
+      totalSelectedInTree,
+      updateAmountOfSelectedNodesAndChildren,
+    ])
 
     const handleBulkExpandCollapse = () => {
       if (treeInstance) {
