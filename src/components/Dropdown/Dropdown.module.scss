@@ -241,7 +241,6 @@ $default-selected-height: av-size(sz-56);
     flex-direction: column;
     border-top: none;
     transition: all 0.3s linear;
-    max-height: av-size(sz-240);
     z-index: av-z-index(important);
     background-color: av-color(surface);
     box-shadow: inset 1px 0 av-color(primary), inset -1px -1px av-color(primary);
