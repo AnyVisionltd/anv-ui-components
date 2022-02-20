@@ -148,7 +148,7 @@ const TableHeader = ({
           size={'small'}
           variant={'ghost'}
         >
-          <ManageColumnIcon />
+          <ManageColumnIcon title={getTranslation('hideShowColumns')} />
         </IconButton>
       </div>
     )
