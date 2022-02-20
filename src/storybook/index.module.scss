@@ -41,6 +41,10 @@
   background-color: av-color(success);
 }
 
+.primaryBackgroundColor {
+  background-color: av-color(primary) !important;
+}
+
 .alertColor {
   color: av-color(alert);
 }

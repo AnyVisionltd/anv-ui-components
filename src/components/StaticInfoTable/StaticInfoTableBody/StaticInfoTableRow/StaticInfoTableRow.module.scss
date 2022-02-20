@@ -1,0 +1,30 @@
+@import '~@anyvision/style-guide';
+
+.tableRow {
+  display: flex;
+  gap: av-space(micro);
+  height: fit-content;
+
+  &.row {
+    margin-bottom: av-space(micro);
+  }
+
+  .tableCell {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    width: av-size(sz-144);
+    min-height: av-size(sz-40);
+    max-height: av-size(sz-80);
+    padding: av-space(micro) av-space();
+    background-color: av-color(content, av-opacity(divider));
+    border-radius: av-radius(tidy);
+    color: av-color(purewhite);
+    @extend %av-body2;
+
+    > * {
+      white-space: pre-line;
+      overflow-wrap: break-word;
+    }
+  }
+}
