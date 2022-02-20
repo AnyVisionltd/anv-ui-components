@@ -21,10 +21,6 @@ const StaticInfoTableBody = ({ data, isVirtualized, rowHeight }) => {
     />
   )
 
-  const renderBottomRow = () => {
-    console.log('bottom row ')
-  }
-
   const classes = classNames(styles.staticInfoTableBody, {
     [styles.tableList]: !isVirtualized,
   })
@@ -40,7 +36,6 @@ const StaticInfoTableBody = ({ data, isVirtualized, rowHeight }) => {
       ) : (
         data.map(renderRow)
       )}
-      {!!columns.renderTableBottom && renderBottomRow()}
     </div>
   )
 }

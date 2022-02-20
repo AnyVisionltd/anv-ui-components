@@ -7,7 +7,7 @@ import {
 import { centerDecorator } from '../../utils/storybook/decorators'
 import { Tooltip } from '../Tooltip'
 import StaticInfoTable from './StaticInfoTable'
-import styles from './StaticInfoTable.module.scss'
+import styles from '../../storybook/index.module.scss'
 
 export default {
   title: 'Content/StaticInfoTable',
@@ -127,7 +127,7 @@ const headers = [
     field: 'roles',
     content: 'Role',
     width: '240',
-    className: styles.roles,
+    className: styles.primaryBackgroundColor,
   },
   ...tableFeatureHeaders,
 ]

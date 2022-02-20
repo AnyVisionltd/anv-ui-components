@@ -42,8 +42,7 @@
 }
 
 .primaryBackgroundColor {
-  background-color: av-color(primary);
-  width: av-size(sz-240);
+  background-color: av-color(primary) !important;
 }
 
 .alertColor {
