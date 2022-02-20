@@ -182,8 +182,6 @@ const Tree = forwardRef(
       if (
         totalSelectedInTree &&
         !selectedKeys.length &&
-        Object.keys(flattenedNodes).length &&
-        Object.keys(filteredData).length &&
         isSelectedKeysUpdatedAfterMount.current
       ) {
         const { nodesMap } = setNodesSelectedStatus({
