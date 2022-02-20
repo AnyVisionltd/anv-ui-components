@@ -25,7 +25,6 @@ import { Tooltip } from '../Tooltip'
 import { DropdownVirtualizedList } from './DropdownVirtualizedList'
 import styles from './Dropdown.module.scss'
 
-const maxMenuHeight = 240
 const menuItemHeight = 56
 const defaultSelectedHeight = 56
 const getTranslation = path => languageService.getTranslation(`${path}`)
@@ -61,6 +60,7 @@ const Dropdown = React.forwardRef(
       isSelectedShownInHeader,
       valueRender,
       canBeEmpty,
+      maxMenuHeight,
     },
     ref,
   ) => {
@@ -83,7 +83,7 @@ const Dropdown = React.forwardRef(
     ])
     const menuHeight = Math.min(
       shownOptions.length * menuItemHeight,
-      maxMenuHeight,
+      maxMenuHeight === -1 ? Infinity : maxMenuHeight,
     )
 
     useImperativeHandle(
@@ -536,6 +536,7 @@ Dropdown.defaultProps = {
   onChange: () => {},
   onExceedMaxSelected: () => {},
   canBeEmpty: false,
+  maxMenuHeight: 240,
 }
 
 Dropdown.propTypes = {
@@ -549,6 +550,8 @@ Dropdown.propTypes = {
   keyValue: propTypes.string,
   /** Set if multi selection is enabled. */
   multiple: propTypes.bool,
+  /** Set max menu height. Default is 240, if set to -1, then height is auto. */
+  maxMenuHeight: propTypes.number,
   /** Set max number of items to choose, if used, set multiple to true. */
   maxSelected: propTypes.number,
   /** Called when max selected options is exceeded. */
