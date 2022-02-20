@@ -1,18 +1,29 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import classNames from 'classnames'
+import propTypes from 'prop-types'
 import { StaticInfoTableList } from './StaticInfoTableList'
 import { StaticInfoTableRow } from './StaticInfoTableRow'
+import StaticInfoTableContext from '../StaticInfoTableContext'
 import styles from './StaticInfoTableBody.module.scss'
 
-const StaticInfoTableBody = ({ data, columns, isVirtualized, rowHeight }) => {
-  const renderRow = (row, index) => (
+const StaticInfoTableBody = ({ data, isVirtualized, rowHeight }) => {
+  const {
+    state: { columns },
+  } = useContext(StaticInfoTableContext)
+
+  const renderRow = (row, index, isBottomRow) => (
     <StaticInfoTableRow
       key={index}
       row={row}
       columns={columns}
       isVirtualized={isVirtualized}
+      isBottomRow={isBottomRow}
     />
   )
+
+  const renderBottomRow = () => {
+    console.log('bottom row ')
+  }
 
   const classes = classNames(styles.staticInfoTableBody, {
     [styles.tableList]: !isVirtualized,
@@ -29,8 +40,26 @@ const StaticInfoTableBody = ({ data, columns, isVirtualized, rowHeight }) => {
       ) : (
         data.map(renderRow)
       )}
+      {!!columns.renderTableBottom && renderBottomRow()}
     </div>
   )
+}
+
+StaticInfoTableBody.defaultProps = {
+  rowHeight: 44,
+}
+
+StaticInfoTableBody.propTypes = {
+  /**
+   *  Array of items, each item represent row in the table. <br/>
+   *  The rows rely on <code>columns</code>,
+   *  <code>prop</code> from <code><StaticInfoTable.Header/></code> component.
+   */
+  data: propTypes.arrayOf(propTypes.object).isRequired,
+  /** Whether the table needs to support virtualization. If using virtualized list, the rowHeight is constant. */
+  isVirtualized: propTypes.bool,
+  /** Height of a table row. Should be used if table is virtualized. */
+  rowHeight: propTypes.number,
 }
 
 export default StaticInfoTableBody

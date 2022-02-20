@@ -14,12 +14,17 @@
     align-items: center;
     box-sizing: border-box;
     width: av-size(sz-144);
-    height: av-size(sz-40);
+    min-height: av-size(sz-40);
+    max-height: av-size(sz-80);
     padding: av-space(micro) av-space();
     background-color: av-color(content, av-opacity(divider));
     border-radius: av-radius(tidy);
     color: av-color(purewhite);
-    overflow-wrap: break-word;
     @extend %av-body2;
+
+    > * {
+      white-space: pre-line;
+      overflow-wrap: break-word;
+    }
   }
 }

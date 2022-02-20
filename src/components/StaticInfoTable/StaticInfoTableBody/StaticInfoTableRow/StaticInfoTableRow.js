@@ -19,9 +19,7 @@ const StaticInfoTableRow = ({ row, columns, isVirtualized }) => {
       className={classNames(styles.tableRow, { [styles.row]: !isVirtualized })}
     >
       {columns.map(({ field, columnRender, hide, className, width }) => {
-        if (hide) {
-          return null
-        }
+        if (hide) return null
 
         const style = width ? { width: `${width}px` } : {}
 
