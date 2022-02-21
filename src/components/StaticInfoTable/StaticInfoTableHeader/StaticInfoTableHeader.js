@@ -40,6 +40,7 @@ StaticInfoTableHeader.propTypes = {
    *  <code>field</code>        		- match to the data properties. <br />
    *  <code>content</code>      		- what to render in the header cell.<br />
    *  <code>columnRender</code> 		- custom column render. <code>(cellData, rowData) => {}</code>. <br />
+   *  <code>columnBottomRender</code>- custom render for the bottom of the table. Necessary when call to action is needed.<code>() => {}</code>. <br />
    *  <code>width</code>    			  - set the column width by flex basis. <br />
    *  <code>hide</code>         		- hide the column. <br />
    *  <code>className</code>        - custom style for the column. <br />
@@ -51,6 +52,7 @@ StaticInfoTableHeader.propTypes = {
       content: propTypes.oneOfType([propTypes.string, propTypes.func])
         .isRequired,
       columnRender: propTypes.func,
+      columnBottomRender: propTypes.func,
       width: propTypes.string,
       hide: propTypes.bool,
       className: propTypes.string,

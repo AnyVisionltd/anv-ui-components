@@ -6,6 +6,7 @@ import {
 } from '@anyvision/anv-icons'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import { Tooltip } from '../Tooltip'
+import { Button } from '../Button'
 import StaticInfoTable from './StaticInfoTable'
 import styles from '../../storybook/index.module.scss'
 
@@ -110,8 +111,6 @@ const renderTableItem = value => {
   )
 }
 
-const renderBottom = () => <p>Its bottom!</p>
-
 const featureHeaders = ['watchList', 'liveCameras', 'reports', 'adminSettings']
 const tableFeatureHeaders = featureHeaders.map(header => ({
   field: header,
@@ -119,7 +118,6 @@ const tableFeatureHeaders = featureHeaders.map(header => ({
     header[0].toUpperCase() +
     header.replace(/([a-z])([A-Z])/g, '$1 $2').slice(1),
   columnRender: renderTableItem,
-  columnButtomRender: renderBottom,
 }))
 
 const headers = [
@@ -136,5 +134,44 @@ export const Basic = () => (
   <StaticInfoTable>
     <StaticInfoTable.Header columns={headers} />
     <StaticInfoTable.Body data={rolesPermissions} />
+  </StaticInfoTable>
+)
+
+const renderBottom = () => (
+  <div
+    style={{
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}
+  >
+    <Button value='ghost'>upgrade</Button>
+  </div>
+)
+
+const headersCallToAction = ['team', 'organization', 'enterprise'].map(
+  value => ({
+    field: value,
+    content: value[0].toUpperCase() + value.slice(1),
+    columnBottomRender: renderBottom,
+    width: '240',
+    className: styles.primaryBackgroundColor,
+  }),
+)
+
+const rowCallToAction = {
+  team: 'Text1',
+  organization: 'Text2',
+  enterprise: 'Text3',
+}
+
+const dataCallToAction = new Array(3).fill(rowCallToAction)
+
+export const WithCallToAction = () => (
+  <StaticInfoTable>
+    <StaticInfoTable.Header columns={headersCallToAction} />
+    <StaticInfoTable.Body data={dataCallToAction} />
   </StaticInfoTable>
 )

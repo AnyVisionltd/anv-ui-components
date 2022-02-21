@@ -195,7 +195,7 @@ const Dropdown = React.forwardRef(
           )
         }
       },
-      [isMenuPositionedUpwards, options, prevProps],
+      [isMenuPositionedUpwards, options, prevProps, maxMenuHeight],
     )
 
     const focusOption = direction => {
