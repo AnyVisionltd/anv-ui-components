@@ -17,7 +17,7 @@
     min-height: av-size(sz-40);
     max-height: av-size(sz-80);
     padding: av-space(micro) av-space();
-    background-color: av-color(content, av-opacity(divider));
+    background-color: av-color(primary, av-opacity(disabled));
     border-radius: av-radius(tidy);
     color: av-color(purewhite);
     @extend %av-body2;
