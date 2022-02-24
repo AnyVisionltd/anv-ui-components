@@ -11,15 +11,28 @@ const StaticInfoTableBody = ({ data, isVirtualized, rowHeight }) => {
     state: { columns },
   } = useContext(StaticInfoTableContext)
 
-  const renderRow = (row, index, isBottomRow) => (
+  const renderRow = (row, index, isCustomBottomRow) => (
     <StaticInfoTableRow
       key={index}
       row={row}
       columns={columns}
       isVirtualized={isVirtualized}
-      isBottomRow={isBottomRow}
+      isCustomBottomRow={
+        typeof isCustomBottomRow === 'boolean' && isCustomBottomRow
+      }
     />
   )
+
+  const renderCustomBottomRow = () => {
+    const shouldRenderCustomBottomRow = columns.some(
+      ({ columnBottomRender }) => !!columnBottomRender,
+    )
+    if (!shouldRenderCustomBottomRow) return null
+    const bottomRow = columns.map(
+      ({ columnBottomRender }) => columnBottomRender,
+    )
+    return renderRow(bottomRow, data.length, true)
+  }
 
   const classes = classNames(styles.staticInfoTableBody, {
     [styles.tableList]: !isVirtualized,
@@ -36,6 +49,7 @@ const StaticInfoTableBody = ({ data, isVirtualized, rowHeight }) => {
       ) : (
         data.map(renderRow)
       )}
+      {renderCustomBottomRow()}
     </div>
   )
 }

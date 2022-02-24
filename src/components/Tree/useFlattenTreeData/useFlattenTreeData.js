@@ -220,6 +220,7 @@ const useFlattenTreeData = ({
     handleAddNewFlattenedNodes,
     handleSetSelectedNodesFromKeysArr,
     handleSetSelectedNodesFromKeysObject,
+    isSelectedKeysUpdatedAfterMount,
   }
 }
 

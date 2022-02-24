@@ -61,6 +61,7 @@ const Dropdown = React.forwardRef(
       valueRender,
       canBeEmpty,
       maxMenuHeight,
+      autoHeight,
     },
     ref,
   ) => {
@@ -83,7 +84,7 @@ const Dropdown = React.forwardRef(
     ])
     const menuHeight = Math.min(
       shownOptions.length * menuItemHeight,
-      maxMenuHeight === -1 ? Infinity : maxMenuHeight,
+      autoHeight ? Infinity : maxMenuHeight,
     )
 
     useImperativeHandle(
@@ -195,7 +196,7 @@ const Dropdown = React.forwardRef(
           )
         }
       },
-      [isMenuPositionedUpwards, options, prevProps],
+      [isMenuPositionedUpwards, options, prevProps, maxMenuHeight],
     )
 
     const focusOption = direction => {
@@ -550,8 +551,10 @@ Dropdown.propTypes = {
   keyValue: propTypes.string,
   /** Set if multi selection is enabled. */
   multiple: propTypes.bool,
-  /** Set max menu height. Default is 240, if set to -1, then height is auto. */
+  /** Set max menu height. Default is 240. */
   maxMenuHeight: propTypes.number,
+  /** Set height of menu to auto. */
+  autoHeight: propTypes.bool,
   /** Set max number of items to choose, if used, set multiple to true. */
   maxSelected: propTypes.number,
   /** Called when max selected options is exceeded. */
