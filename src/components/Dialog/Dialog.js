@@ -17,6 +17,7 @@ const Dialog = ({
   disableBackdropClick,
   disableEscapeKeyDown,
   children,
+  id,
   ...otherProps
 }) => {
   const classes = classNames(styles.dialog, className)
@@ -42,7 +43,7 @@ const Dialog = ({
   UseKeyDownListener({ [keymap.ESCAPE]: onEscapeKeyDown }, isOpen)
 
   return (
-    <Portal containerId='dialog-container'>
+    <Portal containerId={id}>
       {isOpen && (
         <div
           className={styles.backdrop}
@@ -64,6 +65,7 @@ Dialog.defaultProps = {
   onClose: () => {},
   disableBackdropClick: false,
   disableEscapeKeyDown: false,
+  id: 'dialog-container',
 }
 
 Dialog.propTypes = {
@@ -79,6 +81,8 @@ Dialog.propTypes = {
   disableBackdropClick: propTypes.bool,
   /** Disable onClose firing when escape button is clicked */
   disableEscapeKeyDown: propTypes.bool,
+  /** Dialog ID */
+  id: propTypes.string,
 }
 
 Dialog.Header = DialogHeader
