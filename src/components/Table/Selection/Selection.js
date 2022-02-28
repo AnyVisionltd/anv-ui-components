@@ -14,6 +14,7 @@ const Selection = ({
   selectBy,
   checkRowSelectable,
   className,
+  hidden,
 }) => {
   const {
     state,
@@ -84,6 +85,8 @@ const Selection = ({
     renderBar && (excludeMode ? totalItems - items.length : items.length)
   const classes = classNames(styles.selectionBar, className)
 
+  if (hidden) return null
+
   return (
     <Animations.Scale isOpen={renderBar}>
       <Portal containerId={'table-selection-bar'}>
@@ -145,6 +148,8 @@ Selection.propTypes = {
   checkRowSelectable: propTypes.func,
   /** Selection bar css customization. */
   className: propTypes.string,
+  /** Whether selection bar is always hidden. */
+  hidden: propTypes.bool,
 }
 
 export default Selection
