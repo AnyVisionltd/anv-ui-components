@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useImperativeHandle } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { Portal, Animations, Checkbox } from '../../../index'
@@ -7,101 +7,116 @@ import styles from './Selection.module.scss'
 import { useTableData } from '../UseTableData'
 import { BulkAction } from './BulkAction'
 
-const Selection = ({
-  onChange,
-  selected,
-  bulkActions,
-  selectBy,
-  checkRowSelectable,
-  className,
-  hidden,
-}) => {
-  const {
-    state,
-    setSelectionActivity,
-    setSelection,
-    deselectAll,
-    setCheckRowSelectable,
-  } = useContext(TableContext)
-  const { totalItems } = state
-  const { items, excludeMode } = state.selection
-  const tableData = useTableData()
+const Selection = React.forwardRef(
+  (
+    {
+      onChange,
+      selected,
+      bulkActions,
+      selectBy,
+      checkRowSelectable,
+      className,
+      hidden,
+    },
+    ref,
+  ) => {
+    const {
+      state,
+      setSelectionActivity,
+      setSelection,
+      deselectAll,
+      setCheckRowSelectable,
+    } = useContext(TableContext)
+    const { totalItems } = state
+    const { items, excludeMode } = state.selection
+    const tableData = useTableData()
 
-  //For data changes we need to make sure that the selected items are
-  // contained within the new data
-  useEffect(() => {
-    const newItems = items.filter(
-      item => !!tableData.find(item2 => item === item2[selectBy]),
+    useImperativeHandle(
+      ref,
+      () => ({
+        get items() {
+          return items
+        },
+      }),
+      [items],
     )
-    const newExcludeMode = tableData.length ? excludeMode : false
-    onChange && onChange({ excludeMode, items: newItems })
-    setSelection({ excludeMode: newExcludeMode, items: newItems })
-    // the logic don't need items and excludeMode in deps array
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setSelection, onChange, tableData])
 
-  useEffect(() => {
-    selected && setSelection(selected)
-  }, [selected, setSelection])
+    //For data changes we need to make sure that the selected items are
+    // contained within the new data
+    useEffect(() => {
+      const newItems = items.filter(
+        item => !!tableData.find(item2 => item === item2[selectBy]),
+      )
+      const newExcludeMode = tableData.length ? excludeMode : false
+      onChange && onChange({ excludeMode, items: newItems })
+      setSelection({ excludeMode: newExcludeMode, items: newItems })
+      // the logic don't need items and excludeMode in deps array
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [setSelection, onChange, tableData])
 
-  useEffect(() => {
-    onChange && onChange(state.selection)
-  }, [state.selection, onChange])
+    useEffect(() => {
+      selected && setSelection(selected)
+    }, [selected, setSelection])
 
-  useEffect(() => {
-    setSelection({ excludeMode: false, items: [] })
-  }, [setSelection, state.filters])
+    useEffect(() => {
+      onChange && onChange(state.selection)
+    }, [state.selection, onChange])
 
-  useEffect(() => {
-    setSelectionActivity(true, selectBy)
-  }, [setSelectionActivity, selectBy])
+    useEffect(() => {
+      setSelection({ excludeMode: false, items: [] })
+    }, [setSelection, state.filters])
 
-  useEffect(() => {
-    checkRowSelectable && setCheckRowSelectable(checkRowSelectable)
-  }, [checkRowSelectable, setCheckRowSelectable])
+    useEffect(() => {
+      setSelectionActivity(true, selectBy)
+    }, [setSelectionActivity, selectBy])
 
-  const renderActions = () => {
-    return (
-      <div className={styles.actionsContainer}>
-        {bulkActions.map(
-          ({ icon, onClick, subMenu, confirmDialogBody }, index) => (
-            <BulkAction
-              icon={icon}
-              onClick={onClick}
-              subMenu={subMenu}
-              confirmDialogBody={confirmDialogBody}
-              key={index}
-            />
-          ),
-        )}
-      </div>
-    )
-  }
-  const handleDeselectAll = () => {
-    deselectAll()
-  }
-  const renderBar = !!bulkActions && (excludeMode || !!items.length)
-  const selectedCount =
-    renderBar && (excludeMode ? totalItems - items.length : items.length)
-  const classes = classNames(styles.selectionBar, className)
+    useEffect(() => {
+      checkRowSelectable && setCheckRowSelectable(checkRowSelectable)
+    }, [checkRowSelectable, setCheckRowSelectable])
 
-  if (hidden) return null
-
-  return (
-    <Animations.Scale isOpen={renderBar}>
-      <Portal containerId={'table-selection-bar'}>
-        <div className={classes}>
-          <Checkbox indeterminate onChange={handleDeselectAll} />
-          <div className={styles.countContainer}>
-            <span className={styles.counter}>{selectedCount}</span>
-            <span className={styles.counterLabel}>Items Selected</span>
-          </div>
-          {!!bulkActions && renderActions()}
+    const renderActions = () => {
+      return (
+        <div className={styles.actionsContainer}>
+          {bulkActions.map(
+            ({ icon, onClick, subMenu, confirmDialogBody }, index) => (
+              <BulkAction
+                icon={icon}
+                onClick={onClick}
+                subMenu={subMenu}
+                confirmDialogBody={confirmDialogBody}
+                key={index}
+              />
+            ),
+          )}
         </div>
-      </Portal>
-    </Animations.Scale>
-  )
-}
+      )
+    }
+    const handleDeselectAll = () => {
+      deselectAll()
+    }
+    const renderBar = !!bulkActions && (excludeMode || !!items.length)
+    const selectedCount =
+      renderBar && (excludeMode ? totalItems - items.length : items.length)
+    const classes = classNames(styles.selectionBar, className)
+
+    if (hidden) return null
+
+    return (
+      <Animations.Scale isOpen={renderBar}>
+        <Portal containerId={'table-selection-bar'}>
+          <div className={classes}>
+            <Checkbox indeterminate onChange={handleDeselectAll} />
+            <div className={styles.countContainer}>
+              <span className={styles.counter}>{selectedCount}</span>
+              <span className={styles.counterLabel}>Items Selected</span>
+            </div>
+            {!!bulkActions && renderActions()}
+          </div>
+        </Portal>
+      </Animations.Scale>
+    )
+  },
+)
 
 Selection.defaultProps = {
   onChange: () => {},
