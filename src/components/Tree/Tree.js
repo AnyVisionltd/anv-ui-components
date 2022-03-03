@@ -196,18 +196,8 @@ const Tree = forwardRef(
         setFlattenedNodes(nodesMap)
         updateAmountOfSelectedNodesAndChildren(ALL_ROOTS_COMBINED_KEY)
       }
-    }, [
-      childrenKey,
-      filteredData,
-      flattenedNodes,
-      idKey,
-      isChildrenUniqueKeysOverlap,
-      isSelectedKeysUpdatedAfterMount,
-      selectedKeys,
-      setFlattenedNodes,
-      totalSelectedInTree,
-      updateAmountOfSelectedNodesAndChildren,
-    ])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [selectedKeys])
 
     const handleBulkExpandCollapse = () => {
       if (treeInstance) {
