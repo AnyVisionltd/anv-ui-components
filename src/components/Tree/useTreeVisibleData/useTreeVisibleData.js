@@ -52,7 +52,7 @@ const useTreeVisibleData = ({
     (data, searchKeyword, parentKey = ALL_ROOTS_COMBINED_KEY) => {
       const setVisible = nodes =>
         nodes.forEach((node, index) => {
-          node.visible = node[labelKey].toLowerCase().startsWith(searchKeyword)
+          node.visible = node[labelKey].toLowerCase().includes(searchKeyword)
           setNodeProperties({ node, parentKey, index })
 
           if (Array.isArray(node[childrenKey])) {
