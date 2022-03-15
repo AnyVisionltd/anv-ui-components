@@ -78,10 +78,11 @@ const TableBody = ({
     )
   }
   const isRowSelected = selectField => {
-    const { isActive, excludeMode, items } = selection
+    const { isActive, excludeMode, items, alwaysSelected } = selection
     if (!isActive) {
       return null
     }
+    if (alwaysSelected.has(selectField)) return true
     let isSelected = items.some(rowId => rowId === selectField)
     return excludeMode ? !isSelected : isSelected
   }

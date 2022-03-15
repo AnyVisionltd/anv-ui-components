@@ -18,6 +18,7 @@ const ProgressWithIndicator = ({
   successMessage,
   inQueue,
   stopped,
+  text,
   ...otherProps
 }) => {
   const progressProps = { value, variant, className, ...otherProps }
@@ -34,7 +35,7 @@ const ProgressWithIndicator = ({
 
   const progressText = (
     <h5 className={styles.progressText}>
-      {!isTiny && getTranslation('processing')} {value}%
+      {!isTiny && text} {value}%
     </h5>
   )
 
@@ -50,6 +51,7 @@ const ProgressWithIndicator = ({
 
 ProgressWithIndicator.defaultProps = {
   className: '',
+  text: getTranslation('processing'),
 }
 
 ProgressWithIndicator.propTypes = {
@@ -73,6 +75,8 @@ ProgressWithIndicator.propTypes = {
   successMessage: propTypes.string,
   /** Action waits to be done.*/
   inQueue: propTypes.bool,
+  /** Custom text to show when action is processed, default is 'processing'. */
+  text: propTypes.string,
 }
 
 export default ProgressWithIndicator
