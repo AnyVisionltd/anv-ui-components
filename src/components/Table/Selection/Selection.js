@@ -17,6 +17,7 @@ const Selection = React.forwardRef(
       checkRowSelectable,
       className,
       hidden,
+      alwaysSelected,
     },
     ref,
   ) => {
@@ -26,6 +27,7 @@ const Selection = React.forwardRef(
       setSelection,
       deselectAll,
       setCheckRowSelectable,
+      setAlwaysSelection,
     } = useContext(TableContext)
     const { totalItems } = state
     const { items, excludeMode } = state.selection
@@ -57,6 +59,10 @@ const Selection = React.forwardRef(
     useEffect(() => {
       selected && setSelection(selected)
     }, [selected, setSelection])
+
+    useEffect(() => {
+      alwaysSelected && setAlwaysSelection(new Set(alwaysSelected))
+    }, [alwaysSelected, setAlwaysSelection])
 
     useEffect(() => {
       onChange && onChange(state.selection)
@@ -165,6 +171,8 @@ Selection.propTypes = {
   className: propTypes.string,
   /** Whether selection bar is always hidden. */
   hidden: propTypes.bool,
+  /** Items that are are always selected. (For controlled selection). */
+  alwaysSelected: propTypes.arrayOf(propTypes.string, propTypes.number),
 }
 
 export default Selection

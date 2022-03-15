@@ -14,6 +14,7 @@ const initialState = {
     items: [],
     excludeMode: false,
     checkRowSelectable: () => true,
+    alwaysSelected: new Set(),
   },
   columnManagement: {
     isActive: false,
@@ -101,6 +102,15 @@ const reducer = (state, action) => {
           ...state.selection,
           items: action.payload.items,
           excludeMode: action.payload.excludeMode,
+        },
+      }
+    case actionTypes.SET_ALWAYS_SELECTION:
+      console.log('set always selection', action.payload)
+      return {
+        ...state,
+        selection: {
+          ...state.selection,
+          alwaysSelected: action.payload,
         },
       }
     case actionTypes.SET_CHECK_ROW_SELECTABLE:
