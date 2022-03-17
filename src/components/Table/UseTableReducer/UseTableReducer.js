@@ -105,7 +105,6 @@ const reducer = (state, action) => {
         },
       }
     case actionTypes.SET_ALWAYS_SELECTION:
-      console.log('set always selection', action.payload)
       return {
         ...state,
         selection: {
