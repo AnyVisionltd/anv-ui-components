@@ -432,6 +432,7 @@ const Dropdown = React.forwardRef(
         <div
           className={styles.selectedContentContainer}
           onClick={getIntoTypeMode}
+          onMouseDown={getIntoTypeMode}
         >
           {selectedOptions.length > 0 && multiple && renderDeleteButton()}
           <div className={styles.valuesContainer} ref={valuesContainerRef}>
