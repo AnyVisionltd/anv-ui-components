@@ -62,6 +62,7 @@ const Dropdown = React.forwardRef(
       canBeEmpty,
       maxMenuHeight,
       autoHeight,
+      onSearch,
     },
     ref,
   ) => {
@@ -217,6 +218,10 @@ const Dropdown = React.forwardRef(
     const handleFilterChange = e => {
       const value = e.target.value
       setFilteredValue(value)
+      if (onSearch) {
+        onSearch(value)
+        return
+      }
 
       if (!value || !value.trim().length) {
         resetToOriginalOptions()
@@ -536,6 +541,7 @@ Dropdown.defaultProps = {
   onMenuClose: () => {},
   onMenuOpen: () => {},
   onChange: () => {},
+  onSearch: null,
   onExceedMaxSelected: () => {},
   canBeEmpty: false,
   maxMenuHeight: 240,
@@ -562,6 +568,8 @@ Dropdown.propTypes = {
   onExceedMaxSelected: propTypes.func,
   /** Called when selected value has changed. */
   onChange: propTypes.func,
+  /** Called when input value has changed. */
+  onSearch: propTypes.func,
   /** Whether to show multiple selected options in header. */
   isSelectedShownInHeader: propTypes.bool,
   /** Whether to enable search functionality. */
