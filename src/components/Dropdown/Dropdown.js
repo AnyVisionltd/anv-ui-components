@@ -541,7 +541,6 @@ Dropdown.defaultProps = {
   onMenuClose: () => {},
   onMenuOpen: () => {},
   onChange: () => {},
-  onSearch: null,
   onExceedMaxSelected: () => {},
   canBeEmpty: false,
   maxMenuHeight: 240,
