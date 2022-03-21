@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 import classNames from 'classnames'
 import DatePicker from '../DatePicker/DatePicker'
 import styles from './DateRangePicker.module.scss'
@@ -15,6 +16,7 @@ const DateRangePicker = ({
   endLabel,
   startErrorMessage,
   endErrorMessage,
+  maxDaysGap,
   ...otherProps
 }) => (
   <div className={classNames(styles.dateRangePicker, className)}>
@@ -23,6 +25,7 @@ const DateRangePicker = ({
       value={start}
       onChange={start => onChange({ start, end })}
       maxDate={end || ''}
+      minDate={maxDaysGap ? moment(end).subtract(maxDaysGap, 'days') : ''}
       disabled={disabled}
       format={format}
       errorMessage={startErrorMessage}
@@ -33,6 +36,7 @@ const DateRangePicker = ({
       value={end}
       onChange={end => onChange({ start, end })}
       minDate={start || ''}
+      maxDate={maxDaysGap ? moment(start).add(maxDaysGap, 'days') : ''}
       disabled={disabled}
       format={format}
       errorMessage={endErrorMessage}
@@ -62,6 +66,8 @@ DateRangePicker.propTypes = {
   format: PropTypes.string,
   /** For css customization. */
   className: PropTypes.string,
+  /** Maximum days gap before start date and end date. */
+  maxDaysGap: PropTypes.number,
 }
 
 DateRangePicker.defaultProps = {
