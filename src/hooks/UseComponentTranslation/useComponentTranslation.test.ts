@@ -9,6 +9,7 @@ describe('UseComponentTranslation - getComponentTranslation & setTranslations', 
       const { getComponentTranslation } = result.current
       let error
       try {
+        //@ts-ignore
         getComponentTranslation('hello')
       } catch (err) {
         error = err
@@ -33,7 +34,7 @@ describe('UseComponentTranslation - getComponentTranslation & setTranslations', 
         setTranslations({ timePicker: { time: 'hour' } })
       })
       setTimeout(() => {
-          expect(currentTranslations.time).toBe('hour')
+        expect(currentTranslations.time).toBe('hour')
       }, 100)
     })
   })
