@@ -7,10 +7,10 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers'
 import { createTheme, ThemeProvider } from '@material-ui/core/styles'
-import languageService from '../../services/language'
 import DateTimeTextField from './DateTimeTextField/DateTimeTextField'
 import { useDebounce } from '../../hooks/UseDebounce'
 import './DatePicker.module.scss'
+import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
 
 const theme = createTheme({
   typography: {
@@ -37,6 +37,8 @@ const DatePicker = ({
   const [isOpen, setIsOpen] = useState(false)
   const [date, setDate] = useState(value || moment())
   const { set } = useDebounce(debounceTime)
+  const { getComponentTranslation } = useComponentTranslation()
+  const DatePickerTranslations = getComponentTranslation('datePicker')
 
   const handleDateChange = date => {
     setDate(date)
@@ -71,7 +73,7 @@ const DatePicker = ({
           disablePast={disablePast}
           disableFuture={disableFuture}
           value={date}
-          label={label}
+          label={label || DatePickerTranslations.date}
           format={format}
           maxDate={maxDate}
           minDate={minDate}
@@ -121,7 +123,6 @@ DatePicker.defaultProps = {
   disablePast: false,
   format: 'DD/MM/yyyy',
   onChange: () => {},
-  label: languageService.getTranslation('date'),
   errorMessage: '',
 }
 

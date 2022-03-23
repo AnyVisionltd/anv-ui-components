@@ -7,11 +7,9 @@ import {
   Hourglass,
   Stop,
 } from '@anyvision/anv-icons'
+import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
 import { Tooltip } from '../Tooltip'
-import languageService from '../../services/language'
 import styles from './ResultIndicator.module.scss'
-
-const getTranslation = word => languageService.getTranslation(word)
 
 const IndicatorContainer = ({ children, content, className }) => (
   <Tooltip content={content}>
@@ -20,43 +18,49 @@ const IndicatorContainer = ({ children, content, className }) => (
 )
 
 const ResultIndicator = props => {
+  const { getComponentTranslation } = useComponentTranslation()
+  const ResultIndicatorTranslations = getComponentTranslation(
+    'resultsIndicator',
+  )
+
   const { isTiny, errorMessage, successMessage } = props
 
   const indicatorsMap = useMemo(
     () => ({
       inQueue: (
         <IndicatorContainer
-          content={getTranslation('inQueue')}
+          content={ResultIndicatorTranslations.inQueue}
           className={styles.inQueueContainer}
         >
-          <Hourglass /> {!isTiny && getTranslation('inQueue')}
+          <Hourglass /> {!isTiny && ResultIndicatorTranslations.inQueue}
         </IndicatorContainer>
       ),
       success: (
         <IndicatorContainer
-          content={successMessage}
+          content={successMessage || ResultIndicatorTranslations.done}
           className={classNames(styles.resultContainer, styles.success)}
         >
-          <CheckCircleFilled /> {!isTiny && getTranslation('done')}
+          <CheckCircleFilled /> {!isTiny && ResultIndicatorTranslations.done}
         </IndicatorContainer>
       ),
       error: (
         <IndicatorContainer
-          content={errorMessage}
+          content={errorMessage || ResultIndicatorTranslations.failed}
           className={classNames(styles.resultContainer, styles.error)}
         >
-          <TimesCircleFilled /> {!isTiny && getTranslation('failed')}
+          <TimesCircleFilled /> {!isTiny && ResultIndicatorTranslations.failed}
         </IndicatorContainer>
       ),
       stopped: (
         <IndicatorContainer
-          content={getTranslation('stopped')}
+          content={ResultIndicatorTranslations.stopped}
           className={classNames(styles.resultContainer, styles.stopped)}
         >
-          <Stop /> {!isTiny && getTranslation('stopped')}
+          <Stop /> {!isTiny && ResultIndicatorTranslations.stopped}
         </IndicatorContainer>
       ),
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [errorMessage, isTiny, successMessage],
   )
 
@@ -72,8 +76,6 @@ const ResultIndicator = props => {
 
 ResultIndicator.defaultProps = {
   className: '',
-  successMessage: getTranslation('completed'),
-  errorMessage: getTranslation('failed'),
 }
 
 ResultIndicator.propTypes = {

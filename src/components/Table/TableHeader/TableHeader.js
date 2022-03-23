@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
+import { useComponentTranslation } from '../../../hooks/UseComponentTranslation'
 import { getCellWidth } from '../utlis'
-import languageService from '../../../services/language'
 import { orderTypes } from '../../../utils/enums/common'
 import { ReactComponent as LongArrowIcon } from '../../../assets/svg/LongArrow.svg'
 import { ReactComponent as ManageColumnIcon } from '../../../assets/svg/ManageColumn.svg'
@@ -11,7 +11,6 @@ import { Checkbox, IconButton } from '../../../index'
 import styles from './TableHeader.module.scss'
 import { useTableData } from '../UseTableData'
 
-const getTranslation = path => languageService.getTranslation(`${path}`)
 const MIN_SELECTION_COUNT = 0
 
 const TableHeader = ({
@@ -23,6 +22,9 @@ const TableHeader = ({
   selectionLabel,
   ...otherProps
 }) => {
+  const { getComponentTranslation } = useComponentTranslation()
+  const TableTranslations = getComponentTranslation('table')
+
   const {
     state,
     setSortBy,
@@ -148,7 +150,7 @@ const TableHeader = ({
           size={'small'}
           variant={'ghost'}
         >
-          <ManageColumnIcon title={getTranslation('hideShowColumns')} />
+          <ManageColumnIcon title={TableTranslations.hideShowColumns} />
         </IconButton>
       </div>
     )
@@ -157,9 +159,9 @@ const TableHeader = ({
   return (
     <div>
       <div className={styles.results}>
-        {totalItems} {resultLabel ?? getTranslation('results')}
+        {totalItems} {resultLabel ?? TableTranslations.results}
         {Boolean(showSelectionLabel) &&
-          ` (${totalSelected} ${selectionLabel ?? getTranslation('selected')})`}
+          ` (${totalSelected} ${selectionLabel ?? TableTranslations.selected})`}
       </div>
       <div role='row' className={classes} {...otherProps}>
         {renderSelection()}

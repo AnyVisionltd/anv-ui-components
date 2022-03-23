@@ -13,7 +13,6 @@ import { Checkbox, InputBase, Tooltip } from '../../'
 import { CheckboxWithIndeterminateState } from './CheckboxWithIndeterminateState'
 import { VirtualizedTreeList } from './VirtualizedTreeList'
 import { EmptyTreeSearch } from './EmptyTreeSearch'
-import languageService from '../../services/language'
 import useTreeVisibleData from './useTreeVisibleData'
 import useFlattenTreeData from './useFlattenTreeData'
 import { RootNode } from './RootNode'
@@ -27,9 +26,8 @@ import {
   getNodeParents,
   organizeSelectedKeys,
 } from './utils'
+import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
 import styles from './Tree.module.scss'
-
-const getTranslation = path => languageService.getTranslation(`${path}`)
 
 const Tree = forwardRef(
   (
@@ -60,10 +58,14 @@ const Tree = forwardRef(
     },
     ref,
   ) => {
+    const { getComponentTranslation } = useComponentTranslation()
+    const TreeTranslations = getComponentTranslation('tree')
+    const defaultDisplayLabels = [TreeTranslations.item, TreeTranslations.items]
     const [treeInstance, setTreeInstance] = useState(null)
     const [areAllNodesExpanded, setAreAllNodesExpanded] = useState(false)
     const nodesContainerRef = useRef()
-    const [singularNounLabel, pluralNounLabel] = displayLabels
+    const [singularNounLabel, pluralNounLabel] =
+      displayLabels || defaultDisplayLabels
     const keyValues = { childrenKey, labelKey, idKey }
 
     const {
@@ -229,7 +231,7 @@ const Tree = forwardRef(
 
     const renderSearchInput = () => (
       <InputBase
-        placeholder={placeholder}
+        placeholder={placeholder || TreeTranslations.search}
         className={styles.searchInput}
         trailingIcon={<Search />}
         trailingIconClassName={styles.searchIcon}
@@ -248,11 +250,15 @@ const Tree = forwardRef(
             id='bulk-select-tree'
           />
           <label htmlFor='bulk-select-tree' className={styles.bulkSelectLabel}>
-            {getTranslation(areAllNodesSelected ? 'selectNone' : 'selectAll')}
+            {areAllNodesSelected
+              ? TreeTranslations.selectNone
+              : TreeTranslations.selectAll}
           </label>
         </div>
         <div className={styles.bulkExpand} onClick={handleBulkExpandCollapse}>
-          {getTranslation(areAllNodesExpanded ? 'collapseAll' : 'expandAll')}
+          {areAllNodesExpanded
+            ? TreeTranslations.collapseAll
+            : TreeTranslations.expandAll}
         </div>
       </div>
     )
@@ -271,7 +277,7 @@ const Tree = forwardRef(
     const getParentNodeInfo = (totalChildren, totalSelected) =>
       `${totalChildren} ${
         totalChildren === 1 ? singularNounLabel : pluralNounLabel
-      } | ${totalSelected} ${getTranslation('selected')}`
+      } | ${totalSelected} ${TreeTranslations.selected}`
 
     const renderParentNode = (
       node,
@@ -401,7 +407,7 @@ const Tree = forwardRef(
             : emptyListTypes.NO_ITEMS_IN_LIST
         }
         onClearSearch={resetSearchData}
-        noItemsMessage={noItemsMessage}
+        noItemsMessage={noItemsMessage || TreeTranslations.listIsEmpty}
       />
     )
 
@@ -452,14 +458,11 @@ Tree.defaultProps = {
   onSearch: () => {},
   onSelect: () => {},
   onExpand: () => {},
-  placeholder: getTranslation('search'),
-  displayLabels: [getTranslation('item'), getTranslation('items')],
   isSearchable: true,
   isBulkActionsEnabled: true,
   rootNodeActions: [],
   loadMoreData: () => {},
   maxNestingLevel: -1,
-  noItemsMessage: getTranslation('listIsEmpty'),
   childrenKey: 'children',
   labelKey: 'label',
   idKey: 'key',

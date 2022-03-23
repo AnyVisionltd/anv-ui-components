@@ -2,13 +2,25 @@ import React, { useEffect, useCallback, useRef } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { TimesThick } from '@anyvision/anv-icons'
-import languageService from '../../services/language'
 import { IconButton, Portal, Animations, Button } from '../../index'
 import toastMessageTypeMapper from './ToastMessage.utils'
+import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
 import styles from './ToastMessage.module.scss'
 
-const ToastMessage = ({ message, type, isUndo, undoCallback, closeIcon, isOpen, className, onClose, hideTimeout }) => {
+const ToastMessage = ({
+  message,
+  type,
+  isUndo,
+  undoCallback,
+  closeIcon,
+  isOpen,
+  className,
+  onClose,
+  hideTimeout,
+}) => {
   const timerHide = useRef()
+  const { getComponentTranslation } = useComponentTranslation()
+  const ToastMessageTranslations = getComponentTranslation('toastMessage')
 
   const setHideTimeout = useCallback(() => {
     if (!hideTimeout) {
@@ -31,11 +43,12 @@ const ToastMessage = ({ message, type, isUndo, undoCallback, closeIcon, isOpen, 
     }
   }, [isOpen, hideTimeout, setHideTimeout])
 
-
   const toastMessageTheme = toastMessageTypeMapper(type)
 
   const renderLeadingIcon = () => (
-    <span className={classNames(styles.leadingIcon, toastMessageTheme.fillColor)}>
+    <span
+      className={classNames(styles.leadingIcon, toastMessageTheme.fillColor)}
+    >
       {toastMessageTheme.icon}
     </span>
   )
@@ -56,17 +69,27 @@ const ToastMessage = ({ message, type, isUndo, undoCallback, closeIcon, isOpen, 
   }
 
   const renderUndoButton = () =>
-      isUndo &&
-      <Button className={styles.undoButton} onClick={undoCallback} variant='ghost'
-              size='small'>{ languageService.getTranslation('undo') }</Button>
+    isUndo && (
+      <Button
+        className={styles.undoButton}
+        onClick={undoCallback}
+        variant='ghost'
+        size='small'
+      >
+        {ToastMessageTranslations.undo}
+      </Button>
+    )
 
   const classes = classNames(styles.toastMessage, className, styles[type])
 
   return (
     <Animations.Slide isOpen={isOpen}>
       <Portal containerId='toastMessage-portal' className={styles.portal}>
-        <div className={classes} onMouseEnter={() => clearTimeout(timerHide.current)}
-             onMouseLeave={setHideTimeout}>
+        <div
+          className={classes}
+          onMouseEnter={() => clearTimeout(timerHide.current)}
+          onMouseLeave={setHideTimeout}
+        >
           <div className={styles.messageContainer}>
             {renderLeadingIcon()}
             <span>{message}</span>

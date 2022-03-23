@@ -1,11 +1,9 @@
 import React from 'react'
 import propTypes from 'prop-types'
+import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
 import { ResultIndicator } from '../ResultIndicator'
 import { Progress } from '../Progress'
-import languageService from '../../services/language'
 import styles from './ProgressWithIndicator.module.scss'
-
-const getTranslation = word => languageService.getTranslation(word)
 
 const ProgressWithIndicator = ({
   value,
@@ -21,6 +19,11 @@ const ProgressWithIndicator = ({
   text,
   ...otherProps
 }) => {
+  const { getComponentTranslation } = useComponentTranslation()
+  const ProgressWithIndicatorTranslations = getComponentTranslation(
+    'resultsIndicator',
+  )
+
   const progressProps = { value, variant, className, ...otherProps }
   const feedbackProps = {
     isTiny,
@@ -35,7 +38,8 @@ const ProgressWithIndicator = ({
 
   const progressText = (
     <h5 className={styles.progressText}>
-      {!isTiny && text} {value}%
+      {!isTiny && (text || ProgressWithIndicatorTranslations.processing)}{' '}
+      {value}%
     </h5>
   )
 
@@ -51,7 +55,6 @@ const ProgressWithIndicator = ({
 
 ProgressWithIndicator.defaultProps = {
   className: '',
-  text: getTranslation('processing'),
 }
 
 ProgressWithIndicator.propTypes = {

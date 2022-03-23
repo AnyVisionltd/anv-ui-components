@@ -1,15 +1,13 @@
 import React, { useContext, useEffect, useRef } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
+import { useComponentTranslation } from '../../../hooks/UseComponentTranslation'
 import { ReactComponent as NoResultsIcon } from '../../../assets/svg/NoResults.svg'
-import languageService from '../../../services/language'
 import { InfiniteList } from '../../../index'
 import TableContext from '../TableContext'
 import { TableRow } from './TableRow'
 import { useTableData } from '../UseTableData'
 import styles from './TableBody.module.scss'
-
-const getTranslation = path => languageService.getTranslation(`${path}`)
 
 const TableBody = ({
   data,
@@ -25,6 +23,9 @@ const TableBody = ({
 }) => {
   const listRef = useRef()
   const containerRef = useRef()
+
+  const { getComponentTranslation } = useComponentTranslation()
+  const TableTranslations = getComponentTranslation('table')
 
   const {
     state,
@@ -113,10 +114,10 @@ const TableBody = ({
     <div className={styles.noResults}>
       <NoResultsIcon />
       <div className={styles.noResultsTitle}>
-        {getTranslation('noResultsFound')}
+        {TableTranslations.noResultsFound}
       </div>
       <div className={styles.noResultsMessage}>
-        {getTranslation('noResultsMessage')}
+        {TableTranslations.noResultsMessage}
       </div>
     </div>
   )
