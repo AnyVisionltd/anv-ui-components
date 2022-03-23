@@ -1,0 +1,43 @@
+@import '~@anyvision/style-guide';
+
+.menuItem {
+  cursor: pointer;
+  max-width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 av-space();
+  transition: all 0.3s linear;
+  min-height: av-size(sz-56);
+
+  .content {
+    @extend %av-body1;
+    color: av-color(content);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &.isDisabled {
+    opacity: av-opacity(disabled);
+    cursor: default;
+  }
+
+  &:active,
+  &:hover {
+    background-color: av-color(primary, av-opacity(divider));
+  }
+
+  &.isSelected {
+    background-color: av-color(primary, av-opacity(disabled));
+    background-image: none;
+  }
+
+  &.isFocusedByKeyboard {
+    background-color: av-color(content, av-opacity(divider));
+  }
+
+  .checkbox {
+    min-width: av-size(sz-32);
+  }
+}
