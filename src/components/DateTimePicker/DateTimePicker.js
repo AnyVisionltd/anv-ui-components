@@ -9,8 +9,8 @@ import {
 import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 import { DateTimeTextField } from '../DatePicker'
 import { useDebounce } from '../../hooks/UseDebounce'
-import './DateTimePicker.module.scss'
 import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
+import './DateTimePicker.module.scss'
 
 const MATERIAL_UI_THEME = {
   typography: {
