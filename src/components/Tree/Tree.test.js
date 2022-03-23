@@ -1,10 +1,7 @@
 import React from 'react'
 import { render, fireEvent, waitFor, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import languageService from '../../services/language'
 import Tree from './Tree'
-
-const getTranslation = path => languageService.getTranslation(`${path}`)
 
 jest.mock('react-virtualized-auto-sizer', () => ({ children }) =>
   children({ height: 480, width: 100 }),
@@ -110,11 +107,9 @@ describe('<Tree/>', () => {
         }),
       )
       await waitFor(() =>
-        expect(getByText(getTranslation('noResultsFound'))).toBeInTheDocument(),
+        expect(getByText('No Results Found')).toBeInTheDocument(),
       )
-      await waitFor(() =>
-        expect(getByText(getTranslation('clearSearch'))).toBeInTheDocument(),
-      )
+      await waitFor(() => expect(getByText('Clear')).toBeInTheDocument())
     })
 
     test('search input should not appear when isSearchable is false', () => {
@@ -125,6 +120,6 @@ describe('<Tree/>', () => {
 
   test('bulk actions area should not appear when isBulkActionEnabled is false', () => {
     const { getByText } = render(<Tree isBulkActionEnabled={false} />)
-    expect(() => getByText(getTranslation('expandAll'))).toThrow()
+    expect(() => getByText('Expand All')).toThrow()
   })
 })
