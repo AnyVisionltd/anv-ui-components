@@ -84,14 +84,14 @@ const useComponentTranslation = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sharedState])
 
-  const setTranslations = (newTranslations: Translations) => {
+  const setTranslations = (newTranslations: Partial<Translations>) => {
     sharedState = {...sharedState, ...newTranslations}
     _setTranslations({...sharedState})
   }
 
   const getComponentTranslation = (
     key: keyof Translations,
-  ): Translations[keyof Translations] => {
+  )=> {
     if (!translations[key])
       throw new Error(`${key} does not exist in translations`)
     return translations[key]
