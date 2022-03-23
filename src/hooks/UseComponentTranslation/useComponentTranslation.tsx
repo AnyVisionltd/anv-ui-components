@@ -85,8 +85,8 @@ const useComponentTranslation = () => {
   }, [sharedState])
 
   const setTranslations = (newTranslations: Translations) => {
-    sharedState = newTranslations
-    _setTranslations(newTranslations)
+    sharedState = {...sharedState, ...newTranslations}
+    _setTranslations({...sharedState})
   }
 
   const getComponentTranslation = (
