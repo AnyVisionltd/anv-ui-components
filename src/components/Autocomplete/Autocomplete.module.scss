@@ -42,7 +42,6 @@ $default-selected-height: av-size(sz-56);
     border-radius: av-radius(tidy);
     padding: 0 av-space() 2px;
     height: $default-selected-height;
-    min-height: $default-selected-height;
     width: 100%;
     display: flex;
     align-items: center;

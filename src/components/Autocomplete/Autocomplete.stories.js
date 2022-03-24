@@ -4,7 +4,7 @@ import { Chip } from '../Chip'
 import Autocomplete from './Autocomplete'
 
 export default {
-  title: 'Content/Autocomplete2',
+  title: 'Content/Autocomplete',
   component: Autocomplete,
   decorators: [centerDecorator],
 }
