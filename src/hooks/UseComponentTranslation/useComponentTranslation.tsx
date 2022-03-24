@@ -77,10 +77,6 @@ const useComponentTranslation = () => {
 
   useEffect(() => {
     _setTranslations(sharedState)
-  }, [])
-
-  useEffect(() => {
-    _setTranslations(sharedState)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sharedState])
 

@@ -11,9 +11,9 @@ export interface Translations {
     no: string
   }
   dialogWizard: {
-    finish: string // finish,
-    cancel: string // cancel,
-    next: string // next
+    finish: string
+    cancel: string
+    next: string
     step: string
     stepOutOf: string
   }
