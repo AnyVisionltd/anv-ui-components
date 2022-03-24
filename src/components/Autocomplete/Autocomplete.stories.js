@@ -1,23 +1,24 @@
 import React, { useState } from 'react'
 import { centerDecorator } from '../../utils/storybook/decorators'
+import { Chip } from '../Chip'
 import Autocomplete from './Autocomplete'
 
 export default {
-  title: 'Content/Autocomplete',
+  title: 'Content/Autocomplete2',
   component: Autocomplete,
   decorators: [centerDecorator],
 }
 
 const containerStyle = {
   display: 'flex',
+  flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
   height: '100%',
-  marginBottom: '300px',
+  marginBottom: '240px',
 }
 
 const results = [
-  { value: 'VERY LONG TEXT TO SEE TOOLTIP - VERY LONGgfdgfdg  ', id: 1222 },
   { value: 'Banana', id: 1 },
   { value: 'Apple', id: 2 },
   { value: 'Mango', id: 3, disabled: true },
@@ -30,20 +31,10 @@ const results = [
   { value: 'Strawberry', id: 10 },
   { value: 'Watermelon', id: 11 },
   { value: 'Kiwi', id: 12 },
-  { value: 'Kiwi2', id: 12 },
-  { value: 'Kiwi3', id: 1210 },
-  { value: 'Kiwi4', id: 129 },
-  { value: 'Kiwi5', id: 128 },
-  { value: 'Kiwi6', id: 127 },
-  { value: 'Kiwi7', id: 126 },
-  { value: 'Kiwi9', id: 125 },
-  { value: 'Kiwi10', id: 124 },
-  { value: 'Kiwi11', id: 123 },
-  { value: 'Kiwi12', id: 122 },
-  { value: 'Kiwi13', id: 121 },
+  { value: 'Very very very very very very very long paragraph', id: 13 },
 ]
 
-export const Basic = () => {
+const useMock = () => {
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(false)
 
@@ -53,25 +44,53 @@ export const Basic = () => {
       const filterdResults = results.filter(result =>
         result.value.toLowerCase().includes(value.toLowerCase()),
       )
-      console.log('filterdResults', filterdResults)
       setItems(filterdResults)
       setLoading(false)
     }, 500)
   }
 
-  const handleSearchChange = value => {
-    console.log('value', value)
-    fetchResults(value)
-  }
+  return [fetchResults, items, loading]
+}
+
+export const Basic = () => {
+  const [selected, setSelected] = useState(null)
+  const [fetchResults, items, loading] = useMock()
 
   return (
     <div style={containerStyle}>
       <Autocomplete
         options={items}
-        onSearchChange={handleSearchChange}
         loading={loading}
-        onChange={console.log}
+        onSearch={fetchResults}
+        onSelect={setSelected}
       />
+      <p>Selected: {JSON.stringify(selected)}</p>
+    </div>
+  )
+}
+
+export const ValueRender = () => {
+  const [selected, setSelected] = useState(null)
+  const [fetchResults, items, loading] = useMock()
+
+  return (
+    <div style={containerStyle}>
+      <Autocomplete
+        options={items}
+        loading={loading}
+        onSearch={fetchResults}
+        onSelect={setSelected}
+        valueRender={value => <Chip label={value} />}
+      />
+      <p>Selected: {JSON.stringify(selected)}</p>
+    </div>
+  )
+}
+
+export const Disabled = () => {
+  return (
+    <div style={containerStyle}>
+      <Autocomplete options={[]} disabled />
     </div>
   )
 }

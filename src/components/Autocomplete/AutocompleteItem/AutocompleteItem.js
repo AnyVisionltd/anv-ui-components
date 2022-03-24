@@ -1,16 +1,15 @@
 import React, { useRef, memo } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import { Tooltip, Checkbox } from '../../../index'
+import { Tooltip } from '../../../index'
 import { useIsOverflowing } from '../../../hooks'
-import styles from './DropdownItem.module.scss'
+import styles from './Autocomplete.module.scss'
 
-const DropdownItem = ({
+const Autocomplete = ({
   option,
   displayValue,
   isFocusedByKeyboard,
   onClick,
-  multiple,
   isSelected,
   valueRender,
 }) => {
@@ -24,13 +23,6 @@ const DropdownItem = ({
   return (
     <Tooltip content={option[displayValue]} show={useIsOverflowing(labelRef)}>
       <li className={classes} onClick={onClick}>
-        {multiple && (
-          <Checkbox
-            checked={isSelected}
-            onClick={onClick}
-            className={styles.checkbox}
-          />
-        )}
         <div ref={labelRef} className={styles.content}>
           {valueRender
             ? valueRender(option[displayValue], option)
@@ -41,15 +33,13 @@ const DropdownItem = ({
   )
 }
 
-DropdownItem.propTypes = {
+Autocomplete.propTypes = {
   /** Dropdown option. */
   option: propTypes.object,
   /** Value to display from option. */
   displayValue: propTypes.string,
   /** Determines if the dropdown item is focused by user's keyboard. */
   isFocusedByKeyboard: propTypes.bool,
-  /** Set if multi selection is enabled. */
-  multiple: propTypes.bool,
   /** A callback triggered whenever the user clicked on the item. */
   onClick: propTypes.func,
   /** Whether the option is selected or not. */
@@ -60,4 +50,4 @@ DropdownItem.propTypes = {
   menuRef: propTypes.shape({ current: propTypes.instanceOf(Element) }),
 }
 
-export default memo(DropdownItem)
+export default memo(Autocomplete)

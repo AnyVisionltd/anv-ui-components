@@ -12,8 +12,8 @@ import { ArrowUp, TimesCircleFilled, Loader } from '@anyvision/anv-icons'
 import keymap from '../../utils/enums/keymap'
 import { findScrollerNodeBottom } from '../../utils'
 import { InputBase, IconButton } from '../../index'
-import { DropdownItem } from './DropdownItem'
-import { EmptyDropdownMenu } from './EmptyDropdownMenu'
+import { AutocompleteItem } from './AutocompleteItem'
+import { EmptyAutocompleteMenu } from './EmptyAutocompleteMenu'
 import {
   useClickOutsideListener,
   usePrevious,
@@ -22,11 +22,10 @@ import {
 } from '../../hooks'
 import languageService from '../../services/language'
 import { Tooltip } from '../Tooltip'
-import { DropdownVirtualizedList } from './DropdownVirtualizedList'
+import { AutocompleteVirtualizedList } from './AutocompleteVirtualizedList'
 import styles from './Autocomplete.module.scss'
 
 const menuItemHeight = 56
-const defaultSelectedHeight = 56
 const getTranslation = path => languageService.getTranslation(`${path}`)
 
 const getMenuPlacement = ({ menuHeight, containerElement }) => {
@@ -42,11 +41,11 @@ const Autocomplete = React.forwardRef(
   (
     {
       options,
-      defaultOption,
+      defaultValue,
       displayValue,
       keyValue,
       className,
-      onChange,
+      onSelect,
       placeholder,
       label,
       disabled,
@@ -56,13 +55,14 @@ const Autocomplete = React.forwardRef(
       valueRender,
       maxMenuHeight,
       autoHeight,
-      onSearchChange,
+      onSearch,
       loading,
     },
     ref,
   ) => {
+    const [isTypeMode, setIsTypeMode] = useState(false)
     const [filteredValue, setFilteredValue] = useState('')
-    const [selectedOption, setSelectedOption] = useState(defaultOption)
+    const [selected, setSelected] = useState(defaultValue)
     const [showMenu, setShowMenu] = useState(false)
     const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1)
     const [isMenuPositionedUpwards, setIsMenuPositionedUpwards] = useState(null)
@@ -70,7 +70,7 @@ const Autocomplete = React.forwardRef(
     const menuRef = useRef(null)
     const inputRef = useRef(null)
     const selectedContainerRef = useRef(null)
-    const inputWrapperRef = useRef(null)
+    const valuesContainerRef = useRef(null)
     const [selectedValueElement, setSelectedValueElement] = useState(null)
 
     const menuHeight = Math.min(
@@ -81,14 +81,14 @@ const Autocomplete = React.forwardRef(
     useImperativeHandle(
       ref,
       () => ({
-        setOptions: newOptions => {
+        setOptions: () => {
           setFilteredValue('')
         },
       }),
       [],
     )
 
-    const selectedElementContent = selectedOption?.[displayValue]
+    const selectedElementContent = selected?.[displayValue]
 
     const openMenu = () => {
       if (showMenu || disabled) return
@@ -104,6 +104,17 @@ const Autocomplete = React.forwardRef(
 
     const toggleMenu = () => (showMenu ? closeMenu() : openMenu())
 
+    const getIntoTypeMode = () => {
+      if (disabled) return
+      setIsTypeMode(true)
+      !showMenu && openMenu()
+    }
+
+    const getOffTypeMode = () => {
+      isTypeMode && setIsTypeMode(false)
+      filteredValue.length && setFilteredValue('')
+    }
+
     const resetFocusedOptionIndex = () => setFocusedOptionIndex(-1)
 
     const resetFilteredValue = () => {
@@ -112,19 +123,19 @@ const Autocomplete = React.forwardRef(
 
     useClickOutsideListener(() => {
       closeMenu()
+      getOffTypeMode()
       resetFocusedOptionIndex()
     }, containerRef)
 
-    const prevProps = usePrevious({ defaultOption })
+    const prevProps = usePrevious({ defaultValue })
 
     useEffect(() => {
       if (
-        JSON.stringify(prevProps?.defaultOption) !==
-        JSON.stringify(defaultOption)
+        JSON.stringify(prevProps?.defaultValue) !== JSON.stringify(defaultValue)
       ) {
-        setSelectedOption(defaultOption)
+        setSelected(defaultValue)
       }
-    }, [defaultOption, prevProps])
+    }, [defaultValue, prevProps])
 
     const handleMenuPlacement = useCallback(
       node => {
@@ -159,32 +170,25 @@ const Autocomplete = React.forwardRef(
       }
     }
 
-    const handleFilterChange = e => {
-      const value = e.target.value
-      openMenu()
+    const handleFilterChange = ({ target: { value } }) => {
       setFilteredValue(value)
-      onSearchChange(value)
+      onSearch(value)
     }
 
     const handleItemClick = clickedOption => {
       if (!clickedOption || clickedOption.disabled) return
 
-      const { [displayValue]: value } = clickedOption
-
+      getOffTypeMode()
       closeMenu()
       resetFocusedOptionIndex()
-      setSelectedValueElement(inputRef)
-      setSelectedOption(clickedOption)
-      setFilteredValue(value)
-      onChange(clickedOption)
+
+      setSelected(clickedOption)
+      onSelect(clickedOption)
     }
 
-    useEffect(() => {}, [filteredValue])
-
-    const emptySelectedOptions = () => {
-      setSelectedOption(null)
-      onChange(null)
-      setFilteredValue('')
+    const emptySelected = () => {
+      setSelected(null)
+      onSelect(null)
     }
 
     const selectOption = optionIndex => handleItemClick(options[optionIndex])
@@ -194,10 +198,16 @@ const Autocomplete = React.forwardRef(
         case keymap.ENTER:
           if (focusedOptionIndex === -1) return
           selectOption(focusedOptionIndex)
+          resetFilteredValue()
           break
         case keymap.ESCAPE:
           closeMenu()
+          getOffTypeMode()
           resetFocusedOptionIndex()
+          break
+        case keymap.BACKSPACE:
+          if (filteredValue) return
+          emptySelected()
           break
         case keymap.ARROW_UP:
           focusOption('up')
@@ -210,39 +220,46 @@ const Autocomplete = React.forwardRef(
       }
     }
 
+    const renderValues = () => {
+      if (isTypeMode) return null
+      if (!selected) {
+        if (isTypeMode) return null
+        return (
+          <p className={styles.placeholder} onClick={getIntoTypeMode}>
+            {placeholder}
+          </p>
+        )
+      }
+
+      return (
+        <p
+          className={styles.selectedValue}
+          onClick={getIntoTypeMode}
+          ref={setSelectedValueElement}
+        >
+          {selectedElementContent}
+        </p>
+      )
+    }
+
     const renderButtons = () => (
       <div className={styles.icons}>
-        {}
         {loading && (
           <div className={classNames(styles.iconButton, styles.loadingIcon)}>
             <Loader />
           </div>
         )}
-        {selectedOption && (
-          <IconButton
-            onClick={emptySelectedOptions}
-            className={classNames(
-              styles.iconButton,
-              styles.clearBtn,
-              styles.clearSelected,
-            )}
-            variant='ghost'
-          >
-            <TimesCircleFilled />
-          </IconButton>
-        )}
-        {!loading && !selectedOption && (
-          <IconButton
-            variant='ghost'
-            onClick={resetFilteredValue}
-            aria-label='clear input'
-            disabled={disabled}
-            className={classNames(styles.iconButton, styles.clearBtn)}
-            style={{ visibility: filteredValue.length ? 'visible' : 'hidden' }}
-          >
-            <TimesCircleFilled />
-          </IconButton>
-        )}
+        <IconButton
+          disabled={disabled}
+          onClick={filteredValue.length ? resetFilteredValue : emptySelected}
+          className={classNames(styles.iconButton, styles.clearBtn)}
+          variant='ghost'
+          style={{
+            visibility: filteredValue.length || selected ? 'visible' : 'hidden',
+          }}
+        >
+          <TimesCircleFilled />
+        </IconButton>
         <IconButton
           variant='ghost'
           onClick={toggleMenu}
@@ -257,24 +274,18 @@ const Autocomplete = React.forwardRef(
       </div>
     )
 
+    const determineInputPlaceholder = () =>
+      selected ? selected[displayValue] : placeholder
+
+    const determineInputWidth = () =>
+      `${valuesContainerRef.current.offsetWidth}px`
+
     const handleInputKeyPress = () =>
       (inputRef.current.style.width = `${
         (filteredValue.length
           ? filteredValue.length
           : inputRef.current.placeholder.length) + 5
       }ch`)
-
-    const handleInputFocus = e => {
-      const value = e.target.value
-      openMenu()
-      onSearchChange(value)
-    }
-
-    const handleInputBlur = () => {
-      if (selectedOption) {
-        setFilteredValue(selectedOption.value)
-      }
-    }
 
     const renderHeaderContainer = () => (
       <div
@@ -286,70 +297,70 @@ const Autocomplete = React.forwardRef(
         <label className={classNames({ [styles.labelColor]: showMenu })}>
           {label}
         </label>
-        <div className={styles.selectedContentContainer} ref={inputWrapperRef}>
-          <InputBase
-            value={filteredValue}
-            onChange={handleFilterChange}
-            className={styles.inputBase}
-            onKeyDown={handleKeyDown}
-            onKeyPress={handleInputKeyPress}
-            onKeyUp={handleInputKeyPress}
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-            ref={inputRef}
-            placeholder={placeholder}
-          />
+        <div
+          className={styles.selectedContentContainer}
+          onClick={getIntoTypeMode}
+          onMouseDown={getIntoTypeMode}
+        >
+          <div className={styles.valuesContainer} ref={valuesContainerRef}>
+            {renderValues()}
+            {isTypeMode && (
+              <InputBase
+                autoFocus
+                value={filteredValue}
+                onChange={handleFilterChange}
+                className={styles.inputBase}
+                onBlur={getOffTypeMode}
+                onKeyDown={handleKeyDown}
+                placeholder={determineInputPlaceholder()}
+                ref={inputRef}
+                style={{ width: determineInputWidth() }}
+                onKeyPress={handleInputKeyPress}
+                onKeyUp={handleInputKeyPress}
+              />
+            )}
+          </div>
         </div>
         {renderButtons()}
       </div>
     )
 
     const renderOption = (option, index) => (
-      <DropdownItem
+      <AutocompleteItem
         option={option}
         displayValue={displayValue}
         key={option[keyValue]}
         onClick={() => handleItemClick(option)}
-        isSelected={selectOption[keyValue] === option[keyValue]}
-        isFocusedByKeyboard={index === focusedOptionIndex}
+        isSelected={selected?.[keyValue] === option[keyValue]}
+        isFocusedByKeyboard={isTypeMode && index === focusedOptionIndex}
         valueRender={valueRender}
       />
     )
 
-    const renderOptions = () =>
-      !loading && (
-        <div
-          className={classNames(styles.menuContainer, {
-            [styles.isPositionedUpwards]: isMenuPositionedUpwards,
-          })}
-          ref={menuRef}
-          style={{
-            height: options.length ? `${menuHeight}px` : undefined,
-          }}
-        >
-          {!loading && filteredValue && !options.length ? (
-            <EmptyDropdownMenu
-              noOptionsMessage={noOptionsMessage}
-              searchValue={filteredValue}
-            />
-          ) : (
-            <DropdownVirtualizedList
-              menuHeight={menuHeight}
-              options={options}
-              rowHeight={menuItemHeight}
-              renderRow={renderOption}
-              focusedOptionIndex={focusedOptionIndex}
-            />
-          )}
-        </div>
-      )
-
-    const showTooltip = ref => {
-      if (ref && ref.current) {
-        return ref.current.clientWidth < ref.current.scrollWidth
-      }
-      return false
-    }
+    const renderOptions = () => (
+      <div
+        className={classNames(styles.menuContainer, {
+          [styles.isPositionedUpwards]: isMenuPositionedUpwards,
+        })}
+        ref={menuRef}
+        style={{ height: options.length ? `${menuHeight}px` : undefined }}
+      >
+        {!options.length && filteredValue && !loading ? (
+          <EmptyAutocompleteMenu
+            noOptionsMessage={noOptionsMessage}
+            searchValue={filteredValue}
+          />
+        ) : (
+          <AutocompleteVirtualizedList
+            menuHeight={menuHeight}
+            options={options}
+            rowHeight={menuItemHeight}
+            renderRow={renderOption}
+            focusedOptionIndex={focusedOptionIndex}
+          />
+        )}
+      </div>
+    )
 
     return (
       <div
@@ -361,8 +372,10 @@ const Autocomplete = React.forwardRef(
         ref={useCombinedRefs(containerRef, handleMenuPlacement)}
       >
         <Tooltip
-          content={selectedOption?.[displayValue]}
-          show={showTooltip(inputRef)}
+          content={selectedElementContent}
+          show={useIsOverflowing({
+            current: selectedValueElement,
+          })}
         >
           {renderHeaderContainer()}
         </Tooltip>
@@ -374,25 +387,25 @@ const Autocomplete = React.forwardRef(
 
 Autocomplete.defaultProps = {
   options: [],
-  defaultValues: [],
+  defaultValue: null,
   placeholder: getTranslation('selectOption'),
   label: getTranslation('label'),
   displayValue: 'value',
   keyValue: 'id',
-  isSearchable: true,
   disabled: false,
   noOptionsMessage: getTranslation('noResultsFound'),
   onMenuClose: () => {},
   onMenuOpen: () => {},
-  onChange: () => {},
+  onSelect: () => {},
+  onSearch: () => {},
   maxMenuHeight: 240,
 }
 
 Autocomplete.propTypes = {
-  /** Dropdown options. */
+  /** Autocomplete options. */
   options: propTypes.arrayOf(propTypes.object),
-  /** Defauly values for the dropdown. */
-  defaultValues: propTypes.arrayOf(propTypes.object),
+  /** Default value for the autocomplete. */
+  defaultValue: propTypes.object,
   /** Value to display from option. Default is 'value'. */
   displayValue: propTypes.string,
   /** Unique key of the option. Default is 'id'. */
@@ -401,24 +414,18 @@ Autocomplete.propTypes = {
   maxMenuHeight: propTypes.number,
   /** Set height of menu to auto. */
   autoHeight: propTypes.bool,
-  /** Called when max selected options is exceeded. */
-  onExceedMaxSelected: propTypes.func,
   /** Called when selected value has changed. */
-  onChange: propTypes.func,
+  onSelect: propTypes.func,
   /** Called when input value has changed. */
   onSearch: propTypes.func,
-  /** Whether to enable search functionality. */
-  isSearchable: propTypes.bool,
   /** For css customization. */
   className: propTypes.string,
   /** Placeholder to show when no value is selected. */
   placeholder: propTypes.string,
-  /** Label to add information about  the dropdown. */
+  /** Label to add information about  the autocomplete. */
   label: propTypes.string,
-  /** Set dropdown to disabled if true. */
+  /** Set autocomplete to disabled if true. */
   disabled: propTypes.bool,
-  /** Wether dropdown can be empty or not. */
-  canBeEmpty: propTypes.bool,
   /** Called when menu is opened. */
   onMenuOpen: propTypes.func,
   /** Called when menu is closed. */

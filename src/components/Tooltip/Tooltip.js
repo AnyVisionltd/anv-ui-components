@@ -22,10 +22,6 @@ const Tooltip = ({
   const [popperRef, setPopperRef] = useState(null)
   const [arrowRef, setArrowRef] = useState(null)
 
-  useEffect(() => {
-    console.log('anchorRef', anchorRef)
-  }, [anchorRef])
-
   const enterTimer = React.useRef()
   const leaveTimer = React.useRef()
 
@@ -54,11 +50,9 @@ const Tooltip = ({
   }, [anchorRef, closeTooltip])
 
   const openTooltip = () => {
-    console.log('openTooltip')
     clearTimeout(enterTimer.current)
     clearTimeout(leaveTimer.current)
     enterTimer.current = setTimeout(() => {
-      console.log('OPEN TOOL TIP')
       setIsOpen(true)
     }, enterDelay)
   }

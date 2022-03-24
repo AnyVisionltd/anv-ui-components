@@ -2,7 +2,7 @@ import React, { useEffect, useRef, memo } from 'react'
 import { FixedSizeList as List } from 'react-window'
 import propTypes from 'prop-types'
 import AutoSizer from 'react-virtualized-auto-sizer'
-import styles from './DropdownVirtualizedList.module.scss'
+import styles from './AutocompleteVirtualizedList.module.scss'
 
 const BORDER_WIDTH = 1
 
@@ -14,7 +14,7 @@ const Option = memo(({ data, index, style }) => {
   return <div style={rowStyle}>{content}</div>
 })
 
-const DropdownVirtualizedList = ({
+const AutocompleteVirtualizedList = ({
   menuHeight,
   options,
   rowHeight,
@@ -52,7 +52,7 @@ const DropdownVirtualizedList = ({
   )
 }
 
-DropdownVirtualizedList.propTypes = {
+AutocompleteVirtualizedList.propTypes = {
   /** Height of menu list. */
   menuHeight: propTypes.number,
   /** Options array. */
@@ -65,4 +65,4 @@ DropdownVirtualizedList.propTypes = {
   focusedOptionIndex: propTypes.number,
 }
 
-export default DropdownVirtualizedList
+export default AutocompleteVirtualizedList
