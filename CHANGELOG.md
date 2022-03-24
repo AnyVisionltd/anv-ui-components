@@ -1,3 +1,8 @@
+## 24-3-2022
+
+### Added
+
+- Autocomplete
 ## Unreleased
 
 ### Breaking Changes :boom:
