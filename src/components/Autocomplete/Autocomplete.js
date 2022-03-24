@@ -250,6 +250,7 @@ const Autocomplete = React.forwardRef(
           </div>
         )}
         <IconButton
+          data-testid='autocomplete-delete-btn'
           disabled={disabled}
           onClick={filteredValue.length ? resetFilteredValue : emptySelected}
           className={classNames(styles.iconButton, styles.clearBtn)}
