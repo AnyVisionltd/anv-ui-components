@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Translations } from './useComponentTranslations.interfaces'
 
-let sharedState: Translations = {
+let sharedState = {
   table: {
     dialogHeader: 'Column Management',
     saveButton: 'Save',
@@ -48,14 +47,14 @@ let sharedState: Translations = {
     time: 'Time',
   },
   datePicker: {
-    date: 'Date'
+    date: 'Date',
   },
   rangeSlider: {
     start: 'Start',
-    end: 'End'
+    end: 'End',
   },
   tree: {
-    search: "Search",
+    search: 'Search',
     item: 'Item',
     items: 'Items',
     listIsEmpty: 'List is Empty',
@@ -68,26 +67,24 @@ let sharedState: Translations = {
     noResultsFound: 'No Results Found',
   },
   toastMessage: {
-    undo: 'Undo'
-  }
+    undo: 'Undo',
+  },
 }
 
 const useComponentTranslation = () => {
-  const [translations, _setTranslations] = useState<Translations>(sharedState)
+  const [translations, _setTranslations] = useState(sharedState)
 
   useEffect(() => {
     _setTranslations(sharedState)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sharedState])
 
-  const setTranslations = (newTranslations: Partial<Translations>) => {
-    sharedState = {...sharedState, ...newTranslations}
-    _setTranslations({...sharedState})
+  const setTranslations = (newTranslations: Partial<typeof sharedState>) => {
+    sharedState = { ...sharedState, ...newTranslations }
+    _setTranslations({ ...sharedState })
   }
 
-  const getComponentTranslation = (
-    key: keyof Translations,
-  )=> {
+  const getComponentTranslation = (key: keyof typeof sharedState) => {
     if (!translations[key])
       throw new Error(`${key} does not exist in translations`)
     return translations[key]

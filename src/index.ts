@@ -39,4 +39,4 @@ export { Spinner } from './components/Spinner'
 export { StaticInfoTable } from './components/StaticInfoTable'
 
 export { useFormProvider } from './components/FormProvider/useFormProvider'
-export { useComponentTranslation, type Translations } from './hooks/UseComponentTranslation'
+export { useComponentTranslation } from './hooks/UseComponentTranslation'
