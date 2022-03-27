@@ -9,6 +9,7 @@ import React, {
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { ArrowUp, TimesThick, TimesCircleFilled } from '@anyvision/anv-icons'
+import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
 import keymap from '../../utils/enums/keymap'
 import { findScrollerNodeBottom } from '../../utils'
 import { InputBase, IconButton } from '../../index'
@@ -20,14 +21,12 @@ import {
   useCombinedRefs,
   useIsOverflowing,
 } from '../../hooks'
-import languageService from '../../services/language'
 import { Tooltip } from '../Tooltip'
 import { DropdownVirtualizedList } from './DropdownVirtualizedList'
 import styles from './Dropdown.module.scss'
 
 const menuItemHeight = 56
 const defaultSelectedHeight = 56
-const getTranslation = path => languageService.getTranslation(`${path}`)
 
 const getMenuPlacement = ({ menuHeight, containerElement }) => {
   if (!containerElement) return
@@ -66,6 +65,9 @@ const Dropdown = React.forwardRef(
     },
     ref,
   ) => {
+    const { getComponentTranslation } = useComponentTranslation()
+    const DropDownTranslations = getComponentTranslation('dropDown')
+
     const [isTypeMode, setIsTypeMode] = useState(false)
     const [filteredValue, setFilteredValue] = useState('')
     const [shownOptions, setShownOptions] = useState([...options])
@@ -101,9 +103,11 @@ const Dropdown = React.forwardRef(
 
     const selectedElementContent = !multiple
       ? selectedOptions?.[0]?.[displayValue]
-      : `${selectedOptions.length} ${getTranslation(
-          selectedOptions.length === 1 ? 'itemSelected' : 'itemsSelected',
-        )}`
+      : `${selectedOptions.length} ${
+          selectedOptions.length === 1
+            ? DropDownTranslations.itemSelected
+            : DropDownTranslations.itemsSelected
+        }`
 
     const resetToOriginalOptions = () =>
       shownOptions.length !== options.length && setShownOptions(options)
@@ -328,7 +332,7 @@ const Dropdown = React.forwardRef(
         if (isTypeMode) return null
         return (
           <p className={styles.placeholder} onClick={getIntoTypeMode}>
-            {placeholder}
+            {placeholder || DropDownTranslations.selectOption}
           </p>
         )
       }
@@ -432,7 +436,7 @@ const Dropdown = React.forwardRef(
         ref={selectedContainerRef}
       >
         <label className={classNames({ [styles.labelColor]: showMenu })}>
-          {label}
+          {label || DropDownTranslations.label}
         </label>
         <div
           className={styles.selectedContentContainer}
@@ -488,7 +492,9 @@ const Dropdown = React.forwardRef(
       >
         {!shownOptions.length ? (
           <EmptyDropdownMenu
-            noOptionsMessage={noOptionsMessage}
+            noOptionsMessage={
+              noOptionsMessage || DropDownTranslations.noResultsFound
+            }
             searchValue={filteredValue}
           />
         ) : (
@@ -529,15 +535,12 @@ const Dropdown = React.forwardRef(
 Dropdown.defaultProps = {
   options: [],
   defaultValues: [],
-  placeholder: getTranslation('selectOption'),
-  label: getTranslation('label'),
   displayValue: 'value',
   keyValue: 'id',
   multiple: false,
   isSearchable: true,
   disabled: false,
   isSelectedShownInHeader: false,
-  noOptionsMessage: getTranslation('noResultsFound'),
   onMenuClose: () => {},
   onMenuOpen: () => {},
   onChange: () => {},

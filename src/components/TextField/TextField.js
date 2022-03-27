@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, memo, useCallback } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import languageService from '../../services/language'
+import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
 import { useFormProvider } from '../../index'
 import { ReactComponent as ArrowSolidDown } from '../../assets/svg/ArrowSolidDown.svg'
 import { ReactComponent as ErrorCircleIcon } from '../../assets/svg/ErrorCircleOutlined.svg'
@@ -20,8 +20,6 @@ const types = {
 }
 
 const dateSelectors = ['/', '-', ':']
-
-const getTranslation = path => languageService.getTranslation(`${path}`)
 
 const TextField = React.forwardRef((props, ref) => {
   const {
@@ -51,6 +49,9 @@ const TextField = React.forwardRef((props, ref) => {
     trailingIcon,
     ...otherProps
   } = props
+
+  const { getComponentTranslation } = useComponentTranslation()
+  const TextFieldTranslations = getComponentTranslation('textField')
 
   const { isView } = useFormProvider({ view })
 
@@ -266,7 +267,7 @@ const TextField = React.forwardRef((props, ref) => {
             <div
               className={classNames(styles.ellipsis, !viewValue && styles.none)}
             >
-              {viewValue || getTranslation('none')}
+              {viewValue || TextFieldTranslations.none}
             </div>
           </Tooltip>
         </div>

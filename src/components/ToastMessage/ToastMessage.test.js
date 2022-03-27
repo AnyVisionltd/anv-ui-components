@@ -1,7 +1,6 @@
 import React from 'react'
 import { render, fireEvent, waitFor, screen } from '@testing-library/react'
 import { SunBrightens } from '@anyvision/anv-icons'
-import languageService from '../../services/language'
 import ToastMessage from './ToastMessage'
 
 describe('<ToastMessage />', () => {
@@ -95,7 +94,7 @@ describe('<ToastMessage />', () => {
   describe('Undo Button functionality', () => {
     it('should render undo button', () => {
       render(<ToastMessage message='test message' isOpen isUndo={true} />)
-      const node = screen.getByText(languageService.getTranslation('undo'))
+      const node = screen.getByText('Undo')
       expect(node).toBeTruthy()
     })
 
@@ -112,7 +111,7 @@ describe('<ToastMessage />', () => {
           undoCallback={undoCallback}
         />,
       )
-      const node = screen.getByText(languageService.getTranslation('undo'))
+      const node = screen.getByText('Undo')
       fireEvent.click(node)
       await waitFor(() => expect(alertMock).toHaveBeenCalledTimes(1))
     })

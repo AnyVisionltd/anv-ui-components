@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
+import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
 import { Dialog, Button } from '../../index'
 import { IconButton } from '../../index'
 import { ReactComponent as BackIcon } from '../../assets/svg/LongArrow.svg'
-import languageService from '../../services/language'
 import styles from './DialogWizard.module.scss'
 
 const DialogWizard = ({
@@ -27,6 +27,13 @@ const DialogWizard = ({
   classes,
   ...otherProps
 }) => {
+  const { getComponentTranslation } = useComponentTranslation()
+  const DialogWizardTranslations = getComponentTranslation('dialogWizard')
+
+  const cancel = cancelText || DialogWizardTranslations.cancel
+  const next = nextText || DialogWizardTranslations.next
+  const finish = finishText || DialogWizardTranslations.finish
+
   const [step, setStep] = useState(currentStep || 1)
 
   useEffect(() => {
@@ -49,10 +56,10 @@ const DialogWizard = ({
   const renderSteps = () => {
     return (
       <div className={styles.steps}>
-        <small>{languageService.getTranslation('step')}</small>
+        <small>{DialogWizardTranslations.step}</small>
         <div className={styles.stepsNumbers}>
           <small className={styles.stepNumber}>{step}</small>
-          <small>{languageService.getTranslation('stepOutOf')}</small>
+          <small>{DialogWizardTranslations.stepOutOf}</small>
           <small className={styles.stepNumber}>{steps.length}</small>
         </div>
       </div>
@@ -120,13 +127,13 @@ const DialogWizard = ({
           <div className={styles.footer}>
             {footerMessage}
             <div className={styles.buttons}>
-              {cancelText && (
+              {cancel && (
                 <Button variant={'ghost'} onClick={handleClose}>
-                  {cancelText}
+                  {cancel}
                 </Button>
               )}
               <Button onClick={handleNextClick} disabled={disabled}>
-                {step === steps.length ? finishText : nextText}
+                {step === steps.length ? finish : next}
               </Button>
             </div>
           </div>
@@ -148,11 +155,9 @@ DialogWizard.defaultProps = {
   disableBackdropClick: false,
   disableEscapeKeyDown: false,
   steps: [],
-  cancelText: languageService.getTranslation('cancel'),
-  nextText: languageService.getTranslation('next'),
-  finishText: languageService.getTranslation('finish'),
   disabled: false,
   classes: {},
+  onFinish: () => {},
 }
 
 DialogWizard.propTypes = {

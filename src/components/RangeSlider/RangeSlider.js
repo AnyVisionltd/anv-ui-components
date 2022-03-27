@@ -10,8 +10,8 @@ import classNames from 'classnames'
 import keymap from '../../utils/enums/keymap'
 import { SingleThumb } from './SingleThumb'
 import { DualThumb } from './DualThumb'
-import languageService from '../../services/language'
 import { getVideoDurationToShow } from '../../utils/date'
+import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
 import styles from './RangeSlider.module.scss'
 
 const keyboardButtons = [
@@ -46,6 +46,9 @@ const RangeSlider = ({
   const containerRef = useRef(null)
   const rangeRef = useRef(null)
   const isDualThumb = Array.isArray(value)
+
+  const { getComponentTranslation } = useComponentTranslation()
+  const RangeSliderTranslations = getComponentTranslation('rangeSlider')
 
   const SLIDER_SETTINGS = useMemo(
     () => ({
@@ -206,16 +209,12 @@ const RangeSlider = ({
       <>
         <span className={minLabel}>
           {isDuration
-            ? `${languageService.getTranslation(
-                'start',
-              )} ${getVideoDurationToShow(min)}`
+            ? `${RangeSliderTranslations.start} ${getVideoDurationToShow(min)}`
             : min}
         </span>
         <span className={maxLabel}>
           {isDuration
-            ? `${languageService.getTranslation(
-                'end',
-              )} ${getVideoDurationToShow(max)}`
+            ? `${RangeSliderTranslations.end} ${getVideoDurationToShow(max)}`
             : max}
         </span>
       </>

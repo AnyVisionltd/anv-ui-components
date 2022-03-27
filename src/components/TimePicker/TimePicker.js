@@ -8,8 +8,8 @@ import {
 } from '@material-ui/pickers'
 import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 import { DateTimeTextField } from '../DatePicker'
-import languageService from '../../services/language'
 import { useDebounce } from '../../hooks/UseDebounce'
+import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
 import './TimePicker.module.scss'
 
 const MATERIAL_UI_THEME = {
@@ -44,6 +44,8 @@ const TimePicker = ({
   const [isOpen, setIsOpen] = useState(false)
   const [date, setDate] = useState(value || moment())
   const { set } = useDebounce(debounceTime)
+  const { getComponentTranslation } = useComponentTranslation()
+  const TimePickerTranslations = getComponentTranslation('timePicker')
 
   const handleDateChange = date => {
     setDate(date)
@@ -77,7 +79,7 @@ const TimePicker = ({
           disabled={disabled}
           value={date}
           ampm={false}
-          label={label}
+          label={label || TimePickerTranslations.time}
           format={format}
           PopoverProps={{
             anchorEl: () => textFieldRef.current,
@@ -113,7 +115,6 @@ TimePicker.defaultProps = {
   disabled: false,
   format: 'HH:mm',
   onChange: () => {},
-  label: languageService.getTranslation('time'),
   errorMessage: '',
 }
 
