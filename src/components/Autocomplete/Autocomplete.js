@@ -20,13 +20,12 @@ import {
   useCombinedRefs,
   useIsOverflowing,
 } from '../../hooks'
-import languageService from '../../services/language'
+import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
 import { Tooltip } from '../Tooltip'
 import { AutocompleteVirtualizedList } from './AutocompleteVirtualizedList'
 import styles from './Autocomplete.module.scss'
 
 const menuItemHeight = 56
-const getTranslation = path => languageService.getTranslation(`${path}`)
 
 const getMenuPlacement = ({ menuHeight, containerElement }) => {
   if (!containerElement) return
@@ -72,6 +71,8 @@ const Autocomplete = React.forwardRef(
     const selectedContainerRef = useRef(null)
     const valuesContainerRef = useRef(null)
     const [selectedValueElement, setSelectedValueElement] = useState(null)
+    const { getComponentTranslation } = useComponentTranslation()
+    const AutocompleteTranslations = getComponentTranslation('autocomplete')
 
     const menuHeight = Math.min(
       options.length * menuItemHeight,
@@ -226,7 +227,7 @@ const Autocomplete = React.forwardRef(
         if (isTypeMode) return null
         return (
           <p className={styles.placeholder} onClick={getIntoTypeMode}>
-            {placeholder}
+            {placeholder || AutocompleteTranslations.selectOption}
           </p>
         )
       }
@@ -296,7 +297,7 @@ const Autocomplete = React.forwardRef(
         ref={selectedContainerRef}
       >
         <label className={classNames({ [styles.labelColor]: showMenu })}>
-          {label}
+          {label || AutocompleteTranslations.label}
         </label>
         <div
           className={styles.selectedContentContainer}
@@ -348,7 +349,9 @@ const Autocomplete = React.forwardRef(
       >
         {!options.length && filteredValue && !loading ? (
           <EmptyAutocompleteMenu
-            noOptionsMessage={noOptionsMessage}
+            noOptionsMessage={
+              noOptionsMessage || AutocompleteTranslations.noResultsFound
+            }
             searchValue={filteredValue}
           />
         ) : (
@@ -389,12 +392,9 @@ const Autocomplete = React.forwardRef(
 Autocomplete.defaultProps = {
   options: [],
   defaultValue: null,
-  placeholder: getTranslation('selectOption'),
-  label: getTranslation('label'),
   displayValue: 'value',
   keyValue: 'id',
   disabled: false,
-  noOptionsMessage: getTranslation('noResultsFound'),
   onMenuClose: () => {},
   onMenuOpen: () => {},
   onSelect: () => {},
