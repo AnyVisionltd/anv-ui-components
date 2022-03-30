@@ -69,6 +69,11 @@ let sharedState = {
   toastMessage: {
     undo: 'Undo',
   },
+  autocomplete: {
+    selectOption: 'select option',
+    label: 'label',
+    noResultsFound: 'No Results',
+  },
 }
 
 const useComponentTranslation = () => {
