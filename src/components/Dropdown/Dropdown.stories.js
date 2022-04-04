@@ -56,6 +56,23 @@ export const Basic = () => {
   )
 }
 
+export const WithoutSearch = () => {
+  const [, setValues] = useState([])
+  const handleChange = newValues => setValues(newValues)
+
+  return (
+    <div style={{ ...containerStyle, marginBottom: '200px' }}>
+      <Dropdown
+        options={genders}
+        label='Gender'
+        defaultValues={[genders[0]]}
+        onChange={handleChange}
+        isSearchable={false}
+      />
+    </div>
+  )
+}
+
 export const Multiple = () => {
   const [, setValues] = useState([])
   const handleChange = newValues => setValues(newValues)
