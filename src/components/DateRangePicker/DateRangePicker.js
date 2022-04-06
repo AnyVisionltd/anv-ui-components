@@ -24,8 +24,10 @@ const DateRangePicker = ({
       label={startLabel}
       value={start}
       onChange={start => onChange({ start, end })}
-      maxDate={end || ''}
-      minDate={maxDaysGap ? moment(end).subtract(maxDaysGap, 'days') : ''}
+      maxDate={end || undefined}
+      minDate={
+        maxDaysGap && end ? moment(end).subtract(maxDaysGap, 'days') : undefined
+      }
       disabled={disabled}
       format={format}
       errorMessage={startErrorMessage}
@@ -35,8 +37,10 @@ const DateRangePicker = ({
       label={endLabel}
       value={end}
       onChange={end => onChange({ start, end })}
-      minDate={start || ''}
-      maxDate={maxDaysGap ? moment(start).add(maxDaysGap, 'days') : ''}
+      minDate={start || undefined}
+      maxDate={
+        maxDaysGap && start ? moment(start).add(maxDaysGap, 'days') : undefined
+      }
       disabled={disabled}
       format={format}
       errorMessage={endErrorMessage}
