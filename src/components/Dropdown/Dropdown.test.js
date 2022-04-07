@@ -174,6 +174,17 @@ describe('<Dropdown/>', () => {
     })
   })
 
+  describe('testing Dropdown`s error state', () => {
+    it('should display the error message', () => {
+      const onMenuOpen = jest.fn()
+      const errorMessage = 'some error message'
+      const { getByText } = render(
+        <Dropdown onMenuOpen={onMenuOpen} error message={errorMessage} />,
+      )
+      expect(getByText(errorMessage)).toBeTruthy()
+    })
+  })
+
   describe('testing keyValue and displayValue props', () => {
     it('should display the right displayValue although the default is `value`', () => {
       const arr = [{ item: 'test', myId: '1' }]

@@ -23,6 +23,23 @@ $default-selected-height: av-size(sz-56);
   position: relative;
   height: fit-content;
 
+  &.error {
+    & > .selectedContainer {
+      border-color: av-color(error);
+      box-shadow: inset 0 0 0 2px av-color(error);
+    }
+  }
+
+  .message {
+    font-size: av-font-size(tiny);
+    color: av-color(content);
+    margin-top: av-space(micro);
+
+    &.error {
+      color: av-color(error);
+    }
+  }
+
   &.isDisabled {
     opacity: av-opacity(disabled);
   }

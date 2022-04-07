@@ -32,6 +32,8 @@ const getMenuPlacement = ({ menuHeight, containerElement }) => {
 }
 
 const Dropdown = ({
+  message,
+  error,
   options,
   defaultValues,
   displayValue,
@@ -455,7 +457,10 @@ const Dropdown = ({
     <div
       className={classNames(
         styles.container,
-        disabled && styles.isDisabled,
+        {
+          [styles.isDisabled]: disabled,
+          [styles.error]: error,
+        },
         className,
       )}
       ref={useCombinedRefs(containerRef, handleMenuPlacement)}
@@ -469,6 +474,11 @@ const Dropdown = ({
         {renderHeaderContainer()}
       </Tooltip>
       {showMenu && renderOptions()}
+      {!!message & !showMenu ? (
+        <span className={classNames(styles.message, { [styles.error]: error })}>
+          {message}
+        </span>
+      ) : null}
     </div>
   )
 }
@@ -490,6 +500,7 @@ Dropdown.defaultProps = {
   onChange: () => {},
   onExceedMaxSelected: () => {},
   canBeEmpty: false,
+  error: false,
 }
 
 Dropdown.propTypes = {
@@ -531,6 +542,10 @@ Dropdown.propTypes = {
   valueRender: propTypes.func,
   /** Text / component to display when there are no options. */
   noOptionsMessage: propTypes.oneOfType([propTypes.string, propTypes.func]),
+  /** Helper test to describe error or some information. */
+  message: propTypes.string,
+  /** Indicate error mode change border color and message to error color if true. */
+  error: propTypes.bool,
 }
 
 export default memo(Dropdown)
