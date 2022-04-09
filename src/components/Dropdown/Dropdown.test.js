@@ -189,3 +189,15 @@ describe('<Dropdown/>', () => {
     })
   })
 })
+
+describe('testing Dropdown`s error state', () => {
+  it('should display the error message', () => {
+    const onMenuOpen = jest.fn()
+    const errorMessage = 'some error message'
+    const { getByText } = render(
+      <Dropdown onMenuOpen={onMenuOpen} error message={errorMessage} />,
+    )
+    expect(getByText(errorMessage)).toBeTruthy()
+    expect(getByText(errorMessage).classList.contains('error')).toBeTruthy()
+  })
+})

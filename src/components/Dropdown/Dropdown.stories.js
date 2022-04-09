@@ -138,3 +138,9 @@ export const Disabled = () => (
     />
   </div>
 )
+
+export const error = () => (
+  <div style={containerStyle}>
+    <Dropdown options={genders} label='Gender' message='Some error' error />
+  </div>
+)
