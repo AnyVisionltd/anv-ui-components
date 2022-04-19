@@ -100,7 +100,7 @@ const Selection = React.forwardRef(
     }
 
     const renderBulkElement = () => {
-      return <div className={styles.actionsContainer}>{bulkElement()}</div>
+      return <div className={styles.actionsContainer}>{bulkElement(items)}</div>
     }
 
     const handleDeselectAll = () => {
