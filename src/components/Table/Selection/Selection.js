@@ -181,6 +181,7 @@ Selection.propTypes = {
   hidden: propTypes.bool,
   /** Items that are are always selected. (For controlled selection). */
   alwaysSelected: propTypes.arrayOf(propTypes.string, propTypes.number),
+  /** A function that return an Element */
   bulkElement: propTypes.func,
 }
 
