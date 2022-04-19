@@ -18,6 +18,7 @@ const Selection = React.forwardRef(
       className,
       hidden,
       alwaysSelected,
+      bulkElement,
     },
     ref,
   ) => {
@@ -97,10 +98,16 @@ const Selection = React.forwardRef(
         </div>
       )
     }
+
+    const renderBulkElement = () => {
+      return <div className={styles.actionsContainer}>{bulkElement()}</div>
+    }
+
     const handleDeselectAll = () => {
       deselectAll()
     }
-    const renderBar = !!bulkActions && (excludeMode || !!items.length)
+    const renderBar =
+      (!!bulkActions || !!bulkElement) && (excludeMode || !!items.length)
     const selectedCount =
       renderBar && (excludeMode ? totalItems - items.length : items.length)
     const classes = classNames(styles.selectionBar, className)
@@ -117,6 +124,7 @@ const Selection = React.forwardRef(
               <span className={styles.counterLabel}>Items Selected</span>
             </div>
             {!!bulkActions && renderActions()}
+            {!!bulkElement && renderBulkElement()}
           </div>
         </Portal>
       </Animations.Scale>
@@ -173,6 +181,7 @@ Selection.propTypes = {
   hidden: propTypes.bool,
   /** Items that are are always selected. (For controlled selection). */
   alwaysSelected: propTypes.arrayOf(propTypes.string, propTypes.number),
+  bulkElement: propTypes.func,
 }
 
 export default Selection
