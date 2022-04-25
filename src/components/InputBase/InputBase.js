@@ -1,7 +1,7 @@
 import React, { memo, useState } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import { EyeEnabled, EyeDisabled } from '@anyvision/anv-icons'
+import { EyeEnabled, EyeDisabled, TimesThin } from '@anyvision/anv-icons'
 import { IconButton } from '../../index'
 import styles from './InputBase.module.scss'
 
@@ -15,6 +15,15 @@ const inputTypes = Object.freeze({
   PASSWORD: 'password',
 })
 
+const clearTextEvent = {
+  persist: () => true,
+  target: {
+    value: '',
+    selectionStart: 0,
+    selectionEnd: 0,
+  },
+}
+
 const InputBase = React.forwardRef((props, ref) => {
   const {
     rows,
@@ -24,6 +33,7 @@ const InputBase = React.forwardRef((props, ref) => {
     multiline,
     leadingIcon,
     trailingIcon,
+    useClearTextIcon,
     leadingIconClassName,
     trailingIconClassName,
     ...otherProps
@@ -86,6 +96,15 @@ const InputBase = React.forwardRef((props, ref) => {
     )
   }
 
+  const renderClearTextIcon = () => (
+    <span
+      onClick={() => otherProps?.onChange(clearTextEvent)}
+      className={classNames(styles.clearTextIcon, trailingIconClassName)}
+    >
+      <TimesThin />
+    </span>
+  )
+
   return (
     <div className={inputClasses}>
       {leadingIcon && (
@@ -94,6 +113,9 @@ const InputBase = React.forwardRef((props, ref) => {
         </span>
       )}
       <Input ref={inputRef} disabled={disabled} type={type} {...elementProps} />
+      {useClearTextIcon &&
+        !!elementProps.value?.length &&
+        renderClearTextIcon()}
       {renderTrailingIcon()}
     </div>
   )
@@ -128,6 +150,8 @@ InputBase.propTypes = {
   leadingIcon: propTypes.element,
   /** Icon after the children. */
   trailingIcon: propTypes.element,
+  /** Whether to use clear text icon, to clear text in case the input has value. */
+  useClearTextIcon: propTypes.bool,
   /** Event fires when a change appeared in the input element. */
   onChange: propTypes.func,
   /** @ignore */
