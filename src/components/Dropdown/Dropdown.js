@@ -443,7 +443,6 @@ const Dropdown = React.forwardRef(
         <div
           className={styles.selectedContentContainer}
           onClick={getIntoTypeMode}
-          onMouseDown={getIntoTypeMode}
         >
           {selectedOptions.length > 0 && multiple && renderDeleteButton()}
           <div className={styles.valuesContainer} ref={valuesContainerRef}>
@@ -490,7 +489,6 @@ const Dropdown = React.forwardRef(
           [styles.isPositionedUpwards]: isMenuPositionedUpwards,
         })}
         ref={menuRef}
-        style={{ height: shownOptions.length ? `${menuHeight}px` : undefined }}
       >
         {!shownOptions.length ? (
           <EmptyDropdownMenu
