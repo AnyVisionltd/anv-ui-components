@@ -5,7 +5,12 @@ import TableContext from '../TableContext'
 import { SSF } from '../../../index'
 import styles from './TableSSF.module.scss'
 
-const TableSSF = ({ onChange, additionalFilters, className }) => {
+const TableSSF = ({
+  onChange,
+  additionalFilters,
+  className,
+  ...otherParams
+}) => {
   const { state, setFilters } = useContext(TableContext)
   const { columns } = state
 
@@ -42,7 +47,14 @@ const TableSSF = ({ onChange, additionalFilters, className }) => {
 
   const classes = classNames(styles.TableSSF, className)
 
-  return <SSF className={classes} fields={fields} onChange={handleOnChange} />
+  return (
+    <SSF
+      className={classes}
+      fields={fields}
+      onChange={handleOnChange}
+      {...otherParams}
+    />
+  )
 }
 
 TableSSF.defaultProps = {
