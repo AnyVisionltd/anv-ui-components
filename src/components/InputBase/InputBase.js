@@ -96,14 +96,20 @@ const InputBase = React.forwardRef((props, ref) => {
     )
   }
 
-  const renderClearTextIcon = () => (
-    <span
-      onClick={() => otherProps?.onChange(clearTextEvent)}
-      className={classNames(styles.clearTextIcon, trailingIconClassName)}
-    >
-      <TimesThin />
-    </span>
-  )
+  const renderClearTextIcon = () => {
+    const shouldRenderClearTextIcon =
+      useClearTextIcon && !!elementProps.value?.length && !disabled
+    if (!shouldRenderClearTextIcon) return null
+
+    return (
+      <span
+        onClick={() => otherProps?.onChange(clearTextEvent)}
+        className={classNames(styles.clearTextIcon, trailingIconClassName)}
+      >
+        <TimesThin />
+      </span>
+    )
+  }
 
   return (
     <div className={inputClasses}>
@@ -113,9 +119,7 @@ const InputBase = React.forwardRef((props, ref) => {
         </span>
       )}
       <Input ref={inputRef} disabled={disabled} type={type} {...elementProps} />
-      {useClearTextIcon &&
-        !!elementProps.value?.length &&
-        renderClearTextIcon()}
+      {renderClearTextIcon()}
       {renderTrailingIcon()}
     </div>
   )
