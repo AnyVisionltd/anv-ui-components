@@ -387,6 +387,8 @@ export const textFieldPropTypes = {
   style: propTypes.string,
   /** props to be propagated to menu component*/
   menuProps: propTypes.object,
+  /** Whether to use clear text icon, to clear text in case the input has value. */
+  useClearTextIcon: propTypes.bool,
 }
 
 TextField.propTypes = textFieldPropTypes
