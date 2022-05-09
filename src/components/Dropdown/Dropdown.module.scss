@@ -24,7 +24,7 @@ $default-selected-height: av-size(sz-56);
   height: fit-content;
 
   &.error {
-    &>.selectedContainer {
+    & > .selectedContainer {
       border-color: av-color(error);
       box-shadow: inset 0 0 0 1px av-color(error);
     }
@@ -256,7 +256,6 @@ $default-selected-height: av-size(sz-56);
     display: flex;
     flex-direction: column;
     border-top: none;
-    transition: all 0.3s linear;
     z-index: av-z-index(important);
     background-color: av-color(surface);
     box-shadow: inset 1px 0 av-color(primary), inset -1px -1px av-color(primary);

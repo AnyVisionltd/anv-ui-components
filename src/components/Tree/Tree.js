@@ -237,6 +237,7 @@ const Tree = forwardRef(
         trailingIconClassName={styles.searchIcon}
         onChange={handleSearch}
         value={searchQuery}
+        useClearTextIcon
       />
     )
 

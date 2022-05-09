@@ -26,7 +26,7 @@ let sharedState = {
   dropDown: {
     itemSelected: 'Item Selected',
     itemsSelected: 'Items Selected',
-    selectOption: 'SelectOption',
+    selectOption: 'Select Option',
     label: 'Label',
     noResultsFound: 'No results found',
   },

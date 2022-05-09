@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { boolean, number, select } from '@storybook/addon-knobs'
 import { InputBase, IconButton } from '../../index'
 import { ReactComponent as SunIcon } from '../../assets/svg/Sun.svg'
@@ -13,21 +13,21 @@ export default {
 
 export const Default = () => <InputBase placeholder='Placeholder' />
 
-export const disable = () => (
+export const Disable = () => (
   <div className={styles.flexMultipleRows}>
     <InputBase placeholder='Enabled' />
     <InputBase disabled placeholder='Disabled' />
   </div>
 )
 
-export const withIcon = () => (
+export const WithIcon = () => (
   <div className={styles.flexMultipleRows}>
     <InputBase leadingIcon={<SunIcon />} placeholder='With Icon' />
     <InputBase multiline leadingIcon={<SunIcon />} placeholder='With Icon' />
   </div>
 )
 
-export const withtrailingIcon = () => (
+export const WithtrailingIcon = () => (
   <div className={styles.flexMultipleRows}>
     <InputBase
       trailingIcon={
@@ -49,7 +49,7 @@ export const withtrailingIcon = () => (
   </div>
 )
 
-export const states = () => (
+export const States = () => (
   <div className={styles.flexMultipleRows}>
     <InputBase readOnly placeholder='readOnly' defaultValue='default value' />
     <InputBase defaultValue='Default Value' />
@@ -59,6 +59,18 @@ export const states = () => (
     <InputBase multiline rows={10} placeholder='Multiline 10 Rows' />
   </div>
 )
+
+export const WithClearTextIcon = () => {
+  const [value, setValue] = useState('')
+  return (
+    <InputBase
+      value={value}
+      onChange={e => setValue(e.target.value)}
+      useClearTextIcon
+      placeholder='With Clear Text Icon'
+    />
+  )
+}
 
 export const Playground = () => {
   const isMultiline = boolean('multiline', false)
