@@ -137,7 +137,7 @@ const TableBody = ({
           loadMoreItems={loadMoreData}
           ref={listRef}
         />
-      ) : isLoading && selfControlled ? (
+      ) : isLoading ? (
         loadingRender()
       ) : (
         renderNoResults()
