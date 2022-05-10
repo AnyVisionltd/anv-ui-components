@@ -19,6 +19,7 @@ const TableBody = ({
   onRowClick,
   className,
   menuClassName,
+  onTableDataChanged,
   ...otherProps
 }) => {
   const listRef = useRef()
@@ -55,6 +56,7 @@ const TableBody = ({
 
   useEffect(() => {
     setTotalItems(selfControlled ? tableData.length : totalItems)
+    onTableDataChanged(tableData)
   }, [tableData, totalItems, selfControlled, setTotalItems])
 
   useEffect(() => {
@@ -148,6 +150,7 @@ const TableBody = ({
 
 TableBody.defaultProps = {
   rowHeight: 56,
+  onTableDataChanged: () => {},
 }
 
 TableBody.propTypes = {
@@ -191,6 +194,8 @@ TableBody.propTypes = {
   className: propTypes.string,
   /** For Menu customization */
   menuClassName: propTypes.string,
+  /** Callback fire when table data changes (filters changed, sort, etc.) */
+  onTableDataChanged: propTypes.func,
 }
 
 export default TableBody
