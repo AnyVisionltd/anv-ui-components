@@ -89,6 +89,8 @@ DateRangePicker.defaultProps = {
   format: 'DD/MM/yyyy',
   startLabel: 'From',
   endLabel: 'To',
+  startProps: {},
+  endProps: {},
 }
 
 export default DateRangePicker
