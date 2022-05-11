@@ -17,6 +17,8 @@ const DateRangePicker = ({
   startErrorMessage,
   endErrorMessage,
   maxDaysGap,
+  startProps,
+  endProps,
   ...otherProps
 }) => (
   <div className={classNames(styles.dateRangePicker, className)}>
@@ -31,6 +33,7 @@ const DateRangePicker = ({
       disabled={disabled}
       format={format}
       errorMessage={startErrorMessage}
+      {...startProps}
       {...otherProps}
     />
     <DatePicker
@@ -44,6 +47,7 @@ const DateRangePicker = ({
       disabled={disabled}
       format={format}
       errorMessage={endErrorMessage}
+      {...endProps}
       {...otherProps}
     />
   </div>
@@ -72,6 +76,10 @@ DateRangePicker.propTypes = {
   className: PropTypes.string,
   /** Maximum days gap before start date and end date. */
   maxDaysGap: PropTypes.number,
+  /** Props for the start date picker. */
+  startProps: PropTypes.object,
+  /** Props for the end date picker. */
+  endProps: PropTypes.object,
 }
 
 DateRangePicker.defaultProps = {
