@@ -64,6 +64,7 @@ const Dropdown = React.forwardRef(
       maxMenuHeight,
       autoHeight,
       onSearch,
+      messageRef,
     },
     ref,
   ) => {
@@ -530,9 +531,11 @@ const Dropdown = React.forwardRef(
           {renderHeaderContainer()}
         </Tooltip>
         {showMenu && renderOptions()}
-        {!!message & !showMenu ? (
+        {!!message && !showMenu ? (
           <span
             className={classNames(styles.message, { [styles.error]: error })}
+            messageRef={messageRef}
+            tabIndex={-1}
           >
             {message}
           </span>
@@ -606,6 +609,8 @@ Dropdown.propTypes = {
   noOptionsMessage: propTypes.oneOfType([propTypes.string, propTypes.func]),
   /** Helper test to describe error or some information. */
   message: propTypes.string,
+  /** Message ref to allow the message to be focused with error. */
+  messageRef: propTypes.shape({ current: propTypes.instanceOf(Element) }),
   /** Indicate error mode change border color and message to error color if true. */
   error: propTypes.bool,
 }
