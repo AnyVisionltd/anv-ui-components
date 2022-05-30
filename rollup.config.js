@@ -11,6 +11,7 @@ export default {
   input: './src/index.ts',
   output: {
     dir: 'dist',
+    format: 'cjs',
   },
   // All the used libs needs to be here
   external: ['react', 'react-proptypes'],
