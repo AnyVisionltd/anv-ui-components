@@ -87,6 +87,7 @@
 - New Wizard Dialog.
 - Added default behavior that doesn't require isOpen in Menu
 
+
 <!--
 Sections:
 ### Breaking Changes :boom:
