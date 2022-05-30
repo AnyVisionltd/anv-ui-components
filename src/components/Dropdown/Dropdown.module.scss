@@ -71,6 +71,11 @@ $default-selected-height: av-size(sz-56);
       border: solid 1px transparent;
     }
 
+    &.isView {
+      border: none;
+      pointer-events: none;
+    }
+
     &.isMenuOpen {
       box-shadow: inset 0 0 0 2px av-color(primary);
       border: solid 1px transparent;

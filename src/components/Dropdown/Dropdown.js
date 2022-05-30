@@ -12,7 +12,7 @@ import { ArrowUp, TimesThick, TimesCircleFilled } from '@anyvision/anv-icons'
 import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
 import keymap from '../../utils/enums/keymap'
 import { findScrollerNodeBottom } from '../../utils'
-import { InputBase, IconButton } from '../../index'
+import { InputBase, IconButton, useFormProvider } from '../../index'
 import { DropdownItem } from './DropdownItem'
 import { EmptyDropdownMenu } from './EmptyDropdownMenu'
 import {
@@ -42,6 +42,7 @@ const Dropdown = React.forwardRef(
     {
       message,
       error,
+      view,
       options,
       defaultValues,
       displayValue,
@@ -70,6 +71,8 @@ const Dropdown = React.forwardRef(
   ) => {
     const { getComponentTranslation } = useComponentTranslation()
     const DropDownTranslations = getComponentTranslation('dropDown')
+
+    const { isView } = useFormProvider({ view })
 
     const [isTypeMode, setIsTypeMode] = useState(false)
     const [filteredValue, setFilteredValue] = useState('')
@@ -116,7 +119,7 @@ const Dropdown = React.forwardRef(
       shownOptions.length !== options.length && setShownOptions(options)
 
     const openMenu = () => {
-      if (showMenu || disabled) return
+      if (showMenu || disabled || isView) return
       setShowMenu(true)
       onMenuOpen()
     }
@@ -435,6 +438,7 @@ const Dropdown = React.forwardRef(
       <div
         className={classNames(styles.selectedContainer, {
           [styles.isMenuOpen]: showMenu,
+          [styles.isView]: isView,
         })}
         ref={selectedContainerRef}
       >
@@ -467,7 +471,7 @@ const Dropdown = React.forwardRef(
             )}
           </div>
         </div>
-        {renderButtons()}
+        {!isView && renderButtons()}
       </div>
     )
 
@@ -613,6 +617,10 @@ Dropdown.propTypes = {
   messageRef: propTypes.shape({ current: propTypes.instanceOf(Element) }),
   /** Indicate error mode change border color and message to error color if true. */
   error: propTypes.bool,
+  /** If true, will be view mode. <br/>
+   *  <i style="background-color:#ffc40026;">NOTE: Also from \<FormProvider> by context. </i>
+   */
+  view: propTypes.bool,
 }
 
 export default memo(Dropdown)
