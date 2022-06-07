@@ -288,6 +288,97 @@ const treeNodesWithOverlappingKeys = [
 ]
 
 export const Basic = () => {
+  // treeInstance allows to access tree properties and use functions to change
+  // tree properties:
+  // 1. Access tree nodes' map: treeInstance.nodesMap
+  // 2. Change selectedKeys in tree when they are changed from outside source, like reset to default: treeInstance.setSelectedKeys(keysToAdd, keysToRemove)
+  // 3. Change node's properties in case new data is received from sockets, etc: treeInstance.setNodeProperties(nodeKey, {...newProperties})
+  const [treeInstance, setTreeInstance] = useState(null)
+  const [selectedKeys, setSelectedkeys] = useState([
+    'test-100',
+    'test-200',
+    'test-254',
+  ])
+
+  const onSelect = ({ added, removed }) => {
+    // onSelect returns the status of the nodes that were either added as selected or removed.
+    // So do what needs to be done when new nodes are selected / unselected, like add or remove a marker of the camera from the map.
+    // And then, if needed, set the selectedKeys state :
+    const newSelectedKeys = [...selectedKeys]
+    newSelectedKeys.filter(key => !removed.includes(key))
+    setSelectedkeys([...newSelectedKeys, ...added])
+  }
+
+  const loadMoreNodes = () =>
+    new Promise(resolve => {
+      setTimeout(() => {
+        resolve([...createTestRootNodes(15)])
+      }, 100)
+    })
+
+  const rootNodeActions = useMemo(
+    () => [
+      {
+        label: 'Search',
+        onClick: action('Search action clicked'),
+        icon: <Search />,
+      },
+      {
+        label: 'Edit',
+        onClick: action('Edit action clicked'),
+        icon: <PencilEdit />,
+        hidden: node => node.label === 'Movies',
+      },
+      {
+        label: 'Create',
+        onClick: action('Create action clicked'),
+        icon: <ListAdd />,
+        hidden: node => node.children.length > 3,
+      },
+    ],
+    [],
+  )
+
+  return (
+    <Tree
+      nodes={[...createTestRootNodes()]}
+      selectedKeys={selectedKeys}
+      onSelect={onSelect}
+      rootNodeActions={rootNodeActions}
+      loadMoreData={loadMoreNodes}
+      maxNestingLevel={1}
+      ref={setTreeInstance}
+      className={styles.tree}
+      nodesContainerClassName={styles.nodesContainer}
+    />
+  )
+}
+
+export const NestedTree = () => {
+  const [selectedKeys, setSelectedkeys] = useState(['1', '2', '33', '42'])
+
+  const onSelect = ({ added, removed }) => {
+    // onSelect returns the status of the nodes that were either added as selected or removed.
+    // So do what needs to be done when new nodes are selected / unselected, like add or remove a marker of the camera from the map.
+    // And then, if needed, set the selectedKeys state :
+    const newSelectedKeys = [...selectedKeys]
+    newSelectedKeys.filter(key => !removed.includes(key))
+    setSelectedkeys([...newSelectedKeys, ...added])
+  }
+
+  return (
+    <Tree
+      nodes={treeNodes}
+      selectedKeys={selectedKeys}
+      onSelect={onSelect}
+      maxNestingLevel={3}
+      className={styles.tree}
+      nodesContainerClassName={styles.nodesContainer}
+    />
+  )
+}
+
+export const InfiniteTree = () => {
   const [nodes, setNodes] = useState(treeNodes)
   const [params, setParams] = useState({ limit: 50, offset: 0 })
 

@@ -36,14 +36,14 @@ const Node = ({
     maxWidth: maxContainerWidth - paddingLeft,
   }
 
+  const isLastLeafOfParent =
+  isLeaf && nodesMap[parentKey]?.[childrenKey].length - 1 === index
+  
   const handleExpand = () => {
     !isOpen && onExpand(key)
     toggle()
   }
-
-  const isLastLeafOfParent =
-    isLeaf && nodesMap[parentKey]?.[childrenKey].length - 1 === index
-
+  
   // data-parentNodeId = parentKey
   // data-totalItems = total
 
