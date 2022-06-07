@@ -16,6 +16,7 @@ const Tooltip = ({
   offset,
   className,
   overflowOnly,
+  showAlways,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [anchorRef, setAnchorRef] = useState(null)
@@ -72,11 +73,11 @@ const Tooltip = ({
     return anchorRef && anchorRef.scrollWidth > anchorRef.clientWidth
   }
 
-  const showTooltip = show
-    ? overflowOnly
-      ? isOverflown() && isOpen
-      : isOpen
-    : false
+  const isOverflownAndOpen = isOverflown() && isOpen
+
+  const isTooltipOpen = overflowOnly ? isOverflownAndOpen : isOpen
+
+  const showTooltip = (show ? isTooltipOpen : false) || showAlways
 
   return (
     <>
@@ -120,6 +121,7 @@ Tooltip.defaultProps = {
   leaveDelay: 0,
   arrow: false,
   offset: 8,
+  showAlways: false,
 }
 
 Tooltip.propTypes = {
@@ -145,6 +147,8 @@ Tooltip.propTypes = {
   offset: propTypes.number,
   /** Tooltip only when children overflow */
   overflowOnly: propTypes.bool,
+  /** Tooltip always open */
+  alwaysShow: propTypes.bool,
 }
 
 export default Tooltip

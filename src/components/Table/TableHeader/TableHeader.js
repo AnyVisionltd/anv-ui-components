@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
+import { useComponentTranslation } from '../../../hooks/UseComponentTranslation'
 import { getCellWidth } from '../utlis'
-import languageService from '../../../services/language'
 import { orderTypes } from '../../../utils/enums/common'
 import { ReactComponent as LongArrowIcon } from '../../../assets/svg/LongArrow.svg'
 import { ReactComponent as ManageColumnIcon } from '../../../assets/svg/ManageColumn.svg'
@@ -11,14 +11,20 @@ import { Checkbox, IconButton } from '../../../index'
 import styles from './TableHeader.module.scss'
 import { useTableData } from '../UseTableData'
 
-const getTranslation = path => languageService.getTranslation(`${path}`)
+const MIN_SELECTION_COUNT = 0
 
 const TableHeader = ({
   columns,
   onHeaderCellClick,
   className,
+  resultLabel,
+  showSelectionLabel,
+  selectionLabel,
   ...otherProps
 }) => {
+  const { getComponentTranslation } = useComponentTranslation()
+  const TableTranslations = getComponentTranslation('table')
+
   const {
     state,
     setSortBy,
@@ -34,6 +40,7 @@ const TableHeader = ({
     columnManagement,
     totalItems,
   } = state
+  const totalSelected = selection?.items?.length ?? MIN_SELECTION_COUNT
   const { sortBy, sortable: contextSortable } = sort
   const { isActive: columnManagementIsActive } = columnManagement
   const tableData = useTableData()
@@ -143,17 +150,18 @@ const TableHeader = ({
           size={'small'}
           variant={'ghost'}
         >
-          <ManageColumnIcon />
+          <ManageColumnIcon title={TableTranslations.hideShowColumns} />
         </IconButton>
       </div>
     )
 
   const classes = classNames(styles.tableHeader, className)
-
   return (
     <div>
       <div className={styles.results}>
-        {totalItems} {getTranslation('results')}
+        {totalItems} {resultLabel ?? TableTranslations.results}
+        {Boolean(showSelectionLabel) &&
+          ` (${totalSelected} ${selectionLabel ?? TableTranslations.selected})`}
       </div>
       <div role='row' className={classes} {...otherProps}>
         {renderSelection()}
@@ -167,6 +175,7 @@ const TableHeader = ({
 
 TableHeader.defaultProps = {
   onHeaderCellClick: () => {},
+  showSelectionLabel: false,
 }
 
 TableHeader.propTypes = {
@@ -185,6 +194,7 @@ TableHeader.propTypes = {
    *  <code>hide</code>         		- hide the column. <br />
    *  <code>width</code>    			  - set the column width by flex basis. <br />
    *  <code>triggerRowClick</code>  - set if cell is clickable, default true. <br />
+   *  <code>filterFunction</code>  - an optional custom function to filter row values of a specific column. (rowValue, searchValue) => bool <br />
    **/
   columns: propTypes.arrayOf(
     propTypes.shape({
@@ -203,6 +213,10 @@ TableHeader.propTypes = {
       hide: propTypes.bool,
       width: propTypes.string,
       trailingIcon: propTypes.element,
+      resultLabel: propTypes.string,
+      showSelectionLabel: propTypes.bool,
+      selectionLabel: propTypes.string,
+      filterFunction: propTypes.func,
     }),
   ).isRequired,
   /** Callback fire when header cell click with cell field. */

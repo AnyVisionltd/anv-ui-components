@@ -16,7 +16,7 @@ const useIsOverflowing = ref => {
   )
 
   useLayoutEffect(() => {
-    if (!ref?.current || isOverflowing) return
+    if (!ref?.current) return
     setIsOverflowing(checkOverflow(ref.current))
   }, [ref, isOverflowing])
 

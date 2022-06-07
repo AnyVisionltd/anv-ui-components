@@ -1,14 +1,14 @@
 import React from 'react'
 import propTypes from 'prop-types'
 import { NoResults, ErrorCircleOutlined } from '@anyvision/anv-icons'
-import languageService from '../../../services/language'
 import { Button } from '../../Button'
 import { emptyListTypes } from '../utils'
+import { useComponentTranslation } from '../../../hooks/UseComponentTranslation'
 import styles from './EmptyTreeSearch.module.scss'
 
-const getTranslation = path => languageService.getTranslation(`${path}`)
-
 const EmptyTreeSearch = ({ type, onClearSearch, noItemsMessage }) => {
+  const { getComponentTranslation } = useComponentTranslation()
+  const TreeTranslations = getComponentTranslation('tree')
   const content =
     type === emptyListTypes.NO_ITEMS_IN_LIST ? (
       <>
@@ -19,7 +19,7 @@ const EmptyTreeSearch = ({ type, onClearSearch, noItemsMessage }) => {
       <>
         <NoResults />
         <div className={styles.noResultsText}>
-          {getTranslation('noResultsFound')}
+          {TreeTranslations.noResultsFound}
         </div>
         <Button
           className={styles.clearButton}
@@ -27,7 +27,7 @@ const EmptyTreeSearch = ({ type, onClearSearch, noItemsMessage }) => {
           size='small'
           variant='ghost'
         >
-          {getTranslation('clearSearch')}
+          {TreeTranslations.clearSearch}
         </Button>
       </>
     )

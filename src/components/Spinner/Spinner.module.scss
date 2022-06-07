@@ -1,0 +1,94 @@
+@import '~@anyvision/style-guide';
+
+%edge {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background-color: av-color(purewhite);
+  border-radius: av-radius(circle);
+}
+
+.spinner {
+  border-radius: av-radius(circle);
+  width: av-size(sz-16);
+  height: av-size(sz-16);
+  position: relative;
+  border: 4px solid av-color(purewhite, av-opacity(divider));
+  border-left-color: av-color(purewhite);
+  animation: spin 1s infinite linear;
+
+  &.small {
+    &:after {
+      @extend %edge;
+      top: -1px;
+      right: 13px;
+    }
+
+    &:before {
+      @extend %edge;
+      bottom: -1px;
+      right: 13px;
+    }
+  }
+
+  &.medium {
+    width: av-size(sz-24);
+    height: av-size(sz-24);
+
+    &:after {
+      @extend %edge;
+      top: 0px;
+      right: 20px;
+    }
+
+    &:before {
+      @extend %edge;
+      bottom: 0px;
+      right: 20px;
+    }
+  }
+
+  &.large {
+    width: av-size(sz-32);
+    height: av-size(sz-32);
+
+    &:after {
+      @extend %edge;
+      top: 1px;
+      right: 27px;
+    }
+
+    &:before {
+      @extend %edge;
+      bottom: 1px;
+      right: 27px;
+    }
+  }
+
+  &.giant {
+    width: av-size(sz-40);
+    height: av-size(sz-40);
+
+    &:after {
+      @extend %edge;
+      top: 2px;
+      right: 34px;
+    }
+
+    &:before {
+      @extend %edge;
+      bottom: 2px;
+      right: 34px;
+    }
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

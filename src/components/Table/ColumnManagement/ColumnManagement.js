@@ -2,13 +2,16 @@ import React, { useContext, useEffect, useState } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
-import LanguageService from '../../../services/language'
 import { Button, Checkbox, Dialog, List } from '../../../index'
+import { useComponentTranslation } from '../../../hooks/UseComponentTranslation'
 import { ReactComponent as DragIcon } from '../../../assets/svg/Drag.svg'
 import TableContext from '../TableContext'
 import styles from './ColumnManagement.module.scss'
 
 const ColumnManagement = ({ onChange }) => {
+  const { getComponentTranslation } = useComponentTranslation('table')
+  const TableTranslations = getComponentTranslation('table')
+
   const {
     state,
     setColumnManagementActivity,
@@ -137,13 +140,11 @@ const ColumnManagement = ({ onChange }) => {
       isOpen={isOpen}
       onClose={handleDialogClose}
     >
-      <Dialog.Header>
-        {LanguageService.getTranslation('columnManagement')}
-      </Dialog.Header>
+      <Dialog.Header>{TableTranslations.dialogHeader}</Dialog.Header>
       {renderColumnList()}
       <Dialog.Footer className={styles.dialogFooter}>
         <Button size={'small'} onClick={handleSave}>
-          {LanguageService.getTranslation('save')}
+          {TableTranslations.saveButton}
         </Button>
       </Dialog.Footer>
     </Dialog>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, memo, useCallback } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import languageService from '../../services/language'
+import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
 import { useFormProvider } from '../../index'
 import { ReactComponent as ArrowSolidDown } from '../../assets/svg/ArrowSolidDown.svg'
 import { ReactComponent as ErrorCircleIcon } from '../../assets/svg/ErrorCircleOutlined.svg'
@@ -16,9 +16,10 @@ const types = {
   text: 'text',
   password: 'password',
   number: 'number',
+  dateTimePicker: 'date-time-picker',
 }
 
-const getTranslation = path => languageService.getTranslation(`${path}`)
+const dateSelectors = ['/', '-', ':']
 
 const TextField = React.forwardRef((props, ref) => {
   const {
@@ -45,8 +46,12 @@ const TextField = React.forwardRef((props, ref) => {
     label,
     style,
     menuProps,
+    trailingIcon,
     ...otherProps
   } = props
+
+  const { getComponentTranslation } = useComponentTranslation()
+  const TextFieldTranslations = getComponentTranslation('textField')
 
   const { isView } = useFormProvider({ view })
 
@@ -76,11 +81,21 @@ const TextField = React.forwardRef((props, ref) => {
     [disabled, readOnly],
   )
 
-  const setFocusOut = useCallback(() => {
-    if (!disabled && !readOnly) {
-      setActive(false)
-    }
-  }, [disabled, readOnly])
+  const setFocusOut = useCallback(
+    e => {
+      if (
+        isFunction(textFieldRef.current.contains) &&
+        textFieldRef.current.contains(e.target)
+      ) {
+        return
+      }
+
+      if (!disabled && !readOnly) {
+        setActive(false)
+      }
+    },
+    [disabled, readOnly],
+  )
 
   useEffect(() => {
     const ref = textFieldRef && textFieldRef.current
@@ -126,14 +141,29 @@ const TextField = React.forwardRef((props, ref) => {
     if (
       type !== types.options &&
       type !== types.number &&
-      caretStart !== undefined &&
-      inputRef &&
-      inputRef.current
+      caretStart !== undefined
     ) {
-      inputRef.current.setSelectionRange(caretStart, caretEnd)
+      inputRef.current?.setSelectionRange(caretStart, caretEnd)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value])
+
+  const handleDateInputSelection = inputValue => {
+    const currentSelectedCharacter = inputValue[cursorRef.current.caretStart]
+    if (dateSelectors.includes(currentSelectedCharacter)) {
+      cursorRef.current.caretStart += 1
+      cursorRef.current.caretEnd += 1
+    }
+  }
+
+  const handleInputSelection = ({
+    target: { selectionStart, selectionEnd, value },
+  }) => {
+    const prevCaretStart = cursorRef.current.caretStart
+    cursorRef.current = { caretStart: selectionStart, caretEnd: selectionEnd }
+    if (type === types.dateTimePicker && prevCaretStart < selectionStart)
+      handleDateInputSelection(value)
+  }
 
   const onInputChange = e => {
     e.persist()
@@ -141,21 +171,18 @@ const TextField = React.forwardRef((props, ref) => {
       target: { value },
     } = e
     setEmpty(!value)
-    const caretStart = e.target.selectionStart
-    const caretEnd = e.target.selectionEnd
-    cursorRef.current = { caretStart, caretEnd }
+    handleInputSelection(e)
     onChange(e)
   }
 
   const renderTrailingIcon = () => {
+    if (typeof trailingIcon === 'function')
+      return trailingIcon({ isFocused: active })
+
     if (type === types.options) {
       return <ArrowSolidDown className={styles.optionsIcon} />
     }
-    return error && type !== types.password ? (
-      <ErrorCircleIcon />
-    ) : (
-      otherProps.trailingIcon
-    )
+    return error && type !== types.password ? <ErrorCircleIcon /> : trailingIcon
   }
 
   const handleMenuClose = () => {
@@ -240,7 +267,7 @@ const TextField = React.forwardRef((props, ref) => {
             <div
               className={classNames(styles.ellipsis, !viewValue && styles.none)}
             >
-              {viewValue || getTranslation('none')}
+              {viewValue || TextFieldTranslations.none}
             </div>
           </Tooltip>
         </div>
@@ -305,7 +332,7 @@ TextField.defaultProps = {
   menuProps: {},
 }
 
-TextField.propTypes = {
+export const textFieldPropTypes = {
   type: propTypes.string,
   /** The variant of the textField. */
   variant: propTypes.oneOf(['fill', 'outline']),
@@ -360,6 +387,10 @@ TextField.propTypes = {
   style: propTypes.string,
   /** props to be propagated to menu component*/
   menuProps: propTypes.object,
+  /** Whether to use clear text icon, to clear text in case the input has value. */
+  useClearTextIcon: propTypes.bool,
 }
+
+TextField.propTypes = textFieldPropTypes
 
 export default memo(TextField)

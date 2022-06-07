@@ -1,6 +1,6 @@
 {
   "name": "@anyvision/anv-ui-components",
-  "version": "1.0.0-beta.132",
+  "version": "1.0.0-beta.189",
   "main": "dist/index.js",
   "description": "Anyvision Components Library",
   "license": "MIT",
@@ -14,8 +14,8 @@
     "url": "https://github.com/AnyVisionltd/anv-ui-components"
   },
   "dependencies": {
-    "@anyvision/anv-icons": "1.0.0-beta.19",
-    "@anyvision/style-guide": "1.0.4-beta.9",
+    "@anyvision/style-guide": "1.0.4-beta.13",
+    "@anyvision/anv-icons": "^1.0.0-beta.27",
     "@date-io/moment": "^1.3.13",
     "@material-ui/core": "^4.12.3",
     "@material-ui/pickers": "^3.3.10",
@@ -64,8 +64,13 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.17.8",
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.10",
+    "@babel/preset-typescript": "^7.16.7",
+    "@rollup/plugin-commonjs": "^21.0.2",
+    "@rollup/plugin-node-resolve": "^13.1.3",
+    "@rollup/plugin-typescript": "^8.3.1",
     "@storybook/addon-actions": "6.1.21",
     "@storybook/addon-controls": "6.1.21",
     "@storybook/addon-docs": "6.1.21",
@@ -88,20 +93,19 @@
     "lint-staged": "^10.5.3",
     "prettier": "2.1.2",
     "pretty-quick": "^3.1.0",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "react-scripts": "^4.0.1",
     "react-test-renderer": "^16.14.0",
-    "rollup": "^2.38.0",
+    "rollup": "^2.38.1",
     "rollup-plugin-babel": "^4.4.0",
-    "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-json": "^4.0.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^3.1.8",
     "rollup-plugin-sass": "^1.2.2",
     "rollup-plugin-url": "^3.0.1",
-    "url-loader": "^4.1.1",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "typescript": "^4.2.0",
+    "url-loader": "^4.1.1"
   },
   "jest": {
     "moduleNameMapper": {

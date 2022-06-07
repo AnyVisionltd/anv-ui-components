@@ -10,6 +10,8 @@ import classNames from 'classnames'
 import keymap from '../../utils/enums/keymap'
 import { SingleThumb } from './SingleThumb'
 import { DualThumb } from './DualThumb'
+import { getVideoDurationToShow } from '../../utils/date'
+import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
 import styles from './RangeSlider.module.scss'
 
 const keyboardButtons = [
@@ -35,6 +37,7 @@ const RangeSlider = ({
   containerClassName,
   minGap,
   onReachingMinGap,
+  isDuration,
   ...otherProps
 }) => {
   const [showTooltip, setShowTooltip] = useState(false)
@@ -43,6 +46,9 @@ const RangeSlider = ({
   const containerRef = useRef(null)
   const rangeRef = useRef(null)
   const isDualThumb = Array.isArray(value)
+
+  const { getComponentTranslation } = useComponentTranslation()
+  const RangeSliderTranslations = getComponentTranslation('rangeSlider')
 
   const SLIDER_SETTINGS = useMemo(
     () => ({
@@ -202,22 +208,28 @@ const RangeSlider = ({
     return (
       <>
         <span className={minLabel}>
-          {min}
-          {measureUnitText}
+          {isDuration
+            ? `${RangeSliderTranslations.start} ${getVideoDurationToShow(min)}`
+            : min}
         </span>
         <span className={maxLabel}>
-          {max}
-          {measureUnitText}
+          {isDuration
+            ? `${RangeSliderTranslations.end} ${getVideoDurationToShow(max)}`
+            : max}
         </span>
       </>
     )
   }
 
+  const renderTooltipText = textValue => {
+    const currentValue = textValue ?? value
+    return isDuration ? getVideoDurationToShow(currentValue) : currentValue
+  }
+
   const renderSingleThumbTooltip = ref =>
     !isToggleTooltip || showTooltip ? (
       <div ref={ref} className={styles.tooltip}>
-        {hoverValue ?? value}
-        {measureUnitText}
+        {renderTooltipText(hoverValue)}
       </div>
     ) : null
 
@@ -227,7 +239,7 @@ const RangeSlider = ({
       className={styles.tooltip}
       style={{ visibility: showTooltip ? 'visible' : 'hidden' }}
     >
-      {textValue ?? value}
+      {renderTooltipText(textValue)}
       {measureUnitText}
     </div>
   )
@@ -302,6 +314,7 @@ RangeSlider.defaultProps = {
   isToggleTooltip: false,
   measureUnitText: '',
   onReachingMinGap: () => {},
+  isDuration: false,
 }
 
 RangeSlider.propTypes = {
@@ -332,6 +345,8 @@ RangeSlider.propTypes = {
   onReachingMinGap: propTypes.func,
   /** For css customization. */
   containerClassName: propTypes.string,
+  /** convert the slider to handle duration (in seconds) */
+  isDuration: propTypes.bool,
 }
 
 export default RangeSlider

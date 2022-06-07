@@ -3,51 +3,58 @@ import propTypes from 'prop-types'
 import { VariableSizeTree as TreeList } from 'react-vtree'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import { throttle } from '../../../utils'
+import {
+  TREE_NODE_PADDING,
+  LEAF_NODE_HEIGHT,
+  PARENT_NODE_HEIGHT,
+  PARENT_NODE_WRAPPER_HEIGHT,
+} from '../utils'
 import styles from './VirtualizedTreeList.module.scss'
 
 if (typeof ResizeObserver === 'undefined') {
   global.ResizeObserver = require('resize-observer-polyfill').default
 }
 
-const TREE_NODE_PADDING = 24
-const SCROLLBAR_WIDTH = 16
-const LEAF_NODE_HEIGHT = 48
-const PARENT_NODE_HEIGHT = 78
-
 const Node = ({
   data,
   isOpen,
   style,
   toggle,
-  treeData: { renderNode, maxContainerWidth },
-  forwardedRef,
+  treeData: {
+    renderNode,
+    maxContainerWidth,
+    nodesMap,
+    childrenKey,
+    idKey,
+    onExpand,
+  },
 }) => {
-  const { nestingLevel, id } = data
-  const content = renderNode(data, nestingLevel, {
-    isOpen,
-    handleExpand: toggle,
-  })
+  const { nestingLevel, parentKey, isLeaf, index, [idKey]: key } = data
   const paddingLeft = 2 * TREE_NODE_PADDING * nestingLevel
   const additionalStyle = {
     paddingLeft,
-    maxWidth: maxContainerWidth - paddingLeft - SCROLLBAR_WIDTH,
+    maxWidth: maxContainerWidth - paddingLeft,
   }
+
+  const handleExpand = () => {
+    !isOpen && onExpand(key)
+    toggle()
+  }
+
+  const isLastLeafOfParent =
+    isLeaf && nodesMap[parentKey]?.[childrenKey].length - 1 === index
 
   // data-parentNodeId = parentKey
   // data-totalItems = total
 
-  return (
-    <div
-      style={{
-        ...style,
-        ...additionalStyle,
-      }}
-      ref={forwardedRef}
-      data-itemindex={id}
-    >
-      {content}
-    </div>
-  )
+  const content = renderNode(data, nestingLevel, {
+    isOpen,
+    handleExpand,
+    isLastLeaf: isLastLeafOfParent,
+    style: additionalStyle,
+  })
+
+  return <div style={style}>{content}</div>
 }
 
 const RefForwardedNode = forwardRef((props, ref) => (
@@ -89,7 +96,12 @@ function handleOnWheel({ currentTarget, deltaY, clientY }) {
   if (Math.abs(deltaY) < 3) console.log(visibleElements.toString())
 }
 
-const buildTreeWalker = ({ rootNode, childrenKey, idKey, labelKey }) =>
+const determineDefaultHeight = (isParentNode, layer) => {
+  if (!isParentNode) return LEAF_NODE_HEIGHT
+  return layer === 0 ? PARENT_NODE_WRAPPER_HEIGHT : PARENT_NODE_HEIGHT
+}
+
+const buildTreeWalker = ({ rootNode, childrenKey, labelKey }) =>
   function* treeWalker(refresh) {
     const stack = Object.values(rootNode).map(node => ({
       nestingLevel: 0,
@@ -100,25 +112,25 @@ const buildTreeWalker = ({ rootNode, childrenKey, idKey, labelKey }) =>
       const { node, nestingLevel } = stack.shift()
       const {
         isParentNode,
-        [idKey]: key,
         [labelKey]: label,
         [childrenKey]: children,
         visible,
+        uniqueKey,
       } = node
 
       if (!visible) continue
 
       const isOpened = yield refresh
         ? {
-            defaultHeight: isParentNode ? PARENT_NODE_HEIGHT : LEAF_NODE_HEIGHT,
+            defaultHeight: determineDefaultHeight(isParentNode, nestingLevel),
             isOpenByDefault: false,
-            id: key,
+            id: uniqueKey,
             name: label,
             isLeaf: !isParentNode,
             nestingLevel,
             ...node,
           }
-        : key
+        : uniqueKey
 
       if (isParentNode && isOpened) {
         for (let i = children.length - 1; i >= 0; i--) {
@@ -137,6 +149,8 @@ const VirtualizedTreeList = ({
   renderNode,
   loadMoreData,
   isSearching,
+  nodesMap,
+  onExpand,
   ...keyValues
 }) => {
   const innerRef = useRef()
@@ -169,6 +183,9 @@ const VirtualizedTreeList = ({
           itemData={{
             renderNode,
             maxContainerWidth: width,
+            nodesMap,
+            onExpand,
+            ...keyValues,
           }}
           treeWalker={buildTreeWalker({ rootNode, ...keyValues })}
           height={height}
@@ -190,11 +207,14 @@ VirtualizedTreeList.defaultProps = {
   renderNode: () => {},
   setTreeInstance: () => {},
   loadMoreData: () => {},
+  onExpand: () => {},
 }
 
 VirtualizedTreeList.propTypes = {
   /** Tree structure needed for rendering the tree list. */
   rootNode: propTypes.object.isRequired,
+  /** A map object that is used to store data about the tree nodes. */
+  nodesMap: propTypes.object.isRequired,
   /** Render function for the nodes of the tree. */
   renderNode: propTypes.func,
   /** Set ref to the list component, so it can be accessible in Tree component. */
@@ -203,6 +223,14 @@ VirtualizedTreeList.propTypes = {
   loadMoreData: propTypes.func,
   /** Wether user is searching or not. */
   isSearching: propTypes.bool,
+  /** Called when a tree parent node is displayed. */
+  onExpand: propTypes.func,
+  /** The key value of the node's children property. Default is 'children'. */
+  childrenKey: propTypes.string,
+  /** The key value of the node's unique id property. Default is 'key'. */
+  idKey: propTypes.string,
+  /** The key value of the node's name property. Default is 'label'. */
+  labelKey: propTypes.string,
 }
 
 export default VirtualizedTreeList

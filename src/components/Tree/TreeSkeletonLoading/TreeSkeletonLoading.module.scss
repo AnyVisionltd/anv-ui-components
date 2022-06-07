@@ -1,0 +1,52 @@
+@import '~@anyvision/style-guide';
+@import '../Tree.module.scss';
+
+%checkboxSkeletonSize {
+  height: av-size(sz-16);
+  width: av-size(sz-16);
+  margin-right: av-space();
+  border-radius: av-radius(tidy);
+}
+
+.nodeSkeleton {
+  background-color: $nodeBackground;
+  height: $parentNodeHeight;
+  margin-top: av-space(tiny);
+  align-items: center;
+  display: grid;
+  justify-content: center;
+  grid-template-rows: auto auto;
+  grid-template-columns: auto 1fr;
+  padding: 0 av-space();
+
+  .selectCheckbox {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    @extend %checkboxSkeletonSize;
+  }
+
+  .nodeLabel {
+    grid-column: 2 / -1;
+    grid-row: 1 / 2;
+    width: 90%;
+  }
+
+  .content {
+    grid-column: 2 / -1;
+    grid-row: 2 / -1;
+    margin-left: calc(-1 * #{av-space(tiny)});
+    display: flex;
+    align-items: center;
+
+    .expandCheckbox {
+      @extend %checkboxSkeletonSize;
+    }
+
+    .nodeInfo {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: 90%;
+    }
+  }
+}

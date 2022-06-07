@@ -1,5 +1,9 @@
 import { useCallback, useState } from 'react'
-import { ALL_ROOTS_COMBINED_KEY, setNodeValueInTreeFromPath } from '../utils'
+import {
+  ALL_ROOTS_COMBINED_KEY,
+  getUniqueKey,
+  setNodeValueInTreeFromPath,
+} from '../utils'
 
 const useTreeVisibleData = ({
   initialData,
@@ -8,16 +12,32 @@ const useTreeVisibleData = ({
   childrenKey,
   labelKey,
   idKey,
+  isChildrenUniqueKeysOverlap,
 }) => {
+  const setNodeProperties = useCallback(
+    ({ node, parentKey, index }) => {
+      if (node.uniqueKey) return
+      node.parentKey = parentKey
+      node.index = index
+      node.uniqueKey = node[idKey]
+
+      if (isChildrenUniqueKeysOverlap && parentKey !== ALL_ROOTS_COMBINED_KEY) {
+        node.uniqueKey = getUniqueKey(parentKey, node[idKey])
+      }
+    },
+    [idKey, isChildrenUniqueKeysOverlap],
+  )
+
   const setAllNodesAsVisible = useCallback(
     (data, parentKey = ALL_ROOTS_COMBINED_KEY) => {
       const setAllVisible = nodes => {
-        nodes.forEach(node => {
+        nodes.forEach((node, index) => {
           node.visible = true
-          node.parentKey = parentKey
+          setNodeProperties({ node, parentKey, index })
+
           if (node[childrenKey]) {
             node.isParentNode = true
-            setAllNodesAsVisible(node[childrenKey], node[idKey])
+            setAllNodesAsVisible(node[childrenKey], node.uniqueKey)
           }
         })
       }
@@ -25,21 +45,26 @@ const useTreeVisibleData = ({
       setAllVisible(data)
       return data
     },
-    [childrenKey, idKey],
+    [childrenKey, setNodeProperties],
   )
 
   const filterVisibleData = useCallback(
     (data, searchKeyword, parentKey = ALL_ROOTS_COMBINED_KEY) => {
       const setVisible = nodes =>
-        nodes.forEach(node => {
-          node.visible = node[labelKey].toLowerCase().startsWith(searchKeyword)
-          node.parentKey = parentKey
+        nodes.forEach((node, index) => {
+          node.visible = node[labelKey].toLowerCase().includes(searchKeyword)
+          setNodeProperties({ node, parentKey, index })
+
           if (Array.isArray(node[childrenKey])) {
             node.isParentNode = true
             if (node.visible) {
-              setAllNodesAsVisible(node[childrenKey], node[idKey])
+              setAllNodesAsVisible(node[childrenKey], node.uniqueKey)
             } else {
-              filterVisibleData(node[childrenKey], searchKeyword, node[idKey])
+              filterVisibleData(
+                node[childrenKey],
+                searchKeyword,
+                node.uniqueKey,
+              )
               for (const child of node[childrenKey]) {
                 if (child.visible) {
                   node.visible = child.visible
@@ -53,7 +78,7 @@ const useTreeVisibleData = ({
       setVisible(data)
       return data
     },
-    [childrenKey, idKey, labelKey, setAllNodesAsVisible],
+    [childrenKey, labelKey, setAllNodesAsVisible, setNodeProperties],
   )
 
   const [searchQuery, setSearchQuery] = useState('')
@@ -61,17 +86,19 @@ const useTreeVisibleData = ({
     filterVisibleData(initialData, searchQuery.trim().toLowerCase()),
   )
 
-  const handleSetNodeNewProperties = useCallback((nodeKey, newProperties, nodePathArr) => {
-    const newTreeData = setNodeValueInTreeFromPath({
-      pathsArr: [...nodePathArr, nodeKey],
-      treeData: [...filteredData],
-      newProperties,
-      childrenKey,
-      idKey
-    })
+  const handleSetNodeNewProperties = useCallback(
+    (nodeKey, newProperties, nodePathArr) => {
+      const newTreeData = setNodeValueInTreeFromPath({
+        pathsArr: [...nodePathArr, nodeKey],
+        treeData: [...filteredData],
+        newProperties,
+        childrenKey,
+      })
 
-    setFilteredData(newTreeData)
-  }, [childrenKey, filteredData, idKey])
+      setFilteredData(newTreeData)
+    },
+    [childrenKey, filteredData],
+  )
 
   const handleAddNewNodes = useCallback(
     nodesData => {
@@ -111,7 +138,7 @@ const useTreeVisibleData = ({
     resetSearchData: handleResetSearchData,
     handleSearch,
     handleAddNewNodes,
-    handleSetNodeNewProperties
+    handleSetNodeNewProperties,
   }
 }
 

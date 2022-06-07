@@ -1,13 +1,14 @@
 import React from 'react'
 import { render, fireEvent, waitFor, screen } from '@testing-library/react'
 import { SunBrightens } from '@anyvision/anv-icons'
-import languageService from '../../services/language'
 import ToastMessage from './ToastMessage'
 
 describe('<ToastMessage />', () => {
   describe('Render Snapshots', () => {
     it('should render toastMessage when isOpen true', () => {
-      const { container } = render(<ToastMessage message='test message' isOpen />)
+      const { container } = render(
+        <ToastMessage message='test message' isOpen />,
+      )
       expect(container).toMatchSnapshot()
     })
 
@@ -20,14 +21,22 @@ describe('<ToastMessage />', () => {
 
     it('should render leadingIcon', () => {
       const { container } = render(
-        <ToastMessage message='test message' isOpen leadingIcon={<SunBrightens />} />,
+        <ToastMessage
+          message='test message'
+          isOpen
+          leadingIcon={<SunBrightens />}
+        />,
       )
       expect(container).toMatchSnapshot()
     })
 
     it('should render custom closeIcon', () => {
       const { container } = render(
-        <ToastMessage message='test message' isOpen closeIcon={<SunBrightens />} />,
+        <ToastMessage
+          message='test message'
+          isOpen
+          closeIcon={<SunBrightens />}
+        />,
       )
       expect(container).toMatchSnapshot()
     })
@@ -84,10 +93,8 @@ describe('<ToastMessage />', () => {
 
   describe('Undo Button functionality', () => {
     it('should render undo button', () => {
-      const { container } = render(
-        <ToastMessage message='test message' isOpen isUndo={true} />,
-      )
-      const node = screen.getByText(languageService.getTranslation('undo'))
+      render(<ToastMessage message='test message' isOpen isUndo={true} />)
+      const node = screen.getByText('Undo')
       expect(node).toBeTruthy()
     })
 
@@ -96,10 +103,15 @@ describe('<ToastMessage />', () => {
         alert('TEST undo callback - display an alert')
       }
       const alertMock = jest.spyOn(window, 'alert').mockImplementation()
-      const { container } = render(
-        <ToastMessage message='test message' isOpen isUndo={true} undoCallback={undoCallback} />,
+      render(
+        <ToastMessage
+          message='test message'
+          isOpen
+          isUndo={true}
+          undoCallback={undoCallback}
+        />,
       )
-      const node = screen.getByText(languageService.getTranslation('undo'))
+      const node = screen.getByText('Undo')
       fireEvent.click(node)
       await waitFor(() => expect(alertMock).toHaveBeenCalledTimes(1))
     })

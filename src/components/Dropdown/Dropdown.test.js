@@ -1,7 +1,6 @@
 import React from 'react'
 import { screen, render, fireEvent } from '@testing-library/react'
 import Dropdown from './Dropdown'
-import languageService from '../../services/language'
 
 const fruits = [
   { value: 'Banana', id: 1 },
@@ -77,7 +76,7 @@ describe('<Dropdown/>', () => {
         />,
       )
 
-      const itemsSelected = languageService.getTranslation('itemsSelected')
+      const itemsSelected = 'Items Selected'
       const selectedValueText = screen.getByText(
         `${fruits.length} ${itemsSelected}`,
       )
@@ -188,5 +187,17 @@ describe('<Dropdown/>', () => {
       const selectedValueText = getByText(arr[0].item)
       expect(selectedValueText).toBeTruthy()
     })
+  })
+})
+
+describe('testing Dropdown`s error state', () => {
+  it('should display the error message', () => {
+    const onMenuOpen = jest.fn()
+    const errorMessage = 'some error message'
+    const { getByText } = render(
+      <Dropdown onMenuOpen={onMenuOpen} error message={errorMessage} />,
+    )
+    expect(getByText(errorMessage)).toBeTruthy()
+    expect(getByText(errorMessage).classList.contains('error')).toBeTruthy()
   })
 })

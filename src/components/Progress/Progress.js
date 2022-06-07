@@ -16,6 +16,7 @@ const Progress = ({
     const classes = classNames(
       styles.circleProgress,
       indeterminate && styles.indeterminate,
+      className,
     )
 
     const renderCircle = () => {

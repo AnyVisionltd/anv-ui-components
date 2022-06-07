@@ -2,8 +2,20 @@ import React, { useRef, cloneElement } from 'react'
 import propTypes from 'prop-types'
 import styles from './FileUpload.module.scss'
 
-const FileUpload = ({ onChange, accept, multiple, children, ...other }) => {
+const FileUpload = ({
+  onChange,
+  accept,
+  multiple,
+  children,
+  isUploadFolder,
+  ...other
+}) => {
   const fileRef = useRef()
+
+  const openFolderProp = isUploadFolder && {
+    webkitdirectory: '',
+    directory: '',
+  }
 
   const uploadClick = (childrenOnClick, childrenOnClickArgs) => {
     childrenOnClick && childrenOnClick(...childrenOnClickArgs)
@@ -22,6 +34,7 @@ const FileUpload = ({ onChange, accept, multiple, children, ...other }) => {
   return (
     <>
       <input
+        {...openFolderProp}
         className={styles.hide}
         ref={fileRef}
         type={'file'}
@@ -45,6 +58,7 @@ const FileUpload = ({ onChange, accept, multiple, children, ...other }) => {
 
 FileUpload.defaultProps = {
   onChange: () => {},
+  isUploadFolder: false,
 }
 
 FileUpload.propTypes = {
@@ -56,6 +70,8 @@ FileUpload.propTypes = {
   multiple: propTypes.bool,
   /** HTML element or Component to render. */
   children: propTypes.element,
+  /** Is upload entire folder */
+  isUploadFolder: propTypes.bool,
 }
 
 export default FileUpload
