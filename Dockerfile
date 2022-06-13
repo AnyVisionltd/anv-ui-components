@@ -1,4 +1,4 @@
-FROM node:12.16.0-alpine as base
+FROM node:14.19.3-alpine3.15 as base
 
 RUN apk update \
     && apk add --no-cache \
