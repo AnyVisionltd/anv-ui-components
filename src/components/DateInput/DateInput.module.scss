@@ -1,0 +1,33 @@
+@import '~@anyvision/style-guide';
+:global {
+  .date-picker {
+    padding: 0 !important;
+    .ant-picker-input {
+      position: relative;
+  
+      input {
+        margin-top: av-space();
+      }
+  
+      .ant-picker-suffix,
+      .ant-picker-clear {
+        position: absolute;
+        right: av-space(medium);
+        top: 50%;
+        transform: translateY(-50%);
+      }
+  
+      .ant-picker-suffix {
+        svg {
+          font-size: av-size(sz-32);
+        }
+      }
+      .ant-picker-clear {
+        border: av-size(sz-8) solid av-color(purewhite);
+        svg {
+          font-size: av-size(sz-16);
+        }
+      }
+    }
+  }
+}

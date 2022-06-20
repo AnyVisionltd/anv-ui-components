@@ -5,7 +5,7 @@ import TableContext from '../../TableContext'
 import { ConfirmationDialog } from '../../ConfirmationDialog'
 import styles from './BulkAction.module.scss'
 
-const BulkAction = ({ icon, onClick, subMenu, confirmDialogBody }) => {
+const BulkAction = ({ icon, label, onClick, subMenu, confirmDialogBody }) => {
   const { state } = useContext(TableContext)
   const { items, excludeMode } = state.selection
   const moreActionsRef = useRef()

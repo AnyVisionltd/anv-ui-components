@@ -1,0 +1,127 @@
+@import '~@anyvision/style-guide';
+
+.arrows {
+  position: relative;
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: av-font-size(medium);
+    &:nth-child(2) {
+      left: 25%;
+    }
+  }
+}
+
+:global {
+  .date-range-picker {
+    cursor: default;
+    outline: none;
+    text-decoration: none;
+    border-radius: av-radius(tidy);
+    padding: 0 av-space(large) 0 0 !important;
+    height: av-size(sz-56);
+    box-sizing: border-box;
+    width: av-size(sz-480);
+    // width: calc(#{av-size(sz-320)} + #{av-size(sz-96)});
+    &:hover {
+      box-shadow: inset 0 0 0 2px av-color(content, av-opacity(disabled));
+      border: solid 1px transparent;
+    }
+    .ant-picker-input {
+      input {
+        text-align: center;
+        font-size: 16px;
+        font-family: 'Poppins' !important;
+      }
+    }
+
+    .ant-picker-suffix,
+    .ant-picker-clear {
+      position: absolute;
+      right: av-space(base);
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .ant-picker-suffix {
+      svg {
+        font-size: av-size(sz-32);
+      }
+    }
+    .ant-picker-clear {
+      border: av-size(sz-8) solid av-color(purewhite);
+      svg {
+        font-size: av-size(sz-16);
+      }
+    }
+
+    .ant-picker-active-bar {
+      display: none;
+    }
+    &.ant-picker-focused {
+      box-shadow: inset 0 0 0 2px av-color(primary);
+      border: solid 1px transparent;
+      border-right-width: auto;
+      outline: 0;
+    }
+  }
+  .date-range-picker-panel {
+    width: av-size(sz-480);
+    padding: 0;
+    .ant-picker-panel-container {
+      width: 100%;
+      border: solid 1px av-color(primary);
+      background-color: av-color(purewhite);
+
+      .ant-picker-panels {
+        .ant-picker-header {
+          padding: av-space(micro) av-space();
+          .ant-picker-header-view {
+            font-weight: bold;
+          }
+        }
+
+        .ant-picker-datetime-panel {
+          .ant-picker-date-panel {
+            .ant-picker-body {
+              .ant-picker-content {
+                tbody {
+                  tr {
+                    td {
+                      &.ant-picker-cell-in-range {
+                        &::before {
+                          background: av-color(primary, av-opacity(disabled));
+                        }
+                        .ant-picker-cell-inner {
+                          background: transparent;
+                        }
+                      }
+                      &.ant-picker-cell-in-view.ant-picker-cell-range-start,
+                      &.ant-picker-cell-in-view.ant-picker-cell-range-end {
+                        &:not(.ant-picker-cell-range-start-single) {
+                          &:before {
+                            background: av-color(primary, av-opacity(disabled));
+                          }
+                        }
+                        .ant-picker-cell-inner {
+                          background: av-color(primary);
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          .ant-picker-time-panel {
+            .ant-picker-time-panel-column {
+              @extend %av-scrollbar;
+            }
+          }
+        }
+      }
+    }
+  }
+}
