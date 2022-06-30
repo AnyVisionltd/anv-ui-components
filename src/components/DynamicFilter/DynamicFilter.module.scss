@@ -1,0 +1,10 @@
+@import '~@anyvision/style-guide';
+
+.dynamicFilterBtn {
+  padding: av-space(base) av-space(tiny);
+  background-color: av-color(secondary);
+  color: av-color(purewhite);
+  min-width: av-size(sz-80);
+  width: fit-content;
+  cursor: pointer;
+}
