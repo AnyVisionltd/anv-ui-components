@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useRef } from 'react'
 import DynamicFilterDateTime from './components/DynamicFilterDateTime/DynamicFilterDateTime'
 import DynamicFilterInfiniteListFilter from './components/DynamicFilterInfiniteListFilter/DynamicFilterInfiniteListFilter'
 import DynamicFilterListFilter from './components/DynamicFilterListFilter/DynamicFilterListFilter'
@@ -7,8 +7,10 @@ import UseDynamicFilterReducer from './store/UseDynamicFilterReducer'
 import DynamicFilterSelection from './components/DynamicFilterSelection/DynamicFilterSelection'
 import DynamicFilterSlider from './components/DynamicFilterSlider/DynamicFilterSlider'
 import DynamicFilterSort from './components/DynamicFilterSort/DynamicFilterSort'
-import { EyeEnabled, EyeDisabled, TimesThin } from '@anyvision/anv-icons'
+import { ArrowDown } from '@anyvision/anv-icons'
 import { DynamicFilterInterface } from './utils'
+import DynamicFilterMenu from './components/DynamicFilterMenu/DynamicFilterMenu'
+import classNames from 'classnames'
 import styles from './DynamicFilter.module.scss'
 
 const DynamicFilter: DynamicFilterInterface = ({
@@ -18,11 +20,28 @@ const DynamicFilter: DynamicFilterInterface = ({
   classname,
   children,
 }): ReactElement => {
-  const [state, actions] = UseDynamicFilterReducer()
+  const { state, actions } = UseDynamicFilterReducer()
+  const btnRef = useRef(null)
+  const { isMenuOpen } = state
+
+  const handleBtnClick = () => {
+    actions.toggleIsMenuOpen()
+  }
 
   return (
     <DynamicFilterContext.Provider value={{ state, actions }}>
-      <div className={styles.dynamicFilterBtn}>{title}</div>
+      <div
+        ref={btnRef}
+        className={classNames(
+          styles.dynamicFilterBtn,
+          isMenuOpen && styles.btnSelected,
+        )}
+        onClick={handleBtnClick}
+      >
+        <span>{title}</span>
+        <ArrowDown />
+      </div>
+      {isMenuOpen && <DynamicFilterMenu anchorElement={btnRef} />}
     </DynamicFilterContext.Provider>
   )
 }

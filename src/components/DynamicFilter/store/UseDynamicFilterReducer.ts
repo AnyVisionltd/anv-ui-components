@@ -6,20 +6,19 @@ import {
   DynamicFilterActionsTypes,
 } from './DynamicFilterActions'
 
-export const DynamicFilterInitialState: DynamicFilterStateInterface = {
-  test: 'test',
+const DynamicFilterInitialState: DynamicFilterStateInterface = {
+  isMenuOpen: false,
 }
 
 const reducer = (
   state: DynamicFilterStateInterface,
   action: DynamicFilterActions,
-): DynamicFilterStateInterface => {
+) => {
   switch (action.type) {
-    case DynamicFilterActionsTypes.SET_TEST:
-      const { payload: test } = action
+    case DynamicFilterActionsTypes.TOGGLE_IS_MENU_OPEN:
       return {
         ...state,
-        test,
+        isMenuOpen: !state.isMenuOpen,
       }
     default:
       return state
@@ -29,5 +28,5 @@ const reducer = (
 export default () => {
   const [state, dispatch] = useReducer(reducer, DynamicFilterInitialState)
   const { current: bondedActions } = useRef(dynamicFilterActions(dispatch))
-  return [state, bondedActions]
+  return { state, actions: bondedActions }
 }

@@ -1,10 +1,30 @@
 @import '~@anyvision/style-guide';
+@import '../../styles/mixin/ripple.scss';
 
 .dynamicFilterBtn {
+  @include av-ripple();
   padding: av-space(base) av-space(tiny);
-  background-color: av-color(secondary);
+  background-color: av-color(content, av-opacity(ghost));
   color: av-color(purewhite);
   min-width: av-size(sz-80);
   width: fit-content;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: av-space(tiny);
+
+  svg {
+    height: av-size(sz-16);
+    width: av-size(sz-16);
+    transition: all 0.05s linear;
+    fill: av-color(purewhite);
+  }
+
+  &:hover {
+    background-color: av-color(content, av-opacity(divider));
+  }
+
+  &.btnSelected {
+    background-color: av-color(primary);
+  }
 }

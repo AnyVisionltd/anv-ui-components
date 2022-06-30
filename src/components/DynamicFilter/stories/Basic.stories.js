@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import DynamicFilter from '../DynamicFilter'
+import styles from '../../../storybook/index.module.scss'
 
 export default {
   title: 'Content/DynamicFilter',
@@ -20,6 +21,12 @@ export const Basic = () => {
   const onClose = () => {}
 
   return (
-    <DynamicFilter title={'Acknowledge'} onApply={onApply} onClose={onClose} />
+    <div className={styles.marginFlexContainer}>
+      <DynamicFilter
+        title={'Acknowledge'}
+        onApply={onApply}
+        onClose={onClose}
+      />
+    </div>
   )
 }

@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
 export interface DynamicFilterStateInterface {
-  test: string
+  isMenuOpen: boolean
 }
 
 export enum DateTimeVarientType {
