@@ -6,6 +6,8 @@
   height: fit-content;
   min-height: 200px;
   min-width: 300px;
+  max-height: av-size(sz-640);
+  overflow-y: auto;
   background-color: av-color(purewhite);
   border: solid 3px av-color(primary);
   box-sizing: border-box;
