@@ -2,7 +2,7 @@ import React, { FC, ReactElement, useContext, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { useClickOutsideListener } from '../../../../hooks'
 import DynamicFilterContext from '../../store/DynamicFilterContext'
-import { MenuElWidth } from '../../utils'
+import { maxMenuElWidth } from '../../utils'
 import styles from './DynamicFilterMenu.module.scss'
 
 interface DynamicFilterMenuProps {
@@ -19,12 +19,14 @@ const DynamicFilterMenu: FC<DynamicFilterMenuProps> = ({
 
   const customStyle = () => {
     if (anchorElement.current) {
-      const rect = anchorElement.current.getBoundingClientRect()      
-      const isOpenToTheRight: boolean = ((rect.x + rect.width) - MenuElWidth) > 0
+      const rect = anchorElement.current.getBoundingClientRect()
+      const isOpenToTheRight: boolean = rect.x + rect.width - maxMenuElWidth > 0
       return {
-        width: MenuElWidth,
+        maxWidth: `${maxMenuElWidth}px`,
         top: `${rect.bottom}px`,
-        [isOpenToTheRight ? 'right' : 'left']: isOpenToTheRight ? `${window.innerWidth - rect.right}px` : `${rect.x}px`
+        [isOpenToTheRight ? 'right' : 'left']: isOpenToTheRight
+          ? `${window.innerWidth - rect.right}px`
+          : `${rect.x}px`,
       }
     }
   }
@@ -42,19 +44,12 @@ const DynamicFilterMenu: FC<DynamicFilterMenuProps> = ({
   useClickOutsideListener(onClickOutSide, anchorElement, menuRef)
 
   const renderMenu = () => (
-    <div
-      className={styles.menuContainer}
-      style={customStyle()}
-      ref={menuRef}
-    >
+    <div className={styles.menuContainer} style={customStyle()} ref={menuRef}>
       {children}
     </div>
   )
 
-  return createPortal(
-    renderMenu(),
-    anchorElement.current
-  )
+  return createPortal(renderMenu(), anchorElement.current)
 }
 
 export default DynamicFilterMenu

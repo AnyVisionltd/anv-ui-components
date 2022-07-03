@@ -5,8 +5,13 @@
   z-index: 20;
   height: fit-content;
   min-height: 200px;
+  min-width: 300px;
   background-color: av-color(purewhite);
   border: solid 3px av-color(primary);
   box-sizing: border-box;
+  padding: av-space(medium);
+  display: flex;
+  flex-direction: column;
+  gap: av-space(medium);
   cursor: auto;
 }

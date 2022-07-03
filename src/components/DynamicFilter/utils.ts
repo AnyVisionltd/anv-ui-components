@@ -2,6 +2,7 @@ import { FC } from 'react'
 
 export interface DynamicFilterStateInterface {
   isMenuOpen: boolean
+  elementsState: Record<string, any>
 }
 
 export enum DateTimeVarientType {
@@ -40,7 +41,7 @@ export interface DynamicFilterListFilterProps {
 export interface DynamicFilterSelectionProps {
   items: Array<SortItemInterface>
   otherProps?: Record<string, any>
-  key: string
+  elementKey: string
 }
 
 export interface DynamicFilterSliderProps {
@@ -53,7 +54,7 @@ export interface DynamicFilterSliderProps {
 export interface DynamicFilterSortProps {
   items: Array<SortItemInterface>
   otherProps?: Record<string, any>
-  key: string
+  elementKey: string
 }
 
 interface DynamicFilterProps {
@@ -72,5 +73,4 @@ export interface DynamicFilterInterface extends FC<DynamicFilterProps> {
   Sort: FC<DynamicFilterSortProps>
 }
 
-export const MenuElWidth = 480
-
+export const maxMenuElWidth = 480

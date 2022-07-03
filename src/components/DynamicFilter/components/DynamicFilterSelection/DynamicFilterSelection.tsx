@@ -1,13 +1,41 @@
-import React, { FC, ReactElement } from 'react'
+import React, { FC, ReactElement, useContext, useEffect } from 'react'
+import DynamicFilterContext from '../../store/DynamicFilterContext'
 import { DynamicFilterSelectionProps } from '../../utils'
-import styles from './DynamicFilterSelection.module.scss'
+import DynamicFilterSortBase from '../DynamicFilterSortBase/DynamicFilterSortBase'
 
 const DynamicFilterSelection: FC<DynamicFilterSelectionProps> = ({
   items,
-  key,
+  elementKey,
   otherProps,
 }): ReactElement => {
-  return <div></div>
+  const { actions } = useContext(DynamicFilterContext)
+
+  useEffect(() => {
+    if (items.length > 0) {
+      actions.updateElementsState({
+        [elementKey]: {
+          selectedItemId: items[0].key,
+        },
+      })
+    }
+  }, [actions, items, elementKey])
+
+  const onChange = (itemKey: string) => {
+    actions.updateElementsState({
+      [elementKey]: {
+        selectedItemId: itemKey,
+      },
+    })
+  }
+
+  return (
+    <DynamicFilterSortBase
+      items={items}
+      elementKey={elementKey}
+      otherProps={otherProps}
+      onChange={onChange}
+    />
+  )
 }
 
 export default DynamicFilterSelection

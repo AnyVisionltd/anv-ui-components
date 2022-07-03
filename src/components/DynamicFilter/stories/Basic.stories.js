@@ -22,11 +22,31 @@ export const Basic = () => {
 
   return (
     <div className={styles.marginFlexContainer}>
-      <DynamicFilter
-        title={'Acknowledge'}
-        onApply={onApply}
-        onClose={onClose}
-      />
+      <DynamicFilter title={'Acknowledge'} onApply={onApply} onClose={onClose}>
+        <DynamicFilter.Sort
+          items={[
+            {
+              key: 'dds',
+              title:
+                'fdsf dfdsfdfdsfdfdsfdfdsfdfdsfdfdsfdfdsfdfdsfdfdsfdfdsfdfdsfdfdsf',
+            },
+            { key: 'dssasdds', title: 'dssasddsdssasdds' },
+          ]}
+          elementKey={'sorts'}
+        />
+
+        <DynamicFilter.Selection
+          items={[
+            {
+              key: 'dds',
+              title:
+                'fdsf dfdsfdfdsfdfdsfdfdsfdfdsfdfdsfdfdsfdfdsfdfdsfdfdsfdfdsfdfdsf',
+            },
+            { key: 'dssasdds', title: 'dssasddsdssasdds' },
+          ]}
+          elementKey={'Selection'}
+        />
+      </DynamicFilter>
     </div>
   )
 }

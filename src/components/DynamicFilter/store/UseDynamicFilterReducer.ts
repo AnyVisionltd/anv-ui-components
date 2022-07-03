@@ -8,6 +8,7 @@ import {
 
 const DynamicFilterInitialState: DynamicFilterStateInterface = {
   isMenuOpen: false,
+  elementsState: {},
 }
 
 const reducer = (
@@ -19,6 +20,14 @@ const reducer = (
       return {
         ...state,
         isMenuOpen: !state.isMenuOpen,
+      }
+    case DynamicFilterActionsTypes.UPDATE_ELEMENTS_STATE:
+      return {
+        ...state,
+        elementsState: {
+          ...state.elementsState,
+          ...action.payload,
+        },
       }
     default:
       return state
