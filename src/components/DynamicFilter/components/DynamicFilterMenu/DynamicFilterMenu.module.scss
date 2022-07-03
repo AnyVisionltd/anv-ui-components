@@ -3,7 +3,9 @@
 .menuContainer {
   position: absolute;
   z-index: 20;
-  width: 200px;
-  height: 200px;
-  background-color: yellow;
+  height: fit-content;
+  min-height: 200px;
+  background-color: av-color(purewhite);
+  border: solid 3px av-color(primary);
+  box-sizing: border-box;
 }

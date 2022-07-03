@@ -21,7 +21,7 @@ const DynamicFilter: DynamicFilterInterface = ({
   children,
 }): ReactElement => {
   const { state, actions } = UseDynamicFilterReducer()
-  const btnRef = useRef(null)
+  const btnRef = useRef<HTMLDivElement>(null)
   const { isMenuOpen } = state
 
   const handleBtnClick = () => {
@@ -41,7 +41,7 @@ const DynamicFilter: DynamicFilterInterface = ({
         <span>{title}</span>
         <ArrowDown />
       </div>
-      {isMenuOpen && <DynamicFilterMenu anchorElement={btnRef} />}
+      {isMenuOpen && <DynamicFilterMenu anchorElement={btnRef}>{children}</DynamicFilterMenu>}
     </DynamicFilterContext.Provider>
   )
 }

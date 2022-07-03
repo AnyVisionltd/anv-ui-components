@@ -71,3 +71,6 @@ export interface DynamicFilterInterface extends FC<DynamicFilterProps> {
   Slider: FC<DynamicFilterSliderProps>
   Sort: FC<DynamicFilterSortProps>
 }
+
+export const MenuElWidth = 480
+
