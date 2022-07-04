@@ -34,7 +34,6 @@ export const Basic = () => {
           ]}
           elementKey={'sorts'}
         />
-        <DynamicFilter.Slider title='Range' elementKey={'Slider'} />
       </DynamicFilter>
     </div>
   )

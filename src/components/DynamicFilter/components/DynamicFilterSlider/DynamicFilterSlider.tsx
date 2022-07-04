@@ -1,5 +1,6 @@
 import React, { FC, ReactElement, useContext, useEffect, useRef } from 'react'
 import { RangeSlider } from '../../../RangeSlider'
+import { Tooltip } from '../../../Tooltip'
 import DynamicFilterContext from '../../store/DynamicFilterContext'
 import {
   DefaultMaxRange,
@@ -48,7 +49,9 @@ const DynamicFilterSlider: FC<DynamicFilterSliderProps> = ({
 
   return (
     <div className={styles.dynamicFilterSliderContainer}>
-      <span className={styles.SliderTitle}>{title}</span>
+      <Tooltip overflowOnly placement='right' content={title}>
+        <div className={styles.SliderTitle}>{title}</div>
+      </Tooltip>
       <div className={styles.dynamicFilterSliderInnerContainer}>
         <div className={styles.silderContainer}>
           <RangeSlider
