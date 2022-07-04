@@ -1,1 +1,40 @@
 @import '~@anyvision/style-guide';
+
+.dynamicFilterSliderContainer {
+  display: flex;
+  flex-direction: column;
+  gap: av-space(tiny);
+  width: 100%;
+
+  .SliderTitle {
+    @extend %av-subtitle1;
+    color: av-color(trueblack);
+    font-weight: bold;
+  }
+
+  .dynamicFilterSliderInnerContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: av-space(base);
+
+    .silderContainer {
+      width: 45%;
+
+      > * {
+        padding: 0;
+      }
+    }
+
+    .inputsContainer {
+      width: 45%;
+      display: flex;
+      gap: av-space(tiny);
+
+      > * {
+        width: av-size(sz-80);
+      }
+    }
+  }
+}

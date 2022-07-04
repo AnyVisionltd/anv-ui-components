@@ -34,18 +34,7 @@ export const Basic = () => {
           ]}
           elementKey={'sorts'}
         />
-
-        <DynamicFilter.Selection
-          items={[
-            {
-              key: 'dds',
-              title:
-                'fdsf dfdsfdfdsfdfdsfdfdsfdfdsfdfdsfdfdsfdfdsfdfdsfdfdsfdfdsfdfdsf',
-            },
-            { key: 'dssasdds', title: 'dssasddsdssasdds' },
-          ]}
-          elementKey={'Selection'}
-        />
+        <DynamicFilter.Slider title='Range' elementKey={'Slider'} />
       </DynamicFilter>
     </div>
   )

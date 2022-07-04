@@ -41,15 +41,17 @@ const DynamicFilter: DynamicFilterInterface = ({
         <span>{title}</span>
         <ArrowDown />
       </div>
-      {isMenuOpen && <DynamicFilterMenu anchorElement={btnRef}>{children}</DynamicFilterMenu>}
+      {isMenuOpen && (
+        <DynamicFilterMenu anchorElement={btnRef}>{children}</DynamicFilterMenu>
+      )}
     </DynamicFilterContext.Provider>
   )
 }
 DynamicFilter.DateTime = DynamicFilterDateTime
 DynamicFilter.InfiniteListFilter = DynamicFilterInfiniteListFilter
 DynamicFilter.ListFilter = DynamicFilterListFilter
-DynamicFilter.Selection = DynamicFilterSelection
 DynamicFilter.Slider = DynamicFilterSlider
+DynamicFilter.Selection = DynamicFilterSelection
 DynamicFilter.Sort = DynamicFilterSort
 
 export default DynamicFilter

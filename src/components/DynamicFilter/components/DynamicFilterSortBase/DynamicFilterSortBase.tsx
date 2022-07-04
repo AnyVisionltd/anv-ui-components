@@ -35,7 +35,7 @@ const DynamicFilterSortBase: FC<DynamicFilterSortBaseProps> = ({
             className={undefined}
           />
           <Tooltip overflowOnly placement='right' content={title}>
-            <span className={styles.title}>{title}</span>
+            <span className={styles.sortTitle}>{title}</span>
           </Tooltip>
         </div>
       ))}
