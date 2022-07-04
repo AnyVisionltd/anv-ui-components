@@ -9,6 +9,7 @@ import {
 const DynamicFilterInitialState: DynamicFilterStateInterface = {
   isMenuOpen: false,
   elementsState: {},
+  isDatePickerOpen: false,
 }
 
 const reducer = (
@@ -28,6 +29,11 @@ const reducer = (
           ...state.elementsState,
           ...action.payload,
         },
+      }
+    case DynamicFilterActionsTypes.SET_IS_DATE_PICKER_OPEN:
+      return {
+        ...state,
+        isDatePickerOpen: action.payload,
       }
     default:
       return state

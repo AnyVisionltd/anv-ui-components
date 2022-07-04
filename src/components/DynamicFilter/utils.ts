@@ -1,8 +1,10 @@
+import moment from 'moment'
 import { FC } from 'react'
 
 export interface DynamicFilterStateInterface {
   isMenuOpen: boolean
   elementsState: Record<string, any>
+  isDatePickerOpen: boolean
 }
 
 export enum DateTimeVarientType {
@@ -22,6 +24,8 @@ export interface DynamicFilterDateTimeProps {
   varientType?: DateTimeVarientType
   otherPropsTo?: Record<string, any>
   otherPropsFrom?: Record<string, any>
+  elementKey: string
+  title: string
 }
 
 export interface DynamicFilterInfiniteListFilterProps {
@@ -76,11 +80,23 @@ export interface DynamicFilterInterface extends FC<DynamicFilterProps> {
   Sort: FC<DynamicFilterSortProps>
 }
 
-export const maxMenuElWidth = 480
+export const maxMenuElWidth = 540
 export const DefaultMinRange = 0
 export const DefaultMaxRange = 100
 export const DefaultStepRange = 1
 export const DefaultValueRange = 44
+export const DefaultValueFrom = moment().subtract(2, 'days').toISOString()
+export const DefaultValueTo = moment().toISOString()
+export const maxDurationValue = 100
+export const minDurationValue = 0
+export const stepDuration = 1
+export const DefaultVarientType = DateTimeVarientType.All
+
+export enum DurationOptions {
+  Days = 'days',
+  Hours = 'hours',
+  Minutes = 'minutes',
+}
 
 export const countDecimals = number => {
   const text = number.toString()
@@ -111,4 +127,18 @@ export const isEmptyString = val => val === ''
 export enum THUMBS_MAP {
   min = 'min',
   max = 'max',
+}
+
+export const durationOptions = Object.values(DurationOptions).map(option => ({
+  id: option,
+  value: option,
+}))
+
+export const getDefaultDurationInputValue = (
+  from: Date | string,
+  to: Date | string,
+) => {
+  const transformTo = moment(to)
+  const duration = moment.duration(transformTo.diff(from))
+  return Math.floor(duration.asHours())
 }

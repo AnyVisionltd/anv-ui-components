@@ -1,1 +1,46 @@
 @import '~@anyvision/style-guide';
+
+.dateTimeContainer {
+  display: flex;
+  flex-direction: column;
+  gap: av-space(base);
+
+  .title {
+    @extend %av-subtitle1;
+    color: av-color(trueblack);
+    font-weight: bold;
+  }
+
+  .itemContainer {
+    display: flex;
+    gap: av-space(tiny);
+    align-items: flex-start;
+
+    .durationContainer {
+      color: av-color(trueblack);
+      display: flex;
+      flex-direction: column;
+      gap: av-space(tiny);
+      position: relative;
+      top: av-space(micro);
+
+      .subTitle {
+        @extend %av-subtitle2;
+      }
+
+      .durationInputContainer {
+        display: flex;
+        gap: av-space(tiny);
+        align-items: center;
+
+        .durationInput {
+          width: av-size(sz-80);
+        }
+
+        .durationSteps {
+          width: av-size(sz-240);
+        }
+      }
+    }
+  }
+}

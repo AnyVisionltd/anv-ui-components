@@ -1,10 +1,16 @@
 export enum DynamicFilterActionsTypes {
   TOGGLE_IS_MENU_OPEN = 'TOGGLE_IS_MENU_OPEN',
   UPDATE_ELEMENTS_STATE = 'UPDATE_ELEMENTS_STATE',
+  SET_IS_DATE_PICKER_OPEN = 'SET_IS_DATE_PICKER_OPEN',
 }
 
 type ToggleIsMenuOpenAction = {
   type: DynamicFilterActionsTypes.TOGGLE_IS_MENU_OPEN
+}
+
+type SetIsDatePickerOpenAction = {
+  type: DynamicFilterActionsTypes.SET_IS_DATE_PICKER_OPEN
+  payload: boolean
 }
 
 type UpdateElementsStateAction = {
@@ -15,6 +21,7 @@ type UpdateElementsStateAction = {
 export type DynamicFilterActions =
   | ToggleIsMenuOpenAction
   | UpdateElementsStateAction
+  | SetIsDatePickerOpenAction
 
 export const dynamicFilterActions = (
   dispatch: React.Dispatch<DynamicFilterActions>,
@@ -29,5 +36,11 @@ export const dynamicFilterActions = (
       type: DynamicFilterActionsTypes.UPDATE_ELEMENTS_STATE,
       payload,
     } as UpdateElementsStateAction)
+  },
+  setIsDatePickerOpen: (payload: boolean) => {
+    dispatch({
+      type: DynamicFilterActionsTypes.SET_IS_DATE_PICKER_OPEN,
+      payload,
+    } as SetIsDatePickerOpenAction)
   },
 })

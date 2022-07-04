@@ -15,7 +15,7 @@ const DynamicFilterMenu: FC<DynamicFilterMenuProps> = ({
 }): ReactElement => {
   const { state, actions } = useContext(DynamicFilterContext)
   const menuRef = useRef<HTMLDivElement>(null)
-  const { isMenuOpen } = state
+  const { isMenuOpen, isDatePickerOpen } = state
 
   const customStyle = () => {
     if (anchorElement.current) {
@@ -33,6 +33,7 @@ const DynamicFilterMenu: FC<DynamicFilterMenuProps> = ({
 
   const onClickOutSide = (event: any) => {
     if (
+      isDatePickerOpen ||
       !isMenuOpen ||
       (anchorElement && anchorElement.current.contains(event.target))
     ) {

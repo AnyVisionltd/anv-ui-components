@@ -46,6 +46,7 @@ const DateTimePicker = ({
   isNullValue,
   onClose,
   debounceTime,
+  onOpenMenu,
   ...otherProps
 }) => {
   const textFieldRef = useRef()
@@ -56,6 +57,12 @@ const DateTimePicker = ({
   const DateTimePickerTranslations = getComponentTranslation(
     'dateAndTimePicker',
   )
+
+  useEffect(() => {
+    if (onOpenMenu) {
+      onOpenMenu(isOpen)
+    }
+  }, [isOpen, onOpenMenu])
 
   useEffect(() => {
     if (value && new Date(value).getTime() !== new Date(date).getTime())
@@ -140,6 +147,8 @@ DateTimePicker.propTypes = {
   isNullValue: PropTypes.bool,
   /** Debounce for onChange event. */
   debounceTime: PropTypes.number,
+  /** Callback when date picker open/closed. */
+  onOpenMenu: PropTypes.func,
 }
 
 DateTimePicker.defaultProps = {

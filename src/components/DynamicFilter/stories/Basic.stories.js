@@ -34,6 +34,10 @@ export const Basic = () => {
           ]}
           elementKey={'sorts'}
         />
+        <DynamicFilter.DateTime
+          elementKey='dsdsadsad'
+          title='Event Timestamp '
+        />
       </DynamicFilter>
     </div>
   )
