@@ -4,7 +4,6 @@ import { Radio } from '../../../../Radio'
 import { TextField } from '../../../../TextField'
 import {
   DateTimeVarientType,
-  durationOptions,
   minDurationValue,
   stepDuration,
 } from '../../../utils'
@@ -18,6 +17,8 @@ interface DynamicFilterDateTimeDurationProps {
   selectedDurationOption: any
   setSelectedDurationOption: (option: any) => void
   varientType: DateTimeVarientType
+  translations: any,
+  durationOptions: Array<Record<string, string>>
 }
 
 const DynamicFilterDateTimeDuration: FC<DynamicFilterDateTimeDurationProps> = ({
@@ -29,6 +30,8 @@ const DynamicFilterDateTimeDuration: FC<DynamicFilterDateTimeDurationProps> = ({
   selectedDurationOption,
   setSelectedDurationOption,
   varientType,
+  translations,
+  durationOptions
 }): ReactElement => {
   const isShowRadio = varientType !== DateTimeVarientType.Duration
 
@@ -46,7 +49,7 @@ const DynamicFilterDateTimeDuration: FC<DynamicFilterDateTimeDurationProps> = ({
         />
       )}
       <div className={styles.durationContainer}>
-        <span className={styles.subTitle}>During the Last</span>
+        <span className={styles.subTitle}>{translations.DateTimeDurationSubLabel}</span>
         <div className={styles.durationInputContainer}>
           <TextField
             value={durationInputValue}
@@ -58,7 +61,7 @@ const DynamicFilterDateTimeDuration: FC<DynamicFilterDateTimeDurationProps> = ({
             disabled={selectedType !== DateTimeVarientType.Duration}
           />
           <Dropdown
-            label={'Durtion'}
+            label={translations.DateTimeDurationDropdownLabel}
             options={durationOptions}
             defaultValues={[selectedDurationOption]}
             className={styles.durationSteps}

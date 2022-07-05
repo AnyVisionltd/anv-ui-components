@@ -14,9 +14,9 @@ import {
   DefaultValueTo,
   countDecimals,
   isEmptyString,
-  durationOptions,
   getDefaultDurationInputValue,
   DefaultVarientType,
+  DurationOptions,
 } from '../../utils'
 import { Tooltip } from '../../../Tooltip'
 import styles from './DynamicFilterDateTime.module.scss'
@@ -24,7 +24,8 @@ import moment from 'moment'
 import DynamicFilterDateTimeDuration from './components/DynamicFilterDateTimeDuration'
 import { minDurationValue } from '../../utils'
 import DynamicFilterDateTimeDate from './components/DynamicFilterDateTimeDate'
-import { Switch } from '@material-ui/core'
+import { useComponentTranslation } from '../../../../hooks/UseComponentTranslation'
+
 
 const getSelectedType = (varientType: DateTimeVarientType) => {
   switch (varientType) {
@@ -50,9 +51,6 @@ const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
   const [selectedType, setSelectedType] = useState(
     getSelectedType(varientType || DefaultVarientType),
   )
-  const [selectedDurationOption, setSelectedDurationOption] = useState(
-    durationOptions[1],
-  )
   const [durationInputValue, setDurationInputValue] = useState(
     getDefaultDurationInputValue(
       from || DefaultValueFrom,
@@ -60,8 +58,20 @@ const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
     ),
   )
   const componentState = state.elementsState[elementKey]
-
   const { updateElementsState, setIsDatePickerOpen } = actions
+  const { getComponentTranslation } = useComponentTranslation()
+  const translations = getComponentTranslation('dynamicFilterDateTime')
+
+  const durationOptions = Object.values(DurationOptions).map(value => {
+    return {
+      id: value,
+      value: translations[value]
+    }
+  })
+
+  const [selectedDurationOption, setSelectedDurationOption] = useState(
+    durationOptions[1],
+  )
 
   useEffect(() => {
     updateElementsState({
@@ -129,6 +139,8 @@ const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
         setSelectedType={setSelectedType}
         styles={styles}
         varientType={varientType || DefaultVarientType}
+        translations={translations}
+        durationOptions={durationOptions}
       />
     )
   }
@@ -145,19 +157,13 @@ const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
         selectedType={selectedType}
         setSelectedType={setSelectedType}
         varientType={varientType || DefaultVarientType}
+        translations={translations}
       />
     )
   }
 
   const renderByVarient = () => {
     switch (varientType || DefaultVarientType) {
-      case DateTimeVarientType.All:
-        return (
-          <>
-            {renderDateTimeDuration()}
-            {renderDateTimeDate()}
-          </>
-        )
       case DateTimeVarientType.Duration:
         return renderDateTimeDuration()
       case DateTimeVarientType.Time:

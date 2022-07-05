@@ -129,11 +129,6 @@ export enum THUMBS_MAP {
   max = 'max',
 }
 
-export const durationOptions = Object.values(DurationOptions).map(option => ({
-  id: option,
-  value: option,
-}))
-
 export const getDefaultDurationInputValue = (
   from: Date | string,
   to: Date | string,

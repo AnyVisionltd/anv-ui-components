@@ -13,7 +13,8 @@ interface DynamicFilterDateTimeDateProps {
   onChangeDates: (type: string, selectedDate: string) => void
   otherPropsFrom: any
   otherPropsTo: any
-  varientType: DateTimeVarientType
+  varientType: DateTimeVarientType,
+  translations: any,
 }
 
 const DynamicFilterDateTimeDate: FC<DynamicFilterDateTimeDateProps> = ({
@@ -26,6 +27,7 @@ const DynamicFilterDateTimeDate: FC<DynamicFilterDateTimeDateProps> = ({
   otherPropsFrom,
   otherPropsTo,
   varientType,
+  translations,
 }): ReactElement => {
   const isShowRadio = varientType !== DateTimeVarientType.Time
   return (
@@ -42,11 +44,11 @@ const DynamicFilterDateTimeDate: FC<DynamicFilterDateTimeDateProps> = ({
         />
       )}
       <div className={styles.durationContainer}>
-        <span className={styles.subTitle}>Specific Time</span>
+        <span className={styles.subTitle}>{translations.DateTimeSubLabel}</span>
         <div className={styles.durationInputContainer}>
           <DateTimePicker
             onOpenMenu={onDatePickerOpen}
-            label={'From Date & Time'}
+            label={translations.fromDatePickerLabel}
             value={selectedTime.from}
             onChange={value => {
               onChangeDates('from', moment(value).toISOString())
@@ -65,7 +67,7 @@ const DynamicFilterDateTimeDate: FC<DynamicFilterDateTimeDateProps> = ({
           />
           <DateTimePicker
             onOpenMenu={onDatePickerOpen}
-            label={'To Date & Time'}
+            label={translations.toDatePickerLabel}
             value={selectedTime.to}
             onChange={value => {
               onChangeDates('to', moment(value).toISOString())

@@ -74,6 +74,16 @@ let sharedState = {
     label: 'label',
     noResultsFound: 'No Results',
   },
+  dynamicFilterDateTime: {
+    fromDatePickerLabel: 'From Date & Time',
+    toDatePickerLabel: 'To Date & Time',
+    DateTimeSubLabel: 'Specific Time',
+    DateTimeDurationSubLabel: 'During the Last',
+    DateTimeDurationDropdownLabel: 'Durtion',
+    days: 'Days',
+    hours: 'Hours',
+    minutes: 'Minutes'
+  }
 }
 
 const useComponentTranslation = () => {

@@ -4,8 +4,8 @@
   position: absolute;
   z-index: 20;
   height: fit-content;
-  min-height: 200px;
-  min-width: 300px;
+  min-height: av-size(sz-240);
+  min-width: av-size(sz-320);
   max-height: av-size(sz-640);
   overflow-y: auto;
   background-color: av-color(purewhite);

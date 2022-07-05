@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, Ref } from 'react'
+import React, { FC, ReactElement } from 'react'
 import { TextField } from '../../../../TextField'
 import {
   countDecimals,
