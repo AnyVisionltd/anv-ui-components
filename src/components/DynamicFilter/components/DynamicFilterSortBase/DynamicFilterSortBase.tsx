@@ -23,19 +23,19 @@ const DynamicFilterSortBase: FC<DynamicFilterSortBaseProps> = ({
 
   return (
     <div className={styles.filterSortBaseContainer}>
-      {items.map(({ key, title }) => (
-        <div key={key} className={styles.filterSortBaseItem} {...otherProps}>
+      {items.map(({ id, value }) => (
+        <div key={id} className={styles.filterSortBaseItem} {...otherProps}>
           <Radio
-            checked={componentState?.selectedItemId === key}
-            onChange={() => onChange(key)}
-            id={key}
+            checked={componentState?.selectedItemId === id}
+            onChange={() => onChange(id)}
+            id={id}
             indeterminate={undefined}
             disabled={undefined}
             view={undefined}
             className={undefined}
           />
-          <Tooltip overflowOnly placement='right' content={title}>
-            <span className={styles.sortTitle}>{title}</span>
+          <Tooltip overflowOnly placement='right' content={value}>
+            <span className={styles.sortTitle}>{value}</span>
           </Tooltip>
         </div>
       ))}

@@ -14,7 +14,7 @@ const DynamicFilterSelection: FC<DynamicFilterSelectionProps> = ({
     if (items.length > 0) {
       actions.updateElementsState({
         [elementKey]: {
-          selectedItemId: items[0].key,
+          selectedItemId: items[0].id,
         },
       })
     }

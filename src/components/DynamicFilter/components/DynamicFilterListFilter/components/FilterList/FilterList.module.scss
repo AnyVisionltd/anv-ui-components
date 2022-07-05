@@ -1,0 +1,23 @@
+@import '~@anyvision/style-guide';
+
+.listContainer {
+  height: av-size(sz-240);
+  width: 100%;
+  box-sizing: border-box;
+
+  .rowItemContainer {
+    display: flex;
+    align-items: center;
+    gap: av-space(micro);
+    cursor: pointer;
+
+    .rowItemValue {
+      color: av-color(trueblack);
+      max-width: calc(100% - av-space(micro) - av-size(sz-32));
+    }
+
+    &:hover {
+      background-color: av-color(primary, av-opacity(divider));
+    }
+  }
+}

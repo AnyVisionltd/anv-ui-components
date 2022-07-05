@@ -39,7 +39,7 @@ const DynamicFilter: DynamicFilterInterface = ({
         onClick={handleBtnClick}
       >
         <span>{title}</span>
-        <ArrowDown />
+        <ArrowDown className={styles.arrowSvg} />
       </div>
       {isMenuOpen && (
         <DynamicFilterMenu anchorElement={btnRef}>{children}</DynamicFilterMenu>

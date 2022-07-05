@@ -14,7 +14,7 @@ const DynamicFilterSort: FC<DynamicFilterSortProps> = ({
     if (items.length > 0) {
       actions.updateElementsState({
         [elementKey]: {
-          selectedItemId: items[0].key,
+          selectedItemId: items[0].id,
         },
       })
     }

@@ -1,0 +1,36 @@
+@import '~@anyvision/style-guide';
+
+.listFilterContainer {
+  display: flex;
+  flex-direction: column;
+  gap: av-space(base);
+
+  .title {
+    @extend %av-subtitle1;
+    color: av-color(trueblack);
+    font-weight: bold;
+  }
+  .searchInput {
+    svg {
+      fill: av-color(content, av-opacity(divider));
+      width: av-size(sz-32);
+      height: av-size(sz-32);
+    }
+  }
+
+  .listAndSelectWrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sectionCheckboxWrapper {
+    display: flex;
+    align-items: center;
+    gap: av-space(micro);
+
+    .sectionCheckboxLabel {
+      @extend %av-subtitle2;
+      color: av-color(trueblack);
+    }
+  }
+}

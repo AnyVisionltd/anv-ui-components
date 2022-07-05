@@ -8,6 +8,7 @@
   .filterSortBaseItem {
     display: flex;
     align-items: center;
+    gap: av-space(micro);
 
     .sortTitle {
       @extend %av-subtitle2;

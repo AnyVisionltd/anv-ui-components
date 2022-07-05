@@ -26,17 +26,55 @@ export const Basic = () => {
         <DynamicFilter.Sort
           items={[
             {
-              key: 'dds',
-              title:
-                'fdsf dfdsfdfdsfdfdsfdfdsfdfdsfdfdsfdfdsfdfdsfdfdsfdfdsfdfdsfdfdsf',
+              id: 'dds',
+              value: 'fdsf dfdsfdfdsfdfdsfd',
             },
-            { key: 'dssasdds', title: 'dssasddsdssasdds' },
+            { id: 'dssasdds', value: 'dssasddsdssasdds' },
           ]}
           elementKey={'sorts'}
         />
-        <DynamicFilter.DateTime
-          elementKey='dsdsadsad'
-          title='Event Timestamp '
+        <DynamicFilter.ListFilter
+          elementKey='ListFilter'
+          items={[
+            {
+              id: 'fdsfq',
+              value: 'dbbbdbbbdbbbdbbbdbbbdbbbdbbbdbbbdbbbdbbb',
+              type: 'bbb',
+            },
+            { id: 'fdsfw', value: 'ddsdsadsadasd', type: 'bbb' },
+            { id: 'fdsfe', value: 'ddsdsadsadasd', type: 'bbb' },
+            { id: 'fdsrf', value: 'ddsdsadsadasd', type: 'ccc' },
+            { id: 'fdstf', value: 'ddsdsadsadasd', type: 'ccc' },
+            { id: 'fdsyf', value: 'ddsdsadsadasd', type: 'ccc' },
+            { id: 'fudsf', value: 'ddsdsadsadasd', type: 'ccc' },
+            { id: 'fiadsf', value: 'ddsdsadsadasd', type: 'ccc' },
+            { id: 'fodssf', value: 'ddsdsadsadasd', type: 'bbb' },
+            { id: 'fdpdsf', value: 'ddsdsadsadasd', type: 'bbb' },
+            { id: 'fdgsf', value: 'ddsdsadsadasd', type: 'bbb' },
+            { id: 'fdzsf', value: 'ddsdsadsadasd', type: 'bbb' },
+            { id: 'fdsf', value: 'ddsdsadsadasd', type: 'bbb' },
+            { id: 'fdhsf', value: 'ddsdsadsadasd', type: 'aaa' },
+            { id: 'fdsxf', value: 'ddsdsadsadasd', type: 'aaa' },
+            { id: 'fdnsf', value: 'ddsdsadsadasd', type: 'aaa' },
+            { id: 'fdjsf', value: 'ddsdsadsadasd', type: 'aaa' },
+            { id: 'fdcsf', value: 'ddsdsadsadasd', type: 'aaa' },
+            { id: 'fdmsf', value: 'ddsdsadsadasd', type: 'aaa' },
+            { id: 'fdksf', value: 'ddsdsadsadasd', type: 'aaa' },
+          ]}
+          filterItems={[
+            {
+              id: 'aaa',
+              value: 'AAA',
+            },
+            {
+              id: 'bbb',
+              value: 'BBB',
+            },
+            {
+              id: 'ccc',
+              value: 'CCC',
+            },
+          ]}
         />
       </DynamicFilter>
     </div>

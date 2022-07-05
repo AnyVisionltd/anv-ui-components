@@ -82,8 +82,13 @@ let sharedState = {
     DateTimeDurationDropdownLabel: 'Durtion',
     days: 'Days',
     hours: 'Hours',
-    minutes: 'Minutes'
-  }
+    minutes: 'Minutes',
+  },
+  dynamicFilterListFilter: {
+    title: 'Filter',
+    searchPlaceholder: 'Search',
+    selectAll: 'Select All/None',
+  },
 }
 
 const useComponentTranslation = () => {

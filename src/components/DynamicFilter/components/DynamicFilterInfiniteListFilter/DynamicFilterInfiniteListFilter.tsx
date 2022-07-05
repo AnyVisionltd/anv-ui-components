@@ -4,7 +4,7 @@ import styles from './DynamicFilterInfiniteListFilter.module.scss'
 
 const DynamicFilterInfiniteListFilter: FC<DynamicFilterInfiniteListFilterProps> = ({
   items,
-  key,
+  elementKey,
   filterItems,
   withFilters,
 }): ReactElement => {

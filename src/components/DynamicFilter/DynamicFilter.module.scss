@@ -1,6 +1,13 @@
 @import '~@anyvision/style-guide';
 @import '../../styles/mixin/ripple.scss';
 
+.arrowSvg {
+  height: av-size(sz-16);
+  width: av-size(sz-16);
+  transition: all 0.05s linear;
+  fill: av-color(purewhite);
+}
+
 .dynamicFilterBtn {
   padding: av-space(base) av-space(tiny);
   background-color: av-color(content, av-opacity(ghost));
@@ -12,7 +19,7 @@
   align-items: center;
   gap: av-space(tiny);
 
-  svg {
+  .arrowSvg {
     height: av-size(sz-16);
     width: av-size(sz-16);
     transition: all 0.05s linear;

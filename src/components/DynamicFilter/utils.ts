@@ -14,8 +14,14 @@ export enum DateTimeVarientType {
 }
 
 export interface SortItemInterface {
-  key: string
-  title: string
+  id: string
+  value: string
+}
+
+export interface ListItemInterface {
+  id: string
+  value: string
+  type?: string
 }
 
 export interface DynamicFilterDateTimeProps {
@@ -30,15 +36,14 @@ export interface DynamicFilterDateTimeProps {
 
 export interface DynamicFilterInfiniteListFilterProps {
   items: Array<SortItemInterface>
-  key: string
+  elementKey: string
   withFilters?: boolean
   filterItems?: Array<SortItemInterface>
 }
 
 export interface DynamicFilterListFilterProps {
-  items: Array<SortItemInterface>
-  key: string
-  withFilters?: boolean
+  items: Array<ListItemInterface>
+  elementKey: string
   filterItems?: Array<SortItemInterface>
 }
 
