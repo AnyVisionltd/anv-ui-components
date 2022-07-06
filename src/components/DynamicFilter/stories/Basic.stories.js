@@ -61,20 +61,20 @@ export const Basic = () => {
             { id: 'fdmsf', value: 'ddsdsadsadasd', type: 'aaa' },
             { id: 'fdksf', value: 'ddsdsadsadasd', type: 'aaa' },
           ]}
-          filterItems={[
-            {
-              id: 'aaa',
-              value: 'AAA',
-            },
-            {
-              id: 'bbb',
-              value: 'BBB',
-            },
-            {
-              id: 'ccc',
-              value: 'CCC',
-            },
-          ]}
+          // filterItems={[
+          //   {
+          //     id: 'aaa',
+          //     value: 'AAA',
+          //   },
+          //   {
+          //     id: 'bbb',
+          //     value: 'BBB',
+          //   },
+          //   {
+          //     id: 'ccc',
+          //     value: 'CCC',
+          //   },
+          // ]}
         />
       </DynamicFilter>
     </div>
