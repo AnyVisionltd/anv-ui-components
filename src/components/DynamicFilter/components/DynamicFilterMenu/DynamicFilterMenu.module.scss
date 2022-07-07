@@ -5,7 +5,7 @@
   z-index: 20;
   height: fit-content;
   min-height: av-size(sz-240);
-  min-width: av-size(sz-320);
+  min-width: calc(av-size(sz-320) + av-size(sz-80));
   max-height: av-size(sz-640);
   overflow-y: auto;
   background-color: av-color(purewhite);

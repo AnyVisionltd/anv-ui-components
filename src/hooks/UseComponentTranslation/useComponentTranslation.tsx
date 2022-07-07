@@ -88,6 +88,8 @@ let sharedState = {
     title: 'Filter',
     searchPlaceholder: 'Search',
     selectAll: 'Select All/None',
+    loading: 'Loading...',
+    noResults: 'No Results',
   },
 }
 

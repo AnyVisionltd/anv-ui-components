@@ -17,13 +17,11 @@ export interface SortItemInterface {
   id: string
   value: string
 }
-
 export interface ListItemInterface {
   id: string
   value: string
   type?: string
 }
-
 export interface DynamicFilterDateTimeProps {
   from?: Date
   to?: Date
@@ -33,26 +31,21 @@ export interface DynamicFilterDateTimeProps {
   elementKey: string
   title: string
 }
-
-export interface DynamicFilterInfiniteListFilterProps {
-  items: Array<SortItemInterface>
-  elementKey: string
-  withFilters?: boolean
-  filterItems?: Array<SortItemInterface>
-}
-
 export interface DynamicFilterListFilterProps {
   items: Array<ListItemInterface>
   elementKey: string
   filterItems?: Array<SortItemInterface>
+  unControlled?: boolean
+  onChange?: (filterBy: any) => void
+  onLoadMoreData?: () => void
+  totalItems?: number
+  isLoading?: boolean
 }
-
 export interface DynamicFilterSelectionProps {
   items: Array<SortItemInterface>
   otherProps?: Record<string, any>
   elementKey: string
 }
-
 export interface DynamicFilterSliderProps {
   min?: number
   max?: number
@@ -62,23 +55,19 @@ export interface DynamicFilterSliderProps {
   title: string
   defaultValue?: number | Array<number>
 }
-
 export interface DynamicFilterSortProps {
   items: Array<SortItemInterface>
   otherProps?: Record<string, any>
   elementKey: string
 }
-
 interface DynamicFilterProps {
   title: string
   onApply: (anyValue: any) => void
   onClose: () => void
   classname?: string
 }
-
 export interface DynamicFilterInterface extends FC<DynamicFilterProps> {
   DateTime: FC<DynamicFilterDateTimeProps>
-  InfiniteListFilter: FC<DynamicFilterInfiniteListFilterProps>
   ListFilter: FC<DynamicFilterListFilterProps>
   Selection: FC<DynamicFilterSelectionProps>
   Slider: FC<DynamicFilterSliderProps>

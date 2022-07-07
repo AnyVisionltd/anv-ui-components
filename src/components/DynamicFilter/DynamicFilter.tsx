@@ -1,6 +1,5 @@
 import React, { ReactElement, useRef } from 'react'
 import DynamicFilterDateTime from './components/DynamicFilterDateTime/DynamicFilterDateTime'
-import DynamicFilterInfiniteListFilter from './components/DynamicFilterInfiniteListFilter/DynamicFilterInfiniteListFilter'
 import DynamicFilterListFilter from './components/DynamicFilterListFilter/DynamicFilterListFilter'
 import DynamicFilterContext from './store/DynamicFilterContext'
 import UseDynamicFilterReducer from './store/UseDynamicFilterReducer'
@@ -48,7 +47,6 @@ const DynamicFilter: DynamicFilterInterface = ({
   )
 }
 DynamicFilter.DateTime = DynamicFilterDateTime
-DynamicFilter.InfiniteListFilter = DynamicFilterInfiniteListFilter
 DynamicFilter.ListFilter = DynamicFilterListFilter
 DynamicFilter.Slider = DynamicFilterSlider
 DynamicFilter.Selection = DynamicFilterSelection

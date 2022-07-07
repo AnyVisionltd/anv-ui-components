@@ -8,13 +8,19 @@ import { DynamicFilterListFilterProps, ListItemInterface } from '../../utils'
 import { Checkbox } from '../../../Checkbox'
 import FilterList from './components/FilterList/FilterList'
 import styles from './DynamicFilterListFilter.module.scss'
+import classNames from 'classnames'
 
 const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
   items,
   elementKey,
   filterItems,
+  onChange,
+  onLoadMoreData,
+  unControlled,
+  totalItems,
+  isLoading,
 }): ReactElement => {
-  const { actions, state } = useContext(DynamicFilterContext)
+  const { actions } = useContext(DynamicFilterContext)
   const { updateElementsState } = actions
   const { getComponentTranslation } = useComponentTranslation()
   const translations: Record<string, string> = getComponentTranslation(
@@ -28,10 +34,23 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
     [],
   )
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({})
+  const [isExcludeMode, setIsExcludeMode] = useState<boolean>(false)
 
-  const isAllItemsChecked =
-    !!filteredItems.length &&
-    Object.values(checkedItems).every(isSelected => isSelected)
+  const onlyCheckedItems = Object.values(checkedItems).filter(
+    isSelect => isSelect,
+  )
+  const isAllItemsSelected = Object.values(checkedItems).every(
+    isSelected => isSelected,
+  )
+  const isAllItemsNotSelected = Object.values(checkedItems).every(
+    isSelected => !isSelected,
+  )
+
+  const isAllItemsChecked: boolean = !unControlled
+    ? !!filteredItems.length && isAllItemsSelected
+    : isExcludeMode
+    ? isAllItemsNotSelected
+    : onlyCheckedItems.length === totalItems
 
   useEffect(() => {
     const filtered = items.filter(item => {
@@ -46,9 +65,12 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
     })
 
     setFilteredItems(filtered)
-  }, [filterItems, filters.search, filters.selectFilter, items])
+  }, [filterItems, filters, filters.search, filters.selectFilter, items])
 
   useEffect(() => {
+    if (unControlled) {
+      return
+    }
     setCheckedItems(prev =>
       filteredItems.reduce(
         (obj: any, item: ListItemInterface) => ({
@@ -58,38 +80,61 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
         {},
       ),
     )
-  }, [filteredItems])
+  }, [filteredItems, unControlled])
 
   useEffect(() => {
     const updateItems = Object.keys(checkedItems).filter(id => checkedItems[id])
+
     updateElementsState({
       [elementKey]: {
         selectedItems: updateItems,
+        ...(unControlled && { isExcludeMode }),
       },
     })
-  }, [elementKey, updateElementsState, checkedItems])
+  }, [
+    elementKey,
+    updateElementsState,
+    checkedItems,
+    unControlled,
+    isExcludeMode,
+  ])
 
   const onFilterChange = (filterKey: string, value: any) => {
-    setFilters(prev => ({
-      ...prev,
-      [filterKey]: value,
-    }))
+    setFilters(prev => {
+      const updatedFilters = {
+        ...prev,
+        [filterKey]: value,
+      }
+      if (unControlled && onChange) {
+        onChange(updatedFilters)
+      }
+      return updatedFilters
+    })
   }
 
   const onSelectAllFiles = () => {
-    setCheckedItems(() =>
-      filteredItems.reduce(
-        (obj, item) => ({
-          ...obj,
-          [item.id]: !isAllItemsChecked,
-        }),
-        {},
-      ),
-    )
+    if (unControlled) {
+      setIsExcludeMode(prev => !prev)
+    } else {
+      setCheckedItems(() =>
+        (unControlled ? items : filteredItems).reduce(
+          (obj, item) => ({
+            ...obj,
+            [item.id]: !isAllItemsChecked,
+          }),
+          {},
+        ),
+      )
+    }
   }
+
   const onCheckItem = (id: string) => {
     setCheckedItems(prev => ({ ...prev, [id]: !prev[id] }))
   }
+
+  const isShowSelectAll =
+    !isLoading &&
+    !(unControlled && totalItems ? !totalItems : !filteredItems.length)
 
   return (
     <div className={styles.listFilterContainer}>
@@ -99,6 +144,7 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
           options={filterItems}
           defaultValues={[filters.selectFilter]}
           onChange={options => onFilterChange('selectFilter', options[0])}
+          className={styles.dropdown}
         />
       )}
       <TextField
@@ -109,11 +155,16 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
         onChange={({ target: { value } }) => onFilterChange('search', value)}
       />
       <div className={styles.listAndSelectWrapper}>
-        <div className={styles.sectionCheckboxWrapper}>
+        <div
+          className={classNames(
+            styles.sectionCheckboxWrapper,
+            !isShowSelectAll && styles.hidden,
+          )}
+        >
           <Checkbox
             checked={isAllItemsChecked}
             onChange={onSelectAllFiles}
-            disabled={filteredItems.length === 0}
+            disabled={unControlled ? !items.length : !filteredItems.length}
             indeterminate={undefined}
             view={undefined}
             className={undefined}
@@ -125,9 +176,17 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
           </span>
         </div>
         <FilterList
-          items={filteredItems}
+          items={unControlled ? items : filteredItems}
           onCheckItem={onCheckItem}
           checkedItems={checkedItems}
+          unControlled={unControlled}
+          onLoadMoreData={onLoadMoreData}
+          totalItems={
+            unControlled && totalItems ? totalItems : filteredItems.length
+          }
+          isLoading={isLoading}
+          translations={translations}
+          isExcludeMode={isExcludeMode}
         />
       </div>
     </div>

@@ -11,11 +11,17 @@
     font-weight: bold;
   }
   .searchInput {
+    height: 40px;
+
     svg {
-      fill: av-color(content, av-opacity(divider));
+      fill: av-color(content, av-opacity(disabled));
       width: av-size(sz-32);
       height: av-size(sz-32);
     }
+  }
+
+  .dropdown {
+    height: 40px;
   }
 
   .listAndSelectWrapper {
@@ -31,6 +37,10 @@
     .sectionCheckboxLabel {
       @extend %av-subtitle2;
       color: av-color(trueblack);
+    }
+
+    &.hidden {
+      visibility: hidden;
     }
   }
 }
