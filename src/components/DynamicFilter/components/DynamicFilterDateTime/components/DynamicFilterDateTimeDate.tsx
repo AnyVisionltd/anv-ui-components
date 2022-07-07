@@ -13,8 +13,8 @@ interface DynamicFilterDateTimeDateProps {
   onChangeDates: (type: string, selectedDate: string) => void
   otherPropsFrom: any
   otherPropsTo: any
-  varientType: DateTimeVarientType,
-  translations: any,
+  varientType: DateTimeVarientType
+  translations: Record<string, string>
 }
 
 const DynamicFilterDateTimeDate: FC<DynamicFilterDateTimeDateProps> = ({

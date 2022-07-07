@@ -45,7 +45,9 @@ const items = [
 export const Basic = () => {
   const [itemsToShow, SetItemsToShow] = useState(items.slice(0, 10))
   const [isLoading, SetIsLoading] = useState(false)
-  const onApply = res => {}
+  const onApply = res => {
+    console.log('res', res)
+  }
 
   const onClose = () => {}
 
@@ -89,6 +91,26 @@ export const Basic = () => {
           //     value: 'CCC',
           //   },
           // ]}
+        />
+        <DynamicFilter.Sort
+          items={[
+            {
+              id: 'dds',
+              value: 'fdsf dfdsfdfdsfdfdsfd',
+            },
+            { id: 'dssasdds', value: 'dssasddsdssasdds' },
+          ]}
+          elementKey={'sddorts'}
+        />
+        <DynamicFilter.Sort
+          items={[
+            {
+              id: 'dds',
+              value: 'fdsf dfdsfdfdsfdfdsfd',
+            },
+            { id: 'dssasdds', value: 'dssasddsdssasdds' },
+          ]}
+          elementKey={'sddsaddorts'}
         />
       </DynamicFilter>
     </div>

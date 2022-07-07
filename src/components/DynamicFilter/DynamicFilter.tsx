@@ -24,7 +24,18 @@ const DynamicFilter: DynamicFilterInterface = ({
   const { isMenuOpen } = state
 
   const handleBtnClick = () => {
+    if (isMenuOpen) {
+      onClose()
+    }
     actions.toggleIsMenuOpen()
+  }
+
+  const handleOnApplyClick = () => {
+    onApply(state.elementsState)
+  }
+
+  const handleCancelClick = () => {
+    handleBtnClick()
   }
 
   return (
@@ -34,6 +45,7 @@ const DynamicFilter: DynamicFilterInterface = ({
         className={classNames(
           styles.dynamicFilterBtn,
           isMenuOpen && styles.btnSelected,
+          classname && styles[classname],
         )}
         onClick={handleBtnClick}
       >
@@ -41,11 +53,18 @@ const DynamicFilter: DynamicFilterInterface = ({
         <ArrowDown className={styles.arrowSvg} />
       </div>
       {isMenuOpen && (
-        <DynamicFilterMenu anchorElement={btnRef}>{children}</DynamicFilterMenu>
+        <DynamicFilterMenu
+          onApply={handleOnApplyClick}
+          onCancel={handleCancelClick}
+          anchorElement={btnRef}
+        >
+          {children}
+        </DynamicFilterMenu>
       )}
     </DynamicFilterContext.Provider>
   )
 }
+
 DynamicFilter.DateTime = DynamicFilterDateTime
 DynamicFilter.ListFilter = DynamicFilterListFilter
 DynamicFilter.Slider = DynamicFilterSlider

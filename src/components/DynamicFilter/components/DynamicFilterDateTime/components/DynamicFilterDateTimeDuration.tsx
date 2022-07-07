@@ -17,7 +17,7 @@ interface DynamicFilterDateTimeDurationProps {
   selectedDurationOption: any
   setSelectedDurationOption: (option: any) => void
   varientType: DateTimeVarientType
-  translations: any,
+  translations: Record<string, string>
   durationOptions: Array<Record<string, string>>
 }
 
@@ -31,7 +31,7 @@ const DynamicFilterDateTimeDuration: FC<DynamicFilterDateTimeDurationProps> = ({
   setSelectedDurationOption,
   varientType,
   translations,
-  durationOptions
+  durationOptions,
 }): ReactElement => {
   const isShowRadio = varientType !== DateTimeVarientType.Duration
 
@@ -49,7 +49,9 @@ const DynamicFilterDateTimeDuration: FC<DynamicFilterDateTimeDurationProps> = ({
         />
       )}
       <div className={styles.durationContainer}>
-        <span className={styles.subTitle}>{translations.DateTimeDurationSubLabel}</span>
+        <span className={styles.subTitle}>
+          {translations.DateTimeDurationSubLabel}
+        </span>
         <div className={styles.durationInputContainer}>
           <TextField
             value={durationInputValue}

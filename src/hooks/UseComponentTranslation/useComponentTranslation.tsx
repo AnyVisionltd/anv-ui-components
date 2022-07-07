@@ -91,6 +91,9 @@ let sharedState = {
     loading: 'Loading...',
     noResults: 'No Results',
   },
+  dynamicFilterMenu: {
+    applyBtn: 'Apply',
+  },
 }
 
 const useComponentTranslation = () => {
