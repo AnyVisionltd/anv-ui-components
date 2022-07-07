@@ -38,7 +38,7 @@ const FilterList: FC<FilterListProps> = ({
 
   useEffect(() => {
     if (unControlled) {
-      setItemsToShow([...items])
+      setItemsToShow(items)
     } else {
       setItemsToShow(prev => items.slice(0, prev.length || offset))
     }

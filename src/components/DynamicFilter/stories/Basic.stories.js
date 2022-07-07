@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
 import DynamicFilter from '../DynamicFilter'
-import styles from '../../../storybook/index.module.scss'
 
 export default {
   title: 'Content/DynamicFilter',
   component: DynamicFilter,
   subcomponents: {
     DateTime: DynamicFilter.DateTime,
-    InfiniteListFilter: DynamicFilter.InfiniteListFilter,
     ListFilter: DynamicFilter.ListFilter,
     Selection: DynamicFilter.Selection,
     Slider: DynamicFilter.Slider,
@@ -15,102 +13,275 @@ export default {
   },
 }
 
-const items = [
+const listFilterItems = [
   {
-    id: 'fdsfq',
+    id: 'aaa',
+    value: 'AAA',
+  },
+  {
+    id: 'bbb',
+    value: 'BBB',
+  },
+  {
+    id: 'ccc',
+    value: 'CCC',
+  },
+]
+
+const listItems = [
+  {
+    id: 'bbbbff',
     value: 'dbbbdbbbdbbbdbbbdbbbdbbbdbbbdbbbdbbbdbbb',
     type: 'bbb',
   },
-  { id: 'fdsfw', value: 'ddsdsadsadasd', type: 'bbb' },
-  { id: 'fdsfe', value: 'ddsdsadsadasd', type: 'bbb' },
-  { id: 'fdsrf', value: 'ddsdsadsadasd', type: 'ccc' },
-  { id: 'fdstf', value: 'ddsdsadsadasd', type: 'ccc' },
-  { id: 'fdsyf', value: 'ddsdsadsadasd', type: 'ccc' },
-  { id: 'fudsf', value: 'ddsdsadsadasd', type: 'ccc' },
-  { id: 'fiadsf', value: 'ddsdsadsadasd', type: 'ccc' },
-  { id: 'fodssf', value: 'ddsdsadsadasd', type: 'bbb' },
-  { id: 'fdpdsf', value: 'ddsdsadsadasd', type: 'bbb' },
-  { id: 'fdgsf', value: 'ddsdsadsadasd', type: 'bbb' },
-  { id: 'fdzsf', value: 'ddsdsadsadasd', type: 'bbb' },
-  { id: 'fdsf', value: 'ddsdsadsadasd', type: 'bbb' },
-  { id: 'fdhsf', value: 'ddsdsadsadasd', type: 'aaa' },
-  { id: 'fdsxf', value: 'ddsdsadsadasd', type: 'aaa' },
-  { id: 'fdnsf', value: 'ddsdsadsadasd', type: 'aaa' },
-  { id: 'fdjsf', value: 'ddsdsadsadasd', type: 'aaa' },
-  { id: 'fdcsf', value: 'ddsdsadsadasd', type: 'aaa' },
-  { id: 'fdmsf', value: 'ddsdsadsadasd', type: 'aaa' },
-  { id: 'fdksf', value: 'ddsdsadsadasd', type: 'aaa' },
+  { id: 'fdsfee', value: 'ddsdsadsadasd', type: 'bbb' },
+  { id: 'fdsrwqf', value: 'ddsdsadsadasd', type: 'ccc' },
+  { id: 'fdswe tf', value: 'ddsdsadsadasd', type: 'ccc' },
+  { id: 'fdsdfyf', value: 'ddsdsadsadasd', type: 'ccc' },
+  { id: 'fudghsf', value: 'ddsdsadsadasd', type: 'ccc' },
+  { id: 'fiad;lksf', value: 'ddsdsadsadasd', type: 'ccc' },
+  { id: 'fodcasssf', value: 'ddsdsadsadasd', type: 'bbb' },
+  { id: 'fdpas3dsf', value: 'ddsdsadsadasd', type: 'bbb' },
+  { id: 'fd45rgsf', value: 'ddsdsadsadasd', type: 'bbb' },
+  { id: 'fdzt5sf', value: 'ddsdsadsadasd', type: 'bbb' },
+  { id: 'fdgtre55sf', value: 'ddsdsadsadasd', type: 'bbb' },
+  { id: 'fgfh89dhsf', value: 'ddsdsadsadasd', type: 'aaa' },
+  { id: 'few12dsxf', value: 'ddsdsadsadasd', type: 'aaa' },
+  { id: 'fddf44nsf', value: 'ddsdsadsadasd', type: 'aaa' },
+  { id: 'fdjdsvv432sf', value: 'ddsdsadsadasd', type: 'aaa' },
+  { id: 'fdfdsfhuuucsf', value: 'ddsdsadsadasd', type: 'aaa' },
+  { id: 'fdfdfdsfaaamsf', value: 'ddsdsadsadasd', type: 'aaa' },
+  { id: 'fdksdfsfdfrd696677f', value: 'ddsdsadsadasd', type: 'aaa' },
 ]
 
+const sortItems = [
+  { id: 'dfdsffdsfsf', value: 'name' },
+  { id: 'dfdsffdsfsfww', value: 'type' },
+]
+
+const selectionItems = [
+  { id: 'dfdsffdsfsf', value: 'name' },
+  { id: 'dfdsffdsfsfww', value: 'type' },
+]
+
+const loadDataOffset = 10
+
+const style = { width: '100%', height: '400px' }
+
 export const Basic = () => {
-  const [itemsToShow, SetItemsToShow] = useState(items.slice(0, 10))
-  const [isLoading, SetIsLoading] = useState(false)
-  const onApply = res => {
-    console.log('res', res)
+  const [itemsToShow, setItemsToShow] = useState(
+    listItems.slice(0, loadDataOffset),
+  )
+  const [isLoading, setIsLoading] = useState(false)
+  const [searchFilter, setSearchFilter] = useState('')
+
+  const onApply = response => {
+    console.log('onApply response', response)
   }
 
-  const onClose = () => {}
+  const onClose = () => {
+    console.log('onClose')
+  }
+
+  const getFilteredItems = (itemsToFilter, search) => {
+    return itemsToFilter.filter(item =>
+      item.id.toLowerCase().includes(search.toLowerCase()),
+    )
+  }
+
+  const onLoadMoreData = () => {
+    setIsLoading(true)
+    setItemsToShow(prev => {
+      const filteredItems = getFilteredItems(listItems, searchFilter)
+      return filteredItems.slice(0, prev.length + loadDataOffset)
+    })
+    setIsLoading(false)
+  }
+
+  const handleOnChange = ({ search }) => {
+    setSearchFilter(search)
+    setIsLoading(true)
+    const filtered = getFilteredItems(listItems, search)
+    setItemsToShow(filtered)
+    setIsLoading(false)
+  }
 
   return (
-    <div className={styles.marginFlexContainer}>
-      <DynamicFilter title={'Acknowledge'} onApply={onApply} onClose={onClose}>
-        <DynamicFilter.Sort
-          items={[
-            {
-              id: 'dds',
-              value: 'fdsf dfdsfdfdsfdfdsfd',
-            },
-            { id: 'dssasdds', value: 'dssasddsdssasdds' },
-          ]}
-          elementKey={'sorts'}
-        />
+    <div style={style}>
+      <DynamicFilter
+        title={'Basic'}
+        onApply={onApply}
+        onClose={onClose}
+        classname={'customClassname'}
+      >
+        <DynamicFilter.Sort items={sortItems} elementKey={'sorts'} />
         <DynamicFilter.ListFilter
           elementKey='ListFilter'
           items={itemsToShow}
-          onLoadMoreData={() => {
-            SetItemsToShow(prev => [
-              ...prev,
-              ...items.slice(prev.length, prev.length + 10),
-            ])
-          }}
+          onLoadMoreData={onLoadMoreData}
           unControlled={true}
-          onChange={filterBy => console.log(filterBy)}
-          totalItems={items.length}
+          onChange={handleOnChange}
+          totalItems={listItems.length}
           isLoading={isLoading}
-          // filterItems={[
-          //   {
-          //     id: 'aaa',
-          //     value: 'AAA',
-          //   },
-          //   {
-          //     id: 'bbb',
-          //     value: 'BBB',
-          //   },
-          //   {
-          //     id: 'ccc',
-          //     value: 'CCC',
-          //   },
-          // ]}
         />
-        <DynamicFilter.Sort
-          items={[
-            {
-              id: 'dds',
-              value: 'fdsf dfdsfdfdsfdfdsfd',
-            },
-            { id: 'dssasdds', value: 'dssasddsdssasdds' },
-          ]}
-          elementKey={'sddorts'}
+      </DynamicFilter>
+    </div>
+  )
+}
+
+export const Sort = () => {
+  const onApply = response => {
+    console.log('onApply response', response)
+  }
+
+  const onClose = () => {
+    console.log('onClose')
+  }
+
+  return (
+    <div style={style}>
+      <DynamicFilter title={'Sort'} onApply={onApply} onClose={onClose}>
+        <DynamicFilter.Sort items={sortItems} elementKey={'sorts'} />
+      </DynamicFilter>
+    </div>
+  )
+}
+
+export const Selection = () => {
+  const onApply = response => {
+    console.log('onApply response', response)
+  }
+
+  const onClose = () => {
+    console.log('onClose')
+  }
+
+  return (
+    <div style={style}>
+      <DynamicFilter title={'Selection'} onApply={onApply} onClose={onClose}>
+        <DynamicFilter.Selection
+          items={selectionItems}
+          elementKey={'selection'}
         />
-        <DynamicFilter.Sort
-          items={[
-            {
-              id: 'dds',
-              value: 'fdsf dfdsfdfdsfdfdsfd',
-            },
-            { id: 'dssasdds', value: 'dssasddsdssasdds' },
-          ]}
-          elementKey={'sddsaddorts'}
+      </DynamicFilter>
+    </div>
+  )
+}
+
+export const DateTime = () => {
+  const onApply = response => {
+    console.log('onApply response', response)
+  }
+
+  const onClose = () => {
+    console.log('onClose')
+  }
+
+  return (
+    <div style={style}>
+      <DynamicFilter title={'DateTime'} onApply={onApply} onClose={onClose}>
+        <DynamicFilter.DateTime
+          elementKey='DateTime'
+          title='Event Timestamp '
+        />
+      </DynamicFilter>
+    </div>
+  )
+}
+
+export const SingleSlider = () => {
+  const onApply = response => {
+    console.log('onApply response', response)
+  }
+
+  const onClose = () => {
+    console.log('onClose')
+  }
+
+  return (
+    <div style={style}>
+      <DynamicFilter
+        title={'Single Slider'}
+        onApply={onApply}
+        onClose={onClose}
+      >
+        <DynamicFilter.Slider elementKey='DateTime' title='Score' />
+      </DynamicFilter>
+    </div>
+  )
+}
+
+export const DualSlider = () => {
+  const onApply = response => {
+    console.log('onApply response', response)
+  }
+
+  const onClose = () => {
+    console.log('onClose')
+  }
+
+  return (
+    <div style={style}>
+      <DynamicFilter title={'Dual Slider'} onApply={onApply} onClose={onClose}>
+        <DynamicFilter.Slider
+          elementKey='DateTime'
+          title='Score'
+          defaultValue={[4, 8]}
+          min={0}
+          max={10}
+        />
+      </DynamicFilter>
+    </div>
+  )
+}
+
+export const ControlledListFilter = () => {
+  const onApply = response => {
+    console.log('onApply response', response)
+  }
+
+  const onClose = () => {
+    console.log('onClose')
+  }
+
+  return (
+    <div style={style}>
+      <DynamicFilter
+        title={'Controlled ListFilter'}
+        onApply={onApply}
+        onClose={onClose}
+      >
+        <DynamicFilter.ListFilter
+          elementKey='ListFilter'
+          items={listItems}
+          unControlled={false}
+        />
+      </DynamicFilter>
+    </div>
+  )
+}
+
+export const ControlledListWithFilters = () => {
+  const onApply = response => {
+    console.log('onApply response', response)
+  }
+
+  const onClose = () => {
+    console.log('onClose')
+  }
+
+  return (
+    <div style={style}>
+      <DynamicFilter
+        title={'Controlled ListFilter with filters'}
+        onApply={onApply}
+        onClose={onClose}
+      >
+        <DynamicFilter.ListFilter
+          elementKey='ListFilter'
+          items={listItems}
+          unControlled={false}
+          filterItems={listFilterItems}
         />
       </DynamicFilter>
     </div>

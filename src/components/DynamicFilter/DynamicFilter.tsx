@@ -1,4 +1,4 @@
-import React, { ReactElement, useRef } from 'react'
+import React, { useRef } from 'react'
 import DynamicFilterDateTime from './components/DynamicFilterDateTime/DynamicFilterDateTime'
 import DynamicFilterListFilter from './components/DynamicFilterListFilter/DynamicFilterListFilter'
 import DynamicFilterContext from './store/DynamicFilterContext'
@@ -18,20 +18,21 @@ const DynamicFilter: DynamicFilterInterface = ({
   title,
   classname,
   children,
-}): ReactElement => {
+}): JSX.Element => {
   const { state, actions } = UseDynamicFilterReducer()
   const btnRef = useRef<HTMLDivElement>(null)
   const { isMenuOpen } = state
 
   const handleBtnClick = () => {
     if (isMenuOpen) {
-      onClose()
+      onClose && onClose()
     }
     actions.toggleIsMenuOpen()
   }
 
   const handleOnApplyClick = () => {
     onApply(state.elementsState)
+    handleBtnClick()
   }
 
   const handleCancelClick = () => {
@@ -45,7 +46,7 @@ const DynamicFilter: DynamicFilterInterface = ({
         className={classNames(
           styles.dynamicFilterBtn,
           isMenuOpen && styles.btnSelected,
-          classname && styles[classname],
+          classname && classname,
         )}
         onClick={handleBtnClick}
       >

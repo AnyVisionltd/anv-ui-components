@@ -53,8 +53,11 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
     : onlyCheckedItems.length === totalItems
 
   useEffect(() => {
+    if (unControlled) {
+      return
+    }
     const filtered = items.filter(item => {
-      const searchRes = item.value
+      const searchRes = item.id
         .toLowerCase()
         .includes(filters.search.toLowerCase())
       const isByType = item.type && filterItems
@@ -65,7 +68,13 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
     })
 
     setFilteredItems(filtered)
-  }, [filterItems, filters, filters.search, filters.selectFilter, items])
+  }, [
+    filterItems,
+    filters.search,
+    filters.selectFilter?.id,
+    items,
+    unControlled,
+  ])
 
   useEffect(() => {
     if (unControlled) {

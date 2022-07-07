@@ -60,10 +60,10 @@ export interface DynamicFilterSortProps {
   otherProps?: Record<string, any>
   elementKey: string
 }
-interface DynamicFilterProps {
+export interface DynamicFilterProps {
   title: string
-  onApply: (anyValue: any) => void
-  onClose: () => void
+  onApply: (elementsState: Record<string, any>) => void
+  onClose?: () => void
   classname?: string
 }
 export interface DynamicFilterInterface extends FC<DynamicFilterProps> {
