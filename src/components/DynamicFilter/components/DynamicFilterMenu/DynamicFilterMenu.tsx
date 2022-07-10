@@ -32,9 +32,11 @@ const DynamicFilterMenu: FC<DynamicFilterMenuProps> = ({
     if (anchorElement.current) {
       const rect = anchorElement.current.getBoundingClientRect()
       const isOpenToTheRight: boolean = rect.x + rect.width - maxMenuElWidth > 0
+      console.log('window', window.pageYOffset)
+
       return {
         maxWidth: `${maxMenuElWidth}px`,
-        top: `${rect.bottom}px`,
+        top: `${rect.bottom + window.pageYOffset}px`,
         [isOpenToTheRight ? 'right' : 'left']: isOpenToTheRight
           ? `${window.innerWidth - rect.right}px`
           : `${rect.x}px`,

@@ -4,6 +4,8 @@
   display: flex;
   flex-direction: column;
   gap: av-space(base);
+  overflow-y: hidden;
+  overflow-x: hidden;
 
   .title {
     @extend %av-subtitle1;
@@ -15,6 +17,7 @@
     display: flex;
     gap: av-space(tiny);
     align-items: flex-start;
+    height: av-size(sz-96);
 
     .durationContainer {
       color: av-color(trueblack);

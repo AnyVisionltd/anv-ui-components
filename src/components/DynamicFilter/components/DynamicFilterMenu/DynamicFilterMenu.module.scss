@@ -19,11 +19,13 @@
 
   .itemsContainer {
     max-height: 520px;
+    min-height: 150px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: av-space(medium);
     @extend %av-scrollbar;
+    overflow-x: hidden;
   }
 
   .actionBtnContainer {
