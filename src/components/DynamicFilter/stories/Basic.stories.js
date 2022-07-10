@@ -16,53 +16,48 @@ export default {
 
 const listFilterItems = [
   {
-    id: 'aaa',
-    value: 'AAA',
+    id: 'Face',
+    value: 'Face',
   },
   {
-    id: 'bbb',
-    value: 'BBB',
+    id: 'Body',
+    value: 'Body',
   },
   {
-    id: 'ccc',
-    value: 'CCC',
+    id: 'Person',
+    value: 'Person',
   },
 ]
 
 const listItems = [
-  {
-    id: 'bbbbff',
-    value: 'dbbbdbbbdbbbdbbbdbbbdbbbdbbbdbbbdbbbdbbb',
-    type: 'bbb',
-  },
-  { id: 'fdsfee', value: 'ddsdsadsadasd', type: 'bbb' },
-  { id: 'fdsrwqf', value: 'ddsdsadsadasd', type: 'ccc' },
-  { id: 'fdswe tf', value: 'ddsdsadsadasd', type: 'ccc' },
-  { id: 'fdsdfyf', value: 'ddsdsadsadasd', type: 'ccc' },
-  { id: 'fudghsf', value: 'ddsdsadsadasd', type: 'ccc' },
-  { id: 'fiad;lksf', value: 'ddsdsadsadasd', type: 'ccc' },
-  { id: 'fodcasssf', value: 'ddsdsadsadasd', type: 'bbb' },
-  { id: 'fdpas3dsf', value: 'ddsdsadsadasd', type: 'bbb' },
-  { id: 'fd45rgsf', value: 'ddsdsadsadasd', type: 'bbb' },
-  { id: 'fdzt5sf', value: 'ddsdsadsadasd', type: 'bbb' },
-  { id: 'fdgtre55sf', value: 'ddsdsadsadasd', type: 'bbb' },
-  { id: 'fgfh89dhsf', value: 'ddsdsadsadasd', type: 'aaa' },
-  { id: 'few12dsxf', value: 'ddsdsadsadasd', type: 'aaa' },
-  { id: 'fddf44nsf', value: 'ddsdsadsadasd', type: 'aaa' },
-  { id: 'fdjdsvv432sf', value: 'ddsdsadsadasd', type: 'aaa' },
-  { id: 'fdfdsfhuuucsf', value: 'ddsdsadsadasd', type: 'aaa' },
-  { id: 'fdfdfdsfaaamsf', value: 'ddsdsadsadasd', type: 'aaa' },
-  { id: 'fdksdfsfdfrd696677f', value: 'ddsdsadsadasd', type: 'aaa' },
+  { id: 'subject 1', value: 'subject 1', type: 'Face' },
+  { id: 'subject 2', value: 'subject 2', type: 'Body' },
+  { id: 'subject 3', value: 'subject 3', type: 'Body' },
+  { id: 'subject 4', value: 'subject 4', type: 'Face' },
+  { id: 'subject 5', value: 'subject 5', type: 'Body' },
+  { id: 'subject 6', value: 'subject 6', type: 'Body' },
+  { id: 'subject 7', value: 'subject 7', type: 'Face' },
+  { id: 'subject 8', value: 'subject 8', type: 'Face' },
+  { id: 'subject 9', value: 'subject 9', type: 'Face' },
+  { id: 'subject 10', value: 'subject 10', type: 'Face' },
+  { id: 'subject 11', value: 'subject 11', type: 'Body' },
+  { id: 'subject 12', value: 'subject 12', type: 'Body' },
+  { id: 'subject 13', value: 'subject 13', type: 'Body' },
+  { id: 'subject 14', value: 'subject 14', type: 'Face' },
+  { id: 'subject 15', value: 'subject 15', type: 'Person' },
+  { id: 'subject 16', value: 'subject 16', type: 'Person' },
+  { id: 'subject 17', value: 'subject 17', type: 'Face' },
+  { id: 'subject 18', value: 'subject 18', type: 'Person' },
 ]
 
 const sortItems = [
-  { id: 'dfdsffdsfsf', value: 'name' },
-  { id: 'dfdsffdsfsfww', value: 'type' },
+  { id: 'name', value: 'name' },
+  { id: 'type', value: 'type' },
 ]
 
 const selectionItems = [
-  { id: 'dfdsffdsfsf', value: 'name' },
-  { id: 'dfdsffdsfsfww', value: 'type' },
+  { id: 'name', value: 'name' },
+  { id: 'type', value: 'type' },
 ]
 
 const loadDataOffset = 10
@@ -163,6 +158,31 @@ export const Selection = () => {
         <DynamicFilter.Selection
           items={selectionItems}
           elementKey={'selection'}
+        />
+      </DynamicFilter>
+    </div>
+  )
+}
+
+export const MultiSelection = () => {
+  const onApply = response => {
+    console.log('onApply response', response)
+  }
+
+  const onClose = () => {
+    console.log('onClose')
+  }
+
+  return (
+    <div style={style}>
+      <DynamicFilter title={'Selection'} onApply={onApply} onClose={onClose}>
+        <DynamicFilter.Selection
+          items={selectionItems}
+          elementKey={'first-selection'}
+        />
+        <DynamicFilter.Selection
+          items={selectionItems}
+          elementKey={'second-selection'}
         />
       </DynamicFilter>
     </div>
