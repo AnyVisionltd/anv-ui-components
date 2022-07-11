@@ -75,7 +75,7 @@ const DynamicFilterDateTimeDuration: FC<DynamicFilterDateTimeDurationProps> = ({
             menuContainerId={'duration-steps'}
             preferOpenDirection={'bottom-start'}
             items={fixedMenuItemsFilter}
-            selectedItemValue={selectedDurationOption.value}
+            selectedData={selectedDurationOption.value}
             toggleCallback={setIsMenuDropdownOpen}
           />
         </div>

@@ -5,6 +5,7 @@ import { Menu } from '../Menu'
 import { Tooltip } from '../Tooltip'
 import { Button } from '../Button'
 import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
+import { Checkbox } from '../Checkbox'
 import styles from './MenuSelect.module.scss'
 
 interface MenuItemInterface {
@@ -18,7 +19,7 @@ interface MenuSelectProps {
   items: Array<MenuItemInterface>
   preferOpenDirection: string
   menuContainerId: string
-  selectedItemValue: string | Array<string>
+  selectedData: string | Array<string>
   toggleCallback?: (value: boolean) => void
   isMultiSelect?: boolean
   removeAll?: () => void
@@ -28,7 +29,7 @@ const MenuSelect: FC<MenuSelectProps> = ({
   items,
   preferOpenDirection,
   menuContainerId,
-  selectedItemValue,
+  selectedData: selectedItemValue,
   toggleCallback,
   isMultiSelect,
   removeAll,
@@ -78,7 +79,16 @@ const MenuSelect: FC<MenuSelectProps> = ({
               isSelected && styles.selectedMenuItem,
             )}
           >
-            {element}
+            {!isMultiSelect ? (
+              element
+            ) : (
+              <div className={styles.rowItemContainer}>
+                <Checkbox checked={isSelected} />
+                <Tooltip overflowOnly placement='right' content={element}>
+                  <div className={styles.rowItemValue}>{element}</div>
+                </Tooltip>
+              </div>
+            )}
           </Menu.Item>
         ),
       )}

@@ -18,6 +18,16 @@
   .dropdownItem {
     width: 100%;
   }
+
+  .rowItemContainer {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    .rowItemValue {
+      max-width: calc(100% - av-space(micro) - av-size(sz-32));
+    }
+  }
 }
 
 .dropdownContainer {
