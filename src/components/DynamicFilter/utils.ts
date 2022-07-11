@@ -5,6 +5,7 @@ export interface DynamicFilterStateInterface {
   isMenuOpen: boolean
   elementsState: Record<string, any>
   isDatePickerOpen: boolean
+  isMenuDropdownOpen: boolean
 }
 
 export enum DateTimeVarientType {
@@ -130,4 +131,11 @@ export const getDefaultDurationInputValue = (
   const transformTo = moment(to)
   const duration = moment.duration(transformTo.diff(from))
   return Math.floor(duration.asHours())
+}
+
+export interface MenuItemInterface {
+  callback: () => void
+  element: string
+  isSelected: boolean
+  key: string
 }

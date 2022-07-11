@@ -1,5 +1,4 @@
 import React, { FC, ReactElement } from 'react'
-import { Dropdown } from '../../../../Dropdown'
 import { Radio } from '../../../../Radio'
 import { TextField } from '../../../../TextField'
 import {
@@ -7,6 +6,7 @@ import {
   minDurationValue,
   stepDuration,
 } from '../../../utils'
+import MenuSelect from '../../MenuSelect/MenuSelect'
 
 interface DynamicFilterDateTimeDurationProps {
   styles: any
@@ -35,6 +35,13 @@ const DynamicFilterDateTimeDuration: FC<DynamicFilterDateTimeDurationProps> = ({
 }): ReactElement => {
   const isShowRadio = varientType !== DateTimeVarientType.Duration
 
+  const fixedMenuItemsFilter = durationOptions.map(option => ({
+    element: option.value,
+    callback: () => setSelectedDurationOption(option),
+    isSelected: selectedDurationOption.id === option.id,
+    key: option.id,
+  }))
+
   return (
     <div className={styles.itemContainer}>
       {isShowRadio && (
@@ -62,13 +69,11 @@ const DynamicFilterDateTimeDuration: FC<DynamicFilterDateTimeDurationProps> = ({
             className={styles.durationInput}
             disabled={selectedType !== DateTimeVarientType.Duration}
           />
-          <Dropdown
-            label={translations.DateTimeDurationDropdownLabel}
-            options={durationOptions}
-            defaultValues={[selectedDurationOption]}
-            className={styles.durationSteps}
-            onChange={options => setSelectedDurationOption(options[0])}
-            disabled={selectedType !== DateTimeVarientType.Duration}
+          <MenuSelect
+            menuContainerId={'duration-steps'}
+            preferOpenDirection={'bottom-start'}
+            items={fixedMenuItemsFilter}
+            selectedItemValue={selectedDurationOption.value}
           />
         </div>
       </div>

@@ -10,6 +10,7 @@ const DynamicFilterInitialState: DynamicFilterStateInterface = {
   isMenuOpen: false,
   elementsState: {},
   isDatePickerOpen: false,
+  isMenuDropdownOpen: false,
 }
 
 const reducer = (
@@ -34,6 +35,11 @@ const reducer = (
       return {
         ...state,
         isDatePickerOpen: action.payload,
+      }
+    case DynamicFilterActionsTypes.SET_IS_MENU_DROPDOWN_OPEN:
+      return {
+        ...state,
+        isMenuDropdownOpen: action.payload,
       }
     default:
       return state

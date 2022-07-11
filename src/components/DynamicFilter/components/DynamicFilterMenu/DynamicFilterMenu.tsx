@@ -22,7 +22,7 @@ const DynamicFilterMenu: FC<DynamicFilterMenuProps> = ({
 }): ReactElement => {
   const { state, actions } = useContext(DynamicFilterContext)
   const menuRef = useRef<HTMLDivElement>(null)
-  const { isMenuOpen, isDatePickerOpen } = state
+  const { isMenuOpen, isDatePickerOpen, isMenuDropdownOpen } = state
   const { getComponentTranslation } = useComponentTranslation()
   const translations: Record<string, string> = getComponentTranslation(
     'dynamicFilterMenu',
@@ -32,7 +32,6 @@ const DynamicFilterMenu: FC<DynamicFilterMenuProps> = ({
     if (anchorElement.current) {
       const rect = anchorElement.current.getBoundingClientRect()
       const isOpenToTheRight: boolean = rect.x + rect.width - maxMenuElWidth > 0
-      console.log('window', window.pageYOffset)
 
       return {
         maxWidth: `${maxMenuElWidth}px`,
@@ -47,6 +46,7 @@ const DynamicFilterMenu: FC<DynamicFilterMenuProps> = ({
   const onClickOutSide = (event: any) => {
     if (
       isDatePickerOpen ||
+      isMenuDropdownOpen ||
       !isMenuOpen ||
       (anchorElement && anchorElement.current.contains(event.target))
     ) {
