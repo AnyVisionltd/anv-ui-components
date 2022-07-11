@@ -6,9 +6,17 @@
   border-top: none;
   border-radius: av-radius(tidy);
   padding: 0;
+  max-height: av-size(sz-320);
+  width: av-size(sz-240);
+  overflow-y: auto;
+  @extend %av-scrollbar;
 
   .selectedMenuItem {
     background-color: av-color(primary, av-opacity(disabled));
+  }
+
+  .dropdownItem {
+    width: 100%;
   }
 }
 
@@ -36,8 +44,8 @@
     }
 
     svg {
-      width: 24px;
-      height: 24px;
+      width: av-size(sz-24);
+      height: av-size(sz-24);
       transition: transform 200ms;
       transform: rotate(0deg);
     }
@@ -57,8 +65,4 @@
       }
     }
   }
-}
-
-.dropdownItem {
-  width: av-size(sz-240);
 }

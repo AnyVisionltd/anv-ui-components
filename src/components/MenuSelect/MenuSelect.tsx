@@ -1,17 +1,23 @@
-import React, { FC, ReactElement, useContext, useRef, useState } from 'react'
+import React, { FC, ReactElement, useRef, useState } from 'react'
 import classNames from 'classnames'
 import { ArrowDown } from '@anyvision/anv-icons'
-import { Menu } from '../../../Menu'
-import { Tooltip } from '../../../Tooltip'
-import DynamicFilterContext from '../../store/DynamicFilterContext'
-import { MenuItemInterface } from '../../utils'
+import { Menu } from '../Menu'
+import { Tooltip } from '../Tooltip'
 import styles from './MenuSelect.module.scss'
+
+interface MenuItemInterface {
+  callback: () => void
+  element: string
+  isSelected: boolean
+  key: string
+}
 
 interface MenuSelectProps {
   items: Array<MenuItemInterface>
   preferOpenDirection: string
   menuContainerId: string
   selectedItemValue: string
+  toggleCallback?: (value: boolean) => void
 }
 
 const MenuSelect: FC<MenuSelectProps> = ({
@@ -19,15 +25,14 @@ const MenuSelect: FC<MenuSelectProps> = ({
   preferOpenDirection,
   menuContainerId,
   selectedItemValue,
+  toggleCallback,
 }): ReactElement => {
   const btnRef = useRef(null)
   const [anchorElement, setAnchorElement] = useState(null)
   const isMenuOpen = Boolean(anchorElement)
-  const { actions } = useContext(DynamicFilterContext)
-  const { setIsMenuDropdownOpen } = actions
 
   const onToggleMenu = () => {
-    setIsMenuDropdownOpen(!!!anchorElement)
+    toggleCallback && toggleCallback(!!!anchorElement)
     setAnchorElement(anchorElement ? null : btnRef.current)
   }
 

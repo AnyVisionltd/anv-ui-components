@@ -1,4 +1,5 @@
 import React, { FC, ReactElement } from 'react'
+import { MenuSelect } from '../../../../MenuSelect'
 import { Radio } from '../../../../Radio'
 import { TextField } from '../../../../TextField'
 import {
@@ -6,7 +7,6 @@ import {
   minDurationValue,
   stepDuration,
 } from '../../../utils'
-import MenuSelect from '../../MenuSelect/MenuSelect'
 
 interface DynamicFilterDateTimeDurationProps {
   styles: any
@@ -19,6 +19,7 @@ interface DynamicFilterDateTimeDurationProps {
   varientType: DateTimeVarientType
   translations: Record<string, string>
   durationOptions: Array<Record<string, string>>
+  setIsMenuDropdownOpen: (value: boolean) => void
 }
 
 const DynamicFilterDateTimeDuration: FC<DynamicFilterDateTimeDurationProps> = ({
@@ -32,6 +33,7 @@ const DynamicFilterDateTimeDuration: FC<DynamicFilterDateTimeDurationProps> = ({
   varientType,
   translations,
   durationOptions,
+  setIsMenuDropdownOpen,
 }): ReactElement => {
   const isShowRadio = varientType !== DateTimeVarientType.Duration
 
@@ -74,6 +76,7 @@ const DynamicFilterDateTimeDuration: FC<DynamicFilterDateTimeDurationProps> = ({
             preferOpenDirection={'bottom-start'}
             items={fixedMenuItemsFilter}
             selectedItemValue={selectedDurationOption.value}
+            toggleCallback={setIsMenuDropdownOpen}
           />
         </div>
       </div>

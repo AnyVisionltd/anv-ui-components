@@ -26,7 +26,6 @@ import { minDurationValue } from '../../utils'
 import DynamicFilterDateTimeDate from './components/DynamicFilterDateTimeDate'
 import { useComponentTranslation } from '../../../../hooks/UseComponentTranslation'
 
-
 const getSelectedType = (varientType: DateTimeVarientType) => {
   switch (varientType) {
     case DateTimeVarientType.All:
@@ -58,14 +57,18 @@ const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
     ),
   )
   const componentState = state.elementsState[elementKey]
-  const { updateElementsState, setIsDatePickerOpen } = actions
+  const {
+    updateElementsState,
+    setIsDatePickerOpen,
+    setIsMenuDropdownOpen,
+  } = actions
   const { getComponentTranslation } = useComponentTranslation()
   const translations = getComponentTranslation('dynamicFilterDateTime')
 
   const durationOptions = Object.values(DurationOptions).map(value => {
     return {
       id: value,
-      value: translations[value]
+      value: translations[value],
     }
   })
 
@@ -141,6 +144,7 @@ const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
         varientType={varientType || DefaultVarientType}
         translations={translations}
         durationOptions={durationOptions}
+        setIsMenuDropdownOpen={setIsMenuDropdownOpen}
       />
     )
   }
