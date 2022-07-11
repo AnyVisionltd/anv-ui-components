@@ -40,12 +40,14 @@ export const Default = () => {
   }))
 
   return (
-    <MenuSelect
-      menuContainerId='Default'
-      preferOpenDirection='bottom-start'
-      items={defaultItems}
-      selectedItemValue={selectedItem.value}
-    />
+    <div className={styles.marginFlexContainer}>
+      <MenuSelect
+        menuContainerId='Default'
+        preferOpenDirection='bottom-start'
+        items={defaultItems}
+        selectedItemValue={selectedItem.value}
+      />
+    </div>
   )
 }
 
@@ -70,13 +72,15 @@ export const SelectMultiple = () => {
   }))
 
   return (
-    <MenuSelect
-      menuContainerId='Default'
-      preferOpenDirection='bottom-start'
-      items={defaultItems}
-      selectedItemValue={selectedItems}
-      isMultiSelect={true}
-      removeAll={handleRemoveAllSelectedItems}
-    />
+    <div className={styles.marginFlexContainer}>
+      <MenuSelect
+        menuContainerId='Default'
+        preferOpenDirection='bottom-start'
+        items={defaultItems}
+        selectedItemValue={selectedItems}
+        isMultiSelect={true}
+        removeAll={handleRemoveAllSelectedItems}
+      />
+    </div>
   )
 }

@@ -4,6 +4,7 @@ import { ArrowDown, TimesThick } from '@anyvision/anv-icons'
 import { Menu } from '../Menu'
 import { Tooltip } from '../Tooltip'
 import { Button } from '../Button'
+import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
 import styles from './MenuSelect.module.scss'
 
 interface MenuItemInterface {
@@ -35,6 +36,11 @@ const MenuSelect: FC<MenuSelectProps> = ({
   const btnRef = useRef(null)
   const [anchorElement, setAnchorElement] = useState(null)
   const isMenuOpen = Boolean(anchorElement)
+
+  const { getComponentTranslation } = useComponentTranslation()
+  const translations: Record<string, string> = getComponentTranslation(
+    'selectMenu',
+  )
 
   const onToggleMenu = () => {
     toggleCallback && toggleCallback(!!!anchorElement)
@@ -79,51 +85,57 @@ const MenuSelect: FC<MenuSelectProps> = ({
     </Menu>
   )
 
+  const renderMultipleWrapper = () => (
+    <div className={styles.multiSelectContainer}>
+      {selectedItemValue.length === 0 && (
+        <span className={styles.multiSelectTitleNoneItems}>
+          {translations.selectOption}
+        </span>
+      )}
+      {selectedItemValue.length > 0 && (
+        <div className={styles.multiSelectWithItems}>
+          {removeAll && (
+            <Button
+              onClick={onClickRemoveSelectedItems}
+              leadingIcon={<TimesThick />}
+              className={styles.btn}
+            >
+              {selectedItemValue.length}
+            </Button>
+          )}
+          <div className={styles.multiSelectTitleWrapper}>
+            <span className={styles.multiSelectValue}>
+              {selectedItemValue.length}
+            </span>
+            <span>{translations.itemsSelected}</span>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+
+  const renderMenuHeader = () => (
+    <div
+      onClick={onToggleMenu}
+      className={classNames(
+        styles.resultContainer,
+        isMenuOpen && styles.active,
+      )}
+      ref={btnRef}
+    >
+      {!isMultiSelect && (
+        <Tooltip content={selectedItemValue} placement='top' overflowOnly>
+          <div className={styles.resultTitle}>{selectedItemValue}</div>
+        </Tooltip>
+      )}
+      {isMultiSelect && renderMultipleWrapper()}
+      <ArrowDown />
+    </div>
+  )
+
   return (
     <div className={styles.dropdownContainer}>
-      <div
-        onClick={onToggleMenu}
-        className={classNames(
-          styles.resultContainer,
-          isMenuOpen && styles.active,
-        )}
-        ref={btnRef}
-      >
-        {!isMultiSelect && (
-          <Tooltip content={selectedItemValue} placement='top' overflowOnly>
-            <div className={styles.resultTitle}>{selectedItemValue}</div>
-          </Tooltip>
-        )}
-        {isMultiSelect && (
-          <div className={styles.multiSelectContainer}>
-            {selectedItemValue.length === 0 && (
-              <span className={styles.multiSelectTitleNoneItems}>
-                Select Option
-              </span>
-            )}
-            {selectedItemValue.length > 0 && (
-              <div className={styles.multiSelectWithItems}>
-                {removeAll && (
-                  <Button
-                    onClick={onClickRemoveSelectedItems}
-                    leadingIcon={<TimesThick />}
-                    className={styles.btn}
-                  >
-                    {selectedItemValue.length}
-                  </Button>
-                )}
-                <div className={styles.multiSelectTitleWrapper}>
-                  <span className={styles.multiSelectValue}>
-                    {selectedItemValue.length}
-                  </span>
-                  <span>Items Selected</span>
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-        <ArrowDown />
-      </div>
+      {renderMenuHeader()}
       {renderMenu()}
     </div>
   )

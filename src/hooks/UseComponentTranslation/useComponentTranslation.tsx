@@ -94,6 +94,10 @@ let sharedState = {
   dynamicFilterMenu: {
     applyBtn: 'Apply',
   },
+  selectMenu: {
+    itemsSelected: 'Items Selected',
+    selectOption: 'Select Option',
+  },
 }
 
 const useComponentTranslation = () => {
