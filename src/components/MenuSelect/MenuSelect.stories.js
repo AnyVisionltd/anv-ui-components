@@ -48,3 +48,35 @@ export const Default = () => {
     />
   )
 }
+
+export const SelectMultiple = () => {
+  const [selectedItems, setSelectedItems] = useState([])
+
+  const handleRemoveAllSelectedItems = () => {
+    setSelectedItems([])
+  }
+
+  const defaultItems = items.map(item => ({
+    callback: () =>
+      setSelectedItems(prev => {
+        if (prev.find(id => item.id === id)) {
+          return prev.filter(id => item.id !== id)
+        }
+        return [...prev, item.id]
+      }),
+    element: item.value,
+    isSelected: !!selectedItems.find(id => item.id === id),
+    key: item.id,
+  }))
+
+  return (
+    <MenuSelect
+      menuContainerId='Default'
+      preferOpenDirection='bottom-start'
+      items={defaultItems}
+      selectedItemValue={selectedItems}
+      isMultiSelect={true}
+      removeAll={handleRemoveAllSelectedItems}
+    />
+  )
+}
