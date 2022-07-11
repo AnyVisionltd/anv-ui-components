@@ -64,68 +64,13 @@ const loadDataOffset = 10
 
 const style = { width: '100%', height: '400px' }
 
-// export const Basic = () => {
-//   const [itemsToShow, setItemsToShow] = useState(
-//     listItems.slice(0, loadDataOffset),
-//   )
-//   const [isLoading, setIsLoading] = useState(false)
-//   const [searchFilter, setSearchFilter] = useState('')
-
-//   const onApply = response => {
-//     console.log('onApply response', response)
-//   }
-
-//   const onClose = () => {
-//     console.log('onClose')
-//   }
-
-//   const getFilteredItems = (itemsToFilter, search) => {
-//     return itemsToFilter.filter(item =>
-//       item.id.toLowerCase().includes(search.toLowerCase()),
-//     )
-//   }
-
-//   const onLoadMoreData = () => {
-//     setIsLoading(true)
-//     setItemsToShow(prev => {
-//       const filteredItems = getFilteredItems(listItems, searchFilter)
-//       return filteredItems.slice(0, prev.length + loadDataOffset)
-//     })
-//     setIsLoading(false)
-//   }
-
-//   const handleOnChange = ({ search }) => {
-//     setSearchFilter(search)
-//     setIsLoading(true)
-//     const filtered = getFilteredItems(listItems, search)
-//     setItemsToShow(filtered)
-//     setIsLoading(false)
-//   }
-
-//   return (
-//     <div style={style}>
-//       <DynamicFilter
-//         title={'Basic'}
-//         onApply={onApply}
-//         onClose={onClose}
-//         classname={'customClassname'}
-//       >
-//         <DynamicFilter.Sort items={sortItems} elementKey={'sorts'} />
-//         <DynamicFilter.ListFilter
-//           elementKey='ListFilter'
-//           items={itemsToShow}
-//           onLoadMoreData={onLoadMoreData}
-//           unControlled={true}
-//           onChange={handleOnChange}
-//           totalItems={listItems.length}
-//           isLoading={isLoading}
-//         />
-//       </DynamicFilter>
-//     </div>
-//   )
-// }
-
 export const Basic = () => {
+  const [itemsToShow, setItemsToShow] = useState(
+    listItems.slice(0, loadDataOffset),
+  )
+  const [isLoading, setIsLoading] = useState(false)
+  const [searchFilter, setSearchFilter] = useState('')
+
   const onApply = response => {
     console.log('onApply response', response)
   }
@@ -134,17 +79,46 @@ export const Basic = () => {
     console.log('onClose')
   }
 
+  const getFilteredItems = (itemsToFilter, search) => {
+    return itemsToFilter.filter(item =>
+      item.id.toLowerCase().includes(search.toLowerCase()),
+    )
+  }
+
+  const onLoadMoreData = () => {
+    setIsLoading(true)
+    setItemsToShow(prev => {
+      const filteredItems = getFilteredItems(listItems, searchFilter)
+      return filteredItems.slice(0, prev.length + loadDataOffset)
+    })
+    setIsLoading(false)
+  }
+
+  const handleOnChange = ({ search }) => {
+    setSearchFilter(search)
+    setIsLoading(true)
+    const filtered = getFilteredItems(listItems, search)
+    setItemsToShow(filtered)
+    setIsLoading(false)
+  }
+
   return (
     <div style={style}>
       <DynamicFilter
-        title={'DateTime Duration'}
+        title={'Basic'}
         onApply={onApply}
         onClose={onClose}
+        classname={'customClassname'}
       >
-        <DynamicFilter.DateTime
-          varientType={DateTimeVarientType.Duration}
-          elementKey='DateTime'
-          title='Event Timestamp '
+        <DynamicFilter.Sort items={sortItems} elementKey={'sorts'} />
+        <DynamicFilter.ListFilter
+          elementKey='ListFilter'
+          items={itemsToShow}
+          onLoadMoreData={onLoadMoreData}
+          unControlled={true}
+          onChange={handleOnChange}
+          totalItems={listItems.length}
+          isLoading={isLoading}
         />
       </DynamicFilter>
     </div>
