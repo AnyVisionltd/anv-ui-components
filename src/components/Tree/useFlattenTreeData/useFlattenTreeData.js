@@ -221,6 +221,7 @@ const useFlattenTreeData = ({
     handleSetSelectedNodesFromKeysArr,
     handleSetSelectedNodesFromKeysObject,
     isSelectedKeysUpdatedAfterMount,
+    flattenTreeData,
   }
 }
 

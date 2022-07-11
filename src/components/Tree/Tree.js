@@ -55,6 +55,7 @@ const Tree = forwardRef(
       isLoading,
       isChildrenUniqueKeysOverlap,
       isReturnSelectedKeysWhenOnSelect,
+      selfControlled,
     },
     ref,
   ) => {
@@ -75,11 +76,13 @@ const Tree = forwardRef(
       resetSearchData,
       handleAddNewNodes,
       handleSetNodeNewProperties,
+      handleSetNewNodes,
     } = useTreeVisibleData({
       initialData: nodes,
       onSearch,
       treeInstance,
       isChildrenUniqueKeysOverlap,
+      selfControlled,
       ...keyValues,
     })
 
@@ -92,6 +95,7 @@ const Tree = forwardRef(
       handleSetSelectedNodesFromKeysArr,
       handleSetSelectedNodesFromKeysObject,
       isSelectedKeysUpdatedAfterMount,
+      flattenTreeData,
     } = useFlattenTreeData({
       data: nodes,
       selectedKeys,
@@ -161,12 +165,31 @@ const Tree = forwardRef(
     }
 
     useEffect(() => {
-      if (filteredData.length < nodes.length) {
+      if (!selfControlled) {
+        handleSetNewNodes(nodes)
+        flattenTreeData(nodes, selectedKeys)
+      }
+    }, [
+      flattenTreeData,
+      handleSetNewNodes,
+      nodes,
+      selectedKeys,
+      selfControlled,
+    ])
+
+    useEffect(() => {
+      if (selfControlled && filteredData.length < nodes.length) {
         const newAddedNodes = nodes.slice(filteredData.length)
         handleAddNewNodes(newAddedNodes)
         handleAddNewFlattenedNodes(newAddedNodes)
       }
-    }, [filteredData, handleAddNewFlattenedNodes, handleAddNewNodes, nodes])
+    }, [
+      filteredData,
+      handleAddNewFlattenedNodes,
+      handleAddNewNodes,
+      nodes,
+      selfControlled,
+    ])
 
     useEffect(() => {
       const areAllExpanded = checkAllNodesAreExpanded({
@@ -467,6 +490,7 @@ Tree.defaultProps = {
   childrenKey: 'children',
   labelKey: 'label',
   idKey: 'key',
+  selfControlled: true,
 }
 
 Tree.propTypes = {
@@ -524,6 +548,8 @@ Tree.propTypes = {
   noItemsMessage: propTypes.string,
   /** Tree loading status. */
   isLoading: propTypes.bool,
+  /** If true, search is controlled by the table component. Default is true.*/
+  selfControlled: propTypes.bool,
   /** Whether the tree roots can have the same child node without causing unique key conflicts.  */
   isChildrenUniqueKeysOverlap: propTypes.bool,
   /** If there is no need to make changes with selected/added nodes, set this prop to true
