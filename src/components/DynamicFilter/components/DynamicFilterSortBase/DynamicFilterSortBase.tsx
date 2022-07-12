@@ -7,7 +7,7 @@ import styles from './DynamicFilterSortBase.module.scss'
 
 interface DynamicFilterSortBaseProps {
   items: Array<SortItemInterface>
-  otherProps?: Record<string, any>
+  otherProps: Record<string, any>
   elementKey: string
   onChange: (itemKey: string) => void
 }
@@ -22,9 +22,9 @@ const DynamicFilterSortBase: FC<DynamicFilterSortBaseProps> = ({
   const componentState = state.elementsState[elementKey]
 
   return (
-    <div className={styles.filterSortBaseContainer}>
+    <div className={styles.filterSortBaseContainer} {...otherProps}>
       {items.map(({ id, value }) => (
-        <div key={id} className={styles.filterSortBaseItem} {...otherProps}>
+        <div key={id} className={styles.filterSortBaseItem}>
           <Radio
             checked={componentState?.selectedItemId === id}
             onChange={() => onChange(id)}

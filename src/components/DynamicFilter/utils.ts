@@ -23,57 +23,6 @@ export interface ListItemInterface {
   value: string
   type?: string
 }
-export interface DynamicFilterDateTimeProps {
-  from?: Date
-  to?: Date
-  varientType?: DateTimeVarientType
-  otherPropsTo?: Record<string, any>
-  otherPropsFrom?: Record<string, any>
-  elementKey: string
-  title: string
-}
-export interface DynamicFilterListFilterProps {
-  items: Array<ListItemInterface>
-  elementKey: string
-  filterItems?: Array<SortItemInterface>
-  unControlled?: boolean
-  onChange?: (filterBy: any) => void
-  onLoadMoreData?: () => void
-  totalItems?: number
-  isLoading?: boolean
-}
-export interface DynamicFilterSelectionProps {
-  items: Array<SortItemInterface>
-  otherProps?: Record<string, any>
-  elementKey: string
-}
-export interface DynamicFilterSliderProps {
-  min?: number
-  max?: number
-  step?: number
-  otherProps?: Record<string, any>
-  elementKey: string
-  title: string
-  defaultValue?: number | Array<number>
-}
-export interface DynamicFilterSortProps {
-  items: Array<SortItemInterface>
-  otherProps?: Record<string, any>
-  elementKey: string
-}
-export interface DynamicFilterProps {
-  title: string
-  onApply: (elementsState: Record<string, any>) => void
-  onClose?: () => void
-  classname?: string
-}
-export interface DynamicFilterInterface extends FC<DynamicFilterProps> {
-  DateTime: FC<DynamicFilterDateTimeProps>
-  ListFilter: FC<DynamicFilterListFilterProps>
-  Selection: FC<DynamicFilterSelectionProps>
-  Slider: FC<DynamicFilterSliderProps>
-  Sort: FC<DynamicFilterSortProps>
-}
 
 export const maxMenuElWidth = 540
 export const DefaultMinRange = 0

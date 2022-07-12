@@ -9,7 +9,6 @@ import React, {
 import DynamicFilterContext from '../../store/DynamicFilterContext'
 import {
   DateTimeVarientType,
-  DynamicFilterDateTimeProps,
   DefaultValueFrom,
   DefaultValueTo,
   countDecimals,
@@ -37,24 +36,36 @@ const getSelectedType = (varientType: DateTimeVarientType) => {
   }
 }
 
+interface DynamicFilterDateTimeProps {
+  /** The key of the component, On - 'onApply' - the key contains the Resault data.*/
+  elementKey: string
+  /** The title above the Element.*/
+  title: string
+  /** Start date. */
+  from?: Date
+  /** End date. */
+  to?: Date
+  /** Determine the Elements in the FilterDateTime one of - 'All', 'Time', 'Duration'.*/
+  varientType?: DateTimeVarientType
+  /** Props for the To date picker. */
+  otherPropsTo?: Record<string, any>
+  /** Props for the From date picker. */
+  otherPropsFrom?: Record<string, any>
+}
+
 const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
-  from,
-  to,
-  otherPropsFrom,
-  otherPropsTo,
-  varientType,
+  from = DefaultValueFrom,
+  to = DefaultValueTo,
+  otherPropsFrom = {},
+  otherPropsTo = {},
+  varientType = DefaultVarientType,
   elementKey,
   title,
 }): ReactElement => {
   const { actions, state } = useContext(DynamicFilterContext)
-  const [selectedType, setSelectedType] = useState(
-    getSelectedType(varientType || DefaultVarientType),
-  )
+  const [selectedType, setSelectedType] = useState(getSelectedType(varientType))
   const [durationInputValue, setDurationInputValue] = useState(
-    getDefaultDurationInputValue(
-      from || DefaultValueFrom,
-      to || DefaultValueTo,
-    ),
+    getDefaultDurationInputValue(from, to),
   )
   const componentState = state.elementsState[elementKey]
   const {
@@ -80,8 +91,8 @@ const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
     updateElementsState({
       [elementKey]: {
         selectedTime: {
-          from: from || DefaultValueFrom,
-          to: to || DefaultValueTo,
+          from: from,
+          to: to,
         },
       },
     })
@@ -95,7 +106,7 @@ const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
       [elementKey]: {
         selectedTime: {
           from: fromDate,
-          to: componentState?.to || to || DefaultValueTo,
+          to: componentState?.to || to,
         },
       },
     })
@@ -141,7 +152,7 @@ const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
         setSelectedDurationOption={setSelectedDurationOption}
         setSelectedType={setSelectedType}
         styles={styles}
-        varientType={varientType || DefaultVarientType}
+        varientType={varientType}
         translations={translations}
         durationOptions={durationOptions}
         setIsMenuDropdownOpen={setIsMenuDropdownOpen}
@@ -160,14 +171,14 @@ const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
         selectedTime={componentState.selectedTime}
         selectedType={selectedType}
         setSelectedType={setSelectedType}
-        varientType={varientType || DefaultVarientType}
+        varientType={varientType}
         translations={translations}
       />
     )
   }
 
   const renderByVarient = () => {
-    switch (varientType || DefaultVarientType) {
+    switch (varientType) {
       case DateTimeVarientType.Duration:
         return renderDateTimeDuration()
       case DateTimeVarientType.Time:

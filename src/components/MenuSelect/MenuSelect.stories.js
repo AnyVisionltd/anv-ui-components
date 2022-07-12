@@ -10,10 +10,7 @@ export default {
 }
 
 const items = [
-  {
-    id: 'testItem 1',
-    value: 'testItemtestItemtestItemtestItemtestItemtestItem 1',
-  },
+  { id: 'testItem 1', value: 'testItem 1' },
   { id: 'testItem 2', value: 'testItem 2' },
   { id: 'testItem 3', value: 'testItem 3' },
   { id: 'testItem 4', value: 'testItem 4' },

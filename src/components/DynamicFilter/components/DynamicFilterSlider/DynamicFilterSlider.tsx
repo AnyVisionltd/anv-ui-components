@@ -5,7 +5,6 @@ import DynamicFilterContext from '../../store/DynamicFilterContext'
 import {
   DefaultMaxRange,
   DefaultMinRange,
-  DynamicFilterSliderProps,
   DefaultStepRange,
   DefaultValueRange,
   THUMBS_MAP,
@@ -14,25 +13,42 @@ import DynamicFilterDualInput from './components/DynamicFilterDualInput'
 import DynamicFilterSingleInput from './components/DynamicFilterSingleInput'
 import styles from './DynamicFilterSlider.module.scss'
 
+interface DynamicFilterSliderProps {
+  /** The key of the component, On - 'onApply' - the key contains the Resault data.*/
+  elementKey: string
+  /** The title above the slider.*/
+  title: string
+  /** The min value of the range. */
+  min?: number
+  /** The max value of the range. */
+  max?: number
+  /** The step by which the value is incremented / decremented. */
+  step?: number
+  /** Props for the RangeSlider element. */
+  otherProps?: Record<string, any>
+  /** The default value for the slider.*/
+  defaultValue?: number | Array<number>
+}
+
 const DynamicFilterSlider: FC<DynamicFilterSliderProps> = ({
-  min,
-  max,
-  step,
+  min = DefaultMinRange,
+  max = DefaultMaxRange,
+  step = DefaultStepRange,
   elementKey,
   title,
-  defaultValue,
-  otherProps,
+  defaultValue = DefaultValueRange,
+  otherProps = {},
 }): ReactElement => {
   const { state, actions } = useContext(DynamicFilterContext)
   const componentState = state.elementsState[elementKey]
   const minInputRef = useRef<HTMLInputElement>()
   const maxInputRef = useRef<HTMLInputElement>()
-  const isDecimal = (step || DefaultStepRange) < 1
+  const isDecimal = step < 1
 
   useEffect(() => {
     actions.updateElementsState({
       [elementKey]: {
-        selectedRange: defaultValue || DefaultValueRange,
+        selectedRange: defaultValue,
       },
     })
   }, [actions, elementKey, defaultValue])
@@ -55,9 +71,9 @@ const DynamicFilterSlider: FC<DynamicFilterSliderProps> = ({
       <div className={styles.dynamicFilterSliderInnerContainer}>
         <div className={styles.silderContainer}>
           <RangeSlider
-            min={min || DefaultMinRange}
-            max={max || DefaultMaxRange}
-            step={step || DefaultStepRange}
+            min={min}
+            max={max}
+            step={step}
             onChange={onChange}
             value={componentState?.selectedRange}
             disabled={undefined}
@@ -82,22 +98,22 @@ const DynamicFilterSlider: FC<DynamicFilterSliderProps> = ({
                 maxInputRef={maxInputRef}
                 updateElementsState={actions.updateElementsState}
                 elementKey={elementKey}
-                max={max || DefaultMaxRange}
+                max={max}
                 isDecimal={isDecimal}
                 selectedRange={componentState.selectedRange}
-                min={min || DefaultMinRange}
-                step={step || DefaultStepRange}
+                min={min}
+                step={step}
               />
             ))}
           {componentState && !Array.isArray(componentState.selectedRange) && (
             <DynamicFilterSingleInput
               updateElementsState={actions.updateElementsState}
               elementKey={elementKey}
-              max={max || DefaultMaxRange}
+              max={max}
               isDecimal={isDecimal}
               selectedRange={componentState.selectedRange}
-              min={min || DefaultMinRange}
-              step={step || DefaultStepRange}
+              min={min}
+              step={step}
             />
           )}
         </div>

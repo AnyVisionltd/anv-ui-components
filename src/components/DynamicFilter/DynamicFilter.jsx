@@ -1,4 +1,7 @@
 import React, { useRef } from 'react'
+import classNames from 'classnames'
+import propTypes from 'prop-types'
+import { ArrowDown } from '@anyvision/anv-icons'
 import DynamicFilterDateTime from './components/DynamicFilterDateTime/DynamicFilterDateTime'
 import DynamicFilterListFilter from './components/DynamicFilterListFilter/DynamicFilterListFilter'
 import DynamicFilterContext from './store/DynamicFilterContext'
@@ -6,26 +9,17 @@ import UseDynamicFilterReducer from './store/UseDynamicFilterReducer'
 import DynamicFilterSelection from './components/DynamicFilterSelection/DynamicFilterSelection'
 import DynamicFilterSlider from './components/DynamicFilterSlider/DynamicFilterSlider'
 import DynamicFilterSort from './components/DynamicFilterSort/DynamicFilterSort'
-import { ArrowDown } from '@anyvision/anv-icons'
-import { DynamicFilterInterface } from './utils'
 import DynamicFilterMenu from './components/DynamicFilterMenu/DynamicFilterMenu'
-import classNames from 'classnames'
 import styles from './DynamicFilter.module.scss'
 
-const DynamicFilter: DynamicFilterInterface = ({
-  onApply,
-  onClose,
-  title,
-  classname,
-  children,
-}): JSX.Element => {
+const DynamicFilter = ({ onApply, onClose, title, classname, children }) => {
   const { state, actions } = UseDynamicFilterReducer()
-  const btnRef = useRef<HTMLDivElement>(null)
+  const btnRef = useRef(null)
   const { isMenuOpen } = state
 
   const handleBtnClick = () => {
     if (isMenuOpen) {
-      onClose && onClose()
+      onClose()
     }
     actions.toggleIsMenuOpen()
   }
@@ -71,5 +65,20 @@ DynamicFilter.ListFilter = DynamicFilterListFilter
 DynamicFilter.Slider = DynamicFilterSlider
 DynamicFilter.Selection = DynamicFilterSelection
 DynamicFilter.Sort = DynamicFilterSort
+
+DynamicFilter.defaultProps = {
+  onClose: () => {},
+}
+
+DynamicFilter.propTypes = {
+  /** The string of the parent Button. */
+  title: propTypes.string.isRequired,
+  /** A callback with the elements state - (elementsState: Record<string, any>) => void . */
+  onApply: propTypes.func.isRequired,
+  /** A callback on closing the DynamicFilter Menu. */
+  onClose: propTypes.func,
+  /** For the parent Button css customization. */
+  classname: propTypes.string,
+}
 
 export default DynamicFilter

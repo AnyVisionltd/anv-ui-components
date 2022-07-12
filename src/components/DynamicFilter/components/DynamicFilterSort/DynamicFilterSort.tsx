@@ -1,12 +1,21 @@
 import React, { FC, ReactElement, useContext, useEffect } from 'react'
 import DynamicFilterContext from '../../store/DynamicFilterContext'
-import { DynamicFilterSortProps } from '../../utils'
+import { SortItemInterface } from '../../utils'
 import DynamicFilterSortBase from '../DynamicFilterSortBase/DynamicFilterSortBase'
+
+interface DynamicFilterSortProps {
+  /** Sort items - { id, value }.*/
+  items: Array<SortItemInterface>
+  /** The key of the component, On - 'onApply' - the key contains the Resault data.*/
+  elementKey: string
+  /** Props for the Sort parent element. */
+  otherProps?: Record<string, any>
+}
 
 const DynamicFilterSort: FC<DynamicFilterSortProps> = ({
   items,
   elementKey,
-  otherProps,
+  otherProps = {},
 }): ReactElement => {
   const { actions } = useContext(DynamicFilterContext)
 

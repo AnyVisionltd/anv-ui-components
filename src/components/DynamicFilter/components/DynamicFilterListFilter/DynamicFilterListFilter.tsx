@@ -4,11 +4,30 @@ import { useComponentTranslation } from '../../../../hooks/UseComponentTranslati
 import { Dropdown } from '../../../Dropdown'
 import { TextField } from '../../../TextField'
 import DynamicFilterContext from '../../store/DynamicFilterContext'
-import { DynamicFilterListFilterProps, ListItemInterface } from '../../utils'
+import { ListItemInterface, SortItemInterface } from '../../utils'
 import { Checkbox } from '../../../Checkbox'
 import FilterList from './components/FilterList/FilterList'
 import styles from './DynamicFilterListFilter.module.scss'
 import classNames from 'classnames'
+
+interface DynamicFilterListFilterProps {
+  /** List items - { id, value, type? }.*/
+  items: Array<ListItemInterface>
+  /** The key of the component, On - 'onApply' - the key contains the Resault data.*/
+  elementKey: string
+  /** List Filter items - { id, value }.*/
+  filterItems?: Array<SortItemInterface>
+  /** Determine if the List is controlled or not.*/
+  unControlled?: boolean
+  /** If unControlled = true, a callback with the filters - 'search', 'selectFilter?' .*/
+  onChange?: (filterBy: any) => void
+  /** If unControlled = true, a callback for load more data .*/
+  onLoadMoreData?: () => void
+  /** If unControlled = true, the total number of items .*/
+  totalItems?: number
+  /** If unControlled = true, determine if the data is loading .*/
+  isLoading?: boolean
+}
 
 const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
   items,
@@ -16,9 +35,9 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
   filterItems,
   onChange,
   onLoadMoreData,
-  unControlled,
+  unControlled = false,
   totalItems,
-  isLoading,
+  isLoading = false,
 }): ReactElement => {
   const { actions } = useContext(DynamicFilterContext)
   const { updateElementsState } = actions
