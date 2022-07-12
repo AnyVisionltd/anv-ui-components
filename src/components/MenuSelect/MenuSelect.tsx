@@ -8,6 +8,12 @@ import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
 import { Checkbox } from '../Checkbox'
 import styles from './MenuSelect.module.scss'
 
+enum MenuSize {
+  Small = 'small',
+  Medium = 'medium',
+  Large = 'large'
+}
+
 interface MenuItemInterface {
   callback: () => void
   element: string
@@ -16,12 +22,37 @@ interface MenuItemInterface {
 }
 
 interface MenuSelectProps {
+  /** Menu items - { callback, element, isSelected, key }*/
   items: Array<MenuItemInterface>
+  /** Force the menu to open <b>to</b> a certain side.<br />
+ * <code>top-start</code> - means that the menu will open on the top-side-left<br />
+ * <code>top</code> - means that the menu will open in the top-side-center<br />
+ * <code>top-end</code> - means that the menu will open in the top-side-right<br />
+ * <code>right-start</code> - means that the menu will open in the right-side-top<br />
+ * <code>right</code> - means that the menu will open in the right-side-center<br />
+ * <code>right-end</code> - means that the menu will open in the right-side-bottom<br />
+ * <code>bottom-start</code> - means that the menu will open in the bottom-side-left<br />
+ * <code>bottom</code> - means that the menu will open in the bottom-side-center<br />
+ * <code>bottom-end</code> - means that the menu will open in the bottom-side-right<br />
+ * <code>left-start</code> - means that the menu will open in the left-side-top<br />
+ * <code>left</code> - means that the menu will open in the left-side-center <br />
+ * <code>left-end</code> - means that the menu will open in the left-side-bottom<br />
+
+ * */
   preferOpenDirection: string
+  /** Sometimes due to its cleanup, during specific situations,
+   * the menu might not show up. To avoid this, it is best practice
+   * to specify a unique menuContainerId.*/
   menuContainerId: string
+  /** The selected item/ items.*/
   selectedData: string | Array<string>
+  /** The size of the Menu, one of - 'small', 'medium', 'large'.*/
+  size?: MenuSize
+  /** Callback when Menu open and close*/
   toggleCallback?: (value: boolean) => void
+  /** Set if multi selection is enabled. */
   isMultiSelect?: boolean
+  /** Callback for clear all the selected items, Enabled only If isMultiSelect = true.*/
   removeAll?: () => void
 }
 
@@ -33,6 +64,7 @@ const MenuSelect: FC<MenuSelectProps> = ({
   toggleCallback,
   isMultiSelect,
   removeAll,
+  size = MenuSize.Medium
 }): ReactElement => {
   const btnRef = useRef(null)
   const [anchorElement, setAnchorElement] = useState(null)
@@ -57,7 +89,7 @@ const MenuSelect: FC<MenuSelectProps> = ({
     <Menu
       isOpen={isMenuOpen}
       anchorElement={anchorElement}
-      className={styles.menuContainer}
+      className={classNames(styles.menuContainer, styles[size])}
       aria-labelledby='menu'
       preferOpenDirection={preferOpenDirection}
       menuContainerId={menuContainerId}
@@ -129,6 +161,7 @@ const MenuSelect: FC<MenuSelectProps> = ({
       onClick={onToggleMenu}
       className={classNames(
         styles.resultContainer,
+        styles[size],
         isMenuOpen && styles.active,
       )}
       ref={btnRef}
