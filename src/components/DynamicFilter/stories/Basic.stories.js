@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import DynamicFilter from '../DynamicFilter'
-import { DateTimeVarientType } from '../utils'
+import { DateTimeVariantType } from '../utils'
 
 export default {
   title: 'Content/DynamicFilter',
@@ -227,7 +227,7 @@ export const DateTimeOnlyDuration = () => {
         onClose={onClose}
       >
         <DynamicFilter.DateTime
-          varientType={DateTimeVarientType.Duration}
+          variantType={DateTimeVariantType.Duration}
           elementKey='DateTime'
           title='Event Timestamp '
         />
@@ -253,7 +253,7 @@ export const DateTimeOnlyTime = () => {
         onClose={onClose}
       >
         <DynamicFilter.DateTime
-          varientType={DateTimeVarientType.Time}
+          variantType={DateTimeVariantType.Time}
           elementKey='DateTime'
           title='Event Timestamp'
         />

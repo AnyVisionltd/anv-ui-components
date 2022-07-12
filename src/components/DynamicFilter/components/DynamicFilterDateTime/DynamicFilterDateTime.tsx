@@ -8,13 +8,13 @@ import React, {
 } from 'react'
 import DynamicFilterContext from '../../store/DynamicFilterContext'
 import {
-  DateTimeVarientType,
+  DateTimeVariantType,
   DefaultValueFrom,
   DefaultValueTo,
   countDecimals,
   isEmptyString,
   getDefaultDurationInputValue,
-  DefaultVarientType,
+  DefaultVariantType,
   DurationOptions,
 } from '../../utils'
 import { Tooltip } from '../../../Tooltip'
@@ -25,14 +25,14 @@ import { minDurationValue } from '../../utils'
 import DynamicFilterDateTimeDate from './components/DynamicFilterDateTimeDate'
 import { useComponentTranslation } from '../../../../hooks/UseComponentTranslation'
 
-const getSelectedType = (varientType: DateTimeVarientType) => {
-  switch (varientType) {
-    case DateTimeVarientType.All:
-      return DateTimeVarientType.Duration
-    case DateTimeVarientType.Duration:
-      return DateTimeVarientType.Duration
-    case DateTimeVarientType.Time:
-      return DateTimeVarientType.Time
+const getSelectedType = (variantType: DateTimeVariantType) => {
+  switch (variantType) {
+    case DateTimeVariantType.All:
+      return DateTimeVariantType.Duration
+    case DateTimeVariantType.Duration:
+      return DateTimeVariantType.Duration
+    case DateTimeVariantType.Time:
+      return DateTimeVariantType.Time
   }
 }
 
@@ -46,7 +46,7 @@ interface DynamicFilterDateTimeProps {
   /** End date. */
   to?: Date
   /** Determine the Elements in the FilterDateTime one of - 'All', 'Time', 'Duration'.*/
-  varientType?: DateTimeVarientType
+  variantType?: DateTimeVariantType
   /** Props for the To date picker. */
   otherPropsTo?: Record<string, any>
   /** Props for the From date picker. */
@@ -58,12 +58,12 @@ const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
   to = DefaultValueTo,
   otherPropsFrom = {},
   otherPropsTo = {},
-  varientType = DefaultVarientType,
+  variantType = DefaultVariantType,
   elementKey,
   title,
 }): ReactElement => {
   const { actions, state } = useContext(DynamicFilterContext)
-  const [selectedType, setSelectedType] = useState(getSelectedType(varientType))
+  const [selectedType, setSelectedType] = useState(getSelectedType(variantType))
   const [durationInputValue, setDurationInputValue] = useState(
     getDefaultDurationInputValue(from, to),
   )
@@ -89,7 +89,8 @@ const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
 
   useEffect(() => {
     updateElementsState({
-      [elementKey]: {
+      key: elementKey,
+      value: {
         selectedTime: {
           from: from,
           to: to,
@@ -103,7 +104,8 @@ const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
       .subtract(Number(durationInputValue), selectedDurationOption.id)
       .toISOString()
     updateElementsState({
-      [elementKey]: {
+      key: elementKey,
+      value: {
         selectedTime: {
           from: fromDate,
           to: componentState?.to || to,
@@ -129,7 +131,8 @@ const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
 
   const onChangeDates = (type: string, selectedDate: string) => {
     updateElementsState({
-      [elementKey]: {
+      key: elementKey,
+      value: {
         selectedTime: { ...componentState.selectedTime, [type]: selectedDate },
       },
     })
@@ -152,7 +155,7 @@ const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
         setSelectedDurationOption={setSelectedDurationOption}
         setSelectedType={setSelectedType}
         styles={styles}
-        varientType={varientType}
+        variantType={variantType}
         translations={translations}
         durationOptions={durationOptions}
         setIsMenuDropdownOpen={setIsMenuDropdownOpen}
@@ -171,17 +174,17 @@ const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
         selectedTime={componentState.selectedTime}
         selectedType={selectedType}
         setSelectedType={setSelectedType}
-        varientType={varientType}
+        variantType={variantType}
         translations={translations}
       />
     )
   }
 
   const renderByVarient = () => {
-    switch (varientType) {
-      case DateTimeVarientType.Duration:
+    switch (variantType) {
+      case DateTimeVariantType.Duration:
         return renderDateTimeDuration()
-      case DateTimeVarientType.Time:
+      case DateTimeVariantType.Time:
         return renderDateTimeDate()
       default:
         return (

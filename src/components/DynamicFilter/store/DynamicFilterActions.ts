@@ -1,3 +1,5 @@
+import { UpdateElementState } from '../utils'
+
 export enum DynamicFilterActionsTypes {
   TOGGLE_IS_MENU_OPEN = 'TOGGLE_IS_MENU_OPEN',
   UPDATE_ELEMENTS_STATE = 'UPDATE_ELEMENTS_STATE',
@@ -21,7 +23,7 @@ type SetIsDatePickerOpenAction = {
 
 type UpdateElementsStateAction = {
   type: DynamicFilterActionsTypes.UPDATE_ELEMENTS_STATE
-  payload: Record<string, any>
+  payload: UpdateElementState
 }
 
 export type DynamicFilterActions =
@@ -38,7 +40,7 @@ export const dynamicFilterActions = (
       type: DynamicFilterActionsTypes.TOGGLE_IS_MENU_OPEN,
     } as ToggleIsMenuOpenAction)
   },
-  updateElementsState: (payload: Record<string, any>) => {
+  updateElementsState: (payload: UpdateElementState) => {
     dispatch({
       type: DynamicFilterActionsTypes.UPDATE_ELEMENTS_STATE,
       payload,

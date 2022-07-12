@@ -44,7 +44,7 @@ const RangeSliderWithInputs: FC<RangeSliderWithInputsProps> = ({
 
   return (
     <div className={styles.RangeSliderWithInputsContainer}>
-      <div className={styles.silderContainer}>
+      <div className={styles.sliderContainer}>
         <RangeSlider
           min={min}
           max={max}

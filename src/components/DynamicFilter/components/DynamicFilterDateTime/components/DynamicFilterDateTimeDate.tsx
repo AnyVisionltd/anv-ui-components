@@ -2,18 +2,18 @@ import moment from 'moment'
 import React, { FC, ReactElement } from 'react'
 import { DateTimePicker } from '../../../../DateTimePicker'
 import { Radio } from '../../../../Radio'
-import { DateTimeVarientType } from '../../../utils'
+import { DateTimeVariantType } from '../../../utils'
 
 interface DynamicFilterDateTimeDateProps {
   styles: any
-  selectedType: DateTimeVarientType
-  setSelectedType: (type: DateTimeVarientType) => void
+  selectedType: DateTimeVariantType
+  setSelectedType: (type: DateTimeVariantType) => void
   onDatePickerOpen: (isOpen: boolean) => void
   selectedTime: any
   onChangeDates: (type: string, selectedDate: string) => void
   otherPropsFrom: any
   otherPropsTo: any
-  varientType: DateTimeVarientType
+  variantType: DateTimeVariantType
   translations: Record<string, string>
 }
 
@@ -26,21 +26,21 @@ const DynamicFilterDateTimeDate: FC<DynamicFilterDateTimeDateProps> = ({
   onChangeDates,
   otherPropsFrom,
   otherPropsTo,
-  varientType,
+  variantType,
   translations,
 }): ReactElement => {
-  const isShowRadio = varientType !== DateTimeVarientType.Time
+  const isShowRadio = variantType !== DateTimeVariantType.Time
   return (
     <div className={styles.itemContainer}>
       {isShowRadio && (
         <Radio
-          checked={selectedType === DateTimeVarientType.Time}
-          onChange={() => setSelectedType(DateTimeVarientType.Time)}
+          checked={selectedType === DateTimeVariantType.Time}
+          onChange={() => setSelectedType(DateTimeVariantType.Time)}
           indeterminate={undefined}
           disabled={undefined}
           view={undefined}
           className={undefined}
-          id={DateTimeVarientType.Time}
+          id={DateTimeVariantType.Time}
         />
       )}
       <div className={styles.durationContainer}>
@@ -55,14 +55,7 @@ const DynamicFilterDateTimeDate: FC<DynamicFilterDateTimeDateProps> = ({
             }}
             isNullValue
             maxDate={selectedTime.to}
-            debounceTime={undefined}
-            disabled={selectedType !== DateTimeVarientType.Time}
-            disablePast={undefined}
-            format={undefined}
-            minDate={undefined}
-            errorMessage={undefined}
-            onClose={undefined}
-            disableFuture={undefined}
+            disabled={selectedType !== DateTimeVariantType.Time}
             {...otherPropsFrom}
           />
           <DateTimePicker
@@ -74,14 +67,7 @@ const DynamicFilterDateTimeDate: FC<DynamicFilterDateTimeDateProps> = ({
             }}
             isNullValue
             minDate={selectedTime.from}
-            maxDate={undefined}
-            debounceTime={undefined}
-            disabled={selectedType !== DateTimeVarientType.Time}
-            disablePast={undefined}
-            format={undefined}
-            errorMessage={undefined}
-            onClose={undefined}
-            disableFuture={undefined}
+            disabled={selectedType !== DateTimeVariantType.Time}
             {...otherPropsTo}
           />
         </div>

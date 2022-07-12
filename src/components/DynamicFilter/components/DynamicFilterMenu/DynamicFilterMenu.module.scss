@@ -2,7 +2,7 @@
 
 .menuContainer {
   position: absolute;
-  z-index: 20;
+  z-index: av-z-index(popup);
   height: fit-content;
   min-height: av-size(sz-240);
   min-width: calc(av-size(sz-320) + av-size(sz-80));

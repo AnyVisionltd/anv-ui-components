@@ -7,7 +7,7 @@ export interface DynamicFilterStateInterface {
   isMenuDropdownOpen: boolean
 }
 
-export enum DateTimeVarientType {
+export enum DateTimeVariantType {
   All = 'All',
   Time = 'Time',
   Duration = 'Duration',
@@ -23,6 +23,11 @@ export interface ListItemInterface {
   type?: string
 }
 
+export interface UpdateElementState {
+  key: string
+  value: any
+}
+
 export const maxMenuElWidth = 540
 export const DefaultMinRange = 0
 export const DefaultMaxRange = 100
@@ -33,7 +38,7 @@ export const DefaultValueTo = moment().toISOString()
 export const maxDurationValue = 100
 export const minDurationValue = 0
 export const stepDuration = 1
-export const DefaultVarientType = DateTimeVarientType.All
+export const DefaultVariantType = DateTimeVariantType.All
 
 export enum DurationOptions {
   Days = 'days',

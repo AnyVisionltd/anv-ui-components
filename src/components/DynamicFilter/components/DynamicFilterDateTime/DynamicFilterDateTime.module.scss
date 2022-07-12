@@ -10,7 +10,7 @@
   .title {
     @extend %av-subtitle1;
     color: av-color(trueblack);
-    font-weight: bold;
+    font-weight: av-font-weight(bold);
   }
 
   .itemContainer {

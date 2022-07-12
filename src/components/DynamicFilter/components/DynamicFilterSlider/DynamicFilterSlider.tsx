@@ -41,7 +41,8 @@ const DynamicFilterSlider: FC<DynamicFilterSliderProps> = ({
 
   useEffect(() => {
     actions.updateElementsState({
-      [elementKey]: {
+      key: elementKey,
+      value: {
         selectedRange: defaultValue,
       },
     })
@@ -49,7 +50,8 @@ const DynamicFilterSlider: FC<DynamicFilterSliderProps> = ({
 
   const onChange = (value: number | Array<number>) => {
     actions.updateElementsState({
-      [elementKey]: {
+      key: elementKey,
+      value: {
         selectedRange: value,
       },
     })

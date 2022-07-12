@@ -28,7 +28,7 @@ const reducer = (
         ...state,
         elementsState: {
           ...state.elementsState,
-          ...action.payload,
+          [action.payload.key]: action.payload.value,
         },
       }
     case DynamicFilterActionsTypes.SET_IS_DATE_PICKER_OPEN:

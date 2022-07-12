@@ -1,4 +1,12 @@
-import React, { FC, ReactElement, useContext, useEffect, useState } from 'react'
+import React, {
+  FC,
+  ReactElement,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
+import classNames from 'classnames'
 import { Search } from '@anyvision/anv-icons'
 import { useComponentTranslation } from '../../../../hooks/UseComponentTranslation'
 import { Dropdown } from '../../../Dropdown'
@@ -8,7 +16,6 @@ import { ListItemInterface, SortItemInterface } from '../../utils'
 import { Checkbox } from '../../../Checkbox'
 import FilterList from './components/FilterList/FilterList'
 import styles from './DynamicFilterListFilter.module.scss'
-import classNames from 'classnames'
 
 interface DynamicFilterListFilterProps {
   /** List items - { id, value, type? }.*/
@@ -27,6 +34,8 @@ interface DynamicFilterListFilterProps {
   totalItems?: number
   /** If unControlled = true, determine if the data is loading .*/
   isLoading?: boolean
+  /**  Determine the number of items the  list load each time.*/
+  offset?: number
 }
 
 const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
@@ -38,6 +47,7 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
   unControlled = false,
   totalItems,
   isLoading = false,
+  offset = 10,
 }): ReactElement => {
   const { actions } = useContext(DynamicFilterContext)
   const { updateElementsState } = actions
@@ -55,21 +65,43 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({})
   const [isExcludeMode, setIsExcludeMode] = useState<boolean>(false)
 
-  const onlyCheckedItems = Object.values(checkedItems).filter(
-    isSelect => isSelect,
+  const onlyCheckedItems = useMemo(
+    () => Object.values(checkedItems).filter(isSelect => isSelect),
+    [checkedItems],
   )
-  const isAllItemsSelected = Object.values(checkedItems).every(
-    isSelected => isSelected,
+  const isAllItemsSelected = useMemo(
+    () => Object.values(checkedItems).every(isSelected => isSelected),
+    [checkedItems],
   )
-  const isAllItemsNotSelected = Object.values(checkedItems).every(
-    isSelected => !isSelected,
+  const isAllItemsNotSelected = useMemo(
+    () => Object.values(checkedItems).every(isSelected => !isSelected),
+    [checkedItems],
   )
 
-  const isAllItemsChecked: boolean = !unControlled
-    ? !!filteredItems.length && isAllItemsSelected
-    : isExcludeMode
-    ? isAllItemsNotSelected
-    : onlyCheckedItems.length === totalItems
+  const isAllItemsChecked: boolean = useMemo(
+    () =>
+      !unControlled
+        ? !!filteredItems.length && isAllItemsSelected
+        : isExcludeMode
+        ? isAllItemsNotSelected
+        : onlyCheckedItems.length === totalItems,
+    [
+      filteredItems.length,
+      isAllItemsNotSelected,
+      isAllItemsSelected,
+      isExcludeMode,
+      onlyCheckedItems.length,
+      totalItems,
+      unControlled,
+    ],
+  )
+
+  const isShowSelectAll: boolean = useMemo(
+    () =>
+      !isLoading &&
+      !(unControlled && totalItems ? !totalItems : !filteredItems.length),
+    [filteredItems.length, isLoading, totalItems, unControlled],
+  )
 
   useEffect(() => {
     if (unControlled) {
@@ -112,9 +144,9 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
 
   useEffect(() => {
     const updateItems = Object.keys(checkedItems).filter(id => checkedItems[id])
-
     updateElementsState({
-      [elementKey]: {
+      key: elementKey,
+      value: {
         selectedItems: updateItems,
         ...(unControlled && { isExcludeMode }),
       },
@@ -159,10 +191,6 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
   const onCheckItem = (id: string) => {
     setCheckedItems(prev => ({ ...prev, [id]: !prev[id] }))
   }
-
-  const isShowSelectAll =
-    !isLoading &&
-    !(unControlled && totalItems ? !totalItems : !filteredItems.length)
 
   return (
     <div className={styles.listFilterContainer}>
@@ -215,6 +243,7 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
           isLoading={isLoading}
           translations={translations}
           isExcludeMode={isExcludeMode}
+          offset={offset}
         />
       </div>
     </div>

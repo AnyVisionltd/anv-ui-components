@@ -7,9 +7,7 @@ import { Tooltip } from '../../../../../Tooltip'
 import { ListItemInterface } from '../../../../utils'
 import styles from './FilterList.module.scss'
 
-const offset = 10
 const rowHeight = 32
-
 interface FilterListProps {
   onCheckItem: (id: string) => void
   checkedItems: Record<string, boolean>
@@ -20,6 +18,7 @@ interface FilterListProps {
   isLoading?: boolean
   translations: Record<string, string>
   isExcludeMode: boolean
+  offset: number
 }
 
 const FilterList: FC<FilterListProps> = ({
@@ -32,6 +31,7 @@ const FilterList: FC<FilterListProps> = ({
   isLoading,
   translations,
   isExcludeMode,
+  offset,
 }): ReactElement => {
   const listRef = useRef()
   const [itemsToShow, setItemsToShow] = useState<Array<ListItemInterface>>([])

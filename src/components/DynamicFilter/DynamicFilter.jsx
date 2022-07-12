@@ -12,7 +12,7 @@ import DynamicFilterSort from './components/DynamicFilterSort/DynamicFilterSort'
 import DynamicFilterMenu from './components/DynamicFilterMenu/DynamicFilterMenu'
 import styles from './DynamicFilter.module.scss'
 
-const DynamicFilter = ({ onApply, onClose, title, classname, children }) => {
+const DynamicFilter = ({ onApply, onClose, title, className, children }) => {
   const { state, actions } = UseDynamicFilterReducer()
   const btnRef = useRef(null)
   const { isMenuOpen } = state
@@ -40,7 +40,7 @@ const DynamicFilter = ({ onApply, onClose, title, classname, children }) => {
         className={classNames(
           styles.dynamicFilterBtn,
           isMenuOpen && styles.btnSelected,
-          classname && classname,
+          className && className,
         )}
         onClick={handleBtnClick}
       >
@@ -78,7 +78,7 @@ DynamicFilter.propTypes = {
   /** A callback on closing the DynamicFilter Menu. */
   onClose: propTypes.func,
   /** For the parent Button css customization. */
-  classname: propTypes.string,
+  className: propTypes.string,
 }
 
 export default DynamicFilter

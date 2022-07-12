@@ -10,28 +10,33 @@ interface DynamicFilterSortProps {
   elementKey: string
   /** Props for the Sort parent element. */
   otherProps?: Record<string, any>
+  /** Default value, if not set the default is the first item */
+  defaultSelectedId?: string
 }
 
 const DynamicFilterSort: FC<DynamicFilterSortProps> = ({
   items,
   elementKey,
   otherProps = {},
+  defaultSelectedId,
 }): ReactElement => {
   const { actions } = useContext(DynamicFilterContext)
 
   useEffect(() => {
     if (items.length > 0) {
       actions.updateElementsState({
-        [elementKey]: {
-          selectedItemId: items[0].id,
+        key: elementKey,
+        value: {
+          selectedItemId: defaultSelectedId || items[0].id,
         },
       })
     }
-  }, [actions, items, elementKey])
+  }, [actions, items, elementKey, defaultSelectedId])
 
   const onChange = (itemKey: string) => {
     actions.updateElementsState({
-      [elementKey]: {
+      key: elementKey,
+      value: {
         selectedItemId: itemKey,
       },
     })
