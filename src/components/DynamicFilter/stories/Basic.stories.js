@@ -278,7 +278,7 @@ export const SingleSlider = () => {
         onApply={onApply}
         onClose={onClose}
       >
-        <DynamicFilter.Slider elementKey='DateTime' title='Score' />
+        <DynamicFilter.Slider elementKey='SingleSlider' title='Score' />
       </DynamicFilter>
     </div>
   )
@@ -297,7 +297,7 @@ export const DualSlider = () => {
     <div style={style}>
       <DynamicFilter title={'Dual Slider'} onApply={onApply} onClose={onClose}>
         <DynamicFilter.Slider
-          elementKey='DateTime'
+          elementKey='DualSlider'
           title='Score'
           defaultValue={[4, 8]}
           min={0}

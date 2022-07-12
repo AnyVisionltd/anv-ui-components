@@ -1,0 +1,27 @@
+@import '~@anyvision/style-guide';
+
+.RangeSliderWithInputsContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: av-space(loose);
+
+  .silderContainer {
+    width: 45%;
+
+    > * {
+      padding: 0;
+    }
+  }
+
+  .inputsContainer {
+    width: 45%;
+    display: flex;
+    gap: av-space(tiny);
+
+    > * {
+      width: av-size(sz-64);
+      height: 40px;
+    }
+  }
+}

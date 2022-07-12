@@ -1,20 +1,19 @@
 import React, { FC, ReactElement } from 'react'
-import { TextField } from '../../../../TextField'
+import { TextField } from '../../TextField'
 import {
   countDecimals,
   DefaultMaxRange,
   isEmptyString,
   THUMBS_MAP,
   DefaultMinRange,
-} from '../../../utils'
+} from '../utils'
 
-interface DynamicFilterDualInputProps {
-  value: number
+interface SliderDualInputProps {
+  inputValue: number
   idx: number
   minInputRef: any
   maxInputRef: any
-  updateElementsState: (value: Record<string, any>) => void
-  elementKey: string
+  onChange: (value: any) => void
   max: number
   isDecimal: boolean
   min: number
@@ -22,13 +21,12 @@ interface DynamicFilterDualInputProps {
   selectedRange: Array<number>
 }
 
-const DynamicFilterDualInput: FC<DynamicFilterDualInputProps> = ({
-  value,
+const SliderDualInput: FC<SliderDualInputProps> = ({
+  inputValue,
   idx,
   minInputRef,
   maxInputRef,
-  updateElementsState,
-  elementKey,
+  onChange,
   max,
   isDecimal,
   selectedRange,
@@ -59,16 +57,12 @@ const DynamicFilterDualInput: FC<DynamicFilterDualInputProps> = ({
       newValue.reverse()
       minInputRef?.current?.focus()
     }
-    updateElementsState({
-      [elementKey]: {
-        selectedRange: newValue,
-      },
-    })
+    onChange(newValue)
   }
 
   return (
     <TextField
-      value={value}
+      value={inputValue}
       ref={idx === 0 ? minInputRef : maxInputRef}
       onChange={handleDualInputChange}
       name={idx === 0 ? THUMBS_MAP.min : THUMBS_MAP.max}
@@ -80,4 +74,4 @@ const DynamicFilterDualInput: FC<DynamicFilterDualInputProps> = ({
   )
 }
 
-export default DynamicFilterDualInput
+export default SliderDualInput

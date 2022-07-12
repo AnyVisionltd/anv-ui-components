@@ -1,15 +1,14 @@
 import React, { FC, ReactElement } from 'react'
-import { TextField } from '../../../../TextField'
+import { TextField } from '../../TextField'
 import {
   countDecimals,
   DefaultMaxRange,
   isEmptyString,
   DefaultMinRange,
-} from '../../../utils'
+} from '../utils'
 
-interface DynamicFilterSingleInputProps {
-  updateElementsState: (value: Record<string, any>) => void
-  elementKey: string
+interface SliderSingleInputProps {
+  onChange: (value: any) => void
   max: number
   isDecimal: boolean
   min: number
@@ -17,9 +16,8 @@ interface DynamicFilterSingleInputProps {
   selectedRange: number
 }
 
-const DynamicFilterSingleInput: FC<DynamicFilterSingleInputProps> = ({
-  updateElementsState,
-  elementKey,
+const SliderSingleInput: FC<SliderSingleInputProps> = ({
+  onChange,
   max,
   isDecimal,
   selectedRange,
@@ -35,11 +33,7 @@ const DynamicFilterSingleInput: FC<DynamicFilterSingleInputProps> = ({
       return
     }
     const newValue = isEmptyString(value) ? '' : Number(value)
-    updateElementsState({
-      [elementKey]: {
-        selectedRange: newValue,
-      },
-    })
+    onChange(newValue)
   }
 
   return (
@@ -54,4 +48,4 @@ const DynamicFilterSingleInput: FC<DynamicFilterSingleInputProps> = ({
   )
 }
 
-export default DynamicFilterSingleInput
+export default SliderSingleInput

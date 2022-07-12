@@ -1,5 +1,4 @@
 import moment from 'moment'
-import { FC } from 'react'
 
 export interface DynamicFilterStateInterface {
   isMenuOpen: boolean
@@ -48,30 +47,7 @@ export const countDecimals = number => {
   return index === -1 ? 0 : text.length - index - 1
 }
 
-export const removeTrailingZeroesFromDecimal = (number, decimalsEnabled) => {
-  if (decimalsEnabled === 0 && number) {
-    return Math.trunc(number)
-  }
-  let value = number.toString()
-  if (value.indexOf('.') === -1 && !countDecimals(value)) {
-    return number
-  }
-  while (
-    (value.slice(-1) === '0' || value.slice(-1) === '.') &&
-    value.indexOf('.') !== -1 &&
-    countDecimals(value) > decimalsEnabled
-  ) {
-    value = value.substr(0, value.length - 1)
-  }
-  return value
-}
-
 export const isEmptyString = val => val === ''
-
-export enum THUMBS_MAP {
-  min = 'min',
-  max = 'max',
-}
 
 export const getDefaultDurationInputValue = (
   from: Date | string,
