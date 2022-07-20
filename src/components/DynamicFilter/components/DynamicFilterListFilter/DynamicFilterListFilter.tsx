@@ -99,9 +99,9 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
   const isShowSelectAll: boolean = useMemo(
     () =>
       !isLoading &&
-      !(unControlled && totalItems ? !totalItems : !filteredItems.length),
-    [filteredItems.length, isLoading, totalItems, unControlled],
-  )
+      !((unControlled && totalItems) ? !items.length : !filteredItems.length),
+    [filteredItems.length, isLoading, items, totalItems, unControlled],
+  )  
 
   useEffect(() => {
     if (unControlled) {

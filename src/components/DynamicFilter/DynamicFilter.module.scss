@@ -9,11 +9,12 @@
 }
 
 .dynamicFilterBtn {
-  padding: av-space(base) av-space(tiny);
+  padding: 0 av-space(tiny);
   background-color: av-color(content, av-opacity(ghost));
   color: av-color(purewhite);
   min-width: av-size(sz-80);
   width: fit-content;
+  height: av-size(sz-48);
   cursor: pointer;
   display: flex;
   align-items: center;

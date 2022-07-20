@@ -45,7 +45,7 @@ const DynamicFilterDateTimeDate: FC<DynamicFilterDateTimeDateProps> = ({
       )}
       <div className={styles.durationContainer}>
         <span className={styles.subTitle}>{translations.DateTimeSubLabel}</span>
-        <div className={styles.durationInputContainer}>
+        <div className={styles.dateTimeContainer}>
           <DateTimePicker
             onOpenMenu={onDatePickerOpen}
             label={translations.fromDatePickerLabel}

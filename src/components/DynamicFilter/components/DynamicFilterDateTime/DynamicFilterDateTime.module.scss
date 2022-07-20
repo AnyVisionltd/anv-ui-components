@@ -17,7 +17,6 @@
     display: flex;
     gap: av-space(tiny);
     align-items: flex-start;
-    height: av-size(sz-96);
 
     .durationContainer {
       color: av-color(trueblack);
@@ -26,6 +25,7 @@
       gap: av-space(tiny);
       position: relative;
       top: av-space(micro);
+      width: 100%;
 
       .subTitle {
         @extend %av-subtitle2;
@@ -35,6 +35,7 @@
         display: flex;
         gap: av-space(tiny);
         align-items: center;
+        padding-bottom: av-space(tiny);
 
         .durationInput {
           width: av-size(sz-80);
@@ -42,6 +43,18 @@
 
         .durationSteps {
           width: av-size(sz-240);
+        }
+      }
+
+      .dateTimeContainer {
+        display: flex;
+        flex-direction: column;
+        gap: av-space(tiny);
+        align-items: center;
+        padding-bottom: av-space(tiny);
+
+        > * {
+          width: 100%;
         }
       }
     }

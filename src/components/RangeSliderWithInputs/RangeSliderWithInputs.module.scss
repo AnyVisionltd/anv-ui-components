@@ -7,7 +7,7 @@
   gap: av-space(loose);
 
   .sliderContainer {
-    width: 45%;
+    min-width: 240px;
 
     > * {
       padding: 0;
@@ -15,7 +15,6 @@
   }
 
   .inputsContainer {
-    width: 45%;
     display: flex;
     gap: av-space(tiny);
 
