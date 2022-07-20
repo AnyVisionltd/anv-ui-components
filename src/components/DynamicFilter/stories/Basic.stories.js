@@ -71,17 +71,13 @@ export const Basic = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [searchFilter, setSearchFilter] = useState('')
 
-  const onApply = response => {
-    console.log('onApply response', response)
-  }
+  const onApply = response => {}
 
-  const onClose = () => {
-    console.log('onClose')
-  }
+  const onClose = () => {}
 
   const getFilteredItems = (itemsToFilter, search) => {
     return itemsToFilter.filter(item =>
-      item.id.toLowerCase().includes(search.toLowerCase()),
+      item.value.toLowerCase().includes(search.toLowerCase()),
     )
   }
 
@@ -126,13 +122,9 @@ export const Basic = () => {
 }
 
 export const Sort = () => {
-  const onApply = response => {
-    console.log('onApply response', response)
-  }
+  const onApply = response => {}
 
-  const onClose = () => {
-    console.log('onClose')
-  }
+  const onClose = () => {}
 
   return (
     <div style={style}>
@@ -144,13 +136,9 @@ export const Sort = () => {
 }
 
 export const Selection = () => {
-  const onApply = response => {
-    console.log('onApply response', response)
-  }
+  const onApply = response => {}
 
-  const onClose = () => {
-    console.log('onClose')
-  }
+  const onClose = () => {}
 
   return (
     <div style={style}>
@@ -165,13 +153,9 @@ export const Selection = () => {
 }
 
 export const MultiSelection = () => {
-  const onApply = response => {
-    console.log('onApply response', response)
-  }
+  const onApply = response => {}
 
-  const onClose = () => {
-    console.log('onClose')
-  }
+  const onClose = () => {}
 
   return (
     <div style={style}>
@@ -190,13 +174,9 @@ export const MultiSelection = () => {
 }
 
 export const DateTime = () => {
-  const onApply = response => {
-    console.log('onApply response', response)
-  }
+  const onApply = response => {}
 
-  const onClose = () => {
-    console.log('onClose')
-  }
+  const onClose = () => {}
 
   return (
     <div style={style}>
@@ -211,13 +191,9 @@ export const DateTime = () => {
 }
 
 export const DateTimeOnlyDuration = () => {
-  const onApply = response => {
-    console.log('onApply response', response)
-  }
+  const onApply = response => {}
 
-  const onClose = () => {
-    console.log('onClose')
-  }
+  const onClose = () => {}
 
   return (
     <div style={style}>
@@ -237,13 +213,9 @@ export const DateTimeOnlyDuration = () => {
 }
 
 export const DateTimeOnlyTime = () => {
-  const onApply = response => {
-    console.log('onApply response', response)
-  }
+  const onApply = response => {}
 
-  const onClose = () => {
-    console.log('onClose')
-  }
+  const onClose = () => {}
 
   return (
     <div style={style}>
@@ -263,13 +235,9 @@ export const DateTimeOnlyTime = () => {
 }
 
 export const SingleSlider = () => {
-  const onApply = response => {
-    console.log('onApply response', response)
-  }
+  const onApply = response => {}
 
-  const onClose = () => {
-    console.log('onClose')
-  }
+  const onClose = () => {}
 
   return (
     <div style={style}>
@@ -285,13 +253,9 @@ export const SingleSlider = () => {
 }
 
 export const DualSlider = () => {
-  const onApply = response => {
-    console.log('onApply response', response)
-  }
+  const onApply = response => {}
 
-  const onClose = () => {
-    console.log('onClose')
-  }
+  const onClose = () => {}
 
   return (
     <div style={style}>
@@ -309,13 +273,9 @@ export const DualSlider = () => {
 }
 
 export const ControlledListFilter = () => {
-  const onApply = response => {
-    console.log('onApply response', response)
-  }
+  const onApply = response => {}
 
-  const onClose = () => {
-    console.log('onClose')
-  }
+  const onClose = () => {}
 
   return (
     <div style={style}>
@@ -335,13 +295,9 @@ export const ControlledListFilter = () => {
 }
 
 export const ControlledListWithFilters = () => {
-  const onApply = response => {
-    console.log('onApply response', response)
-  }
+  const onApply = response => {}
 
-  const onClose = () => {
-    console.log('onClose')
-  }
+  const onClose = () => {}
 
   return (
     <div style={style}>

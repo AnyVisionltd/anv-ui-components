@@ -20,6 +20,7 @@ interface DynamicFilterDateTimeDurationProps {
   translations: Record<string, string>
   durationOptions: Array<Record<string, string>>
   setIsMenuDropdownOpen: (value: boolean) => void
+  elementKey: string
 }
 
 const DynamicFilterDateTimeDuration: FC<DynamicFilterDateTimeDurationProps> = ({
@@ -34,6 +35,7 @@ const DynamicFilterDateTimeDuration: FC<DynamicFilterDateTimeDurationProps> = ({
   translations,
   durationOptions,
   setIsMenuDropdownOpen,
+  elementKey,
 }): ReactElement => {
   const isShowRadio = variantType !== DateTimeVariantType.Duration
 
@@ -47,13 +49,10 @@ const DynamicFilterDateTimeDuration: FC<DynamicFilterDateTimeDurationProps> = ({
   return (
     <div className={styles.itemContainer}>
       {isShowRadio && (
+        // @ts-ignore
         <Radio
           checked={selectedType === DateTimeVariantType.Duration}
           onChange={() => setSelectedType(DateTimeVariantType.Duration)}
-          indeterminate={undefined}
-          disabled={undefined}
-          view={undefined}
-          className={undefined}
           id={DateTimeVariantType.Duration}
         />
       )}
@@ -63,6 +62,7 @@ const DynamicFilterDateTimeDuration: FC<DynamicFilterDateTimeDurationProps> = ({
         </span>
         <div className={styles.durationInputContainer}>
           <TextField
+            // @ts-ignore
             value={durationInputValue}
             onChange={onDurationInputChange}
             type={'number'}
@@ -73,7 +73,7 @@ const DynamicFilterDateTimeDuration: FC<DynamicFilterDateTimeDurationProps> = ({
             data-testid={'duration-input'}
           />
           <MenuSelect
-            menuContainerId={'duration-steps'}
+            menuContainerId={'duration-steps-' + elementKey}
             preferOpenDirection={'bottom-start'}
             items={fixedMenuItemsFilter}
             selectedData={selectedDurationOption.value}

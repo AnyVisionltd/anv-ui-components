@@ -38,6 +38,7 @@ const SliderSingleInput: FC<SliderSingleInputProps> = ({
 
   return (
     <TextField
+      // @ts-ignore
       value={selectedRange}
       onChange={handleInputChange}
       type={'number'}

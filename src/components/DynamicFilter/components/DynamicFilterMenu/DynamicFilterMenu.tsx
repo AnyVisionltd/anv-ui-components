@@ -66,6 +66,7 @@ const DynamicFilterMenu: FC<DynamicFilterMenuProps> = ({
     >
       <div className={styles.itemsContainer}>{children}</div>
       <div className={styles.actionBtnContainer}>
+        {/* // @ts-ignore */}
         <Button
           onClick={onCancel}
           variant='outline'
@@ -77,13 +78,16 @@ const DynamicFilterMenu: FC<DynamicFilterMenuProps> = ({
             <TimesThick className={styles.xSvg} />
           </div>
         </Button>
-        <Button
-          onClick={onApply}
-          leadingIcon={<CheckThick />}
-          className={styles.actionBtnApply}
-        >
-          {translations.applyBtn}
-        </Button>
+        {
+          // @ts-ignore
+          <Button
+            onClick={onApply}
+            leadingIcon={<CheckThick />}
+            className={styles.actionBtnApply}
+          >
+            {translations.applyBtn}
+          </Button>
+        }
       </div>
     </div>
   )

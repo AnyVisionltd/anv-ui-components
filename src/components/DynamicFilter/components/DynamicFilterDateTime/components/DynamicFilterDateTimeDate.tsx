@@ -33,13 +33,10 @@ const DynamicFilterDateTimeDate: FC<DynamicFilterDateTimeDateProps> = ({
   return (
     <div className={styles.itemContainer}>
       {isShowRadio && (
+        // @ts-ignore
         <Radio
           checked={selectedType === DateTimeVariantType.Time}
           onChange={() => setSelectedType(DateTimeVariantType.Time)}
-          indeterminate={undefined}
-          disabled={undefined}
-          view={undefined}
-          className={undefined}
           id={DateTimeVariantType.Time}
         />
       )}

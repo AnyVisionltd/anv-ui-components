@@ -59,18 +59,14 @@ const FilterList: FC<FilterListProps> = ({
         onClick={() => onCheckItem(item.id)}
         data-testid={'list-item'}
       >
-        <Checkbox
-          checked={
-            isExcludeMode ? !checkedItems[item.id] : checkedItems[item.id]
-          }
-          onChange={undefined}
-          indeterminate={undefined}
-          disabled={undefined}
-          view={undefined}
-          className={undefined}
-          id={undefined}
-          renderIcon={undefined}
-        />
+        {
+          // @ts-ignore
+          <Checkbox
+            checked={
+              isExcludeMode ? !checkedItems[item.id] : checkedItems[item.id]
+            }
+          />
+        }
         <Tooltip overflowOnly placement='right' content={item.value}>
           <div className={styles.rowItemValue}>{item.value}</div>
         </Tooltip>
@@ -91,6 +87,7 @@ const FilterList: FC<FilterListProps> = ({
       {items.length > 0 && !isLoading && (
         <InfiniteList
           ref={listRef}
+          // @ts-ignore
           rowRender={rowRender}
           totalItems={totalItems}
           loadMoreItems={onLoadMoreItems}

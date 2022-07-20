@@ -62,6 +62,7 @@ const SliderDualInput: FC<SliderDualInputProps> = ({
 
   return (
     <TextField
+      // @ts-ignore
       value={inputValue}
       ref={idx === 0 ? minInputRef : maxInputRef}
       onChange={handleDualInputChange}

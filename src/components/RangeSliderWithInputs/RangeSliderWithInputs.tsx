@@ -45,22 +45,19 @@ const RangeSliderWithInputs: FC<RangeSliderWithInputsProps> = ({
   return (
     <div className={styles.RangeSliderWithInputsContainer}>
       <div className={styles.sliderContainer}>
-        <RangeSlider
-          min={min}
-          max={max}
-          step={step}
-          onChange={onSliderChange}
-          value={sliderValue}
-          disabled={undefined}
-          isToggleTooltip={undefined}
-          measureUnitText={undefined}
-          containerClassName={styles.title}
-          minGap={undefined}
-          onReachingMinGap={undefined}
-          isDuration={undefined}
-          {...otherProps}
-          data-testid={'range-slider-with-inputs'}
-        />
+        {
+          // @ts-ignore
+          <RangeSlider
+            min={min}
+            max={max}
+            step={step}
+            onChange={onSliderChange}
+            value={sliderValue}
+            containerClassName={styles.title}
+            {...otherProps}
+            data-testid={'range-slider-with-inputs'}
+          />
+        }
       </div>
       <div className={styles.inputsContainer}>
         {isDual &&

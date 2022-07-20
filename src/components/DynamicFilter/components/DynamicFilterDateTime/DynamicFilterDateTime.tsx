@@ -165,6 +165,7 @@ const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
         translations={translations}
         durationOptions={durationOptions}
         setIsMenuDropdownOpen={setIsMenuDropdownOpen}
+        elementKey={elementKey}
       />
     )
   }
@@ -186,7 +187,7 @@ const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
     )
   }
 
-  const renderByVarient = () => {
+  const renderByVariant = () => {
     switch (variantType) {
       case DateTimeVariantType.Duration:
         return renderDateTimeDuration()
@@ -207,7 +208,7 @@ const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
       <Tooltip overflowOnly placement='right' content={title}>
         <div className={styles.title}>{title}</div>
       </Tooltip>
-      {componentState?.selectedTime && renderByVarient()}
+      {componentState?.selectedTime && renderByVariant()}
     </div>
   )
 }

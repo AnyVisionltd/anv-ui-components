@@ -44,7 +44,7 @@ const DynamicFilter = ({ onApply, onClose, title, className, children }) => {
         )}
         onClick={handleBtnClick}
       >
-        <span>{title}</span>
+        {title}
         <ArrowDown className={styles.arrowSvg} />
       </div>
       {isMenuOpen && (
@@ -71,8 +71,8 @@ DynamicFilter.defaultProps = {
 }
 
 DynamicFilter.propTypes = {
-  /** The string of the parent Button. */
-  title: propTypes.string.isRequired,
+  /** The string or element of the parent Button. */
+  title: propTypes.oneOfType([propTypes.string, propTypes.element]).isRequired,
   /** A callback with the elements state - (elementsState: Record<string, any>) => void . */
   onApply: propTypes.func.isRequired,
   /** A callback on closing the DynamicFilter Menu. */

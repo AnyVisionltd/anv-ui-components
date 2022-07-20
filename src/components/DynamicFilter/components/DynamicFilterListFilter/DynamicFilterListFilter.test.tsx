@@ -60,7 +60,7 @@ const getFilteredItems = (itemsToFilter, search, selectFilter) => {
   return itemsToFilter.filter(
     item =>
       item.type === selectFilter.id &&
-      item.id.toLowerCase().includes(search.toLowerCase()),
+      item.value.toLowerCase().includes(search.toLowerCase()),
   )
 }
 

@@ -25,16 +25,15 @@ const DynamicFilterSortBase: FC<DynamicFilterSortBaseProps> = ({
     <div className={styles.filterSortBaseContainer} {...otherProps}>
       {items.map(({ id, value }) => (
         <div key={id} className={styles.filterSortBaseItem}>
-          <Radio
-            checked={componentState?.selectedItemId === id}
-            onChange={() => onChange(id)}
-            id={id}
-            indeterminate={undefined}
-            disabled={undefined}
-            view={undefined}
-            className={undefined}
-            data-testid={id}
-          />
+          {
+            // @ts-ignore
+            <Radio
+              checked={componentState?.selectedItemId === id}
+              onChange={() => onChange(id)}
+              id={id}
+              data-testid={id}
+            />
+          }
           <Tooltip overflowOnly placement='right' content={value}>
             <span className={styles.sortTitle}>{value}</span>
           </Tooltip>

@@ -6,7 +6,7 @@ import DynamicFilterSortBase from '../DynamicFilterSortBase/DynamicFilterSortBas
 interface DynamicFilterSortProps {
   /** Sort items - { id, value }.*/
   items: Array<SortItemInterface>
-  /** The key of the component, On - 'onApply' - the key contains the Resault data.*/
+  /** The key of the component, On - 'onApply' - the key contains the Result data.*/
   elementKey: string
   /** Props for the Sort parent element. */
   otherProps?: Record<string, any>

@@ -120,7 +120,10 @@ const MenuSelect: FC<MenuSelectProps> = ({
               element
             ) : (
               <div className={styles.rowItemContainer}>
-                <Checkbox checked={isSelected} />
+                {
+                  // @ts-ignore
+                  <Checkbox checked={isSelected} />
+                }
                 <Tooltip overflowOnly placement='right' content={element}>
                   <div className={styles.rowItemValue}>{element}</div>
                 </Tooltip>

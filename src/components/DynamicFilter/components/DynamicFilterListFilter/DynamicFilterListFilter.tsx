@@ -99,16 +99,16 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
   const isShowSelectAll: boolean = useMemo(
     () =>
       !isLoading &&
-      !((unControlled && totalItems) ? !items.length : !filteredItems.length),
+      !(unControlled && totalItems ? !items.length : !filteredItems.length),
     [filteredItems.length, isLoading, items, totalItems, unControlled],
-  )  
+  )
 
   useEffect(() => {
     if (unControlled) {
       return
     }
     const filtered = items.filter(item => {
-      const searchRes = item.id
+      const searchRes = item.value
         .toLowerCase()
         .includes(filters.search.toLowerCase())
       const isByType = item.type && filterItems
@@ -160,16 +160,17 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
   ])
 
   const onFilterChange = (filterKey: string, value: any) => {
-    setFilters(prev => {
-      const updatedFilters = {
-        ...prev,
-        [filterKey]: value,
-      }
-      if (unControlled && onChange) {
-        onChange(updatedFilters)
-      }
-      return updatedFilters
-    })
+    const updatedFilters = {
+      ...filters,
+      [filterKey]: value,
+    }
+    if (unControlled && onChange) {
+      onChange(updatedFilters)
+    }
+    setFilters(prev => ({
+      ...prev,
+      [filterKey]: value,
+    }))
   }
 
   const onSelectAllFiles = () => {
@@ -197,6 +198,7 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
       <span className={styles.title}>{translations.title}</span>
       {filterItems && (
         <Dropdown
+          // @ts-ignore
           options={filterItems}
           defaultValues={[filters.selectFilter]}
           onChange={options => onFilterChange('selectFilter', options[0])}
@@ -204,6 +206,7 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
         />
       )}
       <TextField
+        // @ts-ignore
         className={styles.searchInput}
         trailingIcon={<Search />}
         placeholder={translations.searchPlaceholder}
@@ -219,16 +222,14 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
             !isShowSelectAll && styles.hidden,
           )}
         >
-          <Checkbox
-            checked={isAllItemsChecked}
-            onChange={onSelectAllFiles}
-            disabled={unControlled ? !items.length : !filteredItems.length}
-            indeterminate={undefined}
-            view={undefined}
-            className={undefined}
-            id={undefined}
-            renderIcon={undefined}
-          />
+          {
+            // @ts-ignore
+            <Checkbox
+              checked={isAllItemsChecked}
+              onChange={onSelectAllFiles}
+              disabled={unControlled ? !items.length : !filteredItems.length}
+            />
+          }
           <span className={styles.sectionCheckboxLabel}>
             {translations.selectAll}
           </span>
