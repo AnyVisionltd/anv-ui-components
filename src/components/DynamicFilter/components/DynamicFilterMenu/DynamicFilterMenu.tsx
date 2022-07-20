@@ -58,13 +58,19 @@ const DynamicFilterMenu: FC<DynamicFilterMenuProps> = ({
   useClickOutsideListener(onClickOutSide, anchorElement, menuRef)
 
   const renderMenu = () => (
-    <div className={styles.menuContainer} style={customStyle()} ref={menuRef}>
+    <div
+      data-testid={'dynamic-filter-container'}
+      className={styles.menuContainer}
+      style={customStyle()}
+      ref={menuRef}
+    >
       <div className={styles.itemsContainer}>{children}</div>
       <div className={styles.actionBtnContainer}>
         <Button
           onClick={onCancel}
           variant='outline'
           className={styles.actionBtnCancel}
+          data-testid={'onCancel-btn'}
         >
           <div className={styles.cancelBtnsWrapper}>
             <FilterVasa className={styles.vasaSvg} />

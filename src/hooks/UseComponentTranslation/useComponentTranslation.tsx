@@ -79,7 +79,7 @@ let sharedState = {
     toDatePickerLabel: 'To Date & Time',
     DateTimeSubLabel: 'Specific Time',
     DateTimeDurationSubLabel: 'During the Last',
-    DateTimeDurationDropdownLabel: 'Durtion',
+    DateTimeDurationDropdownLabel: 'Duration',
     days: 'Days',
     hours: 'Hours',
     minutes: 'Minutes',

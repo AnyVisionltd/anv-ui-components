@@ -59,6 +59,7 @@ const RangeSliderWithInputs: FC<RangeSliderWithInputsProps> = ({
           onReachingMinGap={undefined}
           isDuration={undefined}
           {...otherProps}
+          data-testid={'range-slider-with-inputs'}
         />
       </div>
       <div className={styles.inputsContainer}>

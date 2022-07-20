@@ -516,6 +516,7 @@ const Dropdown = React.forwardRef(
 
     return (
       <div
+        data-testid={'dropdown'}
         className={classNames(
           styles.container,
           {

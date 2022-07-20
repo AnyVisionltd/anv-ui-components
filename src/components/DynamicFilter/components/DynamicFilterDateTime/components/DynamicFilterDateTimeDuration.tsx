@@ -70,6 +70,7 @@ const DynamicFilterDateTimeDuration: FC<DynamicFilterDateTimeDurationProps> = ({
             step={stepDuration}
             className={styles.durationInput}
             disabled={selectedType !== DateTimeVariantType.Duration}
+            data-testid={'duration-input'}
           />
           <MenuSelect
             menuContainerId={'duration-steps'}
@@ -77,6 +78,7 @@ const DynamicFilterDateTimeDuration: FC<DynamicFilterDateTimeDurationProps> = ({
             items={fixedMenuItemsFilter}
             selectedData={selectedDurationOption.value}
             toggleCallback={setIsMenuDropdownOpen}
+            disabled={selectedType !== DateTimeVariantType.Duration}
           />
         </div>
       </div>

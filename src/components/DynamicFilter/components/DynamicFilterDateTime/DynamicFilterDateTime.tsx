@@ -42,9 +42,9 @@ interface DynamicFilterDateTimeProps {
   /** The title above the Element.*/
   title: string
   /** Start date. */
-  from?: Date
+  from?: Date | string
   /** End date. */
-  to?: Date
+  to?: Date | string
   /** Determine the Elements in the FilterDateTime one of - 'All', 'Time', 'Duration'.*/
   variantType?: DateTimeVariantType
   /** Props for the To date picker. */
@@ -99,9 +99,10 @@ const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
     })
   }, [elementKey, from, to, updateElementsState])
 
-  useEffect(() => {
+  const onSetSelectedDurationOption = value => {
+    setSelectedDurationOption(value)
     const fromDate = moment()
-      .subtract(Number(durationInputValue), selectedDurationOption.id)
+      .subtract(Number(durationInputValue), value.id)
       .toISOString()
     updateElementsState({
       key: elementKey,
@@ -112,14 +113,7 @@ const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
         },
       },
     })
-  }, [
-    selectedDurationOption,
-    durationInputValue,
-    elementKey,
-    componentState?.to,
-    to,
-    updateElementsState,
-  ])
+  }
 
   const onDurationInputChange = ({ target: { value } }) => {
     if (Number(value) < minDurationValue || countDecimals(value) > 0) {
@@ -127,6 +121,18 @@ const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
     }
     const newValue = isEmptyString(value) ? '' : Number(value)
     setDurationInputValue(newValue as any)
+    const fromDate = moment()
+      .subtract(Number(newValue), selectedDurationOption.id)
+      .toISOString()
+    updateElementsState({
+      key: elementKey,
+      value: {
+        selectedTime: {
+          from: fromDate,
+          to: componentState?.to || to,
+        },
+      },
+    })
   }
 
   const onChangeDates = (type: string, selectedDate: string) => {
@@ -152,7 +158,7 @@ const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
         onDurationInputChange={onDurationInputChange}
         selectedDurationOption={selectedDurationOption}
         selectedType={selectedType}
-        setSelectedDurationOption={setSelectedDurationOption}
+        setSelectedDurationOption={onSetSelectedDurationOption}
         setSelectedType={setSelectedType}
         styles={styles}
         variantType={variantType}

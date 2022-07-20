@@ -44,6 +44,7 @@ const SliderSingleInput: FC<SliderSingleInputProps> = ({
       min={min}
       max={max}
       step={step}
+      data-testid={'slider-single-input'}
     />
   )
 }

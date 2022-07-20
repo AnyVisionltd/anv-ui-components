@@ -57,6 +57,7 @@ const FilterList: FC<FilterListProps> = ({
       <div
         className={styles.rowItemContainer}
         onClick={() => onCheckItem(item.id)}
+        data-testid={'list-item'}
       >
         <Checkbox
           checked={
@@ -78,7 +79,7 @@ const FilterList: FC<FilterListProps> = ({
   }
 
   return (
-    <div className={styles.listContainer}>
+    <div className={styles.listContainer} data-testid={'infinity-list'}>
       {items.length > 0 && isLoading && (
         <div className={styles.noDataContainer}>
           <div className={styles.noDataInnerContainer}>

@@ -70,6 +70,7 @@ const SliderDualInput: FC<SliderDualInputProps> = ({
       min={min}
       max={max}
       step={step}
+      data-testid={'slider-dual-input'}
     />
   )
 }

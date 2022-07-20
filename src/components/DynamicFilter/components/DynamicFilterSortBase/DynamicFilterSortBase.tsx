@@ -33,6 +33,7 @@ const DynamicFilterSortBase: FC<DynamicFilterSortBaseProps> = ({
             disabled={undefined}
             view={undefined}
             className={undefined}
+            data-testid={id}
           />
           <Tooltip overflowOnly placement='right' content={value}>
             <span className={styles.sortTitle}>{value}</span>

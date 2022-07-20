@@ -11,7 +11,7 @@ import styles from './MenuSelect.module.scss'
 enum MenuSize {
   Small = 'small',
   Medium = 'medium',
-  Large = 'large'
+  Large = 'large',
 }
 
 interface MenuItemInterface {
@@ -54,6 +54,8 @@ interface MenuSelectProps {
   isMultiSelect?: boolean
   /** Callback for clear all the selected items, Enabled only If isMultiSelect = true.*/
   removeAll?: () => void
+  /** Set if disabled. */
+  disabled?: boolean
 }
 
 const MenuSelect: FC<MenuSelectProps> = ({
@@ -64,7 +66,8 @@ const MenuSelect: FC<MenuSelectProps> = ({
   toggleCallback,
   isMultiSelect,
   removeAll,
-  size = MenuSize.Medium
+  size = MenuSize.Medium,
+  disabled = false,
 }): ReactElement => {
   const btnRef = useRef(null)
   const [anchorElement, setAnchorElement] = useState(null)
@@ -86,6 +89,7 @@ const MenuSelect: FC<MenuSelectProps> = ({
   }
 
   const renderMenu = () => (
+    // @ts-ignore
     <Menu
       isOpen={isMenuOpen}
       anchorElement={anchorElement}
@@ -97,6 +101,7 @@ const MenuSelect: FC<MenuSelectProps> = ({
     >
       {items.map(
         ({ callback, element, isSelected, key }: MenuItemInterface) => (
+          // @ts-ignore
           <Menu.Item
             key={key}
             onClick={(event: any) => {
@@ -163,6 +168,7 @@ const MenuSelect: FC<MenuSelectProps> = ({
         styles.resultContainer,
         styles[size],
         isMenuOpen && styles.active,
+        disabled && styles.disabled,
       )}
       ref={btnRef}
     >
@@ -177,7 +183,7 @@ const MenuSelect: FC<MenuSelectProps> = ({
   )
 
   return (
-    <div className={styles.dropdownContainer}>
+    <div className={styles.dropdownContainer} data-testid={'menu-select'}>
       {renderMenuHeader()}
       {renderMenu()}
     </div>

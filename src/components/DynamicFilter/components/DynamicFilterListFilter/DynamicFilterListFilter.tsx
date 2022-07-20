@@ -209,9 +209,11 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
         placeholder={translations.searchPlaceholder}
         value={filters.search}
         onChange={({ target: { value } }) => onFilterChange('search', value)}
+        data-testid={'search-filter-input'}
       />
       <div className={styles.listAndSelectWrapper}>
         <div
+          data-testid={'select-all-container'}
           className={classNames(
             styles.sectionCheckboxWrapper,
             !isShowSelectAll && styles.hidden,

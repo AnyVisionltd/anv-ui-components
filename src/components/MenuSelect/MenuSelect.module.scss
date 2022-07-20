@@ -34,7 +34,6 @@
   display: flex;
   justify-content: space-between;
   gap: av-space(base);
-  cursor: pointer;
 
   .resultContainer {
     min-width: 250px;
@@ -47,6 +46,7 @@
     box-sizing: border-box;
     padding: av-space(base);
     transition: all 0.2s linear;
+    cursor: pointer;
 
     .resultTitle {
       font-size: av-font-size(base);
@@ -72,6 +72,19 @@
       svg {
         transition: transform 200ms;
         transform: rotate(180deg);
+      }
+    }
+
+    &.disabled {
+      pointer-events: none;
+      cursor: default;
+
+      .resultTitle {
+        opacity: av-opacity(disabled);
+      }
+
+      svg {
+        opacity: av-opacity(disabled);
       }
     }
 

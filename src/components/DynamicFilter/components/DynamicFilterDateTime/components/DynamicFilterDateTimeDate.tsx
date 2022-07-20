@@ -57,6 +57,7 @@ const DynamicFilterDateTimeDate: FC<DynamicFilterDateTimeDateProps> = ({
             maxDate={selectedTime.to}
             disabled={selectedType !== DateTimeVariantType.Time}
             {...otherPropsFrom}
+            data-testid={'from-date-picker'}
           />
           <DateTimePicker
             onOpenMenu={onDatePickerOpen}
@@ -69,6 +70,7 @@ const DynamicFilterDateTimeDate: FC<DynamicFilterDateTimeDateProps> = ({
             minDate={selectedTime.from}
             disabled={selectedType !== DateTimeVariantType.Time}
             {...otherPropsTo}
+            data-testid={'to-date-picker'}
           />
         </div>
       </div>
