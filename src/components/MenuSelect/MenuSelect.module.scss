@@ -47,14 +47,22 @@
     padding: av-space(base);
     transition: all 0.2s linear;
     cursor: pointer;
+    position: relative;
+
+    .multiSelectContainer {
+      position: relative;
+      top: av-space(tiny);
+    }
 
     .resultTitle {
       font-size: av-font-size(base);
       width: 85%;
       color: av-color(trueblack);
+      position: relative;
+      top: 5px;
     }
 
-    svg {
+    .arrowSvg {
       width: av-size(sz-24);
       height: av-size(sz-24);
       transition: transform 200ms;
@@ -70,7 +78,7 @@
       box-shadow: inset 0 0 0 2px av-color(primary);
       border: solid 1px transparent;
 
-      svg {
+      .arrowSvg {
         transition: transform 200ms;
         transform: rotate(180deg);
       }
@@ -84,7 +92,7 @@
         opacity: av-opacity(disabled);
       }
 
-      svg {
+      .arrowSvg {
         opacity: av-opacity(disabled);
       }
     }
@@ -105,6 +113,8 @@
         padding: 0;
         align-items: center;
         display: flex;
+        font-size: av-font-size(tiny);
+        font-weight: av-font-weight(normal);
 
         svg {
           width: 12px;
@@ -121,6 +131,21 @@
           min-width: av-size(sz-16);
         }
       }
+    }
+
+    .label {
+      text-transform: capitalize;
+      position: absolute;
+      top: 24%;
+      transform: translateY(-50%);
+      font-size: av-font-size(tiny);
+      color: av-color(content, av-opacity(disabled));
+      cursor: text;
+      transition: all 0.2s ease;
+    }
+
+    .labelColor {
+      color: av-color(primary);
     }
   }
 }

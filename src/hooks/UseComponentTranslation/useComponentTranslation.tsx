@@ -97,6 +97,7 @@ let sharedState = {
   selectMenu: {
     itemsSelected: 'Items Selected',
     selectOption: 'Select Option',
+    defaultLabel: 'Label',
   },
 }
 

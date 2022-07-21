@@ -79,6 +79,7 @@ const DynamicFilterDateTimeDuration: FC<DynamicFilterDateTimeDurationProps> = ({
             selectedData={selectedDurationOption.value}
             toggleCallback={setIsMenuDropdownOpen}
             disabled={selectedType !== DateTimeVariantType.Duration}
+            label={translations.DateTimeDurationDropdownLabel}
           />
         </div>
       </div>

@@ -45,6 +45,7 @@ const Dropdown = React.forwardRef(
       error,
       view,
       inPortal,
+      inPortalMenuSize,
       options,
       defaultValues,
       displayValue,
@@ -559,7 +560,7 @@ const Dropdown = React.forwardRef(
       </div>
     )
 
-    const renderPortalMenu = () => {
+    const renderInPortalMenu = () => {
       return (
         <MenuSelect
           menuContainerId={keyValue}
@@ -572,6 +573,8 @@ const Dropdown = React.forwardRef(
           isMultiSelect={multiple}
           removeAll={multiple && handleRemoveAllSelectedItems}
           toggleCallback={onMenuClose}
+          size={inPortalMenuSize}
+          label={label}
         />
       )
     }
@@ -582,7 +585,7 @@ const Dropdown = React.forwardRef(
     })
 
     if (inPortal) {
-      return renderPortalMenu()
+      return renderInPortalMenu()
     }
 
     return (
@@ -632,6 +635,7 @@ Dropdown.defaultProps = {
   canBeEmpty: false,
   maxMenuHeight: 240,
   inPortal: false,
+  inPortalMenuSize: 'medium',
 }
 
 Dropdown.propTypes = {
@@ -691,6 +695,8 @@ Dropdown.propTypes = {
   view: propTypes.bool,
   /** Render the MenuSelect as the dropdown, the only options are -> multiple select and basic select */
   inPortal: propTypes.bool,
+  /** The size of the inPortal Menu, one of - 'small', 'medium', 'large'.*/
+  inPortalMenuSize: propTypes.string,
 }
 
 export default memo(Dropdown)

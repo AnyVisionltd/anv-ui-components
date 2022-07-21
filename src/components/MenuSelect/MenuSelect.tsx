@@ -56,6 +56,8 @@ interface MenuSelectProps {
   removeAll?: () => void
   /** Set if disabled. */
   disabled?: boolean
+  /** Label to add information about  the dropdown. */
+  label?: string
 }
 
 const MenuSelect: FC<MenuSelectProps> = ({
@@ -68,6 +70,7 @@ const MenuSelect: FC<MenuSelectProps> = ({
   removeAll,
   size = MenuSize.Medium,
   disabled = false,
+  label,
 }): ReactElement => {
   const btnRef = useRef(null)
   const [anchorElement, setAnchorElement] = useState(null)
@@ -145,6 +148,7 @@ const MenuSelect: FC<MenuSelectProps> = ({
       {selectedItemValue.length > 0 && (
         <div className={styles.multiSelectWithItems}>
           {removeAll && (
+            //@ts-ignore
             <Button
               onClick={onClickRemoveSelectedItems}
               leadingIcon={<TimesThick />}
@@ -175,6 +179,13 @@ const MenuSelect: FC<MenuSelectProps> = ({
       )}
       ref={btnRef}
     >
+      <span
+        className={classNames(styles.label, {
+          [styles.labelColor]: isMenuOpen,
+        })}
+      >
+        {label || translations.defaultLabel}
+      </span>
       {!isMultiSelect && (
         <Tooltip content={selectedItemValue} placement='top' overflowOnly>
           <div className={styles.resultTitle}>
@@ -183,7 +194,7 @@ const MenuSelect: FC<MenuSelectProps> = ({
         </Tooltip>
       )}
       {isMultiSelect && renderMultipleWrapper()}
-      <ArrowDown />
+      <ArrowDown className={styles.arrowSvg} />
     </div>
   )
 
