@@ -55,6 +55,7 @@ const Tree = forwardRef(
       isLoading,
       isChildrenUniqueKeysOverlap,
       isReturnSelectedKeysWhenOnSelect,
+      isReturnWholeNodeDataWhenOnSelect,
     },
     ref,
   ) => {
@@ -141,6 +142,7 @@ const Tree = forwardRef(
         childrenKey,
         idKey,
         isChildrenUniqueKeysOverlap,
+        isReturnWholeNodeDataWhenOnSelect,
       })
 
       setFlattenedNodes(nodesMap)
@@ -148,7 +150,10 @@ const Tree = forwardRef(
         Array.isArray(node) ? ALL_ROOTS_COMBINED_KEY : node.uniqueKey,
       )
 
-      if (isReturnSelectedKeysWhenOnSelect) {
+      if (
+        isReturnSelectedKeysWhenOnSelect &&
+        !isReturnWholeNodeDataWhenOnSelect
+      ) {
         const newSelectedKeys = organizeSelectedKeys({
           isChildrenUniqueKeysOverlap,
           keysToToggle,
@@ -529,6 +534,9 @@ Tree.propTypes = {
   /** If there is no need to make changes with selected/added nodes, set this prop to true
    * in order to get the new selectedKeys structure.  */
   isReturnSelectedKeysWhenOnSelect: propTypes.bool,
+  /** By default, onSelect returns a list of ids (keys), if isReturnWholeNodeDataWhenOnSelect is set to true,
+   * the whole node data will be returned. isReturnSelectedKeysWhenOnSelect won't work when returning whole object data.  */
+  isReturnWholeNodeDataWhenOnSelect: propTypes.bool,
 }
 
 export default Tree
