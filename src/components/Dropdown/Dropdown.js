@@ -14,6 +14,7 @@ import keymap from '../../utils/enums/keymap'
 import { findScrollerNodeBottom } from '../../utils'
 import { InputBase, IconButton, useFormProvider } from '../../index'
 import { DropdownItem } from './DropdownItem'
+import { MenuSelect } from '../MenuSelect'
 import { EmptyDropdownMenu } from './EmptyDropdownMenu'
 import {
   useClickOutsideListener,
@@ -43,6 +44,7 @@ const Dropdown = React.forwardRef(
       message,
       error,
       view,
+      inPortal,
       options,
       defaultValues,
       displayValue,
@@ -71,9 +73,7 @@ const Dropdown = React.forwardRef(
   ) => {
     const { getComponentTranslation } = useComponentTranslation()
     const DropDownTranslations = getComponentTranslation('dropDown')
-
     const { isView } = useFormProvider({ view })
-
     const [isTypeMode, setIsTypeMode] = useState(false)
     const [filteredValue, setFilteredValue] = useState('')
     const [shownOptions, setShownOptions] = useState([...options])
@@ -87,6 +87,51 @@ const Dropdown = React.forwardRef(
     const selectedContainerRef = useRef(null)
     const valuesContainerRef = useRef(null)
     const [selectedValueElement, setSelectedValueElement] = useState(null)
+    const [menuSelectedItems, setMenuSelectedItems] = useState(
+      multiple
+        ? defaultValues.map(option => option.id)
+        : defaultValues.length
+        ? defaultValues[0]
+        : '',
+    )
+
+    const handleRemoveAllSelectedItems = () => {
+      setMenuSelectedItems([])
+      onChange([])
+    }
+
+    const optionCallback = option => {
+      if (multiple) {
+        const updatedValues = (menuSelectedItems.find(id => option.id === id)
+          ? menuSelectedItems.filter(id => option.id !== id)
+          : [...menuSelectedItems, option.id]
+        ).map(id => options.find(item => item.id === id))
+
+        setMenuSelectedItems(prev => {
+          if (prev.find(id => option.id === id)) {
+            return prev.filter(id => option.id !== id)
+          }
+          return [...prev, option.id]
+        })
+        onChange(updatedValues)
+      } else {
+        setMenuSelectedItems(option)
+        onChange([option])
+      }
+    }
+
+    const menuOptions = options.map(option => {
+      return {
+        key: option.id,
+        element: option[displayValue],
+        isSelected: multiple
+          ? !!menuSelectedItems.find(id => option.id === id)
+          : menuSelectedItems.id === option.id,
+        callback: () => {
+          optionCallback(option)
+        },
+      }
+    })
 
     const selectedOptionsSet = new Set([
       ...selectedOptions.map(({ [keyValue]: id }) => id),
@@ -514,6 +559,32 @@ const Dropdown = React.forwardRef(
       </div>
     )
 
+    const renderPortalMenu = () => {
+      return (
+        <MenuSelect
+          menuContainerId={keyValue}
+          preferOpenDirection={'bottom-start'}
+          items={menuOptions}
+          selectedData={
+            multiple ? menuSelectedItems : menuSelectedItems[displayValue]
+          }
+          disabled={disabled}
+          isMultiSelect={multiple}
+          removeAll={multiple && handleRemoveAllSelectedItems}
+          toggleCallback={onMenuClose}
+        />
+      )
+    }
+
+    const dropdownRef = useCombinedRefs(containerRef, handleMenuPlacement)
+    const showTooltip = useIsOverflowing({
+      current: selectedValueElement,
+    })
+
+    if (inPortal) {
+      return renderPortalMenu()
+    }
+
     return (
       <div
         data-testid={'dropdown'}
@@ -525,14 +596,9 @@ const Dropdown = React.forwardRef(
           },
           className,
         )}
-        ref={useCombinedRefs(containerRef, handleMenuPlacement)}
+        ref={dropdownRef}
       >
-        <Tooltip
-          content={selectedElementContent}
-          show={useIsOverflowing({
-            current: selectedValueElement,
-          })}
-        >
+        <Tooltip content={selectedElementContent} show={showTooltip}>
           {renderHeaderContainer()}
         </Tooltip>
         {showMenu && renderOptions()}
@@ -565,6 +631,7 @@ Dropdown.defaultProps = {
   onExceedMaxSelected: () => {},
   canBeEmpty: false,
   maxMenuHeight: 240,
+  inPortal: false,
 }
 
 Dropdown.propTypes = {
@@ -622,6 +689,8 @@ Dropdown.propTypes = {
    *  <i style="background-color:#ffc40026;">NOTE: Also from \<FormProvider> by context. </i>
    */
   view: propTypes.bool,
+  /** Render the MenuSelect as the dropdown, the only options are -> multiple select and basic select */
+  inPortal: propTypes.bool,
 }
 
 export default memo(Dropdown)

@@ -177,7 +177,9 @@ const MenuSelect: FC<MenuSelectProps> = ({
     >
       {!isMultiSelect && (
         <Tooltip content={selectedItemValue} placement='top' overflowOnly>
-          <div className={styles.resultTitle}>{selectedItemValue}</div>
+          <div className={styles.resultTitle}>
+            {selectedItemValue || translations.selectOption}
+          </div>
         </Tooltip>
       )}
       {isMultiSelect && renderMultipleWrapper()}
