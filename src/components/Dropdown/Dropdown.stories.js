@@ -144,3 +144,39 @@ export const error = () => (
     <Dropdown options={genders} label='Gender' message='Some error' error />
   </div>
 )
+
+export const InPortalMultipleDropdown = () => {
+  const [, setValues] = useState([])
+  const handleChange = newValues => setValues(newValues)
+
+  return (
+    <div style={containerStyle}>
+      <Dropdown
+        options={items}
+        multiple
+        label='Fruits'
+        onChange={handleChange}
+        isSelectedShownInHeader={false}
+        displayValue='myValue'
+        inPortal
+      />
+    </div>
+  )
+}
+
+export const InPortalDropdown = () => {
+  const [, setValues] = useState([])
+  const handleChange = newValues => setValues(newValues)
+
+  return (
+    <div style={{ ...containerStyle, marginBottom: '200px' }}>
+      <Dropdown
+        options={genders}
+        label='Gender'
+        defaultValues={[genders[0]]}
+        onChange={handleChange}
+        inPortal
+      />
+    </div>
+  )
+}

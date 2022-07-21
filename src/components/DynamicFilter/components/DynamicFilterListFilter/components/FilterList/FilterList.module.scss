@@ -1,0 +1,57 @@
+@import '~@anyvision/style-guide';
+
+.listContainer {
+  height: av-size(sz-240);
+  width: 100%;
+  box-sizing: border-box;
+
+  .rowItemContainer {
+    display: flex;
+    align-items: center;
+    gap: av-space(micro);
+    cursor: pointer;
+
+    .rowItemValue {
+      color: av-color(trueblack);
+      max-width: calc(100% - av-space(micro) - av-size(sz-32));
+    }
+
+    &:hover {
+      background-color: av-color(primary, av-opacity(divider));
+    }
+  }
+
+  .noDataContainer {
+    width: 100%;
+    height: av-size(sz-240);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .noDataInnerContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: av-space(tiny);
+      justify-content: center;
+      position: relative;
+      bottom: av-space(medium);
+
+      .noResultSvg {
+        width: av-size(sz-64);
+        height: av-size(sz-64);
+
+        path {
+          opacity: av-opacity(disabled);
+        }
+      }
+
+      .title {
+        font-size: av-size(sz-16);
+        font-weight: bold;
+        color: av-color(trueblack);
+      }
+    }
+  }
+}
