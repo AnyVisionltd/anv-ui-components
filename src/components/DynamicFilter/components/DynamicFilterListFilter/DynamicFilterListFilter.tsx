@@ -38,6 +38,8 @@ interface DynamicFilterListFilterProps {
   isLoading?: boolean
   /**  Determine the number of items the  list load each time.*/
   offset?: number
+  /** Label to add information about  the filter dropdown. */
+  label?: string
 }
 
 const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
@@ -51,6 +53,7 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
   totalItems,
   isLoading = false,
   offset = 10,
+  label,
 }): ReactElement => {
   const { actions } = useContext(DynamicFilterContext)
   const { updateElementsState } = actions
@@ -207,6 +210,7 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
           defaultValues={[filters.selectFilter]}
           onChange={options => onFilterChange('selectFilter', options[0])}
           className={styles.dropdown}
+          label={label}
         />
       )}
       <TextField
