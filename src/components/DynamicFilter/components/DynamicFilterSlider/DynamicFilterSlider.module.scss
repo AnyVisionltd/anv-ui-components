@@ -1,0 +1,14 @@
+@import '~@anyvision/style-guide';
+
+.dynamicFilterSliderContainer {
+  display: flex;
+  flex-direction: column;
+  gap: av-space(tiny);
+  width: 100%;
+
+  .SliderTitle {
+    @extend %av-subtitle1;
+    color: av-color(trueblack);
+    font-weight: bold;
+  }
+}

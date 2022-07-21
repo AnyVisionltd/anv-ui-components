@@ -38,6 +38,8 @@ export { ToastMessage } from './components/ToastMessage'
 export { Spinner } from './components/Spinner'
 export { StaticInfoTable } from './components/StaticInfoTable'
 export { Autocomplete } from './components/Autocomplete'
+export { DynamicFilter } from './components/DynamicFilter'
+export { RangeSliderWithInputs } from './components/RangeSliderWithInputs'
 
 export { useFormProvider } from './components/FormProvider/useFormProvider'
 export { useComponentTranslation } from './hooks/UseComponentTranslation'

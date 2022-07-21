@@ -1,0 +1,68 @@
+@import '~@anyvision/style-guide';
+
+.menuContainer {
+  position: absolute;
+  z-index: av-z-index(popup);
+  height: fit-content;
+  min-height: av-size(sz-240);
+  min-width: calc(av-size(sz-320) + av-size(sz-80));
+  max-height: av-size(sz-640);
+  overflow-y: hidden;
+  background-color: av-color(purewhite);
+  border: solid 3px av-color(primary);
+  box-sizing: border-box;
+  padding: av-space(medium);
+  display: flex;
+  flex-direction: column;
+  gap: av-space(medium);
+  cursor: auto;
+
+  .itemsContainer {
+    max-height: 520px;
+    min-height: 150px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: av-space(medium);
+    @extend %av-scrollbar;
+    overflow-x: hidden;
+  }
+
+  .actionBtnContainer {
+    display: flex;
+    align-items: center;
+    gap: av-space(tiny);
+    justify-content: flex-end;
+
+    .actionBtnApply {
+      svg {
+        width: av-size(sz-24);
+        height: av-size(sz-24);
+      }
+    }
+
+    .actionBtnCancel {
+      display: flex;
+      align-items: center;
+
+      .cancelBtnsWrapper {
+        display: flex;
+        align-items: flex-end;
+        position: relative;
+        left: 5px;
+
+        .xSvg {
+          width: av-size(sz-16);
+          height: av-size(sz-16);
+          position: relative;
+          left: -10px;
+        }
+
+        .vasaSvg {
+          width: av-size(sz-24);
+          height: av-size(sz-24);
+        }
+      }
+    }
+  }
+}

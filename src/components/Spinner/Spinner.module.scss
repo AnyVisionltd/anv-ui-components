@@ -18,6 +18,11 @@
   border-left-color: av-color(purewhite);
   animation: spin 1s infinite linear;
 
+  &.primary {
+    border: 4px solid av-color(primary);
+    border-left-color: av-color(purewhite);
+  }
+
   &.small {
     &:after {
       @extend %edge;

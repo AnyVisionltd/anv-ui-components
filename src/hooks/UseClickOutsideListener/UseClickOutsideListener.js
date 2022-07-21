@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react'
 import { isFunction } from '../../utils'
 
-const useClickOutsideListener = (onClickOutside, ref) => {
+const useClickOutsideListener = (onClickOutside, ref, refToIgnore = {}) => {
   const onClickOutsideHandler = useCallback(
     event => {
       if (
@@ -11,10 +11,13 @@ const useClickOutsideListener = (onClickOutside, ref) => {
         onClickOutside &&
         !ref.current.contains(event.target)
       ) {
+        if (refToIgnore?.current?.contains(event.target)) {
+          return
+        }
         onClickOutside(event)
       }
     },
-    [onClickOutside, ref],
+    [onClickOutside, ref, refToIgnore],
   )
   useEffect(() => {
     document.addEventListener('mouseup', onClickOutsideHandler)
