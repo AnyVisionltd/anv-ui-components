@@ -12,7 +12,7 @@ import { useComponentTranslation } from '../../../../hooks/UseComponentTranslati
 import { Dropdown } from '../../../Dropdown'
 import { TextField } from '../../../TextField'
 import DynamicFilterContext from '../../store/DynamicFilterContext'
-import { ListItemInterface, SortItemInterface } from '../../utils'
+import { allOption, ListItemInterface, SortItemInterface } from '../../utils'
 import { Checkbox } from '../../../Checkbox'
 import FilterList from './components/FilterList/FilterList'
 import styles from './DynamicFilterListFilter.module.scss'
@@ -24,6 +24,8 @@ interface DynamicFilterListFilterProps {
   elementKey: string
   /** List Filter items - { id, value }.*/
   filterItems?: Array<SortItemInterface>
+  /** List Filter default to All, and the All option is added. if false then default is the first item*/
+  isAllDefault?: boolean
   /** Determine if the List is controlled or not.*/
   unControlled?: boolean
   /** If unControlled = true, a callback with the filters - 'search', 'selectFilter?' .*/
@@ -42,6 +44,7 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
   items,
   elementKey,
   filterItems,
+  isAllDefault = false,
   onChange,
   onLoadMoreData,
   unControlled = false,
@@ -56,7 +59,7 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
     'dynamicFilterListFilter',
   )
   const [filters, setFilters] = useState({
-    ...(filterItems && { selectFilter: filterItems[0] }),
+    ...(filterItems && { selectFilter: isAllDefault ? allOption : filterItems[0] }),
     search: '',
   })
   const [filteredItems, setFilteredItems] = useState<Array<ListItemInterface>>(
@@ -83,8 +86,8 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
       !unControlled
         ? !!filteredItems.length && isAllItemsSelected
         : isExcludeMode
-        ? isAllItemsNotSelected
-        : onlyCheckedItems.length === totalItems,
+          ? isAllItemsNotSelected
+          : onlyCheckedItems.length === totalItems,
     [
       filteredItems.length,
       isAllItemsNotSelected,
@@ -113,7 +116,7 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
         .includes(filters.search.toLowerCase())
       const isByType = item.type && filterItems
       const res = isByType
-        ? item.type === filters.selectFilter?.id && searchRes
+        ? (filters.selectFilter?.id === allOption.id || item.type === filters.selectFilter?.id) && searchRes
         : searchRes
       return res
     })
@@ -125,6 +128,7 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
     filters.selectFilter?.id,
     items,
     unControlled,
+    isAllDefault
   ])
 
   useEffect(() => {
@@ -199,7 +203,7 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
       {filterItems && (
         <Dropdown
           // @ts-ignore
-          options={filterItems}
+          options={isAllDefault ? [allOption, ...filterItems] : filterItems}
           defaultValues={[filters.selectFilter]}
           onChange={options => onFilterChange('selectFilter', options[0])}
           className={styles.dropdown}

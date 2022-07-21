@@ -62,3 +62,8 @@ export const getDefaultDurationInputValue = (
   const duration = moment.duration(transformTo.diff(from))
   return Math.floor(duration.asHours())
 }
+
+export const allOption = {
+  id: 'All',
+  value: 'All'
+}
