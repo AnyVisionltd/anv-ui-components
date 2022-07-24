@@ -1,7 +1,7 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useEffect } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
-import { FixedSizeList as List } from 'react-window'
+import { FixedSizeList as List, VariableSizeList } from 'react-window'
 import InfiniteLoader from 'react-window-infinite-loader'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import mergeRefs from '../../utils/mergeRef'
@@ -30,6 +30,9 @@ const InfiniteList = forwardRef(
       loadMoreItems,
       isLoading,
       className,
+      expandableRowMap,
+      expandableHeight,
+      isExpandable,
     },
     forwardRef,
   ) => {
@@ -42,6 +45,21 @@ const InfiniteList = forwardRef(
 
     const classes = classNames(styles.infiniteList, className)
 
+    const getHeight = idx => {
+      return expandableRowMap[idx] ? expandableHeight + rowHeight : rowHeight
+    }
+
+    useEffect(() => {
+      if (
+        forwardRef &&
+        forwardRef.current &&
+        isExpandable &&
+        expandableRowMap
+      ) {
+        forwardRef.current.resetAfterIndex(0)
+      }
+    }, [forwardRef, isExpandable, expandableRowMap])
+
     return (
       <AutoSizer>
         {({ height, width }) => (
@@ -51,26 +69,47 @@ const InfiniteList = forwardRef(
             loadMoreItems={loadMore}
             threshold={0}
           >
-            {({ onItemsRendered, ref }) => (
-              <List
-                ref={mergeRefs(ref, forwardRef)}
-                className={classes}
-                height={height}
-                width={width}
-                itemData={{
-                  items,
-                  rowRender,
-                  isItemLoaded,
-                  customLoader,
-                  rowHeight,
-                }}
-                itemCount={itemCount}
-                itemSize={rowHeight}
-                onItemsRendered={onItemsRendered}
-              >
-                {Item}
-              </List>
-            )}
+            {({ onItemsRendered, ref }) =>
+              isExpandable && expandableRowMap ? (
+                <VariableSizeList
+                  ref={mergeRefs(ref, forwardRef)}
+                  className={classes}
+                  height={height}
+                  width={width}
+                  itemData={{
+                    items,
+                    rowRender,
+                    isItemLoaded,
+                    customLoader,
+                    rowHeight: rowHeight,
+                  }}
+                  itemCount={itemCount}
+                  itemSize={getHeight}
+                  onItemsRendered={onItemsRendered}
+                >
+                  {Item}
+                </VariableSizeList>
+              ) : (
+                <List
+                  ref={mergeRefs(ref, forwardRef)}
+                  className={classes}
+                  height={height}
+                  width={width}
+                  itemData={{
+                    items,
+                    rowRender,
+                    isItemLoaded,
+                    customLoader,
+                    rowHeight,
+                  }}
+                  itemCount={itemCount}
+                  itemSize={rowHeight}
+                  onItemsRendered={onItemsRendered}
+                >
+                  {Item}
+                </List>
+              )
+            }
           </InfiniteLoader>
         )}
       </AutoSizer>
@@ -82,6 +121,8 @@ InfiniteList.defaultProps = {
   loadMoreItems: () => {},
   customLoader: () => 'Loading...',
   rowHeight: 56,
+  expandableHeight: 240,
+  isExpandable: false,
 }
 
 InfiniteList.propTypes = {
@@ -101,6 +142,12 @@ InfiniteList.propTypes = {
   isLoading: propTypes.bool,
   /** For css customization. */
   className: propTypes.string,
+  /** Dictionary of the items that are expanded or not. */
+  expandableRowMap: propTypes.object,
+  /** Expandable element height . */
+  expandableHeight: propTypes.number,
+  /** Make each row expandable, if True -> Render different List */
+  isExpandable: propTypes.bool,
 }
 
 export default InfiniteList

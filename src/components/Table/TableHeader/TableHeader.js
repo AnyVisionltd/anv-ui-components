@@ -39,6 +39,7 @@ const TableHeader = ({
     selection,
     columnManagement,
     totalItems,
+    isExpandableRow,
   } = state
   const totalSelected = selection?.items?.length ?? MIN_SELECTION_COUNT
   const { sortBy, sortable: contextSortable } = sort
@@ -138,6 +139,8 @@ const TableHeader = ({
     )
   }
 
+  const renderExpandableSpace = () => <div className={styles.expandableSpace} />
+
   const renderActionsPlaceholder = () =>
     withRowActions &&
     !columnManagementIsActive && <div className={styles.columnManagementCell} />
@@ -164,6 +167,7 @@ const TableHeader = ({
           ` (${totalSelected} ${selectionLabel ?? TableTranslations.selected})`}
       </div>
       <div role='row' className={classes} {...otherProps}>
+        {isExpandableRow && renderExpandableSpace()}
         {renderSelection()}
         {contextColumns.map(renderCell)}
         {renderActionsPlaceholder()}
