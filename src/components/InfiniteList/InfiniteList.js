@@ -58,7 +58,7 @@ const InfiniteList = forwardRef(
       ) {
         forwardRef.current.resetAfterIndex(0)
       }
-    }, [forwardRef, isExpandable, expandableRowMap])
+    }, [forwardRef, isExpandable, expandableRowMap, totalItems])
 
     return (
       <AutoSizer>
