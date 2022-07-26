@@ -20,7 +20,8 @@ interface DynamicFilterDateTimeDurationProps {
   translations: Record<string, string>
   durationOptions: Array<Record<string, string>>
   setIsMenuDropdownOpen: (value: boolean) => void
-  elementKey: string
+  elementKey: string,
+  isOnDarkTheme: boolean
 }
 
 const DynamicFilterDateTimeDuration: FC<DynamicFilterDateTimeDurationProps> = ({
@@ -36,6 +37,7 @@ const DynamicFilterDateTimeDuration: FC<DynamicFilterDateTimeDurationProps> = ({
   durationOptions,
   setIsMenuDropdownOpen,
   elementKey,
+  isOnDarkTheme,
 }): ReactElement => {
   const isShowRadio = variantType !== DateTimeVariantType.Duration
 
@@ -80,6 +82,7 @@ const DynamicFilterDateTimeDuration: FC<DynamicFilterDateTimeDurationProps> = ({
             toggleCallback={setIsMenuDropdownOpen}
             disabled={selectedType !== DateTimeVariantType.Duration}
             label={translations.DateTimeDurationDropdownLabel}
+            className={isOnDarkTheme && styles.menuOnDarkerSurface}
           />
         </div>
       </div>

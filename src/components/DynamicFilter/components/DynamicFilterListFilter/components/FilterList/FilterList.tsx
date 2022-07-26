@@ -18,7 +18,8 @@ interface FilterListProps {
   isLoading?: boolean
   translations: Record<string, string>
   isExcludeMode: boolean
-  offset: number
+  offset: number,
+  isOnDarkTheme: boolean
 }
 
 const FilterList: FC<FilterListProps> = ({
@@ -32,6 +33,7 @@ const FilterList: FC<FilterListProps> = ({
   translations,
   isExcludeMode,
   offset,
+  isOnDarkTheme,
 }): ReactElement => {
   const listRef = useRef()
   const [itemsToShow, setItemsToShow] = useState<Array<ListItemInterface>>([])
@@ -65,6 +67,7 @@ const FilterList: FC<FilterListProps> = ({
             checked={
               isExcludeMode ? !checkedItems[item.id] : checkedItems[item.id]
             }
+            className={isOnDarkTheme && styles.checkBoxDarkMode}
           />
         }
         <Tooltip overflowOnly placement='right' content={item.value}>

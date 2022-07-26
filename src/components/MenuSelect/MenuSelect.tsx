@@ -58,6 +58,8 @@ interface MenuSelectProps {
   disabled?: boolean
   /** Label to add information about  the dropdown. */
   label?: string
+  /** For css customization. */
+  className?: string,
 }
 
 const MenuSelect: FC<MenuSelectProps> = ({
@@ -71,6 +73,7 @@ const MenuSelect: FC<MenuSelectProps> = ({
   size = MenuSize.Medium,
   disabled = false,
   label,
+  className,
 }): ReactElement => {
   const btnRef = useRef(null)
   const [anchorElement, setAnchorElement] = useState(null)
@@ -96,7 +99,7 @@ const MenuSelect: FC<MenuSelectProps> = ({
     <Menu
       isOpen={isMenuOpen}
       anchorElement={anchorElement}
-      className={classNames(styles.menuContainer, styles[size])}
+      className={classNames(styles.menuContainer, className, styles[size])}
       aria-labelledby='menu'
       preferOpenDirection={preferOpenDirection}
       menuContainerId={menuContainerId}

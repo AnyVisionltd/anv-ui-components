@@ -6,12 +6,12 @@
   height: fit-content;
   min-height: av-size(sz-240);
   min-width: calc(av-size(sz-320) + av-size(sz-80));
-  max-height: av-size(sz-640);
+  max-height: 540px;
   overflow-y: hidden;
   background-color: av-color(purewhite);
   border: solid 3px av-color(primary);
   box-sizing: border-box;
-  padding: av-space(medium);
+  padding: av-space(base);
   display: flex;
   flex-direction: column;
   gap: av-space(medium);
@@ -38,6 +38,7 @@
       svg {
         width: av-size(sz-24);
         height: av-size(sz-24);
+        fill: av-color(purewhite);
       }
     }
 
@@ -50,6 +51,10 @@
         align-items: flex-end;
         position: relative;
         left: 5px;
+
+        svg {
+          fill: av-color(primary);
+        }
 
         .xSvg {
           width: av-size(sz-16);

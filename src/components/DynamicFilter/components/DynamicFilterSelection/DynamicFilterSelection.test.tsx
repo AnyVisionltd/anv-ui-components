@@ -50,7 +50,7 @@ describe('Test the DynamicFilterSelection Component', () => {
     if (mainBtnEl) {
       UserEvents.click(mainBtnEl)
       selectionItems.forEach(selectionItem => {
-        const selectionCheckboxItemEl = screen.getByTestId(selectionItem.id)
+        const selectionCheckboxItemEl = screen.getByTestId(selectionItem.id) as HTMLInputElement
         if (selectionCheckboxItemEl) {
           UserEvents.click(selectionCheckboxItemEl)
           expect(selectionCheckboxItemEl.checked).toBe(true)
@@ -65,7 +65,7 @@ describe('Test the DynamicFilterSelection Component', () => {
       UserEvents.click(mainBtnEl)
       const firstSelectionCheckboxItemEl = screen.getByTestId(
         selectionItems[0].id,
-      )
+      ) as HTMLInputElement
       if (firstSelectionCheckboxItemEl) {
         expect(firstSelectionCheckboxItemEl.checked).toBe(true)
       }

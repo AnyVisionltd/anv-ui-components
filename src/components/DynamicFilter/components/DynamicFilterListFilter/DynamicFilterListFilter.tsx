@@ -40,6 +40,8 @@ interface DynamicFilterListFilterProps {
   offset?: number
   /** Label to add information about  the filter dropdown. */
   label?: string
+  /** Determine if the parent element is dark or light theme*/
+  isOnDarkTheme?: boolean
 }
 
 const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
@@ -54,6 +56,7 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
   isLoading = false,
   offset = 10,
   label,
+  isOnDarkTheme = true,
 }): ReactElement => {
   const { actions } = useContext(DynamicFilterContext)
   const { updateElementsState } = actions
@@ -236,6 +239,7 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
               checked={isAllItemsChecked}
               onChange={onSelectAllFiles}
               disabled={unControlled ? !items.length : !filteredItems.length}
+              className={isOnDarkTheme && styles.checkBoxDarkMode}
             />
           }
           <span className={styles.sectionCheckboxLabel}>
@@ -255,6 +259,7 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
           translations={translations}
           isExcludeMode={isExcludeMode}
           offset={offset}
+          isOnDarkTheme={isOnDarkTheme}
         />
       </div>
     </div>

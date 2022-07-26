@@ -10,8 +10,7 @@
 
 .dynamicFilterBtn {
   padding: 0 av-space(tiny);
-  background-color: av-color(content, av-opacity(ghost));
-  color: av-color(purewhite);
+  color: av-color(purewhite, av-opacity(medium));
   width: fit-content;
   height: av-size(sz-48);
   cursor: pointer;
@@ -23,7 +22,7 @@
     height: av-size(sz-16);
     width: av-size(sz-16);
     transition: all 0.05s linear;
-    fill: av-color(purewhite);
+    fill: av-color(purewhite, av-opacity(medium));
   }
 
   &:hover {
@@ -32,5 +31,10 @@
 
   &.btnSelected {
     background-color: av-color(primary);
+    color: av-color(purewhite);
+
+    .arrowSvg {
+      fill: av-color(purewhite);
+    }
   }
 }

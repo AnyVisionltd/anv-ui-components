@@ -1,7 +1,7 @@
 @import '~@anyvision/style-guide';
 
 .listContainer {
-  height: av-size(sz-240);
+  height: 150px;
   width: 100%;
   box-sizing: border-box;
 
@@ -53,5 +53,11 @@
         color: av-color(trueblack);
       }
     }
+  }
+}
+
+.checkBoxDarkMode {
+  svg {
+    fill: av-color(purewhite);
   }
 }

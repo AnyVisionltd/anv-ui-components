@@ -51,6 +51,8 @@ interface DynamicFilterDateTimeProps {
   otherPropsTo?: Record<string, any>
   /** Props for the From date picker. */
   otherPropsFrom?: Record<string, any>
+  /** Determine if the parent element is dark or light theme*/
+  isOnDarkTheme?: boolean
 }
 
 const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
@@ -61,6 +63,7 @@ const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
   variantType = DefaultVariantType,
   elementKey,
   title,
+  isOnDarkTheme = true,
 }): ReactElement => {
   const { actions, state } = useContext(DynamicFilterContext)
   const [selectedType, setSelectedType] = useState(getSelectedType(variantType))
@@ -166,6 +169,7 @@ const DynamicFilterDateTime: FC<DynamicFilterDateTimeProps> = ({
         durationOptions={durationOptions}
         setIsMenuDropdownOpen={setIsMenuDropdownOpen}
         elementKey={elementKey}
+        isOnDarkTheme={isOnDarkTheme}
       />
     )
   }
