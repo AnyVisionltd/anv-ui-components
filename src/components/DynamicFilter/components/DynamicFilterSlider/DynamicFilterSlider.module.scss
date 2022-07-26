@@ -5,6 +5,7 @@
   flex-direction: column;
   gap: av-space(tiny);
   width: 100%;
+  height: 100px;
 
   .SliderTitle {
     @extend %av-subtitle1;

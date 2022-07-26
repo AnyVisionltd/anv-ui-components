@@ -62,7 +62,7 @@ describe('Test the DynamicFilterSlider singleSlider', () => {
     const mainBtnEl = screen.queryByText(title)
     if (mainBtnEl) {
       UserEvents.click(mainBtnEl)
-      const inputEl = screen.queryByTestId(sliderSingleInputTestId)
+      const inputEl = screen.queryByTestId(sliderSingleInputTestId) as HTMLInputElement
       if (inputEl) {
         expect(Number(inputEl.value)).toBe(mockDefaultValue)
       }
@@ -112,7 +112,7 @@ describe('Test the DynamicFilterSlider dualSlider', () => {
     const mainBtnEl = screen.queryByText(title)
     if (mainBtnEl) {
       UserEvents.click(mainBtnEl)
-      const inputElements = screen.queryAllByTestId(sliderDualInputTestId)
+      const inputElements = screen.queryAllByTestId(sliderDualInputTestId) as HTMLInputElement[]
       if (inputElements.length) {
         inputElements.forEach((inputEl, idx) => {
           expect(Number(inputEl.value)).toBe(mockDefaultDualValue[idx])

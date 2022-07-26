@@ -60,3 +60,8 @@
     }
   }
 }
+
+.menuOnDarkerSurface {
+  --content: #{hex-to-rgb-string(#002450)};  
+  --surface: #{hex-to-rgb-string(#fcfcfc)};
+}
