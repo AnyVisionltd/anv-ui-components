@@ -191,7 +191,7 @@ const TableRow = ({
       )}
       onClick={handleExpandClick}
     >
-      <ArrowDown className={styles.arrowSvg} />
+      <ArrowDown data-testid='expandable-btn' className={styles.arrowSvg} />
     </div>
   )
 
@@ -253,6 +253,7 @@ const TableRow = ({
           <div
             style={{ height: `${expandableHeight}px` }}
             className={styles.expandableElementContainer}
+            data-testid='expandable-el'
           >
             {renderExpandableElement(row)}
           </div>
