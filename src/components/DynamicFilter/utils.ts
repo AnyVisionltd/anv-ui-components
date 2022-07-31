@@ -28,7 +28,7 @@ export interface UpdateElementState {
   value: any
 }
 
-export const maxMenuElWidth = 540
+export const maxMenuElWidth = 450
 export const DefaultMinRange = 0
 export const DefaultMaxRange = 100
 export const DefaultStepRange = 1

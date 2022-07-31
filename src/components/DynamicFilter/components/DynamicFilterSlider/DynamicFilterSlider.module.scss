@@ -11,5 +11,6 @@
     @extend %av-subtitle1;
     color: av-color(trueblack);
     font-weight: bold;
+    font-size: av-font-size(base);
   }
 }

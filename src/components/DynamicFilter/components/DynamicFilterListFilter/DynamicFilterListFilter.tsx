@@ -214,6 +214,7 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
           onChange={options => onFilterChange('selectFilter', options[0])}
           className={styles.dropdown}
           label={label}
+          inPortal={true}
         />
       )}
       <TextField
