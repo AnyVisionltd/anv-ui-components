@@ -9,7 +9,9 @@
     @extend %av-subtitle1;
     color: av-color(trueblack);
     font-weight: av-font-weight(bold);
+    font-size: av-font-size(base);
   }
+
   .searchInput {
     height: 40px;
 

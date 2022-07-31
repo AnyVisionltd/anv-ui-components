@@ -11,6 +11,7 @@
     @extend %av-subtitle1;
     color: av-color(trueblack);
     font-weight: av-font-weight(bold);
+    font-size: av-font-size(base);
   }
 
   .itemContainer {
@@ -64,4 +65,5 @@
 .menuOnDarkerSurface {
   --content: #{hex-to-rgb-string(#002450)};  
   --surface: #{hex-to-rgb-string(#fcfcfc)};
+  --overlay: #{hex-to-rgb-string(#fcfcfc)};
 }
