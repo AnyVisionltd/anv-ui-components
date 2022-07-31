@@ -31,7 +31,7 @@ const DynamicFilterMenu: FC<DynamicFilterMenuProps> = ({
   const customStyle = () => {
     if (anchorElement.current) {
       const rect = anchorElement.current.getBoundingClientRect()
-      const isOpenToTheRight: boolean = ((rect.x + rect.width) - maxMenuElWidth) > 0
+      const isOpenToTheRight: boolean = (rect.right + maxMenuElWidth) > window.innerWidth  
 
       return {
         maxWidth: `${maxMenuElWidth}px`,
