@@ -9,13 +9,14 @@ import React, {
 import classNames from 'classnames'
 import { Search } from '@anyvision/anv-icons'
 import { useComponentTranslation } from '../../../../hooks/UseComponentTranslation'
-import { Dropdown } from '../../../Dropdown'
 import { TextField } from '../../../TextField'
 import DynamicFilterContext from '../../store/DynamicFilterContext'
 import { allOption, ListItemInterface, SortItemInterface } from '../../utils'
 import { Checkbox } from '../../../Checkbox'
 import FilterList from './components/FilterList/FilterList'
+import { MenuSelect } from '../../../MenuSelect'
 import styles from './DynamicFilterListFilter.module.scss'
+
 
 interface DynamicFilterListFilterProps {
   /** List items - { id, value, type? }.*/
@@ -59,7 +60,10 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
   isOnDarkTheme = true,
 }): ReactElement => {
   const { actions } = useContext(DynamicFilterContext)
-  const { updateElementsState } = actions
+  const {
+    updateElementsState,
+    setIsMenuDropdownOpen,
+  } = actions
   const { getComponentTranslation } = useComponentTranslation()
   const translations: Record<string, string> = getComponentTranslation(
     'dynamicFilterListFilter',
@@ -203,19 +207,27 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
     setCheckedItems(prev => ({ ...prev, [id]: !prev[id] }))
   }
 
+  const fixedMenuItemsFilter = (isAllDefault ? [allOption, ...(filterItems || [])] : (filterItems || [])).map((option: SortItemInterface ) => ({
+    element: option.value,
+    callback: () => onFilterChange('selectFilter', option),
+    isSelected: filters.selectFilter?.id === option.id,
+    key: option.id,
+  }))
+
+
   return (
     <div className={styles.listFilterContainer}>
       <span className={styles.title}>{translations.title}</span>
-      {filterItems && (
-        <Dropdown
-          // @ts-ignore
-          options={isAllDefault ? [allOption, ...filterItems] : filterItems}
-          defaultValues={[filters.selectFilter]}
-          onChange={options => onFilterChange('selectFilter', options[0])}
-          className={styles.dropdown}
-          label={label}
-          inPortal={true}
-        />
+      {filterItems && filters.selectFilter && fixedMenuItemsFilter.length > 0 && (
+        <MenuSelect
+            menuContainerId={'filter-menu-' + elementKey}
+            preferOpenDirection={'bottom-start'}
+            items={fixedMenuItemsFilter}
+            selectedData={filters.selectFilter.value}
+            toggleCallback={setIsMenuDropdownOpen}
+            label={label}
+            className={(isOnDarkTheme && styles.menuOnDarkerSurface) as string}
+          />
       )}
       <TextField
         // @ts-ignore
