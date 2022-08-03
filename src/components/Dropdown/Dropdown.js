@@ -69,6 +69,7 @@ const Dropdown = React.forwardRef(
       autoHeight,
       onSearch,
       messageRef,
+      isUpdateOptionsOnOptionsContentChange,
     },
     ref,
   ) => {
@@ -210,6 +211,21 @@ const Dropdown = React.forwardRef(
 
     const prevProps = usePrevious({ options, defaultValues })
 
+    const handlePrevOptionsChange = useCallback(
+      prevOptions => {
+        if (isUpdateOptionsOnOptionsContentChange) {
+          if (JSON.stringify(prevOptions) !== JSON.stringify(options)) {
+            setShownOptions([...options])
+          }
+          return
+        }
+        if (prevOptions?.length !== options.length) {
+          setShownOptions([...options])
+        }
+      },
+      [isUpdateOptionsOnOptionsContentChange, options],
+    )
+
     useEffect(() => {
       if (
         JSON.stringify(prevProps?.defaultValues) !==
@@ -217,10 +233,8 @@ const Dropdown = React.forwardRef(
       ) {
         setSelectedOptions([...defaultValues])
       }
-      if (prevProps?.options?.length !== options.length) {
-        setShownOptions([...options])
-      }
-    }, [options, defaultValues, prevProps])
+      handlePrevOptionsChange(prevProps?.options)
+    }, [options, defaultValues, prevProps, handlePrevOptionsChange])
 
     useEffect(() => {
       if (
@@ -697,6 +711,10 @@ Dropdown.propTypes = {
   inPortal: propTypes.bool,
   /** The size of the inPortal Menu, one of - 'small', 'medium', 'large'.*/
   inPortalMenuSize: propTypes.string,
+  /** Check whether to update options, in case the options are changeable in their content (without list length change).
+   *  Can be removed when Dropdown will be controlled from outside as well.
+   */
+  isUpdateOptionsOnOptionsContentChange: propTypes.bool,
 }
 
 export default memo(Dropdown)
