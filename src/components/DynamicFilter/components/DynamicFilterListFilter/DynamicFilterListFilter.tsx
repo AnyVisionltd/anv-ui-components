@@ -21,7 +21,7 @@ import styles from './DynamicFilterListFilter.module.scss'
 interface DynamicFilterListFilterProps {
   /** List items - { id, value, type? }.*/
   items: Array<ListItemInterface>
-  /** The key of the component, On - 'onApply' - the key contains the Resault data.*/
+  /** The key of the component, On - 'onApply' - the key contains the Result data.*/
   elementKey: string
   /** List Filter items - { id, value }.*/
   filterItems?: Array<SortItemInterface>
@@ -43,6 +43,10 @@ interface DynamicFilterListFilterProps {
   label?: string
   /** Determine if the parent element is dark or light theme*/
   isOnDarkTheme?: boolean
+  /** The default value for the search input.*/
+  defaultSearchValue?: string
+  /** The default value ({ id, value }) for the filter, only when filterItems exists, and it must be one of them.*/
+  defaultFilterValue?: SortItemInterface
 }
 
 const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
@@ -58,6 +62,8 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
   offset = 10,
   label,
   isOnDarkTheme = true,
+  defaultSearchValue = '',
+  defaultFilterValue
 }): ReactElement => {
   const { actions } = useContext(DynamicFilterContext)
   const {
@@ -69,8 +75,15 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
     'dynamicFilterListFilter',
   )
   const [filters, setFilters] = useState({
-    ...(filterItems && { selectFilter: isAllDefault ? allOption : filterItems[0] }),
-    search: '',
+    ...(filterItems && {
+      selectFilter:
+        defaultFilterValue ?
+          defaultFilterValue :
+          isAllDefault ?
+            allOption :
+            filterItems[0]
+    }),
+    search: defaultSearchValue,
   })
   const [filteredItems, setFilteredItems] = useState<Array<ListItemInterface>>(
     [],
@@ -207,7 +220,7 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
     setCheckedItems(prev => ({ ...prev, [id]: !prev[id] }))
   }
 
-  const fixedMenuItemsFilter = (isAllDefault ? [allOption, ...(filterItems || [])] : (filterItems || [])).map((option: SortItemInterface ) => ({
+  const fixedMenuItemsFilter = (isAllDefault ? [allOption, ...(filterItems || [])] : (filterItems || [])).map((option: SortItemInterface) => ({
     element: option.value,
     callback: () => onFilterChange('selectFilter', option),
     isSelected: filters.selectFilter?.id === option.id,
@@ -220,14 +233,14 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
       <span className={styles.title}>{translations.title}</span>
       {filterItems && filters.selectFilter && fixedMenuItemsFilter.length > 0 && (
         <MenuSelect
-            menuContainerId={'filter-menu-' + elementKey}
-            preferOpenDirection={'bottom-start'}
-            items={fixedMenuItemsFilter}
-            selectedData={filters.selectFilter.value}
-            toggleCallback={setIsMenuDropdownOpen}
-            label={label}
-            className={(isOnDarkTheme && styles.menuOnDarkerSurface) as string}
-          />
+          menuContainerId={'filter-menu-' + elementKey}
+          preferOpenDirection={'bottom-start'}
+          items={fixedMenuItemsFilter}
+          selectedData={filters.selectFilter.value}
+          toggleCallback={setIsMenuDropdownOpen}
+          label={label}
+          className={(isOnDarkTheme && styles.menuOnDarkerSurface) as string}
+        />
       )}
       <TextField
         // @ts-ignore
