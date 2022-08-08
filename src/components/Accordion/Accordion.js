@@ -11,13 +11,13 @@ const Accordion = ({ className, data = [], expandAll, disableAll }) => {
   useEffect(() => {
     setSelected(
       expandAll
-        ? Array.from(Array(data.length).keys()).reduce((acc, cur) => {
-            acc[cur] = true
+        ? data?.reduce((acc, { id }) => {
+            acc[id] = true
             return acc
           }, {})
         : {},
     )
-  }, [expandAll, data.length])
+  }, [expandAll, data])
 
   const handleItemSelected = id => {
     if (disableAll) {
