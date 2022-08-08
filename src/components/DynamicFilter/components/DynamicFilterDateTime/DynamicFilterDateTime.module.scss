@@ -1,0 +1,69 @@
+@import '~@anyvision/style-guide';
+
+.dateTimeContainer {
+  display: flex;
+  flex-direction: column;
+  gap: av-space(base);
+  overflow-y: hidden;
+  overflow-x: hidden;
+
+  .title {
+    @extend %av-subtitle1;
+    color: av-color(trueblack);
+    font-weight: av-font-weight(bold);
+    font-size: av-font-size(base);
+  }
+
+  .itemContainer {
+    display: flex;
+    gap: av-space(tiny);
+    align-items: flex-start;
+
+    .durationContainer {
+      color: av-color(trueblack);
+      display: flex;
+      flex-direction: column;
+      gap: av-space(tiny);
+      position: relative;
+      top: av-space(micro);
+      width: 100%;
+
+      .subTitle {
+        @extend %av-subtitle2;
+      }
+
+      .durationInputContainer {
+        display: flex;
+        gap: av-space(tiny);
+        align-items: center;
+        padding-bottom: av-space(tiny);
+
+        .durationInput {
+          width: av-size(sz-80);
+        }
+
+        .durationSteps {
+          width: av-size(sz-240);
+        }
+      }
+
+      .dateTimeContainer {
+        display: flex;
+        flex-direction: column;
+        gap: av-space(tiny);
+        align-items: center;
+        padding-bottom: av-space(tiny);
+
+        > * {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.menuOnDarkerSurface {
+  --content: #{hex-to-rgb-string(#002450)};
+  --surface: #{hex-to-rgb-string(#fcfcfc)};
+  --overlay: #{hex-to-rgb-string(#fcfcfc)};
+}

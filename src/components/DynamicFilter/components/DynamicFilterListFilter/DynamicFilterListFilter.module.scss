@@ -1,0 +1,61 @@
+@import '~@anyvision/style-guide';
+
+.listFilterContainer {
+  display: flex;
+  flex-direction: column;
+  gap: av-space(base);
+
+  .title {
+    @extend %av-subtitle1;
+    color: av-color(trueblack);
+    font-weight: av-font-weight(bold);
+    font-size: av-font-size(base);
+  }
+
+  .searchInput {
+    height: 40px;
+
+    svg {
+      fill: av-color(content, av-opacity(disabled));
+      width: av-size(sz-24);
+      height: av-size(sz-24);
+    }
+  }
+
+  .listAndSelectWrapper {
+    display: flex;
+    flex-direction: column;
+    max-height: 225px;
+  }
+
+  .sectionCheckboxWrapper {
+    display: flex;
+    align-items: center;
+    gap: av-space(micro);
+
+    .sectionCheckboxLabel {
+      @extend %av-subtitle2;
+      color: av-color(trueblack);
+    }
+
+    &.hidden {
+      visibility: hidden;
+    }
+  }
+
+  .dropdown {
+    width: 100%;
+  }
+}
+
+.checkBoxDarkMode {
+  svg {
+    fill: av-color(purewhite);
+  }
+}
+
+.menuOnDarkerSurface {
+  --content: #{hex-to-rgb-string(#002450)};
+  --surface: #{hex-to-rgb-string(#fcfcfc)};
+  --overlay: #{hex-to-rgb-string(#fcfcfc)};
+}

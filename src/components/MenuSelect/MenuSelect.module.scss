@@ -1,0 +1,163 @@
+@import '~@anyvision/style-guide';
+
+.menuContainer {
+  background: av-color(surface);
+  border: solid 1px av-color(primary);
+  border-top: none;
+  border-radius: av-radius(tidy);
+  padding: 0;
+  max-height: av-size(sz-320);
+  min-width: 250px;
+  overflow-y: auto;
+  @extend %av-scrollbar;
+
+  .selectedMenuItem {
+    background-color: av-color(primary, av-opacity(disabled));
+  }
+
+  .dropdownItem {
+    width: 100%;
+  }
+
+  .rowItemContainer {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    .rowItemValue {
+      max-width: calc(100% - av-space(micro) - av-size(sz-32));
+    }
+  }
+}
+
+.dropdownContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: av-space(base);
+
+  .resultContainer {
+    min-width: 250px;
+    height: av-size(sz-56);
+    border-radius: 4px;
+    border: solid 1px av-color(content, av-opacity(divider));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: av-space(base);
+    transition: all 0.2s linear;
+    cursor: pointer;
+    position: relative;
+
+    .multiSelectContainer {
+      position: relative;
+      top: av-space(tiny);
+    }
+
+    .resultTitle {
+      font-size: av-font-size(base);
+      width: 85%;
+      color: av-color(trueblack);
+      position: relative;
+      top: 5px;
+    }
+
+    .arrowSvg {
+      width: av-size(sz-24);
+      height: av-size(sz-24);
+      transition: transform 200ms;
+      transform: rotate(0deg);
+    }
+
+    &:hover {
+      box-shadow: inset 0 0 0 2px av-color(content, av-opacity(disabled));
+      border: solid 1px transparent;
+    }
+
+    &.active {
+      box-shadow: inset 0 0 0 2px av-color(primary);
+      border: solid 1px transparent;
+
+      .arrowSvg {
+        transition: transform 200ms;
+        transform: rotate(180deg);
+      }
+    }
+
+    &.disabled {
+      pointer-events: none;
+      cursor: default;
+
+      .resultTitle {
+        opacity: av-opacity(disabled);
+      }
+
+      .arrowSvg {
+        opacity: av-opacity(disabled);
+      }
+    }
+
+    .multiSelectTitleNoneItems {
+      color: av-color(content, av-opacity(medium));
+    }
+
+    .multiSelectWithItems {
+      display: flex;
+      gap: av-space(tiny);
+      align-items: center;
+
+      .btn {
+        width: 40px;
+        height: 20px;
+        border-radius: 15px;
+        padding: 0;
+        align-items: center;
+        display: flex;
+        font-size: av-font-size(tiny);
+        font-weight: av-font-weight(normal);
+
+        svg {
+          width: 12px;
+          height: 12px;
+        }
+      }
+
+      .multiSelectTitleWrapper {
+        color: av-color(content);
+        display: flex;
+        gap: av-space(micro);
+
+        .multiSelectValue {
+          min-width: av-size(sz-16);
+        }
+      }
+    }
+
+    .label {
+      text-transform: capitalize;
+      position: absolute;
+      top: 24%;
+      transform: translateY(-50%);
+      font-size: av-font-size(tiny);
+      color: av-color(content, av-opacity(disabled));
+      cursor: text;
+      transition: all 0.2s ease;
+    }
+
+    .labelColor {
+      color: av-color(primary);
+    }
+  }
+}
+
+.small {
+  width: 250px;
+}
+
+.medium {
+  width: 280px;
+}
+
+.large {
+  width: av-size(sz-320);
+}

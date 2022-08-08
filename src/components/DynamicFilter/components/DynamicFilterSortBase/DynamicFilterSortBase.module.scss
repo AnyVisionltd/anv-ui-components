@@ -1,0 +1,20 @@
+@import '~@anyvision/style-guide';
+
+.filterSortBaseContainer {
+  display: flex;
+  flex-direction: column;
+  gap: av-space(tiny);
+
+  .filterSortBaseItem {
+    display: flex;
+    align-items: center;
+    gap: av-space(micro);
+
+    .sortTitle {
+      @extend %av-subtitle2;
+      color: av-color(trueblack);
+      max-width: calc(100% - av-size(sz-32));
+      cursor: pointer;
+    }
+  }
+}

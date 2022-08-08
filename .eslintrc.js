@@ -10,7 +10,10 @@ module.exports = {
     'react/require-default-props': 'off',
     'react/button-has-type': 'off',
     semi: ['error', 'never'],
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'react/jsx-filename-extension': [
+      1,
+      { extensions: ['.js', '.jsx', '.tsx'] },
+    ],
     'no-unused-expressions': [2, { allowShortCircuit: true }],
     'arrow-parens': ['error', 'as-needed'],
     'react-hooks/rules-of-hooks': 'error',

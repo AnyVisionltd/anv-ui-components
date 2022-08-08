@@ -24,6 +24,7 @@ export const setNodesSelectedStatus = ({
   childrenKey,
   idKey,
   isChildrenUniqueKeysOverlap,
+  isReturnWholeNodeDataWhenOnSelect,
 }) => {
   const keys = isChildrenUniqueKeysOverlap
     ? { added: {}, removed: {} }
@@ -41,9 +42,13 @@ export const setNodesSelectedStatus = ({
         if (isSelected !== previousSelectedStatus) {
           if (isChildrenUniqueKeysOverlap) {
             currentUsedArrObj[parentKey] = currentUsedArrObj[parentKey] || []
-            currentUsedArrObj[parentKey].push(key)
+            currentUsedArrObj[parentKey].push(
+              isReturnWholeNodeDataWhenOnSelect ? node : key,
+            )
           } else {
-            currentUsedArrObj.push(key)
+            currentUsedArrObj.push(
+              isReturnWholeNodeDataWhenOnSelect ? node : key,
+            )
           }
         }
       }

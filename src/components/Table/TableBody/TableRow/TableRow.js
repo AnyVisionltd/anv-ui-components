@@ -1,6 +1,7 @@
 import React, { memo, useState } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
+import { ArrowDown } from '@anyvision/anv-icons'
 import { formatDateTime } from '../../../../services/date'
 import { events, types } from '../../../../utils/enums'
 import { getCellWidth } from '../../utlis'
@@ -10,9 +11,9 @@ import { ReactComponent as OptionsIcon } from '../../../../assets/svg/Options.sv
 import { Checkbox } from '../../../Checkbox'
 import { SkeletonLoader } from '../../../SkeletonLoader'
 import { ConfirmationDialog } from '../../ConfirmationDialog'
-import styles from './TableRow.module.scss'
 import { Tooltip } from '../../../Tooltip'
 import { generateId } from '../../../../utils'
+import styles from './TableRow.module.scss'
 
 const TableRow = ({
   row,
@@ -27,6 +28,11 @@ const TableRow = ({
   columnManagement,
   selectionEnabled,
   menuClassName,
+  isExpandableRow,
+  onExpandClick,
+  isExpandOpen,
+  renderExpandableElement,
+  expandableHeight,
 }) => {
   const [actionsAnchorElement, setActionsAnchorElement] = useState(null)
   const [isHover, setIsHover] = useState(false)
@@ -171,6 +177,24 @@ const TableRow = ({
     }
   }
 
+  const handleExpandClick = event => {
+    event.stopPropagation()
+    onExpandClick()
+  }
+
+  const renderExpandable = () => (
+    <div
+      role={'cell'}
+      className={classNames(
+        styles.expandableCell,
+        isExpandOpen && styles.expand,
+      )}
+      onClick={handleExpandClick}
+    >
+      <ArrowDown data-testid='expandable-btn' className={styles.arrowSvg} />
+    </div>
+  )
+
   const renderDataRow = () => {
     const tableRowClassNames = classNames(
       styles.tableRow,
@@ -178,45 +202,63 @@ const TableRow = ({
       { [styles.selectedRow]: isSelected },
     )
     return (
-      <div
-        role='row'
-        style={{ height: `${rowHeight}px` }}
-        className={tableRowClassNames}
-        onMouseEnter={mouseHoverHandler}
-        onMouseLeave={mouseHoverHandler}
-        onClick={() => handleRowClick(row)}
-      >
-        {renderSelection(row, isSelected)}
-        {columns.map(
-          ({
-            field,
-            columnRender,
-            columnRenderHover,
-            hide,
-            width,
-            type,
-            triggerRowClick = true,
-          }) => {
-            if (hide) {
-              return null
-            }
-            const style = getCellWidth(width)
-            return (
-              <div
-                role='cell'
-                style={style}
-                className={styles.tableCell}
-                key={field}
-                onClick={e => handleCellClick({ e, row, triggerRowClick })}
-              >
-                {renderCell(row, field, columnRender, columnRenderHover, type)}
-              </div>
-            )
-          },
+      <>
+        <div
+          role='row'
+          style={{ height: `${rowHeight}px` }}
+          className={tableRowClassNames}
+          onMouseEnter={mouseHoverHandler}
+          onMouseLeave={mouseHoverHandler}
+          onClick={() => handleRowClick(row)}
+        >
+          {isExpandableRow && renderExpandable()}
+          {renderSelection(row, isSelected)}
+          {columns.map(
+            ({
+              field,
+              columnRender,
+              columnRenderHover,
+              hide,
+              width,
+              type,
+              triggerRowClick = true,
+            }) => {
+              if (hide) {
+                return null
+              }
+              const style = getCellWidth(width)
+              return (
+                <div
+                  role='cell'
+                  style={style}
+                  className={styles.tableCell}
+                  key={field}
+                  onClick={e => handleCellClick({ e, row, triggerRowClick })}
+                >
+                  {renderCell(
+                    row,
+                    field,
+                    columnRender,
+                    columnRenderHover,
+                    type,
+                  )}
+                </div>
+              )
+            },
+          )}
+          {renderPlaceholder()}
+          {renderActions(row)}
+        </div>
+        {isExpandableRow && renderExpandableElement && isExpandOpen && (
+          <div
+            style={{ height: `${expandableHeight}px` }}
+            className={styles.expandableElementContainer}
+            data-testid='expandable-el'
+          >
+            {renderExpandableElement(row)}
+          </div>
         )}
-        {renderPlaceholder()}
-        {renderActions(row)}
-      </div>
+      </>
     )
   }
 
@@ -264,6 +306,10 @@ const TableRow = ({
 
 TableRow.defaultProps = {
   onRowClick: () => {},
+  onExpandClick: () => {},
+  isExpandOpen: false,
+  expandableHeight: 240,
+  rowHeight: 56,
 }
 
 TableRow.propTypes = {
@@ -275,6 +321,11 @@ TableRow.propTypes = {
   selectionEnabled: propTypes.bool,
   isSelectionActive: propTypes.bool,
   menuClassName: propTypes.string,
+  isExpandableRow: propTypes.bool,
+  onExpandClick: propTypes.func,
+  isExpandOpen: propTypes.bool,
+  renderExpandableElement: propTypes.func,
+  expandableHeight: propTypes.number,
 }
 
 export default memo(TableRow)

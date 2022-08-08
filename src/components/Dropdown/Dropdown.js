@@ -14,6 +14,7 @@ import keymap from '../../utils/enums/keymap'
 import { findScrollerNodeBottom } from '../../utils'
 import { InputBase, IconButton, useFormProvider } from '../../index'
 import { DropdownItem } from './DropdownItem'
+import { MenuSelect } from '../MenuSelect'
 import { EmptyDropdownMenu } from './EmptyDropdownMenu'
 import {
   useClickOutsideListener,
@@ -43,6 +44,8 @@ const Dropdown = React.forwardRef(
       message,
       error,
       view,
+      inPortal,
+      inPortalMenuSize,
       options,
       defaultValues,
       displayValue,
@@ -66,14 +69,13 @@ const Dropdown = React.forwardRef(
       autoHeight,
       onSearch,
       messageRef,
+      isUpdateOptionsOnOptionsContentChange,
     },
     ref,
   ) => {
     const { getComponentTranslation } = useComponentTranslation()
     const DropDownTranslations = getComponentTranslation('dropDown')
-
     const { isView } = useFormProvider({ view })
-
     const [isTypeMode, setIsTypeMode] = useState(false)
     const [filteredValue, setFilteredValue] = useState('')
     const [shownOptions, setShownOptions] = useState([...options])
@@ -87,6 +89,51 @@ const Dropdown = React.forwardRef(
     const selectedContainerRef = useRef(null)
     const valuesContainerRef = useRef(null)
     const [selectedValueElement, setSelectedValueElement] = useState(null)
+    const [menuSelectedItems, setMenuSelectedItems] = useState(
+      multiple
+        ? defaultValues.map(option => option.id)
+        : defaultValues.length
+        ? defaultValues[0]
+        : '',
+    )
+
+    const handleRemoveAllSelectedItems = () => {
+      setMenuSelectedItems([])
+      onChange([])
+    }
+
+    const optionCallback = option => {
+      if (multiple) {
+        const updatedValues = (menuSelectedItems.find(id => option.id === id)
+          ? menuSelectedItems.filter(id => option.id !== id)
+          : [...menuSelectedItems, option.id]
+        ).map(id => options.find(item => item.id === id))
+
+        setMenuSelectedItems(prev => {
+          if (prev.find(id => option.id === id)) {
+            return prev.filter(id => option.id !== id)
+          }
+          return [...prev, option.id]
+        })
+        onChange(updatedValues)
+      } else {
+        setMenuSelectedItems(option)
+        onChange([option])
+      }
+    }
+
+    const menuOptions = options.map(option => {
+      return {
+        key: option.id,
+        element: option[displayValue],
+        isSelected: multiple
+          ? !!menuSelectedItems.find(id => option.id === id)
+          : menuSelectedItems.id === option.id,
+        callback: () => {
+          optionCallback(option)
+        },
+      }
+    })
 
     const selectedOptionsSet = new Set([
       ...selectedOptions.map(({ [keyValue]: id }) => id),
@@ -164,6 +211,21 @@ const Dropdown = React.forwardRef(
 
     const prevProps = usePrevious({ options, defaultValues })
 
+    const handlePrevOptionsChange = useCallback(
+      prevOptions => {
+        if (isUpdateOptionsOnOptionsContentChange) {
+          if (JSON.stringify(prevOptions) !== JSON.stringify(options)) {
+            setShownOptions([...options])
+          }
+          return
+        }
+        if (prevOptions?.length !== options.length) {
+          setShownOptions([...options])
+        }
+      },
+      [isUpdateOptionsOnOptionsContentChange, options],
+    )
+
     useEffect(() => {
       if (
         JSON.stringify(prevProps?.defaultValues) !==
@@ -171,10 +233,8 @@ const Dropdown = React.forwardRef(
       ) {
         setSelectedOptions([...defaultValues])
       }
-      if (prevProps?.options?.length !== options.length) {
-        setShownOptions([...options])
-      }
-    }, [options, defaultValues, prevProps])
+      handlePrevOptionsChange(prevProps?.options)
+    }, [options, defaultValues, prevProps, handlePrevOptionsChange])
 
     useEffect(() => {
       if (
@@ -514,8 +574,37 @@ const Dropdown = React.forwardRef(
       </div>
     )
 
+    const renderInPortalMenu = () => {
+      return (
+        <MenuSelect
+          menuContainerId={keyValue}
+          preferOpenDirection={'bottom-start'}
+          items={menuOptions}
+          selectedData={
+            multiple ? menuSelectedItems : menuSelectedItems[displayValue]
+          }
+          disabled={disabled}
+          isMultiSelect={multiple}
+          removeAll={multiple && handleRemoveAllSelectedItems}
+          toggleCallback={onMenuClose}
+          size={inPortalMenuSize}
+          label={label}
+        />
+      )
+    }
+
+    const dropdownRef = useCombinedRefs(containerRef, handleMenuPlacement)
+    const showTooltip = useIsOverflowing({
+      current: selectedValueElement,
+    })
+
+    if (inPortal) {
+      return renderInPortalMenu()
+    }
+
     return (
       <div
+        data-testid={'dropdown'}
         className={classNames(
           styles.container,
           {
@@ -524,14 +613,9 @@ const Dropdown = React.forwardRef(
           },
           className,
         )}
-        ref={useCombinedRefs(containerRef, handleMenuPlacement)}
+        ref={dropdownRef}
       >
-        <Tooltip
-          content={selectedElementContent}
-          show={useIsOverflowing({
-            current: selectedValueElement,
-          })}
-        >
+        <Tooltip content={selectedElementContent} show={showTooltip}>
           {renderHeaderContainer()}
         </Tooltip>
         {showMenu && renderOptions()}
@@ -564,6 +648,8 @@ Dropdown.defaultProps = {
   onExceedMaxSelected: () => {},
   canBeEmpty: false,
   maxMenuHeight: 240,
+  inPortal: false,
+  inPortalMenuSize: 'medium',
 }
 
 Dropdown.propTypes = {
@@ -621,6 +707,14 @@ Dropdown.propTypes = {
    *  <i style="background-color:#ffc40026;">NOTE: Also from \<FormProvider> by context. </i>
    */
   view: propTypes.bool,
+  /** Render the MenuSelect as the dropdown, the only options are -> multiple select and basic select */
+  inPortal: propTypes.bool,
+  /** The size of the inPortal Menu, one of - 'small', 'medium', 'large'.*/
+  inPortalMenuSize: propTypes.string,
+  /** Check whether to update options, in case the options are changeable in their content (without list length change).
+   *  Can be removed when Dropdown will be controlled from outside as well.
+   */
+  isUpdateOptionsOnOptionsContentChange: propTypes.bool,
 }
 
 export default memo(Dropdown)

@@ -27,7 +27,9 @@ const SelectionGroup = ({
   const [selectedValue, setSelectedValue] = useState(value || defaultValue)
 
   useEffect(() => {
-    value && setSelectedValue(value)
+    if (value !== undefined) {
+      setSelectedValue(value)
+    }
   }, [value])
 
   const onSelectionChange = newValue => {

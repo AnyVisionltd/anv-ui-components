@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useState, useRef } from 'react'
+import React, {
+  useCallback,
+  useEffect,
+  useState,
+  useRef,
+  useImperativeHandle,
+} from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { MenuItem } from './MenuItem'
@@ -17,6 +23,7 @@ const Menu = React.forwardRef((props, ref) => {
     variant,
     size,
     className,
+    containerClassName,
     anchorElement,
     children,
     preferOpenDirection,
@@ -25,6 +32,7 @@ const Menu = React.forwardRef((props, ref) => {
     onClosed,
     onOpened,
     menuContainerId,
+    innerHandlerRef,
     ...otherProps
   } = props
   const [currentFocus, setCurrentFocus] = useState(false)
@@ -33,6 +41,16 @@ const Menu = React.forwardRef((props, ref) => {
   const sideToOpenFrom = useRef(null)
   const positionToOpenFrom = useRef(null)
   const inputRef = useCombinedRefs(useRef({}), ref)
+
+  useImperativeHandle(
+    innerHandlerRef,
+    () => ({
+      get isMenuOpen() {
+        return isMenuOpen
+      },
+    }),
+    [isMenuOpen],
+  )
 
   const { styles: popperStyles, attributes, update: updatePopper } = usePopper(
     anchorElement,
@@ -162,6 +180,7 @@ const Menu = React.forwardRef((props, ref) => {
   const containerClasses = classNames(
     styles.menuContainer,
     isSubMenu && styles.subMenu,
+    containerClassName,
   )
   const menuClasses = classNames(
     styles.menu,

@@ -13,13 +13,14 @@ import styles from './Table.module.scss'
 
 const Table = ({
   selfControlled,
+  isExpandableRow,
   onChange,
   children,
   className,
   ...otherProps
 }) => {
   const [state, actions] = UseTableReducer()
-  const { setSelfControlled } = actions
+  const { setSelfControlled, setIsExpandableRow } = actions
 
   const { filters, sort } = state
   const { sortBy } = sort
@@ -27,6 +28,10 @@ const Table = ({
   useEffect(() => {
     setSelfControlled(selfControlled)
   }, [selfControlled, setSelfControlled])
+
+  useEffect(() => {
+    setIsExpandableRow(isExpandableRow)
+  }, [isExpandableRow, setIsExpandableRow])
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -54,6 +59,7 @@ const Table = ({
 
 Table.defaultProps = {
   selfControlled: false,
+  isExpandableRow: false,
   onChange: () => {},
 }
 
@@ -66,6 +72,8 @@ Table.propTypes = {
   className: propTypes.string,
   /** Table components */
   children: propTypes.node,
+  /** Make each row expandable */
+  isExpandableRow: propTypes.bool,
 }
 
 Table.Body = TableBody

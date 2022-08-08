@@ -1,5 +1,6 @@
 export const actionTypes = Object.freeze({
   SET_SELF_CONTROLLED: 'SET_SELF_CONTROLLED',
+  SET_IS_EXPANDABLE_ROW: 'SET_IS_EXPANDABLE_ROW',
   DESELECT_ALL: 'DESELECT_ALL',
   SET_COLUMNS: 'SET_COLUMNS',
   SET_DATA: 'SET_DATA',
@@ -40,6 +41,12 @@ export const actions = dispatch => ({
   setSelfControlled: data => {
     dispatch({
       type: actionTypes.SET_SELF_CONTROLLED,
+      payload: data,
+    })
+  },
+  setIsExpandableRow: data => {
+    dispatch({
+      type: actionTypes.SET_IS_EXPANDABLE_ROW,
       payload: data,
     })
   },
