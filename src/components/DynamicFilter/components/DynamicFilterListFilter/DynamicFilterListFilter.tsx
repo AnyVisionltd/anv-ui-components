@@ -202,7 +202,13 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
 
   const onSelectAllFiles = () => {
     if (unControlled) {
-      setIsExcludeMode(prev => !prev)
+      setIsExcludeMode(prev => {
+        if (prev && Object.values(checkedItems).some(isSelected => isSelected)) {
+          return prev
+        }
+        return !prev
+      })
+      setCheckedItems({})
     } else {
       setCheckedItems(() =>
         (unControlled ? items : filteredItems).reduce(
