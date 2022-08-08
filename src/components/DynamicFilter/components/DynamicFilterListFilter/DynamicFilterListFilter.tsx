@@ -17,7 +17,6 @@ import FilterList from './components/FilterList/FilterList'
 import { MenuSelect } from '../../../MenuSelect'
 import styles from './DynamicFilterListFilter.module.scss'
 
-
 interface DynamicFilterListFilterProps {
   /** List items - { id, value, type? }.*/
   items: Array<ListItemInterface>
@@ -63,25 +62,21 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
   label,
   isOnDarkTheme = true,
   defaultSearchValue = '',
-  defaultFilterValue
+  defaultFilterValue,
 }): ReactElement => {
   const { actions } = useContext(DynamicFilterContext)
-  const {
-    updateElementsState,
-    setIsMenuDropdownOpen,
-  } = actions
+  const { updateElementsState, setIsMenuDropdownOpen } = actions
   const { getComponentTranslation } = useComponentTranslation()
   const translations: Record<string, string> = getComponentTranslation(
     'dynamicFilterListFilter',
   )
   const [filters, setFilters] = useState({
     ...(filterItems && {
-      selectFilter:
-        defaultFilterValue ?
-          defaultFilterValue :
-          isAllDefault ?
-            allOption :
-            filterItems[0]
+      selectFilter: defaultFilterValue
+        ? defaultFilterValue
+        : isAllDefault
+        ? allOption
+        : filterItems[0],
     }),
     search: defaultSearchValue,
   })
@@ -109,8 +104,8 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
       !unControlled
         ? !!filteredItems.length && isAllItemsSelected
         : isExcludeMode
-          ? isAllItemsNotSelected
-          : onlyCheckedItems.length === totalItems,
+        ? isAllItemsNotSelected
+        : onlyCheckedItems.length === totalItems,
     [
       filteredItems.length,
       isAllItemsNotSelected,
@@ -139,7 +134,9 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
         .includes(filters.search.toLowerCase())
       const isByType = item.type && filterItems
       const res = isByType
-        ? (filters.selectFilter?.id === allOption.id || item.type === filters.selectFilter?.id) && searchRes
+        ? (filters.selectFilter?.id === allOption.id ||
+            item.type === filters.selectFilter?.id) &&
+          searchRes
         : searchRes
       return res
     })
@@ -151,7 +148,7 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
     filters.selectFilter?.id,
     items,
     unControlled,
-    isAllDefault
+    isAllDefault,
   ])
 
   useEffect(() => {
@@ -220,28 +217,32 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
     setCheckedItems(prev => ({ ...prev, [id]: !prev[id] }))
   }
 
-  const fixedMenuItemsFilter = (isAllDefault ? [allOption, ...(filterItems || [])] : (filterItems || [])).map((option: SortItemInterface) => ({
+  const fixedMenuItemsFilter = (isAllDefault
+    ? [allOption, ...(filterItems || [])]
+    : filterItems || []
+  ).map((option: SortItemInterface) => ({
     element: option.value,
     callback: () => onFilterChange('selectFilter', option),
     isSelected: filters.selectFilter?.id === option.id,
     key: option.id,
   }))
 
-
   return (
     <div className={styles.listFilterContainer}>
       <span className={styles.title}>{translations.title}</span>
-      {filterItems && filters.selectFilter && fixedMenuItemsFilter.length > 0 && (
-        <MenuSelect
-          menuContainerId={'filter-menu-' + elementKey}
-          preferOpenDirection={'bottom-start'}
-          items={fixedMenuItemsFilter}
-          selectedData={filters.selectFilter.value}
-          toggleCallback={setIsMenuDropdownOpen}
-          label={label}
-          className={(isOnDarkTheme && styles.menuOnDarkerSurface) as string}
-        />
-      )}
+      {filterItems &&
+        filters.selectFilter &&
+        fixedMenuItemsFilter.length > 0 && (
+          <MenuSelect
+            menuContainerId={'filter-menu-' + elementKey}
+            preferOpenDirection={'bottom-start'}
+            items={fixedMenuItemsFilter}
+            selectedData={filters.selectFilter.value}
+            toggleCallback={setIsMenuDropdownOpen}
+            label={label}
+            className={(isOnDarkTheme && styles.menuOnDarkerSurface) as string}
+          />
+        )}
       <TextField
         // @ts-ignore
         className={styles.searchInput}

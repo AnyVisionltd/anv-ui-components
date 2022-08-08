@@ -35,7 +35,9 @@ const DynamicFilterSortBase: FC<DynamicFilterSortBaseProps> = ({
             />
           }
           <Tooltip overflowOnly placement='right' content={value}>
-            <span onClick={() => onChange(id)} className={styles.sortTitle}>{value}</span>
+            <span onClick={() => onChange(id)} className={styles.sortTitle}>
+              {value}
+            </span>
           </Tooltip>
         </div>
       ))}

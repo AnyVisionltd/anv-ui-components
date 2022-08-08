@@ -18,7 +18,7 @@ interface FilterListProps {
   isLoading?: boolean
   translations: Record<string, string>
   isExcludeMode: boolean
-  offset: number,
+  offset: number
   isOnDarkTheme: boolean
 }
 

@@ -50,7 +50,9 @@ describe('Test the DynamicFilterSort Component', () => {
     if (mainBtnEl) {
       UserEvents.click(mainBtnEl)
       sortItems.forEach(sortItem => {
-        const sortCheckboxItemEl = screen.getByTestId(sortItem.id) as HTMLInputElement
+        const sortCheckboxItemEl = screen.getByTestId(
+          sortItem.id,
+        ) as HTMLInputElement
         if (sortCheckboxItemEl) {
           UserEvents.click(sortCheckboxItemEl)
           expect(sortCheckboxItemEl.checked).toBe(true)
@@ -63,7 +65,9 @@ describe('Test the DynamicFilterSort Component', () => {
     const mainBtnEl = screen.queryByText(title)
     if (mainBtnEl) {
       UserEvents.click(mainBtnEl)
-      const firstSortCheckboxItemEl = screen.getByTestId(sortItems[0].id) as HTMLInputElement
+      const firstSortCheckboxItemEl = screen.getByTestId(
+        sortItems[0].id,
+      ) as HTMLInputElement
       if (firstSortCheckboxItemEl) {
         expect(firstSortCheckboxItemEl.checked).toBe(true)
       }

@@ -20,7 +20,7 @@ interface DynamicFilterDateTimeDurationProps {
   translations: Record<string, string>
   durationOptions: Array<Record<string, string>>
   setIsMenuDropdownOpen: (value: boolean) => void
-  elementKey: string,
+  elementKey: string
   isOnDarkTheme: boolean
 }
 

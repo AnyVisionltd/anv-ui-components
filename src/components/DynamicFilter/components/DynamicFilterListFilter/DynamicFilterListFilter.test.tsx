@@ -134,7 +134,9 @@ describe('Test the DynamicFilterListFilter Component', () => {
     const mainBtnEl = screen.queryByText(title)
     if (mainBtnEl) {
       UserEvents.click(mainBtnEl)
-      const searchFilterEl = screen.queryByTestId(searchFilterInputTestId) as HTMLInputElement
+      const searchFilterEl = screen.queryByTestId(
+        searchFilterInputTestId,
+      ) as HTMLInputElement
       if (searchFilterEl) {
         UserEvents.type(searchFilterEl, 'subject')
         expect(searchFilterEl.value).toBe('subject')

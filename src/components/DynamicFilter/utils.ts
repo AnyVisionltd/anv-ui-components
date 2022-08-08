@@ -65,5 +65,5 @@ export const getDefaultDurationInputValue = (
 
 export const allOption = {
   id: 'All',
-  value: 'All'
+  value: 'All',
 }

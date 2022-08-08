@@ -59,7 +59,7 @@ interface MenuSelectProps {
   /** Label to add information about  the dropdown. */
   label?: string
   /** For css customization. */
-  className?: string,
+  className?: string
 }
 
 const MenuSelect: FC<MenuSelectProps> = ({
