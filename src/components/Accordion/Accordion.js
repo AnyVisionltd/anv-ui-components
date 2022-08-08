@@ -41,14 +41,17 @@ const Accordion = ({
         const isActive = selected[idx]
         return (
           <div
+            key={idx}
             className={classNames(styles.item, {
               [styles.active]: isActive,
               [styles.disabled]: disableAll || disabled,
             })}
+            data-testid={`accordion-item-${idx}`}
           >
             <div
               className={styles.title}
               onClick={() => handleItemSelected(idx)}
+              data-testid={`accordion-item-${idx}_title`}
             >
               <span className={styles.icon}>
                 <ArrowRight />
