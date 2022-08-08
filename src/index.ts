@@ -38,6 +38,7 @@ export { ToastMessage } from './components/ToastMessage'
 export { Spinner } from './components/Spinner'
 export { StaticInfoTable } from './components/StaticInfoTable'
 export { Autocomplete } from './components/Autocomplete'
+export { Accordion } from './components/Accordion'
 
 export { useFormProvider } from './components/FormProvider/useFormProvider'
 export { useComponentTranslation } from './hooks/UseComponentTranslation'
