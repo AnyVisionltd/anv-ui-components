@@ -4,10 +4,12 @@ import Accordion from './Accordion'
 
 const mockData = [
   {
+    id: 0,
     title: 'test_title',
     content: 'test_content',
   },
   {
+    id: 1,
     title: 'test_disabled',
     content: 'test_disabled',
     disabled: true,

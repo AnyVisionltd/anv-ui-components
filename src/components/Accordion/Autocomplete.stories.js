@@ -11,17 +11,20 @@ export default {
 
 const data = [
   {
+    id: 1,
     title: 'Click Me! 😄',
     content: `Sint non amet Lorem non aliqua aliqua labore. Voluptate in reprehenderit 
   ex consectetur dolor ut sint tempor et consequat officia dolore ut nisi. Aliquip consectetur 
   reprehenderit adipisicing deserunt sunt ullamco laborum cillum dolor aute eiusmod eiusmod fugiat nulla.`,
   },
   {
+    id: 2,
     title: 'Click Me! 😂',
     content: `Sint non amet Lorem non aliqua aliqua labore. Voluptate in reprehenderit 
   ex consectetur dolor ut sint tempor et consequat officia dolore ut nisi. Aliquip consectetur`,
   },
   {
+    id: 3,
     title: 'Click Me! 🗽',
     content: `Sint non amet Lorem non aliqua aliqua labore. Voluptate in reprehenderit 
   ex consectetur dolor ut sint tempor et consequat officia dolore ut nisi. Aliquip consectetur 
@@ -32,6 +35,7 @@ const data = [
 
 const withElements = [
   {
+    id: 1,
     title: <Button>Click me</Button>,
     content: (
       <div style={{ display: 'flex' }}>
@@ -43,6 +47,7 @@ const withElements = [
 
 const withLongContent = [
   {
+    id: 1,
     title: 'Very long content',
     content: `Sint non amet Lorem non aliqua aliqua labore. Voluptate in reprehenderit 
 ex consectetur dolor ut sint tempor et consequat officia dolore ut nisi. Aliquip consectetur 
@@ -80,6 +85,7 @@ reprehenderit adipisicing deserunt sunt ullamco laborum cillum dolor aute eiusmo
 
 const withLongTitle = [
   {
+    id: 1,
     title:
       'Very long title Very long title Very long title Very long title Very long title Very long title Very long title Very long title Very long title Very long title',
     content: `Sint non amet Lorem non aliqua aliqua labore. Voluptate in reprehenderit ex consectetur dolor ut sint tempor et cons`,

@@ -5,12 +5,7 @@ import { ArrowRight } from '@anyvision/anv-icons'
 import { Tooltip } from '../Tooltip'
 import styles from './Accordion.module.scss'
 
-const Accordion = ({
-  className,
-  data = [],
-  expandAll = false,
-  disableAll = false,
-}) => {
+const Accordion = ({ className, data = [], expandAll, disableAll }) => {
   const [selected, setSelected] = useState({})
 
   useEffect(() => {
@@ -24,34 +19,30 @@ const Accordion = ({
     )
   }, [expandAll, data.length])
 
-  const handleItemSelected = idx => {
+  const handleItemSelected = id => {
     if (disableAll) {
       return
     }
-    if (selected[idx]) {
-      setSelected(prev => ({ ...prev, [idx]: false }))
-    } else {
-      setSelected(prev => ({ ...prev, [idx]: true }))
-    }
+    setSelected(prev => ({ ...prev, [id]: !prev[id] }))
   }
 
   return (
     <div className={classNames(styles.accordion, className)}>
-      {data.map(({ title, content, disabled }, idx) => {
-        const isActive = selected[idx]
+      {data.map(({ id, title, content, disabled }) => {
+        const isActive = selected[id]
         return (
           <div
-            key={idx}
+            key={id}
             className={classNames(styles.item, {
               [styles.active]: isActive,
               [styles.disabled]: disableAll || disabled,
             })}
-            data-testid={`accordion-item-${idx}`}
+            data-testid={`accordion-item-${id}`}
           >
             <div
               className={styles.title}
-              onClick={() => handleItemSelected(idx)}
-              data-testid={`accordion-item-${idx}_title`}
+              onClick={() => handleItemSelected(id)}
+              data-testid={`accordion-item-${id}_title`}
             >
               <span className={styles.icon}>
                 <ArrowRight />
