@@ -26,7 +26,7 @@ const DynamicFilter = ({ onApply, onClose, title, className, children }) => {
 
   const handleOnApplyClick = () => {
     onApply(state.elementsState)
-    handleBtnClick()
+    actions.toggleIsMenuOpen()
   }
 
   const handleCancelClick = () => {

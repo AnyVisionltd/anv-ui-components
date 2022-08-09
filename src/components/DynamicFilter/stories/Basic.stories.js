@@ -62,7 +62,7 @@ const selectionItems = [
 
 const loadDataOffset = 10
 
-const style = { width: '100%', height: '400px' }
+const style = { width: '100%', height: '400px', backgroundColor: '#02244d' }
 
 export const Basic = () => {
   const [itemsToShow, setItemsToShow] = useState(
