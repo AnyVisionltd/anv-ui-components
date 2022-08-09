@@ -12,6 +12,7 @@ interface DynamicFilterMenuProps {
   anchorElement: any
   onApply: () => void
   onCancel: () => void
+  children: React.ReactNode
 }
 
 const DynamicFilterMenu: FC<DynamicFilterMenuProps> = ({
@@ -67,18 +68,19 @@ const DynamicFilterMenu: FC<DynamicFilterMenuProps> = ({
     >
       <div className={styles.itemsContainer}>{children}</div>
       <div className={styles.actionBtnContainer}>
-        {/* // @ts-ignore */}
-        <Button
-          onClick={onCancel}
-          variant='outline'
-          className={styles.actionBtnCancel}
-          data-testid={'onCancel-btn'}
-        >
-          <div className={styles.cancelBtnsWrapper}>
-            <FilterVasa className={styles.vasaSvg} />
-            <TimesThick className={styles.xSvg} />
-          </div>
-        </Button>
+        {// @ts-ignore 
+          <Button
+            onClick={onCancel}
+            variant='outline'
+            className={styles.actionBtnCancel}
+            data-testid={'onCancel-btn'}
+          >
+            <div className={styles.cancelBtnsWrapper}>
+              <FilterVasa className={styles.vasaSvg} />
+              <TimesThick className={styles.xSvg} />
+            </div>
+          </Button>
+        }
         {
           // @ts-ignore
           <Button
