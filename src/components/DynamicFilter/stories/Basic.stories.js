@@ -115,6 +115,9 @@ export const Basic = () => {
           onChange={handleOnChange}
           totalItems={listItems.length}
           isLoading={isLoading}
+          defaultValues={[
+            { id: 'subject 4', value: 'subject 4', type: 'Face' },
+          ]}
         />
       </DynamicFilter>
     </div>
