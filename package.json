@@ -1,6 +1,6 @@
 {
   "name": "@anyvision/anv-ui-components",
-  "version": "1.0.0-beta.204",
+  "version": "1.0.0-beta.205",
   "main": "dist/index.js",
   "description": "Anyvision Components Library",
   "license": "MIT",
