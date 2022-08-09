@@ -23,7 +23,7 @@
 
   .noDataContainer {
     width: 100%;
-    height: av-size(sz-240);
+    height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -35,8 +35,6 @@
       align-items: center;
       gap: av-space(tiny);
       justify-content: center;
-      position: relative;
-      bottom: av-space(medium);
 
       .noResultSvg {
         width: av-size(sz-64);
