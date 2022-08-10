@@ -69,6 +69,7 @@ export const Basic = () => {
     listItems.slice(0, loadDataOffset),
   )
   const [isLoading, setIsLoading] = useState(false)
+  const [excludeMode, setExcludeMode] = useState(false)
   const [searchFilter, setSearchFilter] = useState('')
 
   const onApply = response => {}
@@ -92,6 +93,7 @@ export const Basic = () => {
 
   const handleOnChange = ({ search, isExcludeMode, selectFilter }) => {
     setSearchFilter(search)
+    setExcludeMode(isExcludeMode)
     setIsLoading(true)
     const filtered = getFilteredItems(listItems, search)
     setItemsToShow(filtered)
@@ -118,7 +120,8 @@ export const Basic = () => {
           defaultValues={[
             { id: 'subject 4', value: 'subject 4', type: 'Face' },
           ]}
-          selectedExcludeMode={true}
+          defaultExcludeMode={false}
+          excludeMode={excludeMode}
         />
       </DynamicFilter>
     </div>
