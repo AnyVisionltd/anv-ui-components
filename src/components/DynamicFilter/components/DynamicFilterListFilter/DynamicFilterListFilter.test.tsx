@@ -162,6 +162,7 @@ describe('Test the DynamicFilterListFilter Component', () => {
     const expectedValue = {
       search: searchValue,
       selectFilter: mockListFilterItems[0],
+      isExcludeMode: false
     }
     if (mainBtnEl) {
       UserEvents.click(mainBtnEl)

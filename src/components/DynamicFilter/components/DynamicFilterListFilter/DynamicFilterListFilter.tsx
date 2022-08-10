@@ -11,7 +11,12 @@ import { Search } from '@anyvision/anv-icons'
 import { useComponentTranslation } from '../../../../hooks/UseComponentTranslation'
 import { TextField } from '../../../TextField'
 import DynamicFilterContext from '../../store/DynamicFilterContext'
-import { allOption, ListItemInterface, SortItemInterface } from '../../utils'
+import {
+  allOption,
+  arrayToBooleanMap,
+  ListItemInterface,
+  SortItemInterface,
+} from '../../utils'
 import { Checkbox } from '../../../Checkbox'
 import FilterList from './components/FilterList/FilterList'
 import { MenuSelect } from '../../../MenuSelect'
@@ -46,6 +51,14 @@ interface DynamicFilterListFilterProps {
   defaultSearchValue?: string
   /** The default value ({ id, value }) for the filter, only when filterItems exists, and it must be one of them.*/
   defaultFilterValue?: SortItemInterface
+  /** If unControlled = true, determine the selected items.*/
+  selectedItems?: Array<ListItemInterface>
+  /** Determine the default selected items - only on init component.*/
+  defaultValues?: Array<ListItemInterface>
+  /** Determine the default isExcludeMode - only on init component.*/
+  defaultExcludeMode?: boolean
+  /** If unControlled = true, determine the isExcludeMode.*/
+  excludeMode?: boolean
 }
 
 const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
@@ -63,6 +76,10 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
   isOnDarkTheme = true,
   defaultSearchValue = '',
   defaultFilterValue,
+  defaultValues,
+  selectedItems,
+  defaultExcludeMode,
+  excludeMode,
 }): ReactElement => {
   const { actions } = useContext(DynamicFilterContext)
   const { updateElementsState, setIsMenuDropdownOpen } = actions
@@ -70,6 +87,7 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
   const translations: Record<string, string> = getComponentTranslation(
     'dynamicFilterListFilter',
   )
+
   const [filters, setFilters] = useState({
     ...(filterItems && {
       selectFilter: defaultFilterValue
@@ -83,8 +101,19 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
   const [filteredItems, setFilteredItems] = useState<Array<ListItemInterface>>(
     [],
   )
-  const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({})
-  const [isExcludeMode, setIsExcludeMode] = useState<boolean>(false)
+  const checkedItemsInit = useMemo(
+    () => arrayToBooleanMap(defaultValues || []),
+    [defaultValues],
+  )
+
+  const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>(
+    checkedItemsInit,
+  )
+  const [isExcludeMode, setIsExcludeMode] = useState<boolean>(
+    !!defaultExcludeMode,
+  )
+
+  console.log('isExcludeMode', isExcludeMode)
 
   const onlyCheckedItems = useMemo(
     () => Object.values(checkedItems).filter(isSelect => isSelect),
@@ -152,6 +181,18 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
   ])
 
   useEffect(() => {
+    if (unControlled && selectedItems) {
+      setCheckedItems(arrayToBooleanMap(selectedItems))
+    }
+  }, [unControlled, selectedItems])
+
+  useEffect(() => {
+    if (unControlled && excludeMode !== undefined) {
+      setIsExcludeMode(excludeMode)
+    }
+  }, [unControlled, excludeMode])
+
+  useEffect(() => {
     if (unControlled) {
       return
     }
@@ -189,7 +230,7 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
       [filterKey]: value,
     }
     if (unControlled && onChange) {
-      onChange(updatedFilters)
+      onChange({ ...updatedFilters, isExcludeMode })
     }
     setFilters(prev => ({
       ...prev,
@@ -199,13 +240,15 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
 
   const onSelectAllFiles = () => {
     if (unControlled) {
-      setIsExcludeMode(prev => {
-        if (prev && Object.values(checkedItems).some(isSelected => isSelected)) {
-          return prev
-        }
-        return !prev
-      })
       setCheckedItems({})
+      const isMakeChange = !!(
+        isExcludeMode &&
+        Object.values(checkedItems).some(isSelected => isSelected)
+      )
+      if (!isMakeChange) {
+        setIsExcludeMode(!isExcludeMode)
+        onChange && onChange({ ...filters, isExcludeMode: !isExcludeMode })
+      }
     } else {
       setCheckedItems(() =>
         (unControlled ? items : filteredItems).reduce(
