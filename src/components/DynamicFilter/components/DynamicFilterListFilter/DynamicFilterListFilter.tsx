@@ -50,6 +50,10 @@ interface DynamicFilterListFilterProps {
   selectedItems?: Array<ListItemInterface>
   /** Determine the default selected items - only on init component.*/
   defaultValues?: Array<ListItemInterface>
+  /** Determine the default isExcludeMode - only on init component.*/
+  defaultExcludeMode?: boolean
+  /** If unControlled = true, determine the isExcludeMode.*/
+  selectedExcludeMode?: boolean
 }
 
 const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
@@ -69,6 +73,8 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
   defaultFilterValue,
   defaultValues,
   selectedItems,
+  defaultExcludeMode,
+  selectedExcludeMode,
 }): ReactElement => {
   const { actions } = useContext(DynamicFilterContext)
   const { updateElementsState, setIsMenuDropdownOpen } = actions
@@ -101,7 +107,9 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>(
     checkedItemsInit,
   )
-  const [isExcludeMode, setIsExcludeMode] = useState<boolean>(false)
+  const [isExcludeMode, setIsExcludeMode] = useState<boolean>(
+    !!defaultExcludeMode,
+  )
 
   const onlyCheckedItems = useMemo(
     () => Object.values(checkedItems).filter(isSelect => isSelect),
@@ -183,6 +191,12 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
   }, [unControlled, selectedItems])
 
   useEffect(() => {
+    if (unControlled && selectedExcludeMode !== undefined) {
+      setIsExcludeMode(selectedExcludeMode)
+    }
+  }, [unControlled, selectedExcludeMode])
+
+  useEffect(() => {
     if (unControlled) {
       return
     }
@@ -220,7 +234,7 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
       [filterKey]: value,
     }
     if (unControlled && onChange) {
-      onChange(updatedFilters)
+      onChange({ ...updatedFilters, isExcludeMode })
     }
     setFilters(prev => ({
       ...prev,
@@ -235,8 +249,10 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
           prev &&
           Object.values(checkedItems).some(isSelected => isSelected)
         ) {
+          onChange && onChange({ ...filters, isExcludeMode: prev })
           return prev
         }
+        onChange && onChange({ ...filters, isExcludeMode: !prev })
         return !prev
       })
       setCheckedItems({})

@@ -90,7 +90,7 @@ export const Basic = () => {
     setIsLoading(false)
   }
 
-  const handleOnChange = ({ search }) => {
+  const handleOnChange = ({ search, isExcludeMode, selectFilter }) => {
     setSearchFilter(search)
     setIsLoading(true)
     const filtered = getFilteredItems(listItems, search)
@@ -118,6 +118,7 @@ export const Basic = () => {
           defaultValues={[
             { id: 'subject 4', value: 'subject 4', type: 'Face' },
           ]}
+          selectedExcludeMode={true}
         />
       </DynamicFilter>
     </div>
