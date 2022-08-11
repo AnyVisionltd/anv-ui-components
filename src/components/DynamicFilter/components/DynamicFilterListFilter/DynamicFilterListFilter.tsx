@@ -52,9 +52,9 @@ interface DynamicFilterListFilterProps {
   /** The default value ({ id, value }) for the filter, only when filterItems exists, and it must be one of them.*/
   defaultFilterValue?: SortItemInterface
   /** If unControlled = true, determine the selected items.*/
-  selectedItems?: Array<ListItemInterface>
+  selectedItems?: Array<string>
   /** Determine the default selected items - only on init component.*/
-  defaultValues?: Array<ListItemInterface>
+  defaultValues?: Array<string>
   /** Determine the default isExcludeMode - only on init component.*/
   defaultExcludeMode?: boolean
   /** If unControlled = true, determine the isExcludeMode.*/
