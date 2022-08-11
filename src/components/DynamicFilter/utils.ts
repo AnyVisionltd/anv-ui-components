@@ -68,11 +68,11 @@ export const allOption = {
   value: 'All',
 }
 
-export const arrayToBooleanMap = (transformedArray: Array<ListItemInterface>) =>
+export const arrayToBooleanMap = (transformedArray: Array<string>) =>
   transformedArray.reduce(
-    (obj: any, item: ListItemInterface) => ({
+    (obj: any, id: string) => ({
       ...obj,
-      [item.id]: true,
+      [id]: true,
     }),
     {},
   )
