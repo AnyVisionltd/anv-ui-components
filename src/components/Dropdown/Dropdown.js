@@ -144,20 +144,24 @@ const Dropdown = React.forwardRef(
       }
     })
 
-    const areAllOptionsSelected = useMemo(
-      () =>
-        addBulkSelectionButton && selfControlled
-          ? selectedOptions.items.length ===
-            options.filter(({ disabled }) => !disabled).length
-          : selectedOptions.excludeMode && !selectedOptions.items.length,
-      [
-        addBulkSelectionButton,
-        options,
-        selectedOptions.excludeMode,
-        selectedOptions.items.length,
-        selfControlled,
-      ],
-    )
+    const areAllOptionsSelected = useMemo(() => {
+      if (!addBulkSelectionButton) return
+      if (selfControlled) {
+        return (
+          selectedOptions.items.length ===
+          options.filter(({ disabled }) => !disabled).length
+        )
+      }
+      const allSelectedInExcludeMode =
+        selectedOptions.excludeMode && !selectedOptions.items.length
+      return allSelectedInExcludeMode
+    }, [
+      addBulkSelectionButton,
+      options,
+      selectedOptions.excludeMode,
+      selectedOptions.items.length,
+      selfControlled,
+    ])
 
     const selectedOptionsSet = new Set([
       ...selectedOptions.items.map(({ [keyValue]: id }) => id),
@@ -178,17 +182,28 @@ const Dropdown = React.forwardRef(
       [],
     )
 
-    const selectedElementContent = !multiple
-      ? selectedOptions.items?.[0]?.[displayValue]
-      : `${selectedOptions.items.length} ${
-          selectedOptions.items.length === 1
-            ? DropDownTranslations.itemSelected
-            : DropDownTranslations.itemsSelected
-        }`
+    const selectedElementContent = useMemo(() => {
+      if (!multiple) {
+        return selectedOptions.items?.[0]?.[displayValue]
+      }
+      const { excludeMode } = selectedOptions
+      if (excludeMode) {
+        return `${DropDownTranslations.multiple} ${DropDownTranslations.itemsSelected}`
+      }
+
+      const selectedOptionsAmount = selectedOptions.items.length
+      const selectedTranslation =
+        selectedOptionsAmount === 1
+          ? DropDownTranslations.itemSelected
+          : DropDownTranslations.itemsSelected
+      return `${selectedOptionsAmount} ${selectedTranslation}`
+    }, [DropDownTranslations, displayValue, multiple, selectedOptions])
 
     const resetToOriginalOptions = () => {
       if (selfControlled) {
-        shownOptions.length !== options.length && setShownOptions(options)
+        if (shownOptions.length !== options.length) {
+          setShownOptions(options)
+        }
       } else {
         onSearch?.('')
       }
@@ -470,7 +485,8 @@ const Dropdown = React.forwardRef(
 
     const renderValues = () => {
       if (isTypeMode && (!multiple || !isSelectedShownInHeader)) return null
-      if (!selectedOptions.items.length) {
+      const { items, excludeMode } = selectedOptions
+      if (!items.length && !excludeMode) {
         if (isTypeMode) return null
         return (
           <p className={styles.placeholder} onClick={getIntoTypeMode}>
@@ -480,7 +496,7 @@ const Dropdown = React.forwardRef(
       }
 
       if (multiple && isSelectedShownInHeader) {
-        return selectedOptions.items.map(({ [displayValue]: value }, index) => (
+        return items.map(({ [displayValue]: value }, index) => (
           <button
             className={classNames(styles.selectedItem, {
               [styles.spacingTop]: isSelectedShownInHeader && multiple,
