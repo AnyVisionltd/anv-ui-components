@@ -79,7 +79,7 @@ export const Multiple = () => {
   const handleChange = newValues => setValues(newValues)
 
   return (
-    <div style={{ ...containerStyle, marginBottom: '320px' }}>
+    <div style={containerStyle}>
       <Dropdown
         options={items}
         multiple
@@ -163,6 +163,10 @@ export const MultipleDropdownControlledFromOutside = () => {
 
   const onSearch = searchValue => {
     setTimeout(() => {
+      if (!searchValue) {
+        setOptions(subjectGroups)
+        return
+      }
       setOptions(
         subjectGroups.filter(item =>
           item.name.toLowerCase().includes(searchValue.toLowerCase()),

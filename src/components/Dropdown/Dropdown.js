@@ -27,7 +27,7 @@ import { Tooltip } from '../Tooltip'
 import { DropdownVirtualizedList } from './DropdownVirtualizedList'
 import styles from './Dropdown.module.scss'
 
-const defaultSelectedHeight = 56
+const DEFAULT_SELECTED_CONTAINER_HEIGHT = 56
 
 const getMenuPlacement = ({ menuHeight, containerElement }) => {
   if (!containerElement) return
@@ -147,11 +147,12 @@ const Dropdown = React.forwardRef(
     const areAllOptionsSelected = useMemo(
       () =>
         addBulkSelectionButton && selfControlled
-          ? selectedOptions.items.length === options.length
+          ? selectedOptions.items.length ===
+            options.filter(({ disabled }) => !disabled).length
           : selectedOptions.excludeMode && !selectedOptions.items.length,
       [
         addBulkSelectionButton,
-        options.length,
+        options,
         selectedOptions.excludeMode,
         selectedOptions.items.length,
         selfControlled,
@@ -185,8 +186,13 @@ const Dropdown = React.forwardRef(
             : DropDownTranslations.itemsSelected
         }`
 
-    const resetToOriginalOptions = () =>
-      shownOptions.length !== options.length && setShownOptions(options)
+    const resetToOriginalOptions = () => {
+      if (selfControlled) {
+        shownOptions.length !== options.length && setShownOptions(options)
+      } else {
+        onSearch?.('')
+      }
+    }
 
     const openMenu = () => {
       if (showMenu || disabled || isView) return
@@ -211,18 +217,23 @@ const Dropdown = React.forwardRef(
 
     const getOffTypeMode = () => {
       isTypeMode && setIsTypeMode(false)
-      filteredValue.length && setFilteredValue('')
+      if (filteredValue.length) {
+        setFilteredValue('')
+        onSearch?.('')
+      }
     }
 
     const resetFocusedOptionIndex = () => setFocusedOptionIndex(-1)
 
-    const resetFilteredValue = () => {
+    const resetFilteredValue = e => {
+      e.stopPropagation()
       setFilteredValue('')
       resetToOriginalOptions()
     }
 
     const isOverflown = useCallback(
-      element => element && element.scrollHeight > defaultSelectedHeight,
+      element =>
+        element && element.scrollHeight > DEFAULT_SELECTED_CONTAINER_HEIGHT,
       [],
     )
 
@@ -329,6 +340,7 @@ const Dropdown = React.forwardRef(
       setFilteredValue(value)
       if (onSearch || !selfControlled) {
         onSearch?.(value)
+        setSelectedOptions({ items: [], excludeMode: false })
         return
       }
 
@@ -344,11 +356,11 @@ const Dropdown = React.forwardRef(
     }
 
     const toggleSelectAll = () => {
-      const newSelectedOptions = { items: [], excludeMode: false }
+      const newSelectedOptions = { items: [] }
       if (selfControlled) {
-        newSelectedOptions.items = selectedOptions.items
-          .filter(({ disabled }) => !disabled)
-          .map(({ [keyValue]: key }) => key)
+        newSelectedOptions.items = !selectedOptions.items.length
+          ? options.filter(({ disabled }) => !disabled)
+          : []
       } else {
         newSelectedOptions.excludeMode =
           !areAllOptionsSelected && !selectedOptions.items.length
