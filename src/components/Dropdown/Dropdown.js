@@ -5,6 +5,7 @@ import React, {
   memo,
   useEffect,
   useCallback,
+  useMemo,
 } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
@@ -12,7 +13,7 @@ import { ArrowUp, TimesThick, TimesCircleFilled } from '@anyvision/anv-icons'
 import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
 import keymap from '../../utils/enums/keymap'
 import { findScrollerNodeBottom } from '../../utils'
-import { InputBase, IconButton, useFormProvider } from '../../index'
+import { InputBase, IconButton, useFormProvider, Checkbox } from '../../index'
 import { DropdownItem } from './DropdownItem'
 import { MenuSelect } from '../MenuSelect'
 import { EmptyDropdownMenu } from './EmptyDropdownMenu'
@@ -26,8 +27,7 @@ import { Tooltip } from '../Tooltip'
 import { DropdownVirtualizedList } from './DropdownVirtualizedList'
 import styles from './Dropdown.module.scss'
 
-const menuItemHeight = 56
-const defaultSelectedHeight = 56
+const DEFAULT_SELECTED_CONTAINER_HEIGHT = 56
 
 const getMenuPlacement = ({ menuHeight, containerElement }) => {
   if (!containerElement) return
@@ -51,6 +51,8 @@ const Dropdown = React.forwardRef(
       displayValue,
       keyValue,
       className,
+      menuClassName,
+      bulkSelectionClassName,
       onChange,
       placeholder,
       label,
@@ -64,12 +66,16 @@ const Dropdown = React.forwardRef(
       isSearchable,
       isSelectedShownInHeader,
       valueRender,
+      optionRender,
       canBeEmpty,
       maxMenuHeight,
       autoHeight,
       onSearch,
       messageRef,
       isUpdateOptionsOnOptionsContentChange,
+      addBulkSelectionButton,
+      selfControlled,
+      menuItemHeight,
     },
     ref,
   ) => {
@@ -79,7 +85,10 @@ const Dropdown = React.forwardRef(
     const [isTypeMode, setIsTypeMode] = useState(false)
     const [filteredValue, setFilteredValue] = useState('')
     const [shownOptions, setShownOptions] = useState([...options])
-    const [selectedOptions, setSelectedOptions] = useState([...defaultValues])
+    const [selectedOptions, setSelectedOptions] = useState({
+      items: [...defaultValues],
+      excludeMode: false,
+    })
     const [showMenu, setShowMenu] = useState(false)
     const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1)
     const [isMenuPositionedUpwards, setIsMenuPositionedUpwards] = useState(null)
@@ -135,8 +144,27 @@ const Dropdown = React.forwardRef(
       }
     })
 
+    const areAllOptionsSelected = useMemo(() => {
+      if (!addBulkSelectionButton) return
+      if (selfControlled) {
+        return (
+          selectedOptions.items.length ===
+          options.filter(({ disabled }) => !disabled).length
+        )
+      }
+      const allSelectedInExcludeMode =
+        selectedOptions.excludeMode && !selectedOptions.items.length
+      return allSelectedInExcludeMode
+    }, [
+      addBulkSelectionButton,
+      options,
+      selectedOptions.excludeMode,
+      selectedOptions.items.length,
+      selfControlled,
+    ])
+
     const selectedOptionsSet = new Set([
-      ...selectedOptions.map(({ [keyValue]: id }) => id),
+      ...selectedOptions.items.map(({ [keyValue]: id }) => id),
     ])
     const menuHeight = Math.min(
       shownOptions.length * menuItemHeight,
@@ -154,16 +182,32 @@ const Dropdown = React.forwardRef(
       [],
     )
 
-    const selectedElementContent = !multiple
-      ? selectedOptions?.[0]?.[displayValue]
-      : `${selectedOptions.length} ${
-          selectedOptions.length === 1
-            ? DropDownTranslations.itemSelected
-            : DropDownTranslations.itemsSelected
-        }`
+    const selectedElementContent = useMemo(() => {
+      if (!multiple) {
+        return selectedOptions.items?.[0]?.[displayValue]
+      }
+      const { excludeMode } = selectedOptions
+      if (excludeMode) {
+        return `${DropDownTranslations.multiple} ${DropDownTranslations.itemsSelected}`
+      }
 
-    const resetToOriginalOptions = () =>
-      shownOptions.length !== options.length && setShownOptions(options)
+      const selectedOptionsAmount = selectedOptions.items.length
+      const selectedTranslation =
+        selectedOptionsAmount === 1
+          ? DropDownTranslations.itemSelected
+          : DropDownTranslations.itemsSelected
+      return `${selectedOptionsAmount} ${selectedTranslation}`
+    }, [DropDownTranslations, displayValue, multiple, selectedOptions])
+
+    const resetToOriginalOptions = () => {
+      if (selfControlled) {
+        if (shownOptions.length !== options.length) {
+          setShownOptions(options)
+        }
+      } else {
+        onSearch?.('')
+      }
+    }
 
     const openMenu = () => {
       if (showMenu || disabled || isView) return
@@ -188,18 +232,23 @@ const Dropdown = React.forwardRef(
 
     const getOffTypeMode = () => {
       isTypeMode && setIsTypeMode(false)
-      filteredValue.length && setFilteredValue('')
+      if (filteredValue.length) {
+        setFilteredValue('')
+        onSearch?.('')
+      }
     }
 
     const resetFocusedOptionIndex = () => setFocusedOptionIndex(-1)
 
-    const resetFilteredValue = () => {
+    const resetFilteredValue = e => {
+      e.stopPropagation()
       setFilteredValue('')
       resetToOriginalOptions()
     }
 
     const isOverflown = useCallback(
-      element => element && element.scrollHeight > defaultSelectedHeight,
+      element =>
+        element && element.scrollHeight > DEFAULT_SELECTED_CONTAINER_HEIGHT,
       [],
     )
 
@@ -213,6 +262,13 @@ const Dropdown = React.forwardRef(
 
     const handlePrevOptionsChange = useCallback(
       prevOptions => {
+        if (!selfControlled) {
+          if (prevOptions !== options) {
+            setShownOptions([...options])
+          }
+          return
+        }
+
         if (isUpdateOptionsOnOptionsContentChange) {
           if (JSON.stringify(prevOptions) !== JSON.stringify(options)) {
             setShownOptions([...options])
@@ -223,7 +279,7 @@ const Dropdown = React.forwardRef(
           setShownOptions([...options])
         }
       },
-      [isUpdateOptionsOnOptionsContentChange, options],
+      [isUpdateOptionsOnOptionsContentChange, options, selfControlled],
     )
 
     useEffect(() => {
@@ -231,7 +287,7 @@ const Dropdown = React.forwardRef(
         JSON.stringify(prevProps?.defaultValues) !==
         JSON.stringify(defaultValues)
       ) {
-        setSelectedOptions([...defaultValues])
+        setSelectedOptions(prev => ({ ...prev, items: [...defaultValues] }))
       }
       handlePrevOptionsChange(prevProps?.options)
     }, [options, defaultValues, prevProps, handlePrevOptionsChange])
@@ -243,7 +299,10 @@ const Dropdown = React.forwardRef(
         !selectedContainerRef.current
       )
         return
-      if (selectedOptions.length && isOverflown(selectedContainerRef.current)) {
+      if (
+        selectedOptions.items.length &&
+        isOverflown(selectedContainerRef.current)
+      ) {
         selectedContainerRef.current.style.height = 'auto'
         selectedContainerRef.current.style.paddingBottom = '8px'
       } else {
@@ -267,7 +326,13 @@ const Dropdown = React.forwardRef(
           )
         }
       },
-      [isMenuPositionedUpwards, options, prevProps, maxMenuHeight],
+      [
+        isMenuPositionedUpwards,
+        options,
+        prevProps,
+        maxMenuHeight,
+        menuItemHeight,
+      ],
     )
 
     const focusOption = direction => {
@@ -288,8 +353,9 @@ const Dropdown = React.forwardRef(
     const handleFilterChange = e => {
       const value = e.target.value
       setFilteredValue(value)
-      if (onSearch) {
-        onSearch(value)
+      if (onSearch || !selfControlled) {
+        onSearch?.(value)
+        setSelectedOptions({ items: [], excludeMode: false })
         return
       }
 
@@ -304,23 +370,35 @@ const Dropdown = React.forwardRef(
       setShownOptions(filteredOptions)
     }
 
+    const toggleSelectAll = () => {
+      const newSelectedOptions = { items: [] }
+      if (selfControlled) {
+        newSelectedOptions.items = !selectedOptions.items.length
+          ? options.filter(({ disabled }) => !disabled)
+          : []
+      } else {
+        newSelectedOptions.excludeMode =
+          !areAllOptionsSelected && !selectedOptions.items.length
+      }
+      setSelectedOptions(newSelectedOptions)
+      onChange(selfControlled ? newSelectedOptions.items : newSelectedOptions)
+    }
+
     const handleItemClick = clickedOption => {
       if (!clickedOption || clickedOption.disabled) return
-      if (maxSelected && maxSelected === selectedOptions.length) {
+      if (maxSelected && maxSelected === selectedOptions.items.length) {
         return onExceedMaxSelected()
       }
       const { [keyValue]: key } = clickedOption
-      const isFoundInDropdown = selectedOptions.find(
-        option => option[keyValue] === key,
-      )
+      const isFoundInDropdown = selectedOptionsSet.has(key)
       let newOptions
       if (multiple) {
         if (isFoundInDropdown) {
-          newOptions = selectedOptions.filter(
+          newOptions = selectedOptions.items.filter(
             option => option[keyValue] !== key,
           )
         } else {
-          newOptions = [...selectedOptions, clickedOption]
+          newOptions = [...selectedOptions.items, clickedOption]
         }
         resetToOriginalOptions()
       } else {
@@ -338,26 +416,35 @@ const Dropdown = React.forwardRef(
         resetFocusedOptionIndex()
       }
 
-      setSelectedOptions(newOptions)
-      onChange(newOptions)
+      setSelectedOptions(prev => ({ ...prev, items: newOptions }))
+      onChange(
+        selfControlled ? newOptions : { ...selectedOptions, items: newOptions },
+      )
     }
 
     const handleRemoveOption = optionIndex => {
-      const newOptions = [...selectedOptions]
+      const newOptions = [...selectedOptions.items]
       newOptions.splice(optionIndex, 1)
-      setSelectedOptions([...newOptions])
-      onChange(newOptions)
+      setSelectedOptions(prev => ({ ...prev, items: newOptions }))
+      onChange(
+        selfControlled ? newOptions : { ...selectedOptions, items: newOptions },
+      )
     }
 
     const popLastValue = () => {
-      const newOptions = selectedOptions.slice(0, selectedOptions.length - 1)
-      setSelectedOptions(newOptions)
-      onChange(newOptions)
+      const newOptions = selectedOptions.items.slice(
+        0,
+        selectedOptions.items.length - 1,
+      )
+      setSelectedOptions(prev => ({ ...prev, items: newOptions }))
+      onChange(
+        selfControlled ? newOptions : { ...selectedOptions, items: newOptions },
+      )
     }
 
     const emptySelectedOptions = () => {
-      setSelectedOptions([])
-      onChange([])
+      setSelectedOptions(prev => ({ ...prev, items: [] }))
+      onChange(selfControlled ? [] : { ...selectedOptions, items: [] })
     }
 
     const selectOption = optionIndex =>
@@ -377,7 +464,11 @@ const Dropdown = React.forwardRef(
           break
         case keymap.BACKSPACE:
           if (filteredValue) return
-          if (multiple && isSelectedShownInHeader && selectedOptions.length) {
+          if (
+            multiple &&
+            isSelectedShownInHeader &&
+            selectedOptions.items.length
+          ) {
             popLastValue()
           }
           break
@@ -394,7 +485,8 @@ const Dropdown = React.forwardRef(
 
     const renderValues = () => {
       if (isTypeMode && (!multiple || !isSelectedShownInHeader)) return null
-      if (!selectedOptions.length) {
+      const { items, excludeMode } = selectedOptions
+      if (!items.length && !excludeMode) {
         if (isTypeMode) return null
         return (
           <p className={styles.placeholder} onClick={getIntoTypeMode}>
@@ -404,7 +496,7 @@ const Dropdown = React.forwardRef(
       }
 
       if (multiple && isSelectedShownInHeader) {
-        return selectedOptions.map(({ [displayValue]: value }, index) => (
+        return items.map(({ [displayValue]: value }, index) => (
           <button
             className={classNames(styles.selectedItem, {
               [styles.spacingTop]: isSelectedShownInHeader && multiple,
@@ -438,7 +530,7 @@ const Dropdown = React.forwardRef(
         })}
         onClick={emptySelectedOptions}
       >
-        {selectedOptions.length}
+        {selectedOptions.items.length}
         <span>
           <TimesThick />
         </span>
@@ -473,18 +565,18 @@ const Dropdown = React.forwardRef(
 
     const determineInputPlaceholder = () => {
       if (!multiple) {
-        return selectedOptions.length
-          ? selectedOptions[0][displayValue]
+        return selectedOptions.items.length
+          ? selectedOptions.items[0][displayValue]
           : placeholder
       }
       if (!isSelectedShownInHeader) return placeholder
-      return selectedOptions.length ? undefined : placeholder
+      return selectedOptions.items.length ? undefined : placeholder
     }
 
     const determineInputWidth = () => {
       const containerWidth = valuesContainerRef.current.offsetWidth
       if (!multiple) return `${containerWidth}px`
-      return selectedOptions.length === 0 ? `${containerWidth}px` : ''
+      return selectedOptions.items.length === 0 ? `${containerWidth}px` : ''
     }
 
     const handleInputKeyPress = () =>
@@ -509,7 +601,7 @@ const Dropdown = React.forwardRef(
           className={styles.selectedContentContainer}
           onClick={getIntoTypeMode}
         >
-          {selectedOptions.length > 0 && multiple && renderDeleteButton()}
+          {selectedOptions.items.length > 0 && multiple && renderDeleteButton()}
           <div className={styles.valuesContainer} ref={valuesContainerRef}>
             {renderValues()}
             {isTypeMode && (
@@ -535,6 +627,35 @@ const Dropdown = React.forwardRef(
       </div>
     )
 
+    const renderBulkSelectionButton = () => (
+      <div
+        className={classNames(
+          styles.bulkSelectContainer,
+          bulkSelectionClassName,
+        )}
+      >
+        <Checkbox
+          checked={areAllOptionsSelected}
+          onChange={toggleSelectAll}
+          className={styles.checkbox}
+          id='bulk-select-dropdown'
+        />
+        <label
+          htmlFor='bulk-select-dropdown'
+          className={styles.bulkSelectLabel}
+        >
+          {DropDownTranslations.selectAllNone}
+        </label>
+      </div>
+    )
+
+    const handleIsOptionSelected = optionKey => {
+      if (selectedOptions.excludeMode) {
+        return !selectedOptionsSet.has(optionKey)
+      }
+      return selectedOptionsSet.has(optionKey)
+    }
+
     const renderOption = (option, index) => (
       <DropdownItem
         option={option}
@@ -542,17 +663,22 @@ const Dropdown = React.forwardRef(
         multiple={multiple}
         key={option[keyValue]}
         onClick={() => handleItemClick(option)}
-        isSelected={selectedOptionsSet.has(option[keyValue])}
+        isSelected={handleIsOptionSelected(option[keyValue])}
         isFocusedByKeyboard={isTypeMode && index === focusedOptionIndex}
         valueRender={valueRender}
+        optionRender={optionRender}
       />
     )
 
     const renderOptions = () => (
       <div
-        className={classNames(styles.menuContainer, {
-          [styles.isPositionedUpwards]: isMenuPositionedUpwards,
-        })}
+        className={classNames(
+          styles.menuContainer,
+          {
+            [styles.isPositionedUpwards]: isMenuPositionedUpwards,
+          },
+          menuClassName,
+        )}
         ref={menuRef}
       >
         {!shownOptions.length ? (
@@ -563,13 +689,16 @@ const Dropdown = React.forwardRef(
             searchValue={filteredValue}
           />
         ) : (
-          <DropdownVirtualizedList
-            menuHeight={menuHeight}
-            options={shownOptions}
-            rowHeight={menuItemHeight}
-            renderRow={renderOption}
-            focusedOptionIndex={focusedOptionIndex}
-          />
+          <>
+            {addBulkSelectionButton && renderBulkSelectionButton()}
+            <DropdownVirtualizedList
+              menuHeight={menuHeight}
+              options={shownOptions}
+              rowHeight={menuItemHeight}
+              renderRow={renderOption}
+              focusedOptionIndex={focusedOptionIndex}
+            />
+          </>
         )}
       </div>
     )
@@ -604,7 +733,6 @@ const Dropdown = React.forwardRef(
 
     return (
       <div
-        data-testid={'dropdown'}
         className={classNames(
           styles.container,
           {
@@ -650,6 +778,8 @@ Dropdown.defaultProps = {
   maxMenuHeight: 240,
   inPortal: false,
   inPortalMenuSize: 'medium',
+  selfControlled: true,
+  menuItemHeight: 56,
 }
 
 Dropdown.propTypes = {
@@ -681,6 +811,10 @@ Dropdown.propTypes = {
   isSearchable: propTypes.bool,
   /** For css customization. */
   className: propTypes.string,
+  /** For css customization. */
+  menuClassName: propTypes.string,
+  /** For css customization. */
+  bulkSelectionClassName: propTypes.string,
   /** Placeholder to show when no value is selected. */
   placeholder: propTypes.string,
   /** Label to add information about  the dropdown. */
@@ -695,6 +829,8 @@ Dropdown.propTypes = {
   onMenuClose: propTypes.func,
   /** Custom value renderer function. */
   valueRender: propTypes.func,
+  /** Custom option renderer function. Function returns render selection checkbox as well. */
+  optionRender: propTypes.func,
   /** Text / component to display when there are no options. */
   noOptionsMessage: propTypes.oneOfType([propTypes.string, propTypes.func]),
   /** Helper test to describe error or some information. */
@@ -715,6 +851,12 @@ Dropdown.propTypes = {
    *  Can be removed when Dropdown will be controlled from outside as well.
    */
   isUpdateOptionsOnOptionsContentChange: propTypes.bool,
+  /** If true, search is controlled by the dropdown component. Default is true.*/
+  selfControlled: propTypes.bool,
+  /** If true, select all/none button will be added to the top of the dropdown options menu. Relevant only to multiple selection dropdown.*/
+  addBulkSelectionButton: propTypes.bool,
+  /** Height of a dropdown menu item. */
+  menuItemHeight: propTypes.number,
 }
 
 export default memo(Dropdown)

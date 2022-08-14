@@ -29,6 +29,8 @@ let sharedState = {
     selectOption: 'Select Option',
     label: 'Label',
     noResultsFound: 'No results found',
+    selectAllNone: 'Select All/None',
+    multiple: 'Multiple',
   },
   resultsIndicator: {
     completed: 'Completed',
