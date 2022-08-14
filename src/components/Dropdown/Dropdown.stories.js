@@ -3,6 +3,7 @@ import { centerDecorator } from '../../utils/storybook/decorators'
 import { Chip } from '../Chip'
 import Dropdown from './Dropdown'
 import styles from '../../storybook/index.module.scss'
+import dropdownStyles from '../../storybook/dropdown.module.scss'
 
 export default {
   title: 'Content/Dropdown',
@@ -78,7 +79,7 @@ export const Multiple = () => {
   const handleChange = newValues => setValues(newValues)
 
   return (
-    <div style={containerStyle}>
+    <div style={{ ...containerStyle, marginBottom: '320px' }}>
       <Dropdown
         options={items}
         multiple
@@ -139,11 +140,72 @@ export const Disabled = () => (
   </div>
 )
 
-export const error = () => (
+export const Error = () => (
   <div style={containerStyle}>
     <Dropdown options={genders} label='Gender' message='Some error' error />
   </div>
 )
+
+const subjectGroups = [
+  { name: 'Default Group', id: '1', subjectsCount: 100 },
+  { name: 'Office', id: '2', subjectsCount: 19 },
+  { name: 'Network', id: '3', subjectsCount: 100 },
+  { name: 'Kitchen', id: '4', subjectsCount: 19 },
+  { name: 'Store', id: '5', subjectsCount: 100 },
+  { name: 'Gym', id: '6', subjectsCount: 19 },
+]
+
+export const MultipleDropdownControlledFromOutside = () => {
+  const [options, setOptions] = useState(subjectGroups)
+
+  const [, setValues] = useState({ excludeMode: false, items: [] })
+  const onSelect = newValues => setValues(newValues)
+
+  const onSearch = searchValue => {
+    setTimeout(() => {
+      setOptions(
+        subjectGroups.filter(item =>
+          item.name.toLowerCase().includes(searchValue.toLowerCase()),
+        ),
+      )
+    }, 200)
+  }
+
+  const optionRender = (option, { renderCheckbox }) => {
+    const { name, subjectsCount } = option
+    return (
+      <div className={dropdownStyles.optionRenderExample}>
+        <div className={dropdownStyles.checkbox}>{renderCheckbox()}</div>
+        <div className={dropdownStyles.content}>
+          <p className={dropdownStyles.title}>{name}</p>
+          <p className={dropdownStyles.body}>{subjectsCount} Subjects</p>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div style={{ ...containerStyle, width: '450px', marginBottom: '300px' }}>
+      <Dropdown
+        className={styles.fullWidth}
+        options={options}
+        multiple
+        label='Fruits'
+        onChange={onSelect}
+        isSelectedShownInHeader={false}
+        displayValue='name'
+        keyValue='id'
+        addBulkSelectionButton
+        selfControlled={false}
+        onSearch={onSearch}
+        optionRender={optionRender}
+        menuItemHeight={64}
+        menuClassName={dropdownStyles.menu}
+        bulkSelectionClassName={dropdownStyles.bulkSelect}
+      />
+    </div>
+  )
+}
 
 export const InPortalMultipleDropdown = () => {
   const [, setValues] = useState([])
