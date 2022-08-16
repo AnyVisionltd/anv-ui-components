@@ -1,8 +1,15 @@
+## 08-8-2022
+
+### Added
+
+- Accordion
+
 ## 24-3-2022
 
 ### Added
 
 - Autocomplete
+
 ## Unreleased
 
 ### Breaking Changes :boom:
@@ -86,7 +93,6 @@
 - New Text Field.
 - New Wizard Dialog.
 - Added default behavior that doesn't require isOpen in Menu
-
 
 <!--
 Sections:

@@ -3,6 +3,7 @@ import { actionTypes, actions } from './actions'
 
 const initialState = {
   selfControlled: false,
+  isExpandableRow: false,
   columns: [],
   data: [],
   totalItems: 0,
@@ -84,6 +85,8 @@ const reducer = (state, action) => {
       return { ...state, totalItems: action.payload }
     case actionTypes.SET_SELF_CONTROLLED:
       return { ...state, selfControlled: action.payload }
+    case actionTypes.SET_IS_EXPANDABLE_ROW:
+      return { ...state, isExpandableRow: action.payload }
     case actionTypes.SET_WITH_ROW_ACTIONS:
       return { ...state, withRowActions: action.payload }
     case actionTypes.SET_SELECTION_ACTIVITY:

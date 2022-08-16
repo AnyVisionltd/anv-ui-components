@@ -29,6 +29,8 @@ let sharedState = {
     selectOption: 'Select Option',
     label: 'Label',
     noResultsFound: 'No results found',
+    selectAllNone: 'Select All/None',
+    multiple: 'Multiple',
   },
   resultsIndicator: {
     completed: 'Completed',
@@ -73,6 +75,31 @@ let sharedState = {
     selectOption: 'select option',
     label: 'label',
     noResultsFound: 'No Results',
+  },
+  dynamicFilterDateTime: {
+    fromDatePickerLabel: 'From Date & Time',
+    toDatePickerLabel: 'To Date & Time',
+    DateTimeSubLabel: 'Specific Time',
+    DateTimeDurationSubLabel: 'During the Last',
+    DateTimeDurationDropdownLabel: 'Duration',
+    days: 'Days',
+    hours: 'Hours',
+    minutes: 'Minutes',
+  },
+  dynamicFilterListFilter: {
+    title: 'Filter',
+    searchPlaceholder: 'Search',
+    selectAll: 'Select All/None',
+    loading: 'Loading...',
+    noResults: 'No Results',
+  },
+  dynamicFilterMenu: {
+    applyBtn: 'Apply',
+  },
+  selectMenu: {
+    itemsSelected: 'Items Selected',
+    selectOption: 'Select Option',
+    defaultLabel: 'Label',
   },
 }
 

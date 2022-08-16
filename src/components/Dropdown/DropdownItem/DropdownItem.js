@@ -13,6 +13,7 @@ const DropdownItem = ({
   multiple,
   isSelected,
   valueRender,
+  optionRender,
 }) => {
   const labelRef = useRef(null)
   const classes = classNames(styles.menuItem, {
@@ -21,16 +22,28 @@ const DropdownItem = ({
     [styles.isDisabled]: !!option.disabled,
   })
 
+  const showOptionTooltip = useIsOverflowing(labelRef)
+
+  const renderCheckbox = () => (
+    <Checkbox
+      checked={isSelected}
+      onClick={onClick}
+      className={styles.checkbox}
+    />
+  )
+
+  if (optionRender) {
+    return optionRender(option, {
+      renderCheckbox: multiple ? renderCheckbox : undefined,
+      isSelected,
+      isFocusedByKeyboard,
+    })
+  }
+
   return (
-    <Tooltip content={option[displayValue]} show={useIsOverflowing(labelRef)}>
+    <Tooltip content={option[displayValue]} show={showOptionTooltip}>
       <li className={classes} onClick={onClick}>
-        {multiple && (
-          <Checkbox
-            checked={isSelected}
-            onClick={onClick}
-            className={styles.checkbox}
-          />
-        )}
+        {multiple && renderCheckbox()}
         <div ref={labelRef} className={styles.content}>
           {valueRender
             ? valueRender(option[displayValue], option)
@@ -56,6 +69,8 @@ DropdownItem.propTypes = {
   isSelected: propTypes.bool,
   /** Custom value renderer function. */
   valueRender: propTypes.func,
+  /** Custom option renderer function. Function returns render selection checkbox as well. */
+  optionRender: propTypes.func,
   /** Menu element. */
   menuRef: propTypes.shape({ current: propTypes.instanceOf(Element) }),
 }

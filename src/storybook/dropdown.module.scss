@@ -1,0 +1,50 @@
+@import '~@anyvision/style-guide';
+
+.menu {
+  padding: 0 av-space() av-space();
+}
+
+.bulkSelect {
+  gap: av-space(tiny);
+}
+
+.optionRenderExample {
+  width: 100%;
+  height: av-size(sz-56);
+  min-height: av-size(sz-56);
+  display: flex;
+  align-items: center;
+  background-color: av-color(content, av-opacity(ghost));
+  box-sizing: border-box;
+  padding: av-space(tiny) av-space();
+  border-radius: av-radius(tidy);
+  margin-bottom: av-size(sz-8);
+
+  > * {
+    box-sizing: border-box;
+  }
+
+  .checkbox {
+    align-self: flex-start;
+    margin-right: av-space(tiny);
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    color: av-color(content);
+    text-align: left;
+
+    .title {
+      @extend %av-subtitle2;
+      margin: 0 0 av-space(micro);
+      padding: 0;
+    }
+
+    .body {
+      @extend %av-body2;
+      padding: 0;
+      margin: 0;
+    }
+  }
+}

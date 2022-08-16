@@ -1,0 +1,40 @@
+@import '~@anyvision/style-guide';
+@import '../../styles/mixin/ripple.scss';
+
+.arrowSvg {
+  height: av-size(sz-16);
+  width: av-size(sz-16);
+  transition: all 0.05s linear;
+  fill: av-color(purewhite);
+}
+
+.dynamicFilterBtn {
+  padding: 0 av-space(tiny);
+  color: av-color(purewhite, av-opacity(medium));
+  width: fit-content;
+  height: av-size(sz-48);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: av-space(tiny);
+
+  .arrowSvg {
+    height: av-size(sz-16);
+    width: av-size(sz-16);
+    transition: all 0.05s linear;
+    fill: av-color(purewhite, av-opacity(medium));
+  }
+
+  &:hover {
+    background-color: av-color(purewhite, av-opacity(ghost));
+  }
+
+  &.btnSelected {
+    background-color: av-color(primary);
+    color: av-color(purewhite);
+
+    .arrowSvg {
+      fill: av-color(purewhite);
+    }
+  }
+}

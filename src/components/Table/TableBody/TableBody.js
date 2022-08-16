@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { useComponentTranslation } from '../../../hooks/UseComponentTranslation'
@@ -20,10 +20,13 @@ const TableBody = ({
   className,
   menuClassName,
   onTableDataChanged,
+  expandableHeight,
+  renderExpandableElement,
   ...otherProps
 }) => {
   const listRef = useRef()
   const containerRef = useRef()
+  const [expandableRowMap, setExpandableRowMap] = useState({})
 
   const { getComponentTranslation } = useComponentTranslation()
   const TableTranslations = getComponentTranslation('table')
@@ -42,6 +45,7 @@ const TableBody = ({
     selfControlled,
     filters,
     sort,
+    isExpandableRow,
   } = state
 
   const tableData = useTableData()
@@ -63,7 +67,11 @@ const TableBody = ({
     setWithRowActions(!!rowActions)
   }, [setWithRowActions, rowActions])
 
-  const renderRow = (row, index) => {
+  const handleExpandClick = idx => {
+    setExpandableRowMap(prev => ({ ...prev, [idx]: !prev[idx] }))
+  }
+
+  const renderRow = (row, idx) => {
     return (
       <TableRow
         isSelectionActive={!!selection.isActive}
@@ -77,6 +85,11 @@ const TableBody = ({
         rowHeight={rowHeight}
         onRowClick={onRowClick}
         menuClassName={menuClassName}
+        isExpandableRow={isExpandableRow}
+        onExpandClick={() => handleExpandClick(idx)}
+        isExpandOpen={!!expandableRowMap[idx]}
+        renderExpandableElement={renderExpandableElement}
+        expandableHeight={expandableHeight}
       />
     )
   }
@@ -138,6 +151,9 @@ const TableBody = ({
           isLoading={isLoading}
           loadMoreItems={loadMoreData}
           ref={listRef}
+          expandableRowMap={expandableRowMap}
+          expandableHeight={expandableHeight}
+          isExpandable={isExpandableRow}
         />
       ) : isLoading && selfControlled ? (
         loadingRender()
@@ -150,6 +166,7 @@ const TableBody = ({
 
 TableBody.defaultProps = {
   rowHeight: 56,
+  expandableHeight: 240,
   onTableDataChanged: () => {},
 }
 
@@ -196,6 +213,10 @@ TableBody.propTypes = {
   menuClassName: propTypes.string,
   /** Callback fire when table data changes (filters changed, sort, etc.) */
   onTableDataChanged: propTypes.func,
+  /**expandable element height . */
+  expandableHeight: propTypes.number,
+  /** The element for the expend section */
+  renderExpandableElement: propTypes.func,
 }
 
 export default TableBody

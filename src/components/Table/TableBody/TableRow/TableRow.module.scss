@@ -33,6 +33,27 @@
     padding-left: av-space(tiny);
   }
 
+  .expandableCell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: av-size(sz-48);
+
+    .arrowSvg {
+      width: av-size(sz-24);
+      height: av-size(sz-24);
+      transition: transform 200ms;
+      transform: rotate(0deg);
+    }
+
+    &.expand {
+      .arrowSvg {
+        transition: transform 200ms;
+        transform: rotate(-180deg);
+      }
+    }
+  }
+
   .actionsCell {
     display: flex;
     align-items: center;
@@ -54,6 +75,11 @@
   .lineSkeleton {
     width: 70%;
   }
+}
+
+.expandableElementContainer {
+  overflow-y: auto;
+  @extend %av-scrollbar;
 }
 
 .clickable {

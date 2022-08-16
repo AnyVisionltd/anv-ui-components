@@ -1,0 +1,57 @@
+@import '~@anyvision/style-guide';
+
+$animation: 0.2s ease-in-out 0.1s;
+.accordion {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: av-space(tiny);
+  .item {
+    color: av-color(content);
+
+    &.disabled {
+      pointer-events: none;
+      opacity: av-opacity(disabled);
+    }
+
+    .title {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: av-space(tiny);
+      transition: $animation;
+      cursor: pointer;
+    }
+    .content {
+      max-height: 0;
+      transition: $animation;
+      overflow: hidden;
+      @extend %av-scrollbar;
+    }
+    .icon {
+      transition: $animation;
+      display: flex;
+      align-items: center;
+      font-size: av-font-size(large);
+      fill: av-color(content);
+    }
+    &.active {
+      .content {
+        padding-top: av-space(tiny);
+        height: auto;
+        max-height: av-size(sz-320);
+        overflow-y: auto;
+        animation: hide-scroll 0.4s backwards;
+        @keyframes hide-scroll {
+          from,
+          to {
+            overflow: hidden;
+          }
+        }
+      }
+      .icon {
+        transform: rotate(90deg);
+      }
+    }
+  }
+}

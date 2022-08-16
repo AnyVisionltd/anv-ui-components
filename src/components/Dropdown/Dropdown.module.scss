@@ -250,6 +250,27 @@ $default-selected-height: av-size(sz-56);
     }
   }
 
+  .checkbox {
+    min-width: av-size(sz-32);
+  }
+
+  .bulkSelectContainer {
+    display: flex;
+    align-items: center;
+    padding: av-space(micro) av-space() 0;
+
+    .bulkSelectCheckbox {
+      span {
+        border: solid 2px av-color(purewhite, av-opacity(disabled));
+      }
+    }
+
+    .bulkSelectLabel {
+      @extend %av-body2;
+      color: av-color(content);
+    }
+  }
+
   .menuContainer {
     position: absolute;
     left: 0;
