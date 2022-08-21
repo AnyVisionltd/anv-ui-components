@@ -460,9 +460,8 @@ export const UniqueKeyOverlap = () => {
   )
 }
 
-export const ControlledFromOutside = () => {
-  const [nodes, setNodes] = useState(treeNodes)
-  const [selectedKeys, setSelectedkeys] = useState(['11', '12', '221'])
+export const BasicTreeControlledFromOutside = () => {
+  const [nodes, setNodes] = useState([...createTestRootNodes(5)])
 
   // Used for the sake of the example
   const shiftFirstNodeToEnd = () => {
@@ -471,24 +470,55 @@ export const ControlledFromOutside = () => {
     return [...newNodes, firstNode]
   }
 
-  const onSelect = newSelectedKeys => setSelectedkeys(newSelectedKeys)
+  // const onSelect = newSelectedKeys => setSelectedkeys(newSelectedKeys)
 
   const onSearch = searchValue => {
     setNodes(shiftFirstNodeToEnd())
-    setSelectedkeys([])
+    // setSelectedkeys([])
   }
 
   return (
     <Tree
       selfControlled={false}
       nodes={nodes}
-      onSelect={onSelect}
+      // onSelect={onSelect}
       maxNestingLevel={3}
       onSearch={onSearch}
-      selectedKeys={selectedKeys}
+      // selectedKeys={selectedKeys}
       className={styles.tree}
       nodesContainerClassName={styles.nodesContainer}
       isReturnSelectedKeysWhenOnSelect
+      totalRootNodes={nodes.length}
+    />
+  )
+}
+
+export const NestedTreeControlledFromOutside = () => {
+  const [nodes, setNodes] = useState(treeNodes)
+
+  // Used for the sake of the example
+  const shiftFirstNodeToEnd = () => {
+    const firstNode = nodes[0]
+    const newNodes = [...nodes].slice(1)
+    return [...newNodes, firstNode]
+  }
+
+  const onSearch = searchValue => {
+    setNodes(shiftFirstNodeToEnd())
+  }
+
+  return (
+    <Tree
+      selfControlled={false}
+      nodes={nodes}
+      // onSelect={onSelect}
+      maxNestingLevel={3}
+      onSearch={onSearch}
+      // selectedKeys={selectedKeys}
+      className={styles.tree}
+      nodesContainerClassName={styles.nodesContainer}
+      isReturnSelectedKeysWhenOnSelect
+      totalRootNodes={nodes.length}
     />
   )
 }
