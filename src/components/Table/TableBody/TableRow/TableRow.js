@@ -33,6 +33,7 @@ const TableRow = ({
   isExpandOpen,
   renderExpandableElement,
   expandableHeight,
+  expandedRowClassName,
 }) => {
   const [actionsAnchorElement, setActionsAnchorElement] = useState(null)
   const [isHover, setIsHover] = useState(false)
@@ -200,6 +201,9 @@ const TableRow = ({
       styles.tableRow,
       { [styles.clickable]: onRowClick },
       { [styles.selectedRow]: isSelected },
+      { [expandedRowClassName]: isExpandOpen },
+      { [styles.noBottomBorder]: isExpandOpen },
+      { [styles.expandedRow]: isExpandOpen },
     )
     return (
       <>
@@ -252,7 +256,10 @@ const TableRow = ({
         {isExpandableRow && renderExpandableElement && isExpandOpen && (
           <div
             style={{ height: `${expandableHeight}px` }}
-            className={styles.expandableElementContainer}
+            className={classNames(
+              styles.expandableElementContainer,
+              expandedRowClassName,
+            )}
             data-testid='expandable-el'
           >
             {renderExpandableElement(row)}
@@ -326,6 +333,7 @@ TableRow.propTypes = {
   isExpandOpen: propTypes.bool,
   renderExpandableElement: propTypes.func,
   expandableHeight: propTypes.number,
+  expandedRowClassName: propTypes.string,
 }
 
 export default memo(TableRow)

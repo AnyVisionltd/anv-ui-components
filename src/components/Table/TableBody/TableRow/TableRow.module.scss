@@ -1,10 +1,12 @@
 @import '~@anyvision/style-guide';
 
+$rowBottomBorder: 1px av-color(content, av-opacity(divider)) solid;
+
 .tableRow {
   box-sizing: border-box;
   min-height: 48px;
   display: flex;
-  border-bottom: 1px av-color(content, av-opacity(divider)) solid;
+  border-bottom: $rowBottomBorder;
 
   .tableCell {
     box-sizing: border-box;
@@ -22,7 +24,7 @@
     white-space: nowrap;
   }
 
-  &:hover:not(.selectedRow) {
+  &:hover:not(.selectedRow, .expandedRow) {
     background-color: av-color(primary, av-opacity(ghost));
   }
 
@@ -77,9 +79,14 @@
   }
 }
 
+.noBottomBorder {
+  border-bottom: none;
+}
+
 .expandableElementContainer {
   overflow-y: auto;
   @extend %av-scrollbar;
+  border-bottom: $rowBottomBorder;
 }
 
 .clickable {
