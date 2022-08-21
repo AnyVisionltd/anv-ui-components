@@ -278,17 +278,29 @@ const isParentNodeSelectedWithExclusion = ({
   nodeKey,
   selectionData,
   nodesMap,
+  childrenKey,
+  maxNestingLevel,
 }) => {
   const { excludeMode, items } = selectionData
   const itemsLength = Object.keys(items).length
-  // Ponder maybe it is the correct:
-  // if (!itemsLength) return excludeMode
   if (excludeMode) return !itemsLength
 
-  // Should be revised because if there are more than one layer of children, we should check the children as well
-  // Use maxDepth if needed
-  // Here I need to run for each of the children isNodeSelected until maxDepth reached, same with totalLeaves
-  return itemsLength === nodesMap[nodeKey].children.length
+  const { layer, [childrenKey]: children } = nodesMap[nodeKey]
+
+  if (isParentNodeHasOnlyLeaves(layer, maxNestingLevel)) {
+    return excludeMode ? !itemsLength : itemsLength === children.length
+  }
+
+  return children.every(({ uniqueKey }) =>
+    isNodeSelectedWithExclusion({
+      nodeKey: uniqueKey,
+      selectionData,
+      nodesMap,
+      childrenKey,
+      nodeParentsKeys: [],
+      maxNestingLevel,
+    }),
+  )
 }
 
 const isLeafNodeSelectedWithExclusion = ({ nodeKey, parentSelectionData }) => {
@@ -304,23 +316,23 @@ export const isNodeSelectedWithExclusion = ({
   nodeParentsKeys,
   selectionData,
   nodesMap,
+  childrenKey,
+  maxNestingLevel,
 }) => {
   const { items, excludeMode } = selectionData
   const itemsLength = Object.keys(selectionData.items).length
-  // if (!itemsLength) {
-  //   return excludeMode
-  // }
   if (excludeMode && !itemsLength) {
     return true
   }
 
   if (!nodeParentsKeys.length) {
     const isParentNode = !!nodesMap[nodeKey]?.isParentNode
-    if (!isParentNode)
+    if (!isParentNode) {
       return isLeafNodeSelectedWithExclusion({
         nodeKey,
         parentSelectionData: selectionData,
       })
+    }
 
     if (!items[nodeKey]) {
       return excludeMode
@@ -329,6 +341,8 @@ export const isNodeSelectedWithExclusion = ({
       nodeKey,
       selectionData: items[nodeKey],
       nodesMap,
+      childrenKey,
+      maxNestingLevel,
     })
   }
 
@@ -341,6 +355,8 @@ export const isNodeSelectedWithExclusion = ({
     nodeParentsKeys: nodeParentsKeys.slice(1),
     selectionData: items[nodeParentKey],
     nodesMap,
+    childrenKey,
+    maxNestingLevel,
   })
 }
 
@@ -350,6 +366,8 @@ export const updateNodeSelectionStatus = ({
   selectionData,
   isSelected,
   nodesMap,
+  childrenKey,
+  maxNestingLevel,
 }) => {
   const newSelectionData = { ...selectionData }
 
@@ -374,7 +392,16 @@ export const updateNodeSelectionStatus = ({
     }
     const [nodeParentKey] = parentsKeys
     if (!selection.items[nodeParentKey]) {
-      selection.items[nodeParentKey] = DEFAULT_PARENT_NODE_SELECTION_DATA(false)
+      const isParentNodeSelected = isParentNodeSelectedWithExclusion({
+        nodeKey: nodeParentKey,
+        selectionData: selection,
+        nodesMap,
+        childrenKey,
+        maxNestingLevel,
+      })
+      selection.items[nodeParentKey] = DEFAULT_PARENT_NODE_SELECTION_DATA(
+        isParentNodeSelected,
+      )
     }
     updateSelectionData({
       parentsKeys: parentsKeys.slice(1),
@@ -384,7 +411,6 @@ export const updateNodeSelectionStatus = ({
   updateSelectionData({
     parentsKeys: nodeParentsKeys,
     selection: newSelectionData,
-    // selection: selectionData,
   })
   return newSelectionData
 }
@@ -410,14 +436,11 @@ export const getTotalLeavesSelectedOfParentNode = ({
   const { items, excludeMode } = selectionData
 
   if (!nodePaths.length) {
-    // const itemsLength = Object.keys(selectionData.items).length
-    // if isParentNodeHasOnlyLeaves... maxNestingLevel, nodeNestingLevel,
     const leavesAmount = getSelectedLeavesAmountOutOfItems({
       maxNestingLevel,
       nodeNestingLevel,
       itemsObj: items,
     })
-    // Need to take into account that itemsLength doesnt include parents
     return excludeMode ? totalLeaves - leavesAmount : leavesAmount
   }
 

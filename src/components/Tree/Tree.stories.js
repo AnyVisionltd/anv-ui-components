@@ -495,26 +495,32 @@ export const BasicTreeControlledFromOutside = () => {
 
 export const NestedTreeControlledFromOutside = () => {
   const [nodes, setNodes] = useState(treeNodes)
-
-  // Used for the sake of the example
-  const shiftFirstNodeToEnd = () => {
-    const firstNode = nodes[0]
-    const newNodes = [...nodes].slice(1)
-    return [...newNodes, firstNode]
-  }
+  const [selectionData, setSelectionData] = useState({
+    excludeMode: false,
+    items: {
+      1: { excludeMode: true, items: {} },
+      2: { excludeMode: true, items: {} },
+    },
+  })
 
   const onSearch = searchValue => {
-    setNodes(shiftFirstNodeToEnd())
+    // const result = refetch(searchValue)
+    // setNodes(result)
+  }
+
+  const onSelect = selectionData => {
+    console.log('select', selectionData)
   }
 
   return (
     <Tree
       selfControlled={false}
       nodes={nodes}
-      // onSelect={onSelect}
+      onSelect={onSelect}
       maxNestingLevel={3}
       onSearch={onSearch}
       // selectedKeys={selectedKeys}
+      treeSelection={selectionData}
       className={styles.tree}
       nodesContainerClassName={styles.nodesContainer}
       isReturnSelectedKeysWhenOnSelect

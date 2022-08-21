@@ -23,7 +23,6 @@ const useNodeSelectionWithExclusion = ({
     DEFAULT_PARENT_NODE_SELECTION_DATA(false),
   )
   const nodeParentKeysPathMap = useRef(new Map())
-  // const parentChildrenOfNodeMap = useRef(new Map())
 
   const getCachedNodeParents = useCallback(
     nodeKey => {
@@ -38,14 +37,22 @@ const useNodeSelectionWithExclusion = ({
     [flattenedNodes],
   )
 
+  const handleOnSelectAllNodesWithExclusion = useCallback(
+    isSelected => {
+      // State is not updated immediately when ALL_ROOTS_COMBINED is selected, so assign it before setState, so new value is used.
+      treeSelectionData.excludeMode = isSelected
+      treeSelectionData.items = {}
+      const newSelectionData = DEFAULT_PARENT_NODE_SELECTION_DATA(isSelected)
+      setTreeSelectionData(newSelectionData)
+      return newSelectionData
+    },
+    [treeSelectionData],
+  )
+
   const handleOnSelectWithExclusion = useCallback(
     ({ nodeKey, isSelected }) => {
       if (nodeKey === ALL_ROOTS_COMBINED_KEY) {
-        // State is not updated immediately when ALL_ROOTS_COMBINED is selected, so assign it before setState, so new value is used.
-        treeSelectionData.excludeMode = isSelected
-        treeSelectionData.items = {}
-        setTreeSelectionData(DEFAULT_PARENT_NODE_SELECTION_DATA(isSelected))
-        return
+        return handleOnSelectAllNodesWithExclusion(isSelected)
       }
       const nodeParentsKeys = getCachedNodeParents(nodeKey)
       const newSelectionData = updateNodeSelectionStatus({
@@ -54,9 +61,13 @@ const useNodeSelectionWithExclusion = ({
         selectionData: treeSelectionData,
         isSelected,
         nodesMap: flattenedNodes,
+        childrenKey,
+        maxNestingLevel,
       })
       setTreeSelectionData(newSelectionData)
+      return newSelectionData
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [flattenedNodes, getCachedNodeParents, treeSelectionData],
   )
 
@@ -68,9 +79,25 @@ const useNodeSelectionWithExclusion = ({
         nodeParentsKeys,
         selectionData: treeSelectionData,
         nodesMap: flattenedNodes,
+        childrenKey,
+        maxNestingLevel,
       })
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [flattenedNodes, getCachedNodeParents, treeSelectionData],
+  )
+
+  const checkIfRootNodeSelected = useCallback(
+    uniqueKey => {
+      if (nodeKeysMap.current.has(uniqueKey)) {
+        const { totalSelected, totalChildren } = nodeKeysMap.current.get(
+          uniqueKey,
+        )
+        return totalSelected === totalChildren
+      }
+      return handleIsNodeSelectedWithExclusion(uniqueKey)
+    },
+    [handleIsNodeSelectedWithExclusion, nodeKeysMap],
   )
 
   const handleIsAllNodesAreSelectedWithExclusion = useCallback(() => {
@@ -81,16 +108,14 @@ const useNodeSelectionWithExclusion = ({
     const allRootsCombinedNode = flattenedNodes[ALL_ROOTS_COMBINED_KEY]
     if (!allRootsCombinedNode) return false
     const { [childrenKey]: children } = allRootsCombinedNode
-    return children.every(({ uniqueKey }) =>
-      handleIsNodeSelectedWithExclusion(uniqueKey),
-    )
+    return children.every(({ uniqueKey }) => checkIfRootNodeSelected(uniqueKey))
   }, [
     treeSelectionData,
     totalRootNodes,
     currentRootNodesAmount,
     flattenedNodes,
-    handleIsNodeSelectedWithExclusion,
     childrenKey,
+    checkIfRootNodeSelected,
   ])
 
   const handleTotalSelectedOfParentNodeWithExclusion = useCallback(
@@ -104,7 +129,6 @@ const useNodeSelectionWithExclusion = ({
         maxNestingLevel,
         nodeNestingLevel,
       })
-      // Run the selection, take into account the nodes dataSelection
     },
     [getCachedNodeParents, treeSelectionData, maxNestingLevel],
   )
@@ -143,7 +167,6 @@ const useNodeSelectionWithExclusion = ({
     }
 
     children.forEach(({ uniqueKey }) => {
-      // Here I want to run only the parent in !selfControlled mode
       if (!flattenedNodes[uniqueKey]?.isParentNode) return
       const {
         totalChildren,

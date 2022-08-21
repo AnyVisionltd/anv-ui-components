@@ -4,7 +4,6 @@ import {
   addRemoveKeysInSelectedObj,
   ALL_ROOTS_COMBINED_KEY,
   convertArrayPropertiesOfObjectToSets,
-  determineIsNodeSelected,
   getTotalNodeChildren,
   handleIsNodeSelectedInNodesMap,
 } from '../utils'
@@ -47,9 +46,7 @@ const useFlattenTreeData = ({
       }
 
       treeData.forEach(node => {
-        let { [childrenKey]: children, parentKey, uniqueKey } = node
-        // here add if !selfControlled and !children return
-        // if (!selfControlled && !children) return
+        const { [childrenKey]: children, parentKey, uniqueKey } = node
         if (layer === 0) {
           nodesMap[ALL_ROOTS_COMBINED_KEY][childrenKey].push({ uniqueKey })
         }
@@ -70,7 +67,6 @@ const useFlattenTreeData = ({
           layer,
           isSelected,
         }
-        // here add if !selfControlled and hasonly leaves..
         flatten(children, nodesMap, selectedKeysSetOrObj, layer + 1)
       })
     },

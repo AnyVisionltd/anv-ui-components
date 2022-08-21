@@ -113,8 +113,6 @@ const DynamicFilterListFilter: FC<DynamicFilterListFilterProps> = ({
     !!defaultExcludeMode,
   )
 
-  console.log('isExcludeMode', isExcludeMode)
-
   const onlyCheckedItems = useMemo(
     () => Object.values(checkedItems).filter(isSelect => isSelect),
     [checkedItems],

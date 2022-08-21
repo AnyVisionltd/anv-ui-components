@@ -144,17 +144,24 @@ const Tree = forwardRef(
       ? totalChildrenInTree === totalSelectedInTree
       : handleIsAllNodesAreSelected()
 
+    const handleOnSelectWithExclusionMode = ({ nodeKey, isSelected }) => {
+      const newSelectionData = handleOnSelectWithExclusion({
+        nodeKey,
+        isSelected,
+      })
+      updateAmountOfSelectedNodesAndChildren(nodeKey)
+      onSelect(newSelectionData)
+    }
+
     const handleOnSelect = (node, isCurrentlySelected) => {
       const nodeKey = Array.isArray(node)
         ? ALL_ROOTS_COMBINED_KEY
         : node.uniqueKey
       if (!selfControlled) {
-        handleOnSelectWithExclusion({
+        handleOnSelectWithExclusionMode({
           nodeKey,
           isSelected: !isCurrentlySelected,
         })
-        updateAmountOfSelectedNodesAndChildren(nodeKey)
-        // Here add onSelect- determine how to use it
         return
       }
 
@@ -187,7 +194,7 @@ const Tree = forwardRef(
     }
 
     useEffect(() => {
-      if (!selfControlled) {
+      if (!selfControlled && !isLoading) {
         // No more need in calculating the leaves in flattenedNodes
         handleSetNewNodes(nodes)
         flattenTreeData(nodes, selectedKeys)
@@ -478,6 +485,8 @@ const Tree = forwardRef(
       <TreeSkeletonLoading containerRef={nodesContainerRef} />
     )
 
+    const isEmpty = isTreeEmpty()
+
     const renderTree = () => (
       <>
         {isEmpty && renderEmptyTree()}
@@ -485,11 +494,14 @@ const Tree = forwardRef(
       </>
     )
 
-    const isEmpty = isTreeEmpty()
+    const shouldRenderSearchInput = () => {
+      if (!isSearchable) return false
+      return !!nodes.length || !!searchQuery
+    }
 
     return (
       <div className={classNames(styles.tree, className)}>
-        {isSearchable && !!nodes.length && renderSearchInput()}
+        {shouldRenderSearchInput() && renderSearchInput()}
         {isBulkActionsEnabled && !isEmpty && renderBulkActions()}
         <div
           ref={nodesContainerRef}
