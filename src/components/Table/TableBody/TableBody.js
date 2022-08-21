@@ -22,6 +22,7 @@ const TableBody = ({
   onTableDataChanged,
   expandableHeight,
   renderExpandableElement,
+  expandedRowClassName,
   ...otherProps
 }) => {
   const listRef = useRef()
@@ -90,6 +91,7 @@ const TableBody = ({
         isExpandOpen={!!expandableRowMap[idx]}
         renderExpandableElement={renderExpandableElement}
         expandableHeight={expandableHeight}
+        expandedRowClassName={expandedRowClassName}
       />
     )
   }
@@ -168,6 +170,7 @@ TableBody.defaultProps = {
   rowHeight: 56,
   expandableHeight: 240,
   onTableDataChanged: () => {},
+  expandedRowClassName: '',
 }
 
 TableBody.propTypes = {
@@ -217,6 +220,8 @@ TableBody.propTypes = {
   expandableHeight: propTypes.number,
   /** The element for the expend section */
   renderExpandableElement: propTypes.func,
+  /** For Row and Expand element css customization. */
+  expandedRowClassName: propTypes.string,
 }
 
 export default TableBody
