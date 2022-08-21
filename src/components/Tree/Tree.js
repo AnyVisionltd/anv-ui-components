@@ -102,7 +102,7 @@ const Tree = forwardRef(
       flattenTreeData,
       handleIsNodeSelectedWithExclusion,
       handleOnSelectWithExclusion,
-      handleIsAllNodesAreSelected,
+      handleIsAllNodesAreSelectedWithExclusion,
     } = useFlattenTreeData({
       data: nodes,
       selectedKeys,
@@ -135,14 +135,13 @@ const Tree = forwardRef(
       [flattenedNodes],
     )
 
-    // Try to remove this block of code
     const {
       totalChildren: totalChildrenInTree,
       totalSelected: totalSelectedInTree,
     } = calculateTotalSelectedAndChildrenOfAllNodes()
     const areAllNodesSelected = selfControlled
       ? totalChildrenInTree === totalSelectedInTree
-      : handleIsAllNodesAreSelected()
+      : handleIsAllNodesAreSelectedWithExclusion()
 
     const handleOnSelectWithExclusionMode = ({ nodeKey, isSelected }) => {
       const newSelectionData = handleOnSelectWithExclusion({

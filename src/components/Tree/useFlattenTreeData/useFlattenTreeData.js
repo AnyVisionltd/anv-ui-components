@@ -221,21 +221,6 @@ const useFlattenTreeData = ({
     [calculateAmountOfSelectedNodesAndChildren, flattenedNodes],
   )
 
-  const handleIsAllNodesAreSelected = useCallback(() => {
-    if (selfControlled) {
-      const {
-        totalChildren: totalChildrenInTree,
-        totalSelected: totalSelectedInTree,
-      } = calculateAmountOfSelectedNodesAndChildren(ALL_ROOTS_COMBINED_KEY)
-      return totalChildrenInTree === totalSelectedInTree
-    }
-    return handleIsAllNodesAreSelectedWithExclusion()
-  }, [
-    calculateAmountOfSelectedNodesAndChildren,
-    handleIsAllNodesAreSelectedWithExclusion,
-    selfControlled,
-  ])
-
   const flattenTreeData = useCallback(
     (treeData, selectedKeysSetOrObj, layer = 0) => {
       const flattenedNodesMap = {}
@@ -286,7 +271,7 @@ const useFlattenTreeData = ({
     flattenTreeData,
     handleIsNodeSelectedWithExclusion,
     handleOnSelectWithExclusion,
-    handleIsAllNodesAreSelected,
+    handleIsAllNodesAreSelectedWithExclusion,
   }
 }
 

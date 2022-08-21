@@ -470,21 +470,16 @@ export const BasicTreeControlledFromOutside = () => {
     return [...newNodes, firstNode]
   }
 
-  // const onSelect = newSelectedKeys => setSelectedkeys(newSelectedKeys)
-
   const onSearch = searchValue => {
     setNodes(shiftFirstNodeToEnd())
-    // setSelectedkeys([])
   }
 
   return (
     <Tree
       selfControlled={false}
       nodes={nodes}
-      // onSelect={onSelect}
       maxNestingLevel={3}
       onSearch={onSearch}
-      // selectedKeys={selectedKeys}
       className={styles.tree}
       nodesContainerClassName={styles.nodesContainer}
       isReturnSelectedKeysWhenOnSelect
@@ -495,22 +490,13 @@ export const BasicTreeControlledFromOutside = () => {
 
 export const NestedTreeControlledFromOutside = () => {
   const [nodes, setNodes] = useState(treeNodes)
-  const [selectionData, setSelectionData] = useState({
-    excludeMode: false,
-    items: {
-      1: { excludeMode: true, items: {} },
-      2: { excludeMode: true, items: {} },
-    },
-  })
 
   const onSearch = searchValue => {
     // const result = refetch(searchValue)
     // setNodes(result)
   }
 
-  const onSelect = selectionData => {
-    console.log('select', selectionData)
-  }
+  const onSelect = selectionData => {}
 
   return (
     <Tree
@@ -519,8 +505,6 @@ export const NestedTreeControlledFromOutside = () => {
       onSelect={onSelect}
       maxNestingLevel={3}
       onSearch={onSearch}
-      // selectedKeys={selectedKeys}
-      treeSelection={selectionData}
       className={styles.tree}
       nodesContainerClassName={styles.nodesContainer}
       isReturnSelectedKeysWhenOnSelect
