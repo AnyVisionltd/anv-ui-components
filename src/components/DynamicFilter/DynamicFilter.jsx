@@ -18,6 +18,7 @@ const DynamicFilter = ({
   title,
   className,
   isFiltered,
+  isDisabled,
   children,
 }) => {
   const { state, actions } = UseDynamicFilterReducer()
@@ -45,6 +46,7 @@ const DynamicFilter = ({
         className={classNames(
           styles.dynamicFilterBtn,
           isMenuOpen && styles.btnSelected,
+          isDisabled && styles.disabled,
           className && className,
         )}
         onClick={handleBtnClick}
@@ -81,6 +83,7 @@ DynamicFilter.Sort = DynamicFilterSort
 DynamicFilter.defaultProps = {
   onClose: () => {},
   isFiltered: false,
+  isDisabled: false,
 }
 
 DynamicFilter.propTypes = {
@@ -92,8 +95,10 @@ DynamicFilter.propTypes = {
   onClose: propTypes.func,
   /** For the parent Button css customization. */
   className: propTypes.string,
-  /** Determine  if the filter icon appear*/
+  /** Determine if the filter icon appear. */
   isFiltered: propTypes.bool,
+  /** Determine if the filter is disabled. */
+  isDisabled: propTypes.bool,
 }
 
 export default DynamicFilter
