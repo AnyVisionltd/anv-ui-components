@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
-import { ArrowDown } from '@anyvision/anv-icons'
+import { ArrowDown, AlertFilter } from '@anyvision/anv-icons'
 import DynamicFilterDateTime from './components/DynamicFilterDateTime/DynamicFilterDateTime'
 import DynamicFilterListFilter from './components/DynamicFilterListFilter/DynamicFilterListFilter'
 import DynamicFilterContext from './store/DynamicFilterContext'
@@ -12,7 +12,14 @@ import DynamicFilterSort from './components/DynamicFilterSort/DynamicFilterSort'
 import DynamicFilterMenu from './components/DynamicFilterMenu/DynamicFilterMenu'
 import styles from './DynamicFilter.module.scss'
 
-const DynamicFilter = ({ onApply, onClose, title, className, children }) => {
+const DynamicFilter = ({
+  onApply,
+  onClose,
+  title,
+  className,
+  isFiltered,
+  children,
+}) => {
   const { state, actions } = UseDynamicFilterReducer()
   const btnRef = useRef(null)
   const { isMenuOpen } = state
@@ -45,7 +52,14 @@ const DynamicFilter = ({ onApply, onClose, title, className, children }) => {
         onClick={handleBtnClick}
       >
         {title}
-        <ArrowDown className={styles.arrowSvg} />
+        <div
+          className={classNames(styles.icons, {
+            [styles.multipleIcons]: isFiltered,
+          })}
+        >
+          {isFiltered && <AlertFilter className={styles.iconSvg} />}
+          <ArrowDown className={styles.iconSvg} />
+        </div>
       </div>
       {isMenuOpen && (
         <DynamicFilterMenu
