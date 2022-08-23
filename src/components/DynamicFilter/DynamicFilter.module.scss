@@ -16,9 +16,19 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: av-space(tiny);
 
-  .arrowSvg {
+  .icons {
+    display: flex;
+    align-items: center;
+    gap: 0px;
+    margin-left: av-space(tiny);
+
+    &.multipleIcons {
+      margin-left: 2px;
+    }
+  }
+
+  .iconSvg {
     height: av-size(sz-16);
     width: av-size(sz-16);
     transition: all 0.05s linear;
