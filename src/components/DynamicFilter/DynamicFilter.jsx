@@ -25,9 +25,6 @@ const DynamicFilter = ({
   const { isMenuOpen } = state
 
   const handleBtnClick = () => {
-    if (isMenuOpen) {
-      onClose()
-    }
     actions.toggleIsMenuOpen()
   }
 
@@ -37,7 +34,8 @@ const DynamicFilter = ({
   }
 
   const handleCancelClick = () => {
-    handleBtnClick()
+    onClose()
+    actions.toggleIsMenuOpen()
   }
 
   return (
@@ -82,6 +80,7 @@ DynamicFilter.Sort = DynamicFilterSort
 
 DynamicFilter.defaultProps = {
   onClose: () => {},
+  isFiltered: false,
 }
 
 DynamicFilter.propTypes = {
@@ -93,6 +92,8 @@ DynamicFilter.propTypes = {
   onClose: propTypes.func,
   /** For the parent Button css customization. */
   className: propTypes.string,
+  /** Determine  if the filter icon appear*/
+  isFiltered: propTypes.bool,
 }
 
 export default DynamicFilter
