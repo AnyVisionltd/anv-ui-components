@@ -17,6 +17,12 @@
   display: flex;
   align-items: center;
 
+  &.disabled {
+    opacity: av-opacity(disabled);
+    cursor: default;
+    pointer-events: none;
+  }
+
   .icons {
     display: flex;
     align-items: center;
