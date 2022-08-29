@@ -459,3 +459,56 @@ export const UniqueKeyOverlap = () => {
     />
   )
 }
+
+export const BasicTreeControlledFromOutside = () => {
+  const [nodes, setNodes] = useState([...createTestRootNodes(5)])
+
+  // Used for the sake of the example
+  const shiftFirstNodeToEnd = () => {
+    const firstNode = nodes[0]
+    const newNodes = [...nodes].slice(1)
+    return [...newNodes, firstNode]
+  }
+
+  const onSearch = searchValue => {
+    setNodes(shiftFirstNodeToEnd())
+  }
+
+  return (
+    <Tree
+      selfControlled={false}
+      nodes={nodes}
+      maxNestingLevel={3}
+      onSearch={onSearch}
+      className={styles.tree}
+      nodesContainerClassName={styles.nodesContainer}
+      isReturnSelectedKeysWhenOnSelect
+      totalRootNodes={nodes.length}
+    />
+  )
+}
+
+export const NestedTreeControlledFromOutside = () => {
+  const [nodes, setNodes] = useState(treeNodes)
+
+  const onSearch = searchValue => {
+    // const result = refetch(searchValue)
+    // setNodes(result)
+  }
+
+  const onSelect = selectionData => {}
+
+  return (
+    <Tree
+      selfControlled={false}
+      nodes={nodes}
+      onSelect={onSelect}
+      maxNestingLevel={3}
+      onSearch={onSearch}
+      className={styles.tree}
+      nodesContainerClassName={styles.nodesContainer}
+      isReturnSelectedKeysWhenOnSelect
+      totalRootNodes={nodes.length}
+    />
+  )
+}

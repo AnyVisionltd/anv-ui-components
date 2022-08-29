@@ -52,10 +52,13 @@ const Tree = forwardRef(
       childrenKey,
       labelKey,
       idKey,
+      totalLeavesKey,
       isLoading,
       isChildrenUniqueKeysOverlap,
       isReturnSelectedKeysWhenOnSelect,
       isReturnWholeNodeDataWhenOnSelect,
+      selfControlled,
+      totalRootNodes,
     },
     ref,
   ) => {
@@ -67,7 +70,7 @@ const Tree = forwardRef(
     const nodesContainerRef = useRef()
     const [singularNounLabel, pluralNounLabel] =
       displayLabels || defaultDisplayLabels
-    const keyValues = { childrenKey, labelKey, idKey }
+    const keyValues = { childrenKey, labelKey, idKey, totalLeavesKey }
 
     const {
       searchQuery,
@@ -76,11 +79,13 @@ const Tree = forwardRef(
       resetSearchData,
       handleAddNewNodes,
       handleSetNodeNewProperties,
+      handleSetNewNodes,
     } = useTreeVisibleData({
       initialData: nodes,
       onSearch,
       treeInstance,
       isChildrenUniqueKeysOverlap,
+      selfControlled,
       ...keyValues,
     })
 
@@ -88,16 +93,23 @@ const Tree = forwardRef(
       flattenedNodes,
       setFlattenedNodes,
       calculateAmountOfSelectedNodesAndChildren,
+      calculateTotalSelectedAndChildrenOfAllNodes,
       updateAmountOfSelectedNodesAndChildren,
       handleAddNewFlattenedNodes,
       handleSetSelectedNodesFromKeysArr,
       handleSetSelectedNodesFromKeysObject,
       isSelectedKeysUpdatedAfterMount,
+      flattenTreeData,
+      handleIsNodeSelectedWithExclusion,
+      handleOnSelectWithExclusion,
+      handleIsAllNodesAreSelectedWithExclusion,
     } = useFlattenTreeData({
       data: nodes,
       selectedKeys,
       maxNestingLevel,
       isChildrenUniqueKeysOverlap,
+      selfControlled,
+      totalRootNodes,
       ...keyValues,
     })
 
@@ -108,7 +120,7 @@ const Tree = forwardRef(
           const { ALL_ROOTS_COMBINED_KEY, ...restNodes } = flattenedNodes
           return Object.freeze(restNodes)
         },
-        setSelectedKeys: (keysToAdd, keysToRemove) => {
+        setSelectedKeys: ({ keysToAdd = [], keysToRemove = [] }) => {
           if (isChildrenUniqueKeysOverlap)
             handleSetSelectedNodesFromKeysObject(keysToAdd, keysToRemove)
           else handleSetSelectedNodesFromKeysArr(keysToAdd, keysToRemove)
@@ -119,22 +131,39 @@ const Tree = forwardRef(
           handleSetNodeNewProperties(nodeKey, newProperties, nodePathArr)
         },
       }),
-      [
-        flattenedNodes,
-        handleSetNodeNewProperties,
-        handleSetSelectedNodesFromKeysArr,
-        handleSetSelectedNodesFromKeysObject,
-        isChildrenUniqueKeysOverlap,
-      ],
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      [flattenedNodes],
     )
 
     const {
       totalChildren: totalChildrenInTree,
       totalSelected: totalSelectedInTree,
-    } = calculateAmountOfSelectedNodesAndChildren(ALL_ROOTS_COMBINED_KEY)
-    const areAllNodesSelected = totalChildrenInTree === totalSelectedInTree
+    } = calculateTotalSelectedAndChildrenOfAllNodes()
+    const areAllNodesSelected = selfControlled
+      ? totalChildrenInTree === totalSelectedInTree
+      : handleIsAllNodesAreSelectedWithExclusion()
 
-    const handleIsSelected = (node, isCurrentlySelected) => {
+    const handleOnSelectWithExclusionMode = ({ nodeKey, isSelected }) => {
+      const newSelectionData = handleOnSelectWithExclusion({
+        nodeKey,
+        isSelected,
+      })
+      updateAmountOfSelectedNodesAndChildren(nodeKey)
+      onSelect(newSelectionData)
+    }
+
+    const handleOnSelect = (node, isCurrentlySelected) => {
+      const nodeKey = Array.isArray(node)
+        ? ALL_ROOTS_COMBINED_KEY
+        : node.uniqueKey
+      if (!selfControlled) {
+        handleOnSelectWithExclusionMode({
+          nodeKey,
+          isSelected: !isCurrentlySelected,
+        })
+        return
+      }
+
       const { keys: keysToToggle, nodesMap } = setNodesSelectedStatus({
         nodesTree: Array.isArray(node) ? node : [node],
         nodesMap: { ...flattenedNodes },
@@ -146,9 +175,7 @@ const Tree = forwardRef(
       })
 
       setFlattenedNodes(nodesMap)
-      updateAmountOfSelectedNodesAndChildren(
-        Array.isArray(node) ? ALL_ROOTS_COMBINED_KEY : node.uniqueKey,
-      )
+      updateAmountOfSelectedNodesAndChildren(nodeKey)
 
       if (
         isReturnSelectedKeysWhenOnSelect &&
@@ -166,17 +193,32 @@ const Tree = forwardRef(
     }
 
     useEffect(() => {
-      if (filteredData.length < nodes.length) {
+      if (!selfControlled && !isLoading) {
+        // No more need in calculating the leaves in flattenedNodes
+        handleSetNewNodes(nodes)
+        flattenTreeData(nodes, selectedKeys)
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [nodes, selfControlled])
+
+    useEffect(() => {
+      if (selfControlled && filteredData.length < nodes.length) {
         const newAddedNodes = nodes.slice(filteredData.length)
         handleAddNewNodes(newAddedNodes)
         handleAddNewFlattenedNodes(newAddedNodes)
       }
-    }, [filteredData, handleAddNewFlattenedNodes, handleAddNewNodes, nodes])
+    }, [
+      filteredData,
+      handleAddNewFlattenedNodes,
+      handleAddNewNodes,
+      nodes,
+      selfControlled,
+    ])
 
     useEffect(() => {
       const areAllExpanded = checkAllNodesAreExpanded({
         nodesTree: filteredData,
-        nodesVirualizedMap: treeInstance?.state?.records,
+        nodesVirtualizedMap: treeInstance?.state?.records,
         childrenKey,
       })
 
@@ -187,6 +229,7 @@ const Tree = forwardRef(
 
     useEffect(() => {
       if (
+        selfControlled &&
         totalSelectedInTree &&
         !selectedKeys.length &&
         isSelectedKeysUpdatedAfterMount.current
@@ -230,7 +273,7 @@ const Tree = forwardRef(
 
     const isTreeEmpty = () => {
       if (!nodes.length) return true
-      if (!searchQuery) return false
+      if (!searchQuery || !selfControlled) return false
       return !filteredData.some(node => node.visible)
     }
 
@@ -251,7 +294,7 @@ const Tree = forwardRef(
         <div className={styles.bulkSelectContainer}>
           <Checkbox
             checked={areAllNodesSelected}
-            onChange={() => handleIsSelected(filteredData, areAllNodesSelected)}
+            onChange={() => handleOnSelect(filteredData, areAllNodesSelected)}
             className={styles.checkbox}
             id='bulk-select-tree'
           />
@@ -318,7 +361,7 @@ const Tree = forwardRef(
               <Checkbox
                 disabled={!totalChildren}
                 checked={isSelected}
-                onChange={() => handleIsSelected(node, isSelected)}
+                onChange={() => handleOnSelect(node, isSelected)}
                 className={classNames(
                   styles.isSelectedCheckbox,
                   styles.checkbox,
@@ -355,10 +398,17 @@ const Tree = forwardRef(
       return { containerClasses, leafNodeClasses }
     }
 
+    const handleIsLeafNodeSelected = uniqueKey => {
+      if (selfControlled) {
+        return flattenedNodes[uniqueKey]?.isSelected
+      }
+      return handleIsNodeSelectedWithExclusion(uniqueKey)
+    }
+
     const renderLeafNode = (node, virtualizedListProps = {}) => {
       const { uniqueKey, [labelKey]: label } = node
       const { style, isLastLeaf } = virtualizedListProps
-      const isSelected = flattenedNodes[uniqueKey]?.isSelected
+      const isSelected = handleIsLeafNodeSelected(uniqueKey)
 
       const { containerClasses, leafNodeClasses } = getLeafNodeClasses(
         isLastLeaf,
@@ -374,7 +424,7 @@ const Tree = forwardRef(
                 <div className={styles.leftSideLeaf}>
                   <Checkbox
                     checked={isSelected}
-                    onChange={() => handleIsSelected(node, isSelected)}
+                    onChange={() => handleOnSelect(node, isSelected)}
                     className={styles.checkbox}
                   />
                   <Tooltip content={label} overflowOnly>
@@ -434,6 +484,8 @@ const Tree = forwardRef(
       <TreeSkeletonLoading containerRef={nodesContainerRef} />
     )
 
+    const isEmpty = isTreeEmpty()
+
     const renderTree = () => (
       <>
         {isEmpty && renderEmptyTree()}
@@ -441,11 +493,14 @@ const Tree = forwardRef(
       </>
     )
 
-    const isEmpty = isTreeEmpty()
+    const shouldRenderSearchInput = () => {
+      if (!isSearchable) return false
+      return !!nodes.length || !!searchQuery
+    }
 
     return (
       <div className={classNames(styles.tree, className)}>
-        {isSearchable && !!nodes.length && renderSearchInput()}
+        {shouldRenderSearchInput() && renderSearchInput()}
         {isBulkActionsEnabled && !isEmpty && renderBulkActions()}
         <div
           ref={nodesContainerRef}
@@ -472,6 +527,7 @@ Tree.defaultProps = {
   childrenKey: 'children',
   labelKey: 'label',
   idKey: 'key',
+  selfControlled: true,
 }
 
 Tree.propTypes = {
@@ -485,6 +541,8 @@ Tree.propTypes = {
   idKey: propTypes.string,
   /** The key value of the node's name property. Default is 'label'. */
   labelKey: propTypes.string,
+  /** The key value of the parent node's total leaves property, relevant when tree is controlled from outside. */
+  totalLeavesKey: propTypes.string,
   /** For css customization. */
   className: propTypes.string,
   /** For css customization. */
@@ -529,6 +587,8 @@ Tree.propTypes = {
   noItemsMessage: propTypes.string,
   /** Tree loading status. */
   isLoading: propTypes.bool,
+  /** If true, search is controlled by the table component. Default is true.*/
+  selfControlled: propTypes.bool,
   /** Whether the tree roots can have the same child node without causing unique key conflicts.  */
   isChildrenUniqueKeysOverlap: propTypes.bool,
   /** If there is no need to make changes with selected/added nodes, set this prop to true

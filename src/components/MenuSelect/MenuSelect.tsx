@@ -135,7 +135,7 @@ const MenuSelect: FC<MenuSelectProps> = ({
                 </Tooltip>
               </div>
             )}
-          {/* @ts-ignore */}  
+            {/* @ts-ignore */}
           </Menu.Item>
         ),
       )}

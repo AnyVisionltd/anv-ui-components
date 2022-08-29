@@ -68,7 +68,8 @@ const DynamicFilterMenu: FC<DynamicFilterMenuProps> = ({
     >
       <div className={styles.itemsContainer}>{children}</div>
       <div className={styles.actionBtnContainer}>
-        {// @ts-ignore 
+        {
+          // @ts-ignore
           <Button
             onClick={onCancel}
             variant='outline'

@@ -5,6 +5,11 @@ export const LEAF_NODE_HEIGHT = 48
 export const PARENT_NODE_WRAPPER_HEIGHT = 80
 export const PARENT_NODE_HEIGHT = 72
 
+export const DEFAULT_PARENT_NODE_SELECTION_DATA = (excludeMode = false) => ({
+  items: {},
+  excludeMode,
+})
+
 export const DEFAULT_AMOUNT_LOADING_NODES = 6
 
 export const SEPARATOR_SIGN = '$$'
@@ -75,17 +80,17 @@ export const setNodesExpandedStatus = ({ nodesTree, isOpen, childrenKey }) =>
 
 export const checkAllNodesAreExpanded = ({
   nodesTree,
-  nodesVirualizedMap,
+  nodesVirtualizedMap,
   childrenKey,
 }) => {
-  if (!nodesVirualizedMap) return false
+  if (!nodesVirtualizedMap) return false
   let areExpanded = true
 
   const areAllNodesExpanded = nodesTreeData => {
     nodesTreeData.forEach(node => {
       const { uniqueKey, [childrenKey]: children } = node
       if (!children || !areExpanded) return
-      if (nodesVirualizedMap[uniqueKey]?.isOpen) {
+      if (nodesVirtualizedMap[uniqueKey]?.isOpen) {
         return areAllNodesExpanded(children)
       } else {
         areExpanded = false
@@ -163,6 +168,25 @@ export const determineIsNodeSelected = ({
   return false
 }
 
+export const handleIsNodeSelectedInNodesMap = ({
+  selectedKeysSetOrObj,
+  parentKey,
+  selfControlled,
+  nodesMap,
+  nodeKey,
+}) => {
+  if (!selfControlled) return
+  const isParentSelected = nodesMap[parentKey]?.isSelected
+  return (
+    isParentSelected ||
+    determineIsNodeSelected({
+      selectedKeysSetOrObj,
+      key: nodeKey,
+      parentKey,
+    })
+  )
+}
+
 const handleUniqueKeysOnSelect = (selectedKeys, { removed, added }) => {
   const newSelectedKeys = [...selectedKeys]
   const removedKeysSet = new Set(removed)
@@ -225,5 +249,211 @@ export const addRemoveKeysInSelectedObj = ({
         flattenedNodes[uniqueKey] = { ...flattenedNodes[uniqueKey], isSelected }
       }
     })
+  })
+}
+
+export const isParentNodeHasOnlyLeaves = (nodeNestingLevel, maxNestingLevel) =>
+  maxNestingLevel - nodeNestingLevel === 1
+
+export const getTotalNodeChildren = ({
+  selfControlled,
+  nodeKey,
+  flattenedNodes,
+  totalLeavesKey,
+  childrenKey,
+  maxNestingLevel,
+}) => {
+  const { [childrenKey]: children, layer, [totalLeavesKey]: totalLeaves } =
+    flattenedNodes[nodeKey] || {}
+  if (!selfControlled && totalLeaves) return totalLeaves
+
+  // It means that the current parentNode has only leaves so no need to filter
+  if (isParentNodeHasOnlyLeaves(layer, maxNestingLevel)) return children.length
+  return children.filter(
+    ({ uniqueKey }) => !flattenedNodes[uniqueKey]?.isParentNode,
+  ).length
+}
+
+const isParentNodeSelectedWithExclusion = ({
+  nodeKey,
+  selectionData,
+  nodesMap,
+  childrenKey,
+  maxNestingLevel,
+}) => {
+  const { excludeMode, items } = selectionData
+  const itemsLength = Object.keys(items).length
+  if (excludeMode) return !itemsLength
+
+  const { layer, [childrenKey]: children } = nodesMap[nodeKey]
+
+  if (isParentNodeHasOnlyLeaves(layer, maxNestingLevel)) {
+    return excludeMode ? !itemsLength : itemsLength === children.length
+  }
+
+  return children.every(({ uniqueKey }) =>
+    isNodeSelectedWithExclusion({
+      nodeKey: uniqueKey,
+      selectionData,
+      nodesMap,
+      childrenKey,
+      nodeParentsKeys: [],
+      maxNestingLevel,
+    }),
+  )
+}
+
+const isLeafNodeSelectedWithExclusion = ({ nodeKey, parentSelectionData }) => {
+  const { items, excludeMode } = parentSelectionData
+  if (excludeMode) {
+    return !items[nodeKey]
+  }
+  return !!items[nodeKey]
+}
+
+export const isNodeSelectedWithExclusion = ({
+  nodeKey,
+  nodeParentsKeys,
+  selectionData,
+  nodesMap,
+  childrenKey,
+  maxNestingLevel,
+}) => {
+  const { items, excludeMode } = selectionData
+  const itemsLength = Object.keys(selectionData.items).length
+  if (excludeMode && !itemsLength) {
+    return true
+  }
+
+  if (!nodeParentsKeys.length) {
+    const isParentNode = !!nodesMap[nodeKey]?.isParentNode
+    if (!isParentNode) {
+      return isLeafNodeSelectedWithExclusion({
+        nodeKey,
+        parentSelectionData: selectionData,
+      })
+    }
+
+    if (!items[nodeKey]) {
+      return excludeMode
+    }
+    return isParentNodeSelectedWithExclusion({
+      nodeKey,
+      selectionData: items[nodeKey],
+      nodesMap,
+      childrenKey,
+      maxNestingLevel,
+    })
+  }
+
+  const [nodeParentKey] = nodeParentsKeys
+  if (!items[nodeParentKey]) {
+    return excludeMode
+  }
+  return isNodeSelectedWithExclusion({
+    nodeKey,
+    nodeParentsKeys: nodeParentsKeys.slice(1),
+    selectionData: items[nodeParentKey],
+    nodesMap,
+    childrenKey,
+    maxNestingLevel,
+  })
+}
+
+export const updateNodeSelectionStatus = ({
+  nodeKey,
+  nodeParentsKeys,
+  selectionData,
+  isSelected,
+  nodesMap,
+  childrenKey,
+  maxNestingLevel,
+}) => {
+  const newSelectionData = { ...selectionData }
+
+  const updateSelectionData = ({ parentsKeys, selection }) => {
+    if (!parentsKeys.length) {
+      const isParentNode = !!nodesMap[nodeKey]?.isParentNode
+      if (isParentNode) {
+        selection.items[nodeKey] = DEFAULT_PARENT_NODE_SELECTION_DATA(
+          isSelected,
+        )
+        return
+      }
+      const shouldAddNodeToItemsSelection =
+        (!selection.excludeMode && isSelected) ||
+        (selection.excludeMode && !isSelected)
+      if (shouldAddNodeToItemsSelection) {
+        selection.items[nodeKey] = true
+      } else {
+        delete selection.items[nodeKey]
+      }
+      return
+    }
+    const [nodeParentKey] = parentsKeys
+    if (!selection.items[nodeParentKey]) {
+      const isParentNodeSelected = isParentNodeSelectedWithExclusion({
+        nodeKey: nodeParentKey,
+        selectionData: selection,
+        nodesMap,
+        childrenKey,
+        maxNestingLevel,
+      })
+      selection.items[nodeParentKey] = DEFAULT_PARENT_NODE_SELECTION_DATA(
+        isParentNodeSelected,
+      )
+    }
+    updateSelectionData({
+      parentsKeys: parentsKeys.slice(1),
+      selection: selection.items[nodeParentKey],
+    })
+  }
+  updateSelectionData({
+    parentsKeys: nodeParentsKeys,
+    selection: newSelectionData,
+  })
+  return newSelectionData
+}
+
+export const getSelectedLeavesAmountOutOfItems = ({
+  maxNestingLevel,
+  nodeNestingLevel,
+  itemsObj,
+}) => {
+  if (isParentNodeHasOnlyLeaves(nodeNestingLevel, maxNestingLevel)) {
+    return Object.keys(itemsObj).length
+  }
+  return Object.values(itemsObj).filter(value => value === true).length
+}
+
+export const getTotalLeavesSelectedOfParentNode = ({
+  nodePaths,
+  selectionData,
+  totalLeaves,
+  maxNestingLevel,
+  nodeNestingLevel,
+}) => {
+  const { items, excludeMode } = selectionData
+
+  if (!nodePaths.length) {
+    const leavesAmount = getSelectedLeavesAmountOutOfItems({
+      maxNestingLevel,
+      nodeNestingLevel,
+      itemsObj: items,
+    })
+    return excludeMode ? totalLeaves - leavesAmount : leavesAmount
+  }
+
+  const [nodeKey] = nodePaths
+  if (!items[nodeKey]) {
+    return excludeMode ? totalLeaves : 0
+  }
+
+  return getTotalLeavesSelectedOfParentNode({
+    nodePaths: nodePaths.slice(1),
+    selectionData: items[nodeKey],
+    totalLeaves,
+    maxNestingLevel,
+    nodeNestingLevel,
   })
 }

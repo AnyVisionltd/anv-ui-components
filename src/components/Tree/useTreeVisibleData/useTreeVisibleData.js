@@ -13,6 +13,7 @@ const useTreeVisibleData = ({
   labelKey,
   idKey,
   isChildrenUniqueKeysOverlap,
+  selfControlled,
 }) => {
   const setNodeProperties = useCallback(
     ({ node, parentKey, index }) => {
@@ -83,7 +84,10 @@ const useTreeVisibleData = ({
 
   const [searchQuery, setSearchQuery] = useState('')
   const [filteredData, setFilteredData] = useState(
-    filterVisibleData(initialData, searchQuery.trim().toLowerCase()),
+    filterVisibleData(
+      initialData,
+      selfControlled ? searchQuery.trim().toLowerCase() : '',
+    ),
   )
 
   const handleSetNodeNewProperties = useCallback(
@@ -98,6 +102,18 @@ const useTreeVisibleData = ({
       setFilteredData(newTreeData)
     },
     [childrenKey, filteredData],
+  )
+
+  const handleSetNewNodes = useCallback(
+    newNodes => {
+      setFilteredData(
+        filterVisibleData(
+          newNodes,
+          selfControlled ? searchQuery.trim().toLowerCase() : '',
+        ),
+      )
+    },
+    [filterVisibleData, searchQuery, selfControlled],
   )
 
   const handleAddNewNodes = useCallback(
@@ -119,6 +135,8 @@ const useTreeVisibleData = ({
   const handleSearch = ({ target: { value } }) => {
     setSearchQuery(value)
     onSearch(value)
+    if (!selfControlled) return
+
     const searchKeyword = value.trim().toLowerCase()
 
     if (!searchKeyword) {
@@ -139,6 +157,7 @@ const useTreeVisibleData = ({
     handleSearch,
     handleAddNewNodes,
     handleSetNodeNewProperties,
+    handleSetNewNodes,
   }
 }
 
