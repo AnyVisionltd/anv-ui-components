@@ -23,6 +23,7 @@ const TableBody = ({
   expandableHeight,
   renderExpandableElement,
   expandedRowClassName,
+  isRowClickExpand,
   ...otherProps
 }) => {
   const listRef = useRef()
@@ -72,6 +73,13 @@ const TableBody = ({
     setExpandableRowMap(prev => ({ ...prev, [idx]: !prev[idx] }))
   }
 
+  const handleRowClick = idx => {
+    if (isRowClickExpand && isExpandableRow) {
+      setExpandableRowMap(prev => ({ ...prev, [idx]: !prev[idx] }))
+    }
+    onRowClick()
+  }
+
   const renderRow = (row, idx) => {
     return (
       <TableRow
@@ -84,7 +92,7 @@ const TableBody = ({
         rowActions={rowActions}
         row={row}
         rowHeight={rowHeight}
-        onRowClick={onRowClick}
+        onRowClick={() => handleRowClick(idx)}
         menuClassName={menuClassName}
         isExpandableRow={isExpandableRow}
         onExpandClick={() => handleExpandClick(idx)}
@@ -171,6 +179,7 @@ TableBody.defaultProps = {
   expandableHeight: 240,
   onTableDataChanged: () => {},
   expandedRowClassName: '',
+  isRowClickExpand: false,
 }
 
 TableBody.propTypes = {
@@ -222,6 +231,8 @@ TableBody.propTypes = {
   renderExpandableElement: propTypes.func,
   /** For Row and Expand element css customization. */
   expandedRowClassName: propTypes.string,
+  /** Determine if click on the row expand the row */
+  isRowClickExpand: propTypes.bool,
 }
 
 export default TableBody
