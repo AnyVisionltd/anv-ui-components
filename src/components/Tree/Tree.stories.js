@@ -525,34 +525,32 @@ export const TreeWithCustomStyle = () => {
   const renderParent = (
     node,
     { isSelected, onSelect, totalSelected, totalChildren, onExpand, isOpen },
-  ) => {
-    return (
-      <div
-        key={node.uniqueKey}
-        style={{ paddingLeft: getNodeLeftPadding(node.nestingLevel) }}
-        className={classNames(treeStyles.customParentNode, {
-          [treeStyles.selected]: isSelected,
-        })}
+  ) => (
+    <div
+      key={node.uniqueKey}
+      style={{ paddingLeft: getNodeLeftPadding(node.nestingLevel) }}
+      className={classNames(treeStyles.customParentNode, {
+        [treeStyles.selected]: isSelected,
+      })}
+    >
+      <IconButton
+        variant='ghost'
+        className={treeStyles.iconButton}
+        onClick={onExpand}
       >
-        <IconButton
-          variant='ghost'
-          className={treeStyles.iconButton}
-          onClick={onExpand}
-        >
-          <ArrowRight
-            className={classNames(treeStyles.arrowSvg, {
-              [treeStyles.opened]: isOpen,
-            })}
-          />
-        </IconButton>
-        <Tooltip content={node.label} overflowOnly>
-          <div onClick={onSelect} className={treeStyles.title}>
-            {node.label}
-          </div>
-        </Tooltip>
-      </div>
-    )
-  }
+        <ArrowRight
+          className={classNames(treeStyles.arrowSvg, {
+            [treeStyles.opened]: isOpen,
+          })}
+        />
+      </IconButton>
+      <Tooltip content={node.label} overflowOnly>
+        <div onClick={onSelect} className={treeStyles.title}>
+          {node.label}
+        </div>
+      </Tooltip>
+    </div>
+  )
 
   const renderLeaf = (node, { isSelected, isLastLeafOfParent, onSelect }) => (
     <div

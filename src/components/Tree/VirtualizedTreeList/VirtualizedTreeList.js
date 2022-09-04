@@ -193,6 +193,12 @@ VirtualizedTreeList.propTypes = {
   idKey: propTypes.string,
   /** The key value of the node's name property. Default is 'label'. */
   labelKey: propTypes.string,
+  /** An object that contains the height of leaf nodes, parent nodes and root nodes. */
+  nodeHeightsValues: propTypes.shape({
+    leafNodeHeight: propTypes.number.isRequired,
+    parentNodeHeight: propTypes.number.isRequired,
+    rootNodeHeight: propTypes.number.isRequired,
+  })
 }
 
 export default VirtualizedTreeList
