@@ -3,12 +3,7 @@ import propTypes from 'prop-types'
 import { VariableSizeTree as TreeList } from 'react-vtree'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import { throttle } from '../../../utils'
-import {
-  TREE_NODE_PADDING,
-  LEAF_NODE_HEIGHT,
-  PARENT_NODE_HEIGHT,
-  PARENT_NODE_WRAPPER_HEIGHT,
-} from '../utils'
+import { TREE_NODE_PADDING } from '../utils'
 import styles from './VirtualizedTreeList.module.scss'
 
 const Node = ({
@@ -49,12 +44,18 @@ const Node = ({
   return <div style={style}>{content}</div>
 }
 
-const determineDefaultHeight = (isParentNode, layer) => {
-  if (!isParentNode) return LEAF_NODE_HEIGHT
-  return layer === 0 ? PARENT_NODE_WRAPPER_HEIGHT : PARENT_NODE_HEIGHT
+const determineDefaultHeight = (isParentNode, layer, nodeHeightsValues) => {
+  const { leafNodeHeight, parentNodeHeight, rootNodeHeight } = nodeHeightsValues
+  if (!isParentNode) return leafNodeHeight
+  return layer === 0 ? rootNodeHeight : parentNodeHeight
 }
 
-const buildTreeWalker = ({ rootNode, childrenKey, labelKey }) =>
+const buildTreeWalker = ({
+  rootNode,
+  nodeHeightsValues,
+  childrenKey,
+  labelKey,
+}) =>
   function* treeWalker(refresh) {
     const stack = Object.values(rootNode).map(node => ({
       nestingLevel: 0,
@@ -75,7 +76,11 @@ const buildTreeWalker = ({ rootNode, childrenKey, labelKey }) =>
 
       const isOpened = yield refresh
         ? {
-            defaultHeight: determineDefaultHeight(isParentNode, nestingLevel),
+            defaultHeight: determineDefaultHeight(
+              isParentNode,
+              nestingLevel,
+              nodeHeightsValues,
+            ),
             isOpenByDefault: false,
             id: uniqueKey,
             name: label,
@@ -104,6 +109,7 @@ const VirtualizedTreeList = ({
   isSearching,
   nodesMap,
   onExpand,
+  nodeHeightsValues,
   ...keyValues
 }) => {
   const innerRef = useRef()
@@ -140,7 +146,11 @@ const VirtualizedTreeList = ({
             onExpand,
             ...keyValues,
           }}
-          treeWalker={buildTreeWalker({ rootNode, ...keyValues })}
+          treeWalker={buildTreeWalker({
+            rootNode,
+            nodeHeightsValues,
+            ...keyValues,
+          })}
           height={height}
           width={width}
           innerRef={innerRef}
@@ -183,6 +193,12 @@ VirtualizedTreeList.propTypes = {
   idKey: propTypes.string,
   /** The key value of the node's name property. Default is 'label'. */
   labelKey: propTypes.string,
+  /** An object that contains the height of leaf nodes, parent nodes and root nodes. */
+  nodeHeightsValues: propTypes.shape({
+    leafNodeHeight: propTypes.number.isRequired,
+    parentNodeHeight: propTypes.number.isRequired,
+    rootNodeHeight: propTypes.number.isRequired,
+  })
 }
 
 export default VirtualizedTreeList

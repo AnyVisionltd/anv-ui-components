@@ -1,0 +1,57 @@
+@import '~@anyvision/style-guide';
+
+.customParentNode {
+  display: flex;
+  align-items: center;
+  height: av-size(sz-48);
+
+  &.selected {
+    background-color: av-color(purewhite, av-opacity(divider));
+  }
+
+  .title {
+    @extend %av-subtitle2;
+    color: av-color(purewhite);
+    flex: 1;
+    cursor: pointer;
+  }
+
+  .iconButton {
+    width: av-size(sz-24);
+    height: av-size(sz-24);
+    background-color: transparent;
+    transition: all 0.1s linear;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .arrowSvg {
+      cursor: pointer;
+      height: av-size(sz-24);
+      width: av-size(sz-24);
+      fill: av-color(purewhite);
+      transition: all 0.1s linear;
+
+      &.opened {
+        transform: rotate(90deg);
+      }
+    }
+  }
+}
+
+.customLeafNode {
+  display: flex;
+  align-items: center;
+  height: av-size(sz-48);
+
+  &.selected {
+    background-color: av-color(purewhite, av-opacity(divider));
+  }
+
+  .title {
+    @extend %av-subtitle2;
+    color: av-color(purewhite);
+    flex: 1;
+    cursor: pointer;
+  }
+}
