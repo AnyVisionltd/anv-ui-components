@@ -1,10 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useMemo } from 'react'
+import classNames from 'classnames'
 import { action } from '@storybook/addon-actions'
-import { PencilEdit, Search, ListAdd } from '@anyvision/anv-icons'
+import { ArrowRight, PencilEdit, Search, ListAdd } from '@anyvision/anv-icons'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import Tree from './Tree'
+import { Tooltip, IconButton } from '../../index'
 import styles from '../../storybook/index.module.scss'
+import treeStyles from '../../storybook/tree.module.scss'
 
 export default {
   title: 'Content/Tree',
@@ -509,6 +512,77 @@ export const NestedTreeControlledFromOutside = () => {
       nodesContainerClassName={styles.nodesContainer}
       isReturnSelectedKeysWhenOnSelect
       totalRootNodes={nodes.length}
+    />
+  )
+}
+
+export const TreeWithCustomStyle = () => {
+  const [nodes, setNodes] = useState(treeNodes)
+
+  const defaultNodePadding = 24
+  const getNodeLeftPadding = nestingLevel => nestingLevel * defaultNodePadding
+
+  const renderParent = (
+    node,
+    { isSelected, onSelect, totalSelected, totalChildren, onExpand, isOpen },
+  ) => {
+    return (
+      <div
+        key={node.uniqueKey}
+        style={{ paddingLeft: getNodeLeftPadding(node.nestingLevel) }}
+        className={classNames(treeStyles.customParentNode, {
+          [treeStyles.selected]: isSelected,
+        })}
+      >
+        <IconButton
+          variant='ghost'
+          className={treeStyles.iconButton}
+          onClick={onExpand}
+        >
+          <ArrowRight
+            className={classNames(treeStyles.arrowSvg, {
+              [treeStyles.opened]: isOpen,
+            })}
+          />
+        </IconButton>
+        <Tooltip content={node.label} overflowOnly>
+          <div onClick={onSelect} className={treeStyles.title}>
+            {node.label}
+          </div>
+        </Tooltip>
+      </div>
+    )
+  }
+
+  const renderLeaf = (node, { isSelected, isLastLeafOfParent, onSelect }) => (
+    <div
+      key={node.uniqueKey}
+      style={{ paddingLeft: getNodeLeftPadding(node.nestingLevel) }}
+      className={classNames(treeStyles.customLeafNode, {
+        [treeStyles.selected]: isSelected,
+      })}
+    >
+      <Tooltip content={node.label} overflowOnly>
+        <div onClick={onSelect} className={treeStyles.title}>
+          {node.label}
+        </div>
+      </Tooltip>
+    </div>
+  )
+
+  return (
+    <Tree
+      nodes={nodes}
+      maxNestingLevel={3}
+      className={styles.tree}
+      nodesContainerClassName={styles.nodesContainer}
+      totalRootNodes={nodes.length}
+      renderParent={renderParent}
+      renderLeaf={renderLeaf}
+      rootNodeHeight={48}
+      parentNodeHeight={48}
+      leafNodeHeight={48}
+      isBulkActionsEnabled={false}
     />
   )
 }

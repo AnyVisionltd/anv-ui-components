@@ -25,6 +25,9 @@ import {
   ALL_ROOTS_COMBINED_KEY,
   getNodeParents,
   organizeSelectedKeys,
+  PARENT_NODE_WRAPPER_HEIGHT,
+  PARENT_NODE_HEIGHT,
+  LEAF_NODE_HEIGHT,
 } from './utils'
 import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
 import styles from './Tree.module.scss'
@@ -42,6 +45,7 @@ const Tree = forwardRef(
       placeholder,
       onExpand,
       onSelect,
+      renderParent,
       renderLeaf,
       renderLeafRightSide,
       displayLabels,
@@ -59,6 +63,9 @@ const Tree = forwardRef(
       isReturnWholeNodeDataWhenOnSelect,
       selfControlled,
       totalRootNodes,
+      rootNodeHeight,
+      parentNodeHeight,
+      leafNodeHeight,
     },
     ref,
   ) => {
@@ -71,6 +78,11 @@ const Tree = forwardRef(
     const [singularNounLabel, pluralNounLabel] =
       displayLabels || defaultDisplayLabels
     const keyValues = { childrenKey, labelKey, idKey, totalLeavesKey }
+    const nodeHeightsValues = {
+      rootNodeHeight,
+      parentNodeHeight,
+      leafNodeHeight,
+    }
 
     const {
       searchQuery,
@@ -346,6 +358,7 @@ const Tree = forwardRef(
         totalChildren = children.length,
       } = calculateAmountOfSelectedNodesAndChildren(uniqueKey)
       const isSelected = !!totalChildren && totalSelected === totalChildren
+      const onSelect = () => handleOnSelect(node, isSelected)
 
       const infoText = getParentNodeInfo(totalChildren, totalSelected)
 
@@ -354,6 +367,17 @@ const Tree = forwardRef(
         isOpen,
       )
 
+      if (renderParent) {
+        return renderParent(node, {
+          isSelected,
+          onSelect,
+          totalSelected,
+          totalChildren,
+          onExpand: handleExpand,
+          isOpen,
+        })
+      }
+
       return (
         <div className={containerClasses} key={uniqueKey}>
           <div className={wrapperClasses}>
@@ -361,7 +385,7 @@ const Tree = forwardRef(
               <Checkbox
                 disabled={!totalChildren}
                 checked={isSelected}
-                onChange={() => handleOnSelect(node, isSelected)}
+                onChange={onSelect}
                 className={classNames(
                   styles.isSelectedCheckbox,
                   styles.checkbox,
@@ -409,31 +433,36 @@ const Tree = forwardRef(
       const { uniqueKey, [labelKey]: label } = node
       const { style, isLastLeaf } = virtualizedListProps
       const isSelected = handleIsLeafNodeSelected(uniqueKey)
+      const onSelect = () => handleOnSelect(node, isSelected)
 
       const { containerClasses, leafNodeClasses } = getLeafNodeClasses(
         isLastLeaf,
       )
 
+      if (renderLeaf) {
+        return renderLeaf(node, {
+          isSelected,
+          isLastLeafOfParent: isLastLeaf,
+          onSelect,
+        })
+      }
+
       return (
         <div className={containerClasses} key={uniqueKey}>
           <div style={style} className={styles.leafNodeWrapper}>
-            {renderLeaf ? (
-              renderLeaf(node)
-            ) : (
-              <div className={leafNodeClasses}>
-                <div className={styles.leftSideLeaf}>
-                  <Checkbox
-                    checked={isSelected}
-                    onChange={() => handleOnSelect(node, isSelected)}
-                    className={styles.checkbox}
-                  />
-                  <Tooltip content={label} overflowOnly>
-                    <p className={styles.leafLabel}>{label}</p>
-                  </Tooltip>
-                </div>
-                {renderLeafRightSide && renderLeafRightSide(node)}
+            <div className={leafNodeClasses}>
+              <div className={styles.leftSideLeaf}>
+                <Checkbox
+                  checked={isSelected}
+                  onChange={onSelect}
+                  className={styles.checkbox}
+                />
+                <Tooltip content={label} overflowOnly>
+                  <p className={styles.leafLabel}>{label}</p>
+                </Tooltip>
               </div>
-            )}
+              {renderLeafRightSide && renderLeafRightSide(node)}
+            </div>
           </div>
         </div>
       )
@@ -476,6 +505,7 @@ const Tree = forwardRef(
         isSearching={!!searchQuery.length}
         nodesMap={flattenedNodes}
         onExpand={onExpand}
+        nodeHeightsValues={nodeHeightsValues}
         {...keyValues}
       />
     )
@@ -528,6 +558,9 @@ Tree.defaultProps = {
   labelKey: 'label',
   idKey: 'key',
   selfControlled: true,
+  rootNodeHeight: PARENT_NODE_WRAPPER_HEIGHT,
+  parentNodeHeight: PARENT_NODE_HEIGHT,
+  leafNodeHeight: LEAF_NODE_HEIGHT,
 }
 
 Tree.propTypes = {
@@ -563,6 +596,14 @@ Tree.propTypes = {
   renderLeaf: propTypes.func,
   /** Custom render for the right side of leaf node. */
   renderLeafRightSide: propTypes.func,
+  /** Custom render for the whole parent node row. */
+  renderParent: propTypes.func,
+  /** Height of a root node (parent node in the first layer). Default is 80. */
+  rootNodeHeight: propTypes.number,
+  /** Height of a root node. Default is 72. */
+  parentNodeHeight: propTypes.number,
+  /** Height of a root node. Default is 48. */
+  leafNodeHeight: propTypes.number,
   /** Display labels that describe the name in singular [0] and plural [1] nouns, default is ['Item', 'Items']. */
   displayLabels: propTypes.arrayOf(propTypes.string),
   /** If passed, menu will be rendered for each main root node in the tree, in addition to search action. */
