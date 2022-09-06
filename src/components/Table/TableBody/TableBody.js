@@ -73,11 +73,11 @@ const TableBody = ({
     setExpandableRowMap(prev => ({ ...prev, [idx]: !prev[idx] }))
   }
 
-  const handleRowClick = idx => {
+  const handleRowClick = (idx, row) => {
     if (isRowClickExpand && isExpandableRow) {
       setExpandableRowMap(prev => ({ ...prev, [idx]: !prev[idx] }))
     }
-    onRowClick()
+    onRowClick(row)
   }
 
   const renderRow = (row, idx) => {
@@ -92,7 +92,7 @@ const TableBody = ({
         rowActions={rowActions}
         row={row}
         rowHeight={rowHeight}
-        onRowClick={() => handleRowClick(idx)}
+        onRowClick={row => handleRowClick(idx, row)}
         menuClassName={menuClassName}
         isExpandableRow={isExpandableRow}
         onExpandClick={() => handleExpandClick(idx)}
