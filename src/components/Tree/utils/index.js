@@ -19,6 +19,16 @@ export const emptyListTypes = Object.freeze({
   NO_RESULTS_FOUND: 1,
 })
 
+export const refreshTree = treeInstance => {
+  if (!treeInstance) return
+  const { props, state } = treeInstance
+  state.computeTree(
+    props,
+    { ...state, records: undefined, order: undefined },
+    { refresh: true },
+  )
+}
+
 export const getUniqueKey = (parentKey, nodeKey) =>
   `${parentKey}${SEPARATOR_SIGN}${nodeKey}`
 
@@ -90,7 +100,7 @@ export const checkAllNodesAreExpanded = ({
     nodesTreeData.forEach(node => {
       const { uniqueKey, [childrenKey]: children } = node
       if (!children || !areExpanded) return
-      if (nodesVirtualizedMap[uniqueKey]?.isOpen) {
+      if (nodesVirtualizedMap?.get(uniqueKey)?.public.isOpen) {
         return areAllNodesExpanded(children)
       } else {
         areExpanded = false

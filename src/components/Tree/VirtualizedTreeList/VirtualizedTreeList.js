@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from 'react'
+import React, { useRef, useMemo, useState } from 'react'
 import propTypes from 'prop-types'
 import { VariableSizeTree as TreeList } from 'react-vtree'
 import AutoSizer from 'react-virtualized-auto-sizer'
@@ -10,7 +10,7 @@ const Node = ({
   data,
   isOpen,
   style,
-  toggle,
+  setOpen,
   treeData: {
     renderNode,
     maxContainerWidth,
@@ -18,9 +18,22 @@ const Node = ({
     childrenKey,
     idKey,
     onExpand,
+    selfControlled,
+    handleLoadChildrenToParentNode,
   },
 }) => {
-  const { nestingLevel, parentKey, isLeaf, index, [idKey]: key } = data
+  const [isLoading, setIsLoading] = useState(false)
+
+  if (data.isPlaceholderNode) return null
+
+  const {
+    nestingLevel,
+    parentKey,
+    isLeaf,
+    index,
+    [idKey]: key,
+    uniqueKey,
+  } = data
   const paddingLeft = 2 * TREE_NODE_PADDING * nestingLevel
   const additionalStyle = {
     paddingLeft,
@@ -29,9 +42,17 @@ const Node = ({
   const isLastLeafOfParent =
     isLeaf && nodesMap[parentKey]?.[childrenKey].length - 1 === index
 
-  const handleExpand = () => {
-    !isOpen && onExpand(key)
-    toggle()
+  const handleExpand = async () => {
+    onExpand?.(key, !isOpen)
+    if (isOpen || selfControlled) {
+      await setOpen(!isOpen)
+      return
+    }
+
+    setIsLoading(true)
+    await handleLoadChildrenToParentNode(key)
+    await setOpen(!isOpen)
+    setIsLoading(false)
   }
 
   const content = renderNode(data, nestingLevel, {
@@ -39,9 +60,14 @@ const Node = ({
     handleExpand,
     isLastLeaf: isLastLeafOfParent,
     style: additionalStyle,
+    isLoading,
   })
 
-  return <div style={style}>{content}</div>
+  return (
+    <div key={uniqueKey} style={style}>
+      {content}
+    </div>
+  )
 }
 
 const determineDefaultHeight = (isParentNode, layer, nodeHeightsValues) => {
@@ -50,51 +76,70 @@ const determineDefaultHeight = (isParentNode, layer, nodeHeightsValues) => {
   return layer === 0 ? rootNodeHeight : parentNodeHeight
 }
 
+const getNodeData = ({ node, nestingLevel, nodeHeightsValues, labelKey }) => {
+  const { isParentNode, [labelKey]: label, uniqueKey } = node
+  return {
+    data: {
+      defaultHeight: determineDefaultHeight(
+        isParentNode,
+        nestingLevel,
+        nodeHeightsValues,
+      ),
+      isOpenByDefault: false,
+      id: uniqueKey,
+      name: label,
+      isLeaf: !isParentNode,
+      nestingLevel,
+      ...node,
+    },
+    nestingLevel,
+    node,
+  }
+}
+
+// We always need to yield at least one root node, but if we the list is empty (either no results or search query doesn't match any node)
+// there is no node to yield, so there is a placeholder node.
+const getPlaceholderNodeData = () => ({
+  data: {
+    isLeaf: true,
+    isPlaceholderNode: true,
+    defaultHeight: 0,
+  },
+  nestingLevel: 0,
+  node: {},
+})
+
 const buildTreeWalker = ({
-  rootNode,
+  rootNodes,
   nodeHeightsValues,
   childrenKey,
   labelKey,
 }) =>
-  function* treeWalker(refresh) {
-    const stack = Object.values(rootNode).map(node => ({
-      nestingLevel: 0,
-      node,
-    }))
+  function* treeWalker() {
+    yield getPlaceholderNodeData()
 
-    while (stack.length) {
-      const { node, nestingLevel } = stack.shift()
-      const {
-        isParentNode,
-        [labelKey]: label,
-        [childrenKey]: children,
-        visible,
-        uniqueKey,
-      } = node
+    for (let i = 0; i < rootNodes.length; i++) {
+      const node = rootNodes[i]
+      if (!node.visible) continue
+      yield getNodeData({
+        node,
+        nestingLevel: 0,
+        nodeHeightsValues,
+        labelKey,
+      })
+    }
 
-      if (!visible) continue
-
-      const isOpened = yield refresh
-        ? {
-            defaultHeight: determineDefaultHeight(
-              isParentNode,
-              nestingLevel,
-              nodeHeightsValues,
-            ),
-            isOpenByDefault: false,
-            id: uniqueKey,
-            name: label,
-            isLeaf: !isParentNode,
-            nestingLevel,
-            ...node,
-          }
-        : uniqueKey
-
-      if (isParentNode && isOpened) {
-        for (let i = children.length - 1; i >= 0; i--) {
-          stack.unshift({
-            nestingLevel: nestingLevel + 1,
-            node: children[i],
+    while (true) {
+      const parentMeta = yield
+      if (parentMeta.node.isParentNode) {
+        for (let i = 0; i < parentMeta.node?.[childrenKey].length; i++) {
+          const childNode = parentMeta.node[childrenKey][i]
+          if (!childNode.visible) continue
+          yield getNodeData({
+            node: childNode,
+            nestingLevel: parentMeta.nestingLevel + 1,
+            nodeHeightsValues,
+            labelKey,
           })
         }
       }
@@ -103,13 +148,15 @@ const buildTreeWalker = ({
 
 const VirtualizedTreeList = ({
   setTreeInstance,
-  rootNode,
+  rootNodes,
   renderNode,
   loadMoreData,
   isSearching,
   nodesMap,
   onExpand,
   nodeHeightsValues,
+  selfControlled,
+  handleLoadChildrenToParentNode,
   ...keyValues
 }) => {
   const innerRef = useRef()
@@ -144,10 +191,12 @@ const VirtualizedTreeList = ({
             maxContainerWidth: width,
             nodesMap,
             onExpand,
+            selfControlled,
+            handleLoadChildrenToParentNode,
             ...keyValues,
           }}
           treeWalker={buildTreeWalker({
-            rootNode,
+            rootNodes,
             nodeHeightsValues,
             ...keyValues,
           })}
@@ -157,6 +206,7 @@ const VirtualizedTreeList = ({
           onScroll={scrollPosition =>
             handleInfiniteScroll(scrollPosition, height)
           }
+          async
         >
           {Node}
         </TreeList>
@@ -174,7 +224,9 @@ VirtualizedTreeList.defaultProps = {
 
 VirtualizedTreeList.propTypes = {
   /** Tree structure needed for rendering the tree list. */
-  rootNode: propTypes.object.isRequired,
+  rootNodes: propTypes.array.isRequired,
+  /** If true, search is controlled by the table component. Default is true.*/
+  selfControlled: propTypes.bool,
   /** A map object that is used to store data about the tree nodes. */
   nodesMap: propTypes.object.isRequired,
   /** Render function for the nodes of the tree. */
@@ -193,12 +245,14 @@ VirtualizedTreeList.propTypes = {
   idKey: propTypes.string,
   /** The key value of the node's name property. Default is 'label'. */
   labelKey: propTypes.string,
+  /** A function to handle addition of new nodes to a a parent node. */
+  handleLoadChildrenToParentNode: propTypes.func,
   /** An object that contains the height of leaf nodes, parent nodes and root nodes. */
   nodeHeightsValues: propTypes.shape({
     leafNodeHeight: propTypes.number.isRequired,
     parentNodeHeight: propTypes.number.isRequired,
     rootNodeHeight: propTypes.number.isRequired,
-  })
+  }),
 }
 
 export default VirtualizedTreeList

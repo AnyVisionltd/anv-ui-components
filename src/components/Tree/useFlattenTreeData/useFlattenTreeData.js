@@ -156,29 +156,21 @@ const useFlattenTreeData = ({
   )
 
   const handleAddNewFlattenedNodes = useCallback(
-    newNodesData => {
-      const newFlattenedNodes = {}
-      newFlattenedNodes[ALL_ROOTS_COMBINED_KEY] = {
-        [idKey]: ALL_ROOTS_COMBINED_KEY,
-        uniqueKey: ALL_ROOTS_COMBINED_KEY,
-        [childrenKey]: [],
+    ({ newNodesData, layer, selectedKeysSetOrObj }) => {
+      const newFlattenedNodes = {
+        ...flattenedNodes,
       }
-
-      flatten(newNodesData, newFlattenedNodes)
-      setFlattenedNodes(prev => ({
-        ...prev,
-        ...newFlattenedNodes,
-        [ALL_ROOTS_COMBINED_KEY]: {
+      if (!newFlattenedNodes[ALL_ROOTS_COMBINED_KEY]) {
+        newFlattenedNodes[ALL_ROOTS_COMBINED_KEY] = {
           [idKey]: ALL_ROOTS_COMBINED_KEY,
           uniqueKey: ALL_ROOTS_COMBINED_KEY,
-          [childrenKey]: [
-            ...prev[ALL_ROOTS_COMBINED_KEY]?.[childrenKey],
-            ...newFlattenedNodes[ALL_ROOTS_COMBINED_KEY][childrenKey],
-          ],
-        },
-      }))
+          [childrenKey]: [],
+        }
+      }
+      flatten(newNodesData, newFlattenedNodes, selectedKeysSetOrObj, layer)
+      setFlattenedNodes(newFlattenedNodes)
     },
-    [childrenKey, flatten, idKey],
+    [childrenKey, flatten, flattenedNodes, idKey],
   )
 
   const handleSetSelectedNodesFromKeysArr = useCallback(

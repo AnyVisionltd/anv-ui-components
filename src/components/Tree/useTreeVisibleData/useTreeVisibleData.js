@@ -1,7 +1,9 @@
 import { useCallback, useState } from 'react'
 import {
   ALL_ROOTS_COMBINED_KEY,
+  getNodeParents,
   getUniqueKey,
+  refreshTree,
   setNodeValueInTreeFromPath,
 } from '../utils'
 
@@ -127,6 +129,30 @@ const useTreeVisibleData = ({
     [filterVisibleData, searchQuery],
   )
 
+  const handleAddNewNestedNodes = useCallback(
+    ({ parentNodeKey, newNodes, nodesMap }) => {
+      const nodeChildrenData = filterVisibleData(
+        newNodes,
+        selfControlled ? searchQuery.trim().toLowerCase() : '',
+        parentNodeKey,
+      )
+      const nodePathArr = getNodeParents(parentNodeKey, nodesMap)
+      handleSetNodeNewProperties(
+        parentNodeKey,
+        { [childrenKey]: nodeChildrenData },
+        nodePathArr,
+      )
+      return nodeChildrenData
+    },
+    [
+      childrenKey,
+      filterVisibleData,
+      handleSetNodeNewProperties,
+      searchQuery,
+      selfControlled,
+    ],
+  )
+
   const handleResetSearchData = useCallback(() => {
     setSearchQuery('')
     setFilteredData(setAllNodesAsVisible(filteredData))
@@ -145,9 +171,7 @@ const useTreeVisibleData = ({
       setFilteredData(filterVisibleData(filteredData, searchKeyword))
     }
 
-    treeInstance?.state?.recomputeTree({
-      refreshNodes: true,
-    })
+    refreshTree(treeInstance)
   }
 
   return {
@@ -158,6 +182,7 @@ const useTreeVisibleData = ({
     handleAddNewNodes,
     handleSetNodeNewProperties,
     handleSetNewNodes,
+    handleAddNewNestedNodes,
   }
 }
 
