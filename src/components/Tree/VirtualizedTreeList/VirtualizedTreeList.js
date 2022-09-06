@@ -24,6 +24,8 @@ const Node = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false)
 
+  if (data.isPlaceholderNode) return null
+
   const {
     nestingLevel,
     parentKey,
@@ -41,16 +43,14 @@ const Node = ({
     isLeaf && nodesMap[parentKey]?.[childrenKey].length - 1 === index
 
   const handleExpand = async () => {
-    if (isOpen || selfControlled || !onExpand) {
+    onExpand?.(key, !isOpen)
+    if (isOpen || selfControlled) {
       await setOpen(!isOpen)
       return
     }
 
     setIsLoading(true)
-    const newChildren = await onExpand(key)
-    if (newChildren) {
-      handleLoadChildrenToParentNode(key, newChildren)
-    }
+    await handleLoadChildrenToParentNode(key)
     await setOpen(!isOpen)
     setIsLoading(false)
   }
@@ -97,18 +97,32 @@ const getNodeData = ({ node, nestingLevel, nodeHeightsValues, labelKey }) => {
   }
 }
 
+// We always need to yield at least one root node, but if we the list is empty (either no results or search query doesn't match any node)
+// there is no node to yield, so there is a placeholder node.
+const getPlaceholderNodeData = () => ({
+  data: {
+    isLeaf: true,
+    isPlaceholderNode: true,
+    defaultHeight: 0,
+  },
+  nestingLevel: 0,
+  node: {},
+})
+
 const buildTreeWalker = ({
-  rootNode,
+  rootNodes,
   nodeHeightsValues,
   childrenKey,
   labelKey,
 }) =>
   function* treeWalker() {
-    const rootNodes = Object.values(rootNode)
+    yield getPlaceholderNodeData()
 
     for (let i = 0; i < rootNodes.length; i++) {
+      const node = rootNodes[i]
+      if (!node.visible) continue
       yield getNodeData({
-        node: rootNodes[i],
+        node,
         nestingLevel: 0,
         nodeHeightsValues,
         labelKey,
@@ -119,8 +133,10 @@ const buildTreeWalker = ({
       const parentMeta = yield
       if (parentMeta.node.isParentNode) {
         for (let i = 0; i < parentMeta.node?.[childrenKey].length; i++) {
+          const childNode = parentMeta.node[childrenKey][i]
+          if (!childNode.visible) continue
           yield getNodeData({
-            node: parentMeta.node.children[i],
+            node: childNode,
             nestingLevel: parentMeta.nestingLevel + 1,
             nodeHeightsValues,
             labelKey,
@@ -132,7 +148,7 @@ const buildTreeWalker = ({
 
 const VirtualizedTreeList = ({
   setTreeInstance,
-  rootNode,
+  rootNodes,
   renderNode,
   loadMoreData,
   isSearching,
@@ -180,7 +196,7 @@ const VirtualizedTreeList = ({
             ...keyValues,
           }}
           treeWalker={buildTreeWalker({
-            rootNode,
+            rootNodes,
             nodeHeightsValues,
             ...keyValues,
           })}
@@ -208,7 +224,7 @@ VirtualizedTreeList.defaultProps = {
 
 VirtualizedTreeList.propTypes = {
   /** Tree structure needed for rendering the tree list. */
-  rootNode: propTypes.object.isRequired,
+  rootNodes: propTypes.array.isRequired,
   /** A map object that is used to store data about the tree nodes. */
   nodesMap: propTypes.object.isRequired,
   /** Render function for the nodes of the tree. */
@@ -227,6 +243,8 @@ VirtualizedTreeList.propTypes = {
   idKey: propTypes.string,
   /** The key value of the node's name property. Default is 'label'. */
   labelKey: propTypes.string,
+  /** A function to handle addition of new nodes to a a parent node. */
+  handleLoadChildrenToParentNode: propTypes.func,
   /** An object that contains the height of leaf nodes, parent nodes and root nodes. */
   nodeHeightsValues: propTypes.shape({
     leafNodeHeight: propTypes.number.isRequired,

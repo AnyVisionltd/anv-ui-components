@@ -3,6 +3,7 @@ import {
   ALL_ROOTS_COMBINED_KEY,
   getNodeParents,
   getUniqueKey,
+  refreshTree,
   setNodeValueInTreeFromPath,
 } from '../utils'
 
@@ -170,9 +171,7 @@ const useTreeVisibleData = ({
       setFilteredData(filterVisibleData(filteredData, searchKeyword))
     }
 
-    treeInstance?.state?.recomputeTree({
-      refreshNodes: true,
-    })
+    refreshTree(treeInstance)
   }
 
   return {

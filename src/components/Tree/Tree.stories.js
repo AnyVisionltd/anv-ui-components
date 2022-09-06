@@ -531,20 +531,20 @@ export const TreeWithCustomStyle = () => {
     return new Promise(resolve => setTimeout(resolve, 1000 * seconds))
   }
 
-  const handleExpand = async nodeKey => {
+  const handleLoadMoreChildren = async ({ id, offset }) => {
     // Sleep to imitate a request from server
     await sleep(0.5)
     return [
       {
-        key: `${nodeKey}1`,
+        key: `${id}1`,
         label: 'New node 1',
         children: [
-          { key: `${nodeKey}11`, label: 'New nodes 1' },
-          { key: `${nodeKey}12`, label: 'New nodes 2' },
-          { key: `${nodeKey}13`, label: 'New nodes 3' },
+          { key: `${id}11`, label: 'New nodes 1' },
+          { key: `${id}12`, label: 'New nodes 2' },
+          { key: `${id}13`, label: 'New nodes 3' },
         ],
       },
-      { key: `${nodeKey}2`, label: 'New node 2' },
+      { key: `${id}2`, label: 'New node 2' },
     ]
   }
 
@@ -635,7 +635,7 @@ export const TreeWithCustomStyle = () => {
       parentNodeHeight={48}
       leafNodeHeight={48}
       isBulkActionsEnabled={false}
-      onExpand={handleExpand}
+      onLoadNewChildren={handleLoadMoreChildren}
     />
   )
 }

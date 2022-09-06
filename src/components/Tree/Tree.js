@@ -44,6 +44,7 @@ const Tree = forwardRef(
       onSearch,
       placeholder,
       onExpand,
+      onLoadNewChildren,
       onSelect,
       renderParent,
       renderLeaf,
@@ -156,13 +157,19 @@ const Tree = forwardRef(
       ? totalChildrenInTree === totalSelectedInTree
       : handleIsAllNodesAreSelectedWithExclusion()
 
-    const handleLoadChildrenToParentNode = (nodeKey, newChildren) => {
+    const handleLoadChildrenToParentNode = async nodeKey => {
+      const node = flattenedNodes[nodeKey]
+      const newChildren = await onLoadNewChildren?.({
+        id: nodeKey,
+        offset: node.children.length,
+      })
+      if (!newChildren) return
+
       const childrenDataWithProperties = handleAddNewNestedNodes({
         parentNodeKey: nodeKey,
         newNodes: newChildren,
         nodesMap: flattenedNodes,
       })
-      const node = flattenedNodes[nodeKey]
       handleAddNewFlattenedNodes({
         newNodesData: [{ ...node, [childrenKey]: childrenDataWithProperties }],
         layer: node.layer,
@@ -526,12 +533,13 @@ const Tree = forwardRef(
     const renderVirtualizedTreeList = () => (
       <VirtualizedTreeList
         setTreeInstance={setTreeInstance}
-        rootNode={{ ...filteredData }}
+        rootNodes={filteredData}
         renderNode={renderNode}
         loadMoreData={handleLoadMoreData}
         isSearching={!!searchQuery.length}
         nodesMap={flattenedNodes}
         onExpand={onExpand}
+        onLoadNewChildren={onLoadNewChildren}
         nodeHeightsValues={nodeHeightsValues}
         selfControlled={selfControlled}
         handleLoadChildrenToParentNode={handleLoadChildrenToParentNode}
@@ -616,10 +624,12 @@ Tree.propTypes = {
   placeholder: propTypes.string,
   /** Enable bulk actions functionality. */
   isBulkActionsEnabled: propTypes.bool,
-  /** Called when a tree parent node is displayed. */
+  /** Called when a tree parent node is expanded. */
   onExpand: propTypes.func,
   /** Callback function after selecting / unselecteing tree node or nodes. */
   onSelect: propTypes.func,
+  /** Callback for adding new children to a new nested node, called when node is expanded or "load more" button is clicked. */
+  onLoadNewChildren: propTypes.func,
   /** Custom render for the whole leaf node row. */
   renderLeaf: propTypes.func,
   /** Custom render for the right side of leaf node. */
