@@ -90,7 +90,7 @@ export const checkAllNodesAreExpanded = ({
     nodesTreeData.forEach(node => {
       const { uniqueKey, [childrenKey]: children } = node
       if (!children || !areExpanded) return
-      if (nodesVirtualizedMap[uniqueKey]?.isOpen) {
+      if (nodesVirtualizedMap?.get(uniqueKey)?.public.isOpen) {
         return areAllNodesExpanded(children)
       } else {
         areExpanded = false

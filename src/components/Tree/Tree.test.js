@@ -113,13 +113,17 @@ describe('<Tree/>', () => {
     })
 
     test('search input should not appear when isSearchable is false', () => {
-      const { getByRole } = render(<Tree isSearchable={false} />)
+      const { getByRole } = render(
+        <Tree isSearchable={false} nodes={treeNodes} />,
+      )
       expect(() => getByRole('textbox')).toThrow()
     })
   })
 
-  test('bulk actions area should not appear when isBulkActionEnabled is false', () => {
-    const { getByText } = render(<Tree isBulkActionEnabled={false} />)
+  test('bulk actions area should not appear when isBulkActionsEnabled is false', () => {
+    const { getByText } = render(
+      <Tree isBulkActionsEnabled={false} nodes={treeNodes} />,
+    )
     expect(() => getByText('Expand All')).toThrow()
   })
 })

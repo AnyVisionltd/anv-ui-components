@@ -92,6 +92,7 @@ const Tree = forwardRef(
       handleAddNewNodes,
       handleSetNodeNewProperties,
       handleSetNewNodes,
+      handleAddNewNestedNodes,
     } = useTreeVisibleData({
       initialData: nodes,
       onSearch,
@@ -155,6 +156,20 @@ const Tree = forwardRef(
       ? totalChildrenInTree === totalSelectedInTree
       : handleIsAllNodesAreSelectedWithExclusion()
 
+    const handleLoadChildrenToParentNode = (nodeKey, newChildren) => {
+      const childrenDataWithProperties = handleAddNewNestedNodes({
+        parentNodeKey: nodeKey,
+        newNodes: newChildren,
+        nodesMap: flattenedNodes,
+      })
+      const node = flattenedNodes[nodeKey]
+      handleAddNewFlattenedNodes({
+        newNodesData: [{ ...node, [childrenKey]: childrenDataWithProperties }],
+        layer: node.layer,
+      })
+      updateAmountOfSelectedNodesAndChildren(nodeKey)
+    }
+
     const handleOnSelectWithExclusionMode = ({ nodeKey, isSelected }) => {
       const newSelectionData = handleOnSelectWithExclusion({
         nodeKey,
@@ -206,7 +221,6 @@ const Tree = forwardRef(
 
     useEffect(() => {
       if (!selfControlled && !isLoading) {
-        // No more need in calculating the leaves in flattenedNodes
         handleSetNewNodes(nodes)
         flattenTreeData(nodes, selectedKeys)
       }
@@ -217,7 +231,7 @@ const Tree = forwardRef(
       if (selfControlled && filteredData.length < nodes.length) {
         const newAddedNodes = nodes.slice(filteredData.length)
         handleAddNewNodes(newAddedNodes)
-        handleAddNewFlattenedNodes(newAddedNodes)
+        handleAddNewFlattenedNodes({ newNodesData: newAddedNodes })
       }
     }, [
       filteredData,
@@ -268,10 +282,7 @@ const Tree = forwardRef(
           isOpen: !areAllNodesExpanded,
           childrenKey,
         })
-        treeInstance.state.recomputeTree({
-          opennessState: allExpandedCollapsedNodesObj,
-          refreshNodes: true,
-        })
+        treeInstance.state.recomputeTree(allExpandedCollapsedNodesObj)
         setAreAllNodesExpanded(!areAllNodesExpanded)
       }
     }
@@ -280,7 +291,7 @@ const Tree = forwardRef(
       const newNodes = await loadMoreData()
       if (!newNodes) return
       handleAddNewNodes(newNodes)
-      handleAddNewFlattenedNodes(newNodes)
+      handleAddNewFlattenedNodes({ newNodesData: newNodes })
     }, [handleAddNewFlattenedNodes, handleAddNewNodes, loadMoreData])
 
     const isTreeEmpty = () => {
@@ -335,6 +346,17 @@ const Tree = forwardRef(
       return { containerClasses, wrapperClasses }
     }
 
+    const handleIsParentNodeSelected = (
+      uniqueKey,
+      totalSelected,
+      totalChildren,
+    ) => {
+      if (selfControlled || totalChildren) {
+        return totalSelected === totalChildren
+      }
+      return handleIsNodeSelectedWithExclusion(uniqueKey)
+    }
+
     const getParentNodeInfo = (totalChildren, totalSelected) =>
       `${totalChildren} ${
         totalChildren === 1 ? singularNounLabel : pluralNounLabel
@@ -351,13 +373,17 @@ const Tree = forwardRef(
         uniqueKey,
         nestingLevel,
       } = node
-      const { isOpen, handleExpand, style } = virtualizedListProps
+      const { isOpen, handleExpand, style, isLoading } = virtualizedListProps
       const { renderActions } = rootNodeProps
       const {
         totalSelected = 0,
         totalChildren = children.length,
       } = calculateAmountOfSelectedNodesAndChildren(uniqueKey)
-      const isSelected = !!totalChildren && totalSelected === totalChildren
+      const isSelected = handleIsParentNodeSelected(
+        uniqueKey,
+        totalSelected,
+        totalChildren,
+      )
       const onSelect = () => handleOnSelect(node, isSelected)
 
       const infoText = getParentNodeInfo(totalChildren, totalSelected)
@@ -375,6 +401,7 @@ const Tree = forwardRef(
           totalChildren,
           onExpand: handleExpand,
           isOpen,
+          isLoading,
         })
       }
 
@@ -506,6 +533,8 @@ const Tree = forwardRef(
         nodesMap={flattenedNodes}
         onExpand={onExpand}
         nodeHeightsValues={nodeHeightsValues}
+        selfControlled={selfControlled}
+        handleLoadChildrenToParentNode={handleLoadChildrenToParentNode}
         {...keyValues}
       />
     )
@@ -548,7 +577,6 @@ Tree.defaultProps = {
   selectedKeys: [],
   onSearch: () => {},
   onSelect: () => {},
-  onExpand: () => {},
   isSearchable: true,
   isBulkActionsEnabled: true,
   rootNodeActions: [],

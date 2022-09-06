@@ -2,7 +2,13 @@
 import React, { useState, useMemo } from 'react'
 import classNames from 'classnames'
 import { action } from '@storybook/addon-actions'
-import { ArrowRight, PencilEdit, Search, ListAdd } from '@anyvision/anv-icons'
+import {
+  ArrowRight,
+  PencilEdit,
+  Search,
+  ListAdd,
+  Loader,
+} from '@anyvision/anv-icons'
 import { centerDecorator } from '../../utils/storybook/decorators'
 import Tree from './Tree'
 import { Tooltip, IconButton } from '../../index'
@@ -517,22 +523,44 @@ export const NestedTreeControlledFromOutside = () => {
 }
 
 export const TreeWithCustomStyle = () => {
-  const [nodes, setNodes] = useState(treeNodes)
+  const [nodes, setNodes] = useState([
+    { key: '5', label: 'Click Me!', children: [] },
+  ])
+
+  const sleep = seconds => {
+    return new Promise(resolve => setTimeout(resolve, 1000 * seconds))
+  }
+
+  const handleExpand = async nodeKey => {
+    // Sleep to imitate a request from server
+    await sleep(0.5)
+    return [
+      {
+        key: `${nodeKey}1`,
+        label: 'New node 1',
+        children: [
+          { key: `${nodeKey}11`, label: 'New nodes 1' },
+          { key: `${nodeKey}12`, label: 'New nodes 2' },
+          { key: `${nodeKey}13`, label: 'New nodes 3' },
+        ],
+      },
+      { key: `${nodeKey}2`, label: 'New node 2' },
+    ]
+  }
 
   const defaultNodePadding = 24
   const getNodeLeftPadding = nestingLevel => nestingLevel * defaultNodePadding
 
-  const renderParent = (
-    node,
-    { isSelected, onSelect, totalSelected, totalChildren, onExpand, isOpen },
-  ) => (
-    <div
-      key={node.uniqueKey}
-      style={{ paddingLeft: getNodeLeftPadding(node.nestingLevel) }}
-      className={classNames(treeStyles.customParentNode, {
-        [treeStyles.selected]: isSelected,
-      })}
-    >
+  const renderExpandIcon = ({ loading, onExpand, isOpen }) => {
+    if (loading) {
+      return (
+        <div className={treeStyles.spinner}>
+          <Loader />
+        </div>
+      )
+    }
+
+    return (
       <IconButton
         variant='ghost'
         className={treeStyles.iconButton}
@@ -544,6 +572,29 @@ export const TreeWithCustomStyle = () => {
           })}
         />
       </IconButton>
+    )
+  }
+
+  const renderParent = (
+    node,
+    {
+      isSelected,
+      onSelect,
+      totalSelected,
+      totalChildren,
+      onExpand,
+      isOpen,
+      isLoading,
+    },
+  ) => (
+    <div
+      key={node.uniqueKey}
+      style={{ paddingLeft: getNodeLeftPadding(node.nestingLevel) }}
+      className={classNames(treeStyles.customParentNode, {
+        [treeStyles.selected]: isSelected,
+      })}
+    >
+      {renderExpandIcon({ loading: isLoading, onExpand, isOpen })}
       <Tooltip content={node.label} overflowOnly>
         <div onClick={onSelect} className={treeStyles.title}>
           {node.label}
@@ -570,8 +621,11 @@ export const TreeWithCustomStyle = () => {
 
   return (
     <Tree
+      selfControlled={false}
       nodes={nodes}
-      maxNestingLevel={3}
+      // It's important to add maxNestingLevel for performance reasons, if known.
+      // For the current example, it's not added.
+      // maxNestingLevel={3}
       className={styles.tree}
       nodesContainerClassName={styles.nodesContainer}
       totalRootNodes={nodes.length}
@@ -581,6 +635,7 @@ export const TreeWithCustomStyle = () => {
       parentNodeHeight={48}
       leafNodeHeight={48}
       isBulkActionsEnabled={false}
+      onExpand={handleExpand}
     />
   )
 }
