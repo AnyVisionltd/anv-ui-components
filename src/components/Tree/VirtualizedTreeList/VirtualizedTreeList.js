@@ -225,6 +225,8 @@ VirtualizedTreeList.defaultProps = {
 VirtualizedTreeList.propTypes = {
   /** Tree structure needed for rendering the tree list. */
   rootNodes: propTypes.array.isRequired,
+  /** If true, search is controlled by the table component. Default is true.*/
+  selfControlled: propTypes.bool,
   /** A map object that is used to store data about the tree nodes. */
   nodesMap: propTypes.object.isRequired,
   /** Render function for the nodes of the tree. */

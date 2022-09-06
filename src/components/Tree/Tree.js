@@ -539,7 +539,6 @@ const Tree = forwardRef(
         isSearching={!!searchQuery.length}
         nodesMap={flattenedNodes}
         onExpand={onExpand}
-        onLoadNewChildren={onLoadNewChildren}
         nodeHeightsValues={nodeHeightsValues}
         selfControlled={selfControlled}
         handleLoadChildrenToParentNode={handleLoadChildrenToParentNode}
