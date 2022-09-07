@@ -73,6 +73,7 @@ const useNodeSelectionWithExclusion = ({
 
   const handleIsNodeSelectedWithExclusion = useCallback(
     nodeKey => {
+      if (!flattenedNodes[nodeKey]) return false
       const nodeParentsKeys = getCachedNodeParents(nodeKey)
       return isNodeSelectedWithExclusion({
         nodeKey,

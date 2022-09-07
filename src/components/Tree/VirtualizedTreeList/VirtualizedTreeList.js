@@ -3,7 +3,14 @@ import propTypes from 'prop-types'
 import { VariableSizeTree as TreeList } from 'react-vtree'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import { throttle } from '../../../utils'
-import { TREE_NODE_PADDING } from '../utils'
+import {
+  isPaginationNode,
+  isPlaceholderNode,
+  nodesListTypes,
+  PAGINATION_NODE_ID,
+  PLACEHOLDER_NODE_ID,
+  TREE_NODE_PADDING,
+} from '../utils'
 import styles from './VirtualizedTreeList.module.scss'
 
 const Node = ({
@@ -24,8 +31,6 @@ const Node = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false)
 
-  if (data.isPlaceholderNode) return null
-
   const {
     nestingLevel,
     parentKey,
@@ -33,12 +38,29 @@ const Node = ({
     index,
     [idKey]: key,
     uniqueKey,
+    type,
   } = data
+
+  if (isPlaceholderNode({ type })) return null
+
   const paddingLeft = 2 * TREE_NODE_PADDING * nestingLevel
   const additionalStyle = {
     paddingLeft,
     maxWidth: maxContainerWidth - paddingLeft,
   }
+
+  if (isPaginationNode({ type })) {
+    return (
+      <div
+        onClick={async () => handleLoadChildrenToParentNode(parentKey)}
+        style={style}
+        key={uniqueKey}
+      >
+        Click on me
+      </div>
+    )
+  }
+
   const isLastLeafOfParent =
     isLeaf && nodesMap[parentKey]?.[childrenKey].length - 1 === index
 
@@ -64,7 +86,7 @@ const Node = ({
   })
 
   return (
-    <div key={uniqueKey} style={style}>
+    <div style={style} key={uniqueKey}>
       {content}
     </div>
   )
@@ -101,11 +123,28 @@ const getNodeData = ({ node, nestingLevel, nodeHeightsValues, labelKey }) => {
 // there is no node to yield, so there is a placeholder node.
 const getPlaceholderNodeData = () => ({
   data: {
+    id: PLACEHOLDER_NODE_ID,
     isLeaf: true,
-    isPlaceholderNode: true,
+    type: nodesListTypes.PLACEHOLDER,
     defaultHeight: 0,
   },
   nestingLevel: 0,
+  node: {},
+})
+
+const getPaginationLoadMoreNodeData = ({
+  parentNodeId,
+  nestingLevel,
+  height,
+}) => ({
+  data: {
+    defaultHeight: height,
+    parentKey: parentNodeId,
+    id: PAGINATION_NODE_ID(parentNodeId),
+    isLeaf: true,
+    type: nodesListTypes.PAGINATION,
+  },
+  nestingLevel,
   node: {},
 })
 
@@ -114,6 +153,7 @@ const buildTreeWalker = ({
   nodeHeightsValues,
   childrenKey,
   labelKey,
+  hasMoreChildrenKey,
 }) =>
   function* treeWalker() {
     yield getPlaceholderNodeData()
@@ -132,14 +172,23 @@ const buildTreeWalker = ({
     while (true) {
       const parentMeta = yield
       if (parentMeta.node.isParentNode) {
-        for (let i = 0; i < parentMeta.node?.[childrenKey].length; i++) {
-          const childNode = parentMeta.node[childrenKey][i]
+        const children = parentMeta.node[childrenKey]
+        for (let i = 0; i < children.length; i++) {
+          const childNode = children[i]
           if (!childNode.visible) continue
           yield getNodeData({
             node: childNode,
             nestingLevel: parentMeta.nestingLevel + 1,
             nodeHeightsValues,
             labelKey,
+          })
+        }
+
+        if (children.length && parentMeta.node[hasMoreChildrenKey]) {
+          yield getPaginationLoadMoreNodeData({
+            parentNodeId: parentMeta.node.uniqueKey,
+            nestingLevel: parentMeta.nestingLevel + 1,
+            height: nodeHeightsValues.leafNodeHeight,
           })
         }
       }
