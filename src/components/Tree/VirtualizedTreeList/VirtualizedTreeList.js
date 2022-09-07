@@ -3,7 +3,7 @@ import propTypes from 'prop-types'
 import { VariableSizeTree as TreeList } from 'react-vtree'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import { throttle } from '../../../utils'
-import { TREE_NODE_PADDING } from '../utils'
+import { PLACEHOLDER_NODE_ID, TREE_NODE_PADDING } from '../utils'
 import styles from './VirtualizedTreeList.module.scss'
 
 const Node = ({
@@ -101,6 +101,7 @@ const getNodeData = ({ node, nestingLevel, nodeHeightsValues, labelKey }) => {
 // there is no node to yield, so there is a placeholder node.
 const getPlaceholderNodeData = () => ({
   data: {
+    id: PLACEHOLDER_NODE_ID,
     isLeaf: true,
     isPlaceholderNode: true,
     defaultHeight: 0,

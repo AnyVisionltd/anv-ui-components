@@ -1,5 +1,7 @@
 export const ALL_ROOTS_COMBINED_KEY = 'ALL_ROOTS_COMBINED_KEY'
 
+export const PLACEHOLDER_NODE_ID = 'placeholder-node'
+
 export const TREE_NODE_PADDING = 24
 export const LEAF_NODE_HEIGHT = 48
 export const PARENT_NODE_WRAPPER_HEIGHT = 80
@@ -27,6 +29,7 @@ export const refreshTree = treeInstance => {
     { ...state, records: undefined, order: undefined },
     { refresh: true },
   )
+  state.resetAfterId(PLACEHOLDER_NODE_ID)
 }
 
 export const getUniqueKey = (parentKey, nodeKey) =>
