@@ -9,14 +9,14 @@ const Accordion = ({ className, data = [], expandAll, disableAll }) => {
   const [selected, setSelected] = useState({})
 
   useEffect(() => {
-    setSelected(
-      expandAll
-        ? data?.reduce((acc, { id }) => {
-            acc[id] = true
-            return acc
-          }, {})
-        : {},
-    )
+    if (expandAll) {
+      setSelected(
+        data?.reduce((acc, { id }) => {
+          acc[id] = true
+          return acc
+        }, {}),
+      )
+    }
   }, [expandAll, data])
 
   const handleItemSelected = id => {
