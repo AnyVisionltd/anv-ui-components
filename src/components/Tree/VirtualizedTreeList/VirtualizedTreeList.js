@@ -1,9 +1,19 @@
-import React, { useRef, useMemo, useState } from 'react'
+import React, { useRef, useMemo, useState, useEffect } from 'react'
 import propTypes from 'prop-types'
 import { VariableSizeTree as TreeList } from 'react-vtree'
+import { useInView } from 'react-intersection-observer'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import { throttle } from '../../../utils'
-import { PLACEHOLDER_NODE_ID, TREE_NODE_PADDING } from '../utils'
+import { Spinner } from '../../../index'
+import {
+  isPaginationNode,
+  isPlaceholderNode,
+  nodesListTypes,
+  PAGINATION_NODE_HEIGHT,
+  PAGINATION_NODE_ID,
+  PLACEHOLDER_NODE_ID,
+  TREE_NODE_PADDING,
+} from '../utils'
 import styles from './VirtualizedTreeList.module.scss'
 
 const Node = ({
@@ -23,8 +33,7 @@ const Node = ({
   },
 }) => {
   const [isLoading, setIsLoading] = useState(false)
-
-  if (data.isPlaceholderNode) return null
+  const { ref, inView } = useInView()
 
   const {
     nestingLevel,
@@ -33,18 +42,47 @@ const Node = ({
     index,
     [idKey]: key,
     uniqueKey,
+    type,
   } = data
+
+  useEffect(() => {
+    if (isPaginationNode({ type }) && inView) {
+      ;(async () => {
+        setIsLoading(true)
+        await handleLoadChildrenToParentNode(parentKey)
+        setIsLoading(false)
+      })()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView])
+
+  if (isPlaceholderNode({ type })) return null
+
+  if (isPaginationNode({ type })) {
+    return (
+      <div
+        key={uniqueKey}
+        style={style}
+        ref={ref}
+        className={styles.paginationNode}
+      >
+        {isLoading && <Spinner size='large' color='primary' />}
+      </div>
+    )
+  }
+
   const paddingLeft = 2 * TREE_NODE_PADDING * nestingLevel
   const additionalStyle = {
     paddingLeft,
     maxWidth: maxContainerWidth - paddingLeft,
   }
+
   const isLastLeafOfParent =
     isLeaf && nodesMap[parentKey]?.[childrenKey].length - 1 === index
 
   const handleExpand = async () => {
     onExpand?.(key, !isOpen)
-    if (isOpen || selfControlled) {
+    if (isOpen || selfControlled || !!data[childrenKey].length) {
       await setOpen(!isOpen)
       return
     }
@@ -76,6 +114,17 @@ const determineDefaultHeight = (isParentNode, layer, nodeHeightsValues) => {
   return layer === 0 ? rootNodeHeight : parentNodeHeight
 }
 
+const isParentNodeHasMoreChildren = ({
+  currentChildrenAmount,
+  totalChildrenAmount,
+  hasMoreChildren,
+}) => {
+  if (Number.isInteger(totalChildrenAmount)) {
+    return totalChildrenAmount > currentChildrenAmount
+  }
+  return hasMoreChildren
+}
+
 const getNodeData = ({ node, nestingLevel, nodeHeightsValues, labelKey }) => {
   const { isParentNode, [labelKey]: label, uniqueKey } = node
   return {
@@ -103,10 +152,23 @@ const getPlaceholderNodeData = () => ({
   data: {
     id: PLACEHOLDER_NODE_ID,
     isLeaf: true,
-    isPlaceholderNode: true,
+    type: nodesListTypes.PLACEHOLDER,
     defaultHeight: 0,
   },
   nestingLevel: 0,
+  node: {},
+})
+
+const getPaginationNodeData = ({ parentNodeId, nestingLevel, height }) => ({
+  data: {
+    defaultHeight: height,
+    parentKey: parentNodeId,
+    uniqueKey: PAGINATION_NODE_ID(parentNodeId),
+    isLeaf: true,
+    type: nodesListTypes.PAGINATION,
+    nestingLevel,
+  },
+  nestingLevel,
   node: {},
 })
 
@@ -115,6 +177,8 @@ const buildTreeWalker = ({
   nodeHeightsValues,
   childrenKey,
   labelKey,
+  hasMoreChildrenKey,
+  totalChildrenKey,
 }) =>
   function* treeWalker() {
     yield getPlaceholderNodeData()
@@ -133,14 +197,34 @@ const buildTreeWalker = ({
     while (true) {
       const parentMeta = yield
       if (parentMeta.node.isParentNode) {
-        for (let i = 0; i < parentMeta.node?.[childrenKey].length; i++) {
-          const childNode = parentMeta.node[childrenKey][i]
+        const {
+          [childrenKey]: children,
+          [hasMoreChildrenKey]: hasMoreChildren,
+          [totalChildrenKey]: totalChildrenAmount,
+        } = parentMeta.node
+        for (let i = 0; i < children.length; i++) {
+          const childNode = children[i]
           if (!childNode.visible) continue
           yield getNodeData({
             node: childNode,
             nestingLevel: parentMeta.nestingLevel + 1,
             nodeHeightsValues,
             labelKey,
+          })
+        }
+
+        if (
+          children.length &&
+          isParentNodeHasMoreChildren({
+            currentChildrenAmount: children.length,
+            totalChildrenAmount,
+            hasMoreChildren,
+          })
+        ) {
+          yield getPaginationNodeData({
+            parentNodeId: parentMeta.node.uniqueKey,
+            nestingLevel: parentMeta.nestingLevel + 1,
+            height: PAGINATION_NODE_HEIGHT,
           })
         }
       }

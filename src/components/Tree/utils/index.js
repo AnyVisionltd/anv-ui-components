@@ -1,11 +1,13 @@
 export const ALL_ROOTS_COMBINED_KEY = 'ALL_ROOTS_COMBINED_KEY'
 
 export const PLACEHOLDER_NODE_ID = 'placeholder-node'
+export const PAGINATION_NODE_ID = parentNodeKey => `pagination-${parentNodeKey}`
 
 export const TREE_NODE_PADDING = 24
 export const LEAF_NODE_HEIGHT = 48
 export const PARENT_NODE_WRAPPER_HEIGHT = 80
 export const PARENT_NODE_HEIGHT = 72
+export const PAGINATION_NODE_HEIGHT = 48
 
 export const DEFAULT_PARENT_NODE_SELECTION_DATA = (excludeMode = false) => ({
   items: {},
@@ -21,6 +23,15 @@ export const emptyListTypes = Object.freeze({
   NO_RESULTS_FOUND: 1,
 })
 
+export const nodesListTypes = Object.freeze({
+  PAGINATION: 'pagination',
+  PLACEHOLDER: 'placeholder',
+})
+
+export const isPaginationNode = ({ type }) => type === nodesListTypes.PAGINATION
+export const isPlaceholderNode = ({ type }) =>
+  type === nodesListTypes.PLACEHOLDER
+
 export const refreshTree = treeInstance => {
   if (!treeInstance) return
   const { props, state } = treeInstance
@@ -30,6 +41,18 @@ export const refreshTree = treeInstance => {
     { refresh: true },
   )
   state.resetAfterId(PLACEHOLDER_NODE_ID)
+}
+
+export const mergeChildrenOfNode = childrenKey => (node, newProperties) => {
+  const {
+    [childrenKey]: newAddedChildren,
+    ...restNodeProperties
+  } = newProperties
+  return {
+    ...node,
+    ...restNodeProperties,
+    [childrenKey]: [...node[childrenKey], ...newAddedChildren],
+  }
 }
 
 export const getUniqueKey = (parentKey, nodeKey) =>
@@ -133,13 +156,14 @@ export const setNodeValueInTreeFromPath = ({
   treeData,
   newProperties,
   childrenKey,
+  nodeSetterFunction = (node, newProperties) => ({ ...node, ...newProperties }),
 }) => {
   const traverseTree = (data, paths) => {
     const nodeKey = paths[0]
     return data.map(childNode => {
       if (childNode.uniqueKey === nodeKey) {
         if (paths.length === 1) {
-          return { ...childNode, ...newProperties }
+          return nodeSetterFunction(childNode, newProperties)
         }
         return {
           ...childNode,

@@ -28,6 +28,7 @@ import {
   PARENT_NODE_WRAPPER_HEIGHT,
   PARENT_NODE_HEIGHT,
   LEAF_NODE_HEIGHT,
+  refreshTree,
 } from './utils'
 import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
 import styles from './Tree.module.scss'
@@ -58,6 +59,8 @@ const Tree = forwardRef(
       labelKey,
       idKey,
       totalLeavesKey,
+      totalChildrenKey,
+      hasMoreChildrenKey,
       isLoading,
       isChildrenUniqueKeysOverlap,
       isReturnSelectedKeysWhenOnSelect,
@@ -78,7 +81,14 @@ const Tree = forwardRef(
     const nodesContainerRef = useRef()
     const [singularNounLabel, pluralNounLabel] =
       displayLabels || defaultDisplayLabels
-    const keyValues = { childrenKey, labelKey, idKey, totalLeavesKey }
+    const keyValues = {
+      childrenKey,
+      labelKey,
+      idKey,
+      totalLeavesKey,
+      hasMoreChildrenKey,
+      totalChildrenKey,
+    }
     const nodeHeightsValues = {
       rootNodeHeight,
       parentNodeHeight,
@@ -159,22 +169,41 @@ const Tree = forwardRef(
 
     const handleLoadChildrenToParentNode = async nodeKey => {
       const node = flattenedNodes[nodeKey]
-      const newChildren = await onLoadNewChildren?.({
-        id: nodeKey,
-        offset: node.children.length,
-      })
-      if (!newChildren) return
+      const childrenAmount = node[childrenKey].length
+      const { newChildren, [hasMoreChildrenKey]: hasMoreChildren } =
+        (await onLoadNewChildren?.({
+          id: nodeKey,
+          offset: childrenAmount,
+        })) || {}
+      if (!newChildren?.length) return
 
       const childrenDataWithProperties = handleAddNewNestedNodes({
         parentNodeKey: nodeKey,
         newNodes: newChildren,
         nodesMap: flattenedNodes,
+        indexPropertyIncrementOfChildren: childrenAmount,
+        childIndexToStartWith: childrenAmount,
+        newParentNodeProperties: {
+          [hasMoreChildrenKey]: hasMoreChildren,
+        },
       })
+      const updatedParentNode = {
+        ...node,
+        [hasMoreChildrenKey]: hasMoreChildren,
+        [childrenKey]: [
+          ...node[childrenKey],
+          ...childrenDataWithProperties.map(({ uniqueKey }) => ({ uniqueKey })),
+        ],
+      }
       handleAddNewFlattenedNodes({
-        newNodesData: [{ ...node, [childrenKey]: childrenDataWithProperties }],
-        layer: node.layer,
+        newNodesData: childrenDataWithProperties,
+        layer: node.layer + 1,
+        updatedParentNode,
       })
       updateAmountOfSelectedNodesAndChildren(nodeKey)
+      if (childrenAmount) {
+        refreshTree(treeInstance)
+      }
     }
 
     const handleOnSelectWithExclusionMode = ({ nodeKey, isSelected }) => {
@@ -183,7 +212,11 @@ const Tree = forwardRef(
         isSelected,
       })
       updateAmountOfSelectedNodesAndChildren(nodeKey)
-      onSelect(newSelectionData)
+      onSelect({
+        selectionData: newSelectionData,
+        clickedNodeKey: nodeKey,
+        isSelected,
+      })
     }
 
     const handleOnSelect = (node, isCurrentlySelected) => {
@@ -609,8 +642,12 @@ Tree.propTypes = {
   idKey: propTypes.string,
   /** The key value of the node's name property. Default is 'label'. */
   labelKey: propTypes.string,
-  /** The key value of the parent node's total leaves property, relevant when tree is controlled from outside. */
+  /** The key value of the parent node's total leaves = (direct children who are not parents) property, relevant when tree is controlled from outside. */
   totalLeavesKey: propTypes.string,
+  /** The key value of the parent node's total children property (both leaves and parents), relevant when tree is controlled from outside. */
+  totalChildrenKey: propTypes.string,
+  /** The key value of the parent node's property to know whether there are more children to the node in the backend, relevant when tree is controlled from outside. */
+  hasMoreChildrenKey: propTypes.string,
   /** For css customization. */
   className: propTypes.string,
   /** For css customization. */

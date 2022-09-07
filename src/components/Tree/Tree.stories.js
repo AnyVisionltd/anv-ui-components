@@ -296,6 +296,26 @@ const treeNodesWithOverlappingKeys = [
   },
 ]
 
+const getChildren = (amount, offset = 0) => {
+  const children = []
+  for (let i = 0; i < amount; i++) {
+    children.push({
+      label: `Camera ${i + offset}`,
+      key: `1${i + offset}`,
+    })
+  }
+  return children
+}
+
+const testNodes = [
+  {
+    key: '1',
+    label: 'Camera Group 1',
+    totalChildren: 70,
+    children: getChildren(50),
+  },
+]
+
 export const Basic = () => {
   // treeInstance allows to access tree properties and use functions to change
   // tree properties:
@@ -534,18 +554,15 @@ export const TreeWithCustomStyle = () => {
   const handleLoadMoreChildren = async ({ id, offset }) => {
     // Sleep to imitate a request from server
     await sleep(0.5)
-    return [
+    const newChildren = [
       {
         key: `${id}1`,
         label: 'New node 1',
-        children: [
-          { key: `${id}11`, label: 'New nodes 1' },
-          { key: `${id}12`, label: 'New nodes 2' },
-          { key: `${id}13`, label: 'New nodes 3' },
-        ],
+        children: [],
       },
       { key: `${id}2`, label: 'New node 2' },
     ]
+    return { newChildren }
   }
 
   const defaultNodePadding = 24
@@ -636,6 +653,119 @@ export const TreeWithCustomStyle = () => {
       leafNodeHeight={48}
       isBulkActionsEnabled={false}
       onLoadNewChildren={handleLoadMoreChildren}
+    />
+  )
+}
+
+export const TreeWithInnerPagination = () => {
+  const hasMoreChildrenKey = 'hasMore'
+  const totalChildrenKey = 'totalChildren'
+  const [nodes, setNodes] = useState(testNodes)
+
+  const sleep = seconds => {
+    return new Promise(resolve => setTimeout(resolve, 1000 * seconds))
+  }
+
+  const handleLoadMoreChildren = async ({ id, offset }) => {
+    await sleep(0.5)
+    const newChildren = getChildren(10, offset)
+
+    return {
+      newChildren,
+      [hasMoreChildrenKey]: offset !== 3,
+    }
+  }
+
+  const defaultNodePadding = 24
+  const getNodeLeftPadding = nestingLevel => nestingLevel * defaultNodePadding
+
+  const renderExpandIcon = ({ loading, onExpand, isOpen }) => {
+    if (loading) {
+      return (
+        <div className={treeStyles.spinner}>
+          <Loader />
+        </div>
+      )
+    }
+
+    return (
+      <IconButton
+        variant='ghost'
+        className={treeStyles.iconButton}
+        onClick={onExpand}
+      >
+        <ArrowRight
+          className={classNames(treeStyles.arrowSvg, {
+            [treeStyles.opened]: isOpen,
+          })}
+        />
+      </IconButton>
+    )
+  }
+
+  const renderParent = (
+    node,
+    {
+      isSelected,
+      onSelect,
+      totalSelected,
+      totalChildren,
+      onExpand,
+      isOpen,
+      isLoading,
+    },
+  ) => (
+    <div
+      key={node.uniqueKey}
+      style={{ paddingLeft: getNodeLeftPadding(node.nestingLevel) }}
+      className={classNames(treeStyles.customParentNode, {
+        [treeStyles.selected]: isSelected,
+      })}
+    >
+      {renderExpandIcon({ loading: isLoading, onExpand, isOpen })}
+      <Tooltip content={node.label} overflowOnly>
+        <div onClick={onSelect} className={treeStyles.title}>
+          {node.label}
+        </div>
+      </Tooltip>
+    </div>
+  )
+
+  const renderLeaf = (node, { isSelected, isLastLeafOfParent, onSelect }) => (
+    <div
+      key={node.uniqueKey}
+      style={{ paddingLeft: getNodeLeftPadding(node.nestingLevel) }}
+      className={classNames(treeStyles.customLeafNode, {
+        [treeStyles.selected]: isSelected,
+      })}
+    >
+      <Tooltip content={node.label} overflowOnly>
+        <div onClick={onSelect} className={treeStyles.title}>
+          {node.label}
+        </div>
+      </Tooltip>
+    </div>
+  )
+
+  return (
+    <Tree
+      selfControlled={false}
+      nodes={nodes}
+      // It's important to add maxNestingLevel for performance reasons, if known.
+      // For the current example, it's not added.
+      // maxNestingLevel={3}
+      className={styles.tree}
+      nodesContainerClassName={styles.nodesContainer}
+      totalRootNodes={nodes.length}
+      renderParent={renderParent}
+      renderLeaf={renderLeaf}
+      rootNodeHeight={48}
+      parentNodeHeight={48}
+      leafNodeHeight={48}
+      isBulkActionsEnabled={false}
+      onLoadNewChildren={handleLoadMoreChildren}
+      hasMoreChildrenKey={hasMoreChildrenKey}
+      totalChildrenKey={totalChildrenKey}
     />
   )
 }

@@ -1,8 +1,9 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useState, useMemo } from 'react'
 import {
   ALL_ROOTS_COMBINED_KEY,
   getNodeParents,
   getUniqueKey,
+  mergeChildrenOfNode,
   refreshTree,
   setNodeValueInTreeFromPath,
 } from '../utils'
@@ -52,11 +53,20 @@ const useTreeVisibleData = ({
   )
 
   const filterVisibleData = useCallback(
-    (data, searchKeyword, parentKey = ALL_ROOTS_COMBINED_KEY) => {
+    (
+      data,
+      searchKeyword,
+      parentKey = ALL_ROOTS_COMBINED_KEY,
+      indexPropertyIncrementOfChildren = 0,
+    ) => {
       const setVisible = nodes =>
         nodes.forEach((node, index) => {
           node.visible = node[labelKey].toLowerCase().includes(searchKeyword)
-          setNodeProperties({ node, parentKey, index })
+          setNodeProperties({
+            node,
+            parentKey,
+            index: index + indexPropertyIncrementOfChildren,
+          })
 
           if (Array.isArray(node[childrenKey])) {
             node.isParentNode = true
@@ -85,20 +95,23 @@ const useTreeVisibleData = ({
   )
 
   const [searchQuery, setSearchQuery] = useState('')
+  const searchKeywordToFilter = useMemo(
+    () => (selfControlled ? searchQuery.trim().toLowerCase() : ''),
+    [searchQuery, selfControlled],
+  )
+
   const [filteredData, setFilteredData] = useState(
-    filterVisibleData(
-      initialData,
-      selfControlled ? searchQuery.trim().toLowerCase() : '',
-    ),
+    filterVisibleData(initialData, searchKeywordToFilter),
   )
 
   const handleSetNodeNewProperties = useCallback(
-    (nodeKey, newProperties, nodePathArr) => {
+    (nodeKey, newProperties, nodePathArr, nodeSetterFunction) => {
       const newTreeData = setNodeValueInTreeFromPath({
         pathsArr: [...nodePathArr, nodeKey],
         treeData: [...filteredData],
         newProperties,
         childrenKey,
+        nodeSetterFunction,
       })
 
       setFilteredData(newTreeData)
@@ -108,14 +121,9 @@ const useTreeVisibleData = ({
 
   const handleSetNewNodes = useCallback(
     newNodes => {
-      setFilteredData(
-        filterVisibleData(
-          newNodes,
-          selfControlled ? searchQuery.trim().toLowerCase() : '',
-        ),
-      )
+      setFilteredData(filterVisibleData(newNodes, searchKeywordToFilter))
     },
-    [filterVisibleData, searchQuery, selfControlled],
+    [filterVisibleData, searchKeywordToFilter],
   )
 
   const handleAddNewNodes = useCallback(
@@ -130,17 +138,26 @@ const useTreeVisibleData = ({
   )
 
   const handleAddNewNestedNodes = useCallback(
-    ({ parentNodeKey, newNodes, nodesMap }) => {
+    ({
+      parentNodeKey,
+      newParentNodeProperties,
+      newNodes,
+      nodesMap,
+      indexPropertyIncrementOfChildren = 0,
+    }) => {
       const nodeChildrenData = filterVisibleData(
         newNodes,
-        selfControlled ? searchQuery.trim().toLowerCase() : '',
+        searchKeywordToFilter,
         parentNodeKey,
+        indexPropertyIncrementOfChildren,
       )
       const nodePathArr = getNodeParents(parentNodeKey, nodesMap)
+      const nodeSetterFunction = mergeChildrenOfNode(childrenKey)
       handleSetNodeNewProperties(
         parentNodeKey,
-        { [childrenKey]: nodeChildrenData },
+        { [childrenKey]: nodeChildrenData, ...newParentNodeProperties },
         nodePathArr,
+        nodeSetterFunction,
       )
       return nodeChildrenData
     },
@@ -148,8 +165,7 @@ const useTreeVisibleData = ({
       childrenKey,
       filterVisibleData,
       handleSetNodeNewProperties,
-      searchQuery,
-      selfControlled,
+      searchKeywordToFilter,
     ],
   )
 

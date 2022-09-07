@@ -40,7 +40,7 @@ const useFlattenTreeData = ({
   })
 
   const flatten = useCallback(
-    (treeData, nodesMap, selectedKeysSetOrObj = new Set(), layer = 0) => {
+    ({ treeData, nodesMap, selectedKeysSetOrObj = new Set(), layer = 0 }) => {
       if (!Array.isArray(treeData) || treeData.length === 0) {
         return
       }
@@ -67,7 +67,12 @@ const useFlattenTreeData = ({
           layer,
           isSelected,
         }
-        flatten(children, nodesMap, selectedKeysSetOrObj, layer + 1)
+        flatten({
+          treeData: children,
+          nodesMap,
+          selectedKeysSetOrObj,
+          layer: layer + 1,
+        })
       })
     },
     [childrenKey, idKey, selfControlled],
@@ -156,10 +161,8 @@ const useFlattenTreeData = ({
   )
 
   const handleAddNewFlattenedNodes = useCallback(
-    ({ newNodesData, layer, selectedKeysSetOrObj }) => {
-      const newFlattenedNodes = {
-        ...flattenedNodes,
-      }
+    ({ newNodesData, layer, selectedKeysSetOrObj, updatedParentNode }) => {
+      const newFlattenedNodes = { ...flattenedNodes }
       if (!newFlattenedNodes[ALL_ROOTS_COMBINED_KEY]) {
         newFlattenedNodes[ALL_ROOTS_COMBINED_KEY] = {
           [idKey]: ALL_ROOTS_COMBINED_KEY,
@@ -167,7 +170,15 @@ const useFlattenTreeData = ({
           [childrenKey]: [],
         }
       }
-      flatten(newNodesData, newFlattenedNodes, selectedKeysSetOrObj, layer)
+      if (updatedParentNode) {
+        newFlattenedNodes[updatedParentNode.uniqueKey] = updatedParentNode
+      }
+      flatten({
+        treeData: newNodesData,
+        nodesMap: newFlattenedNodes,
+        selectedKeysSetOrObj,
+        layer,
+      })
       setFlattenedNodes(newFlattenedNodes)
     },
     [childrenKey, flatten, flattenedNodes, idKey],
@@ -222,7 +233,12 @@ const useFlattenTreeData = ({
         [childrenKey]: [],
       }
 
-      flatten(treeData, flattenedNodesMap, selectedKeysSetOrObj, layer)
+      flatten({
+        treeData,
+        nodesMap: flattenedNodesMap,
+        selectedKeysSetOrObj,
+        layer,
+      })
       setFlattenedNodes(flattenedNodesMap)
     },
     [childrenKey, flatten, idKey],
