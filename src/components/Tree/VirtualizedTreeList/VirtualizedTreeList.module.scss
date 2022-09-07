@@ -7,3 +7,9 @@
     background-color: av-color(purewhite, av-opacity(divider));
   }
 }
+
+.paginationNode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

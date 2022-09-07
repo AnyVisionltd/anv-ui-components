@@ -296,6 +296,26 @@ const treeNodesWithOverlappingKeys = [
   },
 ]
 
+const getChildren = (amount, offset = 0) => {
+  const children = []
+  for (let i = 0; i < amount; i++) {
+    children.push({
+      label: `Camera ${i + offset}`,
+      key: `1${i + offset}`,
+    })
+  }
+  return children
+}
+
+const testNodes = [
+  {
+    key: '1',
+    label: 'Camera Group 1',
+    totalChildren: 70,
+    children: getChildren(50),
+  },
+]
+
 export const Basic = () => {
   // treeInstance allows to access tree properties and use functions to change
   // tree properties:
@@ -538,11 +558,7 @@ export const TreeWithCustomStyle = () => {
       {
         key: `${id}1`,
         label: 'New node 1',
-        children: [
-          { key: `${id}11`, label: 'New nodes 1' },
-          { key: `${id}12`, label: 'New nodes 2' },
-          { key: `${id}13`, label: 'New nodes 3' },
-        ],
+        children: [],
       },
       { key: `${id}2`, label: 'New node 2' },
     ]
@@ -641,32 +657,18 @@ export const TreeWithCustomStyle = () => {
   )
 }
 
-export const TreeWithLoadMoreButtonForChildren = () => {
+export const TreeWithInnerPagination = () => {
   const hasMoreChildrenKey = 'hasMore'
   const totalChildrenKey = 'totalChildren'
-  const [nodes, setNodes] = useState([
-    {
-      key: '5',
-      label: 'Click Me!',
-      children: [],
-      [hasMoreChildrenKey]: true,
-      [totalChildrenKey]: 12,
-    },
-  ])
+  const [nodes, setNodes] = useState(testNodes)
 
   const sleep = seconds => {
     return new Promise(resolve => setTimeout(resolve, 1000 * seconds))
   }
 
   const handleLoadMoreChildren = async ({ id, offset }) => {
-    // Sleep to imitate a request from server
-
     await sleep(0.5)
-    const newChildren = [
-      { key: `${id}1${offset + 1}`, label: 'New nodes 1' },
-      { key: `${id}1${offset + 2}`, label: 'New nodes 2' },
-      { key: `${id}1${offset + 3}`, label: 'New nodes 3' },
-    ]
+    const newChildren = getChildren(10, offset)
 
     return {
       newChildren,

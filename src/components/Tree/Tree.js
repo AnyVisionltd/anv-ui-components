@@ -28,7 +28,7 @@ import {
   PARENT_NODE_WRAPPER_HEIGHT,
   PARENT_NODE_HEIGHT,
   LEAF_NODE_HEIGHT,
-  PAGINATION_NODE_HEIGHT,
+  refreshTree,
 } from './utils'
 import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
 import styles from './Tree.module.scss'
@@ -50,7 +50,6 @@ const Tree = forwardRef(
       renderParent,
       renderLeaf,
       renderLeafRightSide,
-      renderPaginationNode,
       displayLabels,
       rootNodeActions,
       loadMoreData,
@@ -71,7 +70,6 @@ const Tree = forwardRef(
       rootNodeHeight,
       parentNodeHeight,
       leafNodeHeight,
-      paginationNodeHeight,
     },
     ref,
   ) => {
@@ -95,7 +93,6 @@ const Tree = forwardRef(
       rootNodeHeight,
       parentNodeHeight,
       leafNodeHeight,
-      paginationNodeHeight,
     }
 
     const {
@@ -204,6 +201,9 @@ const Tree = forwardRef(
         updatedParentNode,
       })
       updateAmountOfSelectedNodesAndChildren(nodeKey)
+      if (childrenAmount) {
+        refreshTree(treeInstance)
+      }
     }
 
     const handleOnSelectWithExclusionMode = ({ nodeKey, isSelected }) => {
@@ -212,7 +212,11 @@ const Tree = forwardRef(
         isSelected,
       })
       updateAmountOfSelectedNodesAndChildren(nodeKey)
-      onSelect(newSelectionData)
+      onSelect({
+        selectionData: newSelectionData,
+        clickedNodeKey: nodeKey,
+        isSelected,
+      })
     }
 
     const handleOnSelect = (node, isCurrentlySelected) => {
@@ -625,7 +629,6 @@ Tree.defaultProps = {
   rootNodeHeight: PARENT_NODE_WRAPPER_HEIGHT,
   parentNodeHeight: PARENT_NODE_HEIGHT,
   leafNodeHeight: LEAF_NODE_HEIGHT,
-  paginationNodeHeight: PAGINATION_NODE_HEIGHT,
 }
 
 Tree.propTypes = {
@@ -669,16 +672,12 @@ Tree.propTypes = {
   renderLeafRightSide: propTypes.func,
   /** Custom render for the whole parent node row. */
   renderParent: propTypes.func,
-  /** Custom render for rendering a pagination node of a parent node. */
-  renderPaginationNode: propTypes.func,
   /** Height of a root node (parent node in the first layer). Default is 80. */
   rootNodeHeight: propTypes.number,
   /** Height of a root node. Default is 72. */
   parentNodeHeight: propTypes.number,
   /** Height of a root node. Default is 48. */
   leafNodeHeight: propTypes.number,
-  /** Height of a pagination node, which is the button that handles load more for nested parents. Default is 48. */
-  paginationNodeHeight: propTypes.number,
   /** Display labels that describe the name in singular [0] and plural [1] nouns, default is ['Item', 'Items']. */
   displayLabels: propTypes.arrayOf(propTypes.string),
   /** If passed, menu will be rendered for each main root node in the tree, in addition to search action. */

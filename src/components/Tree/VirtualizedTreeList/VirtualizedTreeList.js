@@ -1,12 +1,15 @@
-import React, { useRef, useMemo, useState } from 'react'
+import React, { useRef, useMemo, useState, useEffect } from 'react'
 import propTypes from 'prop-types'
 import { VariableSizeTree as TreeList } from 'react-vtree'
+import { useInView } from 'react-intersection-observer'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import { throttle } from '../../../utils'
+import { Spinner } from '../../../index'
 import {
   isPaginationNode,
   isPlaceholderNode,
   nodesListTypes,
+  PAGINATION_NODE_HEIGHT,
   PAGINATION_NODE_ID,
   PLACEHOLDER_NODE_ID,
   TREE_NODE_PADDING,
@@ -30,6 +33,7 @@ const Node = ({
   },
 }) => {
   const [isLoading, setIsLoading] = useState(false)
+  const { ref, inView } = useInView()
 
   const {
     nestingLevel,
@@ -38,25 +42,39 @@ const Node = ({
     index,
     [idKey]: key,
     uniqueKey,
+    type,
   } = data
 
-  if (isPlaceholderNode(data)) return null
+  useEffect(() => {
+    if (isPaginationNode({ type }) && inView) {
+      ;(async () => {
+        setIsLoading(true)
+        await handleLoadChildrenToParentNode(parentKey)
+        setIsLoading(false)
+      })()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView])
+
+  if (isPlaceholderNode({ type })) return null
+
+  if (isPaginationNode({ type })) {
+    return (
+      <div
+        key={uniqueKey}
+        style={style}
+        ref={ref}
+        className={styles.paginationNode}
+      >
+        {isLoading && <Spinner size='large' color='primary' />}
+      </div>
+    )
+  }
+
   const paddingLeft = 2 * TREE_NODE_PADDING * nestingLevel
   const additionalStyle = {
     paddingLeft,
     maxWidth: maxContainerWidth - paddingLeft,
-  }
-
-  if (isPaginationNode(data)) {
-    return (
-      <div
-        onClick={async () => handleLoadChildrenToParentNode(parentKey)}
-        style={style}
-        key={uniqueKey}
-      >
-        Click on me
-      </div>
-    )
   }
 
   const isLastLeafOfParent =
@@ -64,7 +82,7 @@ const Node = ({
 
   const handleExpand = async () => {
     onExpand?.(key, !isOpen)
-    if (isOpen || selfControlled) {
+    if (isOpen || selfControlled || !!data[childrenKey].length) {
       await setOpen(!isOpen)
       return
     }
@@ -141,15 +159,11 @@ const getPlaceholderNodeData = () => ({
   node: {},
 })
 
-const getPaginationLoadMoreNodeData = ({
-  parentNodeId,
-  nestingLevel,
-  height,
-}) => ({
+const getPaginationNodeData = ({ parentNodeId, nestingLevel, height }) => ({
   data: {
     defaultHeight: height,
     parentKey: parentNodeId,
-    id: PAGINATION_NODE_ID(parentNodeId),
+    uniqueKey: PAGINATION_NODE_ID(parentNodeId),
     isLeaf: true,
     type: nodesListTypes.PAGINATION,
     nestingLevel,
@@ -207,11 +221,10 @@ const buildTreeWalker = ({
             hasMoreChildren,
           })
         ) {
-          yield getPaginationLoadMoreNodeData({
+          yield getPaginationNodeData({
             parentNodeId: parentMeta.node.uniqueKey,
             nestingLevel: parentMeta.nestingLevel + 1,
-            // If using inner pagination, height can be 0 + inView of useInView
-            height: nodeHeightsValues.paginationNodeHeight,
+            height: PAGINATION_NODE_HEIGHT,
           })
         }
       }
