@@ -23,7 +23,7 @@
     "classnames": "^2.2.6",
     "jest-environment-jsdom-sixteen": "^1.0.3",
     "moment": "^2.29.1",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "prop-types": "^15.7.2",
     "react-beautiful-dnd": "^13.0.0",
     "react-intersection-observer": "^9.4.0",
