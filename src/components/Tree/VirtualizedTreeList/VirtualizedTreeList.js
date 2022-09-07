@@ -102,7 +102,7 @@ const Node = ({
   })
 
   return (
-    <div style={style} key={uniqueKey}>
+    <div key={uniqueKey} style={style}>
       {content}
     </div>
   )
@@ -337,7 +337,6 @@ VirtualizedTreeList.propTypes = {
     leafNodeHeight: propTypes.number.isRequired,
     parentNodeHeight: propTypes.number.isRequired,
     rootNodeHeight: propTypes.number.isRequired,
-    paginationNodeHeight: propTypes.number.isRequired,
   }),
 }
 
