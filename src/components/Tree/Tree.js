@@ -28,6 +28,7 @@ import {
   PARENT_NODE_WRAPPER_HEIGHT,
   PARENT_NODE_HEIGHT,
   LEAF_NODE_HEIGHT,
+  PAGINATION_NODE_HEIGHT,
 } from './utils'
 import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
 import styles from './Tree.module.scss'
@@ -49,6 +50,7 @@ const Tree = forwardRef(
       renderParent,
       renderLeaf,
       renderLeafRightSide,
+      renderPaginationNode,
       displayLabels,
       rootNodeActions,
       loadMoreData,
@@ -58,6 +60,7 @@ const Tree = forwardRef(
       labelKey,
       idKey,
       totalLeavesKey,
+      totalChildrenKey,
       hasMoreChildrenKey,
       isLoading,
       isChildrenUniqueKeysOverlap,
@@ -68,6 +71,7 @@ const Tree = forwardRef(
       rootNodeHeight,
       parentNodeHeight,
       leafNodeHeight,
+      paginationNodeHeight,
     },
     ref,
   ) => {
@@ -85,11 +89,13 @@ const Tree = forwardRef(
       idKey,
       totalLeavesKey,
       hasMoreChildrenKey,
+      totalChildrenKey,
     }
     const nodeHeightsValues = {
       rootNodeHeight,
       parentNodeHeight,
       leafNodeHeight,
+      paginationNodeHeight,
     }
 
     const {
@@ -180,19 +186,22 @@ const Tree = forwardRef(
         nodesMap: flattenedNodes,
         indexPropertyIncrementOfChildren: childrenAmount,
         childIndexToStartWith: childrenAmount,
+        newParentNodeProperties: {
+          [hasMoreChildrenKey]: hasMoreChildren,
+        },
       })
-      handleAddNewFlattenedNodes({
-        newNodesData: [
-          {
-            ...node,
-            [childrenKey]: [
-              ...node[childrenKey],
-              ...childrenDataWithProperties,
-            ],
-            [hasMoreChildrenKey]: hasMoreChildren,
-          },
+      const updatedParentNode = {
+        ...node,
+        [hasMoreChildrenKey]: hasMoreChildren,
+        [childrenKey]: [
+          ...node[childrenKey],
+          ...childrenDataWithProperties.map(({ uniqueKey }) => ({ uniqueKey })),
         ],
-        layer: node.layer,
+      }
+      handleAddNewFlattenedNodes({
+        newNodesData: childrenDataWithProperties,
+        layer: node.layer + 1,
+        updatedParentNode,
       })
       updateAmountOfSelectedNodesAndChildren(nodeKey)
     }
@@ -616,6 +625,7 @@ Tree.defaultProps = {
   rootNodeHeight: PARENT_NODE_WRAPPER_HEIGHT,
   parentNodeHeight: PARENT_NODE_HEIGHT,
   leafNodeHeight: LEAF_NODE_HEIGHT,
+  paginationNodeHeight: PAGINATION_NODE_HEIGHT,
 }
 
 Tree.propTypes = {
@@ -629,8 +639,10 @@ Tree.propTypes = {
   idKey: propTypes.string,
   /** The key value of the node's name property. Default is 'label'. */
   labelKey: propTypes.string,
-  /** The key value of the parent node's total leaves property, relevant when tree is controlled from outside. */
+  /** The key value of the parent node's total leaves = (direct children who are not parents) property, relevant when tree is controlled from outside. */
   totalLeavesKey: propTypes.string,
+  /** The key value of the parent node's total children property (both leaves and parents), relevant when tree is controlled from outside. */
+  totalChildrenKey: propTypes.string,
   /** The key value of the parent node's property to know whether there are more children to the node in the backend, relevant when tree is controlled from outside. */
   hasMoreChildrenKey: propTypes.string,
   /** For css customization. */
@@ -657,12 +669,16 @@ Tree.propTypes = {
   renderLeafRightSide: propTypes.func,
   /** Custom render for the whole parent node row. */
   renderParent: propTypes.func,
+  /** Custom render for rendering a pagination node of a parent node. */
+  renderPaginationNode: propTypes.func,
   /** Height of a root node (parent node in the first layer). Default is 80. */
   rootNodeHeight: propTypes.number,
   /** Height of a root node. Default is 72. */
   parentNodeHeight: propTypes.number,
   /** Height of a root node. Default is 48. */
   leafNodeHeight: propTypes.number,
+  /** Height of a pagination node, which is the button that handles load more for nested parents. Default is 48. */
+  paginationNodeHeight: propTypes.number,
   /** Display labels that describe the name in singular [0] and plural [1] nouns, default is ['Item', 'Items']. */
   displayLabels: propTypes.arrayOf(propTypes.string),
   /** If passed, menu will be rendered for each main root node in the tree, in addition to search action. */

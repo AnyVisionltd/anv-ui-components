@@ -7,6 +7,7 @@ export const TREE_NODE_PADDING = 24
 export const LEAF_NODE_HEIGHT = 48
 export const PARENT_NODE_WRAPPER_HEIGHT = 80
 export const PARENT_NODE_HEIGHT = 72
+export const PAGINATION_NODE_HEIGHT = 48
 
 export const DEFAULT_PARENT_NODE_SELECTION_DATA = (excludeMode = false) => ({
   items: {},
@@ -42,10 +43,17 @@ export const refreshTree = treeInstance => {
   state.resetAfterId(PLACEHOLDER_NODE_ID)
 }
 
-export const mergeChildrenOfNode = childrenKey => (node, newProperties) => ({
-  ...node,
-  [childrenKey]: [...node[childrenKey], ...newProperties[childrenKey]],
-})
+export const mergeChildrenOfNode = childrenKey => (node, newProperties) => {
+  const {
+    [childrenKey]: newAddedChildren,
+    ...restNodeProperties
+  } = newProperties
+  return {
+    ...node,
+    ...restNodeProperties,
+    [childrenKey]: [...node[childrenKey], ...newAddedChildren],
+  }
+}
 
 export const getUniqueKey = (parentKey, nodeKey) =>
   `${parentKey}${SEPARATOR_SIGN}${nodeKey}`

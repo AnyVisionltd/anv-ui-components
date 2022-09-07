@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useState, useMemo } from 'react'
 import {
   ALL_ROOTS_COMBINED_KEY,
   getNodeParents,
@@ -95,11 +95,13 @@ const useTreeVisibleData = ({
   )
 
   const [searchQuery, setSearchQuery] = useState('')
+  const searchKeywordToFilter = useMemo(
+    () => (selfControlled ? searchQuery.trim().toLowerCase() : ''),
+    [searchQuery, selfControlled],
+  )
+
   const [filteredData, setFilteredData] = useState(
-    filterVisibleData(
-      initialData,
-      selfControlled ? searchQuery.trim().toLowerCase() : '',
-    ),
+    filterVisibleData(initialData, searchKeywordToFilter),
   )
 
   const handleSetNodeNewProperties = useCallback(
@@ -119,14 +121,9 @@ const useTreeVisibleData = ({
 
   const handleSetNewNodes = useCallback(
     newNodes => {
-      setFilteredData(
-        filterVisibleData(
-          newNodes,
-          selfControlled ? searchQuery.trim().toLowerCase() : '',
-        ),
-      )
+      setFilteredData(filterVisibleData(newNodes, searchKeywordToFilter))
     },
-    [filterVisibleData, searchQuery, selfControlled],
+    [filterVisibleData, searchKeywordToFilter],
   )
 
   const handleAddNewNodes = useCallback(
@@ -143,13 +140,14 @@ const useTreeVisibleData = ({
   const handleAddNewNestedNodes = useCallback(
     ({
       parentNodeKey,
+      newParentNodeProperties,
       newNodes,
       nodesMap,
       indexPropertyIncrementOfChildren = 0,
     }) => {
       const nodeChildrenData = filterVisibleData(
         newNodes,
-        selfControlled ? searchQuery.trim().toLowerCase() : '',
+        searchKeywordToFilter,
         parentNodeKey,
         indexPropertyIncrementOfChildren,
       )
@@ -157,7 +155,7 @@ const useTreeVisibleData = ({
       const nodeSetterFunction = mergeChildrenOfNode(childrenKey)
       handleSetNodeNewProperties(
         parentNodeKey,
-        { [childrenKey]: nodeChildrenData },
+        { [childrenKey]: nodeChildrenData, ...newParentNodeProperties },
         nodePathArr,
         nodeSetterFunction,
       )
@@ -167,8 +165,7 @@ const useTreeVisibleData = ({
       childrenKey,
       filterVisibleData,
       handleSetNodeNewProperties,
-      searchQuery,
-      selfControlled,
+      searchKeywordToFilter,
     ],
   )
 

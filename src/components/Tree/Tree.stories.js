@@ -643,8 +643,15 @@ export const TreeWithCustomStyle = () => {
 
 export const TreeWithLoadMoreButtonForChildren = () => {
   const hasMoreChildrenKey = 'hasMore'
+  const totalChildrenKey = 'totalChildren'
   const [nodes, setNodes] = useState([
-    { key: '5', label: 'Click Me!', children: [], [hasMoreChildrenKey]: true },
+    {
+      key: '5',
+      label: 'Click Me!',
+      children: [],
+      [hasMoreChildrenKey]: true,
+      [totalChildrenKey]: 12,
+    },
   ])
 
   const sleep = seconds => {
@@ -756,6 +763,7 @@ export const TreeWithLoadMoreButtonForChildren = () => {
       isBulkActionsEnabled={false}
       onLoadNewChildren={handleLoadMoreChildren}
       hasMoreChildrenKey={hasMoreChildrenKey}
+      totalChildrenKey={totalChildrenKey}
     />
   )
 }

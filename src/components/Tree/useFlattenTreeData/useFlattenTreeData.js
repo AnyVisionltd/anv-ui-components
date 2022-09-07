@@ -39,23 +39,15 @@ const useFlattenTreeData = ({
     maxNestingLevel,
   })
 
-  // flattenWithFirstLayer as good- update parent in separatae
   const flatten = useCallback(
-    ({
-      treeData,
-      nodesMap,
-      selectedKeysSetOrObj = new Set(),
-      layer = 0,
-      childIndexToStartWith = 0,
-    }) => {
+    ({ treeData, nodesMap, selectedKeysSetOrObj = new Set(), layer = 0 }) => {
       if (!Array.isArray(treeData) || treeData.length === 0) {
         return
       }
 
-      treeData.forEach((node, index) => {
-        if (index < childIndexToStartWith) return
+      treeData.forEach(node => {
         const { [childrenKey]: children, parentKey, uniqueKey } = node
-        if (layer === 0 && !nodesMap[uniqueKey]) {
+        if (layer === 0) {
           nodesMap[ALL_ROOTS_COMBINED_KEY][childrenKey].push({ uniqueKey })
         }
 
@@ -169,8 +161,8 @@ const useFlattenTreeData = ({
   )
 
   const handleAddNewFlattenedNodes = useCallback(
-    ({ newNodesData, layer, selectedKeysSetOrObj, childIndexToStartWith }) => {
-      const newFlattenedNodes = flattenedNodes
+    ({ newNodesData, layer, selectedKeysSetOrObj, updatedParentNode }) => {
+      const newFlattenedNodes = { ...flattenedNodes }
       if (!newFlattenedNodes[ALL_ROOTS_COMBINED_KEY]) {
         newFlattenedNodes[ALL_ROOTS_COMBINED_KEY] = {
           [idKey]: ALL_ROOTS_COMBINED_KEY,
@@ -178,12 +170,14 @@ const useFlattenTreeData = ({
           [childrenKey]: [],
         }
       }
+      if (updatedParentNode) {
+        newFlattenedNodes[updatedParentNode.uniqueKey] = updatedParentNode
+      }
       flatten({
         treeData: newNodesData,
         nodesMap: newFlattenedNodes,
         selectedKeysSetOrObj,
         layer,
-        childIndexToStartWith,
       })
       setFlattenedNodes(newFlattenedNodes)
     },

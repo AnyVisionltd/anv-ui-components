@@ -38,18 +38,16 @@ const Node = ({
     index,
     [idKey]: key,
     uniqueKey,
-    type,
   } = data
 
-  if (isPlaceholderNode({ type })) return null
-
+  if (isPlaceholderNode(data)) return null
   const paddingLeft = 2 * TREE_NODE_PADDING * nestingLevel
   const additionalStyle = {
     paddingLeft,
     maxWidth: maxContainerWidth - paddingLeft,
   }
 
-  if (isPaginationNode({ type })) {
+  if (isPaginationNode(data)) {
     return (
       <div
         onClick={async () => handleLoadChildrenToParentNode(parentKey)}
@@ -98,6 +96,17 @@ const determineDefaultHeight = (isParentNode, layer, nodeHeightsValues) => {
   return layer === 0 ? rootNodeHeight : parentNodeHeight
 }
 
+const isParentNodeHasMoreChildren = ({
+  currentChildrenAmount,
+  totalChildrenAmount,
+  hasMoreChildren,
+}) => {
+  if (Number.isInteger(totalChildrenAmount)) {
+    return totalChildrenAmount > currentChildrenAmount
+  }
+  return hasMoreChildren
+}
+
 const getNodeData = ({ node, nestingLevel, nodeHeightsValues, labelKey }) => {
   const { isParentNode, [labelKey]: label, uniqueKey } = node
   return {
@@ -143,6 +152,7 @@ const getPaginationLoadMoreNodeData = ({
     id: PAGINATION_NODE_ID(parentNodeId),
     isLeaf: true,
     type: nodesListTypes.PAGINATION,
+    nestingLevel,
   },
   nestingLevel,
   node: {},
@@ -154,6 +164,7 @@ const buildTreeWalker = ({
   childrenKey,
   labelKey,
   hasMoreChildrenKey,
+  totalChildrenKey,
 }) =>
   function* treeWalker() {
     yield getPlaceholderNodeData()
@@ -172,7 +183,11 @@ const buildTreeWalker = ({
     while (true) {
       const parentMeta = yield
       if (parentMeta.node.isParentNode) {
-        const children = parentMeta.node[childrenKey]
+        const {
+          [childrenKey]: children,
+          [hasMoreChildrenKey]: hasMoreChildren,
+          [totalChildrenKey]: totalChildrenAmount,
+        } = parentMeta.node
         for (let i = 0; i < children.length; i++) {
           const childNode = children[i]
           if (!childNode.visible) continue
@@ -184,11 +199,19 @@ const buildTreeWalker = ({
           })
         }
 
-        if (children.length && parentMeta.node[hasMoreChildrenKey]) {
+        if (
+          children.length &&
+          isParentNodeHasMoreChildren({
+            currentChildrenAmount: children.length,
+            totalChildrenAmount,
+            hasMoreChildren,
+          })
+        ) {
           yield getPaginationLoadMoreNodeData({
             parentNodeId: parentMeta.node.uniqueKey,
             nestingLevel: parentMeta.nestingLevel + 1,
-            height: nodeHeightsValues.leafNodeHeight,
+            // If using inner pagination, height can be 0 + inView of useInView
+            height: nodeHeightsValues.paginationNodeHeight,
           })
         }
       }
@@ -301,6 +324,7 @@ VirtualizedTreeList.propTypes = {
     leafNodeHeight: propTypes.number.isRequired,
     parentNodeHeight: propTypes.number.isRequired,
     rootNodeHeight: propTypes.number.isRequired,
+    paginationNodeHeight: propTypes.number.isRequired,
   }),
 }
 
