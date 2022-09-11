@@ -33,6 +33,7 @@ const InfiniteList = forwardRef(
       expandableRowMap,
       expandableHeight,
       isExpandable,
+      ...otherProps
     },
     forwardRef,
   ) => {
@@ -86,6 +87,7 @@ const InfiniteList = forwardRef(
                   itemCount={itemCount}
                   itemSize={getHeight}
                   onItemsRendered={onItemsRendered}
+                  {...otherProps}
                 >
                   {Item}
                 </VariableSizeList>
@@ -105,6 +107,7 @@ const InfiniteList = forwardRef(
                   itemCount={itemCount}
                   itemSize={rowHeight}
                   onItemsRendered={onItemsRendered}
+                  {...otherProps}
                 >
                   {Item}
                 </List>
