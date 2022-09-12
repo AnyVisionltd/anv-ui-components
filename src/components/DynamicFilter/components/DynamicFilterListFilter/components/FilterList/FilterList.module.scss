@@ -12,6 +12,7 @@
     cursor: pointer;
 
     .rowItemValue {
+      @extend %av-body2;
       color: av-color(trueblack);
       max-width: calc(100% - av-space(micro) - av-size(sz-32));
     }
