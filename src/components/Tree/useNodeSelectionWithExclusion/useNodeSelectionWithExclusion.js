@@ -18,6 +18,8 @@ const useNodeSelectionWithExclusion = ({
   nodeKeysMap,
   totalLeavesKey,
   maxNestingLevel,
+  isSelectionUpdatedAfterMount,
+  initialSelectionData,
 }) => {
   const [treeSelectionData, setTreeSelectionData] = useState(
     DEFAULT_PARENT_NODE_SELECTION_DATA(false),
@@ -134,60 +136,82 @@ const useNodeSelectionWithExclusion = ({
     [getCachedNodeParents, treeSelectionData, maxNestingLevel],
   )
 
-  const calculateAmountOfSelectedNodesAndChildrenWithExclusion = (
-    nodeKey,
-    isUpdate,
-  ) => {
-    if (!Object.keys(flattenedNodes).length) return {}
-    if (!isUpdate && nodeKeysMap.current.has(nodeKey))
-      return nodeKeysMap.current.get(nodeKey)
-    const { [childrenKey]: children, layer } = flattenedNodes[nodeKey] || {}
+  const calculateAmountOfSelectedNodesAndChildrenWithExclusion = useCallback(
+    (nodeKey, isUpdate) => {
+      if (!Object.keys(flattenedNodes).length) return {}
+      if (!isUpdate && nodeKeysMap.current.has(nodeKey))
+        return nodeKeysMap.current.get(nodeKey)
+      const { [childrenKey]: children, layer } = flattenedNodes[nodeKey] || {}
 
-    if (!children) return { totalSelected: 0, totalChildren: 0 }
+      if (!children) return { totalSelected: 0, totalChildren: 0 }
 
-    const totalChildren = getTotalNodeChildren({
-      flattenedNodes,
-      selfControlled: false,
-      totalLeavesKey,
-      childrenKey,
-      maxNestingLevel,
-      nodeKey,
-    })
-    const nodeCachedValue = {
-      totalChildren,
-      totalSelected: handleTotalSelectedOfParentNodeWithExclusion(
+      const totalChildren = getTotalNodeChildren({
+        flattenedNodes,
+        selfControlled: false,
+        totalLeavesKey,
+        childrenKey,
+        maxNestingLevel,
         nodeKey,
+      })
+      const nodeCachedValue = {
         totalChildren,
-        layer,
-      ),
-    }
+        totalSelected: handleTotalSelectedOfParentNodeWithExclusion(
+          nodeKey,
+          totalChildren,
+          layer,
+        ),
+      }
 
-    if (isParentNodeHasOnlyLeaves(layer, maxNestingLevel)) {
+      if (isParentNodeHasOnlyLeaves(layer, maxNestingLevel)) {
+        nodeKeysMap.current.set(nodeKey, nodeCachedValue)
+        return nodeCachedValue
+      }
+
+      children.forEach(({ uniqueKey }) => {
+        if (!flattenedNodes[uniqueKey]?.isParentNode) return
+        const {
+          totalChildren,
+          totalSelected,
+        } = calculateAmountOfSelectedNodesAndChildrenWithExclusion(
+          uniqueKey,
+          isUpdate,
+        )
+        nodeCachedValue.totalChildren += totalChildren
+        nodeCachedValue.totalSelected += totalSelected
+      })
       nodeKeysMap.current.set(nodeKey, nodeCachedValue)
       return nodeCachedValue
-    }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [flattenedNodes, handleTotalSelectedOfParentNodeWithExclusion],
+  )
 
-    children.forEach(({ uniqueKey }) => {
-      if (!flattenedNodes[uniqueKey]?.isParentNode) return
-      const {
-        totalChildren,
-        totalSelected,
-      } = calculateAmountOfSelectedNodesAndChildrenWithExclusion(
-        uniqueKey,
-        isUpdate,
-      )
-      nodeCachedValue.totalChildren += totalChildren
-      nodeCachedValue.totalSelected += totalSelected
-    })
-    nodeKeysMap.current.set(nodeKey, nodeCachedValue)
-    return nodeCachedValue
-  }
+  const handleSetInitialSelectionWithExclusion = useCallback(() => {
+    if (!Object.keys(flattenedNodes).length) return
+    isSelectionUpdatedAfterMount.current = true
+    if (!initialSelectionData) return
+    // State is not updated immediately when ALL_ROOTS_COMBINED is selected, so assign it before setState, so new value is used.
+    treeSelectionData.excludeMode = initialSelectionData.excludeMode
+    treeSelectionData.items = initialSelectionData.items
+    setTreeSelectionData(initialSelectionData)
+    calculateAmountOfSelectedNodesAndChildrenWithExclusion(
+      ALL_ROOTS_COMBINED_KEY,
+      true,
+    )
+  }, [
+    initialSelectionData,
+    flattenedNodes,
+    isSelectionUpdatedAfterMount,
+    treeSelectionData,
+    calculateAmountOfSelectedNodesAndChildrenWithExclusion,
+  ])
 
   return {
     handleIsNodeSelectedWithExclusion,
     handleOnSelectWithExclusion,
     handleIsAllNodesAreSelectedWithExclusion,
     calculateAmountOfSelectedNodesAndChildrenWithExclusion,
+    handleSetInitialSelectionWithExclusion,
   }
 }
 
