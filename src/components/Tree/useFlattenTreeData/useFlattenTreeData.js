@@ -19,16 +19,18 @@ const useFlattenTreeData = ({
   totalLeavesKey,
   selfControlled,
   totalRootNodes,
+  initialSelectionData,
 }) => {
   const [flattenedNodes, setFlattenedNodes] = useState({})
   const nodeKeysMap = useRef(new Map())
-  const isSelectedKeysUpdatedAfterMount = useRef(false)
+  const isSelectionUpdatedAfterMount = useRef(false)
 
   const {
     handleIsNodeSelectedWithExclusion,
     handleOnSelectWithExclusion,
     handleIsAllNodesAreSelectedWithExclusion,
     calculateAmountOfSelectedNodesAndChildrenWithExclusion,
+    handleSetInitialSelectionWithExclusion,
   } = useNodeSelectionWithExclusion({
     flattenedNodes,
     totalRootNodes,
@@ -37,6 +39,8 @@ const useFlattenTreeData = ({
     nodeKeysMap,
     totalLeavesKey,
     maxNestingLevel,
+    isSelectionUpdatedAfterMount,
+    initialSelectionData,
   })
 
   const flatten = useCallback(
@@ -187,7 +191,7 @@ const useFlattenTreeData = ({
   const handleSetSelectedNodesFromKeysArr = useCallback(
     (keysToAdd, keysToRemove = []) => {
       if (!Object.keys(flattenedNodes).length) return
-      isSelectedKeysUpdatedAfterMount.current = true
+      isSelectionUpdatedAfterMount.current = true
       addRemoveKeysInSelectedArr({
         keysArr: keysToAdd,
         flattenedNodes,
@@ -207,7 +211,7 @@ const useFlattenTreeData = ({
   const handleSetSelectedNodesFromKeysObject = useCallback(
     (keysToAdd, keysToRemove = {}) => {
       if (!Object.keys(flattenedNodes).length) return
-      isSelectedKeysUpdatedAfterMount.current = true
+      isSelectionUpdatedAfterMount.current = true
       addRemoveKeysInSelectedObj({
         keysObject: keysToAdd,
         flattenedNodes,
@@ -253,17 +257,31 @@ const useFlattenTreeData = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data])
 
-  useEffect(() => {
-    if (!isSelectedKeysUpdatedAfterMount.current && selectedKeys.length) {
-      if (isChildrenUniqueKeysOverlap)
-        handleSetSelectedNodesFromKeysObject(selectedKeys)
-      else handleSetSelectedNodesFromKeysArr(selectedKeys)
+  const handleSetInitialSelectionWithoutExclusion = useCallback(() => {
+    if (!selectedKeys.length) return
+    if (isChildrenUniqueKeysOverlap) {
+      handleSetSelectedNodesFromKeysObject(selectedKeys)
+      return
     }
+    handleSetSelectedNodesFromKeysArr(selectedKeys)
   }, [
     handleSetSelectedNodesFromKeysArr,
     handleSetSelectedNodesFromKeysObject,
     isChildrenUniqueKeysOverlap,
     selectedKeys,
+  ])
+
+  useEffect(() => {
+    if (isSelectionUpdatedAfterMount.current) return
+    if (selfControlled) {
+      handleSetInitialSelectionWithoutExclusion()
+      return
+    }
+    handleSetInitialSelectionWithExclusion()
+  }, [
+    handleSetInitialSelectionWithoutExclusion,
+    handleSetInitialSelectionWithExclusion,
+    selfControlled,
   ])
 
   return {
@@ -275,7 +293,7 @@ const useFlattenTreeData = ({
     handleAddNewFlattenedNodes,
     handleSetSelectedNodesFromKeysArr,
     handleSetSelectedNodesFromKeysObject,
-    isSelectedKeysUpdatedAfterMount,
+    isSelectionUpdatedAfterMount,
     flattenTreeData,
     handleIsNodeSelectedWithExclusion,
     handleOnSelectWithExclusion,

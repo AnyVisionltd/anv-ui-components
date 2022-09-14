@@ -455,7 +455,6 @@ export const InfiniteTree = () => {
   )
 }
 
-// export const Basic = () => {
 export const UniqueKeyOverlap = () => {
   const [selectedKeys, setSelectedkeys] = useState({
     1: ['101', '102', '103'],
@@ -527,6 +526,19 @@ export const NestedTreeControlledFromOutside = () => {
 
   const onSelect = selectionData => {}
 
+  // In case there is a persistence of data
+  const initialSelectionData = {
+    items: {
+      1: {
+        items: {
+          11: true,
+        },
+        excludeMode: false,
+      },
+    },
+    excludeMode: true,
+  }
+
   return (
     <Tree
       selfControlled={false}
@@ -538,6 +550,7 @@ export const NestedTreeControlledFromOutside = () => {
       nodesContainerClassName={styles.nodesContainer}
       isReturnSelectedKeysWhenOnSelect
       totalRootNodes={nodes.length}
+      initialSelectionData={initialSelectionData}
     />
   )
 }

@@ -70,6 +70,7 @@ const Tree = forwardRef(
       rootNodeHeight,
       parentNodeHeight,
       leafNodeHeight,
+      initialSelectionData,
     },
     ref,
   ) => {
@@ -122,7 +123,7 @@ const Tree = forwardRef(
       handleAddNewFlattenedNodes,
       handleSetSelectedNodesFromKeysArr,
       handleSetSelectedNodesFromKeysObject,
-      isSelectedKeysUpdatedAfterMount,
+      isSelectionUpdatedAfterMount,
       flattenTreeData,
       handleIsNodeSelectedWithExclusion,
       handleOnSelectWithExclusion,
@@ -134,6 +135,7 @@ const Tree = forwardRef(
       isChildrenUniqueKeysOverlap,
       selfControlled,
       totalRootNodes,
+      initialSelectionData,
       ...keyValues,
     })
 
@@ -182,7 +184,6 @@ const Tree = forwardRef(
         newNodes: newChildren,
         nodesMap: flattenedNodes,
         indexPropertyIncrementOfChildren: childrenAmount,
-        childIndexToStartWith: childrenAmount,
         newParentNodeProperties: {
           [hasMoreChildrenKey]: hasMoreChildren,
         },
@@ -214,8 +215,10 @@ const Tree = forwardRef(
       updateAmountOfSelectedNodesAndChildren(nodeKey)
       onSelect({
         selectionData: newSelectionData,
-        clickedNodeKey: nodeKey,
-        isSelected,
+        clickedNode: {
+          id: nodeKey,
+          isSelected,
+        },
       })
     }
 
@@ -298,7 +301,7 @@ const Tree = forwardRef(
         selfControlled &&
         totalSelectedInTree &&
         !selectedKeys.length &&
-        isSelectedKeysUpdatedAfterMount.current
+        isSelectionUpdatedAfterMount.current
       ) {
         const { nodesMap } = setNodesSelectedStatus({
           nodesTree: filteredData,
@@ -712,6 +715,8 @@ Tree.propTypes = {
   /** By default, onSelect returns a list of ids (keys), if isReturnWholeNodeDataWhenOnSelect is set to true,
    * the whole node data will be returned. isReturnSelectedKeysWhenOnSelect won't work when returning whole object data.  */
   isReturnWholeNodeDataWhenOnSelect: propTypes.bool,
+  /** The default initial selection of the tree when selfControlled is set to false. Prop is optional. */
+  initialSelectionData: propTypes.object,
 }
 
 export default Tree
