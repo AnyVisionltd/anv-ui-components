@@ -3,8 +3,8 @@ import propTypes from 'prop-types'
 import { VariableSizeTree as TreeList } from 'react-vtree'
 import { useInView } from 'react-intersection-observer'
 import AutoSizer from 'react-virtualized-auto-sizer'
+import { Loader } from '@anyvision/anv-icons'
 import { throttle } from '../../../utils'
-import { Spinner } from '../../../index'
 import {
   isPaginationNode,
   isPlaceholderNode,
@@ -66,7 +66,7 @@ const Node = ({
         ref={ref}
         className={styles.paginationNode}
       >
-        {isLoading && <Spinner size='large' color='primary' />}
+        {isLoading && <Loader />}
       </div>
     )
   }
@@ -159,18 +159,22 @@ const getPlaceholderNodeData = () => ({
   node: {},
 })
 
-const getPaginationNodeData = ({ parentNodeId, nestingLevel, height }) => ({
-  data: {
-    defaultHeight: height,
-    parentKey: parentNodeId,
-    uniqueKey: PAGINATION_NODE_ID(parentNodeId),
-    isLeaf: true,
-    type: nodesListTypes.PAGINATION,
+const getPaginationNodeData = ({ parentNodeId, nestingLevel, height }) => {
+  const id = PAGINATION_NODE_ID(parentNodeId)
+  return {
+    data: {
+      defaultHeight: height,
+      parentKey: parentNodeId,
+      uniqueKey: id,
+      id,
+      isLeaf: true,
+      type: nodesListTypes.PAGINATION,
+      nestingLevel,
+    },
     nestingLevel,
-  },
-  nestingLevel,
-  node: {},
-})
+    node: {},
+  }
+}
 
 const buildTreeWalker = ({
   rootNodes,
