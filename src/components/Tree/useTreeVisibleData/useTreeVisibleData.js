@@ -106,17 +106,17 @@ const useTreeVisibleData = ({
 
   const handleSetNodeNewProperties = useCallback(
     (nodeKey, newProperties, nodePathArr, nodeSetterFunction) => {
-      const newTreeData = setNodeValueInTreeFromPath({
-        pathsArr: [...nodePathArr, nodeKey],
-        treeData: [...filteredData],
-        newProperties,
-        childrenKey,
-        nodeSetterFunction,
-      })
-
-      setFilteredData(newTreeData)
+      setFilteredData(prev =>
+        setNodeValueInTreeFromPath({
+          pathsArr: [...nodePathArr, nodeKey],
+          treeData: [...prev],
+          newProperties,
+          childrenKey,
+          nodeSetterFunction,
+        }),
+      )
     },
-    [childrenKey, filteredData],
+    [childrenKey],
   )
 
   const handleSetNewNodes = useCallback(

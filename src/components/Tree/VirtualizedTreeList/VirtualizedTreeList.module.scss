@@ -8,8 +8,25 @@
   }
 }
 
+@keyframes rotate {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(-1turn);
+  }
+}
+
 .paginationNode {
   display: flex;
   justify-content: center;
-  align-items: center;
+  width: av-size(sz-32);
+  height: av-size(sz-32);
+
+  svg {
+    animation: rotate 3.6s linear infinite;
+    width: av-size(sz-32);
+    height: av-size(sz-32);
+    fill: av-color(primary);
+  }
 }
