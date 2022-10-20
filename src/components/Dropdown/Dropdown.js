@@ -9,10 +9,10 @@ import React, {
 } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
+import { usePopper } from 'react-popper'
 import { ArrowUp, TimesThick, TimesCircleFilled } from '@anyvision/anv-icons'
 import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
 import keymap from '../../utils/enums/keymap'
-import { findScrollerNodeBottom } from '../../utils'
 import { InputBase, IconButton, useFormProvider, Checkbox } from '../../index'
 import { DropdownItem } from './DropdownItem'
 import { MenuSelect } from '../MenuSelect'
@@ -20,7 +20,6 @@ import { EmptyDropdownMenu } from './EmptyDropdownMenu'
 import {
   useClickOutsideListener,
   usePrevious,
-  useCombinedRefs,
   useIsOverflowing,
 } from '../../hooks'
 import { Tooltip } from '../Tooltip'
@@ -28,15 +27,6 @@ import { DropdownVirtualizedList } from './DropdownVirtualizedList'
 import styles from './Dropdown.module.scss'
 
 const DEFAULT_SELECTED_CONTAINER_HEIGHT = 56
-
-const getMenuPlacement = ({ menuHeight, containerElement }) => {
-  if (!containerElement) return
-  const { bottom: containerBottom } = containerElement.getBoundingClientRect()
-  if (document.body.clientHeight - containerBottom > menuHeight) return false
-
-  const scrollerNodeBottom = findScrollerNodeBottom(containerElement)
-  return scrollerNodeBottom - containerBottom < menuHeight
-}
 
 const Dropdown = React.forwardRef(
   (
@@ -91,9 +81,8 @@ const Dropdown = React.forwardRef(
     })
     const [showMenu, setShowMenu] = useState(false)
     const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1)
-    const [isMenuPositionedUpwards, setIsMenuPositionedUpwards] = useState(null)
-    const containerRef = useRef(null)
-    const menuRef = useRef(null)
+    const [containerRef, setContainerRef] = useState(null)
+    const [menuRef, setMenuRef] = useState(null)
     const inputRef = useRef(null)
     const selectedContainerRef = useRef(null)
     const valuesContainerRef = useRef(null)
@@ -104,6 +93,22 @@ const Dropdown = React.forwardRef(
         : defaultValues.length
         ? defaultValues[0]
         : '',
+    )
+
+    const { styles: popperStyles, attributes, state: popperState } = usePopper(
+      containerRef,
+      menuRef,
+      {
+        placement: 'auto',
+        modifiers: [
+          {
+            name: 'flip',
+            options: {
+              allowedAutoPlacements: ['top', 'bottom'],
+            },
+          },
+        ],
+      },
     )
 
     const handleRemoveAllSelectedItems = () => {
@@ -252,11 +257,14 @@ const Dropdown = React.forwardRef(
       [],
     )
 
-    useClickOutsideListener(() => {
-      closeMenu()
-      getOffTypeMode()
-      resetFocusedOptionIndex()
-    }, containerRef)
+    useClickOutsideListener(
+      () => {
+        closeMenu()
+        getOffTypeMode()
+        resetFocusedOptionIndex()
+      },
+      { current: containerRef },
+    )
 
     const prevProps = usePrevious({ options, defaultValues })
 
@@ -310,30 +318,6 @@ const Dropdown = React.forwardRef(
         selectedContainerRef.current.style.paddingBottom = '2px'
       }
     }, [selectedOptions, multiple, isSelectedShownInHeader, isOverflown])
-
-    const handleMenuPlacement = useCallback(
-      node => {
-        if (
-          isMenuPositionedUpwards === null ||
-          prevProps?.options?.length !== options.length
-        ) {
-          const menuHeight = Math.min(
-            maxMenuHeight,
-            options.length * menuItemHeight,
-          )
-          setIsMenuPositionedUpwards(
-            getMenuPlacement({ menuHeight, containerElement: node }),
-          )
-        }
-      },
-      [
-        isMenuPositionedUpwards,
-        options,
-        prevProps,
-        maxMenuHeight,
-        menuItemHeight,
-      ],
-    )
 
     const focusOption = direction => {
       if (!showMenu || !shownOptions.length) return
@@ -675,11 +659,13 @@ const Dropdown = React.forwardRef(
         className={classNames(
           styles.menuContainer,
           {
-            [styles.isPositionedUpwards]: isMenuPositionedUpwards,
+            [styles.isPositionedUpwards]: popperState?.placement === 'top',
           },
           menuClassName,
         )}
-        ref={menuRef}
+        ref={setMenuRef}
+        style={popperStyles.popper}
+        {...attributes.popper}
       >
         {!shownOptions.length ? (
           <EmptyDropdownMenu
@@ -722,7 +708,6 @@ const Dropdown = React.forwardRef(
       )
     }
 
-    const dropdownRef = useCombinedRefs(containerRef, handleMenuPlacement)
     const showTooltip = useIsOverflowing({
       current: selectedValueElement,
     })
@@ -741,7 +726,7 @@ const Dropdown = React.forwardRef(
           },
           className,
         )}
-        ref={dropdownRef}
+        ref={setContainerRef}
       >
         <Tooltip content={selectedElementContent} show={showTooltip}>
           {renderHeaderContainer()}

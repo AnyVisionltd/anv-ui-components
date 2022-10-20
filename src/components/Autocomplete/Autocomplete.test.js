@@ -19,17 +19,6 @@ const results = [
 ]
 
 describe('<Autocomplete/>', () => {
-  beforeEach(() => {
-    document.getBoundingClientRect = jest.fn(() => ({
-      height: 100,
-      width: 100,
-      bottom: 0,
-      top: 0,
-      left: 0,
-      right: 0,
-    }))
-  })
-
   describe('single selected option dropdown', () => {
     it('should render correctly', () => {
       const { container } = render(<Autocomplete />)
