@@ -4,20 +4,18 @@ import React, {
   useRef,
   memo,
   useEffect,
-  useCallback,
 } from 'react'
+import { usePopper } from 'react-popper'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { ArrowUp, TimesCircleFilled, Loader } from '@anyvision/anv-icons'
 import keymap from '../../utils/enums/keymap'
-import { findScrollerNodeBottom } from '../../utils'
 import { InputBase, IconButton } from '../../index'
 import { AutocompleteItem } from './AutocompleteItem'
 import { EmptyAutocompleteMenu } from './EmptyAutocompleteMenu'
 import {
   useClickOutsideListener,
   usePrevious,
-  useCombinedRefs,
   useIsOverflowing,
 } from '../../hooks'
 import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
@@ -26,15 +24,6 @@ import { AutocompleteVirtualizedList } from './AutocompleteVirtualizedList'
 import styles from './Autocomplete.module.scss'
 
 const menuItemHeight = 56
-
-const getMenuPlacement = ({ menuHeight, containerElement }) => {
-  if (!containerElement) return
-  const { bottom: containerBottom } = containerElement.getBoundingClientRect()
-  if (document.body.clientHeight - containerBottom > menuHeight) return false
-
-  const scrollerNodeBottom = findScrollerNodeBottom(containerElement)
-  return scrollerNodeBottom - containerBottom < menuHeight
-}
 
 const Autocomplete = React.forwardRef(
   (
@@ -64,15 +53,30 @@ const Autocomplete = React.forwardRef(
     const [selected, setSelected] = useState(defaultValue)
     const [showMenu, setShowMenu] = useState(false)
     const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1)
-    const [isMenuPositionedUpwards, setIsMenuPositionedUpwards] = useState(null)
-    const containerRef = useRef(null)
-    const menuRef = useRef(null)
+    const [containerRef, setContainerRef] = useState(null)
+    const [menuRef, setMenuRef] = useState(null)
     const inputRef = useRef(null)
     const selectedContainerRef = useRef(null)
     const valuesContainerRef = useRef(null)
     const [selectedValueElement, setSelectedValueElement] = useState(null)
     const { getComponentTranslation } = useComponentTranslation()
     const AutocompleteTranslations = getComponentTranslation('autocomplete')
+
+    const { styles: popperStyles, attributes, state: popperState } = usePopper(
+      containerRef,
+      menuRef,
+      {
+        placement: 'auto',
+        modifiers: [
+          {
+            name: 'flip',
+            options: {
+              allowedAutoPlacements: ['top', 'bottom'],
+            },
+          },
+        ],
+      },
+    )
 
     const menuHeight = Math.min(
       options.length * menuItemHeight,
@@ -122,11 +126,14 @@ const Autocomplete = React.forwardRef(
       setFilteredValue('')
     }
 
-    useClickOutsideListener(() => {
-      closeMenu()
-      getOffTypeMode()
-      resetFocusedOptionIndex()
-    }, containerRef)
+    useClickOutsideListener(
+      () => {
+        closeMenu()
+        getOffTypeMode()
+        resetFocusedOptionIndex()
+      },
+      { current: containerRef },
+    )
 
     const prevProps = usePrevious({ defaultValue })
 
@@ -137,24 +144,6 @@ const Autocomplete = React.forwardRef(
         setSelected(defaultValue)
       }
     }, [defaultValue, prevProps])
-
-    const handleMenuPlacement = useCallback(
-      node => {
-        if (
-          isMenuPositionedUpwards === null ||
-          prevProps?.options?.length !== options.length
-        ) {
-          const menuHeight = Math.min(
-            maxMenuHeight,
-            options.length * menuItemHeight,
-          )
-          setIsMenuPositionedUpwards(
-            getMenuPlacement({ menuHeight, containerElement: node }),
-          )
-        }
-      },
-      [isMenuPositionedUpwards, options, prevProps, maxMenuHeight],
-    )
 
     const focusOption = direction => {
       if (!showMenu || !options.length) return
@@ -342,10 +331,14 @@ const Autocomplete = React.forwardRef(
     const renderOptions = () => (
       <div
         className={classNames(styles.menuContainer, {
-          [styles.isPositionedUpwards]: isMenuPositionedUpwards,
+          [styles.isPositionedUpwards]: popperState?.placement === 'top',
         })}
-        ref={menuRef}
-        style={{ height: options.length ? `${menuHeight}px` : undefined }}
+        ref={setMenuRef}
+        style={{
+          ...popperStyles.popper,
+          height: options.length ? `${menuHeight}px` : undefined,
+        }}
+        {...attributes.popper}
       >
         {!options.length && filteredValue && !loading ? (
           <EmptyAutocompleteMenu
@@ -373,7 +366,7 @@ const Autocomplete = React.forwardRef(
           disabled && styles.isDisabled,
           className,
         )}
-        ref={useCombinedRefs(containerRef, handleMenuPlacement)}
+        ref={setContainerRef}
       >
         <Tooltip
           content={selectedElementContent}
