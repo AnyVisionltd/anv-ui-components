@@ -10,6 +10,8 @@ import DynamicFilterSelection from './components/DynamicFilterSelection/DynamicF
 import DynamicFilterSlider from './components/DynamicFilterSlider/DynamicFilterSlider'
 import DynamicFilterSort from './components/DynamicFilterSort/DynamicFilterSort'
 import DynamicFilterMenu from './components/DynamicFilterMenu/DynamicFilterMenu'
+import { useIsOverflowing } from '../../hooks'
+import { Tooltip } from '../../index'
 import styles from './DynamicFilter.module.scss'
 
 const DynamicFilter = ({
@@ -24,6 +26,9 @@ const DynamicFilter = ({
   const { state, actions } = UseDynamicFilterReducer()
   const btnRef = useRef(null)
   const { isMenuOpen } = state
+
+  const labelRef = useRef()
+  const isLabelOverflowing = useIsOverflowing(labelRef, true)
 
   const handleBtnClick = () => {
     actions.toggleIsMenuOpen()
@@ -51,7 +56,13 @@ const DynamicFilter = ({
         )}
         onClick={handleBtnClick}
       >
-        {title}
+        <Tooltip show={isLabelOverflowing} content={title}>
+          <div className={styles.titleContainer}>
+            <p ref={labelRef} className={styles.title}>
+              {title}
+            </p>
+          </div>
+        </Tooltip>
         <div
           className={classNames(styles.icons, {
             [styles.multipleIcons]: isFiltered,

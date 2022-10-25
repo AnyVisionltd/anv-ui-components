@@ -23,6 +23,19 @@
     pointer-events: none;
   }
 
+  .titleContainer {
+    width: calc(100%);
+  }
+
+  .title {
+    text-transform: uppercase;
+    width: inherit;
+    max-width: inherit;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .icons {
     display: flex;
     align-items: center;
