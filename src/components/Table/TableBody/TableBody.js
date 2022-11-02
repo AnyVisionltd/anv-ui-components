@@ -77,7 +77,7 @@ const TableBody = ({
     if (isRowClickExpand && isExpandableRow) {
       setExpandableRowMap(prev => ({ ...prev, [idx]: !prev[idx] }))
     }
-    onRowClick(row)
+    onRowClick?.(row)
   }
 
   const renderRow = (row, idx) => {
