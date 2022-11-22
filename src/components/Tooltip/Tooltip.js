@@ -15,6 +15,7 @@ const Tooltip = ({
   arrow,
   offset,
   className,
+  arrowClassName,
   overflowOnly,
   showAlways,
 }) => {
@@ -102,7 +103,7 @@ const Tooltip = ({
               <div
                 ref={setArrowRef}
                 style={popperStyles.arrow}
-                className={styles.popperArrow}
+                className={classNames(styles.popperArrow, arrowClassName)}
               >
                 <div />
               </div>
@@ -143,6 +144,8 @@ Tooltip.propTypes = {
   className: propTypes.string,
   /** Whether to use arrows or not */
   arrow: propTypes.bool,
+  /** Custom styles for the arrow of the tooltip */
+  arrowClassName: propTypes.string,
   /** The distance between the anchor element and the tooltip */
   offset: propTypes.number,
   /** Tooltip only when children overflow */
