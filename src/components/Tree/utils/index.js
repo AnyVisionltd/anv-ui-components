@@ -302,7 +302,7 @@ export const getTotalNodeChildren = ({
 }) => {
   const { [childrenKey]: children, layer, [totalLeavesKey]: totalLeaves } =
     flattenedNodes[nodeKey] || {}
-  if (!selfControlled && totalLeaves) return totalLeaves
+  if (!selfControlled && Number.isInteger(totalLeaves)) return totalLeaves
 
   // It means that the current parentNode has only leaves so no need to filter
   if (isParentNodeHasOnlyLeaves(layer, maxNestingLevel)) return children.length
@@ -321,6 +321,7 @@ const isParentNodeSelectedWithExclusion = ({
   const { excludeMode, items } = selectionData
   const itemsLength = Object.keys(items).length
   if (excludeMode) return !itemsLength
+  if (!itemsLength) return excludeMode
 
   const { layer, [childrenKey]: children } = nodesMap[nodeKey]
 
