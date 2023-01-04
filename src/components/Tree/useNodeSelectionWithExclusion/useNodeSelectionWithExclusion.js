@@ -4,10 +4,13 @@ import {
   DEFAULT_PARENT_NODE_SELECTION_DATA,
   getNodeParents,
   getTotalLeavesSelectedOfParentNode,
-  getTotalNodeChildren,
+  getTotalDirectNodeChildren,
+  getTotalDirectNodeLeaves,
   isNodeSelectedWithExclusion,
   isParentNodeHasOnlyLeaves,
   updateNodeSelectionStatus,
+  getParentNodeExclusionMode,
+  getTotalDirectChildrenSelectedOfParentNode,
 } from '../utils'
 
 const useNodeSelectionWithExclusion = ({
@@ -20,6 +23,7 @@ const useNodeSelectionWithExclusion = ({
   maxNestingLevel,
   isSelectionUpdatedAfterMount,
   initialSelectionData,
+  totalChildrenKey,
 }) => {
   const [treeSelectionData, setTreeSelectionData] = useState(
     DEFAULT_PARENT_NODE_SELECTION_DATA(false),
@@ -31,7 +35,6 @@ const useNodeSelectionWithExclusion = ({
       if (nodeParentKeysPathMap.current.has(nodeKey)) {
         return nodeParentKeysPathMap.current.get(nodeKey)
       }
-
       const parents = getNodeParents(nodeKey, flattenedNodes)
       nodeParentKeysPathMap.current.set(nodeKey, parents)
       return parents
@@ -90,17 +93,18 @@ const useNodeSelectionWithExclusion = ({
     [flattenedNodes, getCachedNodeParents, treeSelectionData],
   )
 
-  const checkIfRootNodeSelected = useCallback(
-    uniqueKey => {
-      if (nodeKeysMap.current.has(uniqueKey)) {
-        const { totalSelected, totalChildren } = nodeKeysMap.current.get(
-          uniqueKey,
-        )
-        return totalSelected === totalChildren
+  const getParentNodeExcludeMode = useCallback(
+    nodeKey => {
+      if (nodeKey === ALL_ROOTS_COMBINED_KEY) {
+        return treeSelectionData.excludeMode
       }
-      return handleIsNodeSelectedWithExclusion(uniqueKey)
+      const nodeParentsKeys = getCachedNodeParents(nodeKey)
+      return getParentNodeExclusionMode({
+        nodePaths: [...nodeParentsKeys, nodeKey],
+        selectionData: treeSelectionData,
+      })
     },
-    [handleIsNodeSelectedWithExclusion, nodeKeysMap],
+    [getCachedNodeParents, treeSelectionData],
   )
 
   const handleIsAllNodesAreSelectedWithExclusion = useCallback(() => {
@@ -111,14 +115,17 @@ const useNodeSelectionWithExclusion = ({
     const allRootsCombinedNode = flattenedNodes[ALL_ROOTS_COMBINED_KEY]
     if (!allRootsCombinedNode) return false
     const { [childrenKey]: children } = allRootsCombinedNode
-    return children.every(({ uniqueKey }) => checkIfRootNodeSelected(uniqueKey))
+    return children.every(({ uniqueKey }) =>
+      handleIsNodeSelectedWithExclusion(uniqueKey),
+    )
   }, [
-    treeSelectionData,
+    treeSelectionData.items,
+    treeSelectionData.excludeMode,
     totalRootNodes,
     currentRootNodesAmount,
     flattenedNodes,
     childrenKey,
-    checkIfRootNodeSelected,
+    handleIsNodeSelectedWithExclusion,
   ])
 
   const handleTotalSelectedOfParentNodeWithExclusion = useCallback(
@@ -145,7 +152,7 @@ const useNodeSelectionWithExclusion = ({
 
       if (!children) return { totalSelected: 0, totalChildren: 0 }
 
-      const totalChildren = getTotalNodeChildren({
+      const totalChildren = getTotalDirectNodeLeaves({
         flattenedNodes,
         selfControlled: false,
         totalLeavesKey,
@@ -186,6 +193,70 @@ const useNodeSelectionWithExclusion = ({
     [flattenedNodes, handleTotalSelectedOfParentNodeWithExclusion],
   )
 
+  const handleTotalDirectSelectedOfParentNodeWithExclusion = useCallback(
+    (nodeKey, totalChildren, nodeNestingLevel) => {
+      if (nodeKey === ALL_ROOTS_COMBINED_KEY) return 0
+      const nodeParentsKeys = getCachedNodeParents(nodeKey)
+      return getTotalDirectChildrenSelectedOfParentNode({
+        nodePaths: [...nodeParentsKeys, nodeKey],
+        selectionData: treeSelectionData,
+        totalChildren,
+        maxNestingLevel,
+        nodeNestingLevel,
+        nodesMap: flattenedNodes,
+        childrenKey,
+      })
+    },
+    [
+      getCachedNodeParents,
+      treeSelectionData,
+      maxNestingLevel,
+      flattenedNodes,
+      childrenKey,
+    ],
+  )
+
+  const calculateDirectAmountOfSelectedNodesAndChildrenWithExclusion = useCallback(
+    (nodeKey, isUpdate) => {
+      if (!Object.keys(flattenedNodes).length) return {}
+      if (!isUpdate && nodeKeysMap.current.has(nodeKey))
+        return nodeKeysMap.current.get(nodeKey)
+      const { [childrenKey]: children, layer } = flattenedNodes[nodeKey] || {}
+
+      if (!children) return { totalSelected: 0, totalChildren: 0 }
+
+      const totalChildren = getTotalDirectNodeChildren({
+        flattenedNodes,
+        childrenKey,
+        nodeKey,
+        totalChildrenKey,
+      })
+      const nodeCachedValue = {
+        totalChildren,
+        totalSelected: handleTotalDirectSelectedOfParentNodeWithExclusion(
+          nodeKey,
+          totalChildren,
+          layer,
+        ),
+      }
+
+      if (isUpdate) {
+        children.forEach(({ uniqueKey }) => {
+          if (!flattenedNodes[uniqueKey]?.isParentNode) return
+          calculateDirectAmountOfSelectedNodesAndChildrenWithExclusion(
+            uniqueKey,
+            isUpdate,
+          )
+        })
+      }
+
+      nodeKeysMap.current.set(nodeKey, nodeCachedValue)
+      return nodeCachedValue
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [flattenedNodes, handleTotalSelectedOfParentNodeWithExclusion],
+  )
+
   const handleSetInitialSelectionWithExclusion = useCallback(() => {
     if (!Object.keys(flattenedNodes).length) return
     isSelectionUpdatedAfterMount.current = true
@@ -212,6 +283,8 @@ const useNodeSelectionWithExclusion = ({
     handleIsAllNodesAreSelectedWithExclusion,
     calculateAmountOfSelectedNodesAndChildrenWithExclusion,
     handleSetInitialSelectionWithExclusion,
+    calculateDirectAmountOfSelectedNodesAndChildrenWithExclusion,
+    getParentNodeExcludeMode,
   }
 }
 

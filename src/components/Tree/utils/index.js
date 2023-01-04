@@ -292,7 +292,20 @@ export const addRemoveKeysInSelectedObj = ({
 export const isParentNodeHasOnlyLeaves = (nodeNestingLevel, maxNestingLevel) =>
   maxNestingLevel - nodeNestingLevel === 1
 
-export const getTotalNodeChildren = ({
+export const getTotalDirectNodeChildren = ({
+  nodeKey,
+  flattenedNodes,
+  totalChildrenKey,
+  childrenKey,
+}) => {
+  const { [childrenKey]: children, [totalChildrenKey]: totalDirectChildren } =
+    flattenedNodes[nodeKey] || {}
+  return Number.isInteger(totalDirectChildren)
+    ? totalDirectChildren
+    : children.length
+}
+
+export const getTotalDirectNodeLeaves = ({
   selfControlled,
   nodeKey,
   flattenedNodes,
@@ -320,7 +333,6 @@ const isParentNodeSelectedWithExclusion = ({
 }) => {
   const { excludeMode, items } = selectionData
   const itemsLength = Object.keys(items).length
-  if (excludeMode) return !itemsLength
   if (!itemsLength) return excludeMode
 
   const { layer, [childrenKey]: children } = nodesMap[nodeKey]
@@ -464,6 +476,26 @@ export const getSelectedLeavesAmountOutOfItems = ({
   return Object.values(itemsObj).filter(value => value === true).length
 }
 
+export const getSelectedParentsAmountOutOfItems = ({
+  maxNestingLevel,
+  itemsObj,
+  nodesMap,
+  childrenKey,
+}) => {
+  return Object.entries(itemsObj).filter(
+    ([nodeKey, selectionValue]) =>
+      typeof selectionValue === 'object' &&
+      isParentNodeSelectedWithExclusion({
+        nodeKey,
+        selectionData: itemsObj[nodeKey],
+        nodesMap,
+        childrenKey,
+        nodeParentsKeys: [],
+        maxNestingLevel,
+      }),
+  ).length
+}
+
 export const getTotalLeavesSelectedOfParentNode = ({
   nodePaths,
   selectionData,
@@ -493,5 +525,68 @@ export const getTotalLeavesSelectedOfParentNode = ({
     totalLeaves,
     maxNestingLevel,
     nodeNestingLevel,
+  })
+}
+
+export const getTotalDirectChildrenSelectedOfParentNode = ({
+  nodePaths,
+  selectionData,
+  totalChildren,
+  maxNestingLevel,
+  nodeNestingLevel,
+  nodesMap,
+  childrenKey,
+}) => {
+  const { items, excludeMode } = selectionData
+
+  if (!nodePaths.length) {
+    const selectedLeavesAmount = getSelectedLeavesAmountOutOfItems({
+      maxNestingLevel,
+      nodeNestingLevel,
+      itemsObj: items,
+    })
+    const selectedParentsAmount = getSelectedParentsAmountOutOfItems({
+      maxNestingLevel,
+      itemsObj: items,
+      nodesMap,
+      childrenKey,
+    })
+    if (excludeMode) {
+      return totalChildren - selectedLeavesAmount + selectedParentsAmount
+    }
+    return selectedLeavesAmount + selectedParentsAmount
+  }
+
+  const [nodeKey] = nodePaths
+  if (!items[nodeKey]) {
+    return excludeMode ? totalChildren : 0
+  }
+
+  return getTotalDirectChildrenSelectedOfParentNode({
+    nodePaths: nodePaths.slice(1),
+    selectionData: items[nodeKey],
+    totalChildren,
+    maxNestingLevel,
+    nodeNestingLevel,
+    nodesMap,
+    childrenKey,
+  })
+}
+
+export const getParentNodeExclusionMode = ({ nodePaths, selectionData }) => {
+  const { items, excludeMode } = selectionData
+
+  if (!nodePaths.length) {
+    return excludeMode
+  }
+
+  const [nodeKey] = nodePaths
+  if (!items[nodeKey]) {
+    return excludeMode
+  }
+
+  return getParentNodeExclusionMode({
+    nodePaths: nodePaths.slice(1),
+    selectionData: items[nodeKey],
   })
 }

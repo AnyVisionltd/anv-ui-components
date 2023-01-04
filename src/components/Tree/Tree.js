@@ -71,6 +71,8 @@ const Tree = forwardRef(
       parentNodeHeight,
       leafNodeHeight,
       initialSelectionData,
+      isCalculateSelectionAndAmountOfDirectChildren,
+      isCalculateExcludeModeOfParentNode,
     },
     ref,
   ) => {
@@ -128,6 +130,7 @@ const Tree = forwardRef(
       handleIsNodeSelectedWithExclusion,
       handleOnSelectWithExclusion,
       handleIsAllNodesAreSelectedWithExclusion,
+      getParentNodeExcludeMode,
     } = useFlattenTreeData({
       data: nodes,
       selectedKeys,
@@ -136,6 +139,7 @@ const Tree = forwardRef(
       selfControlled,
       totalRootNodes,
       initialSelectionData,
+      isCalculateSelectionAndAmountOfDirectChildren,
       ...keyValues,
     })
 
@@ -394,7 +398,7 @@ const Tree = forwardRef(
       totalSelected,
       totalChildren,
     ) => {
-      if (selfControlled || totalChildren) {
+      if (selfControlled) {
         return totalSelected === totalChildren
       }
       return handleIsNodeSelectedWithExclusion(uniqueKey)
@@ -428,6 +432,9 @@ const Tree = forwardRef(
         totalChildren,
       )
       const onSelect = () => handleOnSelect(node, isSelected)
+      const isExcludeMode = isCalculateExcludeModeOfParentNode
+        ? getParentNodeExcludeMode(uniqueKey)
+        : undefined
 
       const infoText = getParentNodeInfo(totalChildren, totalSelected)
 
@@ -445,6 +452,7 @@ const Tree = forwardRef(
           onExpand: handleExpand,
           isOpen,
           isLoading,
+          isExcludeMode,
         })
       }
 
@@ -632,6 +640,7 @@ Tree.defaultProps = {
   rootNodeHeight: PARENT_NODE_WRAPPER_HEIGHT,
   parentNodeHeight: PARENT_NODE_HEIGHT,
   leafNodeHeight: LEAF_NODE_HEIGHT,
+  isCalculateSelectionAndAmountOfDirectChildren: true,
 }
 
 Tree.propTypes = {
@@ -715,6 +724,12 @@ Tree.propTypes = {
   /** By default, onSelect returns a list of ids (keys), if isReturnWholeNodeDataWhenOnSelect is set to true,
    * the whole node data will be returned. isReturnSelectedKeysWhenOnSelect won't work when returning whole object data.  */
   isReturnWholeNodeDataWhenOnSelect: propTypes.bool,
+  /** Whether to calulate the amount of the direct children of node or not.
+   * If set to false, each node's totalChildren/ totalSelected will be set to the total descendents of a node (not only direct children).
+   * By default it is set to true. Relevant only when tree is not selfControlled. */
+  isCalculateSelectionAndAmountOfDirectChildren: propTypes.bool,
+  /** Whether to calulate the exclusion mode of a parent node (true/false). Relevant only when tree is not selfControlled. */
+  isCalculateExcludeModeOfParentNode: propTypes.bool,
   /** The default initial selection of the tree when selfControlled is set to false. Prop is optional. */
   initialSelectionData: propTypes.object,
 }
