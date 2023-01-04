@@ -4,7 +4,7 @@ import {
   addRemoveKeysInSelectedObj,
   ALL_ROOTS_COMBINED_KEY,
   convertArrayPropertiesOfObjectToSets,
-  getTotalNodeChildren,
+  getTotalDirectNodeLeaves,
   handleIsNodeSelectedInNodesMap,
 } from '../utils'
 import useNodeSelectionWithExclusion from '../useNodeSelectionWithExclusion'
@@ -20,6 +20,8 @@ const useFlattenTreeData = ({
   selfControlled,
   totalRootNodes,
   initialSelectionData,
+  isCalculateSelectionAndAmountOfDirectChildren,
+  totalChildrenKey,
 }) => {
   const [flattenedNodes, setFlattenedNodes] = useState({})
   const nodeKeysMap = useRef(new Map())
@@ -31,6 +33,8 @@ const useFlattenTreeData = ({
     handleIsAllNodesAreSelectedWithExclusion,
     calculateAmountOfSelectedNodesAndChildrenWithExclusion,
     handleSetInitialSelectionWithExclusion,
+    calculateDirectAmountOfSelectedNodesAndChildrenWithExclusion,
+    getParentNodeExcludeMode,
   } = useNodeSelectionWithExclusion({
     flattenedNodes,
     totalRootNodes,
@@ -41,6 +45,8 @@ const useFlattenTreeData = ({
     maxNestingLevel,
     isSelectionUpdatedAfterMount,
     initialSelectionData,
+    isCalculateSelectionAndAmountOfDirectChildren,
+    totalChildrenKey,
   })
 
   const flatten = useCallback(
@@ -91,7 +97,7 @@ const useFlattenTreeData = ({
         flattenedNodes[nodeKey] || {}
 
       if (children) {
-        const totalChildren = getTotalNodeChildren({
+        const totalChildren = getTotalDirectNodeLeaves({
           flattenedNodes,
           selfControlled: true,
           childrenKey,
@@ -130,6 +136,13 @@ const useFlattenTreeData = ({
           isUpdate,
         )
       }
+      if (isCalculateSelectionAndAmountOfDirectChildren) {
+        return calculateDirectAmountOfSelectedNodesAndChildrenWithExclusion(
+          nodeKey,
+          isUpdate,
+        )
+      }
+
       return calculateAmountOfSelectedNodesAndChildrenWithExclusion(
         nodeKey,
         isUpdate,
@@ -139,6 +152,8 @@ const useFlattenTreeData = ({
       calculateAmountOfSelectedNodesAndChildrenWithExclusion,
       calculateAmountOfSelectedNodesAndChildrenWithoutExclusion,
       selfControlled,
+      calculateDirectAmountOfSelectedNodesAndChildrenWithExclusion,
+      isCalculateSelectionAndAmountOfDirectChildren,
     ],
   )
 
@@ -298,6 +313,7 @@ const useFlattenTreeData = ({
     handleIsNodeSelectedWithExclusion,
     handleOnSelectWithExclusion,
     handleIsAllNodesAreSelectedWithExclusion,
+    getParentNodeExcludeMode,
   }
 }
 
