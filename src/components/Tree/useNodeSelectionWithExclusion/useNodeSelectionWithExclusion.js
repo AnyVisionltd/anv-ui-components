@@ -24,6 +24,7 @@ const useNodeSelectionWithExclusion = ({
   isSelectionUpdatedAfterMount,
   initialSelectionData,
   totalChildrenKey,
+  isCalculateSelectionAndAmountOfDirectChildren,
 }) => {
   const [treeSelectionData, setTreeSelectionData] = useState(
     DEFAULT_PARENT_NODE_SELECTION_DATA(false),
@@ -265,16 +266,25 @@ const useNodeSelectionWithExclusion = ({
     treeSelectionData.excludeMode = initialSelectionData.excludeMode
     treeSelectionData.items = initialSelectionData.items
     setTreeSelectionData(initialSelectionData)
-    calculateAmountOfSelectedNodesAndChildrenWithExclusion(
-      ALL_ROOTS_COMBINED_KEY,
-      true,
-    )
+    if (isCalculateSelectionAndAmountOfDirectChildren) {
+      calculateDirectAmountOfSelectedNodesAndChildrenWithExclusion(
+        ALL_ROOTS_COMBINED_KEY,
+        true,
+      )
+    } else {
+      calculateAmountOfSelectedNodesAndChildrenWithExclusion(
+        ALL_ROOTS_COMBINED_KEY,
+        true,
+      )
+    }
   }, [
     initialSelectionData,
     flattenedNodes,
     isSelectionUpdatedAfterMount,
     treeSelectionData,
     calculateAmountOfSelectedNodesAndChildrenWithExclusion,
+    calculateDirectAmountOfSelectedNodesAndChildrenWithExclusion,
+    isCalculateSelectionAndAmountOfDirectChildren,
   ])
 
   return {
