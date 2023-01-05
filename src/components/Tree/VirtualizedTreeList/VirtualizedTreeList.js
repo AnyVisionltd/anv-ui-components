@@ -187,7 +187,7 @@ const buildTreeWalker = ({
   function* treeWalker() {
     yield getPlaceholderNodeData()
 
-    for (let i = 0; i < rootNodes.length; i++) {
+    for (let i = 0; i < rootNodes?.length; i++) {
       const node = rootNodes[i]
       if (!node.visible) continue
       yield getNodeData({

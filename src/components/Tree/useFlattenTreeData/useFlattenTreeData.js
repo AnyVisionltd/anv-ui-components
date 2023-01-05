@@ -38,7 +38,7 @@ const useFlattenTreeData = ({
   } = useNodeSelectionWithExclusion({
     flattenedNodes,
     totalRootNodes,
-    currentRootNodesAmount: data.length,
+    currentRootNodesAmount: data?.length,
     childrenKey,
     nodeKeysMap,
     totalLeavesKey,
@@ -48,6 +48,10 @@ const useFlattenTreeData = ({
     isCalculateSelectionAndAmountOfDirectChildren,
     totalChildrenKey,
   })
+
+  useEffect(() => {
+    handleSetInitialSelectionWithExclusion()
+  }, [initialSelectionData, handleSetInitialSelectionWithExclusion])
 
   const flatten = useCallback(
     ({ treeData, nodesMap, selectedKeysSetOrObj = new Set(), layer = 0 }) => {
@@ -264,7 +268,7 @@ const useFlattenTreeData = ({
   )
 
   useEffect(() => {
-    if (Object.keys(flattenedNodes).length || !data.length) return
+    if (Object.keys(flattenedNodes).length || !data?.length) return
     const selectedKeysParam = isChildrenUniqueKeysOverlap
       ? convertArrayPropertiesOfObjectToSets(selectedKeys)
       : new Set(selectedKeys)

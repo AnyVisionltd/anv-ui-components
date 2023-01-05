@@ -176,7 +176,6 @@ const useNodeSelectionWithExclusion = ({
       }
 
       children.forEach(({ uniqueKey }) => {
-        if (!flattenedNodes[uniqueKey]?.isParentNode) return
         const {
           totalChildren,
           totalSelected,

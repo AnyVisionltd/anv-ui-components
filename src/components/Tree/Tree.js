@@ -73,6 +73,7 @@ const Tree = forwardRef(
       initialSelectionData,
       isCalculateSelectionAndAmountOfDirectChildren,
       isCalculateExcludeModeOfParentNode,
+      renderCustomHeader,
     },
     ref,
   ) => {
@@ -272,7 +273,7 @@ const Tree = forwardRef(
         flattenTreeData(nodes, selectedKeys)
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [nodes, selfControlled])
+    }, [nodes, selfControlled, isLoading])
 
     useEffect(() => {
       if (selfControlled && filteredData.length < nodes.length) {
@@ -342,6 +343,7 @@ const Tree = forwardRef(
     }, [handleAddNewFlattenedNodes, handleAddNewNodes, loadMoreData])
 
     const isTreeEmpty = () => {
+      if (!nodes) return false
       if (!nodes.length) return true
       if (!searchQuery || !selfControlled) return false
       return !filteredData.some(node => node.visible)
@@ -356,6 +358,7 @@ const Tree = forwardRef(
         onChange={handleSearch}
         value={searchQuery}
         useClearTextIcon
+        disabled={isLoading}
       />
     )
 
@@ -594,24 +597,25 @@ const Tree = forwardRef(
       <TreeSkeletonLoading containerRef={nodesContainerRef} />
     )
 
-    const isEmpty = isTreeEmpty()
-
-    const renderTree = () => (
-      <>
-        {isEmpty && renderEmptyTree()}
-        {renderVirtualizedTreeList()}
-      </>
-    )
-
-    const shouldRenderSearchInput = () => {
-      if (!isSearchable) return false
-      return !!nodes.length || !!searchQuery
+    const renderTree = () => {
+      return (
+        <>
+          {isTreeEmpty() && renderEmptyTree()}
+          {renderVirtualizedTreeList()}
+        </>
+      )
     }
 
     return (
       <div className={classNames(styles.tree, className)}>
-        {shouldRenderSearchInput() && renderSearchInput()}
-        {isBulkActionsEnabled && !isEmpty && renderBulkActions()}
+        <div className={styles.header}>
+          {isSearchable && renderSearchInput()}
+          {nodes &&
+            isBulkActionsEnabled &&
+            !isTreeEmpty() &&
+            renderBulkActions()}
+          {renderCustomHeader()}
+        </div>
         <div
           ref={nodesContainerRef}
           className={classNames(styles.nodesContainer, nodesContainerClassName)}
@@ -624,7 +628,7 @@ const Tree = forwardRef(
 )
 
 Tree.defaultProps = {
-  nodes: [],
+  nodes: undefined,
   selectedKeys: [],
   onSearch: () => {},
   onSelect: () => {},
@@ -641,6 +645,7 @@ Tree.defaultProps = {
   parentNodeHeight: PARENT_NODE_HEIGHT,
   leafNodeHeight: LEAF_NODE_HEIGHT,
   isCalculateSelectionAndAmountOfDirectChildren: true,
+  renderCustomHeader: () => {},
 }
 
 Tree.propTypes = {
@@ -678,6 +683,8 @@ Tree.propTypes = {
   onSelect: propTypes.func,
   /** Callback for adding new children to a new nested node, called when node is expanded or "load more" button is clicked. */
   onLoadNewChildren: propTypes.func,
+  /** Custom render for header. */
+  renderCustomHeader: propTypes.func,
   /** Custom render for the whole leaf node row. */
   renderLeaf: propTypes.func,
   /** Custom render for the right side of leaf node. */
