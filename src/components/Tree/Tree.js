@@ -74,7 +74,6 @@ const Tree = forwardRef(
       isCalculateSelectionAndAmountOfDirectChildren,
       isCalculateExcludeModeOfParentNode,
       renderCustomHeader,
-      onSwapItems,
     },
     ref,
   ) => {
@@ -589,7 +588,6 @@ const Tree = forwardRef(
         nodeHeightsValues={nodeHeightsValues}
         selfControlled={selfControlled}
         handleLoadChildrenToParentNode={handleLoadChildrenToParentNode}
-        onSwapItems={onSwapItems}
         {...keyValues}
       />
     )
