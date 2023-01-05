@@ -74,6 +74,7 @@ const Tree = forwardRef(
       isCalculateSelectionAndAmountOfDirectChildren,
       isCalculateExcludeModeOfParentNode,
       renderCustomHeader,
+      onSwapItems,
     },
     ref,
   ) => {
@@ -589,6 +590,7 @@ const Tree = forwardRef(
         nodeHeightsValues={nodeHeightsValues}
         selfControlled={selfControlled}
         handleLoadChildrenToParentNode={handleLoadChildrenToParentNode}
+        onSwapItems={onSwapItems}
         {...keyValues}
       />
     )
@@ -597,10 +599,12 @@ const Tree = forwardRef(
       <TreeSkeletonLoading containerRef={nodesContainerRef} />
     )
 
+    const isEmpty = isTreeEmpty()
+
     const renderTree = () => {
       return (
         <>
-          {isTreeEmpty() && renderEmptyTree()}
+          {isEmpty && renderEmptyTree()}
           {renderVirtualizedTreeList()}
         </>
       )
@@ -610,10 +614,7 @@ const Tree = forwardRef(
       <div className={classNames(styles.tree, className)}>
         <div className={styles.header}>
           {isSearchable && renderSearchInput()}
-          {nodes &&
-            isBulkActionsEnabled &&
-            !isTreeEmpty() &&
-            renderBulkActions()}
+          {nodes && isBulkActionsEnabled && !isEmpty && renderBulkActions()}
           {renderCustomHeader()}
         </div>
         <div
