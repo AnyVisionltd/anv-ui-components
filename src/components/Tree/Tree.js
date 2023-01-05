@@ -629,7 +629,6 @@ const Tree = forwardRef(
 )
 
 Tree.defaultProps = {
-  nodes: undefined,
   selectedKeys: [],
   onSearch: () => {},
   onSelect: () => {},
