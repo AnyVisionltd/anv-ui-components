@@ -38,7 +38,7 @@ const useFlattenTreeData = ({
   } = useNodeSelectionWithExclusion({
     flattenedNodes,
     totalRootNodes,
-    currentRootNodesAmount: data.length || 0,
+    currentRootNodesAmount: data?.length || 0,
     childrenKey,
     nodeKeysMap,
     totalLeavesKey,
