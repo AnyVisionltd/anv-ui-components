@@ -264,7 +264,7 @@ const useFlattenTreeData = ({
   )
 
   useEffect(() => {
-    if (Object.keys(flattenedNodes).length || !data.length) return
+    if (Object.keys(flattenedNodes).length || !data?.length) return
     const selectedKeysParam = isChildrenUniqueKeysOverlap
       ? convertArrayPropertiesOfObjectToSets(selectedKeys)
       : new Set(selectedKeys)
@@ -297,6 +297,7 @@ const useFlattenTreeData = ({
     handleSetInitialSelectionWithoutExclusion,
     handleSetInitialSelectionWithExclusion,
     selfControlled,
+    initialSelectionData,
   ])
 
   return {

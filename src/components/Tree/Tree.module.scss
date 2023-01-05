@@ -9,6 +9,8 @@ $parentNodeHeight: calc(#{$parentNodeWrapperHeight} - #{av-space(tiny)});
 $nodeBackground: av-color(purewhite, av-opacity(ghost));
 $nodeBackgroundHover: av-color(purewhite, av-opacity(divider));
 
+$internalPadding: av-space(micro);
+
 %hiddenTextOverflow {
   white-space: nowrap;
   overflow: hidden;
@@ -32,7 +34,6 @@ $nodeBackgroundHover: av-color(purewhite, av-opacity(divider));
   width: av-size(sz-480);
   height: 100%;
   background-color: av-color(blue-light);
-  padding: av-space(medium);
 
   .checkbox {
     min-width: av-size(sz-32);
@@ -41,10 +42,16 @@ $nodeBackgroundHover: av-color(purewhite, av-opacity(divider));
     }
   }
 
+  .header {
+    padding: av-space() av-space() 0;
+    display: flex;
+    flex-direction: column;
+    gap: av-space();
+  }
+
   .searchInput {
     width: 100%;
     height: $searchInputHeight;
-    margin-bottom: av-space();
     border: solid 1px av-color(purewhite, av-opacity(divider));
     transition: all 0.3s ease-in-out;
 
@@ -75,7 +82,6 @@ $nodeBackgroundHover: av-color(purewhite, av-opacity(divider));
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: av-space(tiny) 0;
     height: $bulkExpandSelectHeight;
 
     .bulkSelectContainer {
@@ -113,6 +119,7 @@ $nodeBackgroundHover: av-color(purewhite, av-opacity(divider));
     flex-direction: column;
     height: 100%;
     min-height: av-size(sz-320);
+    padding: av-space(tiny) av-space() av-space() av-space();
 
     .parentNodeContainer {
       height: $parentNodeHeight;
