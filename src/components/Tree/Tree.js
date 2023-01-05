@@ -344,7 +344,6 @@ const Tree = forwardRef(
     }, [handleAddNewFlattenedNodes, handleAddNewNodes, loadMoreData])
 
     const isTreeEmpty = () => {
-      if (!nodes) return false
       if (!nodes.length) return true
       if (!searchQuery || !selfControlled) return false
       return !filteredData.some(node => node.visible)
@@ -601,20 +600,18 @@ const Tree = forwardRef(
 
     const isEmpty = isTreeEmpty()
 
-    const renderTree = () => {
-      return (
-        <>
-          {isEmpty && renderEmptyTree()}
-          {renderVirtualizedTreeList()}
-        </>
-      )
-    }
+    const renderTree = () => (
+      <>
+        {isEmpty && renderEmptyTree()}
+        {renderVirtualizedTreeList()}
+      </>
+    )
 
     return (
       <div className={classNames(styles.tree, className)}>
         <div className={styles.header}>
           {isSearchable && renderSearchInput()}
-          {nodes && isBulkActionsEnabled && !isEmpty && renderBulkActions()}
+          {isBulkActionsEnabled && !isEmpty && renderBulkActions()}
           {renderCustomHeader()}
         </div>
         <div
@@ -629,6 +626,7 @@ const Tree = forwardRef(
 )
 
 Tree.defaultProps = {
+  nodes: [],
   selectedKeys: [],
   onSearch: () => {},
   onSelect: () => {},

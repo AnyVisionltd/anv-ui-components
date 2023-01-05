@@ -259,9 +259,7 @@ const useNodeSelectionWithExclusion = ({
   )
 
   const handleSetInitialSelectionWithExclusion = useCallback(() => {
-    if (!Object.keys(flattenedNodes).length) return
-    isSelectionUpdatedAfterMount.current = true
-    if (!initialSelectionData) return
+    if (!Object.keys(flattenedNodes).length || !initialSelectionData) return
     // State is not updated immediately when ALL_ROOTS_COMBINED is selected, so assign it before setState, so new value is used.
     treeSelectionData.excludeMode = initialSelectionData.excludeMode
     treeSelectionData.items = initialSelectionData.items
@@ -280,7 +278,6 @@ const useNodeSelectionWithExclusion = ({
   }, [
     initialSelectionData,
     flattenedNodes,
-    isSelectionUpdatedAfterMount,
     treeSelectionData,
     calculateAmountOfSelectedNodesAndChildrenWithExclusion,
     calculateDirectAmountOfSelectedNodesAndChildrenWithExclusion,

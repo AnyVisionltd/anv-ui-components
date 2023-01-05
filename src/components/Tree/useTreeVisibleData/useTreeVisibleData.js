@@ -60,7 +60,7 @@ const useTreeVisibleData = ({
       indexPropertyIncrementOfChildren = 0,
     ) => {
       const setVisible = nodes =>
-        nodes?.forEach((node, index) => {
+        nodes.forEach((node, index) => {
           node.visible = node[labelKey].toLowerCase().includes(searchKeyword)
           setNodeProperties({
             node,
