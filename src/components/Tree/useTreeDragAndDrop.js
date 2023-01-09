@@ -17,7 +17,7 @@ function useTreeDragDrop({ onDropCallback, nodesMap }) {
     const currentEl = e.currentTarget
     e.dataTransfer.effectAllowed = 'move'
     e.dataTransfer.setData('dragged', currentEl.id)
-    e.dataTransfer.setData(currentEl.id, 'draggedIdInDataTransferTypes') // STORE the id as the key to get it on the onDragOver
+    e.dataTransfer.setData(currentEl.id, 'draggedIdInDataTransferTypes') // store the id as the key to use it later
     currentEl.classList.add('drag-start')
   }
 
