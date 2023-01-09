@@ -1,3 +1,9 @@
+## 09-1-2022
+
+### Added
+
+- Drag&Drop functionality to \<Tree> Component
+
 ## 08-8-2022
 
 ### Added
