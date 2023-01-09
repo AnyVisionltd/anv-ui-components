@@ -9,16 +9,17 @@ function useTreeDragDrop({ onDropCallback, nodesMap }) {
     const draggedId = e.dataTransfer.types[1].toLowerCase()
 
     if (currentEl.id.toLowerCase() === draggedId) return false
-    const parents = getNodeParents(node.id, nodesMap).map(p => p.toLowerCase())
+    const parents = getNodeParents(node.id, nodesMap).map(parentNode =>
+      parentNode.toLowerCase(),
+    )
     return !parents.includes(draggedId)
   }
 
-  function onDragStart(e) {
-    const currentEl = e.currentTarget
-    e.dataTransfer.effectAllowed = 'move'
-    e.dataTransfer.setData('dragged', currentEl.id)
-    e.dataTransfer.setData(currentEl.id, 'draggedIdInDataTransferTypes') // store the id as the key to use it later
-    currentEl.classList.add('drag-start')
+  function onDragStart({ currentTarget, dataTransfer }) {
+    dataTransfer.effectAllowed = 'move'
+    dataTransfer.setData('dragged', currentTarget.id)
+    dataTransfer.setData(currentTarget.id, 'draggedIdInDataTransferTypes') // store the id as the key to use it later
+    currentTarget.classList.add('drag-start')
   }
 
   function onDragOver(e, node) {
