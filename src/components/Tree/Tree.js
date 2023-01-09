@@ -74,6 +74,7 @@ const Tree = forwardRef(
       isCalculateSelectionAndAmountOfDirectChildren,
       isCalculateExcludeModeOfParentNode,
       renderCustomHeader,
+      onDragItem,
     },
     ref,
   ) => {
@@ -588,6 +589,7 @@ const Tree = forwardRef(
         nodeHeightsValues={nodeHeightsValues}
         selfControlled={selfControlled}
         handleLoadChildrenToParentNode={handleLoadChildrenToParentNode}
+        onDragItem={onDragItem}
         {...keyValues}
       />
     )
@@ -675,6 +677,8 @@ Tree.propTypes = {
   isBulkActionsEnabled: propTypes.bool,
   /** Called when a tree parent node is expanded. */
   onExpand: propTypes.func,
+  /** Called when dragging an item to another. By default the tree is not draggable. */
+  onDragItem: propTypes.func,
   /** Callback function after selecting / unselecteing tree node or nodes. */
   onSelect: propTypes.func,
   /** Callback for adding new children to a new nested node, called when node is expanded or "load more" button is clicked. */

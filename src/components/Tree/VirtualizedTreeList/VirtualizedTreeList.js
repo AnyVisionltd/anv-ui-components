@@ -14,6 +14,7 @@ import {
   PLACEHOLDER_NODE_ID,
   TREE_NODE_PADDING,
 } from '../utils'
+import { useTreeDragDrop } from '../useTreeDragAndDrop'
 import styles from './VirtualizedTreeList.module.scss'
 
 const Node = ({
@@ -30,6 +31,13 @@ const Node = ({
     onExpand,
     selfControlled,
     handleLoadChildrenToParentNode,
+    onDragItem,
+    onDragStart,
+    onDragEnter,
+    onDragOver,
+    onDragLeave,
+    onDrop,
+    onDragEnd,
   },
 }) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -101,8 +109,32 @@ const Node = ({
     isLoading,
   })
 
+  function handleDragOver(e) {
+    onDragOver(e, data)
+  }
+
+  function handleDragEnter(e) {
+    onDragEnter(e, data, () => {
+      const hasChildren = !!data[childrenKey]?.length
+      if (!isOpen && hasChildren) {
+        handleExpand()
+      }
+    })
+  }
+
   return (
-    <div key={uniqueKey} style={style}>
+    <div
+      key={uniqueKey}
+      style={style}
+      id={uniqueKey}
+      draggable={!!onDragItem}
+      onDragStart={onDragStart}
+      onDragEnter={handleDragEnter}
+      onDragOver={handleDragOver}
+      onDragLeave={onDragLeave}
+      onDrop={onDrop}
+      onDragEnd={onDragEnd}
+    >
       {content}
     </div>
   )
@@ -246,12 +278,22 @@ const VirtualizedTreeList = ({
   nodeHeightsValues,
   selfControlled,
   handleLoadChildrenToParentNode,
+  onDragItem,
   ...keyValues
 }) => {
   const innerRef = useRef()
   const throttledLoadMoreData = useMemo(() => throttle(loadMoreData), [
     loadMoreData,
   ])
+
+  const {
+    onDragStart,
+    onDragEnter,
+    onDragOver,
+    onDragLeave,
+    onDrop,
+    onDragEnd,
+  } = useTreeDragDrop({ onDropCallback: onDragItem, nodesMap })
 
   const handleInfiniteScroll = (
     { scrollOffset, scrollDirection },
@@ -282,6 +324,13 @@ const VirtualizedTreeList = ({
             onExpand,
             selfControlled,
             handleLoadChildrenToParentNode,
+            onDragItem,
+            onDragStart,
+            onDragEnter,
+            onDragOver,
+            onDragLeave,
+            onDrop,
+            onDragEnd,
             ...keyValues,
           }}
           treeWalker={buildTreeWalker({
