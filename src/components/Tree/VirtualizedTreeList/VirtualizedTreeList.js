@@ -38,6 +38,7 @@ const Node = ({
     onDragLeave,
     onDrop,
     onDragEnd,
+    isDraggable,
   },
 }) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -127,7 +128,7 @@ const Node = ({
       key={uniqueKey}
       style={style}
       id={uniqueKey}
-      draggable={!!onDragItem}
+      draggable={isDraggable}
       onDragStart={onDragStart}
       onDragEnter={handleDragEnter}
       onDragOver={handleDragOver}
@@ -279,6 +280,7 @@ const VirtualizedTreeList = ({
   selfControlled,
   handleLoadChildrenToParentNode,
   onDragItem,
+  isDraggable,
   ...keyValues
 }) => {
   const innerRef = useRef()
@@ -331,6 +333,7 @@ const VirtualizedTreeList = ({
             onDragLeave,
             onDrop,
             onDragEnd,
+            isDraggable,
             ...keyValues,
           }}
           treeWalker={buildTreeWalker({

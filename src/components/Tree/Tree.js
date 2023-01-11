@@ -597,6 +597,7 @@ const Tree = forwardRef(
         selfControlled={selfControlled}
         handleLoadChildrenToParentNode={handleLoadChildrenToParentNode}
         onDragItem={handleDragItem}
+        isDraggable={!!onDragItem}
         {...keyValues}
       />
     )
