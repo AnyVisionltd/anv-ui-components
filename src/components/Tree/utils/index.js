@@ -594,3 +594,43 @@ export const getParentNodeExclusionMode = ({ nodePaths, selectionData }) => {
     selectionData: items[nodeKey],
   })
 }
+
+function findNodeById(data, id) {
+  let foundNode
+
+  function run(node) {
+    if (node.id.toLowerCase() === id.toLowerCase()) {
+      foundNode = node
+    } else {
+      const { children = [] } = node
+      children.forEach(run)
+    }
+  }
+
+  data.forEach(run)
+
+  return foundNode
+}
+
+function findByIdAndRemove(data, id) {
+  let itemToMove
+  function run(node, index, arr) {
+    if (node.id.toLowerCase() === id.toLowerCase()) {
+      ;[itemToMove] = arr.splice(index, 1)
+    } else {
+      const { children = [] } = node
+      children.forEach(run)
+    }
+  }
+
+  data.forEach(run)
+
+  return itemToMove
+}
+
+export function getDataAfterReGroup(data, sourceId, targetId) {
+  const itemToMove = findByIdAndRemove(data, sourceId)
+  const target = findNodeById(data, targetId)
+  target.children = [...target?.children, itemToMove]
+  return data
+}

@@ -29,6 +29,7 @@ import {
   PARENT_NODE_HEIGHT,
   LEAF_NODE_HEIGHT,
   refreshTree,
+  getDataAfterReGroup,
 } from './utils'
 import { useComponentTranslation } from '../../hooks/UseComponentTranslation'
 import styles from './Tree.module.scss'
@@ -577,6 +578,12 @@ const Tree = forwardRef(
       />
     )
 
+    function handleDragItem({ dragged, dragTo }) {
+      const updatedData = getDataAfterReGroup([...nodes], dragged, dragTo)
+      onDragItem({ updatedData, dragged, dragTo })
+      refreshTree(treeInstance)
+    }
+
     const renderVirtualizedTreeList = () => (
       <VirtualizedTreeList
         setTreeInstance={setTreeInstance}
@@ -589,7 +596,7 @@ const Tree = forwardRef(
         nodeHeightsValues={nodeHeightsValues}
         selfControlled={selfControlled}
         handleLoadChildrenToParentNode={handleLoadChildrenToParentNode}
-        onDragItem={onDragItem}
+        onDragItem={handleDragItem}
         {...keyValues}
       />
     )
