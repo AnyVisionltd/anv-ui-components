@@ -120,9 +120,9 @@ describe('<Tree/>', () => {
     })
   })
 
-  test('bulk actions area should not appear when isBulkActionsEnabled is false', () => {
+  test('bulk actions area should not appear when isBulkExpand and isBulkSelect are false', () => {
     const { getByText } = render(
-      <Tree isBulkActionsEnabled={false} nodes={treeNodes} />,
+      <Tree isBulkExpand={false} isBulkSelect={false} nodes={treeNodes} />,
     )
     expect(() => getByText('Expand All')).toThrow()
   })
