@@ -79,7 +79,6 @@ $internalPadding: av-space(micro);
 
   .bulkActions {
     display: flex;
-    // justify-content: flex-end;
     align-items: center;
     height: $bulkExpandSelectHeight;
 
@@ -119,7 +118,6 @@ $internalPadding: av-space(micro);
     flex-direction: column;
     height: 100%;
     min-height: av-size(sz-320);
-    // padding: av-space(tiny) av-space() av-space() av-space();
 
     .parentNodeContainer {
       height: $parentNodeHeight;
