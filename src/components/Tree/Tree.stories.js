@@ -664,7 +664,8 @@ export const TreeWithCustomStyle = () => {
       rootNodeHeight={48}
       parentNodeHeight={48}
       leafNodeHeight={48}
-      isBulkActionsEnabled={false}
+      isBulkSelect={false}
+      isBulkExpand={false}
       onLoadNewChildren={handleLoadMoreChildren}
     />
   )

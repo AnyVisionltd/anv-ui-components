@@ -42,7 +42,8 @@ const Tree = forwardRef(
       className,
       nodesContainerClassName,
       isSearchable,
-      isBulkActionsEnabled,
+      isBulkSelect,
+      isBulkExpand,
       onSearch,
       placeholder,
       onExpand,
@@ -74,7 +75,6 @@ const Tree = forwardRef(
       initialSelectionData,
       isCalculateSelectionAndAmountOfDirectChildren,
       isCalculateExcludeModeOfParentNode,
-      renderCustomHeader,
       onDragItem,
     },
     ref,
@@ -365,24 +365,31 @@ const Tree = forwardRef(
 
     const renderBulkActions = () => (
       <div className={styles.bulkActions}>
-        <div className={styles.bulkSelectContainer}>
-          <Checkbox
-            checked={areAllNodesSelected}
-            onChange={() => handleOnSelect(filteredData, areAllNodesSelected)}
-            className={styles.checkbox}
-            id='bulk-select-tree'
-          />
-          <label htmlFor='bulk-select-tree' className={styles.bulkSelectLabel}>
-            {areAllNodesSelected
-              ? TreeTranslations.selectNone
-              : TreeTranslations.selectAll}
-          </label>
-        </div>
-        <div className={styles.bulkExpand} onClick={handleBulkExpandCollapse}>
-          {areAllNodesExpanded
-            ? TreeTranslations.collapseAll
-            : TreeTranslations.expandAll}
-        </div>
+        {isBulkSelect && (
+          <div className={styles.bulkSelectContainer}>
+            <Checkbox
+              checked={areAllNodesSelected}
+              onChange={() => handleOnSelect(filteredData, areAllNodesSelected)}
+              className={styles.checkbox}
+              id='bulk-select-tree'
+            />
+            <label
+              htmlFor='bulk-select-tree'
+              className={styles.bulkSelectLabel}
+            >
+              {areAllNodesSelected
+                ? TreeTranslations.selectNone
+                : TreeTranslations.selectAll}
+            </label>
+          </div>
+        )}
+        {isBulkExpand && (
+          <div className={styles.bulkExpand} onClick={handleBulkExpandCollapse}>
+            {areAllNodesExpanded
+              ? TreeTranslations.collapseAll
+              : TreeTranslations.expandAll}
+          </div>
+        )}
       </div>
     )
 
@@ -615,12 +622,13 @@ const Tree = forwardRef(
       </>
     )
 
+    const isBulkActionsEnabled = isBulkSelect | isBulkExpand
+
     return (
       <div className={classNames(styles.tree, className)}>
         <div className={styles.header}>
           {isSearchable && renderSearchInput()}
-          {isBulkActionsEnabled && !isEmpty && renderBulkActions()}
-          {renderCustomHeader()}
+          {!!isBulkActionsEnabled && !isEmpty && renderBulkActions()}
         </div>
         <div
           ref={nodesContainerRef}
@@ -639,7 +647,8 @@ Tree.defaultProps = {
   onSearch: () => {},
   onSelect: () => {},
   isSearchable: true,
-  isBulkActionsEnabled: true,
+  isBulkSelect: true,
+  isBulkExpand: true,
   rootNodeActions: [],
   loadMoreData: () => {},
   maxNestingLevel: -1,
@@ -651,7 +660,6 @@ Tree.defaultProps = {
   parentNodeHeight: PARENT_NODE_HEIGHT,
   leafNodeHeight: LEAF_NODE_HEIGHT,
   isCalculateSelectionAndAmountOfDirectChildren: true,
-  renderCustomHeader: () => {},
 }
 
 Tree.propTypes = {
@@ -681,8 +689,10 @@ Tree.propTypes = {
   onSearch: propTypes.func,
   /** Placeholder for search input. */
   placeholder: propTypes.string,
-  /** Enable bulk actions functionality. */
-  isBulkActionsEnabled: propTypes.bool,
+  /** Enable bulk selection functionality. */
+  isBulkSelect: propTypes.bool,
+  /** Enable bulk expand functionality. */
+  isBulkExpand: propTypes.bool,
   /** Called when a tree parent node is expanded. */
   onExpand: propTypes.func,
   /** Called when dragging an item to another. By default the tree is not draggable. */
@@ -691,8 +701,6 @@ Tree.propTypes = {
   onSelect: propTypes.func,
   /** Callback for adding new children to a new nested node, called when node is expanded or "load more" button is clicked. */
   onLoadNewChildren: propTypes.func,
-  /** Custom render for header. */
-  renderCustomHeader: propTypes.func,
   /** Custom render for the whole leaf node row. */
   renderLeaf: propTypes.func,
   /** Custom render for the right side of leaf node. */
