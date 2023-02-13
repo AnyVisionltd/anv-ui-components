@@ -111,10 +111,12 @@ const Node = ({
   })
 
   function handleDragOver(e) {
+    if (isLeaf) return
     onDragOver(e, data)
   }
 
   function handleDragEnter(e) {
+    if (isLeaf) return
     onDragEnter(e, data, () => {
       const hasChildren = !!data[childrenKey]?.length
       if (!isOpen && hasChildren) {
@@ -129,12 +131,12 @@ const Node = ({
       style={style}
       id={uniqueKey}
       draggable={isDraggable && !isLeaf}
-      onDragStart={onDragStart}
+      onDragStart={!isLeaf && onDragStart}
       onDragEnter={handleDragEnter}
       onDragOver={handleDragOver}
-      onDragLeave={onDragLeave}
-      onDrop={onDrop}
-      onDragEnd={onDragEnd}
+      onDragLeave={!isLeaf && onDragLeave}
+      onDrop={!isLeaf && onDrop}
+      onDragEnd={!isLeaf && onDragEnd}
     >
       {content}
     </div>
