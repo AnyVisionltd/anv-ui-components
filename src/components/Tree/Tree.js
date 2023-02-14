@@ -431,7 +431,13 @@ const Tree = forwardRef(
         uniqueKey,
         nestingLevel,
       } = node
-      const { isOpen, handleExpand, style, isLoading } = virtualizedListProps
+      const {
+        isOpen,
+        handleExpand,
+        style,
+        isLoading,
+        nodesMap,
+      } = virtualizedListProps
       const { renderActions } = rootNodeProps
       const {
         totalSelected = 0,
@@ -464,6 +470,7 @@ const Tree = forwardRef(
           isOpen,
           isLoading,
           isExcludeMode,
+          nodesMap,
         })
       }
 
