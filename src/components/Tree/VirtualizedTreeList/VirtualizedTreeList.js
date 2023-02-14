@@ -31,7 +31,6 @@ const Node = ({
     onExpand,
     selfControlled,
     handleLoadChildrenToParentNode,
-    onDragItem,
     onDragStart,
     onDragEnter,
     onDragOver,
@@ -108,6 +107,7 @@ const Node = ({
     isLastLeaf: isLastLeafOfParent,
     style: additionalStyle,
     isLoading,
+    nodesMap,
   })
 
   function handleDragOver(e) {
