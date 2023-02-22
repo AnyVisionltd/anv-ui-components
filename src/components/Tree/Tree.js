@@ -214,16 +214,18 @@ const Tree = forwardRef(
       }
     }
 
-    const handleOnSelectWithExclusionMode = ({ nodeKey, isSelected }) => {
+    const handleOnSelectWithExclusionMode = ({ nodeKey, node, isSelected }) => {
       const newSelectionData = handleOnSelectWithExclusion({
         nodeKey,
         isSelected,
+        node,
       })
       updateAmountOfSelectedNodesAndChildren(nodeKey)
       onSelect({
         selectionData: newSelectionData,
         clickedNode: {
           id: nodeKey,
+          node,
           isSelected,
         },
       })
@@ -236,6 +238,7 @@ const Tree = forwardRef(
       if (!selfControlled) {
         handleOnSelectWithExclusionMode({
           nodeKey,
+          node,
           isSelected: !isCurrentlySelected,
         })
         return
