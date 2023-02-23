@@ -170,7 +170,7 @@ const Tree = forwardRef(
           ),
       }),
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      [flattenedNodes],
+      [flattenedNodes, treeInstance],
     )
 
     const {
