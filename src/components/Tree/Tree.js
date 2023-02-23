@@ -163,6 +163,7 @@ const Tree = forwardRef(
           const nodePathArr = getNodeParents(nodeKey, flattenedNodes)
           handleSetNodeNewProperties(nodeKey, newProperties, nodePathArr)
         },
+        scrollToItem: nodeKey => treeInstance?.scrollToItem(nodeKey),
       }),
       // eslint-disable-next-line react-hooks/exhaustive-deps
       [flattenedNodes],
