@@ -164,6 +164,10 @@ const Tree = forwardRef(
           handleSetNodeNewProperties(nodeKey, newProperties, nodePathArr)
         },
         scrollToItem: nodeKey => treeInstance?.scrollToItem(nodeKey),
+        expandCollapseItems: (nodeKeys, isExpand = true) =>
+          treeInstance?.recomputeTree(
+            nodeKeys.reduce((acc, id) => ({ ...acc, [id]: isExpand }), {}),
+          ),
       }),
       // eslint-disable-next-line react-hooks/exhaustive-deps
       [flattenedNodes],
