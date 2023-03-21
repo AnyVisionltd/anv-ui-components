@@ -99,3 +99,13 @@ export const OverflowOnly = () => {
     </div>
   )
 }
+
+export const ClickOnly = () => {
+  const renderTooltipContent = () => <p>I'm a tooltip!</p>
+
+  return (
+    <Tooltip clickOnly={true} content={renderTooltipContent()}>
+      <h6>Click me!</h6>
+    </Tooltip>
+  )
+}

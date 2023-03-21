@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { usePopper } from 'react-popper'
+import { useClickOutsideListener } from '../../hooks/UseClickOutsideListener'
 import { Portal } from '../../index'
 import styles from './Tooltip.module.scss'
 
@@ -17,6 +18,7 @@ const Tooltip = ({
   className,
   arrowClassName,
   overflowOnly,
+  clickOnly,
   showAlways,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -45,11 +47,25 @@ const Tooltip = ({
   }, [leaveDelay])
 
   useEffect(() => {
-    anchorRef && anchorRef.addEventListener('mouseleave', closeTooltip)
+    anchorRef &&
+      !clickOnly &&
+      anchorRef.addEventListener('mouseleave', closeTooltip)
     return () => {
-      anchorRef && anchorRef.removeEventListener('mouseleave', closeTooltip)
+      anchorRef &&
+        !clickOnly &&
+        anchorRef.removeEventListener('mouseleave', closeTooltip)
     }
-  }, [anchorRef, closeTooltip])
+  }, [anchorRef, closeTooltip, clickOnly])
+
+  useClickOutsideListener(
+    () => {
+      if (!isOpen) {
+        return
+      }
+      closeTooltip()
+    },
+    { current: popperRef },
+  )
 
   const openTooltip = () => {
     clearTimeout(enterTimer.current)
@@ -65,7 +81,9 @@ const Tooltip = ({
   }
 
   const handleMouseLeaveTooltip = () => {
-    closeTooltip()
+    if (!clickOnly) {
+      closeTooltip()
+    }
   }
 
   const containerClasses = classNames(styles.popperContainer, className)
@@ -83,7 +101,9 @@ const Tooltip = ({
   return (
     <>
       {React.cloneElement(children, {
-        onMouseEnter: openTooltip,
+        ...(clickOnly
+          ? { onClick: () => !isOpen && openTooltip() }
+          : { onMouseEnter: openTooltip }),
         ref: setAnchorRef,
         className: classNames(children.props.className, styles.childrenStyle),
       })}
@@ -123,6 +143,7 @@ Tooltip.defaultProps = {
   arrow: false,
   offset: 8,
   showAlways: false,
+  clickOnly: false,
 }
 
 Tooltip.propTypes = {
@@ -150,6 +171,8 @@ Tooltip.propTypes = {
   offset: propTypes.number,
   /** Tooltip only when children overflow */
   overflowOnly: propTypes.bool,
+  /** Tooltip only on clicking the element */
+  clickOnly: propTypes.bool,
   /** Tooltip always open */
   alwaysShow: propTypes.bool,
 }
