@@ -58,3 +58,14 @@
     }
   }
 }
+
+.closeBtn {
+  display: flex;
+  justify-content: flex-end;
+
+  svg {
+    fill: av-color(primary);
+    font-size: av-font-size(medium);
+    cursor: pointer;
+  }
+}

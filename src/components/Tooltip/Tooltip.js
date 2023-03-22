@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 import { usePopper } from 'react-popper'
+import { TimesCircleFilled } from '@anyvision/anv-icons'
 import { useClickOutsideListener } from '../../hooks/UseClickOutsideListener'
 import { Portal } from '../../index'
 import styles from './Tooltip.module.scss'
@@ -18,7 +19,9 @@ const Tooltip = ({
   className,
   arrowClassName,
   overflowOnly,
-  clickOnly,
+  isClickable,
+  isCloseBtn,
+  closeBtnClassName,
   showAlways,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -48,14 +51,14 @@ const Tooltip = ({
 
   useEffect(() => {
     anchorRef &&
-      !clickOnly &&
+      !isClickable &&
       anchorRef.addEventListener('mouseleave', closeTooltip)
     return () => {
       anchorRef &&
-        !clickOnly &&
+        !isClickable &&
         anchorRef.removeEventListener('mouseleave', closeTooltip)
     }
-  }, [anchorRef, closeTooltip, clickOnly])
+  }, [anchorRef, closeTooltip, isClickable])
 
   useClickOutsideListener(
     () => {
@@ -81,7 +84,7 @@ const Tooltip = ({
   }
 
   const handleMouseLeaveTooltip = () => {
-    if (!clickOnly) {
+    if (!isClickable) {
       closeTooltip()
     }
   }
@@ -101,7 +104,7 @@ const Tooltip = ({
   return (
     <>
       {React.cloneElement(children, {
-        ...(clickOnly
+        ...(isClickable
           ? { onClick: () => !isOpen && openTooltip() }
           : { onMouseEnter: openTooltip }),
         ref: setAnchorRef,
@@ -118,6 +121,14 @@ const Tooltip = ({
             onMouseLeave={handleMouseLeaveTooltip}
             className={containerClasses}
           >
+            {isClickable && isCloseBtn && (
+              <div
+                className={classNames(styles.closeBtn, closeBtnClassName)}
+                onClick={closeTooltip}
+              >
+                <TimesCircleFilled />
+              </div>
+            )}
             {content}
             {arrow && (
               <div
@@ -143,7 +154,8 @@ Tooltip.defaultProps = {
   arrow: false,
   offset: 8,
   showAlways: false,
-  clickOnly: false,
+  isClickable: false,
+  isCloseBtn: false,
 }
 
 Tooltip.propTypes = {
@@ -172,7 +184,11 @@ Tooltip.propTypes = {
   /** Tooltip only when children overflow */
   overflowOnly: propTypes.bool,
   /** Tooltip only on clicking the element */
-  clickOnly: propTypes.bool,
+  isClickable: propTypes.bool,
+  /** Display close button if enabled (isClickable required) */
+  isCloseBtn: propTypes.bool,
+  /** Custom styles for the close button */
+  closeBtnClassName: propTypes.string,
   /** Tooltip always open */
   alwaysShow: propTypes.bool,
 }
