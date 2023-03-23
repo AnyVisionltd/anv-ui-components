@@ -60,8 +60,9 @@
 }
 
 .closeBtn {
-  display: flex;
-  justify-content: flex-end;
+  position: absolute;
+  right: av-space(tiny);
+  top: av-space(tiny);
 
   svg {
     fill: av-color(primary);
