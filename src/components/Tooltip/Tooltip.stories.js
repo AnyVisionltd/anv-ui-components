@@ -99,3 +99,21 @@ export const OverflowOnly = () => {
     </div>
   )
 }
+
+export const isClickable = () => {
+  const renderTooltipContent = () => (
+    <p
+      style={{
+        width: '150px',
+      }}
+    >
+      I'm a tooltip!
+    </p>
+  )
+
+  return (
+    <Tooltip isClickable isCloseBtn content={renderTooltipContent()}>
+      <h6>Click me!</h6>
+    </Tooltip>
+  )
+}
