@@ -541,7 +541,8 @@ const Dropdown = React.forwardRef(
           className={classNames(styles.iconButton, {
             [styles.rotated]: !showMenu,
           })}
-        >
+          data-testid={dataTestId(label) + '-dropdown-arrow-button'}
+          >
           <ArrowUp />
         </IconButton>
       </div>
@@ -651,6 +652,7 @@ const Dropdown = React.forwardRef(
         isFocusedByKeyboard={isTypeMode && index === focusedOptionIndex}
         valueRender={valueRender}
         optionRender={optionRender}
+        qa={dataTestId(label)}
       />
     )
 
@@ -708,6 +710,10 @@ const Dropdown = React.forwardRef(
       )
     }
 
+    const dataTestId = label => {
+      return label.toLowerCase().split(" ").join("-")
+    }
+
     const showTooltip = useIsOverflowing({
       current: selectedValueElement,
     })
@@ -727,6 +733,7 @@ const Dropdown = React.forwardRef(
           className,
         )}
         ref={setContainerRef}
+        data-testid={dataTestId(label) + '-dropdown'}
       >
         <Tooltip content={selectedElementContent} show={showTooltip}>
           {renderHeaderContainer()}

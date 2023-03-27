@@ -14,6 +14,7 @@ const DropdownItem = ({
   isSelected,
   valueRender,
   optionRender,
+  qa = ""
 }) => {
   const labelRef = useRef(null)
   const classes = classNames(styles.menuItem, {
@@ -32,6 +33,10 @@ const DropdownItem = ({
     />
   )
 
+  const dataTestId = itemName => {
+    return itemName.toLowerCase().split(" ").join("-")
+  }
+
   if (optionRender) {
     return optionRender(option, {
       renderCheckbox: multiple ? renderCheckbox : undefined,
@@ -42,7 +47,7 @@ const DropdownItem = ({
 
   return (
     <Tooltip content={option[displayValue]} show={showOptionTooltip}>
-      <li className={classes} onClick={onClick}>
+      <li className={classes} onClick={onClick} data-testid={qa + '-dropdown-item-' + dataTestId(option[displayValue])}>
         {multiple && renderCheckbox()}
         <div ref={labelRef} className={styles.content}>
           {valueRender

@@ -25,6 +25,7 @@ const TabsItem = ({
       className={classes}
       {...otherProps}
       onClick={() => !disabled && onChange(tabKey)}
+      data-testid={children.toLowerCase().split(" ").join("-") + '-tab-button'}
     >
       <div>
         {leadingIcon && (

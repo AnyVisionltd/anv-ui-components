@@ -167,6 +167,7 @@ const SmartFilter = ({
           menuAnchor && styles.openedMenu,
         )}
         onClick={handleButtonClick}
+        data-testid='smart-filter-button'
       >
         <FilterIcon />
       </Button>

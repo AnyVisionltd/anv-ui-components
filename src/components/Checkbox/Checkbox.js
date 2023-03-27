@@ -15,6 +15,7 @@ const Checkbox = ({
   className,
   id,
   renderIcon,
+  qa = "",
   ...otherProps
 }) => {
   const { isView } = useFormProvider({ view })
@@ -54,6 +55,7 @@ const Checkbox = ({
         disabled={disabled}
         onChange={onChange}
         id={id}
+        data-testid={qa + '-checkbox'}
         {...otherProps}
       />
       <span className={styles.iconContainer}>{renderCheckboxIcon()}</span>

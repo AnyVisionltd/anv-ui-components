@@ -33,6 +33,7 @@ const Menu = React.forwardRef((props, ref) => {
     onOpened,
     menuContainerId,
     innerHandlerRef,
+    qa = "",
     ...otherProps
   } = props
   const [currentFocus, setCurrentFocus] = useState(false)
@@ -172,7 +173,7 @@ const Menu = React.forwardRef((props, ref) => {
   }, [isMenuOpen, handleKeyDown])
 
   const renderMenuList = () => (
-    <ul role='menu' className={menuClasses} {...otherProps}>
+    <ul role='menu' className={menuClasses} data-testid={qa + '-menu'} {...otherProps}>
       {children}
     </ul>
   )

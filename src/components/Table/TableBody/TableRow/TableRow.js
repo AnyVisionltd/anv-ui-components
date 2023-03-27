@@ -87,6 +87,7 @@ const TableRow = ({
           preferOpenDirection='left-start'
           onClose={handleActionsClose}
           menuContainerId={`menu-${generateId()}`}
+          qa='table-row-actions'
         >
           {activeRowActions.map(
             ({ label, icon, hidden, onClick, confirmDialogBody }, index) => (
@@ -112,6 +113,7 @@ const TableRow = ({
             className={styles.actionButton}
             variant='ghost'
             onClick={handleActionsClick}
+            data-testid='table-row-actions-button'
           >
             <OptionsIcon />
           </IconButton>
@@ -133,6 +135,7 @@ const TableRow = ({
           onClick={e => e.stopPropagation()}
           onChange={() => toggleSelectedItem(row, isSelected)}
           checked={isSelected}
+          qa='table-row'
         />
       </div>
     )
@@ -146,11 +149,11 @@ const TableRow = ({
     } else if (type === types.STRING || type === types.NUMBER) {
       return (
         <Tooltip overflowOnly={true} content={row[field]}>
-          <div className={styles.ellipsis}>{row[field]}</div>
+          <div className={styles.ellipsis} data-testid={field}>{row[field]}</div>
         </Tooltip>
       )
     } else if (type === types.DATE) {
-      return <div className={styles.ellipsis}>{formatDateTime(row[field])}</div>
+      return <div className={styles.ellipsis} data-testid={field}>{formatDateTime(row[field])}</div>
     }
     return row[field]
   }
@@ -214,6 +217,7 @@ const TableRow = ({
           onMouseEnter={mouseHoverHandler}
           onMouseLeave={mouseHoverHandler}
           onClick={() => handleRowClick(row)}
+          data-testid='table-row'
         >
           {isExpandableRow && renderExpandable()}
           {renderSelection(row, isSelected)}
@@ -238,6 +242,7 @@ const TableRow = ({
                   className={styles.tableCell}
                   key={field}
                   onClick={e => handleCellClick({ e, row, triggerRowClick })}
+                  data-testid='row-cell'
                 >
                   {renderCell(
                     row,

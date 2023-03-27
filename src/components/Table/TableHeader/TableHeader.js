@@ -134,6 +134,7 @@ const TableHeader = ({
           indeterminate={!!items.length}
           onChange={handleSelectAll}
           disabled={!tableData.length}
+          qa='table-header'
         />
       </div>
     )
@@ -161,7 +162,7 @@ const TableHeader = ({
   const classes = classNames(styles.tableHeader, className)
   return (
     <div>
-      <div className={styles.results}>
+      <div className={styles.results} data-testid='filter-results'>
         {totalItems} {resultLabel ?? TableTranslations.results}
         {Boolean(showSelectionLabel) &&
           ` (${totalSelected} ${selectionLabel ?? TableTranslations.selected})`}
