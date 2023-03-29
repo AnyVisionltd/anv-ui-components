@@ -76,6 +76,7 @@ const Tree = forwardRef(
       isCalculateSelectionAndAmountOfDirectChildren,
       isCalculateExcludeModeOfParentNode,
       onDragItem,
+      qa={}
     },
     ref,
   ) => {
@@ -368,6 +369,7 @@ const Tree = forwardRef(
         value={searchQuery}
         useClearTextIcon
         disabled={isLoading}
+        data-testid={'search-' + qa.tree + '-input'}
       />
     )
 
@@ -380,6 +382,7 @@ const Tree = forwardRef(
               onChange={() => handleOnSelect(filteredData, areAllNodesSelected)}
               className={styles.checkbox}
               id='bulk-select-tree'
+              qa={qa.tree + '-bulk-selection'}
             />
             <label
               htmlFor='bulk-select-tree'
@@ -392,7 +395,7 @@ const Tree = forwardRef(
           </div>
         )}
         {isBulkExpand && (
-          <div className={styles.bulkExpand} onClick={handleBulkExpandCollapse}>
+          <div className={styles.bulkExpand} data-testid='bulk-expand-button' onClick={handleBulkExpandCollapse}>
             {areAllNodesExpanded
               ? TreeTranslations.collapseAll
               : TreeTranslations.expandAll}
@@ -485,7 +488,7 @@ const Tree = forwardRef(
       return (
         <div className={containerClasses} key={uniqueKey}>
           <div className={wrapperClasses}>
-            <div style={style} className={styles.parentNode}>
+            <div style={style} className={styles.parentNode} data-testid={qa.nodes.root + '-' + label.toLowerCase().split(' ').join('-')}>
               <Checkbox
                 disabled={!totalChildren}
                 checked={isSelected}
@@ -494,6 +497,7 @@ const Tree = forwardRef(
                   styles.isSelectedCheckbox,
                   styles.checkbox,
                 )}
+                qa={label.toLowerCase().split(' ').join('-') + '-' + qa.nodes.root}
               />
               <Tooltip content={label} overflowOnly>
                 <p className={styles.parentLabel}>{label}</p>
@@ -505,8 +509,9 @@ const Tree = forwardRef(
                     checked={isOpen}
                     onChange={handleExpand}
                     className={styles.checkbox}
+                    qa={'expand-' + label.toLowerCase().split(' ').join('-') + '-' + qa.nodes.root}
                   />
-                  <p className={styles.parentInfoText}>{infoText}</p>
+                  <p className={styles.parentInfoText} data-testid={label.toLowerCase().split(' ').join('-') + '-' + qa.nodes.root + '-info'}>{infoText}</p>
                 </div>
               </div>
             </div>
@@ -554,15 +559,16 @@ const Tree = forwardRef(
       return (
         <div className={containerClasses} key={uniqueKey}>
           <div style={style} className={styles.leafNodeWrapper}>
-            <div className={leafNodeClasses}>
+            <div className={leafNodeClasses} data-testid={label.toLowerCase().split(' ').join('-') + '-' + qa.nodes.leafs}>
               <div className={styles.leftSideLeaf}>
                 <Checkbox
                   checked={isSelected}
                   onChange={onSelect}
                   className={styles.checkbox}
+                  qa={label.toLowerCase().split(' ').join('-') + '-' + qa.nodes.leafs}
                 />
                 <Tooltip content={label} overflowOnly>
-                  <p className={styles.leafLabel}>{label}</p>
+                  <p className={styles.leafLabel} data-testid={qa.nodes.leafs + '-name'}>{label}</p>
                 </Tooltip>
               </div>
               {renderLeafRightSide && renderLeafRightSide(node)}
@@ -582,6 +588,7 @@ const Tree = forwardRef(
               renderParentNode(node, virtualizedListProps, rootNodeProps)
             }
             menuActions={rootNodeActions}
+            qa={qa.nodes.root}
           />
         )
       }
@@ -641,13 +648,14 @@ const Tree = forwardRef(
 
     return (
       <div className={classNames(styles.tree, className)}>
-        <div className={styles.header}>
+        <div className={styles.header} data-testid={qa.tree + '-tree-header'}>
           {isSearchable && renderSearchInput()}
           {!!isBulkActionsEnabled && !isEmpty && renderBulkActions()}
         </div>
         <div
           ref={nodesContainerRef}
           className={classNames(styles.nodesContainer, nodesContainerClassName)}
+          data-testid={qa.tree + '-tree-nodes'}
         >
           {isLoading ? renderTreeSkeleton() : renderTree()}
         </div>

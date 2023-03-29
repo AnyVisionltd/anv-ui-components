@@ -6,7 +6,7 @@ import { useMenu } from '../../../hooks'
 import { generateId } from '../../../utils'
 import styles from './RootNode.module.scss'
 
-const RootNode = ({ renderNode, menuActions }) => {
+const RootNode = ({ renderNode, menuActions, qa='' }) => {
   const { onAnchorClick, menuProps } = useMenu()
   const { onClose: handleMenuClose, isOpen } = menuProps
 
@@ -24,6 +24,7 @@ const RootNode = ({ renderNode, menuActions }) => {
           preferOpenDirection='bottom-end'
           menuContainerId={`treeNode-${generateId()}`}
           className={styles.menu}
+          qa={qa + '-actions'}
         >
           {activeNodeActions.map(({ label, icon, onClick }, index) => (
             <Menu.Item
@@ -50,6 +51,7 @@ const RootNode = ({ renderNode, menuActions }) => {
             className={styles.actionButton}
             variant='ghost'
             onClick={onAnchorClick}
+            data-testid={qa + '-actions-button'}
           >
             <OptionsIcon />
           </IconButton>

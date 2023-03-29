@@ -29,6 +29,7 @@ const SelectionGroupItem = ({
       className={classes}
       {...otherProps}
       onClick={() => !disabled && onChange(value)}
+      data-testid='selection-group-item'
     >
       <div>
         {leadingIcon && (
