@@ -62,7 +62,7 @@ const SelectionGroup = ({
   const classes = classNames(styles.selectionGroup, styles[variant], className)
 
   return (
-    <div className={classes} data-testid={qa + '-selection-group'} {...otherProps}>
+    <div className={classes} {...otherProps}>
       {childrenWithProps()}
     </div>
   )
