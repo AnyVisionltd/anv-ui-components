@@ -83,7 +83,7 @@ const Selection = React.forwardRef(
 
     const renderActions = () => {
       return (
-        <div className={styles.actionsContainer}>
+        <div className={styles.actionsContainer} data-testid='selection-actions'>
           {bulkActions.map(
             ({ icon, onClick, subMenu, confirmDialogBody }, index) => (
               <BulkAction
@@ -122,9 +122,9 @@ const Selection = React.forwardRef(
       <Animations.Scale isOpen={renderBar}>
         <Portal containerId={'table-selection-bar'}>
           <div className={classes}>
-            <Checkbox indeterminate onChange={handleDeselectAll} />
+            <Checkbox indeterminate onChange={handleDeselectAll} qa='selection' />
             <div className={styles.countContainer}>
-              <span className={styles.counter}>{selectedCount}</span>
+              <span className={styles.counter} data-testid='selection-items-count'>{selectedCount}</span>
               <span className={styles.counterLabel}>Items Selected</span>
             </div>
             {!!bulkActions && renderActions()}
