@@ -650,14 +650,13 @@ const Tree = forwardRef(
 
     return (
       <div className={classNames(styles.tree, className)}>
-        <div className={styles.header} data-testid={qaTree + '-tree-header'}>
+        <div className={styles.header}>
           {isSearchable && renderSearchInput()}
           {!!isBulkActionsEnabled && !isEmpty && renderBulkActions()}
         </div>
         <div
           ref={nodesContainerRef}
           className={classNames(styles.nodesContainer, nodesContainerClassName)}
-          data-testid={qaTree + '-tree-nodes'}
         >
           {isLoading ? renderTreeSkeleton() : renderTree()}
         </div>

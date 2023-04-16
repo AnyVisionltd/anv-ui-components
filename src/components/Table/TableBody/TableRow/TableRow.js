@@ -149,11 +149,11 @@ const TableRow = ({
     } else if (type === types.STRING || type === types.NUMBER) {
       return (
         <Tooltip overflowOnly={true} content={row[field]}>
-          <div className={styles.ellipsis} data-testid={field}>{row[field]}</div>
+          <div className={styles.ellipsis}>{row[field]}</div>
         </Tooltip>
       )
     } else if (type === types.DATE) {
-      return <div className={styles.ellipsis} data-testid={field}>{formatDateTime(row[field])}</div>
+      return <div className={styles.ellipsis}>{formatDateTime(row[field])}</div>
     }
     return row[field]
   }
@@ -242,7 +242,7 @@ const TableRow = ({
                   className={styles.tableCell}
                   key={field}
                   onClick={e => handleCellClick({ e, row, triggerRowClick })}
-                  data-testid='row-cell'
+                  data-testid={field.toLowerCase() + '-row-cell'}
                 >
                   {renderCell(
                     row,

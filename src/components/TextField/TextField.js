@@ -47,6 +47,7 @@ const TextField = React.forwardRef((props, ref) => {
     style,
     menuProps,
     trailingIcon,
+    qa='',
     ...otherProps
   } = props
 
@@ -316,7 +317,7 @@ const TextField = React.forwardRef((props, ref) => {
   )
 
   return (
-    <div className={classNames(styles.container, className)} style={style}>
+    <div className={classNames(styles.container, className)} data-testid={qa + '-text-field'} style={style}>
       {isView ? renderView() : renderInput()}
     </div>
   )
