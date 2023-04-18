@@ -103,6 +103,7 @@ const TableHeader = ({
         style={style}
         className={tableCellClass}
         onClick={() => handleHeaderCellClick(headerCell, sortableColumn)}
+        data-testid='table-header-cell'
       >
         {typeof content === 'function' ? (
           content()
@@ -148,7 +149,10 @@ const TableHeader = ({
 
   const renderColumnManagement = () =>
     columnManagementIsActive && (
-      <div className={styles.columnManagementCell}>
+      <div
+        className={styles.columnManagementCell}
+        data-testid='column-management-cell'
+      >
         <IconButton
           onClick={() => setColumnManagementIsOpen(true)}
           size={'small'}

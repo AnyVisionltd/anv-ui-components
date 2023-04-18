@@ -82,6 +82,7 @@ const ColumnManagement = ({ onChange }) => {
             className={styles.listItem}
             key={index}
             ref={provided.innerRef}
+            data-test='column-item-container'
             {...provided.draggableProps}
             leadingComponent={
               <Checkbox
@@ -89,10 +90,15 @@ const ColumnManagement = ({ onChange }) => {
                 id={field}
                 checked={!hide}
                 disabled={permanent}
+                qa='column'
               />
             }
             trailingComponent={
-              <div className={styles.drag} {...provided.dragHandleProps}>
+              <div
+                className={styles.drag}
+                {...provided.dragHandleProps}
+                data-testid='column-drag-button'
+              >
                 <DragIcon />
               </div>
             }
