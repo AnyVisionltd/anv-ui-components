@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import MomentUtils from '@date-io/moment'
@@ -39,6 +39,11 @@ const DatePicker = ({
   const { set } = useDebounce(debounceTime)
   const { getComponentTranslation } = useComponentTranslation()
   const DatePickerTranslations = getComponentTranslation('datePicker')
+
+  useEffect(() => {
+    setDate(value || moment())
+    setIsOpen(false)
+  }, [value, setDate, setIsOpen])
 
   const handleDateChange = date => {
     setDate(date)
